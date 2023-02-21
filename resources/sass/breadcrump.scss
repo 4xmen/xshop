@@ -1,0 +1,110 @@
+.x-breadcrumb{
+    border: #b2fff300 1px dashed;
+    border-radius: 7px;
+    margin-bottom: 15px;
+    height: 42px;
+    transition: 1s;
+
+    &:hover{
+        border: #b2fff3 1px dashed;
+        background: #1b4b72;
+    }
+    .steps {
+        direction: ltr;
+        list-style: none;
+        display: flex;
+        padding: 0;
+
+        .step {
+            white-space: nowrap;
+            transition: 0.3s ease-in-out;
+            background: $breadcrumb-main-color;
+            position: relative;
+            height: 40px;
+            line-height: 40px;
+            margin-right: 30px;
+            padding: 0 20px;
+            color: white;
+
+            &:hover a{
+                padding-left: 25px;
+                padding-right: 25px;
+            }
+
+
+
+            > a {
+                text-decoration: none;
+                color: white;
+                display: block;
+                transition: 450ms;
+            }
+
+            &:last-child {
+                margin-right: 0;
+            }
+
+
+            &::before {
+                transition: 0.3s ease-in-out;
+                content: "";
+                position: absolute;
+                top: 0;
+                left: -20px;
+                border-left: 20px solid transparent;
+                border-top: 20px solid $breadcrumb-main-color;
+                border-bottom: 20px solid $breadcrumb-main-color;
+            }
+
+            &:first-child::before {
+                display: none;
+            }
+
+            &::after {
+                transition: 0.3s ease-in-out;
+                position: absolute;
+                top: 0;
+                right: -20px;
+                border-left: 20px solid $breadcrumb-main-color;
+                border-top: 20px solid transparent;
+                border-bottom: 20px solid transparent;
+                content: "";
+            }
+
+            &:last-child::after {
+                display: none;
+            }
+
+            &:hover {
+                background: $breadcrumb-hover-color;
+            }
+
+            &:hover::before {
+                border-top-color: $breadcrumb-hover-color;
+                border-bottom-color: $breadcrumb-hover-color;
+            }
+
+            &:hover::after {
+                border-left-color: $breadcrumb-hover-color;
+            }
+
+            &:first-child {
+                border-top-left-radius: 5px;
+                border-bottom-left-radius: 5px;
+            }
+
+            &:last-child {
+                border-top-right-radius: 5px;
+                border-bottom-right-radius: 5px;
+            }
+            i{
+                position: relative;
+                top: 4px;
+                left: -5px;
+                font-size: 20px;
+            }
+        }
+
+    }
+
+}

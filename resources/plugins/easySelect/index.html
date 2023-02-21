@@ -1,0 +1,117 @@
+ <!DOCTYPE html>
+ <html>
+
+ <head>
+     <title>easySelect Demo</title>
+     <link rel="stylesheet" href="easySelectStyle.css">
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+     <script src="easySelect.js"></script>
+ </head>
+
+ <body>
+     <div class="row">
+         <div class="column" style="">
+             <select id="demo1" data-max="" multiple="multiple" style="">
+                 <option value="Lightblue">Lightblue</option>
+                 <option value="Green">Green</option>
+                 <option value="Yellow">Yellow</option>
+                 <option value="Blue Samoa">Blue</option>
+                 <option value="Pink">Pink</option>
+                 <option value="Black">Black</option>
+                 <option value="Orange">Orange</option>
+             </select>
+         </div>
+         <div class="column" style="">
+             <select id="demo3" data-max="5" multiple="multiple" style="">
+                 <option value="Volvo">Volvo</option>
+                 <option value="Opel">Opel</option>
+                 <option value="Audi">Audi</option>
+                 <option value="Dodge">Dodge</option>
+                 <option value="Toyota">Toyota</option>
+                 <option value="Mercedes">Mercedes</option>
+                 <option value="Tesla">Tesla</option>
+
+             </select>
+         </div>
+         <div class="column" style="">
+             <select id="demo" data-max="6" multiple="multiple">
+                 <option value="Afganistan">Afghanistan</option>
+                 <option value="Albania">Albania</option>
+                 <option value="Algeria">Algeria</option>
+                 <option value="American Samoa">American Samoa</option>
+                 <option value="Andorra">Andorra</option>
+                 <option value="Angola">Angola</option>
+                 <option value="Anguilla">Anguilla</option>
+                 <option value="Antigua & Barbuda">Antigua & Barbuda</option>
+                 <option value="Argentina">Argentina</option>
+                 <option value="Armenia">Armenia</option>
+                 <option value="Aruba">Aruba</option>
+                 <option value="Australia">Australia</option>
+                 <option value="Austria">Austria</option>
+                 <option value="Azerbaijan">Azerbaijan</option>
+                 <option value="Bahamas">Bahamas</option>
+                 <option value="Bahrain">Bahrain</option>
+                 <option value="Bangladesh">Bangladesh</option>
+                 <option value="Barbados">Barbados</option>
+                 <option value="Belarus">Belarus</option>
+                 <option value="Belgium">Belgium</option>
+                 <option value="Belize">Belize</option>
+                 <option value="Benin">Benin</option>
+                 <option value="Bermuda">Bermuda</option>
+                 <option value="Bhutan">Bhutan</option>
+                 <option value="Bolivia">Bolivia</option>
+                 <option value="Bonaire">Bonaire</option>
+                 <option value="Bosnia & Herzegovina">Bosnia & Herzegovina</option>
+                 <option value="Botswana">Botswana</option>
+                 <option value="Brazil">Brazil</option>
+                 <option value="British Indian Ocean Ter">British Indian Ocean Ter</option>
+                 <option value="Brunei">Brunei</option>
+                 <option value="Bulgaria">Bulgaria</option>
+                 <option value="Burkina Faso">Burkina Faso</option>
+                 <option value="Burundi">Burundi</option>
+                 <option value="Cambodia">Cambodia</option>
+                 <option value="Cameroon">Cameroon</option>
+                 <option value="Canada">Canada</option>
+                 <option value="Canary Islands">Canary Islands</option>
+                 <option value="Cape Verde">Cape Verde</option>
+             </select>
+         </div>
+     </div>
+ </body>
+
+ </html>
+ <script>
+     $("#demo").easySelect({
+         buttons: true, // 
+         search: true,
+         placeholder: 'Choose Country',
+         placeholderColor: '#524781',
+         selectColor: '#524781',
+         itemTitle: 'Countrys selected',
+         showEachItem: true,
+         width: '80%',
+         dropdownMaxHeight: '450px',
+     })
+     $("#demo1").easySelect({
+         buttons: true, 
+         search: true,
+         placeholder: 'Choose color',
+         placeholderColor: 'violet',
+         selectColor: 'lila',
+         itemTitle: 'Color selected',
+         showEachItem: true,
+         width: '50%',
+         dropdownMaxHeight: '450px',
+     })
+     $("#demo3").easySelect({
+         buttons: true, // 
+         search: true,
+         placeholder: 'Pick Car',
+         placeholderColor: 'green',
+         selectColor: '#524781',
+         itemTitle: 'Car selected',
+         showEachItem: true,
+         width: '80%',
+         dropdownMaxHeight: '450px',
+     })
+ </script>

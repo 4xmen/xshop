@@ -1,0 +1,101 @@
+$progress-color : #459810;
+.wizard{
+    .steps {
+        display: flex;
+        position: relative;
+        min-height: 150px;
+        //background: rgba(0,0,0,0.05);
+        padding: 10px;
+
+        h4{
+            font-size: 14px;
+            text-transform: uppercase;
+        }
+        .hr{
+            top: 38%;
+            left: 5%;
+            right: 5%;
+            position: absolute;
+            border: 1px solid silver;
+            height: 15px;
+            padding: 2px;
+            overflow: hidden;
+            border-radius: 6px;
+            .prog{
+                transition: 600ms;
+                width: 7%;
+                border-radius: 6px;
+                height: 10px;
+                background: $progress-color;
+            }
+        }
+
+        .step {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            flex-grow: 1;
+            flex-basis: 0;
+            .circle{
+                //opacity: 0.6;
+                border-radius: 50%;
+                border: 1px solid silver;
+                background: #fff;
+                width: 80px;
+                height: 80px;
+                margin: 14px auto;
+                transition: 300ms;
+                i{
+                    font-size: 45px;
+                    margin-top: 17px;
+                    color: gray;
+                    transition: .3s;
+                }
+            }
+            &.active{
+                .circle{
+                    border: 2px solid $progress-color;
+                }
+                i{
+                    color: $progress-color;
+                }
+            }
+
+        }
+    }
+
+    .wizard-forms{
+        .wizard-form{
+            background: #fff;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 7px;
+            display: none;
+            &:first-child{
+                .wizard-prev{
+                    display: none;
+                }
+            }
+            .mt-4 .btn{
+                min-width: 15% ;
+            }
+
+            button{
+                i{
+                    display: none;
+                    margin: 4px 25px;
+                }
+                &.w8 i{
+                    display: block;
+                }
+                &.w8 span{
+                    display: none;
+                }
+            }
+
+        }
+
+
+
+    }
+}

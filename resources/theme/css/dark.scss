@@ -1,0 +1,72 @@
+body,#new-products{
+    background: #282c34;
+    h1{
+        color: #eeeeee;
+    }
+}
+
+footer{
+    background: #21252b;
+    h3{
+        box-shadow: none;
+        color: white;
+        border: 0;
+        background: linear-gradient(#21252b, #21252b) 50% 50%/calc(100% ) calc(100% - 2px) no-repeat, linear-gradient(90deg, transparent 0%,#afafaf77 55%, #afafaf77 65%, #afafaf77 100%);
+    }
+    ul li a{
+        color: #eeeeee;
+    }
+    .social{
+        background: linear-gradient(#21252b, #21252b) 50% 50%/calc(100% ) calc(100% - 2px) no-repeat,
+        linear-gradient(90deg, transparent 0%,#afafaf77 45%, #afafaf77 65%, transparent 100%);
+    }
+    .text-black-50{
+        color: white !important;
+    }
+}
+
+#top{
+    background: #21252b;
+}
+
+#list,#post-list{
+    background: #21252b !important;
+    color: white;
+    h4,h2,h1{
+        color: white;
+    }
+}
+#single{
+    p{
+        color: white;
+    }
+}
+
+#product{
+    background: #282c34;
+    .container{
+        background: #21252b;
+    }
+    .row,th,td{
+        background: #21252b !important;
+        color: white;
+    }
+    h4{
+        color: white !important;
+    }
+}
+
+.box{
+    background: #282c34;
+}
+.navbarx{
+    background:  #21252b;
+}
+
+.sub-menu{
+    background: rgba(33, 37, 43, 0.75);
+}
+
+.sub-menu a{
+    color: white;
+}

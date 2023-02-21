@@ -1,0 +1,41 @@
+#uploading-images{
+    padding: 10px;
+}
+
+#upload-drag-drop{
+    border: 2px dashed silver;
+    min-height: 50px;
+    padding: 20px 10px;
+    text-align: center;
+    margin: 10px auto;
+    transition: 600ms;
+    cursor: pointer;
+    &.active,&:hover{
+        border-color: #1d4686;
+        //-webkit-filter: blur(3px);
+        //-moz-filter: blur(3px);
+        //-o-filter: blur(3px);
+        //-ms-filter: blur(3px);
+        //filter: blur(3px);
+    }
+}
+
+.uploader-images{
+    border: 1px #ddd solid;
+    visibility: hidden;
+}
+
+
+.img-preview{
+    background: #eee no-repeat center ;
+    background-size: cover;
+    margin-bottom: 10px;
+    width: 100%;
+    min-height: 225px;
+    transition: 300ms;
+}
+
+.indexed{
+    border-color: #0a53be !important;
+    border-style: dashed !important;
+}

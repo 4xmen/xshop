@@ -1,0 +1,134 @@
+// Fonts
+@import "~@fortawesome/fontawesome-free/css/all.min.css";
+@import "~vazir-font/dist/font-face.css";
+@import "~vue-multiselect/dist/vue-multiselect.min.css";
+@import "~persian-datepicker/dist/css/persian-datepicker.min.css";
+@import '~hc-offcanvas-nav/src/scss/core';
+@import '~hc-offcanvas-nav/src/scss/toggle';
+@import 'theme-white-menu';
+// Variables
+@import 'variables';
+
+@import "multi-image-uploader";
+@import "props";
+@import "wizard";
+
+@import "breadcrump";
+
+@import "fix-libs";
+// Bootstrap
+//@import '~bootstrap/scss/bootstrap';
+
+
+body {
+    overflow-x: hidden;
+    zoom: 100%;
+}
+
+.rvnm-mobile-wrapper {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+}
+
+nav {
+
+    li {
+        cursor: pointer;
+    }
+
+    .current {
+        background: #0d7fa7 !important;
+    }
+
+    a {
+        text-decoration: none !important;
+    }
+}
+
+.x64 {
+    width: 64px;
+}
+
+.bootstrap-select {
+    border: 1px solid #ddd !important;
+}
+
+.category-control {
+    max-height: 200px;
+    overflow-y: scroll;
+}
+
+.select2 {
+    display: block;
+}
+
+#xoptions {
+    display: none;
+}
+
+#profile-tab {
+    li {
+        cursor: pointer;
+    }
+}
+
+#full-video {
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+}
+
+#under {
+    position: relative;
+    z-index: 99;
+    text-align: center;
+    color: white;
+    height: 95vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    a {
+        font-size: 30px;
+        margin-right: 20px;
+    }
+}
+
+.profile-tab {
+    border: 1px solid silver;
+    border-radius: 5px;
+    display: none;
+
+    &.active {
+        display: block;
+    }
+}
+
+.txt-area {
+    white-space: pre-line;
+}
+
+.toggle, .hc-nav-trigger {
+    display: none !important;
+}
+
+.navbarx{
+    z-index: 999;
+}
+/*-993px width*/
+@media (max-width: 993px) {
+    .toggle {
+        display: block !important;
+        font-size: 30px;
+        position: static;
+        padding: 7px;
+    }
+    .brand-and-icon {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+}

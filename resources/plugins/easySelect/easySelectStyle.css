@@ -1,0 +1,265 @@
+* {
+  box-sizing: border-box;
+}
+
+/* Create two equal columns that floats next to each other */
+.column {
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    float: left;
+    width:33%;
+    padding: 10px;
+}
+
+
+.s-hidden {
+    visibility: hidden;
+    padding-right: 10px;
+}
+.easySelect {
+    font-size: 14px !important;
+    cursor: default;
+    display: block;
+    /*make dropdown width */
+    position: relative;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #414c52;
+    border: 1px solid #cbcbcb !important;
+    border-radius: 3px;
+    height: 35px;
+}
+
+.styledSelect {
+    border-radius: 3px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: white;
+    padding-left: 8px;
+    padding-top: 8px;
+    font-weight: 400 !important;
+    color: #414c52;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    padding-right:15%
+}
+
+.clearSelectfromDiv {
+    float: right;
+    margin-right: 35px;
+    font-size: 24px;
+    cursor: pointer;
+    position: relative;
+    top: 3px;
+    z-index: 4;
+    color: #414c52;
+}
+
+.clearSelectfromDiv:hover {
+    color: rgba(65, 76, 82, 0.76);
+}
+
+.styledSelect:after {
+    content: "";
+    width: 0;
+    height: 0;
+    border: 5px solid transparent;
+    border-color: #414c52 transparent transparent transparent;
+    position: absolute;
+    top: 15px;
+    right: 8px;
+}
+
+.styledSelect:active,
+.styledSelect.active {
+    background-color: #fafafa;
+}
+
+.options {
+    display: none;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    left: 0;
+    z-index: 999;
+    margin: 3px 0;
+    padding: 3px 0 0 0px;
+    list-style: none;
+    border: 1px solid #cbcbcb !important;
+    background-color: white;
+    border-radius: 3px;
+    -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+    -moz-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+    width: 100%
+}
+
+.scrolableDiv {
+   overflow: auto
+}
+.divSearcheasySelect{
+     border-bottom: 1px solid #cbcbcb!important;
+}
+
+.options li {
+    margin: auto;
+    max-width: 100%!important;
+    font-size: 14.5px !important;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 500;
+    overflow: hidden
+}
+
+.options li:hover {
+    background-color: #cbcbcb;
+}
+
+.options .container {
+    display:inherit;
+    position: relative;
+    margin: 0px;
+    width: auto!important;
+    cursor: pointer;
+    padding: 6px 15px 6px 33px !important;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+}
+
+.scrolableDiv input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+.checkmark {
+    position: absolute;
+    margin-left: 3px;
+    left: 5px;
+    height: 17px;
+    width: 17px;
+    background-color: white;
+    border-radius: 3px;
+    border: 1px solid #cbcbcb;
+}
+
+.container input:checked ~ .checkmark {
+    background-color: white;
+}
+
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+.container input:checked ~ .checkmark:after {
+    display: block;
+}
+
+.container .checkmark:after {
+    left: 5px;
+    top: 1px;
+    width: 4.5px;
+    height: 10px;
+    border: 2px solid #1720ff;
+    border-width: 0 2px 2px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+
+.divSearcheasySelect {
+    padding-right: 12px;
+    padding-left: 7px;
+    padding-top: 4px;
+    padding-bottom: 7px;
+    overflow: hidden;
+}
+
+.optionRow {
+    margin: -4px 0px 8px 0px;
+    border-radius: 3px;
+    font-size: 11.5px;
+    text-align: left;
+    font-weight: 600;
+    color: #414c52;
+    display: block ruby;
+}
+#clearAlleasySelect{
+    margin-right: 20px
+}
+#selectAlleasySelect{
+   margin-right: 20px
+}
+.optionRow:hover {
+    color: rgba(65, 76, 82, 0.81);
+}
+
+.optionRow .alleasySelect {
+    font-size: 13px;
+    margin: 2px auto auto 4px;
+}
+
+.divSearcheasySelect .searchInputeasySelect {
+    width: 100%;
+    margin-right: auto;
+    color: #414c52;
+    border: 1px solid #cbcbcb !important;
+    height: 33px;
+    background-color: white !important;
+    font-size: 14px;
+    text-indent: 8px;
+    border-radius: 3px
+}
+
+.divSearcheasySelect .searchInputeasySelect:focus {
+    border: 1px solid #a295ff !important;
+    background: white;
+    color: #414c52;
+    box-shadow: 0 1px 3px rgba(105, 105, 105, 0.31) !important;
+    -moz-box-shadow: 0 1px 3px rgba(105, 105, 105, 0.31) !important;
+    -webkit-box-shadow: 0 1px 3px rgba(105, 105, 105, 0.31) !important;
+    outline: #a295ff !important;
+    border-width: 1px;
+}
+
+.divOptionsesySelect > p {
+    display: inline-block
+}
+
+.messageMaxallowedSelections {
+    padding: 0px !important;
+    font-size: 12px;
+    font-weight: bold;
+    margin: auto;
+    color: #838383
+}
+
+.hiddenLieasySelect {
+    text-align: center;
+    padding:4px 4px 8px 0px;
+}
+
+li.hiddenLieasySelect{
+    font-size: 12px!important;
+    font-weight: 600
+}
+
+.options > .hiddenLieasySelect:hover {
+    background: none !important;
+    cursor: context-menu;
+}
+
+li.no_results {
+    padding: 6px;
+     font-size: 12px!important;
+    font-weight: 600
+}
