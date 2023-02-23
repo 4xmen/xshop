@@ -14,16 +14,16 @@
         <div class="container pt-5">
             <div class="row">
                 @if (count($products) > 0)
-{{--                    <div class="col-12">--}}
-{{--                        <div>--}}
-{{--                            <img class=" mt-1 me-3 float-start icon-size" style="position: relative;top: -25px"--}}
-{{--                                 src="{{asset('images/track.svg')}}" alt="ارسال آنی">--}}
-{{--                            <h6 class="mt-1 text-muted">--}}
-{{--                                ارسال آنی در تهران--}}
-{{--                            </h6>--}}
-{{--                            <hr>--}}
-{{--                        </div>--}}
-{{--                    </div>--}}
+                    <div class="col-12">
+                        <div>
+                            <img class=" mt-1 me-3 float-start icon-size" style="position: relative;top: -25px"
+                                 src="{{asset('images/track.svg')}}" alt="ارسال آنی">
+                            <h6 class="mt-1 text-muted">
+                                ارسال آنی در تهران
+                            </h6>
+                            <hr>
+                        </div>
+                    </div>
                     <div class="col-xl-3 col-md-4">
                         <aside class="mb-5">
                             <input type="hidden" id="catId" value="{{$cat->id}}" data-url="{{route('props.list',$cat->id)}}">

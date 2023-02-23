@@ -16,11 +16,14 @@ window.Vue = require('vue').default;
 
 // require('./js/gsap.min.js');
 // require('./js/Physics2DPlugin3.min');
-require('./js/mega-menu.js');
+// require('./js/mega-menu.js');
 require('./js/product.js');
 require('./js/theme.js');
 require('./js/chart.js');
 require('../js/customer.js');
+
+
+
 
 // require('../js/')
 Vue.component('example-component', require('../js/components/ExampleComponent.vue').default);
@@ -40,7 +43,7 @@ var app = new Vue({
 
     },
     created() {
-        if (document.querySelector('#jDataSrc') !== undefined){
+        if (document.querySelector('#jDataSrc') !== undefined && document.querySelector('#jDataSrc') != null){
             try {
                 this.jdata = JSON.parse(document.querySelector('#jDataSrc').value);
                 this.def = JSON.parse(document.querySelector('#jDef').value);

@@ -1,6 +1,7 @@
 <script>
     var isInit = false;
     var uploadFormData = [];
+    var appName = `{{config('app.name')}}`;
     window.translate = {};
     window.translate.next = `{{__('Next')}}`;
     window.translate.prev = `{{__('Previous')}}`;

@@ -1,7 +1,8 @@
 require('hc-offcanvas-nav/dist/hc-offcanvas-nav');
+// import xMegaMenu from 'x-mega-menu/src/x-mega-menu';
+import xm from 'x-mega-menu/dist/x-mega-menu.min';
 
-
-
+let xMegaMenu = window.xMegaMenu = xm.xMegaMenu;
 
 function CopyToClipboard(containerid) {
     if (window.getSelection) {
@@ -46,38 +47,36 @@ let qnn, images, sizes;
 
 jQuery(function ($) {
 
-
     try {
-        var Nav = new hcOffcanvasNav('#main-nav', {
-            disableAt: 300000,
-            customToggle: '.toggle',
-            navTitle: document.title,
-            levelTitles: true,
-            rtl: true,
-            position: 'right',
-            levelTitleAsBack: true
+        xMegaMenu('#mega-menu', {
+            responseWidth: 1124,
+            isRtl: true,
+            mainTitle: appName,
+            blurEffect: true,
+            disableLinks: false,
         });
     } catch(e) {
         console.log(e.message);
     }
+
+
    try {
        $(".xzoom, .xzoom-gallery").xzoom({tint: '#333', Xoffset: 15});
    } catch(e) {
-       console.log(e.message);
    }
 
 
     $(window).on('load', function () {
         setTimeout(function () {
             $('#preloader').slideUp(700);
-            let max = 150 ;
-            for( const b of $(".box")) {
-                if ($(b).height() > max ){
-                    max= $(b).height();
-                }
-            }
-            $('.box').height(max);
-            $("#favs .box").removeAttr('style');
+            // let max = 150 ;
+            // for( const b of $(".box")) {
+            //     if ($(b).height() > max ){
+            //         max= $(b).height();
+            //     }
+            // }
+            // $('.box').height(max);
+            // $("#favs .box").removeAttr('style');
 
         }, 100);
     });
@@ -129,7 +128,23 @@ jQuery(function ($) {
         autoplay: true,
         autoplayTimeout: 5000,
         autoplayHoverPause: true,
-        items: 1,
+        item: 3,
+        responsive: {
+            0: {
+                nav: false,
+                items: 1,
+            },
+            600: {
+                items: 2,
+                nav: false,
+                loop: false
+            },
+            1000: {
+                items: 3,
+                nav: false,
+                loop: false
+            },
+        }
     });
     $('#thumbs').owlCarousel({
         loop: false,
@@ -214,7 +229,6 @@ jQuery(function ($) {
             // console.log(err.response.data.errors);
             for (const k in err.response.data.errors) {
                 let er = err.response.data.errors[k];
-                console.log(er);
                 alertify.error(k + ' : ' + er[0]);
             }
 
@@ -390,7 +404,7 @@ jQuery(function ($) {
                 let cl = '';
                 for( const c of colors) {
                     cl = colorNames[c.color];
-                    console.log(c.color,colorNames);
+                    // console.log(c.color,colorNames);
                     txt += `<div data-id="${c.id}"
                                             data-price="${c.price}"
                                                         data-count="${c.count}"
@@ -418,7 +432,7 @@ jQuery(function ($) {
 
         }
     } catch (e) {
-        console.log('size err',e.message);
+        // console.log('size err',e.message);
     }
 
 
@@ -449,9 +463,8 @@ jQuery(function ($) {
 
         setParticles(100)
     } catch (e) {
-        console.log(e.message);
+        // console.log(e.message);
     }
 });
-
 
 

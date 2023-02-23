@@ -2,20 +2,6 @@
 @section('title')
     {{$pro->name}} -
 @endsection
-@section('body-class') bg-pinkk @endsection
-@section('metas')
-<meta name="product_id" content="{{$pro->id}}">
-<meta name="product_name" content="{{$pro->name}}">
-<meta property="og:image" content="{{$pro->imgurl()}}">
-<meta name="product_price" content="{{$pro->getPurePrice()}}">
-<meta name="product_old_price" content="{{$pro->getPurePrice()}}">
-@if($pro->stock_quantity == 0)
-<meta name="availability" content="outofstock">
-@else
-    <meta name="availability" content="instock">
-@endif
-<meta name="guarantee" content="اصالت کالا">
-@endsection
 @section('content')
     @php
         $commentCount = $pro->comments()->count();
@@ -61,9 +47,8 @@
         ]
       }
 
-
     </script>
-    <div class="">
+    <div>
         <section id="product">
             <div class="container shadow corner">
                 <div aria-label="breadcrumb">
@@ -99,14 +84,14 @@
                         <a href="images/image-1.jpg" data-lightbox="img-1" id="lightbx" data-title="{{$pro->title}}">
                             <img class="xzoom img-fluid" src="{{$pro->thumburl()}}" xoriginal="{{$pro->imgurl()}}"/>
                         </a>
-                            <div class="xzoom-thumbs owl-carousel owl-theme" id="thumbs">
-                                @foreach ($pro->getMedia() as $k => $media)
-                                    <a href="{{$media->getUrl('product-image')}}" class="mt-2 d-inline-block">
-                                        <img alt="{{$pro->title}}" class="xzoom-gallery" width="100"
-                                             src="{{$media->getUrl('product-thumb')}}">
-                                    </a>
-                                @endforeach
-                            </div>
+                        <div class="xzoom-thumbs owl-carousel owl-theme" id="thumbs">
+                            @foreach ($pro->getMedia() as $k => $media)
+                                <a href="{{$media->getUrl('product-image')}}" class="mt-2 d-inline-block">
+                                    <img alt="{{$pro->title}}" class="xzoom-gallery" width="100"
+                                         src="{{$media->getUrl('product-thumb')}}">
+                                </a>
+                            @endforeach
+                        </div>
 
                     </div>
                     <div class="col-md-7 detail">
@@ -115,254 +100,141 @@
                         </h1>
                         <hr>
 
-                        <div class="row">
-                            <div class="col-md-8">
-                                <h2>
-                                    اطلاعات محصول:
-                                </h2>
-                                <table class="table table-hover product-table" id="product-table">
-                                    <tr>
-                                        <th>
-                                            نام محصول
-                                        </th>
-                                        <td>
-                                            {{$pro->name}}
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th>
-                                            کد محصول
-                                        </th>
-                                        <td >
-                                            {{$pro->getCode()}}
-                                        </td>
-                                    </tr>
-                                    @if($pro->stock_quantity > 0)
-                                        <tr>
-                                            <th>
-                                                انتخاب سایز
-                                            </th>
-                                            <td id="size-pick">
-
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <th>
-                                                انتخاب رنگ
-                                            </th>
-                                            <td>
-                                                <div class="color-pick">
-
-                                                    <small style="color: gray">برای نمایش رنگ روی سایز دلخواه کلیک
-                                                        کنید</small>
-                                                </div>
-                                            </td>
-                                        </tr>
-
-
-                                        <tr>
-                                            <th>
-                                                قیمت
-                                            </th>
-                                            <td class="main-price">
-                                                <b>
+                        <h2>
+                            اطلاعات محصول:
+                        </h2>
+                        <table class="table table-hover product-table" id="product-table">
+                            <tr>
+                                <th>
+                                    نام محصول
+                                </th>
+                                <td>
+                                    {{$pro->name}}
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>
+                                    کد محصول
+                                </th>
+                                <td>
+                                    {{$pro->getCode()}}
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>
+                                    قیمت
+                                </th>
+                                <td class="main-price">
+                                    <b>
                                                 <span id="last-pricex">
                                                     {{$pro->getPrice()}}
                                                 </span>
-                                                    {{config('app.currency_type')}}
-                                                </b>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <th style="vertical-align: middle">
-                                                تعداد
-                                            </th>
-                                            <td>
-                                                <div id="counting" class="text-muted float-start mt-2"></div>
-                                                <div class="product-count d-inline-block">
-                                                    <div class="btn btn-info count-inc" style="padding: 2px 5px">
-                                                        <i class="fa fa-plus"></i>
-                                                    </div>
-                                                    <input type="number" id="single-count" class="product-count" value="1" max="1">
-                                                    <div class="btn btn-info count-dec" style="padding: 2px 5px">
-                                                        <i class="fa fa-minus"></i>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                    @endif
-                                    <tr>
-                                        <th>
-                                            جنس
-                                        </th>
-                                        <td>
-                                            <b>{!! \App\Helpers\showMetaValue('material',$pro->getMeta('material')) !!}</b>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th>
-                                            امتیاز
-                                        </th>
-                                        <td>
-                                            <div class="star-rating js-star-rating" dir="ltr">
-                                                <input class="star-rating__input" type="radio" name="rating"
-                                                       value="1"><i
-                                                    class="star-rating__star"></i>
-                                                <input class="star-rating__input" type="radio" name="rating"
-                                                       value="2"><i
-                                                    class="star-rating__star"></i>
-                                                <input class="star-rating__input" type="radio" name="rating"
-                                                       value="3"><i
-                                                    class="star-rating__star"></i>
-                                                <input class="star-rating__input" type="radio" name="rating"
-                                                       value="4"><i
-                                                    class="star-rating__star"></i>
-                                                <input class="star-rating__input" type="radio" name="rating"
-                                                       value="5"><i
-                                                    class="star-rating__star"></i>
-                                                <div
-                                                    class="current-rating current-rating--{{round($pro->average_rating)}} js-current-rating">
-                                                    <i class="star-rating__star">AAA</i></div>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                </table>
-                                <div class="row mt-3">
-                                    <div class="col">
-                                        <div class="box border-0" style="margin-top: -7px;">
-                                            <div class="fav @if($pro->isFav()) liked @endif" data-id="{{$pro->slug}}">
-                                                <i class="far fa-heart fa-3x"></i>
-                                                <i class="fa fa-heart fa-3x"></i>
-                                            </div>
+                                    </b>
+                                </td>
+                            </tr>
+                            @if($pro->hasMeta('color'))
+                                <tr>
+                                    <th>
+                                        انتخاب رنگ
+                                    </th>
+                                    <td>
+                                        <div class="color-pick">
+                                            <input type="hidden" class="color" value="red"/>
+                                            @php $colors = json_decode(\App\Helpers\getProp('color')->options,'true'); @endphp
+
+                                            @foreach($colors as $c)
+                                                <div style="background: {{$c['value']}}" data-color="{{$c['value']}}"
+                                                     class="color @if($c['value'] == $pro->getMeta('color')) active @endif"></div>
+                                            @endforeach
                                         </div>
+                                    </td>
+                                </tr>
+                            @endif
+                            @if($pro->hasMeta('warranty'))
+                                <tr>
+                                    <th>
+                                        گارانتی
+                                    </th>
+                                    <td>
+                                        @php $ws = json_decode(\App\Helpers\getProp('warranty')->options,'true'); @endphp
+                                        <select name="" id="" class="form-control">
+                                            @foreach($ws as $w)
+                                                <option value="{{$w['value']}}"> {{$w['title']}} </option>
+                                            @endforeach
+                                        </select>
+                                    </td>
+                                </tr>
+                            @endif
+                            <tr>
+                                <th>
+                                    امتیاز
+                                </th>
+                                <td>
+                                    <div class="star-rating js-star-rating" dir="ltr">
+                                        <input class="star-rating__input" type="radio" name="rating" value="1"><i
+                                            class="star-rating__star"></i>
+                                        <input class="star-rating__input" type="radio" name="rating" value="2"><i
+                                            class="star-rating__star"></i>
+                                        <input class="star-rating__input" type="radio" name="rating" value="3"><i
+                                            class="star-rating__star"></i>
+                                        <input class="star-rating__input" type="radio" name="rating" value="4"><i
+                                            class="star-rating__star"></i>
+                                        <input class="star-rating__input" type="radio" name="rating" value="5"><i
+                                            class="star-rating__star"></i>
+                                        <div
+                                            class="current-rating current-rating--{{round($pro->average_rating)}} js-current-rating">
+                                            <i class="star-rating__star">AAA</i></div>
                                     </div>
-                                    {{--                                    <div class="col">--}}
-                                    {{--                                        <a href="{{route('compare.add',$pro->slug)}}" class="btn btn-warning  w-75"--}}
-                                    {{--                                           data-wow-delay="1.5s"--}}
-                                    {{--                                           data-wow-duration="2s">--}}
-                                    {{--                                            <i class="fa fa-compass"></i>--}}
-                                    {{--                                            &nbsp;--}}
-                                    {{--                                            مقایسه کالا--}}
-                                    {{--                                        </a>--}}
-                                    {{--                                    </div>--}}
-                                    @if($pro->stock_quantity > 0)
-                                        <div class="col">
-                                            <a href="{{route('card.addq',['',''])}}"
-                                               class="add-to-card-q btn btn-primary float-end">
-                                                <i class="icofont-shopping-cart"></i> &nbsp;
-                                                &nbsp;
-                                                افزودن به سبد خرید
-                                            </a>
-
-                                        </div>
-                                    @else
-                                        <div class="col text-end">
-                                            <div class="text-muted">
-                                                ناموجود
-                                            </div>
-                                        </div>
-                                    @endif
-                                </div>
-
+                                </td>
+                            </tr>
+                        </table>
+                        <div class="row mt-3">
+                            <div class="col-5">
+                                <a href="{{route('compare.add',$pro->slug)}}" class="btn btn-warning mt-1"
+                                   data-wow-delay="1.5s"
+                                   data-wow-duration="2s">
+                                    <i class="fa fa-compass mt-2 mb-2"></i>
+                                    &nbsp;
+                                    مقایسه کالا
+                                </a>
                             </div>
-                            <div class="col-md-4">
-                                <div class="w-100">
-                                    <p class="alert mb-4 p-2 alert-danger">
-                                        به علت متفاوت بودن قواره تولیدی ها، سانت محصول حتما چک شود
-                                    </p>
-                                    <a class="alert pe-1 ps-1 alert-light sizeInfo" href="#my-tabs"
-                                       onclick="$(`[data-content='tab-gu']`).click();">
-                                        <img src="{{asset('images/mahi/size.png')}}" alt="">
-                                        <span>
-                                    راهنمای انتخاب سایز
-                                </span>
-                                    </a>
-                                    <a class="alert pe-1 ps-1 alert-light sizeInfo mt-2" onclick="$(`[data-content='tab-analyze']`).click();"  href="#my-tabs">
-                                        <img src="{{asset('images/mahi/list.svg')}}" alt="">
-                                        <span>
-                                   مشخصات محصول
-                                </span>
-                                    </a>
-                                    @if(auth('customer')->user()->colleague??null)
-                                        <a class="alert pe-1 ps-1 alert-light sizeInfo mt-2" id="cp-deteail">
-                                            <img src="{{asset('images/mahi/size.png')}}" alt="">
-                                            <span>
-                                          کپی توضیحات
-                                        </span>
-                                        </a>
-                                    @endif
-                                </div>
+                            <div class="col">
+                                <a href="{{route('card.add',$pro->slug)}}"
+                                   class="add-to-card btn btn-primary w-100 mt-1">
+                                    <img src="{{asset('images/basket.svg')}}" class="basket-icon" alt="">
+                                    افزودن به سبد خرید
+                                </a>
+
                             </div>
                         </div>
 
                     </div>
                     <div class="col-12">
-                        <div class="row d-md-block d-none mt-4">
-                            <ul class="trust d-md-flex justify-content-around align-items-center p-3">
-                                <li>
-                                    <i class="icofont-shield icofont-2x"></i>
-                                    پرداخت مطمئن
-                                </li>
-                                <li>
-                                    <i class="icofont-diamond icofont-2x"></i>
-                                    اصالت محصول
-                                </li>
-                                <li>
-                                    <i class="icofont-rocket-alt-1 icofont-2x"></i>
-                                    ارسال سریع
-                                </li>
-                                <li>
-                                    <i class="icofont-support icofont-2x"></i>
-                                    پشتیبانی سریع
-                                </li>
-                            </ul>
-                        </div>
-                        <hr>
-                        <div class="wow fadeInRight">
-                            <h4 class="mt-3">
-                                محصولات مشابه
-                            </h4>
-                            <div class="owl-carousel owl-sq">
-                                @foreach ($cat->products()->where('stock_quantity','>', 0)->limit(10)->get() as $p)
-                                    <div class="item ">
-                                        @include('website.component.pro',['p' => $p])
-                                    </div>
-                                @endforeach
-                            </div>
-                        </div>
-
-                    </div>
-                    <div class="col-12">
-
-
                         <ul class="tabs cl" id="my-tabs">
-                            {{--                            <li class="active lc" data-content="tab-detail">مشخصات فنی</li>--}}
-                            <li class="lc active" data-content="tab-analyze">
-                                مشخصات
-                            </li>
-                            <li class="lc" data-content="tab-gu">راهنمای سایز</li>
+                            <li class="active lc" data-content="tab-detail">مشخصات فنی</li>
+                            <li class="lc" data-content="tab-analyze">تحلیل و بررسی</li>
                             <li class="lc" data-content="tab-comment"> دیدگاه کاربران</li>
                             <li class="lc" data-content="tab-question"> پرسش و پاسخ</li>
-                            {{--                            <li class="lc" data-content="tab-chart">نمودار قیمت</li>--}}
+                            <li class="lc" data-content="tab-chart">نمودار قیمت</li>
                         </ul>
                         <div class="tab-container">
-                            {{--                            <div id="tab-detail" class="active">--}}
-                            {{--                                <table class="table table-bordered attribute ">--}}
-                            {{--                                    @foreach($pro->getAllMeta() as $k => $meta)--}}
-                            {{--                                        @if($k != 'color' && $k != 'warranty')--}}
-                            {{--                                            <tr>--}}
-                            {{--                                                <td>--}}
-                            {{--                                                    {{\App\Helpers\getPropLabel($k)}}--}}
-                            {{--                                                </td>--}}
-                            {{--                                                <td>--}}
-                            {{--                                                    {!! \App\Helpers\showMeta($k,$meta) !!}--}}
-                            {{--                                                </td>--}}
-                            {{--                                            </tr>--}}
-                            {{--                                        @endif--}}
-                            {{--                                    @endforeach--}}
-                            {{--                                </table>--}}
-                            {{--                            </div>--}}
-                            <div id="tab-analyze" class="active">
+                            <div id="tab-detail" class="active">
+                                <table class="table table-bordered attribute ">
+                                    @foreach($pro->getAllMeta() as $k => $meta)
+                                        @if($k != 'color' && $k != 'warranty')
+                                            <tr>
+                                                <td>
+                                                    {{\App\Helpers\getPropLabel($k)}}
+                                                </td>
+                                                <td>
+                                                    {!! \App\Helpers\showMeta($k,$meta) !!}
+                                                </td>
+                                            </tr>
+                                        @endif
+                                    @endforeach
+                                </table>
+                            </div>
+                            <div id="tab-analyze">
                                 <div class="content ">
                                     {!! $pro->description !!}
                                 </div>
@@ -378,7 +250,7 @@
                                     {{$comments->links()}}
                                 </div>
                                 <div class="comments-container non-print">
-                                    <div class="alert" id="comment-form">
+                                    <div class="alert alert-secondary" id="comment-form">
                                         @include('starter-kit::component.err')
                                         <h5>
                                             ارسال دیدگاه
@@ -470,11 +342,6 @@
 
                                 @endif
                             </div>
-                            <div id="tab-gu">
-                                <div class="text-center">
-                                    <img src="{{asset('images/sizeGuid.jpg')}}" style="width: 85%;margin: auto;" alt="">
-                                </div>
-                            </div>
                             <div id="tab-chart">
                                 <!--                chart-->
                                 <div>
@@ -484,6 +351,7 @@
                                         </div>
                                         <div class="chartjs-size-monitor-shrink">
                                             <div class=""></div>
+
                                         </div>
                                     </div>
                                     {!! \App\Helpers\makeChart($pro) !!}
@@ -493,11 +361,20 @@
                         </div>
                     </div>
                 </div>
-
+                <div class="wow fadeInRight">
+                    <h4 class="mt-3">
+                        محصولات مشابه
+                    </h4>
+                    <div class="owl-carousel owl-sq">
+                        @foreach ($cat->products()->where('stock_quantity','>', 0)->limit(10)->get() as $p)
+                            <div class="item ">
+                                @include('website.component.pro',['p' => $p])
+                            </div>
+                        @endforeach
+                    </div>
+                </div>
             </div>
         </section>
-
-
         <input type="hidden" id="qn" value="">
         <input type="hidden" id="qnt" value='{!! $pro->quantities()->orderBy('price')->get();!!}'>
         <input type="hidden" id="colors" value='{!! json_encode( \App\Helpers\getColors()) !!}'>

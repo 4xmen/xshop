@@ -9,33 +9,14 @@
     <meta name="keywords" content="{{\App\Helpers\getSetting('keywords')}}">
     <meta name="description" content="{{\App\Helpers\getSetting('desc')}}">
     <meta name="robots" content="follow,index">
-    <link rel="apple-touch-icon" sizes="57x57" href="{{asset('favicon/apple-icon-57x57.png')}}">
-    <link rel="apple-touch-icon" sizes="60x60" href="{{asset('favicon/apple-icon-60x60.png')}}">
-    <link rel="apple-touch-icon" sizes="72x72" href="{{asset('favicon/apple-icon-72x72.png')}}">
-    <link rel="apple-touch-icon" sizes="76x76" href="{{asset('favicon/apple-icon-76x76.png')}}">
-    <link rel="apple-touch-icon" sizes="114x114" href="{{asset('favicon/apple-icon-114x114.png')}}">
-    <link rel="apple-touch-icon" sizes="120x120" href="{{asset('favicon/apple-icon-120x120.png')}}">
-    <link rel="apple-touch-icon" sizes="144x144" href="{{asset('favicon/apple-icon-144x144.png')}}">
-    <link rel="apple-touch-icon" sizes="152x152" href="{{asset('favicon/apple-icon-152x152.png')}}">
-    <link rel="apple-touch-icon" sizes="180x180" href="{{asset('favicon/apple-icon-180x180.png')}}">
-    <link rel="icon" type="image/png" sizes="192x192"  href="{{asset('favicon/android-icon-192x192.png')}}">
-    <link rel="icon" type="image/png" sizes="32x32" href="{{asset('favicon/favicon-32x32.png')}}">
-    <link rel="icon" type="image/png" sizes="96x96" href="{{asset('favicon/favicon-96x96.png')}}">
-    <link rel="icon" type="image/png" sizes="16x16" href="{{asset('favicon/favicon-16x16.ong')}}">
-    <link rel="manifest" href="{{asset('favicon/manifest.json')}}">
-    <meta name="msapplication-TileColor" content="#ffffff">
-    <meta name="msapplication-TileImage" content="{{asset('favicon/ms-icon-144x144.png')}}">
-    <meta name="theme-color" content="#ffffff">
     {!! \App\Helpers\remTitle( SEO::generate()) !!}
 
-        {!! \App\Helpers\getSetting('site_webmaster_google') !!}
         <title>
             @yield('title')
             {{config('app.name')}}
         </title>
     <link rel="stylesheet" href="{{asset('css/theme.css')}}">
 
-    @yield('metas')
 </head>
 <body>
 
@@ -47,7 +28,56 @@
     </a>
 @endif
 <div id="preloader">
-    <img src="{{asset('images/preloader.gif')}}" alt="">
+    <div class="tvdd" role="img" aria-label="Three intersecting rings of twelve pulsing dots that never collide">
+        <div class="tvdd__ring">
+            <div class="tvdd__ring-dots">
+                <div class="tvdd__ring-dot"></div>
+                <div class="tvdd__ring-dot"></div>
+                <div class="tvdd__ring-dot"></div>
+                <div class="tvdd__ring-dot"></div>
+                <div class="tvdd__ring-dot"></div>
+                <div class="tvdd__ring-dot"></div>
+                <div class="tvdd__ring-dot"></div>
+                <div class="tvdd__ring-dot"></div>
+                <div class="tvdd__ring-dot"></div>
+                <div class="tvdd__ring-dot"></div>
+                <div class="tvdd__ring-dot"></div>
+                <div class="tvdd__ring-dot"></div>
+            </div>
+        </div>
+        <div class="tvdd__ring">
+            <div class="tvdd__ring-dots">
+                <div class="tvdd__ring-dot"></div>
+                <div class="tvdd__ring-dot"></div>
+                <div class="tvdd__ring-dot"></div>
+                <div class="tvdd__ring-dot"></div>
+                <div class="tvdd__ring-dot"></div>
+                <div class="tvdd__ring-dot"></div>
+                <div class="tvdd__ring-dot"></div>
+                <div class="tvdd__ring-dot"></div>
+                <div class="tvdd__ring-dot"></div>
+                <div class="tvdd__ring-dot"></div>
+                <div class="tvdd__ring-dot"></div>
+                <div class="tvdd__ring-dot"></div>
+            </div>
+        </div>
+        <div class="tvdd__ring">
+            <div class="tvdd__ring-dots">
+                <div class="tvdd__ring-dot"></div>
+                <div class="tvdd__ring-dot"></div>
+                <div class="tvdd__ring-dot"></div>
+                <div class="tvdd__ring-dot"></div>
+                <div class="tvdd__ring-dot"></div>
+                <div class="tvdd__ring-dot"></div>
+                <div class="tvdd__ring-dot"></div>
+                <div class="tvdd__ring-dot"></div>
+                <div class="tvdd__ring-dot"></div>
+                <div class="tvdd__ring-dot"></div>
+                <div class="tvdd__ring-dot"></div>
+                <div class="tvdd__ring-dot"></div>
+            </div>
+        </div>
+    </div>
 </div>
 <a id="go-top" href="#">
     <i class="fa fa-angle-up"></i>
@@ -55,14 +85,23 @@
 <section id="top-top">
     <div class="container">
         <div class="row">
-            <div class="col-lg-4 col-md-12">
-                <a href="{{route('welcome')}}" class="navbar-brand">
-                    <img src="{{asset('images/logo.png')}}" class="logo" alt="">
-                </a>
+            <div class="col-lg-4 col-md-12 text-start">
+                <div class='marquee'>
+                    <div class="row mt-2 pt-1" >
+                        <a class="col" href="tel:{{\App\Helpers\getSetting('tel')}}">
+                            <i class="fa fa-phone-alt"></i>
+                            {{\App\Helpers\getSetting('tel')}}
+                        </a>
+                        <a class="col" href="mail:{{\App\Helpers\getSetting('email')}}">
+                            <i class="fa fa-envelope"></i>
+                            {{\App\Helpers\getSetting('email')}}
+                        </a>
+                    </div>
+                </div>
+
             </div>
             <div class="col-lg-4 col-md-6">
-                <br>
-                <div class="input-group flex-nowrap">
+                <div class="input-group flex-nowrap" style="margin-top: 1em;">
                     <input type="text" id="searching" data-url="{{route('search')}}"
                            data-ajax="{{route('search.ajax')}}" class="form-control" placeholder="جستجو در محصولات..."
                            aria-label="search"
@@ -73,7 +112,6 @@
                 </div>
             </div>
             <div class="col-lg-4 text-end col-md-6">
-                <br>
                 <a type="button" class="btn btn-primary position-relative" href="{{route('card.show')}}">
                     <i class="icofont-shopping-cart"></i>
                     سبد خرید
@@ -83,7 +121,6 @@
                         </b>
                     </span>
                 </a>
-                &nbsp;
                 @if(Auth::guard('customer')->check())
                     <div class="btn btn-outline-primary">
                         <a href="{{route('customer')}}">
@@ -102,109 +139,8 @@
         </div>
     </div>
 </section>
-<nav id="main-nav">
-    <ul>
-        <li><a href="/">خانه</a></li>
-        {!! \App\Helpers\showCats() !!}
-        {!! \App\Helpers\MenuShowByName('menu')  !!}
-    </ul>
-</nav>
-<section id="top">
-    <div>
-        <div class="main-wrapper">
-            <nav class="navbarx">
-                <div class="brand-and-icon">
-{{--                    <button type="button" class="navbarx-toggler">--}}
-{{--                        <i class="fas fa-bars"></i>--}}
-{{--                    </button>--}}
-                    <div class="toggle">
-                        <i class="fas fa-bars"></i>
-                    </div>
-                    <div>
-                        <a href="{{route('welcome')}}" class="navbar-brand mobile-only">
-                            <img src="{{asset('images/logo.png')}}" class="logo" alt="">
-                        </a>
-                    </div>
-                </div>
 
-                <div class="navbarx-collapse">
-                    <ul class="navbarx-nav">
-                        <li>
-                            <a href="/">
-                                {{__("Home")}}
-                            </a>
-                        </li>
-                        @foreach(\App\Helpers\getMainCats() as $cat)
-                            <li>
-                                <a href="{{route('cat',$cat->slug)}}" class="menu-link">
-                                    {{$cat->name}}
-                                    <span class="drop-icon">
-                                     <i class="fas fa-chevron-down"></i>
-                                    </span>
-                                </a>
-                                <div class="sub-menu">
-                                    <!-- item -->
-                                    <div class="sub-menu-item">
-                                        <h4>
-                                            محصولات جدید
-                                            {{$cat->name}}
-                                        </h4>
-                                        <ul>
-                                            @foreach(\App\Helpers\getProductByCatQ($cat->id) as $p)
-                                                <li>
-                                                    <a href="{{route('product',$p->slug)}}">
-                                                        {{$p->name}}
-                                                    </a>
-                                                </li>
-                                            @endforeach
-                                        </ul>
-                                    </div>
-                                    <!-- end of item -->
-                                    <!-- item -->
-                                    <div class="sub-menu-item">
-                                        <h4> محصولات به تفکیک </h4>
-                                        <ul>
-                                            @foreach(\App\Helpers\getSubCats($cat->id) as $c)
-                                                <li>
-                                                    <a href="{{route('cat',$c->slug)}}">
-                                                        {{$c->name}}
-                                                    </a>
-                                                </li>
-                                            @endforeach
-                                        </ul>
-                                    </div>
-                                    <!-- end of item -->
-                                    <!-- item -->
-                                    <div class="sub-menu-item">
-                                        <b>
-                                            {{mb_substr($cat->description,0,100)}}...
-                                        </b>
-                                        <br>
-                                        <a href="{{route('cat',$cat->slug)}}" class="btn">همه
-                                            محصولات {{$cat->name}} </a>
-                                    </div>
-                                    <!-- end of item -->
-                                    <!-- item -->
-                                    <div class="sub-menu-item">
-                                        <img src="{{$cat->thumbUrl()}} " alt="{{$cat->name}}">
-                                    </div>
-                                    <!-- end of item -->
-                                </div>
-                            </li>
-                        @endforeach
-
-                        {!! \App\Helpers\MenuShowByName('menu')  !!}
-
-
-                    </ul>
-                </div>
-            </nav>
-        </div>
-    </div>
-    <div id="search-list">
-        search
-    </div>
-</section>
+@include('website.component.navbar')
 
 <div id="main-container" class="@yield('body-class')">
     <div id="app">

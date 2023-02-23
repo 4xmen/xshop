@@ -208,7 +208,7 @@
                     پرداخت آنلاین
                 </a>
             </div>
-            @if(auth('customer')->check() && auth('customer')->user()->credit > 0)
+            @if(auth('customer')->user()->credit > 0)
                 <hr>
                 <h5 class="text-center">
                     {{__("Pay by credit")}}: {{number_format(auth('customer')->user()->credit)}} {{config('app.currency_type')}}

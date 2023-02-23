@@ -40,6 +40,7 @@
         "vue-multiselect": "^2.1.6",
         "vue-select2": "^0.2.6",
         "vue-simple-range-slider": "^1.0.0",
+        "x-mega-menu": "^1.2.0",
         "xzoom": "^1.0.15"
     }
 }

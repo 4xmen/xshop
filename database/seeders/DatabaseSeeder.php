@@ -36,8 +36,8 @@ class DatabaseSeeder extends Seeder
             MenuSeeder::class,
             PropSeeder::class,
             ProductSeeder::class,
-            InvoiceSeeder::class,
-            SliderSeeder::class,
+//            InvoiceSeeder::class,
+//            SliderSeeder::class,
             SettingSeeder::class,
             MenuSeeder::class,
         ]);

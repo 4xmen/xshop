@@ -106,6 +106,7 @@ Route::prefix(config('starter-kit.uri'))->name('admin.')->group(
                         Route::post('bulk', [\App\Http\Controllers\Admin\QuestionController::class, "bulk"])->name('bulk');
                     }
                 );
+
                 Route::prefix('ticket')->name('ticket.')->group(
                     function () {
                         Route::get('index', [\App\Http\Controllers\Admin\TicketController::class, "index"])->name('index');

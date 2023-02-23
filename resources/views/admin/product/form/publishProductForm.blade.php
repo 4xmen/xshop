@@ -24,9 +24,7 @@
 
     <div id="metaprice">
         <meta-price   ref="metaPr" :jdata='jdata' :images='{!! isset($product)?$product->getMedia():'[]' !!}'
-
-                      :defz='{!! isset($product)?$product->quantities()->pluck('data'):'[]' !!}'
-                      :counts='{!! isset($product)?$product->quantities()->pluck('count'):'[]' !!}' ></meta-price>
+                      :defz='{!! isset($product)?$product->quantities()->pluck('data'):'[]' !!}' ></meta-price>
     </div>
     @if(isset($product))
         <input type="hidden" name="id" value="{{$product->id}}"/>

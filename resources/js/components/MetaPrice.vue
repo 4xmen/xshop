@@ -110,7 +110,7 @@ export default {
             modal: false,
         }
     },
-    props: ['jdata', 'defz', 'images','counts'],
+    props: ['jdata', 'defz', 'images'],
     mounted() {
         this.updateJdata(this.jdata, this.defz);
     },
@@ -143,7 +143,6 @@ export default {
                 if (this.quantities.length == 0) {
                     for (const d in def) {
                         this.quantities[d] = JSON.parse(def[d]);
-                        this.quantities[d].count = this.counts[d];
                     }
                 }
 

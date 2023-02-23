@@ -91,7 +91,7 @@
 .tabs li.active{
     border: none;
     transition: 0.4s;
-    border-bottom: 2px solid deeppink;
+    border-bottom: 2px solid dodgerblue;
     position: relative;
     height: 75px;
     margin-bottom: -25px;

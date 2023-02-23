@@ -198,7 +198,7 @@
                             </tr>
                             </thead>
                             <tbody>
-                            @foreach(\App\Models\Invoice::whereCustomerId(auth('customer')->id())->orderBy('id','desc')->with('successPayments')->get() as $invoice)
+                            @foreach(\App\Models\Invoice::whereCustomerId(auth('customer')->id())->with('successPayments')->get() as $invoice)
                                 <tr class="{{$invoice->status===\App\Models\Invoice::COMPLETED?'text-success':''}}">
                                     <td>{{$loop->index+1}}</td>
                                     <td style="width: 45%">

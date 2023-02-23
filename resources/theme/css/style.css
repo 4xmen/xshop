@@ -2,6 +2,7 @@
 @import url('grid.css');
 @import url('product.css');
 
+
 * {
     font-family: 'Vazir FD', sans-serif;
 }
@@ -23,38 +24,8 @@ section h1, section h2 {
     font-size: 25px;
 }
 
-#searching {
-    border-radius: 15px;
-    position: relative;
-    z-index: 3;
-}
-
-#addon-wrapping {
-    background: #1dd3b0 !important;
-    color: white;
-    border-radius: 50%;
-    position: relative;
-    left: 35px;
-    z-index: 4;
-}
-
-#addon-wrapping:after {
-    position: absolute;
-    border: 2px dashed #1dd3b0;
-    border-radius: 50%;
-    left: -6px;
-    right: -6px;
-    top: -6px;
-    bottom: -6px;
-    content: ' ';
-    z-index: 0;
-}
-.form-control:focus{
-    border-color: #f442b3;
-    box-shadow: 0 0 0 0.25rem #f442b355;
-}
 footer {
-    background: url("../css/loginbg.png") !important;
+    background: #F5F5F5;
     color: white;
     padding-top: 2em;
 }
@@ -68,7 +39,7 @@ ul li a {
 }
 
 ul li {
-    color: #ea4c89;
+    color: #2B63FF;
 }
 
 footer h3 {
@@ -78,7 +49,8 @@ footer h3 {
     color: black;
     margin-bottom: 25px;
     box-shadow: 0 2px 0 #f5f5f5 inset;
-    color: deeppink;
+    background: linear-gradient(#f5f5f5, #f5f5f5) 50% 50%/calc(100%) calc(100% - 2px) no-repeat,
+    linear-gradient(90deg, transparent 0%, #afafaf77 55%, #afafaf77 65%, #afafaf77 100%);
 }
 
 footer a {
@@ -198,6 +170,17 @@ aside .form-check {
     }
 }
 
+#top-top {
+    padding-bottom: 1em;
+}
+
+#top-top .text-end {
+    margin-top: 1em;
+}
+#addon-wrapping {
+    background: #0a53be !important;
+    border-color: teal;
+}
 
 #top {
     padding-top: 15px;
@@ -247,6 +230,15 @@ aside .form-check {
 @media ( max-width: 767px ) {
     #top .logo-container {
         display: none;
+    }
+
+    #top-top .text-end {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-gap: 1em;
+    }
+
+    #top-top .text-end .btn.btn {
     }
 }
 
@@ -299,13 +291,12 @@ aside .form-check {
     top: 0;
     bottom: 0;
     background: #fff;
-    z-index: 9999999;
+    z-index: 999;
     display: flex;
     align-items: center;
     align-content: center;
     justify-content: center;
-    text-decoration: unset;
-
+    text-decoration: none;
 }
 
 #preloader img {
@@ -362,7 +353,7 @@ aside .form-check {
     text-decoration: none;
 }
 
-.box h5{
+.box h5 {
     text-align: center;
     font-size: 13px;
     color: gray;
@@ -465,7 +456,7 @@ aside .form-check {
 /*go top*/
 
 #go-top {
-    background-color: #ea4c89;
+    background-color: #FF9800;
     width: 50px;
     height: 50px;
     text-align: center;
@@ -580,7 +571,7 @@ aside .form-check {
 }
 
 #product {
-    background: #f7edf6;
+    background: #efefef;
     padding-top: 1em;
 }
 
@@ -748,19 +739,6 @@ tr.border-bottom td {
 #main-conetent .form-group label {
     text-align: end;
 }
-.card-body{
-    padding: 55px;
-    display: block;
-    margin: auto;
-    max-width: 480px;
-}
-.sign-rule{
-    font-size: 11px;
-}
-.card{
-    background: rgb(218,155,183);
-    background: radial-gradient(circle, rgba(218,155,183,0.844958051580007) 0%, rgba(211,148,233,0.4051821412158614) 100%);
-}
 
 #card-info {
     position: fixed;
@@ -808,62 +786,61 @@ tr.border-bottom td {
 
 }
 
-#girl{
+#girl {
     margin-top: 15px;
     background: #ff6a6a33;
     padding-top: 2em;
     padding-bottom: 2em;
 }
 
-.simple-range-slider-bar{
-    background: #f442b3 !important
+.simple-range-slider-bar {
+    background: dodgerblue !important
 }
 
-.parallax{
+.parallax {
     background-size: cover;
     background-attachment: fixed;
     height: 250px;
 }
 
-.pink-pattern{
+.pink-pattern {
     background: url("../css/loginbg.png") !important;
     margin-top: 0;
     padding-top: 10vh;
     padding-bottom: 10vh;
 }
 
-.bg-pinkk{
-    background-color:#f7edf6 !important ;
+.bg-pinkk {
+    background-color: #f7edf6 !important;
 }
 
-#comment-form{
+#comment-form {
     max-width: 100%;
 }
 
 
-
 .btn-info:hover {
-    background: deeppink;
+    background: dodgerblue;
 }
 
 
 .alert-info {
     background: #f3c7e9;
-    border-color: deeppink;
+    border-color: dodgerblue;
     color: darkred;
 }
 
 .form-check-input:checked {
     background-color: darkmagenta;
-    border-color: deeppink;
+    border-color: dodgerblue;
 }
 
-.post-card{
+.post-card {
     box-shadow: 0 3px 7px #aaa;
     overflow: hidden;
 }
 
-.box .fav{
+.box .fav {
     position: absolute;
     left: 7px;
     top: 7px;
@@ -878,19 +855,65 @@ tr.border-bottom td {
     justify-content: center;
 }
 
-.box .fav .fa{
+.box .fav .fa {
     display: none;
 }
-.box .fav.liked .far{
+
+.box .fav.liked .far {
     display: none;
 }
-.box .fav.liked .fa{
+
+.box .fav.liked .fa {
     display: block;
 }
+
 .box .fav:hover .far, .box .fav.liked:hover .fa {
     display: none !important;
 }
 
 .box .fav:hover .fa, .box .fav.liked:hover .far {
     display: block !important;
+}
+
+.navbar-brand img {
+    max-width: 155px;
+}
+
+
+.marquee {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+    margin: 12px 0;
+    font-weight: 100;
+}
+.marquee:nth-of-type(2) {
+    background-color: #55BEC9;
+}
+.marquee:nth-of-type(3) {
+    background-color: #6ED1A8;
+}
+
+.marquee .row {
+    animation: marquee 20s linear infinite;
+    position: absolute;
+    width: 200%;
+}
+.marquee .row span {
+    float: left;
+    width: 50%;
+}
+
+@keyframes marquee {
+    0% {
+        right: 140%;
+    }
+    100% {
+        right: -140%;
+    }
+}
+
+.btn-outline-primary:hover a{
+    color: white ;
 }

@@ -793,7 +793,7 @@ body.hc-nav-open {
   margin-bottom: -1px;
 }
 .hc-offcanvas-nav .nav-title {
-  color: deeppink !important;
+  color: dodgerblue !important;
 }
 .hc-offcanvas-nav .nav-title + .nav-close a:not(.has-label) {
   position: absolute;
