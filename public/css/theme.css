@@ -11756,3 +11756,30 @@ tr.border-bottom td {
 .x-sub-menu li {
   list-style: none;
 }
+
+#search-list {
+  padding: 7px;
+  display: none;
+  background: #fff;
+  border: 1px solid silver;
+  position: absolute;
+  min-height: 35px;
+  box-shadow: 2px 2px 5px rgba(95, 106, 130, 0.52);
+  z-index: 99999;
+}
+
+#search-list img {
+  height: 45px;
+  float: left;
+}
+
+#search-list h4 {
+  font-size: 15px !important;
+  font-weight: 800;
+}
+
+#search-list h5 {
+  font-size: 14px !important;
+  color: #2d69eb;
+  text-align: end;
+}

@@ -61,3 +61,4 @@
         {!! \App\Helpers\MenuShowByName('menu')  !!}
     </ul>
 </nav>
+<div id="search-list"></div>

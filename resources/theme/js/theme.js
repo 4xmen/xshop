@@ -146,6 +146,7 @@ jQuery(function ($) {
             },
         }
     });
+
     $('#thumbs').owlCarousel({
         loop: false,
         margin: 4,
