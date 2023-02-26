@@ -139,7 +139,9 @@ class GatewayRedirectController
         if ($request->has('transport_id')){
             $t = Transport::whereId($request->transport_id)->first();
             $invoice->total_price +=   $t->price;
+            $invoice->transport_price =  $t->price;
         }
+        $invoice->save();
 //        dd($invoice);
 //        $invoice->update(['total_price' =>, 'hash' => ]);
         \Session::remove('card');
