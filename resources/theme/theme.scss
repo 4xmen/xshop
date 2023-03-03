@@ -509,3 +509,49 @@ $is-dark: 'false';
     color: #2d69eb;
     text-align: end;
 }
+
+/*-768px width*/
+@media (max-width: 768px) {
+    #card {
+        table,tbody,tr,td{
+            display: block !important;
+            width: 100%;
+        }
+    }
+    th{
+        display: none;
+    }
+    tr{
+        border-bottom: 1px solid gray !important;
+        td{
+            padding-right: 20% !important;
+            position: relative;
+            border-bottom: 1px solid silver !important;
+            img{
+                width: 80%;
+                object-fit: cover;
+            }
+        }
+        td:before{
+            content: attr(data-before);
+            position: absolute;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            width: 18%;
+            background: #00000022;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    }
+    tr:last-child{
+        td{
+            padding: 3px !important;
+        }
+        td:before{
+            display: none;
+        }
+    }
+
+}

@@ -18,7 +18,7 @@
                     <form action="{{route('invoice.create')}}" method="post">
                         @csrf
                         <div class="text-center" id="card">
-                            <table class="table table-bordered table-striped table-hover table-responsive-lg"
+                            <table class="table table-bordered table-striped table-hover"
                                    id="card-table">
                                 <tr>
                                     <th>

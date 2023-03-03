@@ -466,6 +466,50 @@ jQuery(function ($) {
     } catch (e) {
         // console.log(e.message);
     }
+
+    setTimeout(function () {
+        $(".x-side-menu #searching").attr('id','sub-search');
+        $("#sub-search").keyup(function () {
+            let q = $(this).val();
+            if  (q.length < 3){
+                $(".x-side-menu .list-group-item").remove();
+                return false;
+            }
+            axios.get($(this).data('ajax') + '?q=' + q).then(function (e) {
+                if (!e.data.OK) {
+                    window.alertify.error(e.data.err);
+                } else {
+                    $(".x-side-menu .list-group-item").remove();
+                    // text += '<ul class="list-group">';
+                    let text = '';
+                    for (const p of e.data.data) {
+                        text += '<li class="list-group-item">';
+                        text += `<a href="${p.link}">`;
+                        text += `<img src="${p.image}" alt="product image">`
+                        text += `<span>${p.name}</span> <hr>`
+                        text += `<b>${p.price}</b>`
+                        text += '</a>';
+                        text += '</li>';
+                    }
+                    text += '<li class="list-group-item">';
+                    text += '<a href="' + $(self).data('url') + '?q=' + q + '">';
+                    text += 'جستجو موارد بیشتر :';
+                    text += q;
+                    text += '</a>';
+                    text += '</li>';
+                    // text += '</ul>';
+                    $(".x-side-menu").append(text);
+
+                }
+            });
+        });
+    },1000);
+
+    $("#card table th").each(function (k,e) {
+        $("#card td:nth-child("+(k+1)+")").attr('data-before',$(e).text().trim());
+    })
+
+
 });
 
 

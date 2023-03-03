@@ -11783,3 +11783,48 @@ tr.border-bottom td {
   color: #2d69eb;
   text-align: end;
 }
+
+/*-768px width*/
+@media (max-width: 768px) {
+  #card table, #card tbody, #card tr, #card td {
+    display: block !important;
+    width: 100%;
+  }
+
+  th {
+    display: none;
+  }
+
+  tr {
+    border-bottom: 1px solid gray !important;
+  }
+  tr td {
+    padding-right: 20% !important;
+    position: relative;
+    border-bottom: 1px solid silver !important;
+  }
+  tr td img {
+    width: 80%;
+    -o-object-fit: cover;
+       object-fit: cover;
+  }
+  tr td:before {
+    content: attr(data-before);
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 18%;
+    background: rgba(0, 0, 0, 0.1333333333);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  tr:last-child td {
+    padding: 3px !important;
+  }
+  tr:last-child td:before {
+    display: none;
+  }
+}
