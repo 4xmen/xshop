@@ -824,16 +824,12 @@ tr.border-bottom td {
 }
 
 
-.alert-info {
-    background: #f3c7e9;
-    border-color: dodgerblue;
-    color: darkred;
-}
 
 .form-check-input:checked {
-    background-color: darkmagenta;
+    background-color: dodgerblue;
     border-color: dodgerblue;
 }
+
 
 .post-card {
     box-shadow: 0 3px 7px #aaa;
