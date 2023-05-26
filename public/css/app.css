@@ -1261,6 +1261,94 @@ nav a {
   display: block;
 }
 
+#profile-tab {
+  list-style: none;
+  padding: 0;
+}
+
+#profile-tab li {
+  padding: 0.5rem 1rem;
+  /*border-bottom: 1px solid silver;*/
+}
+
+#profile-tab li a, #profile-tab li span {
+  display: block;
+  transition: 300ms;
+}
+
+#profile-tab li:hover span, #profile-tab li:hover a {
+  transform: translateX(-10px);
+}
+
+#profile-tab li.active {
+  background: gray;
+  color: white;
+}
+
+.gird4 {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.gird4 > div {
+  height: 10rem;
+  padding: 2rem;
+  border: 1px solid rgba(0, 0, 0, 0.1254901961);
+  position: relative;
+  text-align: start;
+  overflow: hidden;
+}
+
+.gird4 > div:first-child {
+  background: rgba(154, 205, 50, 0.5647058824);
+  color: black;
+}
+
+.gird4 > div:nth-child(2) {
+  background: rgba(32, 222, 215, 0.56);
+  color: black;
+}
+
+.gird4 > div:nth-child(3) {
+  background: rgba(250, 38, 69, 0.56);
+  color: black;
+}
+
+.gird4 > div:last-child {
+  background: rgba(255, 69, 0, 0.5647058824);
+  color: black;
+}
+
+.gird4 > div i {
+  font-size: 75px;
+  width: 75px;
+  position: absolute;
+  left: 15px;
+  top: 15px;
+  transform: rotateZ(25deg);
+  color: rgba(255, 255, 255, 0.3333333333);
+}
+
+/*-768px width*/
+@media (max-width: 1000px) {
+  .gird4 {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 650px) {
+  .gird4 {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
+.profile-tab {
+  border: 0 !important;
+  padding: 0 !important;
+}
+
 .txt-area {
   white-space: pre-line;
 }

@@ -11073,6 +11073,57 @@ tr.border-bottom td {
     transform: scale(1);
   }
 }
+.progress-step {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+.progress-step .step {
+  text-align: center;
+  margin-bottom: 35px;
+  position: relative;
+  z-index: 9;
+}
+.progress-step .step.done i, .progress-step .step.done img {
+  border-color: black;
+  color: black;
+}
+.progress-step .step i, .progress-step .step img {
+  font-size: 45px;
+  width: 75px;
+  height: 75px;
+  border-radius: 50%;
+  border: 2px solid gray;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: gray;
+  margin: 15px auto;
+  background: #ffffff;
+  position: relative;
+  z-index: 10;
+  cursor: pointer;
+}
+.progress-step .step:before {
+  height: 2px;
+  background: silver;
+  top: calc(50% - 15px);
+  position: absolute;
+  left: 0;
+  right: 0;
+  content: " ";
+  transform: translateY(-50%);
+}
+.progress-step .step.done:before {
+  background: black;
+}
+
+#card-steps .step {
+  display: none;
+}
+#card-steps .step.active {
+  display: block;
+}
+
 .x-mega-menu {
   background: #eeeeee;
   display: grid;
