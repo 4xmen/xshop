@@ -54,7 +54,7 @@
 </div>
 <!-- Scripts -->
 
-<script src="https://cdn.ckeditor.com/4.14.0/full-all/ckeditor.js"></script>
+<script src="{{asset('js/editor/ckeditor.js')}}"></script>
 
 @foreach (\StarterKit::allScripts() as $name => $path)
     @if (\Illuminate\Support\Str::startsWith($path, ['http://', 'https://']))
