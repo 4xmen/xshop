@@ -1,7 +1,7 @@
-<div class="quantity @if($pro->getPurePriceDef($q->price) == $pro->getPurePrice()) active @endif"
+<div class="quantity @if($index == 0) active @endif"
      data-price="{{$pro->getPurePriceDef($q->price)}}"
      data-count="{{$q->count}}">
-    <input type="checkbox" name="data[{{$pro->id}}]" value='{{$q}}' @if($pro->getPurePriceDef($q->price) == $pro->getPurePrice()) checked @endif>
+    <input type="checkbox" name="data[{{$pro->id}}]" value='{{$q}}' @if($index == 0) checked @endif>
     @foreach(\App\Helpers\jsonOrder( $q->data ) as $k => $meta)
         @if($k != 'color' && $k != 'count' && $k != 'price')
             <span>

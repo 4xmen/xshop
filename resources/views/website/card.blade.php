@@ -68,9 +68,9 @@
                                                         </td>
                                                         <td colspan="2">
                                                             @if($pro->quantities()->sum('count') > 0)
-                                                                @foreach($pro->quantities as $q)
+                                                                @foreach($pro->quantities as $index => $q)
                                                                     @if($q->count > 0)
-                                                                        @include('component.card-quantity',compact('q','pro'))
+                                                                        @include('component.card-quantity',compact('q','pro','$index'))
                                                                     @endif
                                                                 @endforeach
                                                             @else

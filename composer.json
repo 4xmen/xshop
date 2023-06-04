@@ -2,7 +2,14 @@
     "name": "laravel/laravel",
     "type": "project",
     "description": "The Laravel Framework.",
-    "keywords": ["framework", "laravel"],
+    "keywords": [
+        "shop",
+        "persian shop",
+        "open soruce shop",
+        "xshop",
+        "framework",
+        "laravel"
+    ],
     "license": "GPL-3.0-or-later",
     "require": {
         "php": "^8.0.2",

@@ -663,8 +663,10 @@ class WebsiteController extends Controller
             ->get();
         foreach ($qs as $q){
             $p = Product::whereId($q->product_id)->first();
-            $p->stock_quantity = $q->count;
-            $p->save();
+            if ($p != null){
+                $p->stock_quantity = $q->count;
+                $p->save();
+            }
         }
         return 'Done!';
     }
