@@ -72,18 +72,10 @@
     <div class="container mb-5">
         <div class="row mt-3">
             <div class="col-md-6">
-                <div class="card">
-                    <div class="card-body">
                         {!! $chartjs->render() !!}
-                    </div>
-                </div>
             </div>
             <div class="col-md-6">
-                <div class="card">
-                    <div class="card-body">
                         {!! $chartjs2->render() !!}
-                    </div>
-                </div>
             </div>
         </div>
     </div>
