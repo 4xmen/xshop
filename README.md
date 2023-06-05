@@ -12,7 +12,7 @@ x-shop is an open source shop developed in laravel, very customizable!
     - product categories tree 
     - product category sotable
     - product category metable
-    - product category image + thumnail
+    - product category image + thumbnail
 - Product manager
     - product fields
         - name 
@@ -32,14 +32,12 @@ x-shop is an open source shop developed in laravel, very customizable!
     - multi address
     - can define clients as colleague
     - customer control panel
-    - 
 - question and answer 
 - ticking system
 - transport manager
 - meta properties
 - post manager
 - post categories
-- menu manager
 - gallery manager
 - nav menu manager
 - slider & carousel manager
@@ -57,7 +55,7 @@ x-shop is an open source shop developed in laravel, very customizable!
     - saderat bank
     - melat bank
     - parsian bank
-
+- & etc, like as customzied search and compare products
 
 ## License
 xShop developed under `GPL-3` license, So don't worry it will be opensource for ever!
