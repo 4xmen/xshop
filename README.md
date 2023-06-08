@@ -2,7 +2,7 @@
     <img src="media/xstack-shop-logo.svg" alt="xshop logo" width="600">
 </div>
 
-#xShop
+# xShop
 
 x-shop is an open source shop developed in laravel, very customizable!
 
@@ -106,6 +106,19 @@ nano .env # make APP_DEBUG false, APP_ENV production
 php artisan storage:link
 php key:generate
 composer install --optimize-autoloader --no-dev
+```
+
+### add cron job
+
+You must add crontab for your project:
+
+```bash
+crontab -e
+```
+
+Add this line:
+```bash
+* * * * * cd /home/[yourusername]/[your-public-html-project-root] && php artisan schedule:run >> /dev/null 2>&1
 ```
 
 ## contribute & support

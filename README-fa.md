@@ -2,7 +2,7 @@
     <img src="media/xstack-shop-logo.svg" alt="xshop logo" width="600">
 </div>
 
-#xShop
+# xShop
 
 اکس شاپ یک پروژه اوپن سورس فروشگاهی بر پایه لاراول است که شما می‌توانید به راحتی با سفارشی سازی آن فروشگاه مورد نظر خودتون یا مشتریتون رو راه‌اندازی کنید و حتی از سورس کدش آموزش ببنید
 
@@ -110,6 +110,18 @@ php key:generate
 composer install --optimize-autoloader --no-dev
 ```
 
+### اضافه کردن cron job
+
+جهت اجرا کامل برنامه ها زمان‌دار فروشگاه باید یک دستور زیر رو بزنید:
+
+```bash
+crontab -e
+```
+
+و این خط رو اضافه کنید:
+```bash
+* * * * * cd /home/[yourusername]/[your-public-html-project-root] && php artisan schedule:run >> /dev/null 2>&1
+```
 ## contribute & support
 
 ما خیلی خوشحال می‌شویم از شما را کمک کنیم و یا شما ما رو کمک کنید، در صورت توسعه سورس حتما از pull request شما اتسقبال می‌کنیم و اگر مشکلی داشتید، حتما آن را برطرف می‌کنیم، فقط کافی است یک موضوع در لینک زیر ایجاد کنید:
