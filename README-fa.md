@@ -69,7 +69,7 @@
 
 ### نیازمندی‌ها 
 
-- php 8.1
+- php 8.1 [ `php-gd`, `sqlite3`, `php-soap` ]
 - mysql or mariadb
 - composer
 
@@ -83,10 +83,11 @@ cd xshop
 composer install
 php artisan migrate --seed
 php artisan storage:link
+php key:generate
 php artisan serv
 ```
 
-اکنون می‌توانید در آدرس زیر `http://localhost:800/dashboard` با رایانه : `admin@example.com` و پسورد: `password` وارد شوید
+اکنون می‌توانید در آدرس زیر `http://localhost:8000/dashboard` با رایانه : `admin@example.com` و پسورد: `password` وارد شوید
 
 
 
@@ -105,6 +106,7 @@ php artisan db:seed --class=UserSeeder
 php artisan db:seed --class=SettingSeeder
 nano .env # make APP_DEBUG false, APP_ENV production
 php artisan storage:link
+php key:generate
 composer install --optimize-autoloader --no-dev
 ```
 
