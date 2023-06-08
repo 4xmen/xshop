@@ -69,7 +69,7 @@ xShop developed under `GPL-3` license, So don't worry it will be opensource for 
 
 ### Requirement
 
-- php 8.1
+- php 8.1 [ `php-gd`, `sqlite3`, `php-soap` ]
 - mysql or mariadb
 - composer
 
@@ -83,9 +83,10 @@ cd xshop
 composer install
 php artisan migrate --seed
 php artisan storage:link
+php key:generate
 php artisan serv
 ```
-now login to admin panel `http://localhost:800/dashboard` default admin email is : `admin@example.com` and default password is: `password`
+now login to admin panel `http://localhost:8000/dashboard` default admin email is : `admin@example.com` and default password is: `password`
 
 
 # Deploy guide
@@ -103,6 +104,7 @@ php artisan db:seed --class=UserSeeder
 php artisan db:seed --class=SettingSeeder
 nano .env # make APP_DEBUG false, APP_ENV production
 php artisan storage:link
+php key:generate
 composer install --optimize-autoloader --no-dev
 ```
 
