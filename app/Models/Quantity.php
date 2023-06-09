@@ -25,7 +25,6 @@ use Plank\Metable\Metable;
  * @method static \Illuminate\Database\Eloquent\Builder|Quantity wherePrice($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Quantity whereProductId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Quantity whereUpdatedAt($value)
- * @mixin \Eloquent
  * @property string|null $data
  * @property-read \Illuminate\Database\Eloquent\Collection|\Plank\Metable\Meta[] $meta
  * @property-read int|null $meta_count
@@ -41,6 +40,12 @@ use Plank\Metable\Metable;
  * @property int|null $image
  * @method static \Illuminate\Database\Eloquent\Builder|Quantity whereImage($value)
  * @property-read \App\Models\Product $product
+ * @property \Illuminate\Support\Carbon|null $deleted_at
+ * @method static \Illuminate\Database\Eloquent\Builder|Quantity onlyTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder|Quantity whereDeletedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Quantity withTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder|Quantity withoutTrashed()
+ * @mixin \Eloquent
  */
 class Quantity extends Model
 {

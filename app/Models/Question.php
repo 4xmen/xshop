@@ -25,11 +25,11 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|Question whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Question whereProductId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Question whereUpdatedAt($value)
- * @mixin \Eloquent
  * @property int $status
  * @property-read \App\Models\Customer $customer
  * @property-read \App\Models\Product $product
  * @method static \Illuminate\Database\Eloquent\Builder|Question whereStatus($value)
+ * @mixin \Eloquent
  */
 class Question extends Model
 {

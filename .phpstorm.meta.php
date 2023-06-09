@@ -230,6 +230,7 @@ namespace PHPSTORM_META {
             'view' => \Illuminate\View\Factory::class,
             'view.engine.resolver' => \Illuminate\View\Engines\EngineResolver::class,
             'view.finder' => \Illuminate\View\FileViewFinder::class,
+            'zarinpal-gateway' => \App\Payment\Zarinpal::class,
             'zibal-gateway' => \App\Payment\Zibal::class,
         ]));
     override(\Illuminate\Container\Container::makeWith(0), map([
@@ -453,6 +454,7 @@ namespace PHPSTORM_META {
             'view' => \Illuminate\View\Factory::class,
             'view.engine.resolver' => \Illuminate\View\Engines\EngineResolver::class,
             'view.finder' => \Illuminate\View\FileViewFinder::class,
+            'zarinpal-gateway' => \App\Payment\Zarinpal::class,
             'zibal-gateway' => \App\Payment\Zibal::class,
         ]));
     override(\Illuminate\Contracts\Container\Container::get(0), map([
@@ -676,6 +678,7 @@ namespace PHPSTORM_META {
             'view' => \Illuminate\View\Factory::class,
             'view.engine.resolver' => \Illuminate\View\Engines\EngineResolver::class,
             'view.finder' => \Illuminate\View\FileViewFinder::class,
+            'zarinpal-gateway' => \App\Payment\Zarinpal::class,
             'zibal-gateway' => \App\Payment\Zibal::class,
         ]));
     override(\Illuminate\Contracts\Container\Container::make(0), map([
@@ -899,6 +902,7 @@ namespace PHPSTORM_META {
             'view' => \Illuminate\View\Factory::class,
             'view.engine.resolver' => \Illuminate\View\Engines\EngineResolver::class,
             'view.finder' => \Illuminate\View\FileViewFinder::class,
+            'zarinpal-gateway' => \App\Payment\Zarinpal::class,
             'zibal-gateway' => \App\Payment\Zibal::class,
         ]));
     override(\Illuminate\Contracts\Container\Container::makeWith(0), map([
@@ -1122,6 +1126,7 @@ namespace PHPSTORM_META {
             'view' => \Illuminate\View\Factory::class,
             'view.engine.resolver' => \Illuminate\View\Engines\EngineResolver::class,
             'view.finder' => \Illuminate\View\FileViewFinder::class,
+            'zarinpal-gateway' => \App\Payment\Zarinpal::class,
             'zibal-gateway' => \App\Payment\Zibal::class,
         ]));
     override(\App::get(0), map([
@@ -1345,6 +1350,7 @@ namespace PHPSTORM_META {
             'view' => \Illuminate\View\Factory::class,
             'view.engine.resolver' => \Illuminate\View\Engines\EngineResolver::class,
             'view.finder' => \Illuminate\View\FileViewFinder::class,
+            'zarinpal-gateway' => \App\Payment\Zarinpal::class,
             'zibal-gateway' => \App\Payment\Zibal::class,
         ]));
     override(\App::make(0), map([
@@ -1568,6 +1574,7 @@ namespace PHPSTORM_META {
             'view' => \Illuminate\View\Factory::class,
             'view.engine.resolver' => \Illuminate\View\Engines\EngineResolver::class,
             'view.finder' => \Illuminate\View\FileViewFinder::class,
+            'zarinpal-gateway' => \App\Payment\Zarinpal::class,
             'zibal-gateway' => \App\Payment\Zibal::class,
         ]));
     override(\App::makeWith(0), map([
@@ -1791,6 +1798,7 @@ namespace PHPSTORM_META {
             'view' => \Illuminate\View\Factory::class,
             'view.engine.resolver' => \Illuminate\View\Engines\EngineResolver::class,
             'view.finder' => \Illuminate\View\FileViewFinder::class,
+            'zarinpal-gateway' => \App\Payment\Zarinpal::class,
             'zibal-gateway' => \App\Payment\Zibal::class,
         ]));
     override(\app(0), map([
@@ -2014,6 +2022,7 @@ namespace PHPSTORM_META {
             'view' => \Illuminate\View\Factory::class,
             'view.engine.resolver' => \Illuminate\View\Engines\EngineResolver::class,
             'view.finder' => \Illuminate\View\FileViewFinder::class,
+            'zarinpal-gateway' => \App\Payment\Zarinpal::class,
             'zibal-gateway' => \App\Payment\Zibal::class,
         ]));
     override(\resolve(0), map([
@@ -2237,6 +2246,7 @@ namespace PHPSTORM_META {
             'view' => \Illuminate\View\Factory::class,
             'view.engine.resolver' => \Illuminate\View\Engines\EngineResolver::class,
             'view.finder' => \Illuminate\View\FileViewFinder::class,
+            'zarinpal-gateway' => \App\Payment\Zarinpal::class,
             'zibal-gateway' => \App\Payment\Zibal::class,
         ]));
     override(\Psr\Container\ContainerInterface::get(0), map([
@@ -2460,10 +2470,15 @@ namespace PHPSTORM_META {
             'view' => \Illuminate\View\Factory::class,
             'view.engine.resolver' => \Illuminate\View\Engines\EngineResolver::class,
             'view.finder' => \Illuminate\View\FileViewFinder::class,
+            'zarinpal-gateway' => \App\Payment\Zarinpal::class,
             'zibal-gateway' => \App\Payment\Zibal::class,
         ]));
 
 
+    override(\Illuminate\Foundation\Testing\Concerns\InteractsWithContainer::mock(0), map(["" => "@&\Mockery\MockInterface"]));
+    override(\Illuminate\Foundation\Testing\Concerns\InteractsWithContainer::partialMock(0), map(["" => "@&\Mockery\MockInterface"]));
+    override(\Illuminate\Foundation\Testing\Concerns\InteractsWithContainer::instance(0), type(1));
+    override(\Illuminate\Foundation\Testing\Concerns\InteractsWithContainer::spy(0), map(["" => "@&\Mockery\MockInterface"]));
     override(\Illuminate\Support\Arr::add(0), type(0));
     override(\Illuminate\Support\Arr::except(0), type(0));
     override(\Illuminate\Support\Arr::first(0), elementType(0));

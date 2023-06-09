@@ -21,14 +21,15 @@ class CustomerController extends Controller
 
     public function createOrUpdate(Customer $customer, Request $request)
     {
+        $credit = str_replace(',', '', $request->input('credit', 0));
         $customer->name = $request->input('name');
         $customer->address = $request->input('address');
 //        $customer->address_alt = $request->input('address_alt');
         $customer->state = $request->input('state');
-        $customer->credit = str_replace(',','',$request->input('credit'));
+        $customer->credit = $credit == null ? 0 : $credit;
         $customer->city = $request->input('city');
         $customer->postal_code = $request->input('postal_code');
-        if ($request->has('email')){
+        if ($request->has('email')) {
             $customer->email = $request->input('email');
         }
         $customer->mobile = $request->input('mobile');
@@ -67,15 +68,15 @@ class CustomerController extends Controller
     {
         //
         $q = Customer::orderByDesc('id');
-        if ($request->has('name') && strlen($request->input('name')) > 1 ){
-            $q->where('name','LIKE', '%'.$request->name.'%');
+        if ($request->has('name') && strlen($request->input('name')) > 1) {
+            $q->where('name', 'LIKE', '%' . $request->name . '%');
         }
-        if ($request->has('mobile') && strlen($request->input('mobile')) > 1 ){
-            $q->where('mobile','LIKE', '%'.$request->mobile.'%');
+        if ($request->has('mobile') && strlen($request->input('mobile')) > 1) {
+            $q->where('mobile', 'LIKE', '%' . $request->mobile . '%');
         }
 
-        if ($request->has('colleague') ){
-            $q->where('colleague',true);
+        if ($request->has('colleague')) {
+            $q->where('colleague', true);
         }
 
         $customers = $q->paginate(20);
