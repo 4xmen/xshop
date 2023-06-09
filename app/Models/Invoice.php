@@ -28,7 +28,6 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @method static \Illuminate\Database\Eloquent\Builder|Invoice whereStatus($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Invoice whereTotalPrice($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Invoice whereUpdatedAt($value)
- * @mixin \Eloquent
  * @property int|null $discount_id
  * @property-read \App\Models\Discount|null $discount
  * @method static \Illuminate\Database\Eloquent\Builder|Invoice whereDiscountId($value)
@@ -68,6 +67,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @method static \Illuminate\Database\Query\Builder|Invoice withoutTrashed()
  * @property int|null $address_id
  * @method static \Illuminate\Database\Eloquent\Builder|Invoice whereAddressId($value)
+ * @property-read \App\Models\Address|null $address
+ * @mixin \Eloquent
  */
 class Invoice extends Model
 {

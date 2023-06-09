@@ -29,12 +29,12 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @method static \Illuminate\Database\Eloquent\Builder|Discount whereProductId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Discount whereType($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Discount whereUpdatedAt($value)
- * @mixin \Eloquent
  * @property \Illuminate\Support\Carbon|null $deleted_at
  * @method static \Illuminate\Database\Query\Builder|Discount onlyTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder|Discount whereDeletedAt($value)
  * @method static \Illuminate\Database\Query\Builder|Discount withTrashed()
  * @method static \Illuminate\Database\Query\Builder|Discount withoutTrashed()
+ * @mixin \Eloquent
  */
 class Discount extends Model
 {

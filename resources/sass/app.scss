@@ -18,7 +18,7 @@
 
 @import "fix-libs";
 // Bootstrap
-//@import '~bootstrap/scss/bootstrap';
+@import '~bootstrap/dist/css/bootstrap.rtl.min.css';
 
 
 body {
@@ -222,4 +222,10 @@ nav {
         align-items: center;
         justify-content: space-between;
     }
+}
+
+.rule-title{
+    border-bottom: 1px solid dodgerblue;
+    padding: 4px 2rem;
+    background: rgba(30, 144, 255, 0.26);
 }
