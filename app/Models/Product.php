@@ -93,7 +93,6 @@ use function App\Helpers\getSetting;
  * @method static \Illuminate\Database\Query\Builder|Product withTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder|Product withoutTags($tagNames)
  * @method static \Illuminate\Database\Query\Builder|Product withoutTrashed()
- * @mixin \Eloquent
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Quantity[] $quantities
  * @property-read int|null $quantities_count
  * @property int $sell_count
@@ -115,6 +114,9 @@ use function App\Helpers\getSetting;
  * @method static \Illuminate\Database\Eloquent\Builder|Product whereFee($value)
  * @property int $image_index
  * @method static \Illuminate\Database\Eloquent\Builder|Product whereImageIndex($value)
+ * @property int $carat
+ * @method static \Illuminate\Database\Eloquent\Builder|Product whereCarat($value)
+ * @mixin \Eloquent
  */
 class Product extends Model implements HasMedia
 {

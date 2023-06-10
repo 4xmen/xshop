@@ -46,9 +46,9 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @method static \Illuminate\Database\Eloquent\Builder|Prop whereWidth($value)
  * @method static \Illuminate\Database\Query\Builder|Prop withTrashed()
  * @method static \Illuminate\Database\Query\Builder|Prop withoutTrashed()
- * @mixin \Eloquent
  * @property string $unit
  * @method static \Illuminate\Database\Eloquent\Builder|Prop whereUnit($value)
+ * @mixin \Eloquent
  */
 class Prop extends Model
 {

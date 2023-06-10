@@ -43,7 +43,6 @@ use Illuminate\Notifications\Notifiable;
  * @method static \Illuminate\Database\Eloquent\Builder|Customer whereRememberToken($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Customer whereState($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Customer whereUpdatedAt($value)
- * @mixin \Eloquent
  * @property string|null $code
  * @method static \Illuminate\Database\Eloquent\Builder|Customer whereCode($value)
  * @property string|null $address_alt
@@ -70,6 +69,7 @@ use Illuminate\Notifications\Notifiable;
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Credit[] $credits
  * @property-read int|null $credits_count
  * @method static \Illuminate\Database\Eloquent\Builder|Customer whereCerdit($value)
+ * @mixin \Eloquent
  */
 class Customer extends Authenticatable
 {

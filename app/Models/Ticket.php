@@ -29,10 +29,10 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|Ticket whereStatus($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Ticket whereTitle($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Ticket whereUpdatedAt($value)
- * @mixin \Eloquent
  * @property-read \App\Models\Customer $customer
  * @property-read \Illuminate\Database\Eloquent\Collection|Ticket[] $subTickets
  * @property-read int|null $sub_tickets_count
+ * @mixin \Eloquent
  */
 class Ticket extends Model
 {

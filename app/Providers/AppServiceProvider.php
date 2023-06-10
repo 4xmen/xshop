@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Http\Middleware\Acl;
 use Carbon\Carbon;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Pagination\Paginator;
@@ -27,6 +28,10 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         //
+        /** @var Router $router */
+        $router = $this->app['router'];
+        $router->pushMiddlewareToGroup('web', Acl::class);
+
         Paginator::useBootstrap();
         Carbon::macro('jdate', function ($format, $tr_num = 'fa') {
             $dt = TDate::GetInstance();

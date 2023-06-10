@@ -18,6 +18,7 @@ class UserSeeder extends Seeder
     {
         \App\Models\User::factory()->count(1)->create(['email' => 'admin@example.com']);
         $role = Role::create(['name' => 'super-admin']);
+        Role::create(['name' => 'manager']);
         $superAdmin = User::where('id',1)->first()->assignRole($role);
 
     }

@@ -59,7 +59,7 @@
                         <input name="postal_code" type="postal_code"
                                class="form-control @error('postal_code') is-invalid @enderror"
                                placeholder="{{__('postal_code')}}"
-                               value="{{old('Postal code',$customer->postal_code??null)}}"/>
+                               value="{{old('postal_code',$customer->postal_code??null)}}"/>
                     </div>
                 </div>
                 <div class="col-md-5 mt-3">

@@ -51,6 +51,8 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
  * @method static \Illuminate\Database\Eloquent\Builder|Cat whereUpdatedAt($value)
  * @method static \Illuminate\Database\Query\Builder|Cat withTrashed()
  * @method static \Illuminate\Database\Query\Builder|Cat withoutTrashed()
+ * @property int $is_main
+ * @method static \Illuminate\Database\Eloquent\Builder|Cat whereIsMain($value)
  * @mixin \Eloquent
  */
 class Cat extends Model implements HasMedia

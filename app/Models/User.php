@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Xmen\StarterKit\Models\Post;
 use Xmen\StarterKit\Models\StarterKit;
 
 
@@ -49,6 +50,10 @@ use Xmen\StarterKit\Models\StarterKit;
  * @method static \Illuminate\Database\Eloquent\Builder|User wherePassword($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereRememberToken($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereUpdatedAt($value)
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Access> $accesses
+ * @property-read int|null $accesses_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Product> $products
+ * @property-read int|null $products_count
  * @mixin \Eloquent
  */
 class User extends Authenticatable
@@ -84,4 +89,22 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function posts(){
+        return $this->hasMany(Post::class);
+    }
+    public function products(){
+        return $this->hasMany(Product::class);
+    }
+
+    public function accesses(){
+        return $this->hasMany(Access::class);
+    }
+    public function hasAnyAccess($name){
+        return $this->accesses()->where('route','LIKE','%'.$name.'%')->count() > 0;
+    }
+
+    public function hasAccess($route){
+        return $this->accesses()->where('route',$route)->count() > 0;
+    }
 }

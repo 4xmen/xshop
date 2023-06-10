@@ -31,9 +31,9 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @method static \Illuminate\Database\Eloquent\Builder|Credit whereUpdatedAt($value)
  * @method static \Illuminate\Database\Query\Builder|Credit withTrashed()
  * @method static \Illuminate\Database\Query\Builder|Credit withoutTrashed()
- * @mixin \Eloquent
  * @property-read \App\Models\Customer $customer
  * @property-read \App\Models\Invoice $invoice
+ * @mixin \Eloquent
  */
 class Credit extends Model
 {

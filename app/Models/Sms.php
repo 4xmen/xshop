@@ -23,13 +23,13 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|Sms whereText($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Sms whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Sms whereUser($value)
- * @mixin \Eloquent
  * @property string|null $code
  * @method static \Illuminate\Database\Eloquent\Builder|Sms whereCode($value)
  * @property string $ip
  * @property string|null $mobile
  * @method static \Illuminate\Database\Eloquent\Builder|Sms whereIp($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Sms whereMobile($value)
+ * @mixin \Eloquent
  */
 class Sms extends Model
 {
