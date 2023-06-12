@@ -101,7 +101,7 @@ class User extends Authenticatable
         return $this->hasMany(Access::class);
     }
     public function hasAnyAccess($name){
-        return $this->accesses()->where('route','LIKE','%'.$name.'%')->count() > 0;
+        return $this->accesses()->where('route','LIKE','%.'.$name.'.%')->count() > 0;
     }
 
     public function hasAccess($route){

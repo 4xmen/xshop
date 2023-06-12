@@ -34,7 +34,7 @@ class Acl
                     return abort(403, __("You dont't have acccess this acction"));
                 }
                 // check delete or destroy with bulk action
-                if ($requestPath[2] == 'bulk' && $request->input('bulk') == 'delete') {
+                if (isset($requestPath[2]) && $requestPath[2] == 'bulk' && $request->input('bulk') == 'delete') {
                     $requestPath[2] = 'delete';
                     if (!auth()->user()->hasAccess(implode('.', $requestPath))) {
                         $requestPath[2] = 'destroy';
