@@ -1,4 +1,4 @@
-@extends('website.layout')
+@extends('website.layout.layout')
 @section('title')
     {{$post->title}} -
 @endsection

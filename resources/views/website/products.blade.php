@@ -1,4 +1,4 @@
-@extends('website.layout')
+@extends('website.layout.layout')
 @section('title')
     {{__("Products")}} -
 @endsection
@@ -22,13 +22,13 @@
                         </div>
                     </div>
                     <div class="col-xl-3 col-md-4">
-                        @include('website.sidebar')
+                        @include('website.layout.sidebar')
                     </div>
                     <div class="col-xl-9 col-md-8">
                         <div class="list-grid">
                             @foreach($products as $pro)
                                 <div class="item">
-                                    @include('website.component.pro',['p' => $pro])
+                                    @include('website.component.product-box',['p' => $pro])
                                 </div>
                             @endforeach
                         </div>

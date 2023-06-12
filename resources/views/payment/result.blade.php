@@ -1,4 +1,4 @@
-@extends('website.layout')
+@extends('website.layout.layout')
 @section('content')
     <div id="main-conetent">
         <section id="product" class="wow zoomInUp" data-wow-delay=".5">
