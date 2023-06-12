@@ -1,4 +1,4 @@
-@extends('website.layout')
+@extends('website.layout.layout')
 @section('title')
     {{__("Customer profile")}} -
 @endsection
@@ -534,7 +534,7 @@
                             @else
                                 @foreach(auth('customer')->user()->products as $p)
                                     <div class="col-md-3">
-                                        @include('website.component.pro',['p' => $p])
+                                        @include('website.component.product-box',['p' => $p])
                                     </div>
                                 @endforeach
                             @endif

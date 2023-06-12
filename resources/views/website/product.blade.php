@@ -1,4 +1,4 @@
-@extends('website.layout')
+@extends('website.layout.layout')
 @section('title')
     {{$pro->name}} -
 @endsection
@@ -368,7 +368,7 @@
                     <div class="owl-carousel owl-sq">
                         @foreach ($cat->products()->where('stock_quantity','>', 0)->limit(10)->get() as $p)
                             <div class="item ">
-                                @include('website.component.pro',['p' => $p])
+                                @include('website.component.product-box',['p' => $p])
                             </div>
                         @endforeach
                     </div>

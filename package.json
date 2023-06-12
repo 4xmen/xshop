@@ -21,26 +21,26 @@
         "sass-loader": "^11.0.1",
         "vue": "^2.6.12",
         "vue-loader": "^15.9.8",
-        "vue-template-compiler": "^2.7.10"
-    },
-    "dependencies": {
-        "@fortawesome/fontawesome-free": "^6.1.1",
-        "alertifyjs": "^1.13.1",
-        "chart.js": "^3.8.2",
-        "hc-offcanvas-nav": "^6.1.5",
-        "jquery": "^2.2.4",
-        "jquery-sortable": "^0.9.13",
+        "vue-template-compiler": "^2.7.10",
+
         "lightbox2": "^2.11.3",
         "owl.carousel": "^2.3.4",
         "persian-date": "^1.1.0",
         "persian-datepicker": "^1.2.0",
+        "alertifyjs": "^1.13.1",
+        "chart.js": "^3.8.2",
+        "x-mega-menu": "^1.2.0",
+        "xzoom": "^1.0.15"
+    },
+    "dependencies": {
+        "@fortawesome/fontawesome-free": "^6.1.1",
+        "jquery": "^2.2.4",
+        "jquery-sortable": "^0.9.13",
         "rvnm": "^1.4.0",
         "select2": "^4.1.0-rc.0",
         "vazir-font": "^30.1.0",
         "vue-multiselect": "^2.1.6",
         "vue-select2": "^0.2.6",
-        "vue-simple-range-slider": "^1.0.0",
-        "x-mega-menu": "^1.2.0",
-        "xzoom": "^1.0.15"
+        "vue-simple-range-slider": "^1.0.0"
     }
 }

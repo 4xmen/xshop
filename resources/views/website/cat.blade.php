@@ -1,4 +1,4 @@
-@extends('website.layout')
+@extends('website.layout.layout')
 @section('title')
     {{$cat->name}} -
 @endsection
@@ -42,7 +42,7 @@
                                 @endif
 
                             >
-                        @include('website.sidebar')
+                        @include('website.layout.sidebar')
                         </meta-search>
                         </aside>
                     </div>
@@ -50,7 +50,7 @@
                         <div class="list-grid">
                             @foreach($products as $pro)
                                 <div class="item">
-                                    @include('website.component.pro',['p' => $pro])
+                                    @include('website.component.product-box',['p' => $pro])
                                 </div>
                             @endforeach
                         </div>

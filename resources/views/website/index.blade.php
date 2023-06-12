@@ -1,4 +1,4 @@
-@extends('website.layout')
+@extends('website.layout.layout')
 @section('content')
     <section id="index-top">
         <div class="container">

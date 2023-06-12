@@ -19,7 +19,7 @@ class ProductFactory extends Factory
     {
 
         $rand = rand(1,2);
-        $title = ($rand == 1?'موبایل':'تبلت').' ' . $this->faker->unique()->realText(50);
+        $title = ($rand == 1?'موبایل':'تبلت').' ' . $this->faker->unique()->firstNameFemale;
         return [
             //
             'name' => $title,
