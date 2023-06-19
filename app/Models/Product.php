@@ -270,6 +270,13 @@ class Product extends Model implements HasMedia
         return $def;
     }
 
+    public function getOldPrice()
+    {
+        if ($this->getPurePrice() == 0) {
+            return __('Call us!');
+        }
+        return number_format($this->price) . ' ' . config('app.currency_type');
+    }
     public function getPrice()
     {
         if ($this->getPurePrice() == 0) {
@@ -290,7 +297,7 @@ class Product extends Model implements HasMedia
 
     function hasDiscount()
     {
-        return $this->discounts()->where('expire', '>', \DB::raw('NOW()'))->count() > 1;
+        return $this->discounts()->where('expire', '>', \DB::raw('NOW()'))->count() > 0;
     }
 
     public function isFav()
