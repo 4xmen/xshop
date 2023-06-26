@@ -1,0 +1,37 @@
+// 576 - 768 - 1024 Responsive
+
+// Mobile 576px
+@media screen and (max-width: 576px) {
+
+}
+
+// Tablet 768
+@media screen and (max-width: 768px) {
+
+}
+
+// PC 1024
+@media screen and (max-width: 1024px) {
+  .head-services{
+    .serv-box{
+      padding: 10px;
+      h4{
+        font-size: $fs-title-mob ;
+      }
+      span{
+        font-size: $fs-paragraph-mob;
+      }
+    }
+  }
+}
+
+
+
+
+
+
+
+
+
+
+

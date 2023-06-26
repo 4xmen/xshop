@@ -1,0 +1,388 @@
+.breadcrumb-bg {
+  background-color: $bg2;
+  padding: 10px;
+
+  .breadcrumb {
+    --bs-breadcrumb-margin-bottom: 0rem;
+  }
+}
+
+#product-cat-show {
+  background-color: $bg1;
+
+  .cat-box {
+
+    .col {
+      border: 1px solid $bg2;
+      margin: 8px;
+      padding: 8px;
+      transition: 666ms;
+      border-radius: 50%;
+
+      &:hover {
+        background-color: $bg2;
+        transform: rotate(2deg);
+        border: 1px solid $txt-title;
+      }
+
+      h6 {
+        padding-top: 5px;
+      }
+    }
+
+    img {
+      width: 60px;
+      height: 60px;
+    }
+  }
+}
+
+#products {
+  background-color: $bg1;
+
+  //button
+  .button {
+    display: block;
+    margin: auto;
+    --width: 160px;
+    --height: 35px;
+    --tooltip-height: 35px;
+    --tooltip-width: 90px;
+    --gap-between-tooltip-to-button: 18px;
+    --tooltip-color: #fff;
+    width: var(--width);
+    height: var(--height);
+    background: $txt-hover;
+    position: relative;
+    text-align: center;
+    border-radius: 0.45em;
+    font-family: Vazirmatn, serif;
+    transition: background 0.3s;
+    cursor: pointer;
+    //&::before {
+    //  position: absolute;
+    //  content: attr(data-tooltip);
+    //  width: var(--tooltip-width);
+    //  height: var(--tooltip-height);
+    //  background-color: #555;
+    //  font-size: 0.9rem;
+    //  color: #fff;
+    //  border-radius: .25em;
+    //  line-height: var(--tooltip-height);
+    //  bottom: calc(var(--height) + var(--gap-between-tooltip-to-button) + 10px);
+    //  left: calc(50% - var(--tooltip-width) / 2);
+    //  opacity: 0;
+    //  visibility: hidden;
+    //  transition: all 0.5s;
+    //}
+    //&::after {
+    //  position: absolute;
+    //  content: '';
+    //  width: 0;
+    //  height: 0;
+    //  border: 10px solid transparent;
+    //  border-top-color: #555;
+    //  left: calc(50% - 10px);
+    //  bottom: calc(100% + var(--gap-between-tooltip-to-button) - 10px);
+    //  opacity: 0;
+    //  visibility: hidden;
+    //  transition: all 0.5s;
+    //}
+    &:hover {
+      background: #222;
+
+      .text {
+        top: -100%;
+      }
+
+      .icon {
+        top: 0;
+      }
+
+      &:before {
+        opacity: 1;
+        visibility: visible;
+        bottom: calc(var(--height) + var(--gap-between-tooltip-to-button));
+      }
+
+      &:after {
+        opacity: 1;
+        visibility: visible;
+        bottom: calc(var(--height) + var(--gap-between-tooltip-to-button) - 20px);
+      }
+    }
+  }
+
+  .text {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    color: #fff;
+    top: 0;
+    transition: top 0.5s;
+  }
+
+  .button-wrapper {
+    overflow: hidden;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    color: #fff;
+  }
+
+  .icon {
+    overflow: hidden;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    color: #fff;
+    transition: top 0.5s;
+    top: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    svg {
+      width: 24px;
+      height: 24px;
+    }
+  }
+
+  //button finish
+
+  .bg-tertiary {
+    background-color: $bg2;
+    border-radius: $border;
+  }
+
+  //.pro-box{
+  //.box{
+  //  position: relative;
+  //  margin:30px;
+  //  background-color: $box-bg;
+  //  padding:15px;
+  //  border: 0.2px solid $body-bg2;
+  //  border-radius: $border-box;
+  //  box-shadow: 1px 1px 3px $body-bg2;
+  //  transition: 222ms;
+  //  height: 450px;
+  //  &:hover{
+  //    box-shadow: 2px 2px 3px $body-bg2;
+  //  }
+  //  .pro-img{
+  //    max-width: 180px;
+  //    height: auto;
+  //    display: block;
+  //    margin: auto;
+  //  }
+  //  h4{
+  //    font-weight: 200;
+  //    color: black;
+  //  }
+  //  h6{
+  //    margin-top: 15px;
+  //    color: black;
+  //  }
+  //  p{
+  //    font-weight: 100;
+  //    font-size: 14px;
+  //  }
+  //  .offer{
+  //    width: 55px;
+  //    height: 55px;
+  //    position: absolute;
+  //    top: 0;
+  //    right: 0;
+  //    span{
+  //      color: #ff5b00;
+  //    }
+  //  }
+  //  .add-to{
+  //    font-size: 22px;
+  //    background-color: $body-bg;
+  //    padding: 15px;
+  //    border-radius: 50%;
+  //    transition: 666ms;
+  //    &:hover{
+  //      background-color: $primary;
+  //      color: white;
+  //      transform: rotate(7deg);
+  //    }
+  //  }
+  //  .price{
+  //    h4{
+  //
+  //      &:after{
+  //        content: ' تومان';
+  //      }
+  //    }
+  //    h6{
+  //      color: #666666;
+  //      &:after{
+  //        content: ' تومان';
+  //      }
+  //    }
+  //  }
+  //}
+  .product-cards {
+    text-align: center;
+
+    .card {
+      border-radius: 40px;
+
+      &:hover {
+        border: 1px solid $txt-title;
+
+        .card-footer {
+          border-top: 1px solid $txt-title;
+        }
+      }
+    }
+
+    .card-title {
+      font-weight: 200;
+      color: black;
+    }
+
+    .card-brand {
+      margin-top: 15px;
+      color: black;
+    }
+
+    .card-text {
+      font-weight: 100;
+      font-size: 14px;
+    }
+
+    .card-img {
+      display: block;
+      margin: auto;
+      width: 50%;
+      height: auto;
+    }
+  }
+
+  .card-footer {
+    padding: 15px;
+
+    .cta {
+      border: none;
+      background: none;
+
+      span {
+        padding-bottom: 7px;
+        font-size: 14px;
+        padding-left: 15px;
+        text-transform: uppercase;
+      }
+
+      svg {
+        transform: translateX(-8px);
+        transition: all 0.3s ease;
+      }
+
+      &:hover {
+        svg {
+          transform: translateX(0);
+        }
+
+        .hover-underline-animation {
+          &:after {
+            transform: scaleX(1);
+            transform-origin: bottom left;
+          }
+        }
+      }
+
+      &:active {
+        svg {
+          transform: scale(0.9);
+        }
+      }
+    }
+
+    .hover-underline-animation {
+      position: relative;
+      color: black;
+      padding-bottom: 20px;
+
+      &:after {
+        content: "";
+        position: absolute;
+        width: 100%;
+        transform: scaleX(0);
+        height: 2px;
+        bottom: 0;
+        right: 0;
+        background-color: #000000;
+        transform-origin: bottom left;
+        transition: transform 0.25s ease-out;
+      }
+    }
+
+  }
+
+  .offer {
+    width: 55px;
+    height: 55px;
+    position: absolute;
+    top: 0;
+    right: 0;
+
+    span {
+      color: #ff5b00;
+    }
+  }
+
+  .price {
+    h4 {
+      font-size: 18px;
+
+      &:after {
+        content: ' تومان';
+      }
+    }
+
+    del {
+      color: #666666;
+      font-weight: lighter;
+      font-size: 15px;
+
+      &:after {
+        content: ' تومان';
+      }
+    }
+  }
+
+  .pro-paragraph {
+    border: 1px solid $bg2;
+    padding: 50px;
+    margin: 20px;
+    background: $bg2;
+    border: $border;
+
+    h5 {
+      color: black;
+      font-size: 17px;
+    }
+
+    p {
+      text-align: justify;
+    }
+  }
+}
+
+.pagination-pos {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
