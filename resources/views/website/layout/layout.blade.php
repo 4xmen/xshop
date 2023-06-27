@@ -1,6 +1,10 @@
 @include('website.component.header')
 
-<div id="main-container" class="@yield('body-class')">
+<div id="preloader">
+    <img src="{{asset('images/preloader.gif')}}" alt="">
+</div>
+
+<div class="@yield('body-class')">
     <div id="app">
         @yield('content')
     </div>
