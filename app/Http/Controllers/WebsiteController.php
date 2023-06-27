@@ -62,9 +62,14 @@ class WebsiteController extends Controller
         }
         $cats = Cat::whereNull('parent_id')->limit(6)->get();
         $sliders = Slider::whereActive(true)->limit(5)->get();
-        $vid = Clip::latest()->where('active', 1)->first();
+//        $vid = Clip::latest()->where('active', 1)->first();
 
-        return view('website.index', compact('cats', 'sliders', 'vid'));
+        $discount = Discount::whereNotNull('expire')
+            ->where('expire', '>', \DB::raw('NOW()'))
+            ->whereNotNull('product_id')->pluck('product_id')->toArray();
+        $disPros = Product::whereIn('id', $discount)->get();
+
+        return view('website.index', compact('cats', 'sliders', 'disPros'));
     }
 
     public function cat(Cat $cat, Request $request)
