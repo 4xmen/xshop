@@ -108,7 +108,7 @@
                         </button>
                     </div>
                     <a href="{{url('/')}}">
-                        <img src="{{asset('images/logo.png')}}" class="d-block m-auto mt-4 " width="70" height="70"
+                        <img src="{{asset('images/logo.png')}}" class="d-block m-auto mt-4 rounded-0" width="70" height="70"
                              alt="">
                     </a>
                 </div>
