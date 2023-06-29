@@ -29,9 +29,9 @@
                         </label>
                         <select name="customer_id" data-live-search="true" id="customer_id"
                                 class="form-control searchable  @error('customer_id') is-invalid @enderror">
-                            @foreach(\App\models\Customer::all() as $customer )
+                            @foreach(\App\Models\Customer::all() as $customer )
                                 <option value="{{ $customer->id }}"
-                                        @if (old('customer_id',$invoice->customer_id??null) == $customer->id ) selected @endif > {{$customer->name}} </option>
+                                        @if (old('customer_id',$invoice?->customer_id??null) == $customer->id ) selected @endif > {{$customer->name}} </option>
                             @endforeach
                         </select>
                     </div>
@@ -76,43 +76,49 @@
                                value="{{old('tracking_code',$invoice->tracking_code??null)}}"/>
                     </div>
                 </div>
-                @foreach($invoice->products as $product )
+                @if(isset($invoice))
+                    @foreach($invoice->products as $product )
 
-                   <div class="col-md-6">
-                       <div class="card">
-                           <div id="product_{{$product->id}}" class="row">
-                               <div class="col-md-6 mt-3">
-                                   <div class="form-group">
-                                       <label for="products">
-                                           {{__('Product')}}
-                                       </label>
-                                       <select data-live-search="true" name="products.ids[]" data-live-search="true" id="products"
-                                               class="form-control searchable">
-                                           @foreach(\App\models\Product::all() as $allProduct )
-                                               <option value="{{ $allProduct->id }}"
-                                                       @if ($product->id==$allProduct->id  ) selected @endif > {{$allProduct->name}} </option>
-                                           @endforeach
-                                       </select>
-                                   </div>
-                               </div>
-                               <div class="col-md-6 mt-3">
-                                   <div class="form-group">
-                                       <label for="count">
-                                           {{__('Count')}}
-                                       </label>
-                                       <input type="number" name="products.counts[]" value="{{$product->pivot->count}}"
-                                              id="" class="form-control">
-                                       <button class="btn btn-outline-danger "
-                                               onclick="document.getElementById('product_{{$product->id}}').remove()"> X
-                                       </button>
-                                   </div>
-                               </div>
+                        <div class="col-md-6">
+                            <div class="card">
+                                <div id="product_{{$product->id}}" class="row">
+                                    <div class="col-md-6 mt-3">
+                                        <div class="form-group">
+                                            <label for="products">
+                                                {{__('Product')}}
+                                            </label>
+                                            <select data-live-search="true" name="products.ids[]"
+                                                    data-live-search="true" id="products"
+                                                    class="form-control searchable">
+                                                @foreach(\App\models\Product::all() as $allProduct )
+                                                    <option value="{{ $allProduct->id }}"
+                                                            @if ($product->id==$allProduct->id  ) selected @endif > {{$allProduct->name}} </option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 mt-3">
+                                        <div class="form-group">
+                                            <label for="count">
+                                                {{__('Count')}}
+                                            </label>
+                                            <input type="number" name="products.counts[]"
+                                                   value="{{$product->pivot->count}}"
+                                                   id="" class="form-control">
+                                            <button class="btn btn-outline-danger "
+                                                    onclick="document.getElementById('product_{{$product->id}}').remove()">
+                                                X
+                                            </button>
+                                        </div>
+                                    </div>
 
-                           </div>
-                       </div>
-                   </div>
+                                </div>
+                            </div>
+                        </div>
 
-                @endforeach
+                    @endforeach
+                @endif
+
                 <div class="col-md-12">
                     <label> &nbsp;</label>
                     <input name="" type="submit" class="btn btn-primary mt-2" value="{{__('Save')}}"/>

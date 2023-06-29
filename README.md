@@ -89,7 +89,7 @@ php artisan serv
 now login to admin panel `http://localhost:8000/dashboard` default admin email is : `admin@example.com` and default password is: `password`
 
 
-# Deploy guide
+## Deploy guide
 
 We recommend deploy xshop on VPS, so create databse and run this commands
 
@@ -108,7 +108,7 @@ php key:generate
 composer install --optimize-autoloader --no-dev
 ```
 
-### add cron job
+### Add cron job
 
 You must add crontab for your project:
 
@@ -121,13 +121,21 @@ Add this line:
 * * * * * cd /home/[yourusername]/[your-public-html-project-root] && php artisan schedule:run >> /dev/null 2>&1
 ```
 
-## contribute & support
+## Contribute & support
 
 We are so pleased to your help and help you, If you wanna develop xshop, Congrats or 
 if you have problem, don't worry create an issue here:
 
 ```
 https://github.com/4xmen/xshop/issues
+```
+
+## Test
+
+Note: The test must be run on development version, and test command is:
+
+```bash
+php artisan test
 ```
 
 ## Screen shots

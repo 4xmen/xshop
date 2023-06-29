@@ -122,13 +122,23 @@ crontab -e
 ```bash
 * * * * * cd /home/[yourusername]/[your-public-html-project-root] && php artisan schedule:run >> /dev/null 2>&1
 ```
-## contribute & support
+## همکاری و پشتیبانی 
 
 ما خیلی خوشحال می‌شویم از شما را کمک کنیم و یا شما ما رو کمک کنید، در صورت توسعه سورس حتما از pull request شما اتسقبال می‌کنیم و اگر مشکلی داشتید، حتما آن را برطرف می‌کنیم، فقط کافی است یک موضوع در لینک زیر ایجاد کنید:
 
 ```
 https://github.com/4xmen/xshop/issues
 ```
+
+
+## تست پروژه
+
+نکته: تست را حتماً برای نسخه توسعه استفاده کنید نه روی وبسایت زیر بار دستور تست از قرار ذیل است:
+
+```bash
+php artisan test
+```
+
 
 ## Screen shots
 
