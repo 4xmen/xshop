@@ -17,10 +17,13 @@ window.Vue = require('vue').default;
 // require('./js/gsap.min.js');
 // require('./js/Physics2DPlugin3.min');
 // require('./js/mega-menu.js');
-require('./js/product.js');
-require('./js/theme.js');
-require('./js/chart.js');
-require('../js/customer.js');
+// require('./js/product.js');
+// require('./js/theme.js');
+// require('./js/chart.js');
+// require('../js/customer.js');
+ require('./js/back-top.js');
+ require('./js/product');
+ require('./js/slider');
 
 
 
