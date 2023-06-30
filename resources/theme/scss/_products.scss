@@ -344,10 +344,6 @@
   .price {
     h4 {
       font-size: 18px;
-
-      &:after {
-        content: ' تومان';
-      }
     }
 
     del {
@@ -355,9 +351,6 @@
       font-weight: lighter;
       font-size: 15px;
 
-      &:after {
-        content: ' تومان';
-      }
     }
   }
 
