@@ -12,6 +12,68 @@
 
 namespace App\Models{
 /**
+ * App\Models\Access
+ *
+ * @property int $id
+ * @property int $user_id
+ * @property string $route
+ * @property int $owner
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \App\Models\User $user
+ * @method static \Illuminate\Database\Eloquent\Builder|Access newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Access newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Access query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Access whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Access whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Access whereOwner($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Access whereRoute($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Access whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Access whereUserId($value)
+ * @mixin \Eloquent
+ */
+	class Access extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * App\Models\Address
+ *
+ * @property int $id
+ * @property string $address
+ * @property int $customer_id
+ * @property float|null $lat
+ * @property float|null $lng
+ * @property int|null $state
+ * @property int|null $city
+ * @property string $data
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property \Illuminate\Support\Carbon|null $deleted_at
+ * @method static \Illuminate\Database\Eloquent\Builder|Address newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Address newQuery()
+ * @method static \Illuminate\Database\Query\Builder|Address onlyTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder|Address query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Address whereAddress($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Address whereCity($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Address whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Address whereCustomerId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Address whereData($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Address whereDeletedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Address whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Address whereLat($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Address whereLng($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Address whereState($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Address whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Query\Builder|Address withTrashed()
+ * @method static \Illuminate\Database\Query\Builder|Address withoutTrashed()
+ * @mixin \Eloquent
+ */
+	class Address extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
  * App\Models\Attachment
  *
  * @property int $id
@@ -74,6 +136,8 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Cat whereUpdatedAt($value)
  * @method static \Illuminate\Database\Query\Builder|Cat withTrashed()
  * @method static \Illuminate\Database\Query\Builder|Cat withoutTrashed()
+ * @property int $is_main
+ * @method static \Illuminate\Database\Eloquent\Builder|Cat whereIsMain($value)
  * @mixin \Eloquent
  */
 	class Cat extends \Eloquent implements \Spatie\MediaLibrary\HasMedia {}
@@ -133,6 +197,9 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Credit whereUpdatedAt($value)
  * @method static \Illuminate\Database\Query\Builder|Credit withTrashed()
  * @method static \Illuminate\Database\Query\Builder|Credit withoutTrashed()
+ * @property-read \App\Models\Customer $customer
+ * @property-read \App\Models\Invoice $invoice
+ * @mixin \Eloquent
  */
 	class Credit extends \Eloquent {}
 }
@@ -173,7 +240,6 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Customer whereRememberToken($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Customer whereState($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Customer whereUpdatedAt($value)
- * @mixin \Eloquent
  * @property string|null $code
  * @method static \Illuminate\Database\Eloquent\Builder|Customer whereCode($value)
  * @property string|null $address_alt
@@ -194,6 +260,13 @@ namespace App\Models{
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Product[] $products
  * @property-read int|null $products_count
  * @method static \Illuminate\Database\Eloquent\Builder|Customer whereCredit($value)
+ * @property int $cerdit
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Address[] $addresses
+ * @property-read int|null $addresses_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Credit[] $credits
+ * @property-read int|null $credits_count
+ * @method static \Illuminate\Database\Eloquent\Builder|Customer whereCerdit($value)
+ * @mixin \Eloquent
  */
 	class Customer extends \Eloquent {}
 }
@@ -222,12 +295,12 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Discount whereProductId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Discount whereType($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Discount whereUpdatedAt($value)
- * @mixin \Eloquent
  * @property \Illuminate\Support\Carbon|null $deleted_at
  * @method static \Illuminate\Database\Query\Builder|Discount onlyTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder|Discount whereDeletedAt($value)
  * @method static \Illuminate\Database\Query\Builder|Discount withTrashed()
  * @method static \Illuminate\Database\Query\Builder|Discount withoutTrashed()
+ * @mixin \Eloquent
  */
 	class Discount extends \Eloquent {}
 }
@@ -254,7 +327,6 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Invoice whereStatus($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Invoice whereTotalPrice($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Invoice whereUpdatedAt($value)
- * @mixin \Eloquent
  * @property int|null $discount_id
  * @property-read \App\Models\Discount|null $discount
  * @method static \Illuminate\Database\Eloquent\Builder|Invoice whereDiscountId($value)
@@ -292,6 +364,10 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Invoice whereDeletedAt($value)
  * @method static \Illuminate\Database\Query\Builder|Invoice withTrashed()
  * @method static \Illuminate\Database\Query\Builder|Invoice withoutTrashed()
+ * @property int|null $address_id
+ * @method static \Illuminate\Database\Eloquent\Builder|Invoice whereAddressId($value)
+ * @property-read \App\Models\Address|null $address
+ * @mixin \Eloquent
  */
 	class Invoice extends \Eloquent {}
 }
@@ -325,8 +401,8 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Payment whereStatus($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Payment whereType($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Payment whereUpdatedAt($value)
- * @mixin \Eloquent
  * @property-read \App\Models\Invoice $invoice
+ * @mixin \Eloquent
  */
 	class Payment extends \Eloquent {}
 }
@@ -433,7 +509,6 @@ namespace App\Models{
  * @method static \Illuminate\Database\Query\Builder|Product withTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder|Product withoutTags($tagNames)
  * @method static \Illuminate\Database\Query\Builder|Product withoutTrashed()
- * @mixin \Eloquent
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Quantity[] $quantities
  * @property-read int|null $quantities_count
  * @property int $sell_count
@@ -455,6 +530,9 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Product whereFee($value)
  * @property int $image_index
  * @method static \Illuminate\Database\Eloquent\Builder|Product whereImageIndex($value)
+ * @property int $carat
+ * @method static \Illuminate\Database\Eloquent\Builder|Product whereCarat($value)
+ * @mixin \Eloquent
  */
 	class Product extends \Eloquent implements \Spatie\MediaLibrary\HasMedia {}
 }
@@ -500,9 +578,9 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Prop whereWidth($value)
  * @method static \Illuminate\Database\Query\Builder|Prop withTrashed()
  * @method static \Illuminate\Database\Query\Builder|Prop withoutTrashed()
- * @mixin \Eloquent
  * @property string $unit
  * @method static \Illuminate\Database\Eloquent\Builder|Prop whereUnit($value)
+ * @mixin \Eloquent
  */
 	class Prop extends \Eloquent {}
 }
@@ -526,7 +604,6 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Quantity wherePrice($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Quantity whereProductId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Quantity whereUpdatedAt($value)
- * @mixin \Eloquent
  * @property string|null $data
  * @property-read \Illuminate\Database\Eloquent\Collection|\Plank\Metable\Meta[] $meta
  * @property-read int|null $meta_count
@@ -542,6 +619,12 @@ namespace App\Models{
  * @property int|null $image
  * @method static \Illuminate\Database\Eloquent\Builder|Quantity whereImage($value)
  * @property-read \App\Models\Product $product
+ * @property \Illuminate\Support\Carbon|null $deleted_at
+ * @method static \Illuminate\Database\Eloquent\Builder|Quantity onlyTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder|Quantity whereDeletedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Quantity withTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder|Quantity withoutTrashed()
+ * @mixin \Eloquent
  */
 	class Quantity extends \Eloquent {}
 }
@@ -567,11 +650,11 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Question whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Question whereProductId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Question whereUpdatedAt($value)
- * @mixin \Eloquent
  * @property int $status
  * @property-read \App\Models\Customer $customer
  * @property-read \App\Models\Product $product
  * @method static \Illuminate\Database\Eloquent\Builder|Question whereStatus($value)
+ * @mixin \Eloquent
  */
 	class Question extends \Eloquent {}
 }
@@ -625,13 +708,13 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Sms whereText($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Sms whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Sms whereUser($value)
- * @mixin \Eloquent
  * @property string|null $code
  * @method static \Illuminate\Database\Eloquent\Builder|Sms whereCode($value)
  * @property string $ip
  * @property string|null $mobile
  * @method static \Illuminate\Database\Eloquent\Builder|Sms whereIp($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Sms whereMobile($value)
+ * @mixin \Eloquent
  */
 	class Sms extends \Eloquent {}
 }
@@ -661,10 +744,10 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Ticket whereStatus($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Ticket whereTitle($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Ticket whereUpdatedAt($value)
- * @mixin \Eloquent
  * @property-read \App\Models\Customer $customer
  * @property-read \Illuminate\Database\Eloquent\Collection|Ticket[] $subTickets
  * @property-read int|null $sub_tickets_count
+ * @mixin \Eloquent
  */
 	class Ticket extends \Eloquent {}
 }
@@ -742,7 +825,15 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|User wherePassword($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereRememberToken($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereUpdatedAt($value)
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Access> $accesses
+ * @property-read int|null $accesses_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Product> $products
+ * @property-read int|null $products_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Access> $accesses
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Product> $products
  * @mixin \Eloquent
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Access> $accesses
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Product> $products
  */
 	class User extends \Eloquent {}
 }
