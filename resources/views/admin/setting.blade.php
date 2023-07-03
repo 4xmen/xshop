@@ -20,60 +20,63 @@
                                 </label>
                                 @switch($set->type)
                                     @case('longtext')
-                                    <textarea name="{{$set->key}}" id="{{$set->key}}" class="form-control"
-                                              rows="5">{{$set->value}}</textarea>
-                                    @break
+                                        <textarea name="{{$set->key}}" id="{{$set->key}}" class="form-control"
+                                                  rows="5">{{$set->value}}</textarea>
+                                        @break
                                     @case('checkbox')
-                                    <div class="row">
-                                        <div class="col-md">
+                                        <div class="row">
+                                            <div class="col-md">
+                                            </div>
+                                            <div class="col-md">
+                                                <label>
+                                                    <input type="radio" name="{{$set->key}}"
+                                                           @if($set->value == 'yes')  checked @endif value="yes">
+                                                    {{__("Yes")}}
+                                                </label>
+                                            </div>
+                                            <div class="col-md">
+                                                <label>
+                                                    <input type="radio" name="{{$set->key}}" value="no"
+                                                           @if($set->value == 'no')  checked @endif>
+                                                    {{__("No")}}
+                                                </label>
+                                            </div>
                                         </div>
-                                        <div class="col-md">
-                                            <label>
-                                                <input type="radio" name="{{$set->key}}"  @if($set->value == 'yes')  checked @endif value="yes">
-                                                {{__("Yes")}}
-                                            </label>
-                                        </div>
-                                        <div class="col-md">
-                                            <label>
-                                                <input type="radio" name="{{$set->key}}"  value="no" @if($set->value == 'no')  checked @endif>
-                                                {{__("No")}}
-                                            </label>
-                                        </div>
-                                    </div>
-                                    @break
+                                        @break
                                     @case('code')
-                                    <textarea dir="ltr" name="{{$set->key}}" id="{{$set->key}}" class="form-control"
-                                              rows="5">{{$set->value}}</textarea>
-                                    @break
+                                        <textarea dir="ltr" name="{{$set->key}}" id="{{$set->key}}" class="form-control"
+                                                  rows="5">{{$set->value}}</textarea>
+                                        @break
                                     @case('editor')
-                                    <textarea name="{{$set->key}}" id="{{$set->key}}" class="ckeditor form-control"
-                                              rows="5">{{$set->value}}</textarea>
-                                    @break
+                                        <textarea name="{{$set->key}}" id="{{$set->key}}" class="ckeditor form-control"
+                                                  rows="5">{{$set->value}}</textarea>
+                                        @break
                                     @case('category')
-                                    <select name="{{$set->key}}" id="{{$set->key}}" class="form-control">
-                                        @foreach($cats as $cat )
-                                            <option @if (old($set->key,$set->value??null) == $cat->id ) selected
-                                                    @endif value="{{$cat->id }}"> {{$cat->name}} </option>
-                                        @endforeach
-                                    </select>
-                                    @break
+                                        <select name="{{$set->key}}" id="{{$set->key}}" class="form-control">
+                                            @foreach($cats as $cat )
+                                                <option @if (old($set->key,$set->value??null) == $cat->id ) selected
+                                                        @endif value="{{$cat->id }}"> {{$cat->name}} </option>
+                                            @endforeach
+                                        </select>
+                                        @break
                                     @case('cat')
-                                    <select name="{{$set->key}}" id="{{$set->key}}" class="form-control">
-                                        @foreach($pcats as $cat )
-                                            <option @if (old($set->key,$set->value??null) == $cat->id ) selected
-                                                    @endif value="{{$cat->id }}"> {{$cat->name}} </option>
-                                        @endforeach
-                                    </select>
-                                    @break
+                                        <select name="{{$set->key}}" id="{{$set->key}}" class="form-control">
+                                            @foreach($pcats as $cat )
+                                                <option @if (old($set->key,$set->value??null) == $cat->id ) selected
+                                                        @endif value="{{$cat->id }}"> {{$cat->name}} </option>
+                                            @endforeach
+                                        </select>
+                                        @break
                                     @case('image')
-                                    <img src="{{asset('images/'.str_replace('_','.',$set->key))}}" style="max-height: 150px" alt="cover">
-                                    <input type="file" name="pic[{{$set->key}}]" id="{{$set->key}}"
-                                           accept="image/*"
-                                           class="form-control-file"/>
-                                    @break
+                                        <img src="{{asset('images/'.str_replace('_','.',$set->key))}}?{{time()}}"
+                                             class="img-fluid" style="max-height: 150px;max-width: 45%" alt="cover">
+                                        <input type="file" name="pic[{{$set->key}}]" id="{{$set->key}}"
+                                               accept="image/*"
+                                               class="form-control-file"/>
+                                        @break
                                     @default
-                                    <input type="{{$set->type}}" name="{{$set->key}}" id="{{$set->key}}"
-                                           class="form-control" value="{{$set->value}}"/>
+                                        <input type="{{$set->type}}" name="{{$set->key}}" id="{{$set->key}}"
+                                               class="form-control" value="{{$set->value}}"/>
                                 @endswitch
                             </div>
                         </div>
@@ -82,8 +85,8 @@
                 </li>
             @endforeach
             <li class="list-group-item">
-                <input type="submit" value="{{__("Save")}}" class="btn btn-primary" />
-                <input type="reset" value="{{__("Reset")}}" class="btn btn-secondary" />
+                <input type="submit" value="{{__("Save")}}" class="btn btn-primary"/>
+                <input type="reset" value="{{__("Reset")}}" class="btn btn-secondary"/>
             </li>
         </ul>
     </form>
