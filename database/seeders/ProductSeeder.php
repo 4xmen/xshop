@@ -74,10 +74,12 @@ class ProductSeeder extends Seeder
                 $plan = 6;
             }
             $product->categories()->sync($plans[$plan]['cats']);
-            $num = rand(1, $plans[$plan]['max']);
-            $product->addMedia($plans[$plan]['dir'] . "$num.jpg")->preservingOriginal()->toMediaCollection();
-            $num = rand(1, $plans[$plan]['max']);
-            $product->addMedia($plans[$plan]['dir'] . "$num.jpg")->preservingOriginal()->toMediaCollection();
+            if (env('PIC_SEED') != 0){
+                $num = rand(1, $plans[$plan]['max']);
+                $product->addMedia($plans[$plan]['dir'] . "$num.jpg")->preservingOriginal()->toMediaCollection();
+                $num = rand(1, $plans[$plan]['max']);
+                $product->addMedia($plans[$plan]['dir'] . "$num.jpg")->preservingOriginal()->toMediaCollection();
+            }
             $product->cat_id = $plans[$plan]['main'];
             $product->save();
         }
