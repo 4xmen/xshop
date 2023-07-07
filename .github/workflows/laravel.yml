@@ -21,10 +21,8 @@ jobs:
     - name: Install Dependencies
 #      run: composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
       run: composer update -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
-    - name: dump  
-      run: composer dump-autoload --no-ansi --no-interaction --no-scripts
-    - name: Generate key
-      run: php artisan key:generate
+#    - name: Compser dump
+#      run: composer dump-autoload --no-ansi --no-interaction --no-scripts
     - name: Directory Permissions
       run: chmod -R 777 storage bootstrap/cache
     - name: Create Database
@@ -36,7 +34,9 @@ jobs:
         DB_CONNECTION: sqlite
         DB_DATABASE: database/database.sqlite
       run: vendor/bin/phpunit
-    - name: Db seeder test
+    - name: Generate key
+      run: php artisan key:generate
+    - name: Database seeder test
       run: php artisan migrate:fresh --seed
-    - name : developer tests
+    - name : Developer test
       run: php artisan test
