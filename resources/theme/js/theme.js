@@ -157,6 +157,16 @@ jQuery(function ($) {
         items: 4,
         // nav: true,
     });
+    $('.owl-single-item').owlCarousel({
+        loop: true,
+        margin: 0,
+        responsiveClass: true,
+        autoplay: true,
+        autoplayTimeout: 5000,
+        autoplayHoverPause: true,
+        items: 1,
+        // nav: true,
+    });
 
     $('#owlx1').owlCarousel({
         loop: true,

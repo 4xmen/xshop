@@ -10643,7 +10643,7 @@ tr.border-bottom td {
 
 
 .long-box .item {
-    padding: 25px;
+    /*padding: 25px;*/
 }
 
 .fa-bg {
@@ -10891,6 +10891,24 @@ tr.border-bottom td {
 
 .btn-outline-primary:hover a{
     color: white ;
+}
+
+#blog{
+    padding: 2em 0;
+    background: #282c34;
+    color:white;
+}
+
+.img-vh100-full-width img {
+    height: 100vh;
+    width: 100%;
+    -o-object-fit: cover;
+    object-fit: cover;
+}
+
+h3.textt{
+    font-size: 22px;
+    font-weight: 200;
 }
 
 @charset "UTF-8";
@@ -11877,4 +11895,10 @@ a {
   tr:last-child td:before {
     display: none;
   }
+}
+.img-vh100-full-width img {
+  height: 100vh;
+  width: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
 }

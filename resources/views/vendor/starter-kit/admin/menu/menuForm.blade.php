@@ -119,6 +119,9 @@
                 </ol>
             </div>
             <div class="col-md-6 p-3">
+                <div class="alert alert-info">
+                    {{__("Double click to remove")}}
+                </div>
                 <form class="" method="post"
                       enctype="multipart/form-data"
                       @if (isset($menu))
@@ -139,6 +142,7 @@
         </div>
         <input type="hidden" id="tag-search" value="{{route('admin.ckeditor.tagsearch','')}}"/>
         <input type="hidden" id="news-search" value="{{route('admin.ckeditor.newssearch','')}}"/>
+        <input type="hidden" id="rem-menu" value="{{route('admin.setting.remMenu','')}}">
 
     </div>
 @endsection

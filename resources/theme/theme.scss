@@ -210,3 +210,11 @@ a{
     }
 
 }
+
+.img-vh100-full-width{
+    img{
+        height: 100vh;
+        width: 100%;
+        object-fit: cover;
+    }
+}

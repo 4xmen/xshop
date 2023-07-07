@@ -9,6 +9,7 @@ use App\Models\Setting;
 use Conner\Tagging\Model\Tag;
 use Illuminate\Http\Request;
 use Xmen\StarterKit\Models\Category;
+use Xmen\StarterKit\Models\MenuItem;
 use Xmen\StarterKit\Models\Post;
 
 class SettingController extends Controller
@@ -123,5 +124,10 @@ class SettingController extends Controller
     public function postsearch($query) {
         $query = trim($query);
         return Post::where('title', 'LIKE', "%$query%")->limit(5)->get(['id', 'title'])->toArray();
+    }
+
+    public function remMenu($id){
+        MenuItem::where('menuable_id',$id)->delete();
+        return true;
     }
 }
