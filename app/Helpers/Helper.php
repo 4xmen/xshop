@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 
 function getSetting($key)
 {
-    if (!\Schema::hasTable('settings')){
+    if ( !isset($_SERVER['SERVER_NAME']) || !\Schema::hasTable('settings')){
         return false;
     }
     $x = Setting::where('key', $key)->first();
