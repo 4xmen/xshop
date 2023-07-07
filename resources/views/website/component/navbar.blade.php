@@ -1,49 +1,64 @@
-<div id="nav-menu">
-    <ul>
-        @foreach(\App\Helpers\getMainCats(12) as $mcat)
+<nav>
+    <ul id="mega-menu">
         <li>
-            <a href="{{route('cat',$mcat->slug)}}">
-                {{$mcat->name}}
-                <i class="ri-arrow-drop-left-line"></i>
+            <a href="/">
+                <img src="{{asset('images/logo.png')}}" class="logo" alt="">
             </a>
-            <div class="sub-item">
-                <h3>
-                    {{$mcat->name}}
-                </h3>
-                <div class="grid">
-                    <div>
-
-                        <ul>
-                            @foreach(\App\Helpers\getSubCats($mcat->id) as $subcat)
-                                <li>
-                                    <a href="{{route('cat',$subcat->slug)}}">
-                                        <i class="fa fa-external-link"></i>
-                                        {{$subcat->name}}
-                                    </a>
-                                </li>
-                            @endforeach
-                        </ul>
-                    </div>
-                    <div>
-                        <ul>
-                            @foreach(\App\Helpers\getSubCats($mcat->id) as $subcat)
-                                <li>
-                                    <a href="{{route('cat',$subcat->slug)}}">
-                                        <i class="fa fa-external-link"></i>
-                                        {{$subcat->name}}
-                                    </a>
-                                </li>
-                            @endforeach
-                        </ul>
-                    </div>
-                    <div>
-                        <img src="{{$mcat->thumbUrl()}}" class="img-fluid" alt="">
-{{--                        {{$mcat->description}}--}}
-                    </div>
-                </div>
-            </div>
-
         </li>
+        @foreach(\App\Helpers\getMainCats(4) as $mcat)
+            <li>
+                <a href="{{route('cat',$mcat->slug)}}">
+                    {{$mcat->name}}
+                </a>
+                <ul>
+                    <li>
+                        <h3>
+                            محبوب ترین
+                            {{$mcat->name}}
+                            ها
+                        </h3>
+                        <ul>
+                            @foreach($mcat->products()->orderby('stock_quantity','desc')->limit(5)->get() as $p)
+                                <li>
+                                    <a href="{{route('product',$p->slug)}}">
+                                        {{$p->name}}
+                                    </a>
+                                </li>
+                            @endforeach
+                        </ul>
+                    </li>
+                    <li>
+                        <h3>
+                            {{$mcat->name}}
+                            به تفکیک
+                        </h3>
+                        <ul>
+                            @foreach(\App\Helpers\getSubCats($mcat->id) as $subcat)
+                                <li>
+                                    <a href="{{route('cat',$subcat->slug)}}">
+                                        {{$subcat->name}}
+                                    </a>
+                                </li>
+                            @endforeach
+                        </ul>
+                    </li>
+
+                    <li class="x-highlight">
+                        <h3>
+                            {{$mcat->name}}
+                        </h3>
+                        <br>
+                        <p>
+                            {{$mcat->description}}
+                        </p>
+                    </li>
+                    <li>
+                        <img src="{{$mcat->thumbUrl()}}" alt="">
+                    </li>
+                </ul>
+            </li>
         @endforeach
+        {!! \App\Helpers\MenuShowByName('menu')  !!}
     </ul>
-</div>
+</nav>
+<div id="search-list"></div>

@@ -19,108 +19,125 @@
 
 </head>
 <body>
-<!--header navbar-->
-<nav class="up-nav col-12">
-    <a href="{{url('/')}}">
-        <img src="{{asset('images/logo.png')}}" class="rounded-0" alt="">
-    </a>
-</nav>
-<!--header-->
-<header id="header" class="mt-1">
-    <div class="container">
-        <div class="row align-items-center">
-            <div class="col-sm-6 d-xl-none mb-2 ">
-                <a href="#" class="btn btn-outline-light text-dark">
-                    <i class="fa fa-search"></i>
-                </a>
-                <div class="btn btn-primary">
-                    <i class="fa fa-basket-shopping"></i>
-                    <b class="card-count">
-                        {{\App\Helpers\cardCount()}}
-                    </b>
-                </div>
-                @if(Auth::guard('customer')->check())
-                    <a class="btn btn-outline-info" href="{{route('customer')}}">
-                        <i class="ri-user-line"></i>
-                    </a>
-                @else
-                    <a class="btn btn-outline-info" href="{{route('sign')}}">
-                        <i class="ri-user-line"></i>
-                    </a>
-                @endif
-            </div>
-            <div class="col-xl-3 d-none d-xl-block">
-                <div class="">
 
-                    &nbsp;
-                    <div class="btn btn-outline-info btn-icon">
-                        <div class="icon">
-                            <i class="ri-user-line"></i>
-                            @if(Auth::guard('customer')->check())
-                                <a href="{{route('customer')}}">
-                                    {{__("Profile")}}
-                                </a>
-                            @else
-                                <a href="{{route('sign')}}">
-                                    <i class="icofont-user"></i>
-                                    {{__("Login / Register")}}
-                                </a>
-                            @endif
-                        </div>
-                    </div>
-                </div>
+@if(trim(\App\Helpers\getSetting('soc_wp')) != '')
+    <a class="my-float"
+       target="_blank"
+       href="https://api.whatsapp.com/send/?phone={{urlencode(\App\Helpers\getSetting('soc_wp'))}}&text=%D8%A8%D8%A7%20%D8%B3%D9%84%D8%A7%D9%85%0A%D8%A7%D8%B2%20%D8%B3%D8%A7%DB%8C%D8%AA%20%D8%A8%D8%B1%D8%A7%DB%8C%20%D8%B3%D9%81%D8%A7%D8%B1%D8%B4%20%D9%88%20%D9%BE%D8%B4%D8%AA%DB%8C%D8%A8%D8%A7%D9%86%DB%8C%20%D8%AA%D9%85%D8%A7%D8%B3%20%D9%85%DB%8C%DA%AF%DB%8C%D8%B1%D9%85&app_absent=0">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+@endif
+<div id="preloader">
+    <div class="tvdd" role="img" aria-label="Three intersecting rings of twelve pulsing dots that never collide">
+        <div class="tvdd__ring">
+            <div class="tvdd__ring-dots">
+                <div class="tvdd__ring-dot"></div>
+                <div class="tvdd__ring-dot"></div>
+                <div class="tvdd__ring-dot"></div>
+                <div class="tvdd__ring-dot"></div>
+                <div class="tvdd__ring-dot"></div>
+                <div class="tvdd__ring-dot"></div>
+                <div class="tvdd__ring-dot"></div>
+                <div class="tvdd__ring-dot"></div>
+                <div class="tvdd__ring-dot"></div>
+                <div class="tvdd__ring-dot"></div>
+                <div class="tvdd__ring-dot"></div>
+                <div class="tvdd__ring-dot"></div>
             </div>
-            <div class="col-xl-6 ">
-                <div class="input-group">
-                    <input type="text" id="searching" data-url="{{route('search')}}"
-                           data-ajax="{{route('search.ajax')}}" class="form-control silver"
-                           placeholder="جستجو در محصولات..."
-                           aria-label="search"
-                           aria-describedby="addon-wrapping">
-                    <button class="btn btn-outline-primary" type="button" id="button-addon2">
-                        <i class="ri-search-line"></i>
-                    </button>
-                </div>
+        </div>
+        <div class="tvdd__ring">
+            <div class="tvdd__ring-dots">
+                <div class="tvdd__ring-dot"></div>
+                <div class="tvdd__ring-dot"></div>
+                <div class="tvdd__ring-dot"></div>
+                <div class="tvdd__ring-dot"></div>
+                <div class="tvdd__ring-dot"></div>
+                <div class="tvdd__ring-dot"></div>
+                <div class="tvdd__ring-dot"></div>
+                <div class="tvdd__ring-dot"></div>
+                <div class="tvdd__ring-dot"></div>
+                <div class="tvdd__ring-dot"></div>
+                <div class="tvdd__ring-dot"></div>
+                <div class="tvdd__ring-dot"></div>
             </div>
-            <div class="col-xl-3 text-end d-none d-xl-block">
-                <div class="btn btn-outline-primary btn-icon">
-                    <div class="icon">
-                        <b class="card-count">
-                            {{\App\Helpers\cardCount()}}
-                            &nbsp;
-                            <i class="ri-shopping-cart-line float-end"></i>
-                        </b>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xl-3 d-none d-xl-block">
-                <div class="btn btn-primary w-100 align-items-center justify-content-between d-flex" id="main-nav">
-                    <i class="ri-menu-line float-start"></i>
-                    همه محصولات
-                    <i class="ri-arrow-drop-down-line float-end"></i>
-                    @include('website.component.navbar')
-                </div>
-            </div>
-            <div class="col-xl-6 ">
-                <div class="d-flex justify-content-around">
-                    {!! \App\Helpers\MenuShowByName('menu')  !!}
-                </div>
-            </div>
-            <div class="col-xl-3 text-center">
-                <div>
-                    <a class="small">
-                        تلفن‌ تماس
-                    </a>
-                    <br>
-                    <a href="tel:{{\App\Helpers\getSetting('tel')}}" class="btn btn-secondary text-dark">
-                        {{\App\Helpers\getSetting('tel')}}
-                    </a>
-                </div>
+        </div>
+        <div class="tvdd__ring">
+            <div class="tvdd__ring-dots">
+                <div class="tvdd__ring-dot"></div>
+                <div class="tvdd__ring-dot"></div>
+                <div class="tvdd__ring-dot"></div>
+                <div class="tvdd__ring-dot"></div>
+                <div class="tvdd__ring-dot"></div>
+                <div class="tvdd__ring-dot"></div>
+                <div class="tvdd__ring-dot"></div>
+                <div class="tvdd__ring-dot"></div>
+                <div class="tvdd__ring-dot"></div>
+                <div class="tvdd__ring-dot"></div>
+                <div class="tvdd__ring-dot"></div>
+                <div class="tvdd__ring-dot"></div>
             </div>
         </div>
     </div>
-</header>
-<!--header-->
-<div id="search-list"></div>
+</div>
+<a id="go-top" href="#">
+    <i class="fa fa-angle-up"></i>
+</a>
+<section id="top-top">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4 col-md-12 text-start">
+                <div class='marquee'>
+                    <div class="row mt-2 pt-1" >
+                        <a class="col" href="tel:{{\App\Helpers\getSetting('tel')}}">
+                            <i class="fa fa-phone-alt"></i>
+                            {{\App\Helpers\getSetting('tel')}}
+                        </a>
+                        <a class="col" href="mail:{{\App\Helpers\getSetting('email')}}">
+                            <i class="fa fa-envelope"></i>
+                            {{\App\Helpers\getSetting('email')}}
+                        </a>
+                    </div>
+                </div>
 
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <div class="input-group flex-nowrap" style="margin-top: 1em;">
+                    <input type="text" id="searching" data-url="{{route('search')}}"
+                           data-ajax="{{route('search.ajax')}}" class="form-control" placeholder="جستجو در محصولات..."
+                           aria-label="search"
+                           aria-describedby="addon-wrapping">
+                    <span class="input-group-text" id="addon-wrapping">
+                                    <i class="icofont-search bg-custom2 text-light rounded-circle"></i>
+                                </span>
+                </div>
+            </div>
+            <div class="col-lg-4 text-end col-md-6">
+                <a type="button" class="btn btn-primary position-relative" href="{{route('card.show')}}">
+                    <i class="icofont-shopping-cart"></i>
+                    سبد خرید
+                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-primary">
+                        <b id="card-count">
+                            {{\App\Helpers\cardCount()}}
+                        </b>
+                    </span>
+                </a>
+                @if(Auth::guard('customer')->check())
+                    <div class="btn btn-outline-primary">
+                        <a href="{{route('customer')}}">
+                            {{__("Profile")}}
+                        </a>
+                    </div>
+                @else
+                    <div class="btn btn-outline-primary">
+                        <a href="{{route('sign')}}">
+                            <i class="icofont-user"></i>
+                            {{__("Login / Register")}}
+                        </a>
+                    </div>
+                @endif
+            </div>
+        </div>
+    </div>
+</section>
 
+@include('website.component.navbar')

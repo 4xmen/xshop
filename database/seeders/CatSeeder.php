@@ -21,7 +21,7 @@ class CatSeeder extends Seeder
         Cat::factory()->create(['name' => 'برندها','slug' => 'برندها']);
         Cat::factory()->create(['name' => 'اپل','slug' => 'اپل', 'parent_id' => 3]);
         Cat::factory()->create(['name' => 'سامسونگ','slug' => 'سامسونگ', 'parent_id' => 3]);
-        Cat::factory()->create(['name' => 'PC','slug' => 'PC']);
+        Cat::factory()->create(['name' => 'لپ‌تاپ و PC','slug' => 'لپ‌تاپ-و-PC']);
         Cat::factory()->create(['name' => 'آی‌مک','slug' => 'iMac', 'parent_id' => 6]);
         Cat::factory()->create(['name' => 'آیفون','slug' => 'iphone', 'parent_id' => 1]);
         Cat::factory()->create(['name' => 'آی‌پد','slug' => 'iPad', 'parent_id' => 2]);

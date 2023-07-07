@@ -1,4 +1,4 @@
-require('hc-offcanvas-nav/dist/hc-offcanvas-nav');
+// require('hc-offcanvas-nav/dist/hc-offcanvas-nav');
 // import xMegaMenu from 'x-mega-menu/src/x-mega-menu';
 import xm from 'x-mega-menu/dist/x-mega-menu.min';
 

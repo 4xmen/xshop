@@ -87,8 +87,8 @@ class PostSeeder extends Seeder
                 $p->hash = date('Ym') . str_pad(dechex(crc32($p->slug)), 8, '0', STR_PAD_LEFT);
             $p->save();
             $p->categories()->sync([$item['category_id']]);
-            $num = rand(1, 7);
-            $p->addMedia(__DIR__ . "/img/ps$num.jpg")->preservingOriginal()->toMediaCollection();
+            $num = rand(1, 6);
+            $p->addMedia(__DIR__ . "/img/$num/$num.jpg")->preservingOriginal()->toMediaCollection();
             $p->save();
         }
     }

@@ -3,7 +3,7 @@
         {
             "@context": "http://schema.org",
             "@type": "WebSite",
-            "url": "{{config('app.url')}}",
+            "url": "https://shop.ir/",
             "name": "{{\SEOMeta::getTitle()}}",
             "author": {
                 "@type": "Person",
