@@ -34,4 +34,4 @@ jobs:
         DB_DATABASE: database/database.sqlite
       run: PIC_SEED=0 php artisan migrate --seed
     - name: Execute tests (Unit and Feature tests) via PHPUnit
-      run: vendor/bin/phpunit
+      run: php artisan test

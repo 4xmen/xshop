@@ -379,18 +379,23 @@ class AdminWebPagesTest extends TestCase
 
 
     private function  getValidUser(){
-        if (User::where('email','admin@example.com')->count() == 0){
-
-            if (Role::where('name','super-admin')->count() == 0){
-                $role = Role::create(['name' => 'super-admin']);
-            }else{
-                $role = Role::where('name','super-admin')->first();
-            }
-
-            $user = User::factory()->count(1)->create(['email' => 'admin@example.com']);
+//        if (User::where('email','=','admin@example.com')->count() == 0){
+//
+//            if (Role::where('name','=','super-admin')->count() == 0){
+//                $role = Role::create(['name' => 'super-admin']);
+//            }else{
+//                $role = Role::where('name','super-admin')->first();
+//            }
+//
+//            $user = User::factory()->count(1)->create(['email' => 'admin@example.com']);
+//            $user->assignRole($role);
+//        }else{
+//            $user = User::where('email','admin@example.com')->first();
+//        }
+        $role = Role::where('name','super-admin')->first();
+        $user = User::where('id','>',0)->first();
+        if (! $user->hasRole('super-admin')){
             $user->assignRole($role);
-        }else{
-            $user = User::where('email','admin@example.com')->first();
         }
         return $user;
     }

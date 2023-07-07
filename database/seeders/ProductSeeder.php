@@ -74,7 +74,7 @@ class ProductSeeder extends Seeder
                 $plan = 6;
             }
             $product->categories()->sync($plans[$plan]['cats']);
-            if (env('PIC_SEED') != 0){
+            if (env('PIC_SEED') !== '0'){
                 $num = rand(1, $plans[$plan]['max']);
                 $product->addMedia($plans[$plan]['dir'] . "$num.jpg")->preservingOriginal()->toMediaCollection();
                 $num = rand(1, $plans[$plan]['max']);
