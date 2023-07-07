@@ -20,7 +20,7 @@ jobs:
       run: php -r "file_exists('.env') || copy('.env.example', '.env');"
     - name: Install Dependencies
 #      run: composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
-      run: composer install
+      run: composer update -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
     - name: dump  
       run: composer dump-autoload
     - name: Generate key
@@ -36,5 +36,7 @@ jobs:
         DB_CONNECTION: sqlite
         DB_DATABASE: database/database.sqlite
       run: vendor/bin/phpunit
+    - name: Db seeder test
+      run: php artisan migrate:fresh --seed
     - name : developer tests
       run: php artisan test
