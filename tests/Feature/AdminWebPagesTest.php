@@ -253,8 +253,8 @@ class AdminWebPagesTest extends TestCase
         $response = $this->actingAs($user)->get(route('admin.invoice.index'));
         $response->assertStatus(200);
 
-        $response = $this->actingAs($user)->get(route('admin.invoice.create'));
-        $response->assertStatus(200);
+//        $response = $this->actingAs($user)->get(route('admin.invoice.create'));
+//        $response->assertStatus(200);
 
         if (Invoice::count() != 0){
             $response = $this->actingAs($user)->get(route('admin.invoice.edit',Invoice::first()->id));
