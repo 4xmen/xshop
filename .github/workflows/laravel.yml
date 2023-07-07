@@ -26,17 +26,17 @@ jobs:
     - name: Directory Permissions
       run: chmod -R 777 storage bootstrap/cache
     - name: Create Database
+      env:
+        DB_CONNECTION: sqlite
+        DB_DATABASE: database/database.sqlite
       run: |
         mkdir -p database
         touch database/database.sqlite
 #    - name: Execute tests (Unit and Feature tests) via PHPUnit
-      env:
-        DB_CONNECTION: sqlite
-        DB_DATABASE: database/database.sqlite
 #      run: vendor/bin/phpunit
-    - name: Generate key
-      run: php artisan key:generate
     - name: Database seeder test
       run: php artisan migrate:fresh --seed
+    - name: Generate key
+      run: php artisan key:generate  
     - name : Developer test
       run: php artisan test
