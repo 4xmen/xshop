@@ -57,16 +57,18 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
  */
 class Cat extends Model implements HasMedia
 {
-    use HasFactory,SoftDeletes, InteractsWithMedia;
+    use HasFactory, SoftDeletes, InteractsWithMedia;
 
     public function registerMediaConversions(Media $media = null): void
     {
 
 
+        $size = explode('x', config('app.thumbnail_size'));
+
         $this->addMediaConversion('cat-thumb')
-            ->width(600)
-            ->height(600)
-            ->crop(Manipulations::CROP_CENTER, 600, 600)
+            ->width($size[0])
+            ->height($size[1])
+            ->crop(Manipulations::CROP_CENTER, $size[0], $size[1])
             ->optimize()
             ->sharpen(10);
 
@@ -75,7 +77,8 @@ class Cat extends Model implements HasMedia
         }
     }
 
-    public function thumbUrl() {
+    public function thumbUrl()
+    {
         if ($this->getMedia()->count() > 0) {
             return $this->getMedia()->first()->getUrl('cat-thumb');
         } else {
@@ -84,7 +87,8 @@ class Cat extends Model implements HasMedia
         }
     }
 
-    public function imgurl() {
+    public function imgurl()
+    {
         if ($this->getMedia()->count() > 0) {
             return $this->getMedia()->last()->getUrl();
         } else {
@@ -92,11 +96,14 @@ class Cat extends Model implements HasMedia
         }
     }
 
-    public function products(){
-        return$this->belongsToMany(Product::class);
+    public function products()
+    {
+        return $this->belongsToMany(Product::class);
     }
-    public function active_products(){
-        return$this->belongsToMany(Product::class)->where('');
+
+    public function active_products()
+    {
+        return $this->belongsToMany(Product::class)->where('active', 1);
     }
 
     public function backUrl()
@@ -109,19 +116,23 @@ class Cat extends Model implements HasMedia
     }
 
     //
-    public function parent() {
+    public function parent()
+    {
         return $this->belongsTo(Cat::class, 'parent_id');
     }
 
-    public function children() {
+    public function children()
+    {
         return $this->hasMany(Cat::class, 'parent_id');
     }
 
-    public function getRouteKeyName() {
+    public function getRouteKeyName()
+    {
         return 'slug';
     }
 
-    public function props(){
+    public function props()
+    {
         return $this->belongsToMany(Prop::class);
     }
 }

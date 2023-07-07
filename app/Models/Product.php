@@ -167,16 +167,19 @@ class Product extends Model implements HasMedia
     public function registerMediaConversions(Media $media = null): void
     {
 
+        $size = explode('x', config('app.thumbnail_size'));
+
         $this->addMediaConversion('product-image')
             ->width(1200)
 //            ->height(600)
 //            ->crop(Manipulations::CROP_CENTER, 1200, 600)
             ->optimize()
             ->sharpen(10);
+
         $this->addMediaConversion('product-thumb')
-            ->width(600)
-            ->height(600)
-            ->crop(Manipulations::CROP_CENTER, 600, 600)
+            ->width($size[0])
+            ->height($size[1])
+            ->crop(Manipulations::CROP_CENTER, $size[0], $size[1])
             ->optimize()
             ->sharpen(10);
     }

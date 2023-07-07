@@ -58,14 +58,15 @@ return [
 
     'asset_url' => env('ASSET_URL'),
 
-    'currency_type' => env('CURRENCY_TYPE'),
-    'invoice_prefix' => env('INVOICE_PREFIX'),
+    'currency_type' => env('CURRENCY_TYPE','$'),
+    'invoice_prefix' => env('INVOICE_PREFIX','xshop-000'),
     'sms_signup' => env('SIGNUP_SMS',false),
     'sms_url' => env('SMS_URL'),
     'sms_user' => env('SMS_USER'),
     'sms_pass' => env('SMS_PASS'),
     'sms_number' => env('SMS_NUMBER'),
-    'pay_gate' => env('PAY_GATWAY'),
+    'pay_gate' => env('PAY_GATWAY','zarinpal'),
+    'thumbnail_size' => env('THUMBNAIL_SIZE','600x600'),
 
     /*
     |--------------------------------------------------------------------------

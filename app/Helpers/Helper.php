@@ -347,7 +347,7 @@ function getProductByCat($id, $order = 'id', $orderMethod = 'desc', $limit = 10)
     if ($cat == null){
         return  [];
     }
-    return $cat->products()->where('active',1)
+    return $cat->active_products()->where('active',1)
         ->orderBy($order, $orderMethod)->limit($limit)->get();
 }
 function getProductByCatQ($id, $order = 'id', $limit = 10)
