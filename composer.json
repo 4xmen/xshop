@@ -32,7 +32,7 @@
         "plank/laravel-metable": "^5.2",
         "psr/log": "v2.*",
         "symfony/dom-crawler": "^6.2",
-        "xmen/starter-kit": "^v2.2.0"
+        "xmen/starter-kit": "^v3.1.0"
     },
     "require-dev": {
         "barryvdh/laravel-ide-helper": "^2.12",
