@@ -83,7 +83,7 @@ cd xshop
 composer install
 php artisan migrate --seed
 php artisan storage:link
-php key:generate
+php artisan key:generate
 php artisan serv
 ```
 now login to admin panel `http://localhost:8000/dashboard` default admin email is : `admin@example.com` and default password is: `password`
