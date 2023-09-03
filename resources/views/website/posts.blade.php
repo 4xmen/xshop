@@ -27,7 +27,7 @@
                                                 @endforeach
                                             </div>
                                             <div class="mb-1 text-muted">
-                                                {{\App\Helpers\time2persian($p->created_at)}}
+                                                {{$p->created_at->jdate('Y/m/d')}}
                                             </div>
                                             <p>
                                                 {{$p->subtitle}}

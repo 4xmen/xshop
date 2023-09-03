@@ -58,7 +58,7 @@
                                 {{__('Expire  date')}}
                             </label>
                             <input placeholder="{{__("Expire date")}}" type="text" data-reuslt="#exp-date"
-                                   class="form-control @error('expire') is-invalid @enderror dtp" @if(isset($discount))  value="{{\App\Helpers\time2persian($discount->expire)}}"  @endif>
+                                   class="form-control @error('expire') is-invalid @enderror dtp" @if(isset($discount))  value="{{$discount->expire->jdate('Y/m/d')}}"  @endif>
                             <input type="hidden" name="expire" id="exp-date"  @if(isset($discount))  value="{{strtotime($discount->expire)}}" @endif>
                         </div>
                     </div>

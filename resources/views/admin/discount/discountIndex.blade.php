@@ -65,7 +65,7 @@
                             @if($n->expire == null)
                                 -
                             @else
-                                {{\App\Helpers\time2persian($n->expire)}}
+                                {{$n->expire->jdate('Y/m/d')}}
                             @endif
                         </td>
                         <td>
