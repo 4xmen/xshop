@@ -98,7 +98,7 @@
                                         {{$dis->code}}
                                     </td>
                                     <td>
-                                        {{\App\Helpers\time2persian($dis->expire)}}
+                                        {{$dis->expire->jdate('Y/m/d')}}
                                     </td>
                                     <td>
                                         <button type="button" class="btn btn-danger" data-id="{{$dis->id}}">
