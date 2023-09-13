@@ -10773,7 +10773,9 @@ tr.border-bottom td {
 }
 
 .pink-pattern {
-    background: url(/images/loginbg.png?c2ff5cc63e62d379756642a76feda7a9) !important;
+    background: url(/images/shop.jpg?b9d2a691aa19c475462365228672329f) no-repeat !important;
+    background-size: cover !important;
+    background-position: center !important;
     margin-top: 0;
     padding-top: 10vh;
     padding-bottom: 10vh;
