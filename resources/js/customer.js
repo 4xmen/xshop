@@ -1,5 +1,6 @@
 var data = require('./plugins/data');
 var isSendSms = false;
+var step = 1;
 
 function nocomma(num) {
     a = num.toString().replace(/\,/g, ''); // 1125, but a string, so convert it to number
@@ -268,5 +269,38 @@ jQuery(function ($) {
             });
         }
     }, 500);
+
+    $(".next-step").bind('click', function () {
+        step++;
+        $(".step" + step).click();
+    });
+
+    $(".progress-step .step").click(function () {
+        $(".progress-step .step").removeClass('done');
+        $($(this).data('done')).addClass('done');
+        $("#card-steps .active").slideUp(300).removeClass('active');
+        $('#' + $(this).data('id')).slideDown(500).addClass('active');
+        step = parseInt($(this).data('id').substr(4, 1));
+        if ($(this).data('id') == 'step3') {
+            $(".last-step").slideDown(300);
+            $(".next-step").slideUp(300);
+        } else {
+            $(".last-step").slideUp(300);
+            $(".next-step").slideDown(300);
+        }
+    });
+
+    if ($('.card-submit').length > 0){
+        if ($("input.transport:checked").length == 0){
+            $('.card-submit').removeAttr('disabled');
+        }else{
+
+            $("input.transport").bind('change',function () {
+                console.log('fire');
+                $('.card-submit').removeAttr('disabled');
+            });
+        }
+    }
+
 });
 
