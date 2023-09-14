@@ -35,7 +35,7 @@
             <div class="form-group">
                 <label for="width">{{__("Width")}}:</label>
                 <input type="text" placeholder="{{__("Width")}}" name="width" class="form-control" id="width" required
-                       value="{{old('width',$p->width??null)}}">
+                       value="{{old('width',$p->width??'col-md-12')}}">
             </div>
 
             <div class="form-group">

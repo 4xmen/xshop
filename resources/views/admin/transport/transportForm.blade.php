@@ -45,16 +45,19 @@
                         <label for="description">
                             {{__('Description')}}
                         </label>
-                        <textarea name="description" rows="4" class="form-control @error('description') is-invalid @enderror" placeholder="{{__('Description')}}"  >{{old('description',$transport->description??null)}}</textarea>
+                        <textarea name="description" rows="4" class="form-control @error('description') is-invalid @enderror" placeholder="{{__('Description')}}" @if( isset($transport) && $transport->is_default) checked @endif  >{{old('description',$transport->description??null)}}</textarea>
                     </div>
                 </div>
                 <div class="col-md-12 mt-3 mr-5">
                     <div class="form-group">
-                        <input id="is_default" name="is_default" type="checkbox" class="form-check-input @error('is_default') is-invalid @enderror" @if( isset($transport) && $transport->is_default) checked @endif/>
-                        <label class="form-check-label" for="is_default">
-                            {{__('Is default')}}
-                        </label>
+
+                        <div class="form-check form-switch">
+                            <input value="1" class="form-check-input  @error('is_default') is-invalid @enderror" name="is_default" @if( isset($transport) && $transport->is_default) checked @endif type="checkbox" id="is_default">
+                            <label class="form-check-label" for="is_default"> {{__('Is default')}}</label>
+                        </div>
                     </div>
+
+
                 </div>
                 <div class="col-md-12">
                     <label> &nbsp; </label>

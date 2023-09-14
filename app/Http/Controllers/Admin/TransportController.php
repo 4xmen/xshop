@@ -12,9 +12,11 @@ class TransportController extends Controller
 {
 
     function createOrUpdate(Transport $transport,TransportSaveRequest $request){
+
         $transport->price = $request->price;
         $transport->title = $request->title;
         $transport->description = $request->description;
+        $transport->is_default = $request->has('is_default');
         if ($request->has('is_default')){
             Transport::where('is_default')->update([
                 'is_default' =>  0,

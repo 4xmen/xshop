@@ -151,9 +151,9 @@
                                                 {{\App\Helpers\getColorName($data->color)}}
                                             </b>
                                         </span>
-                                                            <span class="badge bg-dark">
-                                             {{$data->size}}
-                                        </span>
+{{--                                                            <span class="badge bg-dark">--}}
+{{--                                             {{$data->size}}--}}
+{{--                                        </span>--}}
                                                         </td>
                                                         <td colspan="2" class="price-td" data-price="{{$qpro->price}}">
                                                             @if($qpro->price == 0)
