@@ -381,8 +381,8 @@ jQuery(function ($) {
     try {
         if ($('#qnt').length != 0) {
             sizes = {};
-            qnt = JSON.parse($('#qnt').val());
-            // console.log(qnt);
+            let qnt = JSON.parse($('#qnt').val());
+            console.log(qnt);
             let txt = '';
             for( const q of qnt) {
                 if (q.count > 0){
@@ -401,17 +401,17 @@ jQuery(function ($) {
             setTimeout(function () {
                 $("#size-pick .size:first-child").click();
             },50);
-            $("#size-pick .size").bind('click.select',function () {
-                $("#size-pick .size").removeClass('active');
+            // $("#size-pick .size").bind('click.select',function () {
+            //     $("#size-pick .size").removeClass('active');
                 let colorNames  = {};
                 try {
                     colorNames = JSON.parse($("#colors").val());
                 } catch {
                 }
 
-                $(this).addClass('active');
+                // $(this).addClass('active');
                 let colors = sizes[$(this).data('id')];
-                let txt = '';
+                txt = '';
                 let cl = '';
                 for( const c of colors) {
                     cl = colorNames[c.color];
@@ -439,7 +439,7 @@ jQuery(function ($) {
                     $("#counting").text($(this).data('count'));
                     $(".product-count").attr('max',$(this).data('count')).val(1);
                 });
-            });
+            // });
 
         }
     } catch (e) {

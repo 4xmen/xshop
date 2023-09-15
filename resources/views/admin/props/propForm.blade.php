@@ -15,9 +15,9 @@
         @include('starter-kit::component.err')
         <form
             @if(isset($p))
-            action="{{route('admin.props.update',$p->id)}}"
+                action="{{route('admin.props.update',$p->id)}}"
             @else
-            action="{{route('admin.props.store')}}"
+                action="{{route('admin.props.store')}}"
             @endif
             method="post" enctype="multipart/form-data">
             @csrf
@@ -35,7 +35,7 @@
             <div class="form-group">
                 <label for="width">{{__("Width")}}:</label>
                 <input type="text" placeholder="{{__("Width")}}" name="width" class="form-control" id="width" required
-                       value="{{old('width',$p->width??null)}}">
+                       value="{{old('width',$p->width??'col-md-12')}}">
             </div>
 
             <div class="form-group">
@@ -63,7 +63,7 @@
             </div>
             <div class="form-group">
                 <label for="xtype">{{__("Type")}}:</label>
-                <select   name="type" id="xtype" class="form-control" required>
+                <select name="type" id="xtype" class="form-control" required>
                     <option
                         value="text" {{ old('type',$p->type??null) == 'text' ? 'selected' : '' }} > {{__("Text type")}}</option>
                     <option
@@ -80,29 +80,43 @@
                         value="singlemulti" {{ old('type',$p->type??null) == 'singlemulti' ? 'selected' : '' }}>{{__("Single Select & multi search")}}</option>
                 </select>
             </div>
-                        <div class="form-group">
-                            <label for="category">{{__("Category")}}</label>
-                            <select
-                                multiple
-                                name="category[]"
-                                id="category"
-                                class="form-control"
-                                data-placeholder="Select category"
-                                required>
-                                <option value=""></option>
-                                @foreach($allCategories as $cat)
-                                    <option value="{{ $cat->id }}"
-                                            @if(isset($cats) && in_array($cat->id,$cats)) selected @endif > {{$cat->name}} </option>
-                                @endforeach
-                            </select>
+            <div class="form-group">
+                <label>{{__("Category")}}</label>
+                {{--                            <select--}}
+                {{--                                multiple--}}
+                {{--                                name="category[]"--}}
+                {{--                                id="category"--}}
+                {{--                                class="form-control"--}}
+                {{--                                data-placeholder="Select category"--}}
+                {{--                                required>--}}
+                {{--                                <option value=""></option>--}}
+                {{--                                @foreach($allCategories as $cat)--}}
+                {{--                                    <option value="{{ $cat->id }}"--}}
+                {{--                                            @if(isset($cats) && in_array($cat->id,$cats)) selected @endif > {{$cat->name}} </option>--}}
+                {{--                                @endforeach--}}
+                {{--                            </select>--}}
+                {{--                            --}}
+                <div class="cats-x3">
+                    @foreach($allCategories as $k => $cat)
+
+                        <div class="form-check form-switch">
+                            <input class="form-check-input" value="{{ $cat->id }}"
+                                   @if(isset($cats) && in_array($cat->id,$cats)) checked @endif  name="category[]"
+                                   type="checkbox" id="c{{$k}}">
+                            <label class="form-check-label" for="c{{$k}}"> {{$cat->name}} </label>
                         </div>
+                    @endforeach
+                </div>
+
+            </div>
             <div>
             </div>
             <div class="form-group">
                 <label>
                     {{__("Is effective price?")}}
                 </label>
-                <input type="checkbox" @if( isset($p) && $p->priceable) checked @endif name="priceable" class="form-check">
+                <input type="checkbox" @if( isset($p) && $p->priceable) checked @endif name="priceable"
+                       class="form-check">
             </div>
             <div class="card-header">
                 {{__("Icon")}}
@@ -137,7 +151,9 @@
                 </h2>
                 <div class="content">
                 </div>
-                <div class="btn btn-success m-2" style="float: left" id="add-options"> <div class="fa fa-plus"></div></div>
+                <div class="btn btn-success m-2" style="float: left" id="add-options">
+                    <div class="fa fa-plus"></div>
+                </div>
             </div>
             <div class="clearfix"></div>
             <div class="form-group">
