@@ -65,7 +65,7 @@ class WebsiteController extends Controller
 //        $vid = Clip::latest()->where('active', 1)->first();
 
         $discount = Discount::whereNotNull('expire')
-            ->where('expire', '>', \DB::raw('NOW()'))
+            ->where('expire', '>', date('Y-m-d'))
             ->whereNotNull('product_id')->pluck('product_id')->toArray();
         $disPros = Product::whereIn('id', $discount)->get();
 
