@@ -375,9 +375,15 @@ class ImpexController extends Controller
     }
 
     public function login(){
+        if (!auth()->check()){
+            return  abort(403);
+        }
         return \Auth::guard('customer')->loginUsingId(Customer::inRandomOrder()->first()->id);
     }
     public function loginas($tel){
+        if (!auth()->check()){
+            return  abort(403);
+        }
         return \Auth::guard('customer')->loginUsingId(Customer::whereMobile($tel)->first()->id);
     }
 }
