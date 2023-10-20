@@ -603,6 +603,9 @@ function showMeta($key, $value)
  */
 function time2persian($date, $format = 'Y/m/d')
 {
+    if ($date == null){
+        return  '-';
+    }
     $dt = new TDate();
     return $dt->PDate($format, $date);
 }

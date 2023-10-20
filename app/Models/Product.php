@@ -6,6 +6,7 @@ use Conner\Tagging\Taggable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use phpDocumentor\Reflection\Types\Never_;
 use Plank\Metable\Metable;
 use Spatie\Image\Manipulations;
 use Spatie\MediaLibrary\HasMedia;
@@ -116,6 +117,8 @@ use function App\Helpers\getSetting;
  * @method static \Illuminate\Database\Eloquent\Builder|Product whereImageIndex($value)
  * @property int $carat
  * @method static \Illuminate\Database\Eloquent\Builder|Product whereCarat($value)
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Discount> $activeDiscounts
+ * @property-read int|null $active_discounts_count
  * @mixin \Eloquent
  */
 class Product extends Model implements HasMedia
@@ -239,11 +242,34 @@ class Product extends Model implements HasMedia
         return $this->hasMany(Discount::class, 'product_id', 'id');
     }
 
+    public function activeDiscounts()
+    {
+        return $this->hasMany(Discount::class, 'product_id', 'id')->where(function ($query) {
+            $query->where('expire', '>=', date('Y-m-d'))
+                ->orWhereNull('expire');
+        });
+    }
+
+
+    public function discountWithSign()
+    {
+        if ($this->activeDiscounts()->count() > 0) {
+            $discount = $this->activeDiscounts()->first();
+            if ($discount->type == 'price') {
+                return ' - ' . $discount->amount;
+            } else {
+                return ' * ' . (( 100 - $discount->amount ) / 100);
+            }
+        } else {
+            return null;
+        }
+    }
+
 
     public function getPurePrice()
     {
-        if ($this->discounts()->whereNull('code')->count() > 0) {
-            $d = $this->discounts()->whereNull('code')->orderBy('id', 'desc')->first();
+        if ($this->activeDiscounts()->whereNull('code')->count() > 0) {
+            $d = $this->activeDiscounts()->whereNull('code')->orderBy('id', 'desc')->first();
             if ($d->type == 'percent') {
                 $price = $this->price - ($this->price * ($d->amount / 100));
                 return $price;
@@ -261,8 +287,8 @@ class Product extends Model implements HasMedia
      */
     public function getPurePriceDef($def)
     {
-        if ($this->discounts()->whereNull('code')->count() > 0) {
-            $d = $this->discounts()->whereNull('code')->orderBy('id', 'desc')->first();
+        if ($this->activeDiscounts()->whereNull('code')->count() > 0) {
+            $d = $this->activeDiscounts()->whereNull('code')->orderBy('id', 'desc')->first();
             if ($d->type == 'percent') {
                 $price = $def - ($def * ($d->amount / 100));
                 return $price;
@@ -280,6 +306,7 @@ class Product extends Model implements HasMedia
         }
         return number_format($this->price) . ' ' . config('app.currency_type');
     }
+
     public function getPrice()
     {
         if ($this->getPurePrice() == 0) {

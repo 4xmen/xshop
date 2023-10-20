@@ -13,11 +13,13 @@
                             <i class="fa fa-shopping-bag"></i>
                             سبد خرید
                         </div>
-                        <div class="step step2" data-id="step2" data-done=".progress-step .step1,.progress-step  .step2">
+                        <div class="step step2" data-id="step2"
+                             data-done=".progress-step .step1,.progress-step  .step2">
                             <i class="fa fa-truck-fast"></i>
                             اطلاعات ارسال
                         </div>
-                        <div class="step step3" data-id="step3"  data-done=".progress-step .step1,.progress-step .step2, .progress-step .step3">
+                        <div class="step step3" data-id="step3"
+                             data-done=".progress-step .step1,.progress-step .step2, .progress-step .step3">
                             <i class="fa fa-credit-card"></i>
                             اطلاعات پرداخت
                         </div>
@@ -29,7 +31,7 @@
                         <div class="row">
                             <div class="col-md-9">
                                 <div id="card-steps">
-                                    <div id="step1" class="step active" >
+                                    <div id="step1" class="step active-step">
                                         <div class="text-center" id="card">
                                             <table class="table table-hover table-responsive-lg"
                                                    id="card-table">
@@ -63,7 +65,9 @@
                                                             </a>
                                                         </td>
                                                         <td colspan="2">
-                                                            {{$pro->name}}
+                                                            <a href="{{route('product',$pro->slug)}}">
+                                                                {{$pro->name}}
+                                                            </a>
                                                             <input type="hidden" name="products[]" value="{{$pro->id}}">
                                                         </td>
                                                         <td colspan="2">
@@ -74,7 +78,8 @@
                                                                     @endif
                                                                 @endforeach
                                                             @else
-                                                                <span class="active" data-count="{{$pro->stock_quantity}}"></span>
+                                                                <span class="active"
+                                                                      data-count="{{$pro->stock_quantity}}"></span>
                                                                 @foreach(\App\Helpers\getPriceableMeta($pro) as $k => $meta)
                                                                     <div class="meta">
                                                                         {{\App\Helpers\getPropLabel($k)}}
@@ -89,7 +94,8 @@
                                                                 @endforeach
                                                             @endif
                                                         </td>
-                                                        <td colspan="2" class="price-td" data-price="{{$pro->getPurePrice()}}">
+                                                        <td colspan="2" class="price-td"
+                                                            data-price="{{$pro->getPurePrice()}}">
                                                             @if($pro->getPurePrice() == 0)
                                                                 {{__("We call you about price soon.")}}
                                                             @else
@@ -105,8 +111,10 @@
                                                                 <div class="btn btn-info count-inc">
                                                                     <i class="fa fa-plus"></i>
                                                                 </div>
-                                                                <input type="number" data-stock="{{$pro->stock_quantity}}"
-                                                                       max="{{$pro->stock_quantity}}" name="count[{{$pro->id}}]"
+                                                                <input type="number"
+                                                                       data-stock="{{$pro->stock_quantity}}"
+                                                                       max="{{$pro->stock_quantity}}"
+                                                                       name="count[{{$pro->id}}]"
                                                                        min="1"
                                                                        data-price="{{str_replace(',','',$pro->getPurePrice())}}"
                                                                        class="form-control product-count"
@@ -117,7 +125,8 @@
                                                             </div>
                                                         </td>
                                                         <td>
-                                                            <a href="{{route('card.rem',$pro->slug)}}" class="btn btn-outline-danger">
+                                                            <a href="{{route('card.rem',$pro->slug)}}"
+                                                               class="btn btn-outline-danger">
                                                                 <i class="fa fa-times"></i>
                                                             </a>
                                                         </td>
@@ -129,15 +138,19 @@
                                                         <td>
 
                                                             <a href="{{route('product',$qpro->product->slug)}}">
-                                                                <img src="{{$qpro->product->thumbUrl()}}" class="img-64" alt="">
+                                                                <img src="{{$qpro->product->thumbUrl()}}" class="img-64"
+                                                                     alt="">
                                                             </a>
                                                         </td>
                                                         <td colspan="2">
-                                                            {{$qpro->product->name}}
+                                                            <a href="{{route('product',$qpro->product->slug)}}">
+                                                                {{$pro->name}}
+                                                            </a>
                                                         </td>
                                                         <td colspan="2">
                                                             @php($data = json_decode($qpro->data))
-                                                            <span class="badge badge-inverse" style="background: {{$data->color}};">
+                                                            <span class="badge badge-inverse"
+                                                                  style="background: {{$data->color}};">
                                             <b>
                                                 {{\App\Helpers\getColorName($data->color)}}
                                             </b>
@@ -146,23 +159,25 @@
                                              {{$data->size}}
                                         </span>
                                                         </td>
-                                                        <td colspan="2" class="price-td" data-price="{{$qpro->price}}">
+                                                        <td colspan="2" class="price-td"
+                                                            data-price="{{$qpro->product->getPurePriceDef($qpro->price)}}">
                                                             @if($qpro->price == 0)
                                                                 {{__("We call you about price soon.")}}
                                                             @else
                                                                 <span class="price">
-                                                {{number_format($qpro->price)}}
-                                            </span>
+                                                                    {{number_format($qpro->product->getPurePriceDef($qpro->price))}}
+                                                                </span>
                                                                 {{config('app.currency_type')}}
                                                             @endif
-                                                            @php($tot = $tot + $qpro->price)
+                                                            @php($tot = $tot + $qpro->product->getPurePriceDef($qpro->price))
                                                         </td>
                                                         <td colspan="2">
                                                             <div class="product-count">
                                                                 <div class="btn btn-info count-inc">
                                                                     <i class="fa fa-plus"></i>
                                                                 </div>
-                                                                <input type="number" data-stock="{{$qpro->count}}" max="{{$qpro->count}}"
+                                                                <input type="number" data-stock="{{$qpro->count}}"
+                                                                       max="{{$qpro->count}}"
                                                                        name="qcount[{{$qpro->id}}]"
                                                                        min="1"
                                                                        data-price="{{$qpro->price}}"
@@ -174,7 +189,8 @@
                                                             </div>
                                                         </td>
                                                         <td>
-                                                            <a href="{{route('card.remq',$qpro->id)}}" class="btn btn-outline-danger">
+                                                            <a href="{{route('card.remq',$qpro->id)}}"
+                                                               class="btn btn-outline-danger">
                                                                 <i class="fa fa-times"></i>
                                                             </a>
                                                         </td>
@@ -215,8 +231,13 @@
                                                             {{$t->title}}
                                                         </label>
                                                         @if(strlen($t->description) > 1)
-                                                            <p class="preline alert alert-info mt-1">{{$t->description}} <span
-                                                                    class="float-end">@if($t->price > 0){{number_format($t->price)}} @else {{__("Free")}} @endif</span>
+                                                            <p class="preline alert alert-info mt-1">{{$t->description}}
+                                                                <span
+                                                                    class="float-end">@if($t->price > 0)
+                                                                        {{number_format($t->price)}}
+                                                                    @else
+                                                                        {{__("Free")}}
+                                                                    @endif</span>
                                                             </p>
                                                         @endif
                                                     </li>
@@ -251,7 +272,8 @@
                                             </ul>
                                             <div class="p-5 py-3" id="resv">
                                                 <div class="form-check form-switch">
-                                                    <input name="reserve" class="form-check-input" type="checkbox" role="switch"
+                                                    <input name="reserve" class="form-check-input" type="checkbox"
+                                                           role="switch"
                                                            id="flexSwitchCheckDefault">
                                                     <label class="form-check-label"
                                                            for="flexSwitchCheckDefault">{{__("Reserve order for :H hours",['H'=>\App\Helpers\getSetting('reserve')])}}</label>
@@ -260,7 +282,7 @@
 
                                         @endif
                                         <div>
-                                            <div  class="text-left p-3">
+                                            <div class="text-left p-3">
                                                 @if(auth('customer')->check() && auth('customer')->user()->colleague == 1)
                                                     <div class="p-3 ">
                                                         اگر همکاری هستید آدرس مشتری را در این قسمت بنویسید
@@ -287,13 +309,14 @@
                                         </div>
                                     </div>
                                     <div id="step3" class="step">
-                                        <div >
+                                        <div>
                                             <label class="text-start d-block">
                                                 {{__("Discount code")}}
                                             </label>
                                             <div class="row">
                                                 <div class="col-md-6">
-                                                    <input type="text" class="form-control" id="discount-code" name="discount"
+                                                    <input type="text" class="form-control" id="discount-code"
+                                                           name="discount"
                                                            placeholder="{{__("Discount code")}}">
                                                 </div>
                                                 <div class="col-md-6">
@@ -364,14 +387,16 @@
                                                 <i class="far fa-credit-card"></i>
                                                 پرداخت از درگاه های آنلاین
                                             </button>
-                                            <button type="submit" class="btn btn-secondary  float-end " name="nopay" value="no-payment">
+                                            <button type="submit" class="btn btn-secondary  float-end " name="nopay"
+                                                    value="no-payment">
                                                 <i class="far fa-credit-card"></i>
                                                 ثبت سفارش پرداخت اعتباری + آنلاین
                                             </button>
                                             <br>
                                             <br>
                                         @endif
-                                        &nbsp;@else
+                                        &nbsp;
+                                    @else
                                         {{--                                        {{__("Register or login to complete purchase")}}--}}
                                         <hr>
                                         <br>

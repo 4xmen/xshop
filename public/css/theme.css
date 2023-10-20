@@ -11137,7 +11137,7 @@ h3.textt{
 #card-steps .step {
   display: none;
 }
-#card-steps .step.active {
+#card-steps .step.active-step {
   display: block;
 }
 

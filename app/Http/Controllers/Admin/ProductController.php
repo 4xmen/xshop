@@ -112,6 +112,9 @@ class ProductController extends Controller
             $discount->amount = $request->discount['amount'];
             $discount->expire = date('Y-m-d',floor($request->discount['expire']/1000));
 //            $discount->code = $request->discount['code'];
+            if ($discount->expire == '1970-01-01 00:00:00'){
+                $discount->expire = null;
+            }
             $discount->type = $request->discount['type'];
             $discount->save();
         }

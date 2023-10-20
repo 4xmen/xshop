@@ -85,7 +85,7 @@ class GatewayRedirectController
             $proData = [
                 'count' => $buyCount,
                 'quantity_id' => $id,
-                'price_total' => ($q->price * ($buyCount)),
+                'price_total' => ($product->getPurePriceDef($q->price) * ($buyCount)),
                 'data'=>json_encode($q),
             ];
             $invoice->total_price += $proData['price_total'];
@@ -107,16 +107,16 @@ class GatewayRedirectController
             $product->save();
             $proData = [
                 'count' => \request('count')[$item],
-                'price_total' => ($product->price * (\request('count')[$item]))
+                'price_total' => ($product->getPurePrice() * (\request('count')[$item]))
             ];
             if (isset(\request('data')[$item])){
                 $temp = json_decode(\request('data')[$item]);
                 $qd = Quantity::find($temp->id);
                 $qd->count -= \request('count')[$item];
                 $proData['data'] = \request('data')[$item];
-                $proData['price_total'] = $qd->price *  \request('count')[$item];
+                $proData['price_total'] = $product->getPurePriceDef($qd->price) *  \request('count')[$item];
                 $proData['quantity_id'] = $qd->id;
-                $product->price = $qd->price;
+                $product->price =  $product->getPurePriceDef($qd->price);
                 $qd->save();
             }
             $invoice->save();

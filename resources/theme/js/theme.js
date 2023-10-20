@@ -380,6 +380,13 @@ jQuery(function ($) {
     });
     try {
         if ($('#qnt').length != 0) {
+            let qnt ;
+            let hasDiscount  = false;
+            if ($("#discount").val() !== ''){
+
+                hasDiscount  = true;
+            }
+
             sizes = {};
             qnt = JSON.parse($('#qnt').val());
             // console.log(qnt);
@@ -414,10 +421,13 @@ jQuery(function ($) {
                 let txt = '';
                 let cl = '';
                 for( const c of colors) {
-                    cl = colorNames[c.color];
-                    // console.log(c.color,colorNames);
+                    let  p  = c.price;
+                    if (hasDiscount){
+                        p  = eval(c.price  + $("#discount").val())
+                    }
                     txt += `<div data-id="${c.id}"
-                                            data-price="${c.price}"
+                                            data-price="${p}"
+                                            data-real-price="${c.price}"
                                                         data-count="${c.count}"
                                                          data-image="${c.image}"
                                                          class="color">
@@ -436,6 +446,7 @@ jQuery(function ($) {
                     $(this).addClass('active');
                     $("#qn").val($(this).data('id'));
                     $("#last-pricex").text(commafy($(this).data('price')));
+                    $("#real-price").text(commafy($(this).data('real-price')));
                     $("#counting").text($(this).data('count'));
                     $(".product-count").attr('max',$(this).data('count')).val(1);
                 });
