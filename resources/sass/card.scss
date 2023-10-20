@@ -47,7 +47,7 @@
 #card-steps {
     .step{
         display: none;
-        &.active{
+        &.active-step{
             display: block;
         }
     }

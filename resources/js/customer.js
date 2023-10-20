@@ -268,5 +268,28 @@ jQuery(function ($) {
             });
         }
     }, 500);
+
+
+
+    $(".next-step").bind('click', function () {
+        step++;
+        $(".step" + step).click();
+    });
+
+    $(".progress-step .step").click(function () {
+        $(".progress-step .step").removeClass('done');
+        $($(this).data('done')).addClass('done');
+        $("#card-steps .active-step").slideUp(300).removeClass('active-step');
+        $('#' + $(this).data('id')).slideDown(500).addClass('active-step');
+        step = parseInt($(this).data('id').substr(4, 1));
+        if ($(this).data('id') == 'step3') {
+            $(".last-step").slideDown(300);
+            $(".next-step").slideUp(300);
+        } else {
+            $(".last-step").slideUp(300);
+            $(".next-step").slideDown(300);
+        }
+    });
 });
+
 

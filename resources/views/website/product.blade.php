@@ -130,6 +130,14 @@
                                                     {{$pro->getPrice()}}
                                                 </span>
                                     </b>
+                                    @if($pro->hasDiscount())
+                                        <del class="text-muted">
+                                                        <span id="real-price">
+                                                            {{number_format($pro->price)}}
+                                                        </span>
+                                            {{config('app.currency_type')}}
+                                        </del>
+                                    @endif
                                 </td>
                             </tr>
                             @if($pro->hasMeta('color'))
@@ -378,5 +386,6 @@
         <input type="hidden" id="qn" value="">
         <input type="hidden" id="qnt" value='{!! $pro->quantities()->orderBy('price')->get();!!}'>
         <input type="hidden" id="colors" value='{!! json_encode( \App\Helpers\getColors()) !!}'>
+        <input type="hidden" id="discount" value="{{$pro->discountWithSign()}}">
 @endsection
 
