@@ -1,6 +1,6 @@
 var data = require('./plugins/data');
 var isSendSms = false;
-
+var step = 1;
 function nocomma(num) {
     a = num.toString().replace(/\,/g, ''); // 1125, but a string, so convert it to number
     return a.toString();

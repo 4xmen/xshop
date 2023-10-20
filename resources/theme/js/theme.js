@@ -380,7 +380,6 @@ jQuery(function ($) {
     });
     try {
         if ($('#qnt').length != 0) {
-            let qnt ;
             let hasDiscount  = false;
             if ($("#discount").val() !== ''){
 
