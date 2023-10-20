@@ -2,18 +2,13 @@
     <div class="row">
         <div class="col-md-6 mt-3">
             <div class="form-group pt-3" >
-                <br>
-                <label for="active">
-                    {{__('Active')}}
-                </label>
-                <input name="active" type="checkbox" id="active"
 
-                       class="float-left ml-4 mt-1 form-check-inline @error('active') is-invalid @enderror"
-                       @if (old('active',$product->active??0) != 0)
-                       checked
-                       @endif
-                       value="1"/>
-            </div>
+                <div class="form-check form-switch">
+                    <input name="active" class="form-check-input @error('active') is-invalid @enderror" type="checkbox" value="1"  id="active"  @if (old('active',$product->active??0) != 0)
+                        checked
+                        @endif>
+                    <label class="form-check-label" for="active">{{__('Active')}}</label>
+                </div>
         </div>
     </div>
 

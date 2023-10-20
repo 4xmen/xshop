@@ -125,7 +125,12 @@ export default {
     },
     methods: {
         changeImg:function ($k) {
+            // console.log($k);
+            // console.log(this.onSelectImage);
+            // console.log(this.quantities);
             this.quantities[this.onSelectImage].image = $k;
+            // console.log(this.quantities);
+            this.$forceUpdate();
         },
         showModal: function (i) {
             // this.showModal(i);
@@ -212,12 +217,16 @@ export default {
     background: #FFFFFF99;
     z-index: 999;
     overflow-y: scroll;
+    backdrop-filter: blur(3px);
 }
 
 
 #overlay img {
     max-width: 100%;
+    width: 100%;
     opacity: .75;
+    height: 150px;
+    object-fit: cover;
 }
 
 #overlay img.selected {

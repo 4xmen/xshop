@@ -208,7 +208,7 @@ class AdminWebPagesTest extends TestCase
         $response->assertStatus(200);
 
         if (Customer::count() != 0){
-            $response = $this->actingAs($user)->get(route('admin.customer.edit',Customer::first()->slug));
+            $response = $this->actingAs($user)->get(route('admin.customer.edit',Customer::first()->id));
             $response->assertStatus(200);
         }
 

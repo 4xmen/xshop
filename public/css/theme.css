@@ -10773,7 +10773,9 @@ tr.border-bottom td {
 }
 
 .pink-pattern {
-    background: url(/images/loginbg.png?c2ff5cc63e62d379756642a76feda7a9) !important;
+    background: url(/images/shop.jpg?b9d2a691aa19c475462365228672329f) no-repeat !important;
+    background-size: cover !important;
+    background-position: center !important;
     margin-top: 0;
     padding-top: 10vh;
     padding-bottom: 10vh;
@@ -11435,6 +11437,48 @@ h3.textt{
     transform: scale(1);
   }
 }
+.color-pick .color {
+  display: inline-block;
+  opacity: 0.75;
+  margin-right: 4px;
+  border-radius: 15px;
+  border: 1px dotted silver;
+}
+
+.color-pick .color span {
+  display: inline-block;
+  mix-blend-mode: darken;
+  font-size: 11px;
+  padding-right: 4px;
+  padding-left: 4px;
+}
+
+.color-pick .color .cl {
+  float: left;
+  min-width: 25px;
+  height: 25px;
+  display: inline-block;
+  border-radius: 50%;
+  position: relative;
+  cursor: pointer;
+}
+
+.color-pick .color.active {
+  opacity: 1;
+  border: 1px solid black;
+  position: relative;
+  padding-right: 15px;
+}
+
+.color-pick .color.active .cl:after {
+  content: "✓";
+  right: 20%;
+  top: 5%;
+  position: absolute;
+  color: white;
+  mix-blend-mode: difference;
+}
+
 .x-mega-menu {
   background: #eeeeee;
   display: grid;

@@ -804,7 +804,9 @@ tr.border-bottom td {
 }
 
 .pink-pattern {
-    background: url("../css/loginbg.png") !important;
+    background: url("../css/shop.jpg") no-repeat !important;
+    background-size: cover !important;
+    background-position: center !important;
     margin-top: 0;
     padding-top: 10vh;
     padding-bottom: 10vh;

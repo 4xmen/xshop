@@ -327,7 +327,7 @@ class Product extends Model implements HasMedia
 
     function hasDiscount()
     {
-        return $this->discounts()->where('expire', '>', \DB::raw('NOW()'))->count() > 0;
+        return $this->discounts()->where('expire', '>', date('Y-m-d'))->count() > 0;
     }
 
     public function isFav()

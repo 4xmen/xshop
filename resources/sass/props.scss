@@ -2,3 +2,29 @@
 #xls-file,#optionz{
     display: none;
 }
+
+.cats-x3{
+    column-count: 4
+}
+
+/*-1000px width*/
+@media (max-width: 1000px) {
+    .cats-x3{
+        column-count: 3
+    }
+}
+
+/*-600px width*/
+@media (max-width: 600px) {
+    .cats-x3{
+        column-count: 2
+    }
+}
+
+/*-300px width*/
+@media (max-width: 300px) {
+    .cats-x3{
+        column-count: 1
+    }
+}
+

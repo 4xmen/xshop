@@ -147,17 +147,29 @@
                                     </th>
                                     <td>
                                         <div class="color-pick">
-                                            <input type="hidden" class="color" value="red"/>
-                                            @php $colors = json_decode(\App\Helpers\getProp('color')->options,'true'); @endphp
 
-                                            @foreach($colors as $c)
-                                                <div style="background: {{$c['value']}}" data-color="{{$c['value']}}"
-                                                     class="color @if($c['value'] == $pro->getMeta('color')) active @endif"></div>
-                                            @endforeach
                                         </div>
                                     </td>
                                 </tr>
                             @endif
+                            <tr>
+                                <th style="vertical-align: middle">
+                                    تعداد
+                                </th>
+                                <td>
+                                    {{--                                                <div id="counting" class="text-muted float-start mt-2"></div>--}}
+                                    <div class="product-count d-inline-block">
+                                        <div class="btn btn-info count-inc" style="padding: 2px 5px">
+                                            <i class="fa fa-plus"></i>
+                                        </div>
+                                        <input type="number" id="single-count" class="product-count"
+                                               value="1" max="1">
+                                        <div class="btn btn-info count-dec" style="padding: 2px 5px">
+                                            <i class="fa fa-minus"></i>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
                             @if($pro->hasMeta('warranty'))
                                 <tr>
                                     <th>
@@ -207,8 +219,8 @@
                                 </a>
                             </div>
                             <div class="col">
-                                <a href="{{route('card.add',$pro->slug)}}"
-                                   class="add-to-card btn btn-primary w-100 mt-1">
+                                <a href="{{route('card.addq',['',''])}}"
+                                   class="add-to-card-q btn btn-primary w-100 mt-1">
                                     <img src="{{asset('images/basket.svg')}}" class="basket-icon" alt="">
                                     افزودن به سبد خرید
                                 </a>
@@ -227,6 +239,7 @@
                         </ul>
                         <div class="tab-container">
                             <div id="tab-detail" class="active">
+
                                 <table class="table table-bordered attribute ">
                                     @foreach($pro->getAllMeta() as $k => $meta)
                                         @if($k != 'color' && $k != 'warranty')
@@ -382,6 +395,7 @@
                     </div>
                 </div>
             </div>
+
         </section>
         <input type="hidden" id="qn" value="">
         <input type="hidden" id="qnt" value='{!! $pro->quantities()->orderBy('price')->get();!!}'>
