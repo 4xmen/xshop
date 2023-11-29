@@ -217,7 +217,7 @@ class WebsiteController extends Controller
 
     public function post(Post $post)
     {
-        $comments = $post->comments()->paginate(15);
+        $comments = $post->comments()->paginate(16);
         $sld = Slider::inRandomOrder()->first();
         return view('website.post', compact('post', 'comments', 'sld'));
     }

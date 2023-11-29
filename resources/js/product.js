@@ -84,7 +84,9 @@ $(function () {
                 if (res.data.url != undefined) {
                     window.location.href = res.data.url;
                 } else {
-                    alertify.success(res.data.msg);
+                    if (res.data.link !== undefined){
+                        $("#saveProduct").attr('action',res.data.link)
+                    }
                     if ($("#price-amount").val().trim() !== '') {
                         window.location.reload();
                     }

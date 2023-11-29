@@ -188,7 +188,7 @@ aside .form-check {
     background: #fff;
 }
 
-#top .logo {
+#top-top .logo {
     max-height: 65px;
     max-width: 100%;
     float: right;
@@ -363,6 +363,11 @@ aside .form-check {
     font-size: 15px;
     margin-top: 1rem;
     text-align: center;
+    overflow: hidden;
+    white-space: nowrap;
+    max-width: 95%;
+    text-overflow: ellipsis;
+
     color: #444;
 }
 

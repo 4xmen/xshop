@@ -85,6 +85,9 @@
     <section id="new-products" class="mt-5 long-box">
         <div class="container pt-4 pb-4">
             <h1 class="mb-4">
+                <a href="{{route('products')}}" class="float-end btn btn-outline-primary">
+                    همه محصولات
+                </a>
                 {{\App\Helpers\getSetting('sectext')}}
             </h1>
             <div id="owl1" class="owl-carousel owl-theme owl1">
@@ -114,9 +117,6 @@
                 @endforeach
 
             </div>
-            <a href="{{route('products')}}" class="float-end btn btn-outline-primary">
-                همه محصولات
-            </a>
             <br>
             <br>
         </div>

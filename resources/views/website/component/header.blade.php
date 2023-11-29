@@ -86,18 +86,22 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-4 col-md-12 text-start">
-                <div class='marquee'>
-                    <div class="row mt-2 pt-1" >
-                        <a class="col" href="tel:{{\App\Helpers\getSetting('tel')}}">
-                            <i class="fa fa-phone-alt"></i>
-                            {{\App\Helpers\getSetting('tel')}}
-                        </a>
-                        <a class="col" href="mail:{{\App\Helpers\getSetting('email')}}">
-                            <i class="fa fa-envelope"></i>
-                            {{\App\Helpers\getSetting('email')}}
-                        </a>
-                    </div>
-                </div>
+{{--                <div class='marquee'>--}}
+{{--                    <div class="row mt-2 pt-1" >--}}
+{{--                        <a class="col" href="tel:{{\App\Helpers\getSetting('tel')}}">--}}
+{{--                            <i class="fa fa-phone-alt"></i>--}}
+{{--                            {{\App\Helpers\getSetting('tel')}}--}}
+{{--                        </a>--}}
+{{--                        <a class="col" href="mail:{{\App\Helpers\getSetting('email')}}">--}}
+{{--                            <i class="fa fa-envelope"></i>--}}
+{{--                            {{\App\Helpers\getSetting('email')}}--}}
+{{--                        </a>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
+
+                <a href="/">
+                    <img src="{{asset('images/logo.png')}}" class="logo"   alt="">
+                </a>
 
             </div>
             <div class="col-lg-4 col-md-6">

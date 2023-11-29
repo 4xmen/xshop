@@ -1,10 +1,5 @@
 <nav>
     <ul id="mega-menu">
-        <li>
-            <a href="/">
-                <img src="{{asset('images/logo.png')}}" class="logo" alt="">
-            </a>
-        </li>
         @foreach(\App\Helpers\getMainCats(4) as $mcat)
             <li>
                 <a href="{{route('cat',$mcat->slug)}}">

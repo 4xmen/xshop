@@ -252,7 +252,7 @@ class ProductController extends Controller
         $this->createOrUpdate($product, $request);
         logAdmin(__METHOD__, Product::class, $product->id);
         if ($request->ajax()) {
-            return ['OK' => true, 'msg' => $product->name . ' ' . __('updated successfully')];
+            return ['OK' => true, 'msg' => $product->name . ' ' . __('updated successfully'),'data' => $product,'link' => route('admin.product.update',$product->slug)];
         } else {
             return redirect()->route('admin.product.index')->with(['message' => $product->name . ' ' . __('updated successfully')]);
         }
