@@ -364,8 +364,7 @@ aside .form-check {
     margin-top: 1rem;
     text-align: center;
     overflow: hidden;
-    white-space: nowrap;
-    max-width: 95%;
+    max-height: 1.3em;
     text-overflow: ellipsis;
 
     color: #444;
