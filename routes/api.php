@@ -19,6 +19,10 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+Route::get('/test/laravel', function () {
+   return 'work!';
+});
+
 Route::get('/clear', function () {
 
     Artisan::call('cache:clear');
@@ -33,6 +37,5 @@ Route::get('/clear', function () {
 
 Route::prefix('v1')->name('v1.')->group(
     function () {
-
         Route::get('index', [\App\Http\Controllers\Api\ApiV1Controller::class,'index'])->name('index');
     });
