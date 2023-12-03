@@ -111,7 +111,7 @@
                                     </label>
                                     <input name="is_breaking" type="checkbox" id="is_breaking"
 
-                                           class="float-left ml-4 mt-1 form-check-inline @error('is_breaking') is-invalid @enderror"
+                                           class="float-end ml-4 mt-1 form-check-inline @error('is_breaking') is-invalid @enderror"
                                            placeholder="{{__('Is breaking news?')}}"
                                            @if (old('is_breaking',$posts->is_breaking??0) != 0)
                                            checked
@@ -126,7 +126,7 @@
                                         {{__('Pin')}}
                                     </label>
                                     <input name="is_pinned" type="checkbox" id="is_pinned"
-                                           class="float-left ml-4 mt-1 form-check-inline @error('is_pinned') is-invalid @enderror"
+                                           class="float-end ml-4 mt-1 form-check-inline @error('is_pinned') is-invalid @enderror"
                                            placeholder="{{__('Is pinned news?')}}"
                                            @if (old('is_pinned',$posts->is_pinned??0) != 0)
                                            checked

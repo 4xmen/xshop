@@ -8,7 +8,7 @@
     <div class="container">
         <h1>
             {{__("Slider list")}}
-            <a href="{{route('admin.slider.create')}}" class="btn btn-success float-right">
+            <a href="{{route('admin.slider.create')}}" class="btn btn-success float-start">
                 {{__("New Slider")}}
             </a>
         </h1>
@@ -44,7 +44,7 @@
                     </th>
                     <th>
                         {{__("Action")}}
-                        <a href="{{route('admin.slider.create')}}" class="btn btn-success float-right"><i
+                        <a href="{{route('admin.slider.create')}}" class="btn btn-success float-start"><i
                                 class="fa fa-plus"></i></a>
                     </th>
                 </tr>

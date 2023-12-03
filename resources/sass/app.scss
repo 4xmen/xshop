@@ -228,3 +228,14 @@ nav {
     padding: 4px 2rem;
     background: rgba(30, 144, 255, 0.26);
 }
+
+// fix rtl and ltr
+.form-check-label {
+    padding-right: 1.25rem;
+    padding-left: 1.25rem;
+}
+
+.category-control li input{
+    margin-right: 5px;
+    margin-top: 1px;
+}

@@ -79,7 +79,7 @@
                                @if (old('active',$clip->active??0) != 0)
                                checked
                                @endif
-                               class="float-left ml-4 mt-1 form-check-inline @error('active') is-invalid @enderror"
+                               class="float-end ml-4 mt-1 form-check-inline @error('active') is-invalid @enderror"
                                value="">
                     </div>
                 </div>

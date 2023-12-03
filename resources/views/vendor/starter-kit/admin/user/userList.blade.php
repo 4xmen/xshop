@@ -7,7 +7,7 @@
     <div class="container">
         <h1>
             {{__("User list")}}
-            <a href="{{route('admin.user.create')}}" class="btn btn-success float-right">
+            <a href="{{route('admin.user.create')}}" class="btn btn-success float-start">
                 {{__("New user")}}
             </a>
         </h1>

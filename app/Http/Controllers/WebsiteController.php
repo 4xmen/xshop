@@ -109,6 +109,7 @@ class WebsiteController extends Controller
         } else {
             $q = $q->orderByDesc('sell_count');
         }
+
         if (isset($request->meta) && isset($request->meta['material'])){
 //            dd(array_column(json_decode($request->meta['material'],true),'value'));
             if (count(json_decode($request->meta['material'],true) ) > 0){

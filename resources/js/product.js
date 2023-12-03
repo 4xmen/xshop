@@ -6,7 +6,7 @@ $(function () {
         CKEDITOR.replace('description', {
             filebrowserUploadUrl: xupload,
             filebrowserUploadMethod: 'form',
-            contentsLangDirection: 'rtl'
+            contentsLangDirection: isRtl?'rtl':'ltr'
         });
         CKEDITOR.instances.description.on('change',function () {
             $("#description").val(CKEDITOR.instances.description.getData());

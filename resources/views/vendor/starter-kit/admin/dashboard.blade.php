@@ -5,12 +5,12 @@
         <div class="card">
             <div class="card-header">
                 <h3 class="text-center">
-                    <a class="btn btn-dark float-right" href="{{route('admin.home.nav',[$ny,$nm])}}">
+                    <a class="btn btn-dark float-start" href="{{route('admin.home.nav',[$ny,$nm])}}">
                         {{__("Next")}}
                         <i class="fa fa-arrow-left"></i>
                     </a>
                     {{$dt->PDate('Y F',$time)}}
-                    <a class="btn btn-dark float-left" href="{{route('admin.home.nav',[$py,$pm])}}">
+                    <a class="btn btn-dark float-end" href="{{route('admin.home.nav',[$py,$pm])}}">
                         <i class="fa fa-arrow-right"></i>
                         {{__("Previous")}}
                     </a>

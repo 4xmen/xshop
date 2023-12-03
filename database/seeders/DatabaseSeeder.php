@@ -31,13 +31,14 @@ class DatabaseSeeder extends Seeder
 
         $this->call([
             UserSeeder::class,
+            XlangSeeder::class,
             CategorySeeder::class,
             CatSeeder::class,
             CustomerSeeder::class,
-            PostSeeder::class,
-            MenuSeeder::class,
-            PropSeeder::class,
-            ProductSeeder::class,
+//            PostSeeder::class,
+//            MenuSeeder::class,
+//            PropSeeder::class,
+//            ProductSeeder::class,
 //            InvoiceSeeder::class,
 //            SliderSeeder::class,
             SettingSeeder::class,

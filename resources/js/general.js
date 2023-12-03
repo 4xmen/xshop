@@ -14,10 +14,16 @@ jQuery(function () {
         if (confirm('Are sure?')) {
             let self = this;
             axios.post($("#rem-menu").val() + '/' + $(this).data('menuableid')).then(function () {
-              $(self).slideUp();
+                $(self).slideUp();
             });
         }
     });
+
+    window.addEventListener('load', function () {
+        if (!isRtl) {
+            document.querySelector('body').style.direction = 'ltr';
+        }
+    })
     // );
     // $("nav .current").closest('li').click();
 });

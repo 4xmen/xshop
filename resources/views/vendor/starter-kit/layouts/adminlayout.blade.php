@@ -7,8 +7,16 @@
     <script src="{{ asset('vendor/starter-kit/js/manifest.js') }}"  ></script>
     <script src="{{ asset('vendor/starter-kit/js/vendor.js') }}" defer  ></script>
     <script src="{{ asset('vendor/starter-kit/js/app.js') }}"  defer ></script>
-
-@yield('header-content')
+    <script>
+        @php
+            $lang = \App\Models\Xlang::where('is_default',true)->first();
+        @endphp
+        var isRtl = false;
+        @if($lang !== null && $lang->rtl)
+            isRtl = true;
+        @endif
+    </script>
+    @yield('header-content')
 <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
@@ -34,7 +42,7 @@
                     <input type="search" value="" placeholder="{{__("Search in all panel")}}" class="form-control"/>
                 </form>
                 <div class="col-md-3">
-                    <div class="m-2 float-right">
+                    <div class="m-2 float-start">
                         {{__("Welcome")}}: {{auth()->user()->name}}
                     </div>
                 </div>

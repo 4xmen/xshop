@@ -7,7 +7,7 @@
     <div class="container">
         <h1>
             {{__("Clip list")}}
-            <a href="{{route('admin.clip.create')}}" class="btn btn-success float-right">
+            <a href="{{route('admin.clip.create')}}" class="btn btn-success float-start">
                 {{__("New Clip")}}
             </a>
         </h1>
@@ -46,7 +46,7 @@
                     </th>
                     <th>
                         {{__("Action")}}
-                        <a href="{{route('admin.clip.create')}}" class="btn btn-success float-right"><i
+                        <a href="{{route('admin.clip.create')}}" class="btn btn-success float-start"><i
                                 class="fa fa-plus"></i></a>
                     </th>
                 </tr>

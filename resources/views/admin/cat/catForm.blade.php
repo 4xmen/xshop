@@ -15,8 +15,8 @@
                 {{__('New product category')}}
             @else
                 {{__('Edit product category')}}: {{$ccat->name}}
-                <img src="{{$ccat->thumbUrl()}}" class="x64 float-right" alt="">
-                <img src="{{$ccat->backUrl()}}" class="x64 float-right" alt="">
+                <img src="{{$ccat->thumbUrl()}}" class="x64 float-start" alt="">
+                <img src="{{$ccat->backUrl()}}" class="x64 float-start" alt="">
 {{--                {{$ccat->imgUrl()}}--}}
             @endif
         </h1>

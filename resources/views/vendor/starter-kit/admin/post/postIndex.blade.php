@@ -40,7 +40,7 @@
                     </th>
                     <th>
                         {{__("Action")}}
-                        <a href="{{route('admin.post.create')}}" class="btn btn-success float-right"><i
+                        <a href="{{route('admin.post.create')}}" class="btn btn-success float-start"><i
                                 class="fa fa-plus"></i></a>
                     </th>
                 </tr>

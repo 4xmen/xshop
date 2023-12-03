@@ -3,7 +3,7 @@
 @section('content')
     <div class="container">
         <h5 class="text-center"> {{__("Properties list")}}
-            <a class="btn btn-primary float-right" href="{{route('admin.props.create')}}">
+            <a class="btn btn-primary float-start" href="{{route('admin.props.create')}}">
                 <i class="fa fa-plus"></i>
             </a>
         </h5>
