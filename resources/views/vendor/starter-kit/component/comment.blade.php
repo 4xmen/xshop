@@ -1,27 +1,23 @@
 <li>
-    <div class="comment-main-level">
-        <!-- Avatar -->
-        <div class="comment-avatar"><img src="https://www.gravatar.com/avatar/{{md5($c->email)}}?s=64"></div>
-        <!-- Contenedor del Comentario -->
-        <div class="comment-box">
-            <div class="comment-head">
-                <h6 class="comment-name">
-                    <a href="#">
-                        {{$c->name}}
-                    </a>
-                </h6>
-                <span>{{$c->persianDate()}}</span>
-                <i class="fa fa-reply  comment-reply" data-id="{{$c->id}}" title="{{__("reply")}}"></i>
-                <i class="fa fa-heart"></i>
-            </div>
-            <div class="comment-content">
+    <div class="row">
+        <div class="col-md-3 text-center">
+            <img class="img-avatar"  src="https://www.gravatar.com/avatar/{{md5($c->email)}}?s=64" alt="avatar" />
+            {{$c->name}}
+            <br>
+            {{$c->persianDate()}}
+            <br>
+            <span class="btn-sm btn-secondary comment-reply" data-id="{{$c->id}}" title="{{__("reply")}}">
+                <i class="fa fa-reply"></i>
+            </span>
+        </div>
+        <div class="col-md-9">
+            <p>
                 {{$c->body}}
-            </div>
+            </p>
         </div>
     </div>
     @if ($c->approved_children()->count()>0)
-        <ul class="comments-list reply-list">
-
+        <ul>
             @foreach($c->approved_children as $cch)
                 <li>
                     @include('starter-kit::component.comment', ['c' => $cch])

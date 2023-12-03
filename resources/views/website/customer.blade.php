@@ -481,7 +481,7 @@
                                     <label for="body">
                                         {{__("Text")}}
                                     </label>
-                                    <textarea name="body" id="body" class="form-control"
+                                    <textarea name="body" id="body" class="ckeditorx form-control"
                                               placeholder="{{__("Your question or request...")}}"
                                               rows="5">{{old('body')}}</textarea>
                                 </div>
@@ -509,7 +509,7 @@
                                     <label for="body">
                                         {{__("Text")}}
                                     </label>
-                                    <textarea name="body" id="body" class="form-control"
+                                    <textarea name="body" id="body" class="ckeditorx form-control"
                                               placeholder="{{__("Application request")}}"
                                               rows="5">{{old('body')}}</textarea>
                                 </div>

@@ -53,7 +53,7 @@
                                     <label for="body">
                                         {{__('Post Text')}}
                                     </label>
-                                    <textarea name="body" class="form-control @error('body') is-invalid @enderror"
+                                    <textarea name="body" class="ckeditorx form-control @error('body') is-invalid @enderror"
                                               placeholder="{{__('Post Text')}}"
                                               rows="8">{{old('body',$posts->body??null)}}</textarea>
                                     {{--                                    @trix(\App\Post::class, 'body')--}}
@@ -105,32 +105,23 @@
                             </div>
                             <div class="col-md-3 mt-3">
                                 <div class="form-group mt-3">
-                                    <br>
-                                    <label for="is_breaking">
-                                        {{__('Is breaking news?')}}
-                                    </label>
-                                    <input name="is_breaking" type="checkbox" id="is_breaking"
-
-                                           class="float-end ml-4 mt-1 form-check-inline @error('is_breaking') is-invalid @enderror"
-                                           placeholder="{{__('Is breaking news?')}}"
-                                           @if (old('is_breaking',$posts->is_breaking??0) != 0)
-                                           checked
-                                           @endif
-                                           value="1"/>
+                                    <div class="form-check form-switch">
+                                        <input class="form-check-input" name="is_breaking"  @if (old('is_breaking',$posts->is_breaking??0) != 0)
+                                            checked
+                                               @endif type="checkbox" id="isbr">
+                                        <label class="form-check-label" for="isbr">{{__('Is breaking news?')}}</label>
+                                    </div>
                                 </div>
                             </div>
                             <div class="col-md-3 mt-3">
                                 <div class="form-group mt-3">
-                                    <br>
-                                    <label for="is_pinned">
-                                        {{__('Pin')}}
-                                    </label>
-                                    <input name="is_pinned" type="checkbox" id="is_pinned"
-                                           class="float-end ml-4 mt-1 form-check-inline @error('is_pinned') is-invalid @enderror"
-                                           placeholder="{{__('Is pinned news?')}}"
-                                           @if (old('is_pinned',$posts->is_pinned??0) != 0)
-                                           checked
-                                            @endif/>
+
+                                    <div class="form-check form-switch">
+                                        <input class="form-check-input" name="is_pin"  @if (old('is_pin',$posts->is_pin??0) != 0)
+                                            checked
+                                               @endif type="checkbox" id="ispin">
+                                        <label class="form-check-label" for="ispin">{{__('Pin')}}</label>
+                                    </div>
                                 </div>
                             </div>
                         </div>

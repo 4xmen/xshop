@@ -2,16 +2,7 @@ var isW8 = false;
 // var descBody = $("#description").val();
 
 $(function () {
-    if ($("[name='desc']#description").length) {
-        CKEDITOR.replace('description', {
-            filebrowserUploadUrl: xupload,
-            filebrowserUploadMethod: 'form',
-            contentsLangDirection: isRtl?'rtl':'ltr'
-        });
-        CKEDITOR.instances.description.on('change',function () {
-            $("#description").val(CKEDITOR.instances.description.getData());
-        });
-    }
+
 
     window.fakerProduct = function () {
         $("#name").val("Product name sample 1");

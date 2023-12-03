@@ -52,7 +52,7 @@
                                             @break
                                         @case('editor')
                                             <textarea name="{{$set->key}}" id="{{$set->key}}"
-                                                      class="ckeditor form-control"
+                                                      class="ckeditorx form-control"
                                                       rows="5">{{$set->value}}</textarea>
                                             @break
                                         @case('category')
@@ -169,6 +169,11 @@
 @endsection
 @section('js-content')
     <script>
-        document.querySelector('#price').classList.add('currency');
+        try {
+            document.querySelector('#price').classList.add('currency');
+        } catch(e) {
+            // console.log(e.message);
+        }
+
     </script>
 @endsection

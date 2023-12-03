@@ -45,7 +45,7 @@
                         <label for="body">
                             {{__('Text')}}
                         </label>
-                        <textarea name="body" class="form-control @error('body') is-invalid @enderror"
+                        <textarea name="body" class="ckeditorx form-control @error('body') is-invalid @enderror"
                                   placeholder="{{__('Text')}}">{{old('body',$poll->body??null)}}</textarea>
                     </div>
 

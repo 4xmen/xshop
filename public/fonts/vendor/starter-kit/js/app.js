@@ -32266,7 +32266,7 @@ jQuery(function () {
       CKEDITOR.replace('body', {
         filebrowserUploadUrl: xupload,
         filebrowserUploadMethod: 'form',
-        contentsLangDirection: 'rtl'
+        // contentsLangDirection: 'rtl'
       });
     }
   } catch (e) {}

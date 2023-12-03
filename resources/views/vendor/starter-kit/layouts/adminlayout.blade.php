@@ -17,7 +17,7 @@
         @endif
     </script>
     @yield('header-content')
-<!-- CSRF Token -->
+    <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>@yield('page_title', '') {{config('app.name', 'Laravel')}} </title>

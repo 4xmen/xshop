@@ -52,17 +52,12 @@
 
                 <div class="col-md-3 mt-3">
                     <div class="form-group">
-                        <br>
-                        <br>
-                        <label for="chk">
-                            {{__("Active")}}
-                        </label>
-                        <input type="checkbox" id="chk" name="active"
-                               @if (old('active',$adv->active??0) != 0)
-                               checked
-                               @endif
-                               class="float-end ml-4 mt-1 form-check-inline @error('active') is-invalid @enderror"
-                               value="">
+                        <div class="form-check form-switch">
+                            <input class="form-check-input" name="active" value="1"  @if (old('active',$adv->active??0) != 0)
+                                checked
+                                   @endif type="checkbox" id="active">
+                            <label class="form-check-label" for="active">{{__("Active")}}</label>
+                        </div>
                     </div>
                 </div>
                 <div class="col-md-4 mt-3">

@@ -31,7 +31,7 @@
                             {{$log->user->name}}
                         </td>
                         <td>
-                            {{__($log->action)}}
+                            {{__("$log->action")}}
                         </td>
                         <td>
                             {{__($log->loggable_type)}}|

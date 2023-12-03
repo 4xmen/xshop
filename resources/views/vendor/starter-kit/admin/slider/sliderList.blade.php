@@ -21,7 +21,7 @@
                 {{__("All")}}
             </a>
             <a href="?filter=0" data-filter="0" class="btn btn-dark filter">
-                {{__("Deactivate")}}
+                {{__("Deactive")}}
             </a>
             <a href="?filter=1" data-filter="1" class="btn btn-dark filter">
                 {{__("Active")}}

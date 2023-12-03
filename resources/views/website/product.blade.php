@@ -289,7 +289,7 @@
                                                         </label>
 
                                                         <textarea required="" minlength="10" id="comment-message"
-                                                                  name="body" class="form-control " placeholder="پیام"
+                                                                  name="body" class="ckeditorx form-control " placeholder="پیام"
                                                                   rows="4"></textarea>
                                                     </div>
                                                 </div>
@@ -351,7 +351,7 @@
                                             <span class="name">نام کاربر</span>
                                         </div>
                                         <form id="question-form">
-                                            <textarea class="form-control" dir="rtl" name="body"
+                                            <textarea class="ckeditorx form-control" dir="rtl" name="body"
                                                       placeholder="سوال شما..."></textarea>
                                             <input type="hidden" name="product_id" value="{{$pro->id}}">
                                         </form>

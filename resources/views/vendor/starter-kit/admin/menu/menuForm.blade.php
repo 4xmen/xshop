@@ -32,9 +32,9 @@
                     </li>
                     <li class="list-group-item" data-can="false">
                         <span>
-                            {{__("News")}}
+                            {{__("Posts")}}
                         </span>
-                        <input type="text" id="news-auto" placeholder="{{__("News search")}}" class="form-control mt-2" />
+                        <input type="text" id="news-auto" placeholder="{{__("Posts search")}}" class="form-control mt-2" />
                         <input id="news-title" type="text" name="menu[][title]" class="form-control mt-2"
                                placeholder="{{__("Title")}}"/>
                         <input type="hidden" name="menu[][meta]" value="">
@@ -75,7 +75,7 @@
                     </li>
                     <li class="list-group-item" data-can="false">
                             <span>
-                                {{__("Category with sub news")}}
+                                {{__("Category with sub posts")}}
                             </span>
                         <select name="menu[][menuableid]" class="form-control">
                             @foreach($cats as $cat )
@@ -99,7 +99,7 @@
                     </li>
                     <li class="list-group-item" data-can="false">
                         <span>
-                        {{__("Tag with sub news")}}
+                        {{__("Tag with sub posts")}}
                         </span>
                         <input type="text" id="tag-auto2" placeholder="{{__("Tag search")}}"  name="menu[][meta]"  class="form-control mt-2" />
                         <input id="tag-sub-title" type="text" name="menu[][title]" class="form-control mt-2"
@@ -120,7 +120,7 @@
             </div>
             <div class="col-md-6 p-3">
                 <div class="alert alert-info">
-                    {{__("Double click to remove")}}
+                    {{__("Double click on to remove item")}}
                 </div>
                 <form class="" method="post"
                       enctype="multipart/form-data"
@@ -142,7 +142,7 @@
         </div>
         <input type="hidden" id="tag-search" value="{{route('admin.ckeditor.tagsearch','')}}"/>
         <input type="hidden" id="news-search" value="{{route('admin.ckeditor.newssearch','')}}"/>
-        <input type="hidden" id="rem-menu" value="{{route('admin.setting.remMenu','')}}">
+        <input type="hidden" id="rm-item" value="{{route('admin.menu.remItem','')}}"/>
 
     </div>
 @endsection

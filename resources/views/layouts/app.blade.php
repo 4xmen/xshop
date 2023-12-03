@@ -18,6 +18,16 @@
     <link href="{{ asset('vendor/starter-kit/css/app.css') }}" rel="stylesheet">
 
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
+    <script>
+        @php
+            $lang = \App\Models\Xlang::where('is_default',true)->first();
+        @endphp
+        var isRtl = false;
+        @if($lang !== null && $lang->rtl)
+            isRtl = true;
+        @endif
+    </script>
 </head>
 <body>
     <div id="app">

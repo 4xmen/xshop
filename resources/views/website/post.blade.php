@@ -71,7 +71,7 @@
                                         </label>
 
                                         <textarea required="" minlength="10" id="comment-message"
-                                                  name="body" class="form-control " placeholder="پیام"
+                                                  name="body" class="ckeditorx form-control " placeholder="پیام"
                                                   rows="4"></textarea>
                                     </div>
                                 </div>
