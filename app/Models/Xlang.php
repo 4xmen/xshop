@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * App\Models\Xlang
@@ -34,5 +35,13 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Xlang extends Model
 {
-    use HasFactory;
+    use HasFactory,SoftDeletes;
+
+    public function imgUrl(){
+        if ($this->img == null || $this->img == '') {
+            return asset('/images/logo.png');
+        } else {
+            return \Storage::url('langz/' . $this->img);
+        }
+    }
 }

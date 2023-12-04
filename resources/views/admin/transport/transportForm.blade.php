@@ -1,9 +1,9 @@
 @extends('admin.adminlayout')
 @section('page_title')
     @if(!isset($transport))
-        {{__('New discount')}}
+        {{__('New transport')}}
     @else
-        {{__('Edit discount')}}: {{$transport->title}}
+        {{__('Edit transport')}}: {{$transport->title}}
     @endif
     -
 @endsection

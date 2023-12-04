@@ -7,7 +7,7 @@ use Carbon\Carbon;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Pagination\Paginator;
 use Xmen\StarterKit\Helpers\TDate;
-
+use  Translator\Framework\TranslatorCommand;
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -18,6 +18,9 @@ class AppServiceProvider extends ServiceProvider
     public function register()
     {
         //
+        $this->commands([
+            TranslatorCommand::class,
+        ]);
     }
 
     /**

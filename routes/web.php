@@ -23,12 +23,24 @@ Route::prefix(config('starter-kit.uri'))->name('admin.')->group(
 
                 Route::prefix('users')->name('user.')->group(
                     function () {
-                        Route::get('/all', [\App\Http\Controllers\Admin\UserController::class,'index'])->name('all');
+                        Route::get('/', [\App\Http\Controllers\Admin\UserController::class,'index'])->name('all');
                         Route::get('/delete/{user}',  [\App\Http\Controllers\Admin\UserController::class,'destroy'])->name('delete');
                         Route::get('/create',  [\App\Http\Controllers\Admin\UserController::class,'create'])->name('create');
                         Route::post('/store',  [\App\Http\Controllers\Admin\UserController::class,'store'])->name('store');
                         Route::get('/edit/{user}',  [\App\Http\Controllers\Admin\UserController::class,'edit'])->name('edit');
                         Route::post('/update/{user}',  [\App\Http\Controllers\Admin\UserController::class,'update'])->name('update');
+                    });
+                Route::prefix('langs')->name('lang.')->group(
+                    function () {
+                        Route::get('/', [\App\Http\Controllers\Admin\XlangController::class,'index'])->name('index');
+                        Route::get('/translates', [\App\Http\Controllers\Admin\XlangController::class,'translate'])->name('translate');
+                        Route::get('/delete/{xlang}',  [\App\Http\Controllers\Admin\XlangController::class,'destroy'])->name('delete');
+                        Route::get('/create',  [\App\Http\Controllers\Admin\XlangController::class,'create'])->name('create');
+                        Route::post('/store',  [\App\Http\Controllers\Admin\XlangController::class,'store'])->name('store');
+                        Route::get('/edit/{xlang}',  [\App\Http\Controllers\Admin\XlangController::class,'edit'])->name('edit');
+                        Route::post('/update/{xlang}',  [\App\Http\Controllers\Admin\XlangController::class,'update'])->name('update');
+                        Route::post('bulk', [\App\Http\Controllers\Admin\XlangController::class, "bulk"])->name('bulk');
+
                     });
 
                 Route::prefix('cat')->name('cat.')->group(

@@ -34,7 +34,7 @@ class GatewayRedirectController
             \Log::error("Payment REQUEST exception: " . $exception->getMessage());
             \Log::warning($exception->getTraceAsString());
             $result = false;
-            $message = __(' لطفا درگاه بانک را تعویض نمایید.');
+            $message = __('Please change payment gate.');
             return view("payment.result", compact('invoice', 'payment', 'result', 'message'));
         }
     }

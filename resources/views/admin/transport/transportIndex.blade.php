@@ -1,6 +1,7 @@
+
 @extends('admin.adminlayout')
 @section('page_title')
-    {{__("Discounts")}}
+    {{__("Transports")}}
     -
 @endsection
 @section('content')

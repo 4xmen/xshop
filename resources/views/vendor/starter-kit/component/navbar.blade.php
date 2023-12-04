@@ -416,6 +416,35 @@
                 </ul>
 
             </li>
+            @if(config('app.xlang'))
+                <li>
+                    <a>
+                        <i class="fa fa-language"></i>
+                        {{__("Languages")}}
+                    </a>
+                    <ul>
+                        <li>
+                            <a href="{{route('admin.lang.index')}}">
+                                {{--                           <i class="fa fa-list-alt"></i> --}}
+                                {{__("Language list")}}
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{route('admin.lang.create')}}">
+                                {{--                            <i class="fa fa-plus-square"></i>--}}
+                                {{__("New language")}}
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{route('admin.lang.translate')}}">
+                                {{--                            <i class="fa fa-plus-square"></i>--}}
+                                {{__("Translates")}}
+                            </a>
+                        </li>
+                    </ul>
+
+                </li>
+            @endif
         @endif
 
         @guest

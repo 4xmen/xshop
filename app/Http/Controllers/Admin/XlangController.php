@@ -3,11 +3,30 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\XlangSaveRequest;
 use App\Models\Xlang;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Artisan;
+use function Xmen\StarterKit\Helpers\logAdmin;
+use function Xmen\StarterKit\Helpers\logAdminBatch;
 
 class XlangController extends Controller
 {
+
+    public function createOrUpdate(Xlang $xlang, XlangSaveRequest $request) {
+        $xlang->name = $request->input('name');
+        $xlang->tag = $request->input('tag');
+        $xlang->rtl = $request->has('rtl');
+
+
+        if ($request->hasFile('img')) {
+            $name = time().'.'.request()->img->getClientOriginalExtension();
+            $xlang->img = $name;
+            $request->file('img')->storeAs('public/langz', $name);
+        }
+        $xlang->save();
+        return $xlang;
+    }
     /**
      * Display a listing of the resource.
      *
@@ -16,6 +35,9 @@ class XlangController extends Controller
     public function index()
     {
         //
+        Artisan::call('translator:update');
+        $langs =  Xlang::paginate(99);
+        return view('admin.langs.langIndex',compact('langs'));
     }
 
     /**
@@ -26,6 +48,7 @@ class XlangController extends Controller
     public function create()
     {
         //
+        return view('admin.langs.langForm');
     }
 
     /**
@@ -34,9 +57,28 @@ class XlangController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(XlangSaveRequest $request)
     {
         //
+        define("TRANSLATE_CONFIG_PATH", __DIR__ . '/../../../../config/translator.php');
+        define("TRANSLATE_NEW_FILE",__DIR__ . '/../../../../resources/lang/'.$request->tag.'.json' );
+        $config = file_get_contents(TRANSLATE_CONFIG_PATH);
+        $re = '/\'languages\' \=\> (.*)\,/m';
+        preg_match_all($re, $config, $matches, PREG_SET_ORDER, 0);
+        $oldLangs = $matches[0][1];
+
+        $newLans = json_encode(array_unique(array_merge(json_decode($oldLangs),[$request->tag])));
+        $newConfig = (str_replace($oldLangs,$newLans,$config));
+        file_put_contents(TRANSLATE_CONFIG_PATH,$newConfig);
+
+        if (!file_exists(TRANSLATE_NEW_FILE)){
+            file_put_contents(TRANSLATE_NEW_FILE,'{}');
+        }
+
+        $xlang = new Xlang();
+        $xlang = $this->createOrUpdate($xlang, $request);
+        logAdmin(__METHOD__, Xlang::class, $xlang->id);
+        return redirect()->route('admin.lang.index')->with(['message' => __('Lang') . ' ' . __('created successfully')]);
     }
 
     /**
@@ -59,6 +101,7 @@ class XlangController extends Controller
     public function edit(Xlang $xlang)
     {
         //
+        return  view('admin.langs.langForm',compact('xlang'));
     }
 
     /**
@@ -68,9 +111,12 @@ class XlangController extends Controller
      * @param  \App\Models\Xlang  $xlang
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Xlang $xlang)
+    public function update(XlangSaveRequest $request, Xlang $xlang)
     {
         //
+        $xlang = $this->createOrUpdate($xlang, $request);
+        logAdmin(__METHOD__, Xlang::class, $xlang->id);
+        return redirect()->route('admin.lang.index')->with(['message' => __('Lang') . ' ' . __('updated successfully')]);
     }
 
     /**
@@ -82,5 +128,27 @@ class XlangController extends Controller
     public function destroy(Xlang $xlang)
     {
         //
+        $xlang->delete();
+        logAdmin(__METHOD__, Xlang::class, $xlang->id);
+        return redirect()->route('admin.lang.index')->with(['message' => __('Lang') . ' ' . __('deleted successfully')]);
+    }
+
+    public function translate(){
+
+    }
+
+
+    public function bulk(Request $request) {
+
+        switch ($request->input('bulk')) {
+            case 'delete':
+                $msg = __('transports deleted successfully');
+                logAdminBatch(__METHOD__.'.'.$request->input('bulk'),XlangController::class,$request->input('id'));
+                XlangController::destroy($request->input('id'));
+                break;
+            default:
+                $msg = __('Unknown bulk action :' . $request->input('bulk'));
+        }
+        return redirect()->route('admin.customer.index')->with(['message' => $msg]);
     }
 }
