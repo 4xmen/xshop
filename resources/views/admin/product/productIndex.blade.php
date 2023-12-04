@@ -7,6 +7,12 @@
     <div class="container">
 
         @include('starter-kit::component.err')
+
+        <form action="" class="my-2">
+            <label for="q">
+            </label>
+            <input id="q" type="search" name="q" value="{{request()->get('q')}}" class="form-control" placeholder="{{__("Search")}}...">
+        </form>
         <div class="alert alert-dark">
             <span>
                 {{__("Filter")}}:
@@ -45,7 +51,7 @@
                     </th>
                     <th>
                         {{__("Action")}}
-                        <a href="{{route('admin.product.create')}}" class="btn btn-success float-start"><i
+                        <a href="{{route('admin.product.create')}}" class="btn btn-success float-end"><i
                                 class="fa fa-plus"></i></a>
                     </th>
                 </tr>
