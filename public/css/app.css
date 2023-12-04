@@ -3601,6 +3601,12 @@ nav a {
   text-decoration: none !important;
 }
 
+.lang-item {
+  background: #ddd;
+  border-radius: 7px;
+  padding: 1rem;
+}
+
 .x64 {
   width: 64px;
 }

@@ -40,6 +40,8 @@ Route::prefix(config('starter-kit.uri'))->name('admin.')->group(
                         Route::get('/edit/{xlang}',  [\App\Http\Controllers\Admin\XlangController::class,'edit'])->name('edit');
                         Route::post('/update/{xlang}',  [\App\Http\Controllers\Admin\XlangController::class,'update'])->name('update');
                         Route::post('bulk', [\App\Http\Controllers\Admin\XlangController::class, "bulk"])->name('bulk');
+                        Route::get('/download/{tag}',  [\App\Http\Controllers\Admin\XlangController::class,'download'])->name('download');
+                        Route::post('/upload/{tag}',  [\App\Http\Controllers\Admin\XlangController::class,'upload'])->name('upload');
 
                     });
 
