@@ -122,17 +122,7 @@
                 {{__("Icon")}}
             </div>
             <div class="card-body">
-                <input type="hidden" name="icon" id="icon" value="{{old('icon',$p->icon??null)}}"/>
-                <div class="btn-group btn-block">
-                    <button type="button" class="btn btn-primary  iconpicker-component"><i
-                            class=" fa-fw {{$p->icon??''}}"></i></button>
-                    <button type="button" data-src="#icon" class="icp icp-dd btn  btn-primary dropdown-toggle"
-                            data-selected="fa-car" data-toggle="dropdown">
-                        <span class="caret"></span>
-                        <span class="sr-only">Toggle Dropdown</span>
-                    </button>
-                    <div class="dropdown-menu"></div>
-                </div>
+                <remix-icon-picker xname="icon" xval="{{old('icon',$p->icon??null)}}"></remix-icon-picker>
             </div>
             @if(isset($p))
                 <input type="hidden" id="options" value='{{$p->options}}'>

@@ -70,6 +70,8 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
 Vue.component('meta-price', require('./components/MetaPrice.vue').default);
 Vue.component('currency', require('./components/CurrencyInput.vue').default);
 Vue.component('meta-element', require('./components/MetaElement.vue').default);
+Vue.component('remix-icon-picker', require('./components/RemixIconPicker.vue').default);
+
 var app = new Vue({
     el: '#app',
     data: {
