@@ -6,7 +6,7 @@
                     {{$mcat->name}}
                 </a>
                 <ul>
-                @foreach(\App\Helpers\getSubCats($mcat->id) as $subcat)
+                @foreach(\App\Helpers\getSubCats($mcat->id,4) as $subcat)
                     <li>
                         <h3>
                             <a href="{{route('cat',$subcat->slug)}}">
