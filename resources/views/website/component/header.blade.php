@@ -85,7 +85,7 @@
 <section id="top-top">
     <div class="container">
         <div class="row">
-            <div class="col-lg-4 col-md-12 text-start">
+            <div class="col-lg-4 col-md-12 text-start d-flex align-items-center">
 {{--                <div class='marquee'>--}}
 {{--                    <div class="row mt-2 pt-1" >--}}
 {{--                        <a class="col" href="tel:{{\App\Helpers\getSetting('tel')}}">--}}
@@ -144,4 +144,4 @@
     </div>
 </section>
 
-@include('website.component.navbar')
+@include('website.component.navbar2')

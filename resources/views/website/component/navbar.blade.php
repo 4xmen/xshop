@@ -1,6 +1,6 @@
 <nav>
     <ul id="mega-menu">
-        @foreach(\App\Helpers\getMainCats(4) as $mcat)
+        @foreach(\App\Helpers\getMainCats(8) as $mcat)
             <li>
                 <a href="{{route('cat',$mcat->slug)}}">
                     {{$mcat->name}}
