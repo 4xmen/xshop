@@ -455,9 +455,9 @@ function getProductByCatQ($id, $order = 'id', $limit = 10)
  * @param $id
  * @return Cat[]|\Illuminate\Database\Eloquent\Builder[]|\Illuminate\Database\Eloquent\Collection|\LaravelIdea\Helper\App\Models\_IH_Cat_C
  */
-function getSubCats($id)
+function getSubCats($id,$limit = 99)
 {
-    return Cat::where('parent_id', $id)->get();
+    return Cat::where('parent_id', $id)->limit($limit)->get();
 }
 
 /***
