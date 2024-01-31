@@ -94,6 +94,7 @@ return [
 
     'locale' => 'fa',
     'xlang' => env('XLANG',false),
+    'xlang_main' => env('XLANG_MAIN','en'),
 
     /*
     |--------------------------------------------------------------------------
