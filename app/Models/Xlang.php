@@ -35,9 +35,10 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  */
 class Xlang extends Model
 {
-    use HasFactory,SoftDeletes;
+    use HasFactory, SoftDeletes;
 
-    public function imgUrl(){
+    public function imgUrl()
+    {
         if ($this->img == null || $this->img == '') {
             return asset('/images/logo.png');
         } else {
