@@ -34,15 +34,23 @@ class DatabaseSeeder extends Seeder
             XlangSeeder::class,
             CategorySeeder::class,
             CatSeeder::class,
-            CustomerSeeder::class,
-//            PostSeeder::class,
-//            MenuSeeder::class,
-//            PropSeeder::class,
-//            ProductSeeder::class,
-//            InvoiceSeeder::class,
-//            SliderSeeder::class,
-            SettingSeeder::class,
-            MenuSeeder::class,
         ]);
+        if (env('NO_SEED_PRODUCT', 'false') != 'true') {
+
+            $this->call([
+                PostSeeder::class,
+                MenuSeeder::class,
+                PropSeeder::class,
+                ProductSeeder::class,
+//                            InvoiceSeeder::class,
+//                            SliderSeeder::class,
+            ]);
+            $this->call([
+                CustomerSeeder::class,
+                SettingSeeder::class,
+                MenuSeeder::class,
+            ]);
+        }
+
     }
 }

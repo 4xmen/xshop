@@ -28,10 +28,12 @@
         "laravel/sanctum": "^2.14.1",
         "laravel/tinker": "^2.7",
         "laravel/ui": "^3.4",
+        "nyholm/psr7": "^1.8",
         "pishran/zarinpal": "^4.3",
         "plank/laravel-metable": "^5.2",
         "psr/log": "v2.*",
         "symfony/dom-crawler": "^6.2",
+        "symfony/psr-http-message-bridge": "^7.0",
         "xmen/starter-kit": "^v3.1.0"
     },
     "require-dev": {
