@@ -756,7 +756,7 @@ function cardCount()
 function sendSMSText($number, $content)
 {
 
-    $url = 'http://rest.payamak-panel.com/api/SendSMS/SendSMS';
+    $url = config('app.sms_url');
 
     $options = array(
         'content-type' => 'application/x-www-form-urlencoded',
@@ -797,15 +797,15 @@ function sendSMSText($number, $content)
 function sendSMSText2($number, $content)
 {
 
-    $url = 'http://ara11.ir:3002/api/v1/send';
+    $url = config('app.sms_url');
 
     $options = array(
         'content-type' => 'application/x-www-form-urlencoded',
         'cache-control' => 'no-cache'
     );
     $fields_string = http_build_query(array(
-        'user' => 'mahyar',
-        'password' => 'MahGold;123',
+        'user' => config('app.sms_user'),
+        'password' => config('app.sms_pass'),
         'number' => $number,
         'text' => $content,
         'isflash' => 'false'
