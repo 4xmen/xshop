@@ -15,6 +15,9 @@
         @if($lang !== null && $lang->rtl)
             isRtl = true;
         @endif
+       @if(config('app.xlang_main') == 'fa' || config('app.xlang_main') == 'ar')
+            isRtl = true;
+        @endif
     </script>
     @yield('header-content')
     <!-- CSRF Token -->
