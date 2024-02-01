@@ -789,6 +789,45 @@ function sendSMSText($number, $content)
 }
 
 /***
+ * send sms
+ * @param string $number phone number
+ * @param string $content sms content
+ * @return bool|string
+ */
+function sendSMSText2($number, $content)
+{
+
+    $url = 'http://ara11.ir:3002/api/v1/send';
+
+    $options = array(
+        'content-type' => 'application/x-www-form-urlencoded',
+        'cache-control' => 'no-cache'
+    );
+    $fields_string = http_build_query(array(
+        'user' => 'mahyar',
+        'password' => 'MahGold;123',
+        'number' => $number,
+        'text' => $content,
+        'isflash' => 'false'
+    ));
+
+//open connection
+    $ch = curl_init();
+
+//set the url, number of POST vars, POST data
+    curl_setopt($ch, CURLOPT_URL, $url);
+    curl_setopt($ch, CURLOPT_POST, true);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, $fields_string);
+
+//So that curl_exec returns the contents of the cURL; rather than echoing it
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+//execute post
+    $result = curl_exec($ch);
+    return json_decode($result,true);
+}
+
+/***
  * remove title of html code
  * @param $str
  * @return array|string|string[]|null

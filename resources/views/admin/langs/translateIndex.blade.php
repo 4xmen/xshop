@@ -28,7 +28,10 @@
                                     {{__("Upload file")}}
                                 </button>
                             </form>
-
+                            <a href="{{route('admin.lang.ai',$lang->tag)}}" class="btn btn-outline-success w-100 mt-3 btn-sm">
+                                <i class="ri-ai-generate"></i>
+                                {{__("Translate with AI")}}
+                            </a>
                         </div>
                     </div>
                 @endforeach

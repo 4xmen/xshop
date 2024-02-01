@@ -41,6 +41,7 @@ Route::prefix(config('starter-kit.uri'))->name('admin.')->group(
                         Route::post('/update/{xlang}',  [\App\Http\Controllers\Admin\XlangController::class,'update'])->name('update');
                         Route::post('bulk', [\App\Http\Controllers\Admin\XlangController::class, "bulk"])->name('bulk');
                         Route::get('/download/{tag}',  [\App\Http\Controllers\Admin\XlangController::class,'download'])->name('download');
+                        Route::get('/ai/{tag}',  [\App\Http\Controllers\Admin\XlangController::class,'ai'])->name('ai');
                         Route::post('/upload/{tag}',  [\App\Http\Controllers\Admin\XlangController::class,'upload'])->name('upload');
 
                     });
@@ -288,6 +289,24 @@ Route::get('/reset', [App\Http\Controllers\WebsiteController::class, "reset"])->
 Route::get('/resetStock', [App\Http\Controllers\WebsiteController::class, "resetStockStatus"])->name('resetStock');
 Route::get('/resetQ', [App\Http\Controllers\WebsiteController::class, "resetQuantity"])->name('resetQuantity');
 Route::get('/credit/pay/{invoice}', [App\Http\Controllers\CustomerController::class, 'credit'])->name('credit');
+
+Route::get('/test/sms',function (){
+   if (auth()->check()){
+       $result = \App\Helpers\sendSMSText2('09209517726','پیامک');
+       if ($result == null){
+           return  'fatal error';
+       }else{
+           if ($result['OK']){
+               return  $result['Msg'];
+           }else{
+               return 'err'.$result['Code'].': '.$result['Msg'];
+           }
+       }
+   } else{
+       return abort(403);
+   }
+});
+
 
 //Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 if (\App\Helpers\getSetting('redirect') == 'yes') {

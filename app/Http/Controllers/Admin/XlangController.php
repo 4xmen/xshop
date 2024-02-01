@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\XlangSaveRequest;
 use App\Models\Xlang;
 use Illuminate\Http\Request;
+use GuzzleHttp\Client;
+
 use Illuminate\Support\Facades\Artisan;
 use function Xmen\StarterKit\Helpers\logAdmin;
 use function Xmen\StarterKit\Helpers\logAdminBatch;
@@ -147,6 +149,25 @@ class XlangController extends Controller
     {
         define("TRANSLATE_FILE", PREFIX_PATH . 'resources/lang/' . $tag . '.json');
         return response()->download(TRANSLATE_FILE, $tag . '.json');
+    }
+    public function ai($tag)
+    {
+
+//        set_time_limit(300);
+
+        define("TRANSLATE_FILE", PREFIX_PATH . 'resources/lang/' . $tag . '.json');
+        $file = file_get_contents(TRANSLATE_FILE);
+        $url = 'http://5.255.98.77:3001/json?form=en&to='.$tag;
+
+        $client = new Client([
+            'headers' => [ 'Content-Type' => 'application/json' ]
+        ]);
+
+        $response = $client->post($url,
+            ['body' => $file]
+        );
+        file_put_contents(TRANSLATE_FILE,$response->getBody());
+        return  redirect()->back()->with(['message' => __("Translated by ai xstack service:").' '.$tag]);
     }
 
     public function upload($tag, Request $request)
