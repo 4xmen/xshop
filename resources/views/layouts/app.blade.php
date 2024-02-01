@@ -24,7 +24,10 @@
             $lang = \App\Models\Xlang::where('is_default',true)->first();
         @endphp
         var isRtl = false;
-        @if($lang !== null && $lang->rtl || config('app.xlang_main') == 'fa' || config('app.xlang_main') == 'ar')
+        @if($lang !== null && $lang->rtl)
+            isRtl = true;
+        @endif
+        @if(config('app.xlang_main') == 'fa' || config('app.xlang_main') == 'ar')
             isRtl = true;
         @endif
     </script>
