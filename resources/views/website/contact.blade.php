@@ -82,7 +82,7 @@
                                     </label>
                                     <textarea name="bodya" style=" height: 150px;"
                                               class="form-control @error('bodya') is-invalid @enderror"
-                                              placeholder="{{__('Question|Message')}}">{{old('body',$item->body??null)}}</textarea>
+                                              placeholder="{{__('Question/Message')}}">{{old('body',$item->body??null)}}</textarea>
                                 </div>
                             </div>
                             <div class="col-md-10">

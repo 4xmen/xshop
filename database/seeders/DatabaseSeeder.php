@@ -36,7 +36,6 @@ class DatabaseSeeder extends Seeder
             CatSeeder::class,
         ]);
         if (env('NO_SEED_PRODUCT', 'false') != 'true') {
-
             $this->call([
                 PostSeeder::class,
                 MenuSeeder::class,
@@ -45,12 +44,13 @@ class DatabaseSeeder extends Seeder
 //                            InvoiceSeeder::class,
 //                            SliderSeeder::class,
             ]);
-            $this->call([
-                CustomerSeeder::class,
-                SettingSeeder::class,
-                MenuSeeder::class,
-            ]);
         }
+
+        $this->call([
+            CustomerSeeder::class,
+            SettingSeeder::class,
+            MenuSeeder::class,
+        ]);
 
     }
 }

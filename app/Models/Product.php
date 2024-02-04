@@ -12,6 +12,7 @@ use Spatie\Image\Manipulations;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
+use Spatie\Translatable\HasTranslations;
 use Xmen\StarterKit\Models\Category;
 use Xmen\StarterKit\Models\Comment;
 use function App\Helpers\getSetting;
@@ -123,10 +124,12 @@ use function App\Helpers\getSetting;
  */
 class Product extends Model implements HasMedia
 {
-    use SoftDeletes, InteractsWithMedia, Taggable, Metable, HasFactory;
+    use SoftDeletes, InteractsWithMedia, Taggable, Metable, HasFactory,HasTranslations;
 
     protected $guarded = [];
     protected $appends = ['url'];
+
+    public $translatable = ['name','excerpt','description'];
 
     public function getTitle()
     {

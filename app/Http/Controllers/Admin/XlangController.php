@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\XlangSaveRequest;
+use App\Models\Product;
 use App\Models\Xlang;
 use Illuminate\Http\Request;
 use GuzzleHttp\Client;
@@ -21,6 +22,13 @@ class XlangController extends Controller
         $xlang->name = $request->input('name');
         $xlang->tag = $request->input('tag');
         $xlang->rtl = $request->has('rtl');
+
+        $xlang->is_default = $request->has('is_default');
+        if ($xlang->is_default){
+            Xlang::where('is_default','1')->update([
+                'is_default' => 0,
+            ]);
+        }
 
 
         if ($request->hasFile('img')) {
@@ -65,19 +73,22 @@ class XlangController extends Controller
     public function store(XlangSaveRequest $request)
     {
         //
-        define("TRANSLATE_CONFIG_PATH", PREFIX_PATH . 'config/translator.php');
-        define("TRANSLATE_NEW_FILE", PREFIX_PATH . 'resources/lang/' . $request->tag . '.json');
-        $config = file_get_contents(TRANSLATE_CONFIG_PATH);
-        $re = '/\'languages\' \=\> (.*)\,/m';
-        preg_match_all($re, $config, $matches, PREG_SET_ORDER, 0);
-        $oldLangs = $matches[0][1];
+        if ($request->tag != 'en'){
 
-        $newLans = json_encode(array_unique(array_merge(json_decode($oldLangs), [$request->tag])));
-        $newConfig = (str_replace($oldLangs, $newLans, $config));
-        file_put_contents(TRANSLATE_CONFIG_PATH, $newConfig);
+            define("TRANSLATE_CONFIG_PATH", PREFIX_PATH . 'config/translator.php');
+            define("TRANSLATE_NEW_FILE", PREFIX_PATH . 'resources/lang/' . $request->tag . '.json');
+            $config = file_get_contents(TRANSLATE_CONFIG_PATH);
+            $re = '/\'languages\' \=\> (.*)\,/m';
+            preg_match_all($re, $config, $matches, PREG_SET_ORDER, 0);
+            $oldLangs = $matches[0][1];
 
-        if (!file_exists(TRANSLATE_NEW_FILE)) {
-            file_put_contents(TRANSLATE_NEW_FILE, '{}');
+            $newLans = json_encode(array_unique(array_merge(json_decode($oldLangs), [$request->tag])));
+            $newConfig = (str_replace($oldLangs, $newLans, $config));
+            file_put_contents(TRANSLATE_CONFIG_PATH, $newConfig);
+
+            if (!file_exists(TRANSLATE_NEW_FILE)) {
+                file_put_contents(TRANSLATE_NEW_FILE, '{}');
+            }
         }
 
         $xlang = new Xlang();
@@ -141,6 +152,7 @@ class XlangController extends Controller
     public function translate()
     {
         $langs = Xlang::all();
+//        return  Product::where('name->en',null)->get();
         return view('admin.langs.translateIndex', compact('langs'));
     }
 

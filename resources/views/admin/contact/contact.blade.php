@@ -46,7 +46,7 @@
             </tr>
             <tr>
                 <th>
-                    {{__("Question|Message")}}
+                    {{__("Question/Message")}}
                 </th>
                 <td>
                     {{($con->body)}}

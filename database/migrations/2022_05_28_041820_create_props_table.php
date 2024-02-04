@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('props', function (Blueprint $table) {
                 $table->id();
                 $table->string('name',90)->unique();
-                $table->string('label',90);
+                $table->string('label');
                 $table->string('width',300)->default('col-md-6');
                 $table->boolean('required')->default(false);
                 $table->boolean('searchable')->default(true);

@@ -17,10 +17,10 @@ class XlangSeeder extends Seeder
     {
         //
         $lang = new Xlang();
-        $lang->tag = 'fa';
-        $lang->rtl = true;
+        $lang->tag = config('app.xlang_main');
+        $lang->rtl =  true;
         $lang->is_default = true;
-        $lang->name = 'پارسی';
+        $lang->name = __("Default");
         $lang->save();
     }
 }

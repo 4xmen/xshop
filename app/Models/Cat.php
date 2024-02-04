@@ -9,6 +9,8 @@ use Spatie\Image\Manipulations;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
+use Spatie\Translatable\HasTranslations;
+
 
 /**
  * App\Models\Cat
@@ -57,7 +59,10 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
  */
 class Cat extends Model implements HasMedia
 {
-    use HasFactory, SoftDeletes, InteractsWithMedia;
+    use HasFactory, SoftDeletes, InteractsWithMedia,HasTranslations;
+
+
+    public $translatable = ['name','description'];
 
     public function registerMediaConversions(Media $media = null): void
     {

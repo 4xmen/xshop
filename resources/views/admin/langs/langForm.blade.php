@@ -49,7 +49,7 @@
                         <input name="img" type="file" class="form-control @error('img') is-invalid @enderror"  id="flag" placeholder="{{__('Flag')}}" value="{{old('img',$xlang->img??null)}}"  />
                     </div>
                 </div>
-                <div class="col-md-4 mt-3">
+                <div class="col-md-2 mt-3">
                     <div class="form-check form-switch mt-1">
                         <br>
                         <input class="form-check-input   @error('rtl') is-invalid @enderror"
@@ -57,6 +57,17 @@
                                value="1" >
                         <label for="rtl">
                             {{__('RTL')}}
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-2 mt-3">
+                    <div class="form-check form-switch mt-1">
+                        <br>
+                        <input class="form-check-input   @error('is_default') is-invalid @enderror"
+                               name="is_default" type="checkbox" id="is_default" @if(old('is_default',$xlang->is_default??null) == 1) checked="" @endif
+                               value="1" >
+                        <label for="is_default">
+                            {{__('Default')}}
                         </label>
                     </div>
                 </div>
