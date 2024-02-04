@@ -8,9 +8,6 @@
     <div class="container">
         <h1>
             {{__("Slider list")}}
-            <a href="{{route('admin.slider.create')}}" class="btn btn-success float-start">
-                {{__("New Slider")}}
-            </a>
         </h1>
         @include('starter-kit::component.err')
         <div class="alert alert-dark">
@@ -44,8 +41,6 @@
                     </th>
                     <th>
                         {{__("Action")}}
-                        <a href="{{route('admin.slider.create')}}" class="btn btn-success float-start"><i
-                                class="fa fa-plus"></i></a>
                     </th>
                 </tr>
                 </thead>
@@ -64,11 +59,17 @@
                         </td>
                         <td>
                             <a href="{{route('admin.slider.edit',$pl->id)}}" class="btn btn-secondary">
-                                {{__("Edit")}}
+                               <i class="ri-edit-2-line"></i>
                             </a>
                             <a href="{{route('admin.slider.delete',$pl->id)}}" class="btn btn-danger del-conf">
-                                {{__("Delete")}}
+                                <i class="ri-close-line"></i>
                             </a>
+                            @if(config('app.xlang'))
+                                <a href="{{route('admin.lang.model',[$pl->id,\Xmen\StarterKit\Models\Slider::class])}}"
+                                   class="btn btn-outline-dark translat-btn">
+                                    <i class="ri-translate"></i>
+                                </a>
+                            @endif
                         </td>
                     </tr>
                 @endforeach
@@ -78,5 +79,8 @@
         </form>
         <br>
         {{$sliders->links()}}
+        <a class="btn-add" href="{{route('admin.cat.create')}}">
+            <i class="ri-add-line"></i>
+        </a>
     </div>
 @endsection

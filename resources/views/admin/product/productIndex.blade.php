@@ -51,8 +51,6 @@
                     </th>
                     <th>
                         {{__("Action")}}
-                        <a href="{{route('admin.product.create')}}" class="btn btn-success float-end"><i
-                                class="fa fa-plus"></i></a>
                     </th>
                 </tr>
                 </thead>
@@ -78,15 +76,19 @@
                         </td>
                         <td>
                             <a href="{{route('admin.product.edit',$n->slug)}}" class="btn btn-primary">
-                                <i class="fa fa-edit"></i> &nbsp;
-                                {{__("Edit")}}
+                                <i class="ri-edit-2-line"></i>
                             </a>
                             @if($n->deleted_at == null)
                             <a href="{{route('admin.product.delete',$n->slug)}}"
                                class="btn btn-danger  delete-confirm">
-                                <i class="fa fa-times"></i> &nbsp;
-                                {{__("Delete")}}
+                                <i class="ri-close-line"></i>
                             </a>
+                            @if(config('app.xlang'))
+                                <a href="{{route('admin.lang.model',[$n->id,\App\Models\Product::class])}}"
+                                   class="btn btn-outline-dark translat-btn">
+                                    <i class="ri-translate"></i>
+                                </a>
+                            @endif
                             @else
                                 <a href="{{route('admin.product.restore',$n->slug)}}"
                                    class="btn btn-success">
@@ -105,5 +107,8 @@
         <div class="text-center pt-3">
             {{$products->links()}}
         </div>
+        <a class="btn-add" href="{{route('admin.post.create')}}">
+            <i class="ri-add-line"></i>
+        </a>
     </div>
 @endsection

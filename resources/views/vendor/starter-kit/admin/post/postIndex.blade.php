@@ -40,8 +40,6 @@
                     </th>
                     <th>
                         {{__("Action")}}
-                        <a href="{{route('admin.post.create')}}" class="btn btn-success float-start"><i
-                                class="fa fa-plus"></i></a>
                     </th>
                 </tr>
                 </thead>
@@ -65,14 +63,18 @@
                         </td>
                         <td>
                             <a href="{{route('admin.post.edit',$n->slug)}}" class="btn btn-primary">
-                                <i class="fa fa-edit"></i> &nbsp;
-                                {{__("Edit")}}
+                                <i class="ri-edit-2-line"></i>
                             </a>
                             <a href="{{route('admin.post.delete',$n->slug)}}"
                                class="btn btn-danger  delete-confirm">
-                                <i class="fa fa-times"></i> &nbsp;
-                                {{__("Delete")}}
+                                <i class="ri-close-line"></i>
                             </a>
+                            @if(config('app.xlang'))
+                                <a href="{{route('admin.lang.model',[$n->id,\Xmen\StarterKit\Models\Post::class])}}"
+                                   class="btn btn-outline-dark translat-btn">
+                                    <i class="ri-translate"></i>
+                                </a>
+                            @endif
                         </td>
                     </tr>
                 @endforeach
@@ -83,5 +85,8 @@
         <div class="text-center pt-3">
             {{$posts->links()}}
         </div>
+        <a class="btn-add" href="{{route('admin.post.create')}}">
+            <i class="ri-add-line"></i>
+        </a>
     </div>
 @endsection

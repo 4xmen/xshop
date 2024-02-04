@@ -43,6 +43,9 @@ Route::prefix(config('starter-kit.uri'))->name('admin.')->group(
                         Route::get('/download/{tag}',  [\App\Http\Controllers\Admin\XlangController::class,'download'])->name('download');
                         Route::get('/ai/{tag}',  [\App\Http\Controllers\Admin\XlangController::class,'ai'])->name('ai');
                         Route::post('/upload/{tag}',  [\App\Http\Controllers\Admin\XlangController::class,'upload'])->name('upload');
+                        Route::get('/model/translate/{id}/{model}',  [\App\Http\Controllers\Admin\XlangController::class,'translateModel'])->name('model');
+                        Route::post('/model/translate/save/{id}/{model}',  [\App\Http\Controllers\Admin\XlangController::class,'translateModelSave'])->name('modelSave');
+                        Route::get('/model/ai/{id}/{model}/{field}/{lang}',  [\App\Http\Controllers\Admin\XlangController::class,'translateModelAi'])->name('aiText');
 
                     });
 

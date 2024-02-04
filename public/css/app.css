@@ -3734,6 +3734,63 @@ nav a {
   color: rgba(255, 255, 255, 0.3333333333);
 }
 
+.lang-support {
+  background: dodgerblue;
+  color: white;
+  padding: 7px;
+  text-align: center;
+  font-weight: 300;
+  margin-top: 1rem;
+}
+
+.btn-ai {
+  height: 65px;
+  width: 65px;
+  background: dodgerblue;
+  font-size: 25px;
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
+  transition: 400ms;
+  cursor: pointer;
+  box-shadow: inset 0 0 0 0 rgba(0, 0, 0, 0.1333333333);
+}
+.btn-ai:hover {
+  box-shadow: inset 0 0 0 75px rgba(0, 0, 0, 0.1333333333);
+}
+
+.btn-add {
+  height: 50px;
+  width: 50px;
+  background: #333;
+  font-size: 25px;
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: 400ms;
+  cursor: pointer;
+  box-shadow: inset 0 0 0 0 rgba(255, 255, 255, 0.1333333333);
+  position: fixed;
+  left: 1rem;
+  bottom: 1rem;
+  text-decoration: none;
+}
+.btn-add:hover {
+  box-shadow: inset 0 0 0 75px rgba(0, 0, 0, 0.1333333333);
+}
+
+.img-squire {
+  width: 100%;
+  height: 175px;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
 /*-768px width*/
 @media (max-width: 1000px) {
   .gird4 {
@@ -3799,4 +3856,8 @@ nav a {
 .ajs-message.ajs-visible {
   right: auto !important;
   left: 2rem !important;
+}
+
+.no-dec a {
+  text-decoration: none;
 }

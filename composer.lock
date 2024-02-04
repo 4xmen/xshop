@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "476fc03eaacbf9c04610c95da580105c",
+    "content-hash": "38e039d93317f0accb46bc58aa69b9e1",
     "packages": [
         {
             "name": "artesaos/seotools",
@@ -8421,16 +8421,16 @@
         },
         {
             "name": "xmen/starter-kit",
-            "version": "v3.2.2",
+            "version": "v3.2.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/4xmen/starterkit-for-laravel.git",
-                "reference": "e06fae15e94831babebb1ab3ba4c7f5c57f85a5e"
+                "reference": "207cafd1abb67f9a0768223f32490e69d1be8a8d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/4xmen/starterkit-for-laravel/zipball/e06fae15e94831babebb1ab3ba4c7f5c57f85a5e",
-                "reference": "e06fae15e94831babebb1ab3ba4c7f5c57f85a5e",
+                "url": "https://api.github.com/repos/4xmen/starterkit-for-laravel/zipball/207cafd1abb67f9a0768223f32490e69d1be8a8d",
+                "reference": "207cafd1abb67f9a0768223f32490e69d1be8a8d",
                 "shasum": ""
             },
             "require": {
@@ -8489,9 +8489,9 @@
             ],
             "support": {
                 "issues": "https://github.com/4xmen/starterkit-for-laravel/issues",
-                "source": "https://github.com/4xmen/starterkit-for-laravel/tree/v3.2.2"
+                "source": "https://github.com/4xmen/starterkit-for-laravel/tree/v3.2.5"
             },
-            "time": "2024-02-04T12:31:22+00:00"
+            "time": "2024-02-04T23:17:48+00:00"
         }
     ],
     "packages-dev": [

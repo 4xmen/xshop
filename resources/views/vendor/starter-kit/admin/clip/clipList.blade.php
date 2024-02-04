@@ -46,8 +46,6 @@
                     </th>
                     <th>
                         {{__("Action")}}
-                        <a href="{{route('admin.clip.create')}}" class="btn btn-success float-start"><i
-                                class="fa fa-plus"></i></a>
                     </th>
                 </tr>
                 </thead>
@@ -69,11 +67,17 @@
                         </td>
                         <td>
                             <a href="{{route('admin.clip.edit',$pl->slug)}}" class="btn btn-secondary">
-                                {{__("Edit")}}
+                                <i class="ri-edit-2-line"></i>
                             </a>
                             <a href="{{route('admin.clip.delete',$pl->slug)}}" class="btn btn-danger del-conf">
-                                {{__("Delete")}}
+                                <i class="ri-close-line"></i>
                             </a>
+                            @if(config('app.xlang'))
+                                <a href="{{route('admin.lang.model',[$n->id,\Xmen\StarterKit\Models\Clip::class])}}"
+                                   class="btn btn-outline-dark translat-btn">
+                                    <i class="ri-translate"></i>
+                                </a>
+                            @endif
                         </td>
                     </tr>
                 @endforeach
@@ -83,5 +87,9 @@
         </form>
         <br>
         {{$clips->links()}}
+        <a class="btn-add" href="{{route('admin.clip.create')}}">
+            <i class="ri-add-line"></i>
+        </a>
     </div>
+
 @endsection

@@ -2,10 +2,8 @@
 
 @section('content')
     <div class="container">
-        <h5 class="text-center"> {{__("Properties list")}}
-            <a class="btn btn-primary float-start" href="{{route('admin.props.create')}}">
-                <i class="fa fa-plus"></i>
-            </a>
+        <h5 class="text-center">
+            {{__("Properties list")}}
         </h5>
 
         <div class="table-responsive">
@@ -33,7 +31,7 @@
                         <td>
                             {{$p->type}}
                         </td>
-                        <td>
+                        <td class="no-dec">
                             @if(isset($p->category))
                                 @foreach($p->category as $c)
                                     <a href="{{route('admin.props.sort',$c->id)}}">
@@ -49,14 +47,20 @@
                                 <a title="Edit"
                                    class="btn btn-secondary ad-accept-btn"
                                    href="{{route('admin.props.edit',$p->id)}}">
-                                    <i class="fa fa-edit"></i>
+                                    <i class="ri-edit-2-line"></i>
                                 </a>
                                 &nbsp;
                                 <a title="Dlete"
                                    class="btn btn-danger cdelete"
                                    href="{{route('admin.props.delete',$p->id)}}">
-                                    <i class="fa fa-times"></i>
+                                    <i class="ri-close-line"></i>
                                 </a>
+                                @if(config('app.xlang'))
+                                    <a href="{{route('admin.lang.model',[$p->id,\App\Models\Prop::class])}}"
+                                       class="btn btn-outline-dark translat-btn mx-1">
+                                        <i class="ri-translate"></i>
+                                    </a>
+                                @endif
                             </div>
                         </td>
                     </tr>
@@ -68,4 +72,9 @@
             </div>
         </div>
     </div>
+
+
+    <a class="btn-add" href="{{route('admin.props.create')}}">
+        <i class="ri-add-line"></i>
+    </a>
 @endsection

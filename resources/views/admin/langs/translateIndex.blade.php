@@ -54,7 +54,7 @@
             <div class="row">
 
                 @foreach($langs as $lang)
-                    <div class="col-md-4">
+                    <div class="col-md-4 mb-4">
                         <div class="lang-item">
                             <h5>
                                 {{$lang->name}}

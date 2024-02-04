@@ -183,6 +183,63 @@ nav {
     color: #ffffff55;
 }
 
+.lang-support{
+    background: dodgerblue;
+    color: white;
+    padding: 7px;
+    text-align: center;
+    font-weight: 300;
+    margin-top: 1rem;
+}
+
+.btn-ai{
+    height: 65px;
+    width: 65px;
+    background: dodgerblue;
+    font-size: 25px;
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+    transition: 400ms;
+    cursor: pointer;
+    box-shadow: inset 0 0 0 0 #00000022;
+
+    &:hover{
+        box-shadow: inset 0 0 0 75px #00000022;
+    }
+}
+
+.btn-add{
+    height: 50px;
+    width: 50px;
+    background: #333;
+    font-size: 25px;
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 400ms;
+    cursor: pointer;
+    box-shadow: inset 0 0 0 0 #ffffff22;
+    position: fixed;
+    left: 1rem;
+    bottom: 1rem;
+    text-decoration: none;
+
+    &:hover{
+        box-shadow: inset 0 0 0 75px #00000022;
+    }
+}
+
+.img-squire{
+    width: 100%;
+    height: 175px;
+    object-fit: cover;
+}
 /*-768px width*/
 @media ( max-width: 1000px ) {
     .gird4 {
@@ -249,4 +306,10 @@ nav {
 .ajs-message.ajs-visible{
     right: auto !important;
     left: 2rem !important;
+}
+
+.no-dec{
+    a{
+        text-decoration: none;
+    }
 }

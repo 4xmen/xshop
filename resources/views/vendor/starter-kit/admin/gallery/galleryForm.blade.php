@@ -97,17 +97,30 @@
         <div class="card-body">
           <form action="{{route('admin.gallery.updatetitle',$gallery->slug)}}" method="post">
             @csrf
+              <div class="row">
+
             @foreach($gallery->images as $img)
-              <div class="img-preview">
+              <div class="col-md-3">
                 <a href="{{route('admin.image.delete',$img->id)}}" class="del-conf">
                   <i class="fa fa-times"></i>
                 </a>
-                <img src="{{$img->imgUrl()}}" alt="">
-                <h4>
-                  <input type="text" class="form-control" name="titles[{{$img->id}}]" value="{{$img->title}}"/>
-                </h4>
+                <img src="{{$img->imgUrl()}}" class="img-squire" alt="">
+                  <div class="row">
+                      <div class="col-md-9">
+                          <input type="text" class="form-control" name="titles[{{$img->id}}]" value="{{$img->title}}"/>
+                      </div>
+                      <div class="col-md-3">
+                          @if(config('app.xlang'))
+                              <a href="{{route('admin.lang.model',[$img->id,\Xmen\StarterKit\Models\Image::class])}}"
+                                 class="btn btn-outline-dark translat-btn">
+                                  <i class="ri-translate"></i>
+                              </a>
+                          @endif
+                      </div>
+                  </div>
               </div>
             @endforeach
+              </div>
             <br>
             <input type="submit"  class="btn btn-primary" value="{{__("Save")}}"/>
           </form>

@@ -4,18 +4,42 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\XlangSaveRequest;
+use App\Models\Cat;
 use App\Models\Product;
+use App\Models\Prop;
+use App\Models\Setting;
 use App\Models\Xlang;
 use Illuminate\Http\Request;
 use GuzzleHttp\Client;
 
 use Illuminate\Support\Facades\Artisan;
+use Xmen\StarterKit\Models\Category;
+use Xmen\StarterKit\Models\Clip;
+use Xmen\StarterKit\Models\Gallery;
+use Xmen\StarterKit\Models\Image;
+use Xmen\StarterKit\Models\MenuItem;
+use Xmen\StarterKit\Models\Post;
+use Xmen\StarterKit\Models\Slider;
 use function Xmen\StarterKit\Helpers\logAdmin;
 use function Xmen\StarterKit\Helpers\logAdminBatch;
 
 const PREFIX_PATH = __DIR__ . '/../../../../';
 class XlangController extends Controller
 {
+
+    public $allowedModels = [
+        Product::class,
+        Cat::class,
+        Post::class,
+        Category::class,
+        Slider::class,
+        MenuItem::class,
+        Gallery::class,
+        Clip::class,
+        Prop::class,
+        Setting::class,
+        Image::class
+    ];
 
     public function createOrUpdate(Xlang $xlang, XlangSaveRequest $request)
     {
@@ -24,8 +48,8 @@ class XlangController extends Controller
         $xlang->rtl = $request->has('rtl');
 
         $xlang->is_default = $request->has('is_default');
-        if ($xlang->is_default){
-            Xlang::where('is_default','1')->update([
+        if ($xlang->is_default) {
+            Xlang::where('is_default', '1')->update([
                 'is_default' => 0,
             ]);
         }
@@ -73,7 +97,7 @@ class XlangController extends Controller
     public function store(XlangSaveRequest $request)
     {
         //
-        if ($request->tag != 'en'){
+        if ($request->tag != 'en') {
 
             define("TRANSLATE_CONFIG_PATH", PREFIX_PATH . 'config/translator.php');
             define("TRANSLATE_NEW_FILE", PREFIX_PATH . 'resources/lang/' . $request->tag . '.json');
@@ -162,6 +186,7 @@ class XlangController extends Controller
         define("TRANSLATE_FILE", PREFIX_PATH . 'resources/lang/' . $tag . '.json');
         return response()->download(TRANSLATE_FILE, $tag . '.json');
     }
+
     public function ai($tag)
     {
 
@@ -169,17 +194,17 @@ class XlangController extends Controller
 
         define("TRANSLATE_FILE", PREFIX_PATH . 'resources/lang/' . $tag . '.json');
         $file = file_get_contents(TRANSLATE_FILE);
-        $url = 'http://5.255.98.77:3001/json?form=en&to='.$tag;
+        $url = 'http://5.255.98.77:3001/json?form=en&to=' . $tag;
 
         $client = new Client([
-            'headers' => [ 'Content-Type' => 'application/json' ]
+            'headers' => ['Content-Type' => 'application/json']
         ]);
 
         $response = $client->post($url,
             ['body' => $file]
         );
-        file_put_contents(TRANSLATE_FILE,$response->getBody());
-        return  redirect()->back()->with(['message' => __("Translated by ai xstack service:").' '.$tag]);
+        file_put_contents(TRANSLATE_FILE, $response->getBody()->getContents());
+        return redirect()->back()->with(['message' => __("Translated by ai xstack service:") . ' ' . $tag]);
     }
 
     public function upload($tag, Request $request)
@@ -193,7 +218,7 @@ class XlangController extends Controller
             return redirect()->back()->withErrors(__("Invalid json file!"));
         }
         file_put_contents(TRANSLATE_FILE, $data);
-        return  redirect()->back()->with(['message' => __("Translate updated")]);
+        return redirect()->back()->with(['message' => __("Translate updated")]);
     }
 
     public function bulk(Request $request)
@@ -208,6 +233,73 @@ class XlangController extends Controller
             default:
                 $msg = __('Unknown bulk action :' . $request->input('bulk'));
         }
-        return redirect()->route('admin.customer.index')->with(['message' => $msg]);
+        return redirect()->route('admin.lang.index')->with(['message' => $msg]);
     }
+
+
+    public function translateModel($id, $model)
+    {
+
+        if (!in_array($model, $this->allowedModels)) {
+            return abort(404);
+        }
+        $langs = Xlang::where('is_default', 0)->get();
+        $cls = $model;
+        $model = ($model)::where('id', $id)->firstOrFail();
+//        return $model;
+        $translates = $model->translatable;
+        return view('admin.langs.translate', compact('model', 'translates', 'langs', 'cls'));
+    }
+
+    public function translateModelSave($id, $model, Request $request)
+    {
+
+        if (!in_array($model, $this->allowedModels)) {
+            return abort(404);
+        }
+        $langs = Xlang::where('is_default', 0)->get();
+        $model = ($model)::where('id', $id)->firstOrFail();
+//        $model = Product::whereId('id',$id)->first();
+        foreach ($request->input('data') as $lang => $items) {
+            foreach ($items as $k => $item) {
+                if ($item != null) {
+                    $model->setTranslation($k, $lang, $item);
+                }
+            }
+        }
+
+        $model->save();
+        return redirect()->back()->with(['message' => __('Translate updated')]);
+
+    }
+
+    public function translateModelAi($id, $model, $tag, $field)
+    {
+
+        if (!in_array($model, $this->allowedModels)) {
+            return abort(404);
+        }
+        $langs = Xlang::where('is_default', 0)->get();
+        $model = ($model)::where('id', $id)->firstOrFail();
+//        $model = Product::whereId('id',$id)->first();
+        $url = 'http://5.255.98.77:3001/text?form=' . config('app.xlang_main') . '&to=' . $tag;
+
+        $client = new Client([
+            'headers' => ['Content-Type' => 'application/x-www-form-urlencoded']
+        ]);
+
+        $response = $client->post($url,
+            ['form_params' => ['body' => $model->$field]],
+        );
+//        file_put_contents(TRANSLATE_FILE, $response->getBody());
+        if ($response->getStatusCode() != 200) {
+            return redirect()->back()->withErrors(__("API error!"));
+        }
+//        dd($response->getBody()->getContents());
+        $model->setTranslation($field, $tag, $response->getBody()->getContents());
+        $model->save();
+        return redirect()->back()->with(['message' => __('Translate updated')]);
+
+    }
+
 }

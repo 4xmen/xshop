@@ -23,8 +23,6 @@
                     </th>
                     <th>
                         {{__("Action")}}
-                        <a href="{{route('admin.category.create')}}" class="btn btn-success float-start"><i
-                                class="fa fa-plus"></i></a>
                     </th>
                 </tr>
                 </thead>
@@ -43,14 +41,18 @@
                         </td>
                         <td>
                             <a href="{{route('admin.category.edit',$cat->slug)}}" class="btn btn-primary">
-                                <i class="fa fa-edit"></i> &nbsp;
-                                {{__("Edit")}}
+                                <i class="ri-edit-2-line"></i>
                             </a>
                             <a href="{{route('admin.category.delete',$cat->slug)}}"
                                class="btn btn-danger  delete-confirm">
-                                <i class="fa fa-times"></i> &nbsp;
-                                {{__("Delete")}}
+                                <i class="ri-close-line"></i>
                             </a>
+                            @if(config('app.xlang'))
+                                <a href="{{route('admin.lang.model',[$cat->id,\Xmen\StarterKit\Models\Category::class])}}"
+                                   class="btn btn-outline-dark translat-btn">
+                                    <i class="ri-translate"></i>
+                                </a>
+                            @endif
                         </td>
                     </tr>
                 @endforeach
@@ -62,4 +64,8 @@
             {{$cats->links()}}
         </div>
     </div>
+
+    <a class="btn-add" href="{{route('admin.category.create')}}">
+        <i class="ri-add-line"></i>
+    </a>
 @endsection
