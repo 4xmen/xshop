@@ -194,7 +194,7 @@ class XlangController extends Controller
 
         define("TRANSLATE_FILE", PREFIX_PATH . 'resources/lang/' . $tag . '.json');
         $file = file_get_contents(TRANSLATE_FILE);
-        $url = 'http://5.255.98.77:3001/json?form=en&to=' . $tag;
+        $url = config('app.xlang_api_url').'/json?form=en&to=' . $tag;
 
         $client = new Client([
             'headers' => ['Content-Type' => 'application/json']
@@ -282,7 +282,7 @@ class XlangController extends Controller
         $langs = Xlang::where('is_default', 0)->get();
         $model = ($model)::where('id', $id)->firstOrFail();
 //        $model = Product::whereId('id',$id)->first();
-        $url = 'http://5.255.98.77:3001/text?form=' . config('app.xlang_main') . '&to=' . $tag;
+        $url = config('app.xlang_api_url').'/text?form=' . config('app.xlang_main') . '&to=' . $tag;
 
         $client = new Client([
             'headers' => ['Content-Type' => 'application/x-www-form-urlencoded']
