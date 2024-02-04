@@ -176,7 +176,7 @@ class ProductController extends Controller
             }
         }
         if ($request->has('q')){
-            $n->where('name','LIKE','%'.$request->input('q').'%');
+            $n->where('name->'.config('app.xlang_main'),'LIKE','%'.$request->input('q').'%');
         }
         $products = $n->paginate(20);
         return view('admin.product.productIndex', compact('products'));
