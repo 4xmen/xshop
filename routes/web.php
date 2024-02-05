@@ -23,29 +23,29 @@ Route::prefix(config('starter-kit.uri'))->name('admin.')->group(
 
                 Route::prefix('users')->name('user.')->group(
                     function () {
-                        Route::get('/', [\App\Http\Controllers\Admin\UserController::class,'index'])->name('all');
-                        Route::get('/delete/{user}',  [\App\Http\Controllers\Admin\UserController::class,'destroy'])->name('delete');
-                        Route::get('/create',  [\App\Http\Controllers\Admin\UserController::class,'create'])->name('create');
-                        Route::post('/store',  [\App\Http\Controllers\Admin\UserController::class,'store'])->name('store');
-                        Route::get('/edit/{user}',  [\App\Http\Controllers\Admin\UserController::class,'edit'])->name('edit');
-                        Route::post('/update/{user}',  [\App\Http\Controllers\Admin\UserController::class,'update'])->name('update');
+                        Route::get('/', [\App\Http\Controllers\Admin\UserController::class, 'index'])->name('all');
+                        Route::get('/delete/{user}', [\App\Http\Controllers\Admin\UserController::class, 'destroy'])->name('delete');
+                        Route::get('/create', [\App\Http\Controllers\Admin\UserController::class, 'create'])->name('create');
+                        Route::post('/store', [\App\Http\Controllers\Admin\UserController::class, 'store'])->name('store');
+                        Route::get('/edit/{user}', [\App\Http\Controllers\Admin\UserController::class, 'edit'])->name('edit');
+                        Route::post('/update/{user}', [\App\Http\Controllers\Admin\UserController::class, 'update'])->name('update');
                     });
                 Route::prefix('langs')->name('lang.')->group(
                     function () {
-                        Route::get('/', [\App\Http\Controllers\Admin\XlangController::class,'index'])->name('index');
-                        Route::get('/translates', [\App\Http\Controllers\Admin\XlangController::class,'translate'])->name('translate');
-                        Route::get('/delete/{xlang}',  [\App\Http\Controllers\Admin\XlangController::class,'destroy'])->name('delete');
-                        Route::get('/create',  [\App\Http\Controllers\Admin\XlangController::class,'create'])->name('create');
-                        Route::post('/store',  [\App\Http\Controllers\Admin\XlangController::class,'store'])->name('store');
-                        Route::get('/edit/{xlang}',  [\App\Http\Controllers\Admin\XlangController::class,'edit'])->name('edit');
-                        Route::post('/update/{xlang}',  [\App\Http\Controllers\Admin\XlangController::class,'update'])->name('update');
+                        Route::get('/', [\App\Http\Controllers\Admin\XlangController::class, 'index'])->name('index');
+                        Route::get('/translates', [\App\Http\Controllers\Admin\XlangController::class, 'translate'])->name('translate');
+                        Route::get('/delete/{xlang}', [\App\Http\Controllers\Admin\XlangController::class, 'destroy'])->name('delete');
+                        Route::get('/create', [\App\Http\Controllers\Admin\XlangController::class, 'create'])->name('create');
+                        Route::post('/store', [\App\Http\Controllers\Admin\XlangController::class, 'store'])->name('store');
+                        Route::get('/edit/{xlang}', [\App\Http\Controllers\Admin\XlangController::class, 'edit'])->name('edit');
+                        Route::post('/update/{xlang}', [\App\Http\Controllers\Admin\XlangController::class, 'update'])->name('update');
                         Route::post('bulk', [\App\Http\Controllers\Admin\XlangController::class, "bulk"])->name('bulk');
-                        Route::get('/download/{tag}',  [\App\Http\Controllers\Admin\XlangController::class,'download'])->name('download');
-                        Route::get('/ai/{tag}',  [\App\Http\Controllers\Admin\XlangController::class,'ai'])->name('ai');
-                        Route::post('/upload/{tag}',  [\App\Http\Controllers\Admin\XlangController::class,'upload'])->name('upload');
-                        Route::get('/model/translate/{id}/{model}',  [\App\Http\Controllers\Admin\XlangController::class,'translateModel'])->name('model');
-                        Route::post('/model/translate/save/{id}/{model}',  [\App\Http\Controllers\Admin\XlangController::class,'translateModelSave'])->name('modelSave');
-                        Route::get('/model/ai/{id}/{model}/{field}/{lang}',  [\App\Http\Controllers\Admin\XlangController::class,'translateModelAi'])->name('aiText');
+                        Route::get('/download/{tag}', [\App\Http\Controllers\Admin\XlangController::class, 'download'])->name('download');
+                        Route::get('/ai/{tag}', [\App\Http\Controllers\Admin\XlangController::class, 'ai'])->name('ai');
+                        Route::post('/upload/{tag}', [\App\Http\Controllers\Admin\XlangController::class, 'upload'])->name('upload');
+                        Route::get('/model/translate/{id}/{model}', [\App\Http\Controllers\Admin\XlangController::class, 'translateModel'])->name('model');
+                        Route::post('/model/translate/save/{id}/{model}', [\App\Http\Controllers\Admin\XlangController::class, 'translateModelSave'])->name('modelSave');
+                        Route::get('/model/ai/{id}/{model}/{field}/{lang}', [\App\Http\Controllers\Admin\XlangController::class, 'translateModelAi'])->name('aiText');
 
                     });
 
@@ -197,7 +197,6 @@ Route::get('/props/list/{id}', [\App\Http\Controllers\Admin\PropController::clas
 Route::group(
     ['middleware' => ['under']],
     function () {
-
         Route::get('/', [App\Http\Controllers\WebsiteController::class, 'index'])->name('welcome');
         Route::get('/product-category/{cat}', [App\Http\Controllers\WebsiteController::class, 'cat'])->name('cat');
         Route::get('/product/{pro}', [App\Http\Controllers\WebsiteController::class, 'product'])->name('product');
@@ -232,6 +231,16 @@ Route::group(
         Route::get('/ticket/{ticket}', [\App\Http\Controllers\CustomerController::class, 'ticket'])->name('ticket.show');
         Route::get('/posts', [App\Http\Controllers\WebsiteController::class, 'posts'])->name('posts');
         Route::get('/track', [App\Http\Controllers\WebsiteController::class, 'track'])->name('track');
+        Route::get('/redirect/bank/{invoice}/{gateway}', \App\Http\Controllers\Payment\GatewayRedirectController::class)->name('redirect.bank');
+        Route::any('/pay/check/{invoice_hash}/{gateway}', \App\Http\Controllers\Payment\GatewayVerifyController::class)->name('pay.check');
+        Route::get('/fav/toggle/{product}', [App\Http\Controllers\WebsiteController::class, 'favToggle'])->name('fav.toggle');
+        Route::post('/contact/send', [App\Http\Controllers\WebsiteController::class, "sendContact"])->name('sendcontact');
+        Route::get('/contact', [App\Http\Controllers\WebsiteController::class, "contact"])->name('contact');
+        Route::get('/reset', [App\Http\Controllers\WebsiteController::class, "reset"])->name('reset');
+        Route::get('/resetStock', [App\Http\Controllers\WebsiteController::class, "resetStockStatus"])->name('resetStock');
+        Route::get('/resetQ', [App\Http\Controllers\WebsiteController::class, "resetQuantity"])->name('resetQuantity');
+        Route::get('/credit/pay/{invoice}', [App\Http\Controllers\CustomerController::class, 'credit'])->name('credit');
+        Route::post('/invoice', [\App\Http\Controllers\Payment\GatewayRedirectController::class, 'createInvoice'])->middleware('auth:customer')->name('invoice.create');
     });
 
 Route::get('/underConstruct', function () {
@@ -258,6 +267,21 @@ Route::prefix('')->name('n.')->group(function () {
 //    Route::post('assign', [App\Http\Controllers\WebsiteController::class, ''])->name('assign');
 });
 
+
+//Route::get('contact', [App\Http\Controllers\WebsiteController::class, "contact"])->name('contact');
+//Route::get('mag', [App\Http\Controllers\WebsiteController::class, 'mag'])->name('mag');
+
+Route::prefix('/{lang}')->name('lang.')->group(function () {
+    Route::group(
+        ['middleware' => ['lang']],
+        function () {
+            Route::get('mag', [App\Http\Controllers\WebsiteController::class, 'mag'])->name('mag');
+            Route::get('contact', [App\Http\Controllers\WebsiteController::class, "contact"])->name('contact');
+
+        });
+});
+
+
 // site map
 Route::get('/sitemap.xml', [App\Http\Controllers\SitemapController::class, 'index'])->name('sitemap.index');
 Route::get('/sitemap/posts.xml', [App\Http\Controllers\SitemapController::class, 'posts'])->name('sitemap.posts');
@@ -282,32 +306,23 @@ Auth::routes([
     'register' => false,
 ]);
 //
-Route::post('/invoice', [\App\Http\Controllers\Payment\GatewayRedirectController::class, 'createInvoice'])->middleware('auth:customer')->name('invoice.create');
-Route::get('/redirect/bank/{invoice}/{gateway}', \App\Http\Controllers\Payment\GatewayRedirectController::class)->name('redirect.bank');
-Route::any('/pay/check/{invoice_hash}/{gateway}', \App\Http\Controllers\Payment\GatewayVerifyController::class)->name('pay.check');
-Route::get('/fav/toggle/{product}', [App\Http\Controllers\WebsiteController::class, 'favToggle'])->name('fav.toggle');
-Route::post('/contact/send', [App\Http\Controllers\WebsiteController::class, "sendContact"])->name('sendcontact');
-Route::get('/contact', [App\Http\Controllers\WebsiteController::class, "contact"])->name('contact');
-Route::get('/reset', [App\Http\Controllers\WebsiteController::class, "reset"])->name('reset');
-Route::get('/resetStock', [App\Http\Controllers\WebsiteController::class, "resetStockStatus"])->name('resetStock');
-Route::get('/resetQ', [App\Http\Controllers\WebsiteController::class, "resetQuantity"])->name('resetQuantity');
-Route::get('/credit/pay/{invoice}', [App\Http\Controllers\CustomerController::class, 'credit'])->name('credit');
 
-Route::get('/test/sms',function (){
-   if (auth()->check()){
-       $result = \App\Helpers\sendSMSText2('09209517726','پیامک');
-       if ($result == null){
-           return  'fatal error';
-       }else{
-           if ($result['OK']){
-               return  $result['Msg'];
-           }else{
-               return 'err'.$result['Code'].': '.$result['Msg'];
-           }
-       }
-   } else{
-       return abort(403);
-   }
+
+Route::get('/test/sms', function () {
+    if (auth()->check()) {
+        $result = \App\Helpers\sendSMSText2(\App\Helpers\getSetting('tel'), 'پیامک');
+        if ($result == null) {
+            return 'fatal error';
+        } else {
+            if ($result['OK']) {
+                return $result['Msg'];
+            } else {
+                return 'err' . $result['Code'] . ': ' . $result['Msg'];
+            }
+        }
+    } else {
+        return abort(403);
+    }
 });
 
 

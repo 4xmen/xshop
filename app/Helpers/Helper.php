@@ -455,7 +455,7 @@ function getProductByCatQ($id, $order = 'id', $limit = 10)
  * @param $id
  * @return Cat[]|\Illuminate\Database\Eloquent\Builder[]|\Illuminate\Database\Eloquent\Collection|\LaravelIdea\Helper\App\Models\_IH_Cat_C
  */
-function getSubCats($id,$limit = 99)
+function getSubCats($id, $limit = 99)
 {
     return Cat::where('parent_id', $id)->limit($limit)->get();
 }
@@ -603,8 +603,8 @@ function showMeta($key, $value)
  */
 function time2persian($date, $format = 'Y/m/d')
 {
-    if ($date == null){
-        return  '-';
+    if ($date == null) {
+        return '-';
     }
     $dt = new TDate();
     return $dt->PDate($format, $date);
@@ -824,7 +824,7 @@ function sendSMSText2($number, $content)
 
 //execute post
     $result = curl_exec($ch);
-    return json_decode($result,true);
+    return json_decode($result, true);
 }
 
 /***
@@ -873,4 +873,55 @@ function findLink($html)
 
     return $match[1];
 
+}
+
+
+function showMenuMange2($arr)
+{
+    $back = '';
+    $tr = '';
+
+    foreach ($arr as $menu) {
+        $ol = '';
+        if ($menu->children()->count() > 0) {
+            $ol = '<ol>' . showMenuMange2($menu->children()->orderBy('sort')->get()) . '</ol>';
+        }
+
+        if (config('app.xlang')) {
+            $l = route('admin.lang.model', [$menu->id, MenuItem::class]);
+            $tr = <<<TR
+            <a href="$l" class="float-end">
+                <i class="ri-translate"></i>
+            </a>
+TR;
+
+        }
+        $back .= <<<LI
+        <li class="list-group-item"
+        data-menuabletype="$menu->menuable_type"
+        data-menuableid="$menu->menuable_id"
+        data-meta="$menu->meta"
+        data-kind="$menu->kind"
+        data-item-id="$menu->id"
+        data-title="$menu->title"
+        >
+            <span>
+                $menu->title
+                $tr
+            </span>
+            $ol
+        </li>
+LI;
+    }
+
+    return $back;
+}
+
+function xroute($rt, $args = [])
+{
+    if (config('app.xlang_main') != app()->getLocale()) {
+        return \route( $rt, $args);
+    } else {
+        return \route($rt, $args);
+    }
 }

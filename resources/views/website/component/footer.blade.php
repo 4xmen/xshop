@@ -82,6 +82,7 @@
                     {{\App\Helpers\getSetting('copyright')}}
                     &copy; {{date('Y')}}
                 </div>
+                {{\App\Helpers\xroute('contact')}}
             </div>
         </div>
     </div>
