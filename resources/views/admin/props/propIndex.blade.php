@@ -7,7 +7,7 @@
         </h5>
 
         <div class="table-responsive">
-            <table class="table">
+            <table class="table table-striped table-bordered text-center">
                 <thead>
                 <tr>
                     <th>#</th>
