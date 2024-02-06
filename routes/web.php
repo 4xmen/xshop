@@ -200,6 +200,9 @@ Route::get('/props/list/{id}', [\App\Http\Controllers\Admin\PropController::clas
 
 // for under construction
 
+Auth::routes([
+    'register' => false,
+]);
 
 Route::group(
     ['middleware' => ['under']],
@@ -361,9 +364,7 @@ Route::get('/home', function () {
     return redirect((config('starter-kit.uri')));
 })->name('home');
 
-Auth::routes([
-    'register' => false,
-]);
+
 //
 
 
