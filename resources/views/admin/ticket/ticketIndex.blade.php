@@ -22,11 +22,11 @@
         </div>
         <form action="{{route('admin.ticket.bulk')}}" method="post" class="bulk-action">
             @csrf
-            <table class="table table-striped table-bordered ">
+            <table class="table table-striped table-bordered text-center">
                 <thead class="thead-dark">
                 <tr>
                     <th>
-                        <input type="checkbox" class="chkall"/>
+                        #
                     </th>
                     <th>
                         {{__("Title")}}
@@ -42,13 +42,16 @@
                         {{--                        <a href="{{route('admin.invoice.create')}}" class="btn btn-success float-start"><i--}}
                         {{--                                class="fa fa-plus"></i></a>--}}
                     </th>
+                    <th>
+                        <input type="checkbox" class="chkall"/>
+                    </th>
                 </tr>
                 </thead>
                 <tbody>
                 @foreach ($tickets as $ticket)
                     <tr>
                         <td>
-                            <input type="checkbox" name="id[]" value="{{$ticket->id}}" class="m-2 chkbox"/>
+                            {{$ticket->id}}
                         </td>
                         <td>
                             {{$ticket->title}}
@@ -63,14 +66,15 @@
                         </td>
                         <td>
                             <a href="{{route('admin.ticket.edit',$ticket->id)}}" class="btn btn-primary">
-                                <i class="fa fa-edit"></i> &nbsp;
-                                {{__("Edit")}} / {{__("Answer")}}
+                                <i class="ri-edit-2-line"></i>
                             </a>
                             <a href="{{route('admin.ticket.delete',$ticket->id)}}"
                                class="btn btn-danger  delete-confirm">
-                                <i class="fa fa-times"></i> &nbsp;
-                                {{__("Delete")}}
+                                <i class="ri-close-line"></i>
                             </a>
+                        </td>
+                        <td>
+                            <input type="checkbox" name="id[]" value="{{$ticket->id}}" class="m-2 chkbox"/>
                         </td>
                     </tr>
                 @endforeach
