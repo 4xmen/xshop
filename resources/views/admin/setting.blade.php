@@ -22,6 +22,12 @@
                                     </label>
                                     @switch($set->type)
                                         @case('longtext')
+                                            @if(config('app.xlang'))
+                                                <a href="{{route('admin.lang.model',[$set->id,\App\Models\Setting::class])}}"
+                                                   class="btn btn-outline-dark translat-btn">
+                                                    <i class="ri-translate"></i>
+                                                </a>
+                                            @endif
                                             <textarea name="{{$set->key}}" id="{{$set->key}}" class="form-control"
                                                       rows="5">{{$set->value}}</textarea>
                                             @break
@@ -51,6 +57,12 @@
                                                       rows="5">{{$set->value}}</textarea>
                                             @break
                                         @case('editor')
+                                            @if(config('app.xlang'))
+                                                <a href="{{route('admin.lang.model',[$set->id,\App\Models\Setting::class])}}"
+                                                   class="btn btn-outline-dark translat-btn">
+                                                    <i class="ri-translate"></i>
+                                                </a>
+                                            @endif
                                             <textarea name="{{$set->key}}" id="{{$set->key}}"
                                                       class="ckeditorx form-control"
                                                       rows="5">{{$set->value}}</textarea>
@@ -79,6 +91,12 @@
                                                    class="form-control-file"/>
                                             @break
                                         @default
+                                            @if(config('app.xlang'))
+                                                <a href="{{route('admin.lang.model',[$set->id,\App\Models\Setting::class])}}"
+                                                   class="btn btn-outline-dark translat-btn float-end">
+                                                    <i class="ri-translate"></i>
+                                                </a>
+                                            @endif
                                             <input type="{{$set->type}}" name="{{$set->key}}" id="{{$set->key}}"
                                                    class="form-control" value="{{$set->value}}"/>
                                     @endswitch
