@@ -36,9 +36,9 @@
             @csrf
             <table class="table table-striped table-bordered ">
                 <thead class="thead-dark">
-                <tr>
+                <tr class="text-center">
                     <th>
-                        <input type="checkbox" class="chkall"/>
+                        #
                     </th>
                     <th>
                         {{__("Image")}}
@@ -52,13 +52,15 @@
                     <th>
                         {{__("Action")}}
                     </th>
+                    <th>
+                        <input type="checkbox" class="chkall"/>
+                    </th>
                 </tr>
                 </thead>
                 <tbody>
                 @foreach ($products as $n)
-                    <tr>
+                    <tr class="text-center">
                         <td>
-                            <input type="checkbox" name="id[]" value="{{$n->id}}" class="m-2 chkbox"/>
                             {{$n->id}}
                         </td>
                         <td>
@@ -96,7 +98,9 @@
                                     {{__("Restore")}}
                                 </a>
                             @endif
-
+                        </td>
+                        <td>
+                            <input type="checkbox" name="id[]" value="{{$n->id}}" class="m-2 chkbox"/>
                         </td>
                     </tr>
                 @endforeach
