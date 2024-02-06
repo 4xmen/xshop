@@ -7,15 +7,12 @@
     <div class="container">
         <h1>
             {{__("User list")}}
-            <a href="{{route('admin.user.create')}}" class="btn btn-success float-start">
-                {{__("New user")}}
-            </a>
         </h1>
         @include('starter-kit::component.err')
-        <table class="table table-bordered table-striped">
+        <table class="table table-bordered table-striped text-center">
             <tr>
                 <th>
-                    {{__("id")}}
+                    #
                 </th>
                 <th>
                     {{__("Username")}}
@@ -45,14 +42,14 @@
                         {{$user->mobile}}
                     </td>
                     <td>
-                        <a href="{{route('admin.user.edit',$user->id)}}" class="btn btn-secondary">
-                            {{__("Edit")}}
+                        <a href="{{route('admin.user.edit',$user->id)}}" class="btn btn-primary">
+                            <i class="ri-edit-2-fill"></i>
                         </a>
                         <a href="{{route('admin.user.delete',$user->id)}}" class="btn btn-danger del-conf">
-                            {{__("Delete")}}
+                            <i class="ri-close-line"></i>
                         </a>
                         <a href="{{route('admin.logs.user',$user->id)}}" class="btn btn-dark">
-                            {{__("Logs")}}
+                            <i class="ri-news-line"></i>
                         </a>
                     </td>
                 </tr>
@@ -60,4 +57,7 @@
         </table>
         {{$users->links()}}
     </div>
+    <a class="btn-add" href="{{route('admin.user.create')}}">
+        <i class="ri-add-line"></i>
+    </a>
 @endsection

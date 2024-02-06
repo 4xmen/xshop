@@ -26,11 +26,11 @@
         </div>
         <form action="{{route('admin.comment.bulk')}}" method="post" class="bulk-action">
             @csrf
-            <table class="table table-striped table-bordered ">
+            <table class="table table-striped table-bordered text-center">
                 <thead class="thead-dark">
                 <tr>
                     <th>
-                        <input type="checkbox" class="chkall"/>
+                        #
                     </th>
                     <th>
                         {{__("name / email")}}
@@ -43,8 +43,9 @@
                     </th>
                     <th colspan="2">
                         {{__("Action")}}
-                        <a href="{{route('admin.post.create')}}" class="btn btn-success float-start"><i
-                                class="fa fa-plus"></i></a>
+                    </th>
+                    <th>
+                        <input type="checkbox" class="chkall"/>
                     </th>
                 </tr>
                 </thead>
@@ -52,7 +53,6 @@
                 @foreach ($comments as $c)
                     <tr>
                         <td>
-                            <input type="checkbox" name="id[]" value="{{$c->id}}" class="m-2 chkbox"/>
                             {{$c->id}}
                         </td>
                         <td>
@@ -99,6 +99,9 @@
                                 <i class="fa fa-times"></i>
                             </a>
                         </td>
+                        <td>
+                            <input type="checkbox" name="id[]" value="{{$c->id}}" class="m-2 chkbox"/>
+                        </td>
                     </tr>
                 @endforeach
                 </tbody>
@@ -109,4 +112,7 @@
             {{$comments->links()}}
         </div>
     </div>
+    <a class="btn-add" href="{{route('admin.post.create')}}">
+        <i class="ri-add-line"></i>
+    </a>
 @endsection

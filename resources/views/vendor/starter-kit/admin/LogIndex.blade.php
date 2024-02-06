@@ -7,9 +7,12 @@
     <div class="container">
 
         @include('starter-kit::component.err')
-            <table class="table table-striped table-bordered ">
+            <table class="table table-striped table-bordered text-center">
                 <thead class="thead-dark">
                 <tr>
+                    <th>
+                        #
+                    </th>
                     <th>
                         {{__("User")}}
                     </th>
@@ -27,6 +30,9 @@
                 <tbody>
                 @foreach ($logs as $log)
                     <tr>
+                        <td>
+                            {{$log->id}}
+                        </td>
                         <td>
                             {{$log->user->name}}
                         </td>
