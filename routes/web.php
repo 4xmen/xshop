@@ -198,24 +198,9 @@ Route::group(
     ['middleware' => ['under']],
     function () {
         Route::get('/', [App\Http\Controllers\WebsiteController::class, 'index'])->name('welcome');
-        Route::get('/product-category/{cat}', [App\Http\Controllers\WebsiteController::class, 'cat'])->name('cat');
-        Route::get('/product/{pro}', [App\Http\Controllers\WebsiteController::class, 'product'])->name('product');
-        Route::get('/compare/remove/{pro}', [App\Http\Controllers\WebsiteController::class, 'compareRem'])->name('compare.rem');
-        Route::get('/compare/add/{pro}', [App\Http\Controllers\WebsiteController::class, 'compareAdd'])->name('compare.add');
-        Route::get('/compare', [App\Http\Controllers\WebsiteController::class, 'compare'])->name('compare');
-        Route::get('/card-add/{id}', [App\Http\Controllers\WebsiteController::class, 'cardAdd'])->name('card.add');
-        Route::get('/card-rem/{id}', [App\Http\Controllers\WebsiteController::class, 'cardRem'])->name('card.rem');
-        Route::get('/card-add-q/{id}/{count}', [App\Http\Controllers\WebsiteController::class, 'cardAddQ'])->name('card.addq');
-        Route::get('/card-rem-q/{id}', [App\Http\Controllers\WebsiteController::class, 'cardRemQ'])->name('card.remq');
-        Route::get('/post/{post}', [App\Http\Controllers\WebsiteController::class, 'post'])->name('post');
-        Route::get('/products', [App\Http\Controllers\WebsiteController::class, 'products'])->name('products');
-        Route::get('/search/ajax', [App\Http\Controllers\WebsiteController::class, 'searchAjax'])->name('search.ajax');
         Route::get('/search', [App\Http\Controllers\WebsiteController::class, 'search'])->name('search');
         Route::get('/card', [App\Http\Controllers\WebsiteController::class, 'card'])->name('card.show');
         Route::get('/sign', [App\Http\Controllers\WebsiteController::class, 'sign'])->name('sign');
-        Route::get('/customer/invoice/{invoice}', [App\Http\Controllers\CustomerController::class, 'invoice'])->name('customer.invoice')->middleware('auth:customer');
-        Route::get('/customer/address/save', [App\Http\Controllers\CustomerController::class, 'saveAddress'])->name('customer.address')->middleware('auth:customer');
-        Route::get('/customer/address/rem/{address}', [App\Http\Controllers\CustomerController::class, 'remAddress'])->name('customer.remaddress')->middleware('auth:customer');
         Route::get('/customer', [App\Http\Controllers\CustomerController::class, 'index'])->name('customer')->middleware('auth:customer');
         Route::post('/signin', [\App\Http\Controllers\Auth\LoginController::class, 'customerLogin'])->name('signin');
         Route::post('/signup', [\App\Http\Controllers\Auth\RegisterController::class, 'createCustomer'])->name('signup');
@@ -224,16 +209,7 @@ Route::group(
         Route::post('/checkSMS', [\App\Http\Controllers\WebsiteController::class, 'checkSMS'])->name('checkSMS');
         Route::post('/profile', [\App\Http\Controllers\WebsiteController::class, 'profile'])->name('profile');
         Route::get('/logout', [\App\Http\Controllers\WebsiteController::class, 'logout'])->name('logout');
-        Route::post('/discount', [\App\Http\Controllers\WebsiteController::class, 'discount'])->name('discount');
-        Route::get('/invoice/qr/{hash}', [\App\Http\Controllers\CustomerController::class, 'qr'])->name('invoice.qr');
-        Route::get('/invoice/pdf/{hash}', [\App\Http\Controllers\CustomerController::class, 'pdf'])->name('invoice.pdf');
-        Route::post('/ticket/send', [\App\Http\Controllers\CustomerController::class, 'SendTicket'])->name('ticket.send');
-        Route::get('/ticket/{ticket}', [\App\Http\Controllers\CustomerController::class, 'ticket'])->name('ticket.show');
-        Route::get('/posts', [App\Http\Controllers\WebsiteController::class, 'posts'])->name('posts');
-        Route::get('/track', [App\Http\Controllers\WebsiteController::class, 'track'])->name('track');
-        Route::get('/redirect/bank/{invoice}/{gateway}', \App\Http\Controllers\Payment\GatewayRedirectController::class)->name('redirect.bank');
-        Route::any('/pay/check/{invoice_hash}/{gateway}', \App\Http\Controllers\Payment\GatewayVerifyController::class)->name('pay.check');
-        Route::get('/fav/toggle/{product}', [App\Http\Controllers\WebsiteController::class, 'favToggle'])->name('fav.toggle');
+        Route::get('/products', [App\Http\Controllers\WebsiteController::class, 'products'])->name('products');
         Route::post('/contact/send', [App\Http\Controllers\WebsiteController::class, "sendContact"])->name('sendcontact');
         Route::get('/contact', [App\Http\Controllers\WebsiteController::class, "contact"])->name('contact');
         Route::get('/reset', [App\Http\Controllers\WebsiteController::class, "reset"])->name('reset');
@@ -241,42 +217,124 @@ Route::group(
         Route::get('/resetQ', [App\Http\Controllers\WebsiteController::class, "resetQuantity"])->name('resetQuantity');
         Route::get('/credit/pay/{invoice}', [App\Http\Controllers\CustomerController::class, 'credit'])->name('credit');
         Route::post('/invoice', [\App\Http\Controllers\Payment\GatewayRedirectController::class, 'createInvoice'])->middleware('auth:customer')->name('invoice.create');
+        Route::get('/mag', [App\Http\Controllers\WebsiteController::class, 'mag'])->name('mag');
+        Route::get('/search/ajax', [App\Http\Controllers\WebsiteController::class, 'searchAjax'])->name('search.ajax');
+        Route::get('/compare/now', [App\Http\Controllers\WebsiteController::class, 'compare'])->name('compare');
+        Route::get('/posts', [App\Http\Controllers\WebsiteController::class, 'posts'])->name('posts');
+        Route::get('/track', [App\Http\Controllers\WebsiteController::class, 'track'])->name('track');
+        Route::post('/discount', [\App\Http\Controllers\WebsiteController::class, 'discount'])->name('discount');
+        Route::get('galleries', [App\Http\Controllers\WebsiteController::class, 'galleries'])->name('galleries');
+        Route::get('clips', [App\Http\Controllers\WebsiteController::class, 'clips'])->name('clips');
+        Route::get('/customer/address/save', [App\Http\Controllers\CustomerController::class, 'saveAddress'])->name('customer.address')->middleware('auth:customer');
+        Route::post('/ticket/send', [\App\Http\Controllers\CustomerController::class, 'SendTicket'])->name('ticket.send');
+
+        Route::get('/product-category/{cat}', [App\Http\Controllers\WebsiteController::class, 'cat'])->name('cat');
+        Route::get('/product/{pro}', [App\Http\Controllers\WebsiteController::class, 'product'])->name('product');
+        Route::get('/compare/remove/{pro}', [App\Http\Controllers\WebsiteController::class, 'compareRem'])->name('compare.rem');
+        Route::get('/compare/add/{pro}', [App\Http\Controllers\WebsiteController::class, 'compareAdd'])->name('compare.add');
+        Route::get('/card-add/{id}', [App\Http\Controllers\WebsiteController::class, 'cardAdd'])->name('card.add');
+        Route::get('/card-rem/{id}', [App\Http\Controllers\WebsiteController::class, 'cardRem'])->name('card.rem');
+        Route::get('/card-add-q/{id}/{count}', [App\Http\Controllers\WebsiteController::class, 'cardAddQ'])->name('card.addq');
+        Route::get('/card-rem-q/{id}', [App\Http\Controllers\WebsiteController::class, 'cardRemQ'])->name('card.remq');
+        Route::get('/post/{post}', [App\Http\Controllers\WebsiteController::class, 'post'])->name('post');
+        Route::get('/customer/invoice/{invoice}', [App\Http\Controllers\CustomerController::class, 'invoice'])->name('customer.invoice')->middleware('auth:customer');
+        Route::get('/customer/address/rem/{address}', [App\Http\Controllers\CustomerController::class, 'remAddress'])->name('customer.remaddress')->middleware('auth:customer');
+        Route::get('/invoice/qr/{hash}', [\App\Http\Controllers\CustomerController::class, 'qr'])->name('invoice.qr');
+        Route::get('/invoice/pdf/{hash}', [\App\Http\Controllers\CustomerController::class, 'pdf'])->name('invoice.pdf');
+        Route::get('/ticket/{ticket}', [\App\Http\Controllers\CustomerController::class, 'ticket'])->name('ticket.show');
+        Route::get('/fav/toggle/{product}', [App\Http\Controllers\WebsiteController::class, 'favToggle'])->name('fav.toggle');
+        Route::get('/tag/{tag}', [App\Http\Controllers\WebsiteController::class, 'tag'])->name('tag.show');
+        Route::get('/category/{category}', [App\Http\Controllers\WebsiteController::class, 'category'])->name('category.show');
+        Route::get('/product-category/{cat}', [App\Http\Controllers\WebsiteController::class, 'cat'])->name('product-category.show');
+        Route::get('/post/{post}', [App\Http\Controllers\WebsiteController::class, 'post'])->name('post.show');
+        Route::get('/g/{gallery}', [App\Http\Controllers\WebsiteController::class, 'gallery'])->name('gallery');
+        Route::get('/s/{term}', [App\Http\Controllers\WebsiteController::class, 'search'])->name('search');
+        Route::post('/comment/post/{post}', [App\Http\Controllers\WebsiteController::class, 'commentPost'])->name('comment.post');
+        Route::post('/comment/product/{product}', [App\Http\Controllers\WebsiteController::class, 'commentProduct'])->name('comment.product');
+        Route::post('/like/{news}', [App\Http\Controllers\WebsiteController::class, 'like'])->name('like');
+        Route::post('/vote/{poll}', [App\Http\Controllers\WebsiteController::class, 'vote'])->name('vote');
+        Route::get('/poll/{poll}', [App\Http\Controllers\WebsiteController::class, 'poll'])->name('poll');
+        Route::get('/goadv/{adv}', [App\Http\Controllers\WebsiteController::class, 'goadv'])->name('goadv');
+
+        Route::get('/redirect/bank/{invoice}/{gateway}', \App\Http\Controllers\Payment\GatewayRedirectController::class)->name('redirect.bank');
+        Route::any('/pay/check/{invoice_hash}/{gateway}', \App\Http\Controllers\Payment\GatewayVerifyController::class)->name('pay.check');
     });
 
 Route::get('/underConstruct', function () {
     return view('website.under');
-});
-Route::prefix('')->name('n.')->group(function () {
-    Route::get('mag', [App\Http\Controllers\WebsiteController::class, 'mag'])->name('mag');
-    Route::get('tag/{tag}', [App\Http\Controllers\WebsiteController::class, 'tag'])->name('tag');
-    Route::get('category/{category}', [App\Http\Controllers\WebsiteController::class, 'category'])->name('category');
-    Route::get('category/{cat}', [App\Http\Controllers\WebsiteController::class, 'cat'])->name('cat');
-    Route::get('n/{post}', [App\Http\Controllers\WebsiteController::class, 'post'])->name('show');
-    Route::get('galleries', [App\Http\Controllers\WebsiteController::class, 'galleries'])->name('galleries');
-    Route::get('clips', [App\Http\Controllers\WebsiteController::class, 'clips'])->name('clips');
-//    Route::get('faq', "WebsiteController@faq")->name('faq'); //ESH
-    Route::get('g/{gallery}', [App\Http\Controllers\WebsiteController::class, 'gallery'])->name('gallery');
-    Route::get('s/{term}', [App\Http\Controllers\WebsiteController::class, 'search'])->name('search');
-
-    Route::post('comment/post/{post}', [App\Http\Controllers\WebsiteController::class, 'commentPost'])->name('comment.post');
-    Route::post('comment/product/{product}', [App\Http\Controllers\WebsiteController::class, 'commentProduct'])->name('comment.product');
-    Route::post('like/{news}', [App\Http\Controllers\WebsiteController::class, 'like'])->name('like');
-    Route::post('vote/{poll}', [App\Http\Controllers\WebsiteController::class, 'vote'])->name('vote');
-    Route::get('poll/{poll}', [App\Http\Controllers\WebsiteController::class, 'poll'])->name('poll');
-    Route::get('goadv/{adv}', [App\Http\Controllers\WebsiteController::class, 'goadv'])->name('goadv');
-//    Route::post('assign', [App\Http\Controllers\WebsiteController::class, ''])->name('assign');
 });
 
 
 //Route::get('contact', [App\Http\Controllers\WebsiteController::class, "contact"])->name('contact');
 //Route::get('mag', [App\Http\Controllers\WebsiteController::class, 'mag'])->name('mag');
 
-Route::prefix('/{lang}')->name('lang.')->group(function () {
+Route::prefix('/{lang?}')->name('lang.')->group(function () {
     Route::group(
         ['middleware' => ['lang']],
         function () {
-            Route::get('mag', [App\Http\Controllers\WebsiteController::class, 'mag'])->name('mag');
-            Route::get('contact', [App\Http\Controllers\WebsiteController::class, "contact"])->name('contact');
+
+
+            Route::get('/', [App\Http\Controllers\WebsiteController::class, 'index'])->name('welcome');
+            Route::get('/search', [App\Http\Controllers\WebsiteController::class, 'search'])->name('search');
+            Route::get('/card', [App\Http\Controllers\WebsiteController::class, 'card'])->name('card.show');
+            Route::get('/sign', [App\Http\Controllers\WebsiteController::class, 'sign'])->name('sign');
+            Route::get('/customer', [App\Http\Controllers\CustomerController::class, 'index'])->name('customer')->middleware('auth:customer');
+            Route::post('/signin', [\App\Http\Controllers\Auth\LoginController::class, 'customerLogin'])->name('signin');
+            Route::post('/signup', [\App\Http\Controllers\Auth\RegisterController::class, 'createCustomer'])->name('signup');
+            Route::post('/question/send', [\App\Http\Controllers\WebsiteController::class, 'questionSend'])->name('question.send');
+            Route::post('/sendSMS', [\App\Http\Controllers\WebsiteController::class, 'sendSMS'])->name('sendSMS');
+            Route::post('/checkSMS', [\App\Http\Controllers\WebsiteController::class, 'checkSMS'])->name('checkSMS');
+            Route::post('/profile', [\App\Http\Controllers\WebsiteController::class, 'profile'])->name('profile');
+            Route::get('/logout', [\App\Http\Controllers\WebsiteController::class, 'logout'])->name('logout');
+            Route::get('/products', [App\Http\Controllers\WebsiteController::class, 'products'])->name('products');
+            Route::post('/contact/send', [App\Http\Controllers\WebsiteController::class, "sendContact"])->name('sendcontact');
+            Route::get('/contact', [App\Http\Controllers\WebsiteController::class, "contact"])->name('contact');
+            Route::get('/reset', [App\Http\Controllers\WebsiteController::class, "reset"])->name('reset');
+            Route::get('/resetStock', [App\Http\Controllers\WebsiteController::class, "resetStockStatus"])->name('resetStock');
+            Route::get('/resetQ', [App\Http\Controllers\WebsiteController::class, "resetQuantity"])->name('resetQuantity');
+            Route::get('/credit/pay/{invoice}', [App\Http\Controllers\CustomerController::class, 'credit'])->name('credit');
+            Route::post('/invoice', [\App\Http\Controllers\Payment\GatewayRedirectController::class, 'createInvoice'])->middleware('auth:customer')->name('invoice.create');
+            Route::get('/mag', [App\Http\Controllers\WebsiteController::class, 'mag'])->name('mag');
+            Route::get('/search/ajax', [App\Http\Controllers\WebsiteController::class, 'searchAjax'])->name('search.ajax');
+            Route::get('/compare/now', [App\Http\Controllers\WebsiteController::class, 'compare'])->name('compare');
+            Route::get('/posts', [App\Http\Controllers\WebsiteController::class, 'posts'])->name('posts');
+            Route::get('/track', [App\Http\Controllers\WebsiteController::class, 'track'])->name('track');
+            Route::post('/discount', [\App\Http\Controllers\WebsiteController::class, 'discount'])->name('discount');
+            Route::get('galleries', [App\Http\Controllers\WebsiteController::class, 'galleries'])->name('galleries');
+            Route::get('clips', [App\Http\Controllers\WebsiteController::class, 'clips'])->name('clips');
+            Route::get('/customer/address/save', [App\Http\Controllers\CustomerController::class, 'saveAddress'])->name('customer.address')->middleware('auth:customer');
+            Route::post('/ticket/send', [\App\Http\Controllers\CustomerController::class, 'SendTicket'])->name('ticket.send');
+
+            Route::get('category/{category}', [App\Http\Controllers\WebsiteController::class, 'categoryLang'])->name('category.show');
+            Route::get('/product-category/{cat}', [App\Http\Controllers\WebsiteController::class, 'catLang'])->name('product-category.show');
+            Route::get('/product/{pro}', [App\Http\Controllers\WebsiteController::class, 'productLang'])->name('product');
+            Route::get('post/{post}', [App\Http\Controllers\WebsiteController::class, 'postLang'])->name('post.show');
+            Route::get('/compare/remove/{pro}', [App\Http\Controllers\WebsiteController::class, 'compareRemLang'])->name('compare.rem');
+            Route::get('/compare/add/{pro}', [App\Http\Controllers\WebsiteController::class, 'compareAddLang'])->name('compare.add');
+            Route::get('/card-add/{id}', [App\Http\Controllers\WebsiteController::class, 'cardAddLang'])->name('card.add');
+            Route::get('/card-rem/{id}', [App\Http\Controllers\WebsiteController::class, 'cardRemLang'])->name('card.rem');
+            Route::get('/card-add-q/{id}/{count}', [App\Http\Controllers\WebsiteController::class, 'cardAddQLang'])->name('card.addq');
+            Route::get('/card-rem-q/{id}', [App\Http\Controllers\WebsiteController::class, 'cardRemQLang'])->name('card.remq');
+            Route::get('/customer/invoice/{invoice}', [App\Http\Controllers\CustomerController::class, 'invoiceLang'])->name('customer.invoice')->middleware('auth:customer');
+            Route::get('/customer/address/rem/{address}', [App\Http\Controllers\CustomerController::class, 'remAddressLang'])->name('customer.remaddress')->middleware('auth:customer');
+            Route::get('/invoice/qr/{hash}', [\App\Http\Controllers\CustomerController::class, 'qrLang'])->name('invoice.qr');
+            Route::get('/invoice/pdf/{hash}', [\App\Http\Controllers\CustomerController::class, 'pdfLang'])->name('invoice.pdf');
+            Route::get('/ticket/{ticket}', [\App\Http\Controllers\CustomerController::class, 'ticketLang'])->name('ticket.show');
+            Route::get('/fav/toggle/{product}', [App\Http\Controllers\WebsiteController::class, 'favToggleLang'])->name('fav.toggle');
+            Route::get('tag/{tag}', [App\Http\Controllers\WebsiteController::class, 'tagLang'])->name('tag.show');
+            Route::get('/g/{gallery}', [App\Http\Controllers\WebsiteController::class, 'galleryLang'])->name('gallery');
+            Route::get('/s/{term}', [App\Http\Controllers\WebsiteController::class, 'searchLang'])->name('search');
+            Route::post('/comment/post/{post}', [App\Http\Controllers\WebsiteController::class, 'commentPostLang'])->name('comment.post');
+            Route::post('/comment/product/{product}', [App\Http\Controllers\WebsiteController::class, 'commentProductLang'])->name('comment.product');
+            Route::post('/like/{news}', [App\Http\Controllers\WebsiteController::class, 'likeLang'])->name('like');
+            Route::post('/vote/{poll}', [App\Http\Controllers\WebsiteController::class, 'voteLang'])->name('vote');
+            Route::get('/poll/{poll}', [App\Http\Controllers\WebsiteController::class, 'pollLang'])->name('poll');
+            Route::get('/goadv/{adv}', [App\Http\Controllers\WebsiteController::class, 'goadvLang'])->name('goadv');
+
+            // need check by Sadeghpm
+            Route::get('/redirect/bank/{invoice}/{gateway}', \App\Http\Controllers\Payment\GatewayRedirectController::class)->name('redirect.bank');
+            Route::any('/pay/check/{invoice_hash}/{gateway}', \App\Http\Controllers\Payment\GatewayVerifyController::class)->name('pay.check');
+
 
         });
 });

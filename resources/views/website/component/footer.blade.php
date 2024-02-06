@@ -9,7 +9,7 @@
                 <ul>
                     @foreach(\App\Helpers\getSettingCategory('footer1')->posts as $p)
                         <li>
-                            <a href="{{route('n.show',$p->slug)}}">
+                            <a href="{{route('post.show',$p->slug)}}">
                                 {{$p->title}}
                             </a>
                         </li>
@@ -23,7 +23,7 @@
                 <ul>
                     @foreach(\App\Helpers\getSettingCategory('footer2')->posts as $p)
                         <li>
-                            <a href="{{route('n.show',$p->slug)}}">
+                            <a href="{{route('post.show',$p->slug)}}">
                                 {{$p->title}}
                             </a>
                         </li>

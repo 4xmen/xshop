@@ -15,12 +15,12 @@
                         </a>
                     </li>
                     <li class="breadcrumb-item">
-                        <a href="{{route('n.mag')}}">
+                        <a href="{{route('mag')}}">
                             {{__("Magazine")}}
                         </a>
                     </li>
                     <li class="breadcrumb-item">
-                        <a href="{{route('n.category',$post->categories()->first()->slug)}}">
+                        <a href="{{route('category.show',$post->categories()->first()->slug)}}">
                             {{$post->categories()->first()->name}}
                         </a>
                     </li>
@@ -61,7 +61,7 @@
                             ارسال دیدگاه
                         </h5>
                         <form class="xsumbmiter non-print" method="post" id="comment-form-body" action="no-action">
-                            <input type="hidden" id="smt"  value="{{route('n.comment.post',$post->slug)}}">
+                            <input type="hidden" id="smt"  value="{{route('comment.post',$post->slug)}}">
                             @csrf
                             <input type="hidden" id="reply" name="parent" value="">
                             <div class="row mb-3">

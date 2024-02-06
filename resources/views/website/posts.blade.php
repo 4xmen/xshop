@@ -14,14 +14,14 @@
                     <div class="row">
                         @foreach($posts as $p)
                             <div class="col-md-4">
-                                <a href="{{route('n.show',$p->slug)}}" class="text-dark text-decoration-none">
+                                <a href="{{route('post.show',$p->slug)}}" class="text-dark text-decoration-none">
                                     <div class="mb-4 card post-card">
                                         <img src="{{$p->imgurl()}}" class="img-fluid" alt="{{$p->title}}" title="{{$p->title}}">
                                         <div class="card-body">
                                             <h3 class="textt">{{$p->title}}</h3>
                                             <div class="mb-2">
                                                 @foreach($p->tags as $tag)
-                                                    <a class="post-tag ms-2" href="{{route('n.tag',$tag->slug)}}">
+                                                    <a class="post-tag ms-2" href="{{route('tag.show',$tag->slug)}}">
                                                         {{$tag->name}}
                                                     </a>
                                                 @endforeach
@@ -53,7 +53,7 @@
                         <ul class="list-group">
                             @foreach(\Xmen\StarterKit\Models\Post::latest()->limit(10)->get() as $post)
                                 <li class="list-group-item">
-                                    <a href="">
+                                    <a href="{{route('post.show',$post->slug)}}">
                                         {{$post->title}}
                                     </a>
                                 </li>

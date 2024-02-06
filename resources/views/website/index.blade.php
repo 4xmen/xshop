@@ -166,14 +166,14 @@
             <div class="row">
                 @foreach(\Xmen\StarterKit\Models\Post::where('status',1)->limit(4)->get() as $p)
                     <div class="col-md-3">
-                        <a href="{{route('n.show',$p->slug)}}" class="text-dark text-decoration-none">
+                        <a href="{{route('post.show',$p->slug)}}" class="text-dark text-decoration-none">
                             <div class="mb-4 card post-card">
                                 <img src="{{$p->imgurl()}}" class="img-fluid" alt="{{$p->title}}" title="{{$p->title}}">
                                 <div class="card-body">
                                     <h3 class="textt">{{$p->title}}</h3>
                                     <div class="mb-2">
                                         @foreach($p->tags as $tag)
-                                            <a class="post-tag ms-2" href="{{route('n.tag',$tag->slug)}}">
+                                            <a class="post-tag ms-2" href="{{route('tag.show',$tag->slug)}}">
                                                 {{$tag->name}}
                                             </a>
                                         @endforeach
@@ -210,7 +210,7 @@
             <div class="row">
                 @foreach(\App\Helpers\getSubCats(\App\Helpers\getSetting('4cat')) as $cat)
                     <div class="col-md-2 col-sm-3 col-4">
-                        <a href="{{route('cat',$cat->slug)}}">
+                        <a href="{{route('product-category.show',$cat->slug)}}">
                             <img src="{{$cat->thumbUrl()}}" title="{{$cat->name}}" alt="{{$cat->name}}">
                         </a>
                     </div>

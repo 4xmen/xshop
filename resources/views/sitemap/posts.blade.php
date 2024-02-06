@@ -9,7 +9,7 @@
     @foreach($items as $item)
 
     <url>
-        <loc>{{route('n.show',$item->slug)}}</loc>
+        <loc>{{route('post.show',$item->slug)}}</loc>
         <lastmod>{{ $item->updated_at->tz('UTC')->toAtomString() }}</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.7</priority>

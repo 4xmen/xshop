@@ -125,7 +125,7 @@ function showCats($cats = [], $liClass = '', $ulClass = '')
     $txt = '';
     foreach ($cats as $cat) {
         $txt .= '<li class="' . $liClass . '">
-        <a href="' . route('cat', $cat->slug) . '">' . $cat->name . '</a>';
+        <a href="' . route('product-category.show', $cat->slug) . '">' . $cat->name . '</a>';
         if ($cat->children()->count() > 0) {
 //            $txt .='<li> '.$cat->name;
             $txt .= '<ul class="' . $ulClass . '">';
@@ -261,34 +261,34 @@ function MenuShowItems($items)
         $out .= '<li>';
         switch ($item->kind) {
             case "tag":
-                $out .= '<a href="' . route('n.tag', $item->meta) . '" >' . $item->title . '</a>';
+                $out .= '<a href="' . route('tag.show', $item->meta) . '" >' . $item->title . '</a>';
                 break;
             case "link":
                 $out .= '<a href="' . $item->meta . '" >' . $item->title . '</a>';
                 break;
             case "news":
                 $n = Post::whereId($item->menuable_id)->firstOrFail();
-                $out .= '<a href="' . route('n.show', $n->slug) . '" >' . $item->title . '</a>';
+                $out .= '<a href="' . route('post.show', $n->slug) . '" >' . $item->title . '</a>';
                 break;
             case "tag-sub":
                 $out .= $item->title;
                 $news = Post::withAnyTag($item->meta)->limit(10)->get(['title', 'slug']);
                 $out .= '<ul>';
                 foreach ($news as $new) {
-                    $out .= '<li><a href="' . route('n.show', $new->slug) . '" >' . $new->title . '</a></li>';
+                    $out .= '<li><a href="' . route('post.show', $new->slug) . '" >' . $new->title . '</a></li>';
                 }
                 $out .= '</ul>';
                 break;
             case "cat":
                 $cat = Category::whereId($item->menuable_id)->firstOrFail();
-                $out .= '<a href="' . route('n.cat', $cat->slug) . '" >' . $item->title . '</a>';
+                $out .= '<a href="' . route('category.show', $cat->slug) . '" >' . $item->title . '</a>';
                 break;
             case "cat-sub":
                 $out .= $item->title;
                 $cats = Category::where('parent_id', $item->menuable_id)->limit(20)->get(['name', 'slug']);
                 $out .= '<ul>';
                 foreach ($cats as $c) {
-                    $out .= '<li><a href="' . route('n.cat', $c->slug) . '" >' . $c->name . '</a></li>';
+                    $out .= '<li><a href="' . route('product-category.show', $c->slug) . '" >' . $c->name . '</a></li>';
                 }
                 $out .= '</ul>';
                 break;
@@ -298,7 +298,7 @@ function MenuShowItems($items)
                 $news = $cat->posts()->limit(10)->get(['slug', 'title']);
                 $out .= '<ul>';
                 foreach ($news as $new) {
-                    $out .= '<li><a href="' . route('n.show', $new->slug) . '" >' . $new->title . '</a></li>';
+                    $out .= '<li><a href="' . route('post.show', $new->slug) . '" >' . $new->title . '</a></li>';
                 }
                 $out .= '</ul>';
                 break;
@@ -682,14 +682,14 @@ function makeProductBreadcrumb(Product $p, Cat $c)
     $items = [
         [
             'name' => $c->name,
-            'link' => \route('cat', $c->slug)
+            'link' => \route('product-category.show', $c->slug)
         ]
     ];
     while ($c->parent_id != null) {
         $c = Cat::where('id', $c->parent_id)->first();
         $items[] = [
             'name' => $c->name,
-            'link' => \route('cat', $c->slug)
+            'link' => \route('product-category.show', $c->slug)
         ];
     }
 

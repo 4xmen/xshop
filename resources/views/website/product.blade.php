@@ -63,11 +63,11 @@
                         </li>
                         @if ($cat->parent != null)
                             <li class="breadcrumb-item">
-                                <a href="{{route('cat',$cat->parent->slug)}}">{{$cat->parent->name}}</a>
+                                <a href="{{route('product-category.show',$cat->parent->slug)}}">{{$cat->parent->name}}</a>
                             </li>
                         @endif
                         <li class="breadcrumb-item">
-                            <a href="{{route('cat',$cat->slug)}}">{{$cat->name}}</a>
+                            <a href="{{route('product-category.show',$cat->slug)}}">{{$cat->name}}</a>
                         </li>
                         <li class="breadcrumb-item active" aria-current="page">
                             {{$pro->name}}
@@ -279,7 +279,7 @@
                                         <form class="xsumbmiter non-print" method="post" id="comment-form-body"
                                               action="no-action">
                                             <input type="hidden" id="smt"
-                                                   value="{{route('n.comment.product',$pro->slug)}}">
+                                                   value="{{route('comment.product',$pro->slug)}}">
                                             @csrf
                                             <input type="hidden" id="reply" name="parent" value="">
                                             <div class="row mb-3">

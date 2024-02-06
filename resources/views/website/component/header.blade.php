@@ -106,7 +106,7 @@
             </div>
             <div class="col-lg-4 col-md-6">
                 <div class="input-group flex-nowrap" style="margin-top: 1em;">
-                    <input type="text" id="searching" data-url="{{route('search')}}"
+                    <input type="text" id="searching" data-url="{{route('search','')}}"
                            data-ajax="{{route('search.ajax')}}" class="form-control" placeholder="جستجو در محصولات..."
                            aria-label="search"
                            aria-describedby="addon-wrapping">

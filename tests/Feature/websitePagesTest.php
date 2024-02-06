@@ -40,7 +40,7 @@ class websitePagesTest extends TestCase
     public function test_single_post()
     {
         if (Post::count() > 0) {
-            $response = $this->get(route('post', Post::inRandomOrder()->first()->slug));
+            $response = $this->get(route('post.show', Post::inRandomOrder()->first()->slug));
             $response->assertStatus(200);
         } else {
             $this->assertTrue(true);
@@ -61,7 +61,7 @@ class websitePagesTest extends TestCase
 
     public function test_single_product_category()
     {
-        $response = $this->get(route('cat', Cat::inRandomOrder()->first()->slug));
+        $response = $this->get(route('product-category.show', Cat::inRandomOrder()->first()->slug));
         $response->assertStatus(200);
     }
 

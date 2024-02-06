@@ -2,7 +2,7 @@
     <ul id="mega-menu">
         @foreach(\App\Helpers\getMainCats(8) as $mcat)
             <li>
-                <a href="{{route('cat',$mcat->slug)}}">
+                <a href="{{route('product-category.show',$mcat->slug)}}">
                     {{$mcat->name}}
                 </a>
                 <ul>
@@ -30,7 +30,7 @@
                         <ul>
                             @foreach(\App\Helpers\getSubCats($mcat->id) as $subcat)
                                 <li>
-                                    <a href="{{route('cat',$subcat->slug)}}">
+                                    <a href="{{route('product-category.show',$subcat->slug)}}">
                                         {{$subcat->name}}
                                     </a>
                                 </li>

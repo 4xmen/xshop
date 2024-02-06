@@ -7,7 +7,7 @@
             </div>
             <div class="col-md-9">
                 <h3>
-                    <a href="{{route('n.show',$n->slug)}}">
+                    <a href="{{route('post.show',$n->slug)}}">
                         {{$n->title}}
                     </a>
                 </h3>

@@ -80,7 +80,7 @@ class WebsiteController extends Controller
             ->orderByDesc($this->sort)->orderByDesc('id');
         if ($request->has('ext')) {
             $q = $q->where('stock_status', 'IN_STOCK')
-                ->where('stock_quantity','>',0);
+                ->where('stock_quantity', '>', 0);
         }
         if ($request->has('from')) {
             $q = $q->where('price', '>=', $request->input('from'));
@@ -110,27 +110,32 @@ class WebsiteController extends Controller
             $q = $q->orderByDesc('sell_count');
         }
 
-        if (isset($request->meta) && isset($request->meta['material'])){
+        if (isset($request->meta) && isset($request->meta['material'])) {
 //            dd(array_column(json_decode($request->meta['material'],true),'value'));
-            if (count(json_decode($request->meta['material'],true) ) > 0){
-                $q->whereMetaIn('material',array_column(json_decode($request->meta['material'],true),'value'));
+            if (count(json_decode($request->meta['material'], true)) > 0) {
+                $q->whereMetaIn('material', array_column(json_decode($request->meta['material'], true), 'value'));
             }
         }
         if (isset($request->meta) && isset($request->meta['size'])) {
-            $id = Quantity::where('count','>',0)
-                ->where('data','LIKE','%"size":"'.$request->meta['size'].'"%')
+            $id = Quantity::where('count', '>', 0)
+                ->where('data', 'LIKE', '%"size":"' . $request->meta['size'] . '"%')
                 ->pluck('product_id')->toArray();
-            $q->whereIn('id',$id);
+            $q->whereIn('id', $id);
         }
         if (isset($request->meta) && isset($request->meta['color'])) {
-            $id = Quantity::where('count','>',0)
-                ->where('data','LIKE','%"color":"'.$request->meta['color'].'"%')
+            $id = Quantity::where('count', '>', 0)
+                ->where('data', 'LIKE', '%"color":"' . $request->meta['color'] . '"%')
                 ->pluck('product_id')->toArray();
-            $q->whereIn('id',$id);
+            $q->whereIn('id', $id);
         }
 
         $products = $q->paginate(16);
         return view('website.cat', compact('cat', 'products'));
+    }
+
+    public function catLang($lang, Cat $cat, Request $request)
+    {
+        return $this->cat($cat, $request);
     }
 
     public function products()
@@ -144,15 +149,15 @@ class WebsiteController extends Controller
     public function product($pro)
     {
 
-        if (is_numeric($pro)){
+        if (is_numeric($pro)) {
             $pro = Product::whereId($pro)->first();
-            if ($pro == null){
+            if ($pro == null) {
                 $pro = Product::inRandomOrder()->limit(1)->first();
             }
 
-            return  redirect()->route('product',$pro->slug);
+            return redirect()->route('product', $pro->slug);
 
-        }else{
+        } else {
             $pro = Product::whereSlug($pro)->first();
         }
 
@@ -162,6 +167,11 @@ class WebsiteController extends Controller
 
         $comments = $pro->approved_comments()->paginate(10);
         return view('website.product', compact('pro', 'cat', 'comments'));
+    }
+
+    public function productLang($lang, $pro)
+    {
+        return $this->product($pro);
     }
 
     public function searchAjax(Request $request)
@@ -188,6 +198,11 @@ class WebsiteController extends Controller
             ];
         }
         return ['OK' => true, 'data' => $pros];
+    }
+
+    public function searchLang($lang, $term, Request $request)
+    {
+        return $this->search($term, $request);
     }
 
     public function search(Request $request)
@@ -223,6 +238,16 @@ class WebsiteController extends Controller
         return view('website.post', compact('post', 'comments', 'sld'));
     }
 
+    public function postLang($lang, Post $post)
+    {
+        return $this->post($post);
+    }
+
+    public function galleryLang($lang, Gallery $gallery)
+    {
+        return $this->gallery($gallery);
+    }
+
     public function gallery(Gallery $gallery)
     {
         $title = $gallery->title;
@@ -248,6 +273,11 @@ class WebsiteController extends Controller
     }
 
 
+    public function tagLang($lang, $tag)
+    {
+        return $this->tag($tag);
+    }
+
     public function tag($tag)
     {
         $title = __('Tag') . ' ' . $tag;
@@ -264,6 +294,11 @@ class WebsiteController extends Controller
         return view('website.posts', compact('posts', 'title', 'subtitle'));
     }
 
+    public function categoryLang($lang, Category $category)
+    {
+        return $this->category($category);
+    }
+
     public function posts()
     {
         $title = __('All posts');
@@ -274,20 +309,29 @@ class WebsiteController extends Controller
     }
 
 
-    public function like(Post $news, Request $request)
+    public function likeLang($lang, Post $post, Request $request)
+    {
+        return $this->like($post, $request);
+    }
+
+    public function like(Post $post, Request $request)
     {
 
-        if (!gLog(Post::class, $news->id, 'like', $request)) {
-            return ['OK' => false, 'msg' => __("You liked ago ") . $news->title];
+        if (!gLog(Post::class, $post->id, 'like', $request)) {
+            return ['OK' => false, 'msg' => __("You liked ago ") . $post->title];
         }
 
         if ($request->input('action') == 1) {
-            $news->increment('like');
-            return ['OK' => true, 'msg' => __("You liked ") . $news->title];
+            $post->increment('like');
+            return ['OK' => true, 'msg' => __("You liked ") . $post->title];
         } else {
-            $news->increment('dislike');
-            return ['OK' => true, 'msg' => __("You disliked ") . $news->title];
+            $post->increment('dislike');
+            return ['OK' => true, 'msg' => __("You disliked ") . $post->title];
         }
+    }
+
+    public function voteLang($lang ,Poll $poll, Request $request){
+        return $this->vote($poll,$request);
     }
 
     public function vote(Poll $poll, Request $request)
@@ -305,6 +349,9 @@ class WebsiteController extends Controller
 
     }
 
+    public function pollLang($lang, Poll $poll, Request $request){
+        return $this->poll($poll,$request);
+    }
     public function poll(Poll $poll, Request $request)
     {
         $count = $poll->opinions()->sum('vote');
@@ -312,6 +359,11 @@ class WebsiteController extends Controller
         return view('website.poll', compact('poll', 'count', 'canVote'));
     }
 
+
+    public function commentPostLang($lang, Post $post, CommentClientRequest $request)
+    {
+        return $this->commentPost($post, $request);
+    }
 
     public function commentPost(Post $post, CommentClientRequest $request)
     {
@@ -350,6 +402,12 @@ class WebsiteController extends Controller
 
         return redirect()->route('post', $post->slug . '#comment-form')->with(['message' => __('Your comment submited successfully, After approve will be visbile.')]);
 
+    }
+
+
+    public function commentProductLang($lang, Product $product, CommentClientRequest $request)
+    {
+        return $this->commentProduct($product, $request);
     }
 
     public function commentProduct(Product $product, CommentClientRequest $request)
@@ -391,6 +449,9 @@ class WebsiteController extends Controller
 
     }
 
+    public function goadvLang($lang, Adv $adv){
+        return $this->goadv($adv);
+    }
     public function goadv(Adv $adv)
     {
         $adv->increment('click');
@@ -418,6 +479,11 @@ class WebsiteController extends Controller
         return view('website.compare', compact('pros'));
     }
 
+    public function compareAddLang($lang, Product $pro)
+    {
+        $this->compareAdd($pro);
+    }
+
     public function compareRem(Product $pro)
     {
         $arr = unserialize(session('to_compare', serialize([])));
@@ -426,6 +492,11 @@ class WebsiteController extends Controller
             session(['to_compare' => serialize($arr)]);
         }
         return redirect()->route('compare');
+    }
+
+    public function compareRemLang($lang, Product $pro)
+    {
+        return $this->compareRem($pro);
     }
 
     public function cardAdd($id)
@@ -437,6 +508,16 @@ class WebsiteController extends Controller
             session(['card' => serialize($arr)]);
         }
         return ['OK' => true, 'msg' => __('Added to card'), 'data' => count(array_merge($arr, $arr2))];
+    }
+
+    public function cardAddLang($lang, $id)
+    {
+        return $this->cardAdd($id);
+    }
+
+    public function cardAddQLang($lang, $id, $count)
+    {
+        return $this->cardAddQ($id, $count);
     }
 
     public function cardAddQ($id, $count)
@@ -453,6 +534,11 @@ class WebsiteController extends Controller
         return ['OK' => true, 'msg' => __('Added to card'), 'data' => count(array_merge($arr, $arr2))];
     }
 
+    public function cardRemLang($lang, $id)
+    {
+        return $this->cardRem($id);
+    }
+
     public function cardRem($id)
     {
         $arr = unserialize(session('card', serialize([])));
@@ -461,6 +547,11 @@ class WebsiteController extends Controller
         }
         session(['card' => serialize($arr)]);
         return redirect()->route('card.show')->with(['message' => __('Product removed form card')]);
+    }
+
+    public function cardRemQLang($lang, $id)
+    {
+        return $this->cardRemQ($id);
     }
 
     public function cardRemQ($id)
@@ -485,13 +576,13 @@ class WebsiteController extends Controller
         $counts = unserialize(session('qcounts', serialize([])));
         $qpros = Quantity::whereIn('id', $arr)->get();
         $transports = Transport::orderBy('sort')->orderBy('price')->get();
-        $resevers = Invoice::where('reserve',1)->where('customer_id', \auth('customer')->id())
+        $resevers = Invoice::where('reserve', 1)->where('customer_id', \auth('customer')->id())
             ->whereBetween('created_at',
                 [
                     Carbon::now()->subHour((int)getSetting('reserve')),
                     Carbon::now(),
                 ])->get();
-        \Session::put('shoping_card','1');
+        \Session::put('shoping_card', '1');
         \Session::save();
         return view('website.card', compact('pros', 'transports', 'qpros', 'counts', 'resevers'));
     }
@@ -553,11 +644,11 @@ class WebsiteController extends Controller
         $mobile = $request->mobile;
         if (Customer::where('mobile', $mobile)->count() > 0) {
 
-            if (Customer::where('mobile', $mobile)->where('code', $code)->count() > 0){
+            if (Customer::where('mobile', $mobile)->where('code', $code)->count() > 0) {
                 Auth::guard('customer')->loginUsingId(Customer::where('mobile', $mobile)
                     ->where('code', $code)->first()->id);
                 return ['OK' => true, 'msg' => __('Welcome')];
-            }else{
+            } else {
                 return ['OK' => false, 'err' => __('Auth code error')];
             }
             // login
@@ -613,6 +704,11 @@ class WebsiteController extends Controller
         return view('website.track', compact('attaches'));
     }
 
+    public function favToggleLang($lang, Product $product)
+    {
+        return $this->favToggle($product);
+    }
+
     public function favToggle(Product $product)
     {
         if (\auth('customer')->check()) {
@@ -657,19 +753,21 @@ class WebsiteController extends Controller
 
     }
 
-    static public function resetStockStatus(){
+    static public function resetStockStatus()
+    {
         Product::whereStockQuantity('0')->update(['stock_status' => 'OUT_STOCK']);
         return 'Done!';
     }
 
-    static public  function resetQuantity(){
+    static public function resetQuantity()
+    {
 
-        $qs =  Quantity::groupBy('product_id')
+        $qs = Quantity::groupBy('product_id')
             ->select('product_id', DB::raw('sum(`count`) as count'))
             ->get();
-        foreach ($qs as $q){
+        foreach ($qs as $q) {
             $p = Product::whereId($q->product_id)->first();
-            if ($p != null){
+            if ($p != null) {
                 $p->stock_quantity = $q->count;
                 $p->save();
             }
