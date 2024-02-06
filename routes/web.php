@@ -189,6 +189,13 @@ Route::prefix(config('starter-kit.uri'))->name('admin.')->group(
             }
         );
     });
+
+// site map
+Route::get('/sitemap.xml', [App\Http\Controllers\SitemapController::class, 'index'])->name('sitemap.index');
+Route::get('/sitemap/posts.xml', [App\Http\Controllers\SitemapController::class, 'posts'])->name('sitemap.posts');
+Route::get('/sitemap/cats.xml', [App\Http\Controllers\SitemapController::class, 'cats'])->name('sitemap.cats');
+Route::get('/sitemap/products.xml', [App\Http\Controllers\SitemapController::class, 'products'])->name('sitemap.products');
+
 Route::get('/props/list/{id}', [\App\Http\Controllers\Admin\PropController::class, 'list'])->name('props.list');
 
 // for under construction
@@ -339,12 +346,6 @@ Route::prefix('/{lang?}')->name('lang.')->group(function () {
         });
 });
 
-
-// site map
-Route::get('/sitemap.xml', [App\Http\Controllers\SitemapController::class, 'index'])->name('sitemap.index');
-Route::get('/sitemap/posts.xml', [App\Http\Controllers\SitemapController::class, 'posts'])->name('sitemap.posts');
-Route::get('/sitemap/cats.xml', [App\Http\Controllers\SitemapController::class, 'cats'])->name('sitemap.cats');
-Route::get('/sitemap/products.xml', [App\Http\Controllers\SitemapController::class, 'products'])->name('sitemap.products');
 
 //Route::get('impex/customer', [App\Http\Controllers\ImpexController::class, 'customer'])->name('impex.customer');
 //Route::get('impex/col', [App\Http\Controllers\ImpexController::class, 'col'])->name('impex.col');
