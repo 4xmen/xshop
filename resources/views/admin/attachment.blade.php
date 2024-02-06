@@ -32,8 +32,11 @@
                 </div>
             </div>
         </form>
-        <table class="table table-striped table-bordered">
+        <table class="table table-striped table-bordered text-center mt-3">
             <tr>
+                <th>
+                    #
+                </th>
                 <th>
                     {{__("Title")}}
                 </th>
@@ -49,6 +52,9 @@
             </tr>
             @foreach($attaches as $q)
                 <tr>
+                    <td>
+                        {{$q->id}}
+                    </td>
                     <td>
                         {{$q->title}}
                     </td>

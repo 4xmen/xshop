@@ -124,4 +124,7 @@
             {{$invoices->links()}}
         </div>
     </div>
+    <a class="btn-add" href="{{route('admin.invoice.create')}}">
+        <i class="ri-add-line"></i>
+    </a>
 @endsection
