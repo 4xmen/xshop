@@ -8,7 +8,7 @@
         </li>
         <li id="catalog" class="main-nav">
             <a>
-                <i class="fab fa-apple"></i>
+                <i class="ri-apple-fill"></i>
                 &nbsp;
                 {{__("Catalog")}}
             </a>
