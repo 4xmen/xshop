@@ -9,11 +9,11 @@
         @include('starter-kit::component.err')
         <form action="{{route('admin.cat.bulk')}}" method="post" class="bulk-action" >
             @csrf
-            <table class="table table-striped table-bordered ">
+            <table class="table table-striped table-bordered text-center">
                 <thead class="thead-dark">
                 <tr>
                     <th>
-                        <input type="checkbox" class="chkall"/>
+                        #
                     </th>
                     <th>
                         {{__("Image")}}
@@ -27,13 +27,15 @@
                     <th>
                         {{__("Action")}}
                     </th>
+                    <th>
+                        <input type="checkbox" class="chkall"/>
+                    </th>
                 </tr>
                 </thead>
                 <tbody>
                 @foreach ($cats as $cat)
                     <tr>
                         <td>
-                            <input type="checkbox" name="id[]" value="{{$cat->id}}" class="m-2 chkbox"/>
                             {{$cat->id}}
                         </td>
                         <td>
@@ -59,6 +61,9 @@
                                     <i class="ri-translate"></i>
                                 </a>
                             @endif
+                        </td>
+                        <td>
+                            <input type="checkbox" name="id[]" value="{{$cat->id}}" class="m-2 chkbox"/>
                         </td>
                     </tr>
                 @endforeach

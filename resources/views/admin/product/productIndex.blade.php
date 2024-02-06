@@ -34,9 +34,9 @@
         </div>
         <form action="{{route('admin.product.bulk')}}" method="post" class="bulk-action">
             @csrf
-            <table class="table table-striped table-bordered ">
+            <table class="table table-striped table-bordered text-center">
                 <thead class="thead-dark">
-                <tr class="text-center">
+                <tr>
                     <th>
                         #
                     </th>
@@ -59,7 +59,7 @@
                 </thead>
                 <tbody>
                 @foreach ($products as $n)
-                    <tr class="text-center">
+                    <tr>
                         <td>
                             {{$n->id}}
                         </td>
