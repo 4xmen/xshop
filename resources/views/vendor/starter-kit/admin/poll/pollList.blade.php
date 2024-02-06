@@ -7,9 +7,6 @@
     <div class="container">
         <h1>
             {{__("Poll list")}}
-            <a href="{{route('admin.poll.create')}}" class="btn btn-success float-start">
-                {{__("New Poll")}}
-            </a>
         </h1>
         @include('starter-kit::component.err')
         <div class="alert alert-dark">
@@ -29,11 +26,11 @@
 
         <form action="{{route('admin.poll.bulk')}}" method="post" class="bulk-action">
             @csrf
-            <table class="table table-striped table-bordered ">
+            <table class="table table-striped table-bordered text-center">
                 <thead class="thead-dark">
                 <tr>
                     <th>
-                        <input type="checkbox" class="chkall"/>
+                        #
                     </th>
                     <th>
                         {{__("Title")}}
@@ -46,8 +43,9 @@
                     </th>
                     <th>
                         {{__("Action")}}
-                        <a href="{{route('admin.poll.create')}}" class="btn btn-success float-start"><i
-                                class="fa fa-plus"></i></a>
+                    </th>
+                    <th>
+                        <input type="checkbox" class="chkall"/>
                     </th>
                 </tr>
                 </thead>
@@ -55,7 +53,6 @@
                 @foreach($polls as $pl)
                     <tr>
                         <td>
-                            <input type="checkbox" name="id[]" value="{{$pl->id}}" class="m-2 chkbox"/>
                             {{$pl->id}}
                         </td>
                         <td>
@@ -69,11 +66,14 @@
                         </td>
                         <td>
                             <a href="{{route('admin.poll.edit',$pl->slug)}}" class="btn btn-secondary">
-                                {{__("Edit")}}
+                                <i class="ri-edit-2-fill"></i>
                             </a>
                             <a href="{{route('admin.poll.delete',$pl->slug)}}" class="btn btn-danger del-conf">
-                                {{__("Delete")}}
+                                <i class="ri-close-line"></i>
                             </a>
+                        </td>
+                        <td>
+                            <input type="checkbox" name="id[]" value="{{$pl->id}}" class="m-2 chkbox"/>
                         </td>
                     </tr>
                 @endforeach
@@ -84,4 +84,7 @@
         <br>
         {{$polls->links()}}
     </div>
+    <a class="btn-add" href="{{route('admin.poll.create')}}">
+        <i class="ri-add-line"></i>
+    </a>
 @endsection

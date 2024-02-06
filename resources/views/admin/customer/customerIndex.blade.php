@@ -43,13 +43,13 @@
                 </div>
             </div>
         </form>
-        <form action="{{route('admin.customer.bulk')}}" method="post" class="bulk-action" >
+        <form action="{{route('admin.customer.bulk')}}" method="post" class="bulk-action mt-3" >
             @csrf
-            <table class="table table-striped table-bordered ">
+            <table class="table table-striped table-bordered text-center">
                 <thead class="thead-dark">
                 <tr>
                     <th>
-                        <input type="checkbox" class="chkall"/>
+                        #
                     </th>
                     <th>
                         {{__("Name")}}
@@ -62,8 +62,9 @@
                     </th>
                     <th>
                         {{__("Action")}}
-                        <a href="{{route('admin.customer.create')}}" class="btn btn-success float-start"><i
-                                class="fa fa-plus"></i></a>
+                    </th>
+                    <th>
+                        <input type="checkbox" class="chkall"/>
                     </th>
                 </tr>
                 </thead>
@@ -71,7 +72,6 @@
                 @foreach ($customers as $customer)
                     <tr>
                         <td>
-                            <input type="checkbox" name="id[]" value="{{$customer->id}}" class="m-2 chkbox"/>
                             {{$customer->id}}
                         </td>
                         <td>
@@ -85,14 +85,15 @@
                         </td>
                         <td>
                             <a href="{{route('admin.customer.edit',$customer->id)}}" class="btn btn-primary">
-                                <i class="fa fa-edit"></i> &nbsp;
-                                {{__("Edit")}}
+                                <i class="ri-edit-2-line"></i>
                             </a>
                             <a href="{{route('admin.customer.delete',$customer->id)}}"
                                class="btn btn-danger  delete-confirm">
-                                <i class="fa fa-times"></i> &nbsp;
-                                {{__("Delete")}}
+                                <i class="ri-close-line"></i>
                             </a>
+                        </td>
+                        <td>
+                            <input type="checkbox" name="id[]" value="{{$customer->id}}" class="m-2 chkbox"/>
                         </td>
                     </tr>
                 @endforeach
@@ -103,5 +104,8 @@
         <div class="text-center pt-3">
             {{$customers->appends(request()->input())->links()}}
         </div>
+        <a class="btn-add" href="{{route('admin.customer.create')}}">
+            <i class="ri-add-line"></i>
+        </a>
     </div>
 @endsection

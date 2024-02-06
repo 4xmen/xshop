@@ -22,11 +22,11 @@
         </div>
         <form action="{{route('admin.invoice.bulk')}}" method="post" class="bulk-action">
             @csrf
-            <table class="table table-striped table-bordered ">
+            <table class="table table-striped table-bordered text-center">
                 <thead class="thead-dark">
                 <tr>
                     <th>
-                        <input type="checkbox" class="chkall"/>
+                        #
                     </th>
                     <th>
                         {{__("Customer")}}
@@ -51,13 +51,16 @@
                         {{--                        <a href="{{route('admin.invoice.create')}}" class="btn btn-success float-start"><i--}}
                         {{--                                class="fa fa-plus"></i></a>--}}
                     </th>
+                    <th>
+                        <input type="checkbox" class="chkall"/>
+                    </th>
                 </tr>
                 </thead>
                 <tbody>
                 @foreach ($invoices as $invoice)
                     <tr>
                         <td>
-                            <input type="checkbox" name="id[]" value="{{$invoice->id}}" class="m-2 chkbox"/>
+                            {{$invoice->id}}
                         </td>
                         <td>
                             {{$invoice->customer->name}}
@@ -86,21 +89,23 @@
                         </td>
                         <td>
                             <a href="{{route('admin.invoice.edit',$invoice->hash)}}" class="btn btn-primary">
-                                <i class="fa fa-edit"></i>
-
+                                <i class="ri-edit-2-line"></i>
                             </a>
                             <a href="{{route('admin.invoice.delete',$invoice->hash)}}"
                                class="btn btn-danger  delete-confirm">
-                                <i class="fa fa-times"></i>
+                                <i class="ri-close-line"></i>
                             </a>
                             <a href="{{route('admin.invoice.show',$invoice->hash)}}"
                                class="btn btn-secondary">
-                                <i class="fa fa-eye"></i>
+                                <i class="ri-eye-fill"></i>
                             </a>
                             <a href="{{route('invoice.pdf',$invoice->hash)}}"
                                class="btn btn-dark" target="_blank">
-                                <i class="fa fa-file-pdf"></i>
+                                <i class="ri-file-pdf-2-fill"></i>
                             </a>
+                        </td>
+                        <td>
+                            <input type="checkbox" name="id[]" value="{{$invoice->id}}" class="m-2 chkbox"/>
                         </td>
                     </tr>
                 @endforeach
@@ -119,4 +124,7 @@
             {{$invoices->links()}}
         </div>
     </div>
+    <a class="btn-add" href="{{route('admin.invoice.create')}}">
+        <i class="ri-add-line"></i>
+    </a>
 @endsection

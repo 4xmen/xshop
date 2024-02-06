@@ -10,11 +10,11 @@
         </h1>
         @include('starter-kit::component.err')
 
-        <table class="table table-striped table-bordered ">
+        <table class="table table-striped table-bordered text-center">
             <thead class="thead-dark">
             <tr>
                 <th>
-                    -
+                    #
                 </th>
                 <th>
                     {{__("Name")}}
@@ -34,11 +34,11 @@
                         {{$menu->name}}
                     </td>
                     <td>
-                        <a href="{{route('admin.menu.manage',$menu->id)}}" class="btn btn-secondary">
-                            {{__("Manage")}}
+                        <a href="{{route('admin.menu.manage',$menu->id)}}" class="btn btn-primary">
+                            <i class="ri-edit-2-fill"></i>
                         </a>
                         <a href="{{route('admin.menu.delete',$menu->id)}}" class="btn btn-danger del-conf">
-                            {{__("Delete")}}
+                            <i class="ri-close-line"></i>
                         </a>
                     </td>
                 </tr>

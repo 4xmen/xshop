@@ -9,11 +9,11 @@
         @include('starter-kit::component.err')
         <form action="{{route('admin.discount.bulk')}}" method="post" class="bulk-action">
             @csrf
-            <table class="table table-striped table-bordered ">
+            <table class="table table-striped table-bordered text-center">
                 <thead class="thead-dark">
                 <tr>
                     <th>
-                        <input type="checkbox" class="chkall"/>
+                        #
                     </th>
                     <th>
                         {{__("Type")}}
@@ -29,8 +29,9 @@
                     </th>
                     <th>
                         {{__("Action")}}
-                        <a href="{{route('admin.discount.create')}}" class="btn btn-success float-start"><i
-                                class="fa fa-plus"></i></a>
+                    </th>
+                    <th>
+                        <input type="checkbox" class="chkall"/>
                     </th>
                 </tr>
                 </thead>
@@ -38,7 +39,6 @@
                 @foreach ($discounts as $n)
                     <tr>
                         <td>
-                            <input type="checkbox" name="id[]" value="{{$n->id}}" class="m-2 chkbox"/>
                             {{$n->id}}
                         </td>
                         <td>
@@ -70,14 +70,15 @@
                         </td>
                         <td>
                             <a href="{{route('admin.discount.edit',$n->id)}}" class="btn btn-primary">
-                                <i class="fa fa-edit"></i> &nbsp;
-                                {{__("Edit")}}
+                                <i class="ri-edit-2-line"></i>
                             </a>
                             <a href="{{route('admin.discount.delete',$n->id)}}"
                                class="btn btn-danger  delete-confirm">
-                                <i class="fa fa-times"></i> &nbsp;
-                                {{__("Delete")}}
+                                <i class="ri-close-line"></i>
                             </a>
+                        </td>
+                        <td>
+                            <input type="checkbox" name="id[]" value="{{$n->id}}" class="m-2 chkbox"/>
                         </td>
                     </tr>
                 @endforeach
@@ -89,4 +90,7 @@
             {{$discounts->links()}}
         </div>
     </div>
+    <a class="btn-add" href="{{route('admin.discount.create')}}">
+        <i class="ri-add-line"></i>
+    </a>
 @endsection

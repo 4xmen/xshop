@@ -7,9 +7,6 @@
     <div class="container">
         <h1>
             {{__("Clip list")}}
-            <a href="{{route('admin.clip.create')}}" class="btn btn-success float-start">
-                {{__("New Clip")}}
-            </a>
         </h1>
         @include('starter-kit::component.err')
         <div class="alert alert-dark">
@@ -29,11 +26,11 @@
 
         <form action="{{route('admin.clip.bulk')}}" method="post" class="bulk-action">
             @csrf
-            <table class="table table-striped table-bordered ">
+            <table class="table table-striped table-bordered text-center">
                 <thead class="thead-dark">
                 <tr>
                     <th>
-                        <input type="checkbox" class="chkall"/>
+                        #
                     </th>
                     <th>
                         {{__("Title")}}
@@ -47,13 +44,15 @@
                     <th>
                         {{__("Action")}}
                     </th>
+                    <th>
+                        <input type="checkbox" class="chkall"/>
+                    </th>
                 </tr>
                 </thead>
                 <tbody>
                 @foreach($clips as $pl)
                     <tr>
                         <td>
-                            <input type="checkbox" name="id[]" value="{{$pl->id}}" class="m-2 chkbox"/>
                             {{$pl->id}}
                         </td>
                         <td>
@@ -78,6 +77,9 @@
                                     <i class="ri-translate"></i>
                                 </a>
                             @endif
+                        </td>
+                        <td>
+                            <input type="checkbox" name="id[]" value="{{$pl->id}}" class="m-2 chkbox"/>
                         </td>
                     </tr>
                 @endforeach

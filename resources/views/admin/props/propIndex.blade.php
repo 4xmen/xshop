@@ -7,7 +7,7 @@
         </h5>
 
         <div class="table-responsive">
-            <table class="table">
+            <table class="table table-striped table-bordered text-center">
                 <thead>
                 <tr>
                     <th>#</th>
@@ -45,7 +45,7 @@
                             <div class="btn-group"
                                  role="group">
                                 <a title="Edit"
-                                   class="btn btn-secondary ad-accept-btn"
+                                   class="btn btn-primary ad-accept-btn"
                                    href="{{route('admin.props.edit',$p->id)}}">
                                     <i class="ri-edit-2-line"></i>
                                 </a>

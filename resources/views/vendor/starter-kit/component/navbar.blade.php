@@ -2,13 +2,13 @@
     <ul>
         <li>
             <a href="{{ url('/') }}">
-                <i class="fa fa-atom"></i>
+                <i class="ri-command-fill"></i>&nbsp;
                 {{ config('app.name', 'Laravel') }}
             </a>
         </li>
         <li id="catalog" class="main-nav">
             <a>
-                <i class="fab fa-apple"></i>
+                <i class="ri-apple-fill"></i>
                 &nbsp;
                 {{__("Catalog")}}
             </a>
@@ -16,7 +16,7 @@
                 @if(auth()->user()->hasAnyAccess('product'))
                     <li id="product-li">
                         <a>
-                            <i class="fa fa-gem"></i>
+                            <i class="ri-vip-diamond-fill"></i>&nbsp;
                             {{__('Products')}}
                         </a>
                         <ul>
@@ -36,7 +36,7 @@
                 @if(auth()->user()->hasAnyAccess('invoice'))
                     <li id="invoices-li">
                         <a>
-                            <i class="fa fa-file-invoice"></i>
+                            <i class="ri-file-list-3-fill"></i>&nbsp;
                             {{__('Invoices')}}
                         </a>
                         <ul>
@@ -56,7 +56,7 @@
                 @if(auth()->user()->hasAnyAccess('customer'))
                     <li>
                         <a>
-                            <i class="fa fa-users"></i>
+                            <i class="ri-team-fill"></i>&nbsp;
                             {{__('Customers')}}
                         </a>
                         <ul>
@@ -76,7 +76,7 @@
                 @if(auth()->user()->hasAnyAccess('discount'))
                     <li id="discount-li">
                         <a>
-                            <i class="fa fa-percent"></i>
+                            <i class="ri-percent-fill"></i>&nbsp;
                             {{__('Discounts')}}
                         </a>
                         <ul>
@@ -96,7 +96,7 @@
                 @if(auth()->user()->hasAnyAccess('question'))
                     <li id="questions-li">
                         <a href="{{route('admin.question.index')}}">
-                            <i class="fa fa-question"></i>
+                            <i class="ri-question-mark"></i>&nbsp;
                             {{__('Questions')}}
                         </a>
                     </li>
@@ -104,7 +104,7 @@
                 @if(auth()->user()->hasAnyAccess('ticket'))
                     <li id="tickets-li">
                         <a href="{{route('admin.ticket.index')}}">
-                            <i class="fa fa-envelope"></i>
+                            <i class="ri-mail-fill"></i>&nbsp;
                             {{__('Tickets')}}
                         </a>
                     </li>
@@ -112,7 +112,7 @@
                 @if(auth()->user()->hasAnyAccess('cat'))
                     <li>
                         <a>
-                            <i class="fa fa-cubes"></i>
+                            <i class="ri-box-3-fill"></i>&nbsp;
                             {{__('Product categories')}}
                         </a>
                         <ul>
@@ -138,7 +138,7 @@
 
                     <li>
                         <a>
-                            <i class="fa fa-truck"></i>
+                            <i class="ri-truck-fill"></i>&nbsp;
                             {{__('Transports')}}
                         </a>
                         <ul>
@@ -158,7 +158,7 @@
                 @if(auth()->user()->hasAnyAccess('props'))
                     <li>
                         <a>
-                            <i class="fa fa-project-diagram"></i>
+                            <i class="ri-file-list-3-fill"></i>&nbsp;
                             {{__("Properties meta")}}
                         </a>
                         <ul>
@@ -182,7 +182,7 @@
 
         <li id="cms" class="main-nav">
             <a>
-                <i class="fab fa-internet-explorer"></i>
+                <i class="ri-ie-fill"></i>&nbsp;
                 &nbsp;
                 {{__("Website contents")}}
             </a>
@@ -190,7 +190,7 @@
                 @if(auth()->user()->hasAnyAccess('post'))
                     <li id="posts-li">
                         <a>
-                            <i class="fa fa-bullhorn"></i>
+                            <i class="ri-megaphone-fill"></i>&nbsp;
                             {{__('Post')}}
                         </a>
                         <ul>
@@ -210,7 +210,7 @@
                 @if(auth()->user()->hasAnyAccess('category'))
                     <li>
                         <a>
-                            <i class="fa fa-book"></i>
+                            <i class="ri-book-3-fill"></i>&nbsp;
                             {{__('Categories')}}
                         </a>
                         <ul>
@@ -239,7 +239,7 @@
 
                     <li>
                         <a>
-                            <i class="fa fa-images"></i>
+                            <i class="ri-gallery-fill"></i>&nbsp;
                             {{__("Galleries")}}
                         </a>
                         <ul>
@@ -262,7 +262,7 @@
                 @if(auth()->user()->hasAnyAccess('clip'))
                     <li>
                         <a>
-                            <i class="fa fa-file-video"></i>
+                            <i class="ri-video-fill"></i>&nbsp;
                             {{__("Video clips")}}
                         </a>
                         <ul>
@@ -283,7 +283,7 @@
                 @if(auth()->user()->hasAnyAccess('adv'))
                     <li>
                         <a>
-                            <i class="fa fa-atom"></i>
+                            <i class="ri-threads-line"></i>&nbsp;
                             {{__("Advertise")}}
                         </a>
                         <ul>
@@ -304,7 +304,7 @@
                 @if(auth()->user()->hasAnyAccess('menu'))
                     <li>
                         <a href="{{route('admin.menu.index')}}">
-                            <i class="fa fa-list-alt"></i>
+                            <i class="ri-list-check"></i>&nbsp;
                             {{__("Menus")}}
                         </a>
                     </li>
@@ -312,7 +312,7 @@
                 @if(auth()->user()->hasAnyAccess('props'))
                     <li>
                         <a>
-                            <i class="fa fa-file-image"></i>
+                            <i class="ri-image-fill"></i>&nbsp;
                             {{__("Slider")}}
                         </a>
                         <ul>
@@ -333,7 +333,7 @@
                 @if(auth()->user()->hasAnyAccess('poll'))
                     <li>
                         <a>
-                            <i class="fa fa-vote-yea"></i>
+                            <i class="ri-chat-poll-fill"></i>&nbsp;
                             {{__("Poll")}}
                         </a>
                         <ul>
@@ -357,7 +357,7 @@
         @if(auth()->user()->hasAnyAccess('comment'))
             <li>
                 <a href="{{route('admin.comment.index')}}">
-                    <i class="fa fa-comments"></i>
+                    <i class="ri-chat-1-fill"></i>&nbsp;
                     {{__('Comments')}}
                 </a>
             </li>
@@ -365,7 +365,7 @@
         @if(auth()->user()->hasAnyAccess('setting'))
             <li>
                 <a href="{{route('admin.setting.index')}}">
-                    <i class="fa fa-cogs"></i>
+                    <i class="ri-tools-fill"></i>&nbsp;
                     {{__("Setting")}}
                 </a>
             </li>
@@ -373,7 +373,7 @@
         @if(auth()->user()->hasAnyAccess('attachment'))
             <li>
                 <a href="{{route('admin.attachment.index')}}">
-                    <i class="fa fa-paperclip"></i>
+                    <i class="ri-attachment-2"></i>&nbsp;
                     {{__("Attachments")}}
                 </a>
             </li>
@@ -381,7 +381,7 @@
         @if(auth()->user()->hasAnyAccess('contact'))
             <li>
                 <a href="{{route('admin.contact.index')}}">
-                    <i class="fa fa-envelope"></i>
+                    <i class="ri-mail-unread-fill"></i>&nbsp;
                     {{__("Contact us")}}
                 </a>
             </li>
@@ -389,7 +389,7 @@
         @if(auth()->user()->hasAnyAccess('logs'))
             <li>
                 <a href="{{route('admin.logs.index')}}">
-                    <i class="fa fa-list-alt"></i>
+                    <i class="ri-list-check-3"></i>&nbsp;
                     {{__('Logs')}}
                 </a>
             </li>
@@ -397,7 +397,7 @@
         @if(auth()->user()->hasRole('super-admin'))
             <li>
                 <a>
-                    <i class="fa fa-users"></i>
+                    <i class="ri-folder-user-fill"></i>&nbsp;
                     {{__("Users")}}
                 </a>
                 <ul>
@@ -419,7 +419,7 @@
             @if(config('app.xlang'))
                 <li>
                     <a>
-                        <i class="fa fa-language"></i>
+                        <i class="ri-global-fill"></i>&nbsp;
                         {{__("Languages")}}
                     </a>
                     <ul>
@@ -461,7 +461,7 @@
                 <a class="dropdown-item" href="{{ route('logout') }}"
                    onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                    <i class="fa fas fa-sign-out-alt"></i>
+                    <i class="ri-logout-circle-r-fill"></i>&nbsp;
                     {{ __('Logout') }}
                 </a>
 

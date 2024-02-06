@@ -10,11 +10,11 @@
         @include('starter-kit::component.err')
         <form action="{{route('admin.transport.bulk')}}" method="post" class="bulk-action">
             @csrf
-            <table class="table table-striped table-bordered ">
+            <table class="table table-striped table-bordered text-center">
                 <thead class="thead-dark">
                 <tr>
                     <th>
-                        <input type="checkbox" class="chkall"/>
+                        #
                     </th>
                     <th>
                         {{__("Title")}}
@@ -24,8 +24,9 @@
                     </th>
                     <th>
                         {{__("Action")}}
-                        <a href="{{route('admin.transport.create')}}" class="btn btn-success float-start"><i
-                                class="fa fa-plus"></i></a>
+                    </th>
+                    <th>
+                        <input type="checkbox" class="chkall"/>
                     </th>
                 </tr>
                 </thead>
@@ -33,7 +34,6 @@
                 @foreach ($transports as $n)
                     <tr>
                         <td>
-                            <input type="checkbox" name="id[]" value="{{$n->id}}" class="m-2 chkbox"/>
                             {{$n->id}}
                         </td>
                         <td>
@@ -44,14 +44,15 @@
                         </td>
                         <td>
                             <a href="{{route('admin.transport.edit',$n->id)}}" class="btn btn-primary">
-                                <i class="fa fa-edit"></i> &nbsp;
-                                {{__("Edit")}}
+                                <i class="ri-edit-2-line"></i>
                             </a>
                             <a href="{{route('admin.transport.delete',$n->id)}}"
                                class="btn btn-danger  delete-confirm">
-                                <i class="fa fa-times"></i> &nbsp;
-                                {{__("Delete")}}
+                                <i class="ri-close-line"></i>
                             </a>
+                        </td>
+                        <td>
+                            <input type="checkbox" name="id[]" value="{{$n->id}}" class="m-2 chkbox"/>
                         </td>
                     </tr>
                 @endforeach
@@ -62,5 +63,8 @@
         <div class="text-center pt-3">
             {{$transports->links()}}
         </div>
+        <a class="btn-add" href="{{route('admin.transport.create')}}">
+            <i class="ri-add-line"></i>
+        </a>
     </div>
 @endsection

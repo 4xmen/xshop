@@ -5,8 +5,11 @@
 @endsection
 @section('content')
     @include('starter-kit::component.err')
-    <table class="table table-striped table-bordered">
+    <table class="table table-striped table-bordered text-center">
         <tr>
+            <th>
+                #
+            </th>
             <th>
                 {{__("Question / Answer")}}
             </th>
@@ -19,6 +22,9 @@
         </tr>
         @foreach($qs as $q)
             <tr>
+                <td>
+                    {{$q->id}}
+                </td>
                 <td>
                     {{$q->body}}
                     <hr>
