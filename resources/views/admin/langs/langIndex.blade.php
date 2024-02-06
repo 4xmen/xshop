@@ -13,10 +13,9 @@
                 <thead class="thead-dark">
                 <tr>
                     <th>
-                        <input type="checkbox" class="chkall"/>
+                        #
                     </th>
                     <th>
-
                             {{__("Name")}}
                     </th>
                     <th>
@@ -29,13 +28,15 @@
                         {{__("Action")}}
 
                     </th>
+                    <th>
+                        <input type="checkbox" class="chkall"/>
+                    </th>
                 </tr>
                 </thead>
                 <tbody>
                 @foreach ($langs as $n)
                     <tr>
                         <td>
-                            <input type="checkbox" name="id[]" value="{{$n->id}}" class="m-2 chkbox"/>
                             {{$n->id}}
                         </td>
                         <td>
@@ -61,6 +62,9 @@
                                class="btn btn-danger  delete-confirm btn-sm">
                                 <i class="ri-close-line"></i>
                             </a>
+                        </td>
+                        <td>
+                            <input type="checkbox" name="id[]" value="{{$n->id}}" class="m-2 chkbox"/>
                         </td>
                     </tr>
                 @endforeach
