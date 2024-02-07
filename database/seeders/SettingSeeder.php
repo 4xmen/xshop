@@ -50,7 +50,7 @@ INSERT INTO `settings` (`id`, `section`, `type`, `title`, `active`, `key`, `valu
 	(NULL, '1menu', 'text', 'Email', 1, 'email', '{"$lang":"info@local"}', '2023-02-22 20:51:53', '2024-02-06 03:14:33'),
 	(NULL, 'seo', 'text', 'Website name', 1, 'site_name', '{"$lang":"Xshop"}', '2022-09-14 05:16:58', '2024-02-06 03:14:33'),
 	(NULL, 'seo', 'text', 'Brief website description (SEO)', 1, 'site_description', '{"$lang":"Description of your store"}', '2022-09-14 05:18:23', '2024-02-06 03:14:33'),
-	(NULL, 'seo', 'text', 'Website keywords (SEO - use "," to break)', 1, 'site_keywords', '{"$lang":"shop, xshop, website"}'),
+	(NULL, 'seo', 'text', 'Website keywords (SEO - use "," to break)', 1, 'site_keywords', '{"$lang":"shop, xshop, website"}', '2022-09-14 05:18:23', '2024-02-06 03:14:33'),
 	(NULL, 'seo', 'text', 'Google Webmaster code', 1, 'site_webmaster_google', '{"$lang":null}', '2022-09-14 05:29:17', '2024-02-06 03:14:33'),
 	(NULL, 'seo', 'image', 'Site image(SEO)', 1, 'site_image', NULL, '2022-09-14 05:30:51', '2022-09-14 05:30:51');
 SQL);

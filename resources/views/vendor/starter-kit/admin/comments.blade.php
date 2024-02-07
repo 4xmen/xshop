@@ -112,7 +112,7 @@
             {{$comments->links()}}
         </div>
     </div>
-    <a class="btn-add" href="{{route('admin.post.create')}}">
-        <i class="ri-add-line"></i>
-    </a>
+{{--    <a class="btn-add" href="{{route('admin.post.create')}}">--}}
+{{--        <i class="ri-add-line"></i>--}}
+{{--    </a>--}}
 @endsection
