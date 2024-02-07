@@ -75,9 +75,14 @@ class WebsiteController extends Controller
     public function cat(Cat $cat, Request $request)
     {
 
+        $connection = config('database.default');
+        $driver = config("database.connections.{$connection}.driver");
+
         $q = $cat->products()->where('active', 1)
-            ->orderByRaw("FIELD(stock_status, \"IN_STOCK\", \"BACK_ORDER\", \"OUT_STOCK\")")
             ->orderByDesc($this->sort)->orderByDesc('id');
+        if ($driver == 'mysql'){
+            $q->orderByRaw("FIELD(stock_status, \"IN_STOCK\", \"BACK_ORDER\", \"OUT_STOCK\")");
+        }
         if ($request->has('ext')) {
             $q = $q->where('stock_status', 'IN_STOCK')
                 ->where('stock_quantity', '>', 0);
