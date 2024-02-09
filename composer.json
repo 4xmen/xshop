@@ -34,7 +34,7 @@
         "psr/log": "v2.*",
         "symfony/dom-crawler": "^6.2",
         "symfony/psr-http-message-bridge": "^7.0",
-        "xmen/starter-kit": "^v3.2.5"
+        "xmen/starter-kit": "^v3.2.6"
     },
     "require-dev": {
         "barryvdh/laravel-ide-helper": "^2.12",

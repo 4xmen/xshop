@@ -50,27 +50,23 @@
             <input type="hidden" name="to" v-model="state.range[1]">
         </div>
         <div v-for="d in elms" :class="cls" v-if="d.searchable">
-            <div v-if="d.type === 'text'">
-                <label :for="d.name">
-                    {{ d.label }}
+            <template v-if="d.type !== 'checkbox'">
+                <label :for="d.name" >
+                    {{ makeLabel(d.label) }}
                 </label>
+            </template>
+            <div v-if="d.type === 'text'">
+
                 <input v-model="defaults[d.name]" type="text" :id="d.name" :name="'meta['+d.name+']'"
                        class="form-control">
             </div>
             <div v-else-if="d.type === 'number'">
-                <label :for="d.name">
-                    {{ d.label }}
-                    <!--                    "{{defaults[d.name]}}"-->
-                </label>
-                <input type="number" v-model="defaults[d.name]" :placeholder="d.label" :id="d.name"
+                <input type="number" v-model="defaults[d.name]" :placeholder="makeLabel(d.label)" :id="d.name"
                        :name="'meta['+d.name+']'" class="form-control">
             </div>
             <div v-else-if="d.type === 'color'" :id="d.name" :name="'meta['+d.name+']'">
-                <label :for="d.name">
-                    {{ d.label }}
-                </label>
                 <select v-model="defaults[d.name]" :name="'meta['+d.name+']'" :id="d.name" class="form-control">
-                    <option value=""> {{ d.label }}</option>
+                    <option value=""> {{ makeLabel(d.label) }}</option>
                     <option :style="'background-color:' + o.value " :value="o.value" v-for="o in d.options">
                         {{ o.title }}
                     </option>
@@ -82,35 +78,28 @@
                     <input :name="'meta['+d.name+']'" v-model="defaults[d.name]" type="checkbox">
                     <div class="slider round"></div>
                 </label>
-                {{ d.label }}
+                <span >
+
+                </span>
+                 {{ makeLabel(d.label) }}
 
 
             </div>
             <div v-else-if="d.type === 'select'">
-                <label :for="d.name">
-                    {{ d.label }}
-                </label>
                 <select v-model="defaults[d.name]" :name="'meta['+d.name+']'" :id="d.name" class="form-control">
                     <option value=""> {{ t.all }}</option>
                     <option :value="o.value" v-for="o in d.options"> {{ o.title }}</option>
                 </select>
             </div>
             <div v-else-if="d.type === 'multi'">
-                <label :for="d.name">
-                    {{ d.label }}
-                </label>
-
                 <multiselect :multiple="true" :taggable="true" label="title" v-model="defaults[d.name]"
-                             :placeholder="d.label" :options="d.options"></multiselect>
+                             :placeholder="makeLabel(d.label)" :options="d.options"></multiselect>
                 <input :id="d.label" type="hidden" :name="'meta['+d.name+']'" :value="makeVal(defaults[d.name])">
             </div>
             <div v-else-if="d.type === 'singlemulti'">
-                <label :for="d.name">
-                    {{ d.label }}
-                </label>
                 <multiselect @remove="rem(d.name,$event)" @select="upd(d.name,defaults[d.name])"
                              v-model="defaults[d.name]" :multiple="true" :taggable="true" label="title"
-                             :placeholder="d.label" :options="d.options"></multiselect>
+                             :placeholder="makeLabel(d.label)" :options="d.options"></multiselect>
                 <input type="hidden" :name="'meta['+d.name+']'" :value="makeVal(defaults[d.name])">
             </div>
         </div>
@@ -177,7 +166,7 @@ export default {
             state: {range: [parseInt(this.minm), parseInt(this.maxm)], number: 1000}
         }
     },
-    props: ['jdata', 'searchable', 'defz', 'cls', 'minm', 'maxm'],
+    props: ['jdata', 'searchable', 'defz', 'cls', 'minm', 'maxm','langg'],
     mounted() {
         this.updateJdata(this.jdata, this.defz);
         if (getParameterByName('to') !== null) {
@@ -196,6 +185,13 @@ export default {
 
     },
     methods: {
+        makeLabel(lbl){
+            if ( typeof lbl == 'object'){
+                return lbl[this.langg];
+            }else{
+                return  lbl;
+            }
+        },
         apply: function () {
             this.$refs.filter.submit();
         },

@@ -39,6 +39,7 @@
                                          :maxm="{{$cat->products()->max('price')}}"
                                          @else
                                          :maxm="1000000000"
+                                         langg="{{config('app.locale')}}"
                                 @endif
 
                             >

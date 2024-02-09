@@ -107,7 +107,7 @@
             <div class="col-lg-4 col-md-6">
                 <div class="input-group flex-nowrap" style="margin-top: 1em;">
                     <input type="text" id="searching" data-url="{{route('search','')}}"
-                           data-ajax="{{route('search.ajax')}}" class="form-control" placeholder="جستجو در محصولات..."
+                           data-ajax="{{route('search.ajax')}}" class="form-control" placeholder="{{__("Search for ...")}}"
                            aria-label="search"
                            aria-describedby="addon-wrapping">
                     <span class="input-group-text" id="addon-wrapping">
@@ -118,7 +118,7 @@
             <div class="col-lg-4 text-end col-md-6">
                 <a type="button" class="btn btn-primary position-relative" href="{{route('card.show')}}">
                     <i class="icofont-shopping-cart"></i>
-                    سبد خرید
+                    {{__("Card")}}
                     <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-primary">
                         <b id="card-count">
                             {{\App\Helpers\cardCount()}}
@@ -143,5 +143,4 @@
         </div>
     </div>
 </section>
-
-@include('website.component.navbar2')
+@include('website.component.navbar')

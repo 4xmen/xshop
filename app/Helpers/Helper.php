@@ -28,6 +28,10 @@ function getSetting($key)
         $a = new \stdClass();
         return '';
     }
+    if (config('app.xlang') && ($x->type == 'cat' || $x->type == 'category')) {
+        $defLang = config('app.xlang_main');
+        return $x->getTranslations('value')[$defLang];
+    }
     return $x->value;
 }
 
@@ -38,12 +42,8 @@ function getSetting($key)
  */
 function getSettingCategory($key)
 {
-    $x = Setting::where('key', $key)->first();
-    if ($x == null) {
-        $a = new \stdClass();
-        return '';
-    }
-    return Category::where('id', $x->value)->first();
+    $x = getSetting($key);
+    return Category::where('id', $x)->first();
 }
 
 /***
@@ -53,12 +53,8 @@ function getSettingCategory($key)
  */
 function getSettingCat($key)
 {
-    $x = Setting::where('key', $key)->first();
-    if ($x == null) {
-        $a = new \stdClass();
-        return '';
-    }
-    return Cat::where('id', $x->value)->first();
+    $x = getSetting($key);
+    return Cat::where('id', $x)->first();
 }
 
 /***
@@ -920,8 +916,25 @@ LI;
 function xroute($rt, $args = [])
 {
     if (config('app.xlang_main') != app()->getLocale()) {
-        return \route( $rt, $args);
+        return \route($rt, $args);
     } else {
         return \route($rt, $args);
     }
+}
+
+
+function digitsToLatin($number)
+{
+    if ($number == null) {
+        return null;
+    }
+    $latin = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
+    $persian = ['۰', '۱', '۲', '۳', '۴', '۵', '۶', '۷', '۸', '۹'];
+    $arabic = ['٠', '١', '٢', '٣', '٤', '٥', '٦', '٧', '٨', '٩'];
+    $persian2 = ['\\u06f0', '\\u06f1', '\\u06f2', '\\u06f3', '\\u06f4', '\\u06f5', '\\u06f6', '\\u06f7', '\\u06f8', '\\u06f9'];
+    $arabic2 = ['\\u0660', '\\u0661', '\\u0662', '\\u0663', '\\u0664', '\\u0665', '\\u0666', '\\u0667', '\\u0668', '\\u0669'];
+    $number = str_replace($persian, $latin, $number);
+    $number = str_replace($persian2, $latin, $number);
+    $number = str_replace($arabic2, $latin, $number);
+    return str_replace($arabic, $latin, $number);
 }

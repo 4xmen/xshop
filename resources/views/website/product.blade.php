@@ -274,7 +274,7 @@
                                     <div class="alert alert-secondary" id="comment-form">
                                         @include('starter-kit::component.err')
                                         <h5>
-                                            ارسال دیدگاه
+                                            {{__("Send comment")}}
                                         </h5>
                                         <form class="xsumbmiter non-print" method="post" id="comment-form-body"
                                               action="no-action">
@@ -289,7 +289,7 @@
                                                         </label>
 
                                                         <textarea required="" minlength="10" id="comment-message"
-                                                                  name="body" class="ckeditorx form-control " placeholder="پیام"
+                                                                  name="body" class="ckeditorx form-control " placeholder="{{__("Message")}}"
                                                                   rows="4"></textarea>
                                                     </div>
                                                 </div>
@@ -297,7 +297,7 @@
                                                     <div class="form-group">
 
                                                         <input name="name" required="" minlength="2" type="text"
-                                                               class="form-control " placeholder="نام" value=""
+                                                               class="form-control " placeholder="{{__("Name")}}" value=""
                                                                id="name">
                                                     </div>
                                                 </div>
@@ -305,14 +305,14 @@
                                                     <div class="form-group">
 
                                                         <input required="" name="email" id="email" type="email"
-                                                               class="form-control " placeholder="ایمیل" value="">
+                                                               class="form-control " placeholder="{{__("E-mail")}}" value="">
                                                     </div>
                                                 </div>
 
                                                 <div class="col-md-12">
                                                     <label> &nbsp;</label>
                                                     <input name="" type="submit" class="btn btn-primary mt-2"
-                                                           value="ارسال دیدگاه">
+                                                           value="{{__("Send")}}">
                                                 </div>
                                             </div>
                                         </form>
