@@ -963,7 +963,7 @@ function getEmojiLanguagebyCode($lang) {
         "cs" => "🇨🇿", // Czech
         "da" => "🇩🇰", // Danish
         "nl" => "🇳🇱", // Dutch
-        "en" => "🇬🇧", // English
+        "en" => "🇺🇸", // English
         "et" => "🇪🇪", // Estonian
         "fi" => "🇫🇮", // Finnish
         "fr" => "🇫🇷", // French
