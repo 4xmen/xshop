@@ -84,10 +84,26 @@
                                             </select>
                                             @break
                                         @case('image')
-                                            <img src="{{asset('images/'.str_replace('_','.',$set->key))}}?{{time()}}"
-                                                 class="img-fluid" style="max-height: 150px;max-width: 45%" alt="cover">
+                                            @if(pathinfo(str_replace('_','.',$set->key), PATHINFO_EXTENSION) == 'mp4')
+                                                <video controls
+                                                       src="{{asset('assets/file/'.str_replace('_','.',$set->key))}}?{{time()}}"
+                                                       class="img-fluid"
+                                                       style="max-height: 150px;max-width: 45%"></video>
+                                                <br>
+                                            @elseif(pathinfo(str_replace('_','.',$set->key), PATHINFO_EXTENSION) == 'mp3')
+                                                <audio controls
+                                                       src="{{asset('assets/file/'.str_replace('_','.',$set->key))}}?{{time()}}"
+                                                       class="img-fluid"
+                                                       style="max-height: 150px;max-width: 45%"></audio>
+                                                <br>
+                                            @else
+                                                <img
+                                                    src="{{asset('images/'.str_replace('_','.',$set->key))}}?{{time()}}"
+                                                    class="img-fluid" style="max-height: 150px;max-width: 45%"
+                                                    alt="cover">
+                                            @endif
                                             <input type="file" name="pic[{{$set->key}}]" id="{{$set->key}}"
-                                                   accept="image/*"
+                                                   accept=".{{pathinfo(str_replace('_','.',$set->key), PATHINFO_EXTENSION)}}"
                                                    class="form-control-file"/>
                                             @break
                                         @default
@@ -152,7 +168,7 @@
                                 <option value="checkbox"
                                         @if (old('type') == 'checkbox' ) selected @endif >{{__("Checkbox")}} </option>
                                 <option value="image"
-                                        @if (old('type') == 'image' ) selected @endif >{{__("Image")}} </option>
+                                        @if (old('type') == 'image' ) selected @endif >{{__("Media")}} </option>
 
                             </select>
                         </div>
@@ -189,7 +205,7 @@
     <script>
         try {
             document.querySelector('#price').classList.add('currency');
-        } catch(e) {
+        } catch (e) {
             // console.log(e.message);
         }
 

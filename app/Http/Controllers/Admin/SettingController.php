@@ -97,10 +97,11 @@ class SettingController extends Controller
         $files = $request->allFiles();
         if (isset($files['pic'])) {
             foreach ($files['pic'] as $index => $file) {
-//            $name = time() . '.' . $file->getClientOriginalExtension();
-//            Setting::where('key',$key)->update(['value' => $name]);
-//            $request->file($index)->storeAs('public/setting', $name);
-                $file->move(public_path('/images/'), str_replace('_','.',$index) );//store('/images/'.,['disk' => 'public']);
+                if ($file->extension() == 'mp4' || $file->extension() == 'mp3'){
+                    $file->move(public_path('/assets/file/'), str_replace('_','.',$index) );//store('/images/'.,['disk' => 'public']);
+                }else{
+                    $file->move(public_path('/images/'), str_replace('_','.',$index) );//store('/images/'.,['disk' => 'public']);
+                }
             }
         }
         return redirect()->back()->with(['message' => __('Setting of website updated')]);
