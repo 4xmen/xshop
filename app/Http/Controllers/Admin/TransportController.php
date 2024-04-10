@@ -127,6 +127,6 @@ class TransportController extends Controller
             default:
                 $msg = __('Unknown bulk action :' . $request->input('bulk'));
         }
-        return redirect()->route('admin.customer.index')->with(['message' => $msg]);
+        return redirect()->route('admin.transport.index')->with(['message' => $msg]);
     }
 }
