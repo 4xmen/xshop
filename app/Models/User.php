@@ -10,6 +10,7 @@ use Illuminate\Notifications\Notifiable;
 class User extends Authenticatable
 {
     use HasFactory, Notifiable;
+    static $roles = ['DEVELOPER','ADMIN','USER'];
 
     /**
      * The attributes that are mass assignable.

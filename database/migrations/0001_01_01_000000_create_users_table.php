@@ -17,6 +17,9 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->string('mobile',20)->nullable();
+            $table->string('avatar',1024)->nullable();
+            $table->enum('role',\App\Models\User::$roles)->default('USER');
             $table->rememberToken();
             $table->timestamps();
         });
