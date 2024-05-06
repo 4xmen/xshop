@@ -40,6 +40,7 @@ return [
     */
 
     'debug' => (bool) env('APP_DEBUG', false),
+    'deployed' => (bool) env('APP_DEPLOYED', false),
 
     /*
     |--------------------------------------------------------------------------

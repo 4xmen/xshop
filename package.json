@@ -17,6 +17,7 @@
     },
     "dependencies": {
         "remixicon": "^4.2.0",
+        "three": "0.150.0",
         "vazirmatn": "^33.0.3"
     }
 }

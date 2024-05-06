@@ -1,9 +1,9 @@
 {
-    "name": "laravel/laravel",
+    "name": "xmen/xshop",
     "type": "project",
     "description": "The skeleton application for the Laravel framework.",
-    "keywords": ["laravel", "framework"],
-    "license": "MIT",
+    "keywords": ["xshop", "e-shop", "laravel","laravel-shop","open-source-shop"],
+    "license": "GPL-3.0-or-later",
     "require": {
         "php": "^8.2",
         "carlos-meneses/laravel-mpdf": "^2.1",

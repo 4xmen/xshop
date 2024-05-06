@@ -1,8 +1,24 @@
 // Fonts
 @import 'vazirmatn/Vazirmatn-font-face.css';
-
+@import "remixicon/fonts/remixicon.css";
 // Variables
 @import 'variables';
 
 // Bootstrap
 @import 'bootstrap/scss/bootstrap';
+
+*{
+    padding: 0;
+    margin: 0;
+}
+body{
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+a{
+    text-decoration: none !important;
+}
+
+@import "common";
+@import "raw";
+@import "fix";
