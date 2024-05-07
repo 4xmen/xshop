@@ -63,12 +63,6 @@
                         {{__('Transports')}}
                     </a>
                 </li>
-                <li>
-                    <a>
-                        <i class="ri-image-fill"></i>
-                        {{__("Slider")}}
-                    </a>
-                </li>
 
             </ul>
         </li>
@@ -126,6 +120,12 @@
                     <a href="">
                         <i class="ri-list-check"></i>
                         {{__("Menus")}}
+                    </a>
+                </li>
+                <li>
+                    <a>
+                        <i class="ri-image-fill"></i>
+                        {{__("Slider")}}
                     </a>
                 </li>
                 <li>
