@@ -124,5 +124,17 @@ return [
         'store' => env('APP_MAINTENANCE_STORE', 'database'),
     ],
 
+    /*
+    |--------------------------------------------------------------------------
+    | Panel
+    |--------------------------------------------------------------------------
+    | These configuration options of the control panel
+     */
+
+    'panel' => [
+        'prefix' => env('PANEL_PREFIX','dashboard'),
+        'page_count' => env('PANEL_PAGE_COUNT',30),
+    ],
+
 
 ];

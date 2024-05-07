@@ -7,6 +7,26 @@
 // Bootstrap
 @import 'bootstrap/scss/bootstrap';
 
+/* width */
+::-webkit-scrollbar {
+    width: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: #282c34;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: darkred;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: var(--bs-indigo);
+}
+
 *{
     padding: 0;
     margin: 0;
