@@ -135,6 +135,17 @@ return [
         'prefix' => env('PANEL_PREFIX','dashboard'),
         'page_count' => env('PANEL_PAGE_COUNT',30),
     ],
+    /*
+    |--------------------------------------------------------------------------
+    | Media
+    |--------------------------------------------------------------------------
+    | These configuration options of medias
+     */
+
+    'media' => [
+        'gallery_thumb' => env('MEDIA_GALLEY_THUMB','500x500'),
+        'post_thumb' => env('MEDIA_POST_THUMB','500x500'),
+    ],
 
 
 ];
