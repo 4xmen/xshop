@@ -59,7 +59,7 @@
                 <div class="row mb-3">
                     <div class="col-md-6">
                         <div class="form-check form-switch mt-1">
-                            <input class="form-check-input" {{ old('remember') ? 'checked' : '' }} name="remember"
+                            <input class="form-check-input" {{ old('remember',true) ? 'checked' : '' }} name="remember"
                                    type="checkbox" role="switch" id="remember" aria-label="Username"
                                    aria-describedby="basic-addon1">
                             <label class="form-check-label" for="remember">{{ __('Remember Me') }}</label>

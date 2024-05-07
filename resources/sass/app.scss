@@ -14,11 +14,27 @@
 body{
     min-height: 100vh;
     overflow-x: hidden;
+    cursor: default;
 }
 a{
     text-decoration: none !important;
 }
 
+#panel{
+    display: grid;
+    grid-template-columns:50px 0 1fr;
+    transition: 400ms;
+
+    &.sided{
+        grid-template-columns:50px 250px 1fr;
+        #sidebar-panel{
+            display: block;
+        }
+    }
+}
+
+
 @import "common";
 @import "raw";
 @import "fix";
+@import "navbar";
