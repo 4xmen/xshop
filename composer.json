@@ -19,6 +19,7 @@
         "pishran/zarinpal": "^4.3",
         "plank/laravel-metable": "^6.0",
         "spatie/laravel-medialibrary": "^11.4",
+        "spatie/laravel-permission": "^6.7",
         "spatie/laravel-translatable": "^6.6",
         "thiagocordeiro/laravel-translator": "^1.2"
     },
