@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Spatie\Permission\Models\Role;
 
 class UserSeeder extends Seeder
 {
@@ -36,5 +37,25 @@ class UserSeeder extends Seeder
                 'email' => 'user@example.com',
             ]
         );
+
+        // add roles
+        foreach (User::$roles as $role) {
+            $r = new Role();
+            $r->name = strtolower($role);
+            $r->save();
+        }
+
+        $developer = User::whereId(1)->first();
+        $developer->assignRole('developer');
+        $developer->save();
+
+        $admin = User::whereId(2)->first();
+        $admin->assignRole('admin');
+        $admin->save();
+
+        $user = User::whereId(3)->first();
+        $user->assignRole('user');
+        $user->save();
+
     }
 }
