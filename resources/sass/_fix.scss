@@ -1,4 +1,29 @@
-.form-control:focus{
+.form-control:focus,.form-check-input:focus{
     box-shadow: 0 0 0 0.25rem rgba(133, 13, 253, 0.25);
 border-color: #bc86fe;
+}
+
+.card{
+    background-color: rgba(var(--bs-body-bg),.5);
+    background-image: url("../images/pattern.png");
+    backdrop-filter: blur(4px);
+    box-shadow: -2px -2px 7px #560000, 2px 2px 7px #5e00b5;
+}
+
+
+
+.form-check-input:checked,.btn-primary{
+    background-color: #a60087;
+    border-color: #ff0067;
+}
+
+.btn-primary:hover{
+    background-color: #ff0067;
+}
+
+a,a:visited{
+    color: #cb00a5;
+    &:hover{
+        color: #ff0067;
+    }
 }

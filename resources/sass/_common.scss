@@ -13,3 +13,8 @@
         box-shadow: 0px 3px 5px #11111177, inset 0 0 0  40px darkred;
     }
 }
+
+.custom-tooltip {
+    --bs-tooltip-bg: var(--bs-indigo);
+    --bs-tooltip-color: var(--bs-white);
+}

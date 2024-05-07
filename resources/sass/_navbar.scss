@@ -1,0 +1,76 @@
+#panel-navbar {
+    background-color: #282c34;
+    background-image: url("../images/pattern.png");
+    height: calc(100vh - 55px);
+    overflow-y: auto;
+    position: relative;
+
+    ul {
+        padding: 0;
+        list-style: none;
+    }
+
+    > ul {
+        position: absolute;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        height: 100%;
+        overflow-y: auto;
+        //border-right: 1px dashed gray;
+        //border-left: 1px dashed gray;
+
+
+        li {
+            i {
+                font-size: 28px;
+            }
+            ul{
+                display: none;
+            }
+        }
+
+        a, a:visited {
+            padding: 5px 9px 5px 11px;
+            display: block;
+            color: white;
+
+            &:hover {
+                color: $indigo;
+            }
+        }
+    }
+}
+
+#sidebar-panel {
+    overflow: hidden;
+    background: rgba(0, 0, 0, .1);
+    transition: .5s;
+    ul{
+        padding: 5px;
+        list-style: none;
+        li{
+            a{
+                display: flex;
+                padding: 7px ;
+                color: white;
+                transition: .7s;
+                border-radius: 5px;
+                align-items: center;
+                justify-self: center;
+
+                i{
+                    font-size: 20px;
+                    margin-right: 1rem;
+                    margin-left: 1rem;
+                }
+
+                &:hover{
+                    background: darkred;
+                }
+            }
+
+        }
+    }
+}
+
