@@ -1,24 +1,122 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-6 mb-4">
             <div class="card">
-                <div class="card-header">{{ __('Dashboard') }}</div>
-
+                <div class="card-header">
+                    lorem
+                </div>
                 <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
-
-                    <p data-bs-toggle="tooltip" data-bs-placement="top"
-                        data-bs-custom-class="custom-tooltip"
-                        data-bs-title="This top tooltip is themed via CSS variables.">
-                        {{ __('You are logged in!') }}
-                    </p>
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                    Aliquam aspernatur, commodi consequatur deleniti dolor,
+                    dolore ducimus ipsa laudantium magni natus nemo neque odit
+                    officia perferendis provident suscipit ullam voluptas voluptate?
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 mb-4">
+            <div class="card">
+                <div class="card-header">
+                    lorem
+                </div>
+                <div class="card-body">
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                    Aliquam aspernatur, commodi consequatur deleniti dolor,
+                    dolore ducimus ipsa laudantium magni natus nemo neque odit
+                    officia perferendis provident suscipit ullam voluptas voluptate?
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="card">
+                <div class="card-header">
+                    lorem
+                </div>
+                <div class="card-body">
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                    Aliquam aspernatur, commodi consequatur deleniti dolor,
+                    dolore ducimus ipsa laudantium magni natus nemo neque odit
+                    officia perferendis provident suscipit ullam voluptas voluptate?
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="card">
+                <div class="card-header">
+                    lorem
+                </div>
+                <div class="card-body">
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                    Aliquam aspernatur, commodi consequatur deleniti dolor,
+                    dolore ducimus ipsa laudantium magni natus nemo neque odit
+                    officia perferendis provident suscipit ullam voluptas voluptate?
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="card">
+                <div class="card-header">
+                    lorem
+                </div>
+                <div class="card-body">
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                    Aliquam aspernatur, commodi consequatur deleniti dolor,
+                    dolore ducimus ipsa laudantium magni natus nemo neque odit
+                    officia perferendis provident suscipit ullam voluptas voluptate?
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 mb-4">
+            <div class="card">
+                <div class="card-header">
+                    lorem
+                </div>
+                <div class="card-body">
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                    Aliquam aspernatur, commodi consequatur deleniti dolor,
+                    dolore ducimus ipsa laudantium magni natus nemo neque odit
+                    officia perferendis provident suscipit ullam voluptas voluptate?
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 mb-4">
+            <div class="card">
+                <div class="card-header">
+                    lorem
+                </div>
+                <div class="card-body">
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                    Aliquam aspernatur, commodi consequatur deleniti dolor,
+                    dolore ducimus ipsa laudantium magni natus nemo neque odit
+                    officia perferendis provident suscipit ullam voluptas voluptate?
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 mb-4">
+            <div class="card">
+                <div class="card-header">
+                    lorem
+                </div>
+                <div class="card-body">
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                    Aliquam aspernatur, commodi consequatur deleniti dolor,
+                    dolore ducimus ipsa laudantium magni natus nemo neque odit
+                    officia perferendis provident suscipit ullam voluptas voluptate?
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 mb-4">
+            <div class="card">
+                <div class="card-header">
+                    lorem
+                </div>
+                <div class="card-body">
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                    Aliquam aspernatur, commodi consequatur deleniti dolor,
+                    dolore ducimus ipsa laudantium magni natus nemo neque odit
+                    officia perferendis provident suscipit ullam voluptas voluptate?
                 </div>
             </div>
         </div>

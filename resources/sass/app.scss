@@ -25,6 +25,10 @@ a{
     grid-template-columns:50px 0 1fr;
     transition: 400ms;
 
+    >aside{
+        background-image: url("../images/pattern.png");
+        background-color: #282c34;
+    }
     &.sided{
         grid-template-columns:50px 250px 1fr;
         #sidebar-panel{
