@@ -5,7 +5,7 @@ border-color: #bc86fe;
 
 .card{
     background-color: rgba(var(--bs-body-bg),.5);
-    background-image: url("../images/pattern.png");
+    background-image: url("../../images/pattern.png");
     backdrop-filter: blur(4px);
     box-shadow: -2px -2px 7px #560000, 2px 2px 7px #5e00b5;
 }
@@ -26,4 +26,11 @@ a,a:visited{
     &:hover{
         color: #ff0067;
     }
+}
+
+.pagination{
+    --bs-pagination-active-bg: #6e0000 ;
+    --bs-pagination-active-border-color: #810000;
+    --bs-pagination-color: #cb00a5;
+    --bs-pagination-hover-color: red;
 }

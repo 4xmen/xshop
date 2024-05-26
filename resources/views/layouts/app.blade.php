@@ -9,7 +9,8 @@
                 @include('components.panel-side-navbar')
             </aside>
             <div id="sidebar-panel"></div>
-            <main class="py-4">
+            <main class="py-3 px-3">
+                @include('components.panel-breadcrumb')
                 @yield('content')
             </main>
         </div>

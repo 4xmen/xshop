@@ -10,21 +10,43 @@ class XController extends Controller
 
     protected $model = User::class;
     protected $name = "User";
+    protected $cols = [];
+    protected $extra_cols = ['id'];
     protected $listView = 'admin.users.user-list';
     protected $formView = 'admin.users.user-form';
 
 
-    public function createOrUpdate($item, Request $request) {
+    public function createOrUpdate($item, Request $request)
+    {
 
     }
+
+    protected function showList($query)
+    {
+        $items = $query->paginate(config('app.panel.page_count'), array_merge($this->extra_cols, $this->cols));
+        $cols = $this->cols;
+        return view($this->listView, compact('items', 'cols'));
+    }
+
+    protected function makeSortAndFilter()
+    {
+        if (!\request()->has('sort') || !in_array(\request('sort'), $this->cols)) {
+            $query = $this->model::orderByDesc('id');
+        } else {
+            $query = $this->model::orderBy(\request('sort'), \request('sortType', 'asc'));
+        }
+        return $query;
+    }
+
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
-        $items = $this->model::orderByDesc('id')->paginate(config('app.panel.page_count'));
-        return view($this->listView,compact('items'));
+
+        $query = $this->makeSortAndFilter();
+        return $this->showList($query);
+
     }
 
     /**
@@ -47,7 +69,7 @@ class XController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show( $user)
+    public function show($user)
     {
         //
     }
@@ -63,7 +85,7 @@ class XController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request,  $user)
+    public function update(Request $request, $user)
     {
         //
     }
@@ -74,5 +96,15 @@ class XController extends Controller
     public function destroy($user)
     {
         //
+    }
+
+
+    /**
+     * Show list of trashed
+     */
+    public function trashed()
+    {
+        $query = User::onlyTrashed();
+        return $this->showList($query);
     }
 }

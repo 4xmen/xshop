@@ -1,11 +1,11 @@
 <?php
 
 namespace App\Providers;
-
 use App\Helpers\TDate;
 use App\Http\Middleware\Acl;
 use Carbon\Carbon;
 use Illuminate\Pagination\Paginator;
+use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -32,5 +32,7 @@ class AppServiceProvider extends ServiceProvider
             $dt = TDate::GetInstance();
             return $dt->PDate($format, self::this()->timestamp);
         });
+
+
     }
 }

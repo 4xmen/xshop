@@ -1,4 +1,6 @@
 <?php
+use Illuminate\Support\Facades\Facade;
+use Illuminate\Support\ServiceProvider;
 
 return [
 
@@ -148,4 +150,35 @@ return [
     ],
 
 
+
+    /*
+   |--------------------------------------------------------------------------
+   | Class Aliases
+   |--------------------------------------------------------------------------
+   |
+   | This array of class aliases will be registered when this application
+   | is started. However, feel free to register as many as you wish as
+   | the aliases are "lazy" loaded so they don't hinder performance.
+   |
+   */
+
+    'aliases' => Facade::defaultAliases()->merge([
+        // 'Example' => App\Facades\Example::class,
+    ])->toArray(),
+
+
+    'providers' => ServiceProvider::defaultProviders()->merge([
+        /*
+         * Package Service Providers...
+         */
+
+        /*
+         * Application Service Providers...
+         */
+        App\Providers\AppServiceProvider::class,
+        Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
+        Translator\Framework\TranslatorServiceProvider::class,
+        \App\Providers\BladeServiceProvider::class,
+
+    ])->toArray(),
 ];

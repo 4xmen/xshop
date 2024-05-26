@@ -21,9 +21,11 @@ Route::prefix(config('app.panel.prefix'))->name('admin.')->group(
                         Route::get('create', [\App\Http\Controllers\Admin\UserController::class, 'create'])->name('create');
                         Route::post('store', [\App\Http\Controllers\Admin\UserController::class, 'store'])->name('store');
                         Route::get('edit/{user}', [\App\Http\Controllers\Admin\UserController::class, 'edit'])->name('edit');
+                        Route::get('show/{user}', [\App\Http\Controllers\Admin\UserController::class, 'show'])->name('show');
                         Route::post('update/{user}', [\App\Http\Controllers\Admin\UserController::class, 'update'])->name('update');
-                        Route::get('delete/{user}', [\App\Http\Controllers\Admin\UserController::class, 'destroy'])->name('delete');
+                        Route::get('delete/{user}', [\App\Http\Controllers\Admin\UserController::class, 'destroy'])->name('destroy');
                         Route::post('bulk', [\App\Http\Controllers\Admin\UserController::class, "bulk"])->name('bulk');
+                        Route::get('trashed', [\App\Http\Controllers\Admin\UserController::class, "trashed"])->name('trashed');
                     });
             });
     });
