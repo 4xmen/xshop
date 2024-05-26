@@ -2,7 +2,7 @@
 @import 'vazirmatn/Vazirmatn-font-face.css';
 @import "remixicon/fonts/remixicon.css";
 // Variables
-@import 'variables';
+@import 'panel/variables';
 
 // Bootstrap
 @import 'bootstrap/scss/bootstrap';
@@ -47,7 +47,7 @@ a{
 
     >aside{
         background-image: url("../images/pattern.png");
-        background-color: #282c34;
+        background-color: lighten($body-bg,7);
     }
     &.sided{
         grid-template-columns:50px 250px 1fr;
@@ -58,7 +58,9 @@ a{
 }
 
 
-@import "common";
-@import "raw";
-@import "fix";
-@import "navbar";
+@import "panel/common";
+@import "panel/raw";
+@import "panel/fix";
+@import "panel/navbar";
+@import "panel/breadcrumbs";
+@import "panel/item-list";

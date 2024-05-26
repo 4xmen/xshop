@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('slug')->unique();
             $table->string('subtitle', 4096);
             $table->text('body');
-            $table->unsignedBigInteger('category_id');
+            $table->unsignedBigInteger('group_id');
             $table->unsignedBigInteger('user_id');
             $table->unsignedTinyInteger('status')->default(0);
             $table->boolean('is_breaking')->default(0);
@@ -31,7 +31,8 @@ return new class extends Migration
 
             $table->foreign('user_id')
                 ->references('id')->on('users');
-            $table->foreign('category_id')
+
+            $table->foreign('group_id')
                 ->references('id')->on('groups');
         });
 

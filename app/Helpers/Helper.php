@@ -1,15 +1,15 @@
 <?php
 
-namespace App\Helpers;
-
+use App\Helpers;
 
 
 /**
  * @param $lang code like fa
  * @return string
  */
-function getEmojiLanguagebyCode($lang) {
-    $languages = array(
+function getEmojiLanguagebyCode($lang)
+{
+    $languages = [
         "af" => "🇿🇦", // Afrikaans
         "sq" => "🇦🇱", // Albanian
         "am" => "🇪🇹", // Amharic
@@ -76,11 +76,63 @@ function getEmojiLanguagebyCode($lang) {
         "uz" => "🇺🇿", // Uzbek
         "vi" => "🇻🇳", // Vietnamese
         "cy" => "🇬🇧"  // Welsh
-    );
+    ];
     $lang = strtolower($lang);
     if (array_key_exists($lang, $languages)) {
         return $languages[$lang];
     } else {
         return "❓";
+    }
+}
+
+/**
+ * has route as named we want this model?
+ * @param $name string
+ * @return bool
+ */
+
+function hasRoute($name)
+{
+    // create route
+    $cRuote = str_replace('index', $name, request()->route()->getName());
+    if (\Illuminate\Support\Facades\Route::has($cRuote)) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+/**
+ * get named route url
+ * @param $name string
+ * @param $args array
+ * @return string|null
+ */
+function getRoute($name,$args = [])
+{
+    // create route
+    $cRuote = str_replace('index', $name, request()->route()->getName());
+    if (\Illuminate\Support\Facades\Route::has($cRuote)) {
+        return \route($cRuote,$args);
+    } else {
+        return null;
+    }
+}
+
+
+/**
+ * make sort link suffix
+ * @param $col string
+ * @return string
+ */
+function sortSuffix($col){
+    if (request()->sort == $col){
+        if (request('sortType','asc') == 'desc'){
+            return '&sortType=asc';
+        }else{
+            return '&sortType=desc';
+        }
+    }else{
+        return '';
     }
 }

@@ -16,6 +16,7 @@ import './bootstrap';
 import { createApp } from 'vue';
 import './panel/raw.js';
 import './panel/navbar.js';
+import './panel/list-checkboxs.js';
 
 /**
  * Next, we will create a fresh Vue application instance. You may then begin

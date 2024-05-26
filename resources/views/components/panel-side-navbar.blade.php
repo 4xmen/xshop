@@ -183,7 +183,7 @@
             </a>
             <ul id="manage">
                 <li>
-                    <a>
+                    <a href="{{route('admin.user.index')}}">
                         <i class="ri-folder-user-fill"></i>
                         {{__("Users")}}
                     </a>

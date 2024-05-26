@@ -89,16 +89,16 @@ class Post extends Model  implements HasMedia
         return $this->morphMany(Comment::class, 'commentable')->where('status', 1);
     }
 
-    public function toArray()
-    {
-        return [
-            'id' => $this->id,
-            'title' => $this->title,
-            'subtitle' => $this->subtitle,
-            'body' => $this->body,
-            'categories' => $this->categories->implode(' ') ?? null,
-            'author' => $this->author->name ?? null,
-            'tags' => $this->tags->implode(' ') ?? null,
-        ];
-    }
+//    public function toArray()
+//    {
+//        return [
+//            'id' => $this->id,
+//            'title' => $this->title,
+//            'subtitle' => $this->subtitle,
+//            'body' => $this->body,
+//            'categories' => $this->categories->implode(' ') ?? null,
+//            'author' => $this->author->name ?? null,
+//            'tags' => $this->tags->implode(' ') ?? null,
+//        ];
+//    }
 }
