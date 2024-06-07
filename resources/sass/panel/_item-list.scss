@@ -10,7 +10,15 @@
         font-weight: 200;
         margin: 0;
     }
+    h2,h3,h4,h5,h6{
+        font-weight: 200;
+        font-size: 22px;
+        margin-bottom: 0;
+    }
 
+    h2{
+        margin-bottom: .5rem;
+    }
     .item-search {
         form {
             padding: 1rem;
@@ -28,6 +36,8 @@
         }
 
         td,th{
+            transition: 300ms;
+            transition-delay: 100ms;
             &:first-child{
                 width: 100px;
             }
@@ -66,9 +76,10 @@
 
 
         &:hover{
+            background-image: url("../images/pattern.png");
+            background-color: #00000044;
             td{
-                background-color: #00000044;
-                background-image: url("../images/pattern.png");
+                background-color: transparent;
             }
         }
 
@@ -84,3 +95,10 @@
 }
 
 
+
+#bulk-from{
+    max-height: 0;
+    overflow: hidden;
+    box-sizing: border-box;
+    transition: 1s;
+}

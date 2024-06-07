@@ -7,7 +7,7 @@ use App\Helpers;
  * @param $lang code like fa
  * @return string
  */
-function getEmojiLanguagebyCode($lang)
+function getEmojiLanguagebyCode($lang) : string
 {
     $languages = [
         "af" => "🇿🇦", // Afrikaans
@@ -88,13 +88,14 @@ function getEmojiLanguagebyCode($lang)
 /**
  * has route as named we want this model?
  * @param $name string
+ * @param $endRoute string 'index' or alt list
  * @return bool
  */
 
-function hasRoute($name)
+function hasRoute($name,$endRoute = 'index') : bool
 {
     // create route
-    $cRuote = str_replace('index', $name, request()->route()->getName());
+    $cRuote = str_replace($endRoute, $name, request()->route()->getName());
     if (\Illuminate\Support\Facades\Route::has($cRuote)) {
         return true;
     } else {
@@ -106,14 +107,15 @@ function hasRoute($name)
  * get named route url
  * @param $name string
  * @param $args array
+ * @param $endRoute string 'index' or alt list
  * @return string|null
  */
-function getRoute($name,$args = [])
+function getRoute($name, $args = [],$endRoute = 'index') : string | null
 {
     // create route
-    $cRuote = str_replace('index', $name, request()->route()->getName());
+    $cRuote = str_replace($endRoute, $name, request()->route()->getName());
     if (\Illuminate\Support\Facades\Route::has($cRuote)) {
-        return \route($cRuote,$args);
+        return \route($cRuote, $args);
     } else {
         return null;
     }
@@ -125,14 +127,79 @@ function getRoute($name,$args = [])
  * @param $col string
  * @return string
  */
-function sortSuffix($col){
-    if (request()->sort == $col){
-        if (request('sortType','asc') == 'desc'){
+function sortSuffix($col) : string
+{
+    if (request()->sort == $col) {
+        if (request('sortType', 'asc') == 'desc') {
             return '&sortType=asc';
-        }else{
+        } else {
             return '&sortType=desc';
         }
-    }else{
+    } else {
         return '';
     }
+}
+
+
+/**
+ * make array compatible | help us to translate
+ * @param $array
+ * @param $translate
+ * @return false|string
+ */
+function arrayNormolizeVueCompatible($array, $translate = false): false | string
+{
+    $result = [];
+    foreach ($array as $index => $item) {
+        $result[] = ['id' => $index, 'name' => ($translate ? __($item) : $item)];
+    }
+    return json_encode($result);
+}
+
+
+/**
+ * check string is json or not
+ * @param $string
+ * @return bool
+ */
+function isJson($string) : bool {
+    json_decode($string);
+    return json_last_error() === JSON_ERROR_NONE;
+}
+
+
+/**
+ * save admin batch log
+ * @param $method
+ * @param $cls class
+ * @param $ids
+ * @return void
+ */
+function logAdminBatch($method, $cls, $ids): void
+{
+    $act = explode('\\', $method);
+    foreach ($ids as $id) {
+        auth()->user()->logs()->create([
+            'action' => $act[count($act) - 1],
+            'loggable_type' => $cls,
+            'loggable_id' => $id,
+        ]);
+    }
+}
+
+/**
+ * save admin log
+ * @param $method
+ * @param $cls class
+ * @param $id
+ * @return void
+ */
+function logAdmin($method, $cls, $id) :void
+{
+    $act = explode('\\', $method);
+    auth()->user()->logs()->create([
+        'action' => $act[count($act) - 1],
+        'loggable_type' => $cls,
+        'loggable_id' => $id,
+    ]);
 }

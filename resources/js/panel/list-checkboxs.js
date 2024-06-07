@@ -4,6 +4,42 @@ function clearSelection()
     else if (document.selection) {document.selection.empty();}
 }
 
+
+function serializeForm(selector) {
+    let form = document.querySelector(selector);
+    let formData = new FormData(form);
+    let serializedArray = [];
+
+    formData.forEach(function(value, key) {
+        serializedArray.push({
+            name: key,
+            value: value
+        });
+    });
+
+    return serializedArray;
+}
+
+function handleCheckChange () {
+    let frm = serializeForm('#main-form');
+    let bi =  document.querySelector('#bulk-idz');
+    bi.innerHTML = '';
+    for( const item of frm) {
+        let n =document.createElement("input");
+        n.name = item.name;
+        n.value = item.value;
+        n.type = 'hidden';
+        bi.appendChild(n);
+    }
+
+    if (frm.length == 0){
+        document.querySelector('#bulk-from').style.maxHeight = '0';
+    }else{
+        document.querySelector('#bulk-from').style.maxHeight = '250px';
+    }
+
+}
+
 window.addEventListener('load',function () {
     let chkall = document.querySelectorAll(".chkall");
 
@@ -18,6 +54,7 @@ window.addEventListener('load',function () {
                 checkbox.removeAttribute("checked");
             }
         });
+        handleCheckChange();
     });
 // Attach an event listener for "change" and "click" events
     chkall.forEach(function(chkall) {
@@ -44,6 +81,7 @@ window.addEventListener('load',function () {
                 checkbox.removeAttribute("checked");
             });
         }
+        handleCheckChange();
     }
 
 
@@ -55,6 +93,7 @@ window.addEventListener('load',function () {
     chkboxes.forEach(chkbox => {
         chkbox.addEventListener('click', handleCheckboxClick);
         chkbox.parentNode.querySelector('label').addEventListener('click', handleCheckboxClick);
+        chkbox.addEventListener('change',handleCheckChange);
     });
 
     function handleCheckboxClick(e) {
@@ -80,9 +119,10 @@ window.addEventListener('load',function () {
 
         }
 
+        handleCheckChange();
         lastChecked = self;
 
     }
-
+    handleCheckChange();
 });
 
