@@ -1,5 +1,5 @@
 #panel-navbar {
-    height: calc(100vh - 55px);
+    height: calc(100vh - 60px);
     overflow-y: auto;
     position: relative;
 
@@ -72,3 +72,8 @@
     }
 }
 
+
+#panel-top-navbar{
+    background: rgb(40, 45, 70);
+    padding-top: .8rem;
+}

@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-md  shadow-sm">
+<nav class="navbar navbar-expand-md  shadow-sm" id="panel-top-navbar">
     <div class="container-fluid">
         <a class="navbar-brand" href="{{ url('/') }}">
             {{ config('app.name', 'Laravel') }}

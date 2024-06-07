@@ -13,7 +13,7 @@ class User extends Authenticatable
 {
     use HasFactory, Notifiable, HasRoles, SoftDeletes;
 
-    static $roles = ['DEVELOPER', 'ADMIN', 'USER'];
+    static $roles = ['DEVELOPER', 'ADMIN', 'USER', 'SUSPENDED'];
 
     /**
      * The attributes that are mass assignable.
@@ -25,6 +25,11 @@ class User extends Authenticatable
         'email',
         'password',
     ];
+
+    public function getRouteKeyName()
+    {
+        return 'email';
+    }
 
     /**
      * The attributes that should be hidden for serialization.
@@ -49,7 +54,13 @@ class User extends Authenticatable
         ];
     }
 
-    public function posts(){
+    public function posts()
+    {
         return $this->hasMany(Post::class);
+    }
+
+    public function logs()
+    {
+        return $this->hasMany(AdminLog::class, 'user_id', 'id');
     }
 }

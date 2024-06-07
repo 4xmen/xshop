@@ -17,6 +17,7 @@ import { createApp } from 'vue';
 import './panel/raw.js';
 import './panel/navbar.js';
 import './panel/list-checkboxs.js';
+import './panel/general-events.js';
 
 /**
  * Next, we will create a fresh Vue application instance. You may then begin
@@ -29,6 +30,32 @@ const app = createApp({});
 import ExampleComponent from './components/ExampleComponent.vue';
 app.component('example-component', ExampleComponent);
 
+import VueJalaliCalendar from './components/vueJalaliCalendar.vue';
+app.component('vue-jalali-calendar', VueJalaliCalendar);
+
+import CurrencyInput from './components/CurrencyInput.vue';
+app.component('currency-input', CurrencyInput);
+
+import RemixIconPicker from './components/RemixIconPicker.vue';
+app.component('remix-icon-picker', RemixIconPicker);
+
+import FontAwesomeIconPicker from "./components/FontAwesomeIconPicker.vue";
+app.component('awesome-icon-picker', FontAwesomeIconPicker);
+
+import vueDateTimePicker from "./components/vueDateTimePicker.vue";
+app.component('vue-datetime-picker-input', vueDateTimePicker);
+
+import vueDateRangePicker from "./components/vueDateRangePicker.vue";
+app.component('vue-date-range-picker-input', vueDateRangePicker);
+
+import SearchableSelect from "./components/SearchableSelect.vue";
+app.component('searchable-select', SearchableSelect);
+
+import SearchableMultiSelect from "./components/searchableMultiSelect.vue";
+app.component('searchable-multi-select', SearchableMultiSelect);
+
+import Increment from "./components/Increment.vue";
+app.component('increment', Increment);
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue

@@ -32,7 +32,7 @@ class BladeServiceProvider extends ServiceProvider
                 \$from = (\$currentPage - 1) * \$perPage + 1;
                 \$to = min(\$currentPage * \$perPage, \$total);
 
-            echo \"(\$from | \$to | \$total) \"; ?>";
+            echo \"( \$from - \$to ) \"; ?>";
         });
     }
 }
