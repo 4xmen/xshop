@@ -1,4 +1,12 @@
+
+const hideSidebar = function (e) {
+    if (!e.target.closest('aside') && !e.target.closest('#sidebar-panel')) {
+        document.querySelector('#panel').classList.remove('sided');
+        document.removeEventListener('click', hideSidebar);
+    }
+};
 window.addEventListener('load', function () {
+
     try {
 
         document.querySelectorAll('#panel-navbar a')?.forEach(function (el) {
@@ -8,9 +16,13 @@ window.addEventListener('load', function () {
                     e.preventDefault();
                     document.querySelector('#panel').classList.add('sided');
                     document.querySelector('#sidebar-panel').innerHTML = document.querySelector(href).outerHTML;
+                    setTimeout(function () {
+                        document.addEventListener('click',hideSidebar);
+                    },50);
                 }
             });
-        })
+        });
+
     } catch (e) {
         console.log(e.message);
     }

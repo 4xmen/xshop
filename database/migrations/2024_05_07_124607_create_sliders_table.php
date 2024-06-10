@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('tag')->nullable();
             $table->unsignedBigInteger('user_id');
             $table->boolean('active')->default(true);
+            $table->json('data');
             $table->timestamps();
             $table->foreign('user_id')
                 ->references('id')->on('users');

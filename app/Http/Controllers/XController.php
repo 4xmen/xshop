@@ -2,15 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UserSaveRequest;
 use App\Models\User;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 
 abstract class XController extends Controller
 {
 
-    protected $model = User::class;
-    protected $name = "User";
+    protected const _MODEL_ = User::class;
+    protected const SAVE_REQUEST = UserSaveRequest::class;
     protected $cols = [];
     protected $extra_cols = ['id'];
     protected $listView = 'admin.users.user-list';
@@ -28,7 +28,7 @@ abstract class XController extends Controller
     ];
 
 
-    public function createOrUpdate($item, $request)
+    public function save($user, $request)
     {
 
     }
@@ -37,7 +37,7 @@ abstract class XController extends Controller
     {
 
 
-        if (hasRoute('trashed')){
+        if (hasRoute('trashed')) {
             $this->extra_cols[] = 'deleted_at';
         }
         $items = $query->paginate(config('app.panel.page_count'),
@@ -52,9 +52,9 @@ abstract class XController extends Controller
 
 
         if (!\request()->has('sort') || !in_array(\request('sort'), $this->cols)) {
-            $query = $this->model::orderByDesc('id');
+            $query = self::_MODEL_::orderByDesc('id');
         } else {
-            $query = $this->model::orderBy(\request('sort'), \request('sortType', 'asc'));
+            $query = self::_MODEL_::orderBy(\request('sort'), \request('sortType', 'asc'));
         }
 
         foreach (\request()->input('filter', []) as $col => $filter) {
@@ -95,14 +95,7 @@ abstract class XController extends Controller
 
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
 
-    }
 
     /**
      * Store a newly created resource in storage.
@@ -110,14 +103,18 @@ abstract class XController extends Controller
     public function store(Request $request)
     {
         //
-        $item = new $this->model();
-        $item = $this->create($item,$request);
-        logAdmin(__METHOD__, $this->model , $item->id);
 
-        if ($request->ajax()){
-            return ['OK' => true,];
-        }else{
-            return redirect()->route('admin.'.$this->model.'.index')->with(['message' => __('As you wished created successfully')]);
+        $validatedRequest = app()->make(self::SAVE_REQUEST)->merge($request->all());
+
+        $item = new (self::_MODEL_)();
+        $item = $this->save($item, $request);
+        logAdmin(__METHOD__, self::_MODEL_, $item->id);
+
+        if ($request->ajax()) {
+            return ['OK' => true, __('As you wished created successfully')];
+        } else {
+            return redirect(getRoute('edit', $item->{$item->getRouteKeyName()}))
+                ->with(['message' => __('As you wished created successfully')]);
         }
     }
 
@@ -129,20 +126,24 @@ abstract class XController extends Controller
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit($user)
-    {
-        //
-    }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, $user)
+    public function bringUp(Request $request, $item)
     {
         //
+
+        $validatedRequest = app()->make(self::SAVE_REQUEST)->merge($request->all());
+        $item = $this->save($item, $request);
+        logAdmin(__METHOD__, self::_MODEL_, $item->id);
+
+        if ($request->ajax()) {
+            return ['OK' => true, __('As you wished updated successfully')];
+        } else {
+            return redirect(getRoute('edit', $item->{$item->getRouteKeyName()}))
+                ->with(['message' => __('As you wished updated successfully')]);
+        }
     }
 
     /**
@@ -151,7 +152,7 @@ abstract class XController extends Controller
     public function delete($item)
     {
         //
-        logAdmin(__METHOD__, $this->model , $item->id);
+        logAdmin(__METHOD__, self::_MODEL_, $item->id);
         $item->delete();
         return redirect()->back()->with(['message' => __('As you wished removed successfully')]);
     }
@@ -162,7 +163,7 @@ abstract class XController extends Controller
     public function restoreing($item)
     {
         //
-        logAdmin(__METHOD__, $this->model , $item->id);
+        logAdmin(__METHOD__, self::_MODEL_, $item->id);
         $item->restore();
         return redirect()->back()->with(['message' => __('As you wished restored successfully')]);
     }
@@ -177,9 +178,11 @@ abstract class XController extends Controller
         return $this->showList($query);
     }
 
-    protected function do_bulk($msg,$action,$ids)
+    protected function do_bulk($msg, $action, $ids)
     {
-        logAdminBatch(__METHOD__ . '.' . $action, $this->model, $ids);
+        logAdminBatch(__METHOD__ . '.' . $action, self::_MODEL_, $ids);
         return redirect()->back()->with(['message' => $msg]);
     }
+
+
 }

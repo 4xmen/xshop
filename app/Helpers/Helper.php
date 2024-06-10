@@ -92,10 +92,13 @@ function getEmojiLanguagebyCode($lang) : string
  * @return bool
  */
 
-function hasRoute($name,$endRoute = 'index') : bool
+function hasRoute($name) : bool
 {
     // create route
-    $cRuote = str_replace($endRoute, $name, request()->route()->getName());
+    $routes = explode('.',request()->route()->getName());
+    $routes[count($routes) - 1 ] = $name;
+    $cRuote = implode('.',$routes);
+
     if (\Illuminate\Support\Facades\Route::has($cRuote)) {
         return true;
     } else {
@@ -107,13 +110,15 @@ function hasRoute($name,$endRoute = 'index') : bool
  * get named route url
  * @param $name string
  * @param $args array
- * @param $endRoute string 'index' or alt list
  * @return string|null
  */
-function getRoute($name, $args = [],$endRoute = 'index') : string | null
+function getRoute($name, $args = []) : string | null
 {
     // create route
-    $cRuote = str_replace($endRoute, $name, request()->route()->getName());
+    $routes = explode('.',request()->route()->getName());
+    $routes[count($routes) - 1 ] = $name;
+    $cRuote = implode('.',$routes);
+
     if (\Illuminate\Support\Facades\Route::has($cRuote)) {
         return \route($cRuote, $args);
     } else {
@@ -202,4 +207,16 @@ function logAdmin($method, $cls, $id) :void
         'loggable_type' => $cls,
         'loggable_id' => $id,
     ]);
+}
+
+
+
+
+function queryBuilder($except = null){
+    $queries = request()->toArray();
+    if ($except != null){
+        unset($queries[$except]);
+        unset($queries['sortType']);
+    }
+    return http_build_query($queries);
 }
