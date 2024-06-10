@@ -15,7 +15,6 @@ abstract class XController extends Controller
     protected $extra_cols = ['id'];
     protected $listView = 'admin.users.user-list';
     protected $formView = 'admin.users.user-form';
-    protected $filterables = [];
 
     protected $searchable = [];
 
