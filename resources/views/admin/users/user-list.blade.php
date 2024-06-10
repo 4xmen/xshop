@@ -5,7 +5,7 @@
     {{__("Users list")}}
 @endsection
 @section('title')
-    {{__("Users list")}} |
+    {{__("Users list")}} -
 @endsection
 @section('filter')
     <h2>

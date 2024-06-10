@@ -71,7 +71,7 @@
                             <i class="ri-check-double-line"></i>
                             {{__("Bulk actions:")}}
                         </h3>
-                        <form action="{{getRoute('bulk',[],strpos(request()->url(),'trashed') == false?'index':'trashed')}}" id="bulk-from" method="post">
+                        <form action="{{getRoute('bulk',[])}}" id="bulk-from" method="post">
 
                             <div class="p-3">
 
@@ -120,7 +120,7 @@
                             </th>
                             @foreach($cols as $col)
                                 <th>
-                                    <a href="?sort={{$col}}{{sortSuffix($col)}}">
+                                    <a href="?sort={{$col}}{{sortSuffix($col)}}&{{queryBuilder('sort')}}">
                                         {{__($col)}}
                                     </a>
                                 </th>
@@ -160,7 +160,7 @@
                                 <td>
 
                                     @if(strpos(request()->url(),'trashed') != false && hasRoute('restore'))
-                                        <a href="{{getRoute('restore',$item->{$item->getRouteKeyName()},'trashed')}}"
+                                        <a href="{{getRoute('restore',$item->{$item->getRouteKeyName()})}}"
                                            class="btn btn-success btn-sm mx-1 d-xl-none d-xxl-none"
                                            data-bs-toggle="tooltip"
                                            data-bs-placement="top"
@@ -205,7 +205,7 @@
                                                 @endif
                                             @else
                                                 @if( hasRoute('restore') && $item->trashed())
-                                                    <a href="{{getRoute('restore',$item->{$item->getRouteKeyName()},'trashed')}}"
+                                                    <a href="{{getRoute('restore',$item->{$item->getRouteKeyName()})}}"
                                                        class="btn btn-success btn-sm mx-1"
                                                        data-bs-toggle="tooltip"
                                                        data-bs-placement="top"
@@ -262,7 +262,6 @@
             </div>
         </div>
         {{--   list content end--}}
-    </div>
     </div>
 
     @if(hasRoute('create'))

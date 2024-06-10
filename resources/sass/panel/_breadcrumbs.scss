@@ -15,6 +15,7 @@ $pnl-brc-height: 50px;
         border-radius: 4px ;
         transition: .5s;
         li{
+            transition: 300ms;
             position: relative;
             overflow: hidden;
             a,span{
@@ -30,6 +31,7 @@ $pnl-brc-height: 50px;
             }
 
             &:before {
+                transition: 300ms;
                 content: "";
                 width: 37px;
                 height: 37px;
@@ -48,11 +50,11 @@ $pnl-brc-height: 50px;
 
             &:hover{
                 background: #444e7c;
-                background-image: url("../images/pattern.png");
+                //background-image: url("../images/pattern.png");
 
                 & + li:before{
                     background: #444e7c;
-                    background-image: url("../images/pattern.png");
+                    //background-image: url("../images/pattern.png");
                 }
             }
         }

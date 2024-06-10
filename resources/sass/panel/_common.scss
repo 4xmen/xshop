@@ -51,3 +51,30 @@ a.btn,a.action-btn,a.circle-btn{
     bottom: 1rem;
 }
 
+.general-form{
+    background: $lighter-color;
+    border-radius: 7px;
+    margin-bottom: 4rem;
+    position: relative;
+    h1{
+        font-size: 25px;
+        font-weight: 200;
+        background: #00000011;
+        padding: 1rem;
+        text-align: center;
+        margin: 0 -1rem;
+    }
+
+    .row{
+        padding: 0 1rem 2rem ;
+    }
+
+    input[type='submit']{
+        position: absolute ;
+        bottom: -1rem;
+        left: 50%;
+        transform: translateX(-50%);
+        min-width: 200px;
+    }
+}
+
