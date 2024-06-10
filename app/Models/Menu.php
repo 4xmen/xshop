@@ -10,7 +10,7 @@ class Menu extends Model
 {
     use HasFactory,SoftDeletes;
 
-    public function menuItems()
+    public function items()
     {
         return $this->hasMany(Item::class);
     }
