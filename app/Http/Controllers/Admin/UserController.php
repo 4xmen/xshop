@@ -93,12 +93,12 @@ class UserController extends XController
         switch ($action) {
             case 'delete':
                 $msg = __(':COUNT items deleted successfully', ['COUNT' => count($ids)]);
-                self::_MODEL_::destroy($ids);
+                $this->_MODEL_::destroy($ids);
                 break;
             case 'restore':
                 $msg = __(':COUNT items restored successfully', ['COUNT' => count($ids)]);
                 foreach ($ids as $id) {
-                    self::_MODEL_::withTrashed()->find($id)->restore();
+                    $this->_MODEL_::withTrashed()->find($id)->restore();
                 }
                 break;
             case 'role':

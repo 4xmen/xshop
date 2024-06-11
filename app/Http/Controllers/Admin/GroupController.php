@@ -4,26 +4,26 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\XController;
-use App\Http\Requests\UserSaveRequest;
+use App\Http\Requests\GroupSaveRequest;
 use App\Models\Access;
-use App\Models\User;
+use App\Models\Group;
 use Illuminate\Http\Request;
 use App\Helper;
 use function App\Helpers\hasCreateRoute;
 
-class UserController extends XController
+class GroupController extends XController
 {
 
-    // protected  $_MODEL_ = User::class;
-    // protected  $SAVE_REQUEST = UserSaveRequest::class;
+    // protected  $_MODEL_ = Group::class;
+    // protected  $SAVE_REQUEST = GroupSaveRequest::class;
 
-    protected $cols = [];
-    protected $extra_cols = [];
+    protected $cols = ['name','subtitle','parent_id'];
+    protected $extra_cols = ['id','slug'];
 
-    protected $searchable = [];
+    protected $searchable = ['name','subtitle','description'];
 
-    protected $listView = 'admin.users.user-list';
-    protected $formView = 'admin.users.user-form';
+    protected $listView = 'admin.groups.group-list';
+    protected $formView = 'admin.groups.group-form';
 
 
     protected $buttons = [
@@ -38,19 +38,30 @@ class UserController extends XController
 
     public function __construct()
     {
-        parent::__construct(User::class, UserSaveRequest::class);
+        parent::__construct(Group::class, GroupSaveRequest::class);
     }
 
     /**
-     * @param $user User
-     * @param $request  UserSaveRequest
-     * @return User
+     * @param $group Group
+     * @param $request  GroupSaveRequest
+     * @return Group
      */
-    public function save($user, $request)
+    public function save($group, $request)
     {
 
-        $user->save();
-        return $user;
+        $group->name = $request->input('name');
+        $group->subtitle = $request->input('subtitle');
+        $group->description = $request->input('description');
+        $group->parent_id = $request->input('parent_id');
+        $group->slug = $this->getSlug($group);
+        if ($request->has('image')){
+            $group->image = $this->storeFile('image',$group, 'groups');
+        }
+        if ($request->has('bg')){
+            $group->bg = $this->storeFile('bg',$group, 'groups');
+        }
+        $group->save();
+        return $group;
 
     }
 
@@ -61,16 +72,18 @@ class UserController extends XController
     public function create()
     {
         //
-        return view($this->formView);
+        $cats = Group::all();
+        return view($this->formView,compact('cats'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(User $item)
+    public function edit(Group $item)
     {
         //
-        return view($this->formView, compact('item'));
+        $cats = Group::all();
+        return view($this->formView, compact('item','cats'));
     }
 
     public function bulk(Request $request)
@@ -100,13 +113,13 @@ class UserController extends XController
         return $this->do_bulk($msg, $action, $ids);
     }
 
-    public function destroy(User $item)
+    public function destroy(Group $item)
     {
         return parent::delete($item);
     }
 
 
-    public function update(Request $request, User $item)
+    public function update(Request $request, Group $item)
     {
         return $this->bringUp($request, $item);
     }
@@ -114,7 +127,7 @@ class UserController extends XController
     /**restore*/
     public function restore($item)
     {
-        return parent::restoreing(User::withTrashed()->where('id', $item)->first());
+        return parent::restoreing(Group::withTrashed()->where('id', $item)->first());
     }
     /*restore**/
 }

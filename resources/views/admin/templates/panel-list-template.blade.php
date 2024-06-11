@@ -6,6 +6,7 @@
 
             {{--  list side bar start--}}
             <div class="col-xl-3">
+                @include('components.err')
                 <div class="item-list mb-3">
                     <div class="row">
                         <div class="col-8">
@@ -79,9 +80,9 @@
                                 <select class="form-control mb-3" name="action" required>
                                     <option value=""></option>
                                     @if(strpos(request()->url(),'trashed') != false)
-                                    <option value="restore"> {{__("Batch restore")}} </option>
+                                        <option value="restore"> {{__("Batch restore")}} </option>
                                     @else
-                                    <option value="delete"> {{__("Batch delete")}} </option>
+                                        <option value="delete"> {{__("Batch delete")}} </option>
                                     @endif
                                     @yield('bulk')
                                 </select>
@@ -95,7 +96,7 @@
                     </div>
                 @endif
 
-                @include('components.err')
+
             </div>
             {{--  list side bar end--}}
 
@@ -132,103 +133,120 @@
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach($items as $item)
+                        @if(count($items) == 0)
                             <tr>
-                                <td>
-                                    <input type="checkbox" id="chk-{{$item->id}}" class="chkbox"
-                                           name="id[{{$item->id}}]" value="{{$item->id}}">
-                                    <label for="chk-{{$item->id}}">
-                                        {{$item->id}}
-                                    </label>
-                                </td>
-                                @foreach($cols as $k => $col)
-                                    @if($k == 0 && hasRoute('edit'))
-                                        <td>
-                                            <a href="{{getRoute('edit',$item->{$item->getRouteKeyName()})}}">
-                                                <b>
-                                                    {{$item->name}}
-                                                </b>
-                                            </a>
-                                        </td>
-                                    @else
-                                        <td>
-                                            {{$item->$col}}
-                                        </td>
-                                    @endif
-                                @endforeach
-                                @yield('table-body')
-                                <td>
-
-                                    @if(strpos(request()->url(),'trashed') != false && hasRoute('restore'))
-                                        <a href="{{getRoute('restore',$item->{$item->getRouteKeyName()})}}"
-                                           class="btn btn-success btn-sm mx-1 d-xl-none d-xxl-none"
-                                           data-bs-toggle="tooltip"
-                                           data-bs-placement="top"
-                                           data-bs-custom-class="custom-tooltip"
-                                           data-bs-title="{{__("Restore")}}">
-                                            <i class="ri-recycle-line"></i>
-                                        </a>
-                                    @else
-
-                                    <div class="dropdown d-xl-none d-xxl-none">
-                                        <a class="btn btn-outline-secondary dropdown-toggle" href="#" role="button"
-                                           data-bs-toggle="dropdown" aria-expanded="false">
-                                        </a>
-                                        <ul class="dropdown-menu">
-                                            @foreach($buttons as $btn => $btnData)
-                                                <li>
-                                                    <a class="dropdown-item {{$btnData['class']}}"
-                                                       href="{{getRoute($btn,$item->id)}}">
-                                                        <i class="{{$btnData['icon']}}"></i>
-                                                        &nbsp;
-                                                        {{__($btnData['title'])}}
-                                                    </a>
-                                                </li>
-                                            @endforeach
-                                        </ul>
-                                    </div>
-                                    @endif
-                                    <div class="d-none d-xl-block  d-xxl-block">
-                                        @foreach($buttons as $btn => $btnData)
-
-                                            @if(strpos($btnData['class'],'delete') == false )
-                                                @if(strpos(request()->url(),'trashed') == false)
-
-                                                <a href="{{getRoute($btn,$item->{$item->getRouteKeyName()})}}"
-                                                   class="btn {{$btnData['class']}} btn-sm mx-1"
-                                                   data-bs-toggle="tooltip"
-                                                   data-bs-placement="top"
-                                                   data-bs-custom-class="custom-tooltip"
-                                                   data-bs-title="{{__($btnData['title'])}}">
-                                                    <i class="{{$btnData['icon']}}"></i>
-                                                </a>
-                                                @endif
-                                            @else
-                                                @if( hasRoute('restore') && $item->trashed())
-                                                    <a href="{{getRoute('restore',$item->{$item->getRouteKeyName()})}}"
-                                                       class="btn btn-success btn-sm mx-1"
-                                                       data-bs-toggle="tooltip"
-                                                       data-bs-placement="top"
-                                                       data-bs-custom-class="custom-tooltip"
-                                                       data-bs-title="{{__("Restore")}}">
-                                                        <i class="ri-recycle-line"></i>
-                                                    </a>
-                                                @else
-                                                    <a href="{{getRoute($btn,$item->{$item->getRouteKeyName()})}}"
-                                                       class="btn {{$btnData['class']}} btn-sm mx-1"
-                                                       data-bs-toggle="tooltip"
-                                                       data-bs-placement="top"
-                                                       data-bs-custom-class="custom-tooltip"
-                                                       data-bs-title="{{__($btnData['title'])}}">
-                                                        <i class="{{$btnData['icon']}}"></i>
-                                                    </a>
-                                                @endif
-                                            @endif
-                                        @endforeach
-                                    </div>
+                                <td colspan="100%">
+                                    {{__("There is nothing to show!")}}
                                 </td>
                             </tr>
-                        @endforeach
+                        @else
+                            @foreach($items as $item)
+                                <tr>
+                                    <td>
+                                        <input type="checkbox" id="chk-{{$item->id}}" class="chkbox"
+                                               name="id[{{$item->id}}]" value="{{$item->id}}">
+                                        <label for="chk-{{$item->id}}">
+                                            {{$item->id}}
+                                        </label>
+                                    </td>
+                                    @foreach($cols as $k => $col)
+                                        @if($k == 0 && hasRoute('edit'))
+                                            <td>
+                                                <a href="{{getRoute('edit',$item->{$item->getRouteKeyName()})}}">
+                                                    <b>
+                                                        {{$item->name}}
+                                                    </b>
+                                                </a>
+                                            </td>
+                                        @else
+                                            <td>
+                                                @switch($col)
+                                                    @case($col == 'parent_id')
+                                                    {{ $item->parent?->{$cols[0]}??'-' }}
+                                                    @break
+                                                    @default
+                                                        {{$item->$col}}
+                                                @endswitch
+                                            </td>
+                                        @endif
+                                    @endforeach
+                                    @yield('table-body')
+                                    <td>
+
+                                        @if(strpos(request()->url(),'trashed') != false && hasRoute('restore'))
+                                            <a href="{{getRoute('restore',$item->{$item->getRouteKeyName()})}}"
+                                               class="btn btn-success btn-sm mx-1 d-xl-none d-xxl-none"
+                                               data-bs-toggle="tooltip"
+                                               data-bs-placement="top"
+                                               data-bs-custom-class="custom-tooltip"
+                                               data-bs-title="{{__("Restore")}}">
+                                                <i class="ri-recycle-line"></i>
+                                            </a>
+                                        @else
+
+                                            <div class="dropdown d-xl-none d-xxl-none">
+                                                <a class="btn btn-outline-secondary dropdown-toggle" href="#"
+                                                   role="button"
+                                                   data-bs-toggle="dropdown" aria-expanded="false">
+                                                </a>
+                                                <ul class="dropdown-menu">
+                                                    @foreach($buttons as $btn => $btnData)
+                                                        <li>
+                                                            <a class="dropdown-item {{$btnData['class']}}"
+                                                               href="{{getRoute($btn,$item->{$item->getRouteKeyName()})}}">
+                                                                <i class="{{$btnData['icon']}}"></i>
+                                                                &nbsp;
+                                                                {{__($btnData['title'])}}
+                                                            </a>
+                                                        </li>
+                                                    @endforeach
+                                                </ul>
+                                            </div>
+                                        @endif
+                                        <div class="d-none d-xl-block  d-xxl-block">
+                                            @foreach($buttons as $btn => $btnData)
+
+                                                @if(strpos($btnData['class'],'delete') == false )
+                                                    @if(strpos(request()->url(),'trashed') == false)
+
+                                                        <a href="{{getRoute($btn,$item->{$item->getRouteKeyName()})}}"
+                                                           class="btn {{$btnData['class']}} btn-sm mx-1"
+                                                           data-bs-toggle="tooltip"
+                                                           data-bs-placement="top"
+                                                           data-bs-custom-class="custom-tooltip"
+                                                           data-bs-title="{{__($btnData['title'])}}">
+                                                            <i class="{{$btnData['icon']}}"></i>
+                                                        </a>
+                                                    @endif
+                                                @else
+                                                    @if( hasRoute('restore') && $item->trashed())
+                                                        <a class="btn btn-success btn-sm mx-1"
+                                                           href="{{getRoute('restore',$item->id)}}" {{--dont change this id to getRouteKeyName --}}
+                                                           data-bs-toggle="tooltip"
+                                                           data-bs-placement="top"
+                                                           data-bs-custom-class="custom-tooltip"
+                                                           data-bs-title="{{__("Restore")}}">
+                                                            <i class="ri-recycle-line"></i>
+                                                        </a>
+                                                    @else
+                                                        <a href="{{getRoute($btn,$item->{$item->getRouteKeyName()})}}"
+                                                           class="btn {{$btnData['class']}} btn-sm mx-1"
+                                                           data-bs-toggle="tooltip"
+                                                           data-bs-placement="top"
+                                                           data-bs-custom-class="custom-tooltip"
+                                                           data-bs-title="{{__($btnData['title'])}}">
+                                                            <i class="{{$btnData['icon']}}"></i>
+                                                        </a>
+                                                    @endif
+                                                @endif
+                                            @endforeach
+                                        </div>
+                                    </td>
+                                </tr>
+
+                            @endforeach
+                        @endif
+
                         </tbody>
 
 
