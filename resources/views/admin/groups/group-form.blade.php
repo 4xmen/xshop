@@ -88,7 +88,7 @@
                                 class="form-control @error('parent') is-invalid @enderror">
                             <option value=""> {{__('No parent')}} </option>
                             @foreach($cats as $cat )
-                                @if($cat->id != $item->id)
+                                @if( !isset($item) || $cat->id != $item->id )
                                     <option value="{{ $cat->id }}"
                                             @if (old('parent',$item->parent_id??null) == $cat->id  ) selected @endif >
                                         {{$cat->name}}

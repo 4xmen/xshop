@@ -1,6 +1,7 @@
 <?php
 
 use App\Helpers;
+use Illuminate\Support\Facades\Route;
 
 
 /**
@@ -257,3 +258,74 @@ function sluger($name, $replace_char = '-')
     return substr($name, 0, 120);
 }
 
+
+/**
+ * generate last item of breadcrumb of admin panel
+ * @return void
+ */
+function lastCrump()
+{
+    $routes = explode('.', Route::currentRouteName());
+    if (count($routes) != 3) {
+        echo '<li >
+        <a>
+            <i class="fa fa-cube" ></i>
+            ' . __(ucfirst($routes[count($routes) - 1])) . '
+        </a>
+    </li>';
+        return;
+    }
+    $route = $routes[count($routes) - 1];
+    if ($route == 'home') {
+        return;
+    }
+
+    if ($route == 'all' || $route == 'index' || $route == 'list') {
+        echo '<li >
+        <a>
+            <i class="fa fa-list" ></i>
+            ' . __(ucfirst($routes[count($routes) - 2])) . '
+        </a>
+    </li>';
+    } else {
+        $link = '#';
+        $temp = $routes;
+        array_pop($temp);
+        $temp = implode('.', $temp) . '.';
+        $link = \route($temp . 'index');
+        echo '<li>
+        <a href="' . $link . '">
+            <i class="ri-list-check" ></i>
+            ' . __(Str::plural(ucfirst($routes[count($routes) - 2]))) . '
+        </a>
+    </li>';
+        switch ($route) {
+            case 'create':
+                $title = __('Add') . ' ' . __($routes[count($routes) - 2]);
+                $icon = 'ri-add-line';
+                break;
+            case 'edit':
+                $title = __('Edit') . ' ' . __($routes[count($routes) - 2]);
+                $icon = 'ri-edit-line';
+                break;
+            case 'show':
+                $title = __('Show') . ' ' . __($routes[count($routes) - 2]);
+                $icon = 'ri-eye-line';
+                break;
+            case 'sort':
+                $title = __('Sort') . ' ' . __($routes[count($routes) - 2]);
+                $icon = 'ri-sort-number-asc';
+                break;
+            default:
+                $title = __('') . ' ' . __(ucfirst($routes[count($routes) - 1]));
+                $icon = 'ri-bubble-chart-line';
+                break;
+        }
+        echo '<li>
+            <a>
+                <i class="' . $icon . '" ></i>
+                ' . $title . '
+            </a>
+        </li>';
+    }
+}
