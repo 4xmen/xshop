@@ -79,7 +79,7 @@
                     </a>
                 </li>
                 <li>
-                    <a>
+                    <a href="{{route('admin.group.index')}}">
                         <i class="ri-book-3-fill"></i>
                         {{__('Groups')}}
                     </a>

@@ -210,8 +210,11 @@ function logAdmin($method, $cls, $id) :void
 }
 
 
-
-
+/**
+ * build query with excepts
+ * @param $except
+ * @return string
+ */
 function queryBuilder($except = null){
     $queries = request()->toArray();
     if ($except != null){
@@ -220,3 +223,37 @@ function queryBuilder($except = null){
     }
     return http_build_query($queries);
 }
+
+
+/**
+ * @param $name
+ * @param $replace_char string
+ * @return string
+ */
+function sluger($name, $replace_char = '-')
+{
+    // special chars
+    $name = str_replace(['&', '+' , '@', '*'], ['and', 'plus', 'at', 'star'], $name);
+
+    // replace non letter or digits by -
+    $name = preg_replace('~[^\pL\d\.]+~u', $replace_char, $name);
+
+    // transliterate
+    $name = iconv('utf-8', 'utf-8//TRANSLIT', $name);
+
+    // trim
+    $name = trim($name, $replace_char);
+
+    // remove duplicate -
+    $name = preg_replace('~-+~', $replace_char, $name);
+
+    // lowercase
+    $name = strtolower($name);
+
+    if (empty($name)) {
+        return 'N-A';
+    }
+
+    return substr($name, 0, 120);
+}
+

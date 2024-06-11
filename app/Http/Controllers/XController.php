@@ -4,19 +4,30 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\UserSaveRequest;
 use App\Models\User;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 
 abstract class XController extends Controller
 {
 
-    protected const _MODEL_ = User::class;
-    protected const SAVE_REQUEST = UserSaveRequest::class;
+    protected $_MODEL_ = User::class;
+    protected $SAVE_REQUEST = UserSaveRequest::class;
     protected $cols = [];
     protected $extra_cols = ['id'];
     protected $listView = 'admin.users.user-list';
     protected $formView = 'admin.users.user-form';
 
     protected $searchable = [];
+
+    public function __construct($model = null, $request = null)
+    {
+        if ($model != null) {
+            $this->_MODEL_ = $model;
+        }
+        if ($request != null) {
+            $this->SAVE_REQUEST = $request;
+        }
+    }
 
 
     protected $buttons = [
@@ -51,9 +62,9 @@ abstract class XController extends Controller
 
 
         if (!\request()->has('sort') || !in_array(\request('sort'), $this->cols)) {
-            $query = self::_MODEL_::orderByDesc('id');
+            $query = $this->_MODEL_::orderByDesc('id');
         } else {
-            $query = self::_MODEL_::orderBy(\request('sort'), \request('sortType', 'asc'));
+            $query = $this->_MODEL_::orderBy(\request('sort'), \request('sortType', 'asc'));
         }
 
         foreach (\request()->input('filter', []) as $col => $filter) {
@@ -95,7 +106,6 @@ abstract class XController extends Controller
     }
 
 
-
     /**
      * Store a newly created resource in storage.
      */
@@ -103,11 +113,11 @@ abstract class XController extends Controller
     {
         //
 
-        $validatedRequest = app()->make(self::SAVE_REQUEST)->merge($request->all());
+        $validatedRequest = app()->make($this->SAVE_REQUEST)->merge($request->all());
 
-        $item = new (self::_MODEL_)();
+        $item = new ($this->_MODEL_)();
         $item = $this->save($item, $request);
-        logAdmin(__METHOD__, self::_MODEL_, $item->id);
+        logAdmin(__METHOD__, $this->_MODEL_, $item->id);
 
         if ($request->ajax()) {
             return ['OK' => true, __('As you wished created successfully')];
@@ -133,9 +143,9 @@ abstract class XController extends Controller
     {
         //
 
-        $validatedRequest = app()->make(self::SAVE_REQUEST)->merge($request->all());
+        $validatedRequest = app()->make($this->SAVE_REQUEST)->merge($request->all());
         $item = $this->save($item, $request);
-        logAdmin(__METHOD__, self::_MODEL_, $item->id);
+        logAdmin(__METHOD__, $this->_MODEL_, $item->id);
 
         if ($request->ajax()) {
             return ['OK' => true, __('As you wished updated successfully')];
@@ -151,7 +161,7 @@ abstract class XController extends Controller
     public function delete($item)
     {
         //
-        logAdmin(__METHOD__, self::_MODEL_, $item->id);
+        logAdmin(__METHOD__, $this->_MODEL_, $item->id);
         $item->delete();
         return redirect()->back()->with(['message' => __('As you wished removed successfully')]);
     }
@@ -162,7 +172,7 @@ abstract class XController extends Controller
     public function restoreing($item)
     {
         //
-        logAdmin(__METHOD__, self::_MODEL_, $item->id);
+        logAdmin(__METHOD__, $this->_MODEL_, $item->id);
         $item->restore();
         return redirect()->back()->with(['message' => __('As you wished restored successfully')]);
     }
@@ -177,11 +187,48 @@ abstract class XController extends Controller
         return $this->showList($query);
     }
 
+    /**
+     * do bulk actions
+     * @param $msg
+     * @param $action
+     * @param $ids
+     * @return \Illuminate\Http\RedirectResponse
+     */
     protected function do_bulk($msg, $action, $ids)
     {
-        logAdminBatch(__METHOD__ . '.' . $action, self::_MODEL_, $ids);
+        logAdminBatch(__METHOD__ . '.' . $action, $this->_MODEL_, $ids);
         return redirect()->back()->with(['message' => $msg]);
     }
 
+    /**
+     * @param $key request key as column's name
+     * @param $model Model
+     * @param $folder string save directory name
+     * @return string|null
+     */
+    public function storeFile($key, $model, $folder)
+    {
+        if (\request()->hasFile($key)) {
+            $name = time() . '-' . request()->file($key)->getClientOriginalName() ;
+            request()->file($key)->storeAs('public/' . $folder, $name);
+            return $name;
+        }
+        return null;
+    }
+
+    /**
+     * @param $model Model
+     * @param $key string key of slug request
+     * @param $name base slug col
+     * @return void
+     */
+    public function getSlug($model, $key = 'slug', $name = 'name')
+    {
+        if (!\request()->has('slug') || request()->input('slug') == null) {
+            return sluger($model->$name);
+        } else {
+            return sluger(\request()->input($key, $model->$name));
+        }
+    }
 
 }

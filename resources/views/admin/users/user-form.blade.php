@@ -11,6 +11,8 @@
     <div class="row">
         <div class="col-lg-3">
             <div class="item-list mb-3">
+                @include('components.err')
+
                 <h3 class="p-3">
                     <i class="ri-message-3-line"></i>
                     {{__("Tips")}}
@@ -25,7 +27,6 @@
                 </ul>
             </div>
 
-            @include('components.err')
         </div>
         <div class="col-lg-9 ps-xl-1 ps-xxl-1">
             <div class="general-form ">
