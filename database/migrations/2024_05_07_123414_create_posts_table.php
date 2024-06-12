@@ -15,12 +15,12 @@ return new class extends Migration
             $table->id();
             $table->text('title');
             $table->string('slug')->unique();
-            $table->string('subtitle', 4096);
+            $table->text('subtitle');
             $table->text('body');
             $table->unsignedBigInteger('group_id');
             $table->unsignedBigInteger('user_id');
             $table->unsignedTinyInteger('status')->default(0);
-            $table->boolean('is_breaking')->default(0);
+            $table->unsignedInteger('view')->default(0);
             $table->boolean('is_pinned')->default(0);
             $table->string('hash', 14)->unique();
             $table->unsignedInteger('like')->default(0);

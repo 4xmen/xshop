@@ -78,3 +78,14 @@ a.btn,a.action-btn,a.circle-btn{
     }
 }
 
+.group-control{
+    list-style: none;
+    overflow-y: auto;
+    padding: 0 .5rem;
+    ul{
+        padding: 0 .5rem;
+    }
+    input{
+        margin: 0 .5rem;
+    }
+}

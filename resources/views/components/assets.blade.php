@@ -5,3 +5,5 @@
     <link rel="stylesheet" href="{{asset('build/assets/app-B_xQQxAx.css')}}">
     <script src="{{asset('build/assets/app-1AxZ3O2-.js')}}" defer type="module"></script>
 @endif
+
+<script src="{{asset('assets/vendor/editor/ckeditor.js')}}"></script>

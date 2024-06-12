@@ -12,7 +12,7 @@ class Category extends Model
     public function imgUrl()
     {
         if ($this->image == null) {
-            return null;
+            return asset('/assets/upload/logo.svg');
         }
 
         return \Storage::url('category/' . $this->image);
@@ -20,7 +20,7 @@ class Category extends Model
     public function bgUrl()
     {
         if ($this->bg == null) {
-            return null;
+            return asset('/assets/upload/logo.svg');
         }
 
         return \Storage::url('category/' . $this->bg);

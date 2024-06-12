@@ -154,7 +154,7 @@
                                             <td>
                                                 <a href="{{getRoute('edit',$item->{$item->getRouteKeyName()})}}">
                                                     <b>
-                                                        {{$item->name}}
+                                                        {{$item?->{$cols[0]} }}
                                                     </b>
                                                 </a>
                                             </td>

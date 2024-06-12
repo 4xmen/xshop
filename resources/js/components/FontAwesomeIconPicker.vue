@@ -2601,7 +2601,7 @@ export default {
     border-radius: 7px;
     width: 80%;
     margin: 5vh auto;
-    background: #ffffff99;
+    background: #00000099;
     padding: 5px;
 }
 
@@ -2625,16 +2625,16 @@ export default {
 .icon-list i:hover{
     background: #ffffff75;
     transform: scale(1.75);
-    color: dodgerblue;
+    color: darkred;
     cursor: pointer;
 }
 
 #selected-icon{
     font-size: 30px;
-    color: dodgerblue;
+    color: darkred;
     width: 50px;
     padding: 5px;
-    background: #fff;
+    background: #000000;
     margin: auto;
     display: flex;
     align-items: center;
