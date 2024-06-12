@@ -21,7 +21,7 @@ class PostController extends XController
     protected $cols = ['title','hash','view'];
     protected $extra_cols = ['id', 'slug'];
 
-    protected $searchable = [];
+    protected $searchable = ['title','subtitle','body'];
 
     protected $listView = 'admin.posts.post-list';
     protected $formView = 'admin.posts.post-form';

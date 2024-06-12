@@ -335,6 +335,12 @@ function lastCrump()
 }
 
 
+/**
+ * @param $cats array categories or groups as nested ul li wih checkbox
+ * @param $checked array witch one checked default
+ * @param $parent null|integer parent id
+ * @return string
+ */
 function showCatNestedControl($cats, $checked = [], $parent = null)
 {
     $ret = "";
@@ -354,3 +360,40 @@ function showCatNestedControl($cats, $checked = [], $parent = null)
         return "<ul> $ret </ul>";
     }
 }
+
+/**
+ * find model name form morph
+ * @param $modelable_type
+ * @param $modelable_id
+ * @return string
+ */
+function getModelName($modelable_type,$modelable_id){
+    $r = explode('\\',$modelable_type);
+    return $r[count($r)-1].':'.$modelable_id;
+}
+
+/**
+ * find model show link form morph
+ * @param $modelable_type
+ * @param $modelable_id
+ * @return string
+ */
+function getModelLink($modelable_type,$modelable_id){
+    $r = explode('\\',$modelable_type);
+    $model = strtolower($r[count($r)-1]);
+    $name = 'admin.'.$model.'.show';
+    if (Route::has($name)){
+        return \route($name,$modelable_id);
+    }else{
+        return '';
+    }
+}
+
+function getAction($act){
+    $r = explode('::',$act);
+    return ucfirst($r[count($r)-1]);
+
+}
+
+
+
