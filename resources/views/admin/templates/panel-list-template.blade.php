@@ -126,7 +126,7 @@
                                     </a>
                                 </th>
                             @endforeach
-                            @yield('table-head')
+{{--                            @yield('table-head')--}}
                             <th>
 
                             </th>
@@ -170,7 +170,7 @@
                                             </td>
                                         @endif
                                     @endforeach
-                                    @yield('table-body')
+{{--                                    @yield('table-body')--}}
                                     <td>
 
                                         @if(strpos(request()->url(),'trashed') != false && hasRoute('restore'))
@@ -277,6 +277,7 @@
                         </tfoot>
                         {{-- pagination and toggle button end --}}
                     </table>
+                </form>
             </div>
         </div>
         {{--   list content end--}}

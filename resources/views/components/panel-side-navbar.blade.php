@@ -189,9 +189,15 @@
                     </a>
                 </li>
                 <li>
+                    <a href="{{route('admin.adminlogs.index')}}">
+                        <i class="ri-list-check-3"></i>
+                        {{__('Logs of admins')}}
+                    </a>
+                </li>
+                <li>
                     <a href="">
                         <i class="ri-list-check-3"></i>
-                        {{__('Logs')}}
+                        {{__('Logs of guests')}}
                     </a>
                 </li>
                 <li>
