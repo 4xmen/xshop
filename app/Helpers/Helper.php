@@ -269,7 +269,7 @@ function lastCrump()
     if (count($routes) != 3) {
         echo '<li >
         <a>
-            <i class="fa fa-cube" ></i>
+            <i class="ri-folder-chart-line" ></i>
             ' . __(ucfirst($routes[count($routes) - 1])) . '
         </a>
     </li>';
@@ -283,8 +283,8 @@ function lastCrump()
     if ($route == 'all' || $route == 'index' || $route == 'list') {
         echo '<li >
         <a>
-            <i class="fa fa-list" ></i>
-            ' . __(ucfirst($routes[count($routes) - 2])) . '
+            <i class="ri-list-check" ></i>
+            ' . __(Str::plural(ucfirst($routes[count($routes) - 2]))) . '
         </a>
     </li>';
     } else {
@@ -296,7 +296,7 @@ function lastCrump()
         echo '<li>
         <a href="' . $link . '">
             <i class="ri-list-check" ></i>
-            ' . __(Str::plural(ucfirst($routes[count($routes) - 2]))) . '
+            ' . __(ucfirst(Str::plural($routes[count($routes) - 2]))) . '
         </a>
     </li>';
         switch ($route) {
@@ -316,6 +316,10 @@ function lastCrump()
                 $title = __('Sort') . ' ' . __($routes[count($routes) - 2]);
                 $icon = 'ri-sort-number-asc';
                 break;
+            case 'trashed':
+                $title = __('Trashed') . ' ' . __($routes[count($routes) - 2]);
+                $icon = 'ri-delete-bin-6-line';
+                break;
             default:
                 $title = __('') . ' ' . __(ucfirst($routes[count($routes) - 1]));
                 $icon = 'ri-bubble-chart-line';
@@ -327,5 +331,26 @@ function lastCrump()
                 ' . $title . '
             </a>
         </li>';
+    }
+}
+
+
+function showCatNestedControl($cats, $checked = [], $parent = null)
+{
+    $ret = "";
+    foreach ($cats as $cat) {
+        if ($cat->parent_id == $parent) {
+            $ret .= "<li>";
+            $check = in_array($cat->id, $checked) ? 'checked=""' : '';
+            $ret .= "<label><input type='checkbox' name='cat[]' value='{$cat->id}' $check />";
+            $ret .= $cat->name . '</label>';
+            $ret .= showCatNestedControl($cats, $checked, $cat->id);
+            $ret .= "</li>";
+        }
+    }
+    if ($parent == null) {
+        return $ret;
+    } else {
+        return "<ul> $ret </ul>";
     }
 }

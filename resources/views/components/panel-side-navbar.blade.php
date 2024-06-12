@@ -73,7 +73,7 @@
             </a>
             <ul id="contents">
                 <li>
-                    <a>
+                    <a href="{{route('admin.post.index')}}">
                         <i class="ri-megaphone-fill"></i>
                         {{__('Post')}}
                     </a>

@@ -5,20 +5,22 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Spatie\Image\Manipulations;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
-use Spatie\MediaLibrary\MediaCollections\Models\Media;
+use Spatie\Tags\HasTags;
 use Spatie\Translatable\HasTranslations;
 
-class Post extends Model  implements HasMedia
+class Post extends Model implements HasMedia
 {
-    use HasFactory,SoftDeletes, InteractsWithMedia,HasTranslations;
-    public $translatable = ['title','subtitle','body'];
+    use HasFactory, SoftDeletes, InteractsWithMedia, HasTranslations, HasTags;
 
-    public function categories()
+    public $translatable = ['title', 'subtitle', 'body'];
+
+
+    public function groups()
     {
-        return $this->belongsToMany(Category::class);
+        return $this->belongsToMany(Group::class);
     }
 
     public function author()
@@ -32,39 +34,41 @@ class Post extends Model  implements HasMedia
     }
 
 
-    public function registerMediaConversions(Media $media = null): void
+    public function registerMediaConversions(?Media $media = null): void
     {
-        $t = explode('x',config('app.media.post_thumb'));
+        $t = explode('x', config('app.media.post_thumb'));
 
-        if (config('app.media.post_thumb') == null || config('app.media.post_thumb') == ''){
-            $t[0] = 500 ;
-            $t[1] = 500 ;
+        if (config('app.media.post_thumb') == null || config('app.media.post_thumb') == '') {
+            $t[0] = 500;
+            $t[1] = 500;
         }
 
-
-        $this->addMediaConversion('posts-image')
+        $this->addMediaConversion('post-image')
             ->width($t[0])
             ->height($t[1])
-            ->crop(Manipulations::CROP_CENTER, $t[0], $t[1])
+            ->crop( $t[0], $t[1])
             ->optimize()
-            ->sharpen(10);
+            ->sharpen(10)
+            ->nonQueued()
+            ->format('webp');
+
     }
 
-    public function imgurl()
+    public function imgUrl()
     {
         if ($this->getMedia()->count() > 0) {
-            return $this->getMedia()->first()->getUrl('posts-image');
+            return $this->getMedia()->first()->getUrl('post-image');
         } else {
-            return "no image";
+            return asset('assets/upload/logo.svg');
         }
     }
 
-    public function orgurl()
+    public function orgUrl()
     {
         if ($this->getMedia()->count() > 0) {
             return $this->getMedia()[$this->image_index]->getUrl();
         } else {
-            return asset('/images/logo.png');
+            return asset('assets/upload/logo.svg');
 
         }
     }
@@ -87,6 +91,10 @@ class Post extends Model  implements HasMedia
     public function approved_comments()
     {
         return $this->morphMany(Comment::class, 'commentable')->where('status', 1);
+    }
+
+    public function main_group(){
+        return $this->belongsTo(Group::class);
     }
 
 //    public function toArray()

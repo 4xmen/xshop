@@ -18,6 +18,7 @@ import './panel/raw.js';
 import './panel/navbar.js';
 import './panel/list-checkboxs.js';
 import './panel/general-events.js';
+import './panel/editor-handle.js';
 
 /**
  * Next, we will create a fresh Vue application instance. You may then begin
@@ -56,6 +57,9 @@ app.component('searchable-multi-select', SearchableMultiSelect);
 
 import Increment from "./components/Increment.vue";
 app.component('increment', Increment);
+
+import TagInput from "./components/TagInput.vue";
+app.component('tag-input', TagInput);
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue

@@ -4,6 +4,12 @@
     //margin: 0 1rem;
     border-radius: 4px;
 
+    .img-fluid{
+        max-height: 128px;
+        display: block;
+        margin: auto;
+    }
+
     h1 {
         font-size: 25px;
         padding: 1rem;
@@ -28,6 +34,7 @@
 
 .table-list {
     width: 100%;
+
     tr{
 
         th{

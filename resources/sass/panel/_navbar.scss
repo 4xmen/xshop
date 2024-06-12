@@ -77,3 +77,13 @@
     background: rgb(40, 45, 70);
     padding-top: .8rem;
 }
+
+
+main{
+    transition: 700ms;
+}
+
+.blured{
+    filter: blur(5px) grayscale(.75);
+    opacity: .5;
+}

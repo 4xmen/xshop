@@ -41,7 +41,7 @@ class Group extends Model
     public function imgUrl()
     {
         if ($this->image == null) {
-            return null;
+            return asset('/assets/upload/logo.svg');
         }
 
         return \Storage::url('groups/' . $this->image);
@@ -50,7 +50,7 @@ class Group extends Model
     public function bgUrl()
     {
         if ($this->bg == null) {
-            return null;
+            return asset('/assets/upload/logo.svg');
         }
 
         return \Storage::url('groups/' . $this->bg);
