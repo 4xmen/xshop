@@ -37,4 +37,5 @@
         @endif
         @yield('form')
     </form>
+    @yield('out-of-form')
 @endsection

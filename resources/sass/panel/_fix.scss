@@ -3,11 +3,35 @@
 border-color: #bc86fe;
 }
 
-.card{
-    background-color: rgba(var(--bs-body-bg),.5);
-    background-image: url("../../images/pattern.png");
-    backdrop-filter: blur(4px);
-    box-shadow: -2px -2px 7px #560000, 2px 2px 7px #5e00b5;
+.forms{
+
+    .card{
+        background-color: rgba(var(--bs-body-bg),.5);
+        background-image: url("../../images/pattern.png");
+        backdrop-filter: blur(4px);
+        box-shadow: -2px -2px 7px #560000, 2px 2px 7px #5e00b5;
+    }
+}
+
+main{
+    .card{
+        background-color: $lighter-color;
+        border: 0;
+        .card-header{
+            background: #00000011;
+            border: 0;
+            text-align: center;
+        }
+
+        .card-footer{
+            .btn{
+                min-width: 200px;
+                width: 10%;
+                display: block;
+                margin: auto;
+            }
+        }
+    }
 }
 
 

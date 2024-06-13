@@ -119,6 +119,11 @@
                                            type="checkbox" role="switch">
                                 </div>
                             </th>
+                            @if(isset($items[0]) && method_exists($items[0],'imgUrl'))
+                                <th>
+                                    {{__("image")}}
+                                </th>
+                            @endif
                             @foreach($cols as $col)
                                 <th>
                                     <a href="?sort={{$col}}{{sortSuffix($col)}}&{{queryBuilder('sort')}}">
@@ -126,7 +131,7 @@
                                     </a>
                                 </th>
                             @endforeach
-{{--                            @yield('table-head')--}}
+                            {{--                            @yield('table-head')--}}
                             <th>
 
                             </th>
@@ -142,6 +147,7 @@
                         @else
                             @foreach($items as $item)
                                 <tr>
+
                                     <td>
                                         <input type="checkbox" id="chk-{{$item->id}}" class="chkbox"
                                                name="id[{{$item->id}}]" value="{{$item->id}}">
@@ -149,6 +155,11 @@
                                             {{$item->id}}
                                         </label>
                                     </td>
+                                    @if(isset($item) && method_exists($item,'imgUrl'))
+                                        <td>
+                                            <img src="{{$item->imgUrl()}}" class="image-x64" alt="">
+                                        </td>
+                                    @endif
                                     @foreach($cols as $k => $col)
                                         @if($k == 0 && hasRoute('edit'))
                                             <td>
@@ -162,15 +173,23 @@
                                             <td>
                                                 @switch($col)
                                                     @case($col == 'parent_id')
-                                                    {{ $item->parent?->{$cols[0]}??'-' }}
-                                                    @break
+                                                        {{ $item->parent?->{$cols[0]}??'-' }}
+                                                        @break
+                                                    @case($col == 'status')
+                                                        <div class="model-status status-{{$item->status}}"></div>
+                                                        @break
+                                                    @case($col == 'user_id')
+                                                        <a href="{{route('admin.user.edit',$item->user?->email)}}">
+                                                            {{ $item->user?->name??'-' }}
+                                                        </a>
+                                                        @break
                                                     @default
                                                         {{$item->$col}}
                                                 @endswitch
                                             </td>
                                         @endif
                                     @endforeach
-{{--                                    @yield('table-body')--}}
+                                    {{--                                    @yield('table-body')--}}
                                     <td>
 
                                         @if(strpos(request()->url(),'trashed') != false && hasRoute('restore'))
@@ -221,7 +240,8 @@
                                                 @else
                                                     @if( hasRoute('restore') && $item->trashed())
                                                         <a class="btn btn-success btn-sm mx-1"
-                                                           href="{{getRoute('restore',$item->id)}}" {{--dont change this id to getRouteKeyName --}}
+                                                           href="{{getRoute('restore',$item->id)}}"
+                                                           {{--dont change this id to getRouteKeyName --}}
                                                            data-bs-toggle="tooltip"
                                                            data-bs-placement="top"
                                                            data-bs-custom-class="custom-tooltip"

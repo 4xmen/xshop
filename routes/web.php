@@ -20,8 +20,11 @@ Route::prefix(config('app.panel.prefix'))->name('admin.')->group(
                 Route::get('/',[\App\Http\Controllers\HomeController::class,'index'])->name('dash');
 
                 Route::post('ckeditor/upload', [\App\Http\Controllers\Admin\CkeditorController::class,'upload'])->name('ckeditor.upload');
-                Route::get('adminlogs', [\App\Http\Controllers\Admin\AdminLogController::class,'index'])->name('adminlogs.index');
-                Route::get('adminlogs/{user}', [\App\Http\Controllers\Admin\AdminLogController::class,'log'])->name('adminlogs.show');
+                Route::get('adminlogs', [\App\Http\Controllers\Admin\AdminLogController::class,'index'])->name('adminlog.index');
+                Route::get('adminlogs/{user}', [\App\Http\Controllers\Admin\AdminLogController::class,'log'])->name('adminlog.show');
+                Route::post('images/store/{gallery}', [\App\Http\Controllers\Admin\ImageController::class,'store'])->name('image.store');
+                Route::get('images/destroy/{image}', [\App\Http\Controllers\Admin\ImageController::class,'destroy'])->name('image.destroy');
+
 
                 Route::prefix('users')->name('user.')->group(
                     function () {
@@ -54,13 +57,25 @@ Route::prefix(config('app.panel.prefix'))->name('admin.')->group(
                         Route::get('', [\App\Http\Controllers\Admin\PostController::class, 'index'])->name('index');
                         Route::get('create', [\App\Http\Controllers\Admin\PostController::class, 'create'])->name('create');
                         Route::post('store', [\App\Http\Controllers\Admin\PostController::class, 'store'])->name('store');
-                        Route::post('show/{item}', [\App\Http\Controllers\Admin\PostController::class, 'show'])->name('show');
+                        Route::get('show/{item}', [\App\Http\Controllers\Admin\PostController::class, 'show'])->name('show');
                         Route::get('edit/{item}', [\App\Http\Controllers\Admin\PostController::class, 'edit'])->name('edit');
                         Route::post('update/{item}', [\App\Http\Controllers\Admin\PostController::class, 'update'])->name('update');
                         Route::get('delete/{item}', [\App\Http\Controllers\Admin\PostController::class, 'destroy'])->name('destroy');
                         Route::get('restore/{item}', [\App\Http\Controllers\Admin\PostController::class, 'restore'])->name('restore');
                         Route::post('bulk', [\App\Http\Controllers\Admin\PostController::class, "bulk"])->name('bulk');
                         Route::get('trashed', [\App\Http\Controllers\Admin\PostController::class, "trashed"])->name('trashed');
+                    });
+                Route::prefix('galleries')->name('gallery.')->group(
+                    function () {
+                        Route::get('', [\App\Http\Controllers\Admin\GalleryController::class, 'index'])->name('index');
+                        Route::get('create', [\App\Http\Controllers\Admin\GalleryController::class, 'create'])->name('create');
+                        Route::post('store', [\App\Http\Controllers\Admin\GalleryController::class, 'store'])->name('store');
+                        Route::get('show/{item}', [\App\Http\Controllers\Admin\GalleryController::class, 'show'])->name('show');
+                        Route::post('title/update', [\App\Http\Controllers\Admin\GalleryController::class, 'updateTitle'])->name('title');
+                        Route::get('edit/{item}', [\App\Http\Controllers\Admin\GalleryController::class, 'edit'])->name('edit');
+                        Route::post('update/{item}', [\App\Http\Controllers\Admin\GalleryController::class, 'update'])->name('update');
+                        Route::get('delete/{item}', [\App\Http\Controllers\Admin\GalleryController::class, 'destroy'])->name('destroy');
+                        Route::post('bulk', [\App\Http\Controllers\Admin\GalleryController::class, "bulk"])->name('bulk');
                     });
             });
     });

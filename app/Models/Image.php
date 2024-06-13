@@ -4,34 +4,33 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Spatie\MediaLibrary\Conversions\Manipulations;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Spatie\Translatable\HasTranslations;
 
-class Gallery extends Model implements HasMedia
+class Image extends Model implements HasMedia
 {
-    use HasFactory,InteractsWithMedia,HasTranslations;
+    use HasFactory,InteractsWithMedia, HasTranslations;
+    public $translatable = ['title'];
 
+    protected $guarded = [''];
 
-    public $translatable = ['title','description'];
-    public function images()
+    public function gallery()
     {
-        return $this->hasMany(Image::class, 'gallery_id', 'id')->orderBy('sort')->orderByDesc('id');
+        return $this->belongsTo(Gallery::class, 'gallery_id');
     }
 
     public function registerMediaConversions(Media $media = null): void
     {
-        $this->addMediaConversion('gallery-image')->optimize();
 
-        $t = explode('x',config('app.media.gallery_thumb'));
-
-        if (config('starter-kit.gallery_thumb') == null || config('starter-kit.gallery_thumb') == ''){
-            $t[0] = 500 ;
-            $t[1] = 500 ;
+        $t = explode('x', config('starter-kit.post_thumb'));
+        if (config('starter-kit.gallery_thumb') == null || config('starter-kit.gallery_thumb') == '') {
+            $t[0] = 500;
+            $t[1] = 500;
         }
 
+        $this->addMediaConversion('image-image')->optimize();
 
         $this->addMediaConversion('gthumb')->width($t[0])
             ->height($t[1])
@@ -41,22 +40,12 @@ class Gallery extends Model implements HasMedia
 //                    ->withResponsiveImages();
     }
 
-    public function getRouteKeyName()
-    {
-        return 'slug';
-    }
-
-    public function imgUrl()
+    public function imgurl()
     {
         if ($this->getMedia()->count() > 0) {
             return $this->getMedia()->first()->getUrl('gthumb');
         } else {
             return "no image";
         }
-    }
-
-    public function author()
-    {
-        return $this->belongsTo(\App\Models\User::class);
     }
 }

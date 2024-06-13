@@ -89,3 +89,37 @@ a.btn,a.action-btn,a.circle-btn{
         margin: 0 .5rem;
     }
 }
+
+.model-status{
+    width: 15px;
+    height: 15px;
+    margin: auto;
+    border-radius: 3px;
+}
+.status-0{
+    background: red;
+}
+.status-1{
+    background: lime;
+}
+
+.image-x64{
+    height: 64px;
+    width: 64px;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+
+
+.img-squire{
+    display: block;
+    max-width: 100%;
+    margin: auto;
+}
+
+.rm-img{
+    position: relative;
+    z-index: 1;
+    margin-bottom: -75px;
+}
