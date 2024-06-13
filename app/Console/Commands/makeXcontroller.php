@@ -45,8 +45,8 @@ class makeXcontroller extends Command
 
         // replace variables
         $content = str_replace('User', $model, $content);
-        $content = str_replace('user', strtolower($model), $content);
         $content = str_replace('users', strtolower($plural), $content);
+        $content = str_replace('user', strtolower($model), $content);
         $content = str_replace('$user', $var, $content);
 
         Artisan::call('make:request', ['name' => $model.'SaveRequest']);

@@ -91,7 +91,7 @@
                     </a>
                 </li>
                 <li>
-                    <a>
+                    <a href="{{route('admin.gallery.index')}}">
                         <i class="ri-gallery-fill"></i>
                         {{__("Galleries")}}
                     </a>
@@ -189,7 +189,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="{{route('admin.adminlogs.index')}}">
+                    <a href="{{route('admin.adminlog.index')}}">
                         <i class="ri-list-check-3"></i>
                         {{__('Logs of admins')}}
                     </a>

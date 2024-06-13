@@ -36,7 +36,7 @@ class AdminLogController extends XController
 
 
     public function log(User $item){
-        return redirect()->route('admin.adminlogs.index',['filter[user_id]'=> '['.$item->id.']']);
+        return redirect()->route('admin.adminlog.index',['filter[user_id]'=> '['.$item->id.']']);
     }
 
 

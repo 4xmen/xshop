@@ -18,7 +18,7 @@ class PostController extends XController
     // protected  $_MODEL_ = Post::class;
     // protected  $SAVE_REQUEST = PostSaveRequest::class;
 
-    protected $cols = ['title','hash','view'];
+    protected $cols = ['title','hash','view','status'];
     protected $extra_cols = ['id', 'slug'];
 
     protected $searchable = ['title','subtitle','body'];
@@ -122,6 +122,14 @@ class PostController extends XController
                 foreach ($ids as $id) {
                     $this->_MODEL_::withTrashed()->find($id)->restore();
                 }
+                break;
+            case 'publish':
+                $this->_MODEL_::whereIn('id', $request->input('id'))->update(['status' => 1]);
+                $msg = __(':COUNT items published successfully', ['COUNT' => count($ids)]);
+                break;
+            case 'draft':
+                $this->_MODEL_::whereIn('id', $request->input('id'))->update(['status' => 0]);
+                $msg = __(':COUNT items drafted successfully', ['COUNT' => count($ids)]);
                 break;
             /*restore**/
             default:
