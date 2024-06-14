@@ -5,11 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Spatie\Tags\HasTags;
 use Spatie\Translatable\HasTranslations;
 
 class Clip extends Model
 {
-    use HasFactory, SoftDeletes, HasTranslations;
+    use HasFactory, SoftDeletes, HasTranslations,HasTags;
 
     public $translatable = ['title','body'];
 
@@ -18,10 +19,10 @@ class Clip extends Model
         return 'slug';
     }
 
-    public function coverUrl()
+    public function imgUrl()
     {
         if ($this->cover == null) {
-            return null;
+            return asset('assets/upload/logo.svg');;
         }
 
         return \Storage::url('clips/' . $this->cover);

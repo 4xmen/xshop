@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('file', 2048)->nullable();
             $table->string('cover', 2048)->nullable();
             $table->unsignedBigInteger('user_id');
-            $table->boolean('active')->default(true);
+            $table->unsignedTinyInteger('status')->default(0);
             $table->softDeletes();
             $table->timestamps();
             $table->foreign('user_id')

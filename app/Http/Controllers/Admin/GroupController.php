@@ -18,7 +18,7 @@ class GroupController extends XController
     // protected  $SAVE_REQUEST = GroupSaveRequest::class;
 
     protected $cols = ['name','subtitle','parent_id'];
-    protected $extra_cols = ['id','slug'];
+    protected $extra_cols = ['id','slug','image'];
 
     protected $searchable = ['name','subtitle','description'];
 
