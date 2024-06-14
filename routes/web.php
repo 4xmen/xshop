@@ -65,6 +65,19 @@ Route::prefix(config('app.panel.prefix'))->name('admin.')->group(
                         Route::post('bulk', [\App\Http\Controllers\Admin\PostController::class, "bulk"])->name('bulk');
                         Route::get('trashed', [\App\Http\Controllers\Admin\PostController::class, "trashed"])->name('trashed');
                     });
+                Route::prefix('clips')->name('clip.')->group(
+                    function () {
+                        Route::get('', [\App\Http\Controllers\Admin\ClipController::class, 'index'])->name('index');
+                        Route::get('create', [\App\Http\Controllers\Admin\ClipController::class, 'create'])->name('create');
+                        Route::post('store', [\App\Http\Controllers\Admin\ClipController::class, 'store'])->name('store');
+                        Route::get('show/{item}', [\App\Http\Controllers\Admin\ClipController::class, 'show'])->name('show');
+                        Route::get('edit/{item}', [\App\Http\Controllers\Admin\ClipController::class, 'edit'])->name('edit');
+                        Route::post('update/{item}', [\App\Http\Controllers\Admin\ClipController::class, 'update'])->name('update');
+                        Route::get('delete/{item}', [\App\Http\Controllers\Admin\ClipController::class, 'destroy'])->name('destroy');
+                        Route::get('restore/{item}', [\App\Http\Controllers\Admin\ClipController::class, 'restore'])->name('restore');
+                        Route::post('bulk', [\App\Http\Controllers\Admin\ClipController::class, "bulk"])->name('bulk');
+                        Route::get('trashed', [\App\Http\Controllers\Admin\ClipController::class, "trashed"])->name('trashed');
+                    });
                 Route::prefix('galleries')->name('gallery.')->group(
                     function () {
                         Route::get('', [\App\Http\Controllers\Admin\GalleryController::class, 'index'])->name('index');

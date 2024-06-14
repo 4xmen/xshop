@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('image');
             $table->string('tag')->nullable();
             $table->unsignedBigInteger('user_id');
-            $table->boolean('active')->default(true);
+            $table->unsignedTinyInteger('status')->default(0);
             $table->json('data');
             $table->timestamps();
             $table->foreign('user_id')

@@ -51,7 +51,7 @@ class Gallery extends Model implements HasMedia
         if ($this->getMedia()->count() > 0) {
             return $this->getMedia()->first()->getUrl('gthumb');
         } else {
-            return "no image";
+            return asset('assets/upload/logo.svg');
         }
     }
 

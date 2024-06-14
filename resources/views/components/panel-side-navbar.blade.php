@@ -97,7 +97,7 @@
                     </a>
                 </li>
                 <li>
-                    <a>
+                    <a href="{{route('admin.clip.index')}}">
                         <i class="ri-video-fill"></i>
                         {{__("Video clips")}}
                     </a>
