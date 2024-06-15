@@ -1,15 +1,16 @@
 @extends('admin.templates.panel-form-template')
 @section('title')
     @if(isset($item))
-        {{__("Edit group")}} [{{$item->name}}]
+        {{__("Edit category")}} [{{$item->name}}]
     @else
-        {{__("Add new group")}}
+        {{__("Add new category")}}
     @endif -
 @endsection
 @section('form')
 
     <div class="row">
         <div class="col-lg-3">
+
             @include('components.err')
             <div class="item-list mb-3">
                 <h3 class="p-3">
@@ -29,7 +30,7 @@
                         <i class="ri-image-2-line"></i>
                         {{__('Feature image')}}
                     </h3>
-                    <img src="{{$item->imgUrl()}}" alt="{{$item->name}}" class="img-fluid">
+                    <img src="{{$item->imgUrl()}}" alt="{{$item->name}}" class="img-fluid mb-4">
 
                 </div>
                 <div class="item-list mb-3">
@@ -37,11 +38,10 @@
                         <i class="ri-image-2-line"></i>
                         {{__('Background image')}}
                     </h3>
-                    <img src="{{$item->bgUrl()}}" alt="{{$item->name}}" class="img-fluid">
+                    <img src="{{$item->bgUrl()}}" alt="{{$item->name}}" class="img-fluid mb-4">
 
                 </div>
             @endif
-
 
         </div>
         <div class="col-lg-9 ps-xl-1 ps-xxl-1">
@@ -49,9 +49,9 @@
 
                 <h1>
                     @if(isset($item))
-                        {{__("Edit group")}} [{{$item->name}}]
+                        {{__("Edit category")}} [{{$item->name}}]
                     @else
-                        {{__("Add new group")}}
+                        {{__("Add new category")}}
                     @endif
                 </h1>
 
@@ -60,17 +60,17 @@
                     <div class="form-group row">
                         <div class="col-md-6 mt-3">
                             <label for="name">
-                                {{__('Group name')}}
+                                {{__('Category name')}}
                             </label>
                             <input name="name" type="text" class="form-control @error('name') is-invalid @enderror"
-                                   placeholder="{{__('Group name')}}" value="{{old('name',$item->name??null)}}"/>
+                                   placeholder="{{__('Category name')}}" value="{{old('name',$item->name??null)}}"/>
                         </div>
                         <div class="col-md-6 mt-3">
                             <label for="name">
-                                {{__('Group slug')}}
+                                {{__('Category slug')}}
                             </label>
                             <input name="slug" type="text" class="form-control @error('slug') is-invalid @enderror"
-                                   placeholder="{{__('Group slug')}}" value="{{old('slug',$item->slug??null)}}"/>
+                                   placeholder="{{__('Category slug')}}" value="{{old('slug',$item->slug??null)}}"/>
                         </div>
                         <div class="col-md-12 mt-3">
                             <div class="form-group">

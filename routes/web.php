@@ -52,6 +52,19 @@ Route::prefix(config('app.panel.prefix'))->name('admin.')->group(
                         Route::post('bulk', [\App\Http\Controllers\Admin\GroupController::class, "bulk"])->name('bulk');
                         Route::get('trashed', [\App\Http\Controllers\Admin\GroupController::class, "trashed"])->name('trashed');
                     });
+                Route::prefix('categories')->name('category.')->group(
+                    function () {
+                        Route::get('', [\App\Http\Controllers\Admin\CategoryController::class, 'index'])->name('index');
+                        Route::get('create', [\App\Http\Controllers\Admin\CategoryController::class, 'create'])->name('create');
+                        Route::post('store', [\App\Http\Controllers\Admin\CategoryController::class, 'store'])->name('store');
+                        Route::get('edit/{item}', [\App\Http\Controllers\Admin\CategoryController::class, 'edit'])->name('edit');
+                        Route::post('update/{item}', [\App\Http\Controllers\Admin\CategoryController::class, 'update'])->name('update');
+                        Route::get('delete/{item}', [\App\Http\Controllers\Admin\CategoryController::class, 'destroy'])->name('destroy');
+                        Route::get('restore/{item}', [\App\Http\Controllers\Admin\CategoryController::class, 'restore'])->name('restore');
+                        Route::post('bulk', [\App\Http\Controllers\Admin\CategoryController::class, "bulk"])->name('bulk');
+                        Route::get('trashed', [\App\Http\Controllers\Admin\CategoryController::class, "trashed"])->name('trashed');
+                    });
+
                 Route::prefix('posts')->name('post.')->group(
                     function () {
                         Route::get('', [\App\Http\Controllers\Admin\PostController::class, 'index'])->name('index');
