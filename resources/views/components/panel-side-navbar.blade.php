@@ -46,7 +46,7 @@
                     </a>
                 </li>
                 <li>
-                    <a>
+                    <a href="{{route('admin.category.index')}}">
                         <i class="ri-box-3-fill"></i>
                         {{__('Product categories')}}
                     </a>

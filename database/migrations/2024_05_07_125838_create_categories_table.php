@@ -15,9 +15,11 @@ return new class extends Migration
             $table->id();
             $table->text('name');
             $table->string('slug',128)->unique();
+            $table->text('subtitle')->nullable();
             $table->text('description')->nullable();
             $table->integer('sort')->default(0);
-            $table->string('image')->nullable()->default(null);
+            $table->string('image',2048)->nullable()->default(null);
+            $table->string('bg',2048)->nullable()->default(null);
             $table->unsignedInteger('parent_id')->nullable()->default(null)->index();
             $table->softDeletes();
             $table->timestamps();
