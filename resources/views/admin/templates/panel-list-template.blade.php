@@ -157,7 +157,9 @@
                                     </td>
                                     @if(isset($item) && method_exists($item,'imgUrl'))
                                         <td>
+                                            <a href="{{getRoute('edit',$item->{$item->getRouteKeyName()})}}">
                                             <img src="{{$item->imgUrl()}}" class="image-x64" alt="">
+                                            </a>
                                         </td>
                                     @endif
                                     @foreach($cols as $k => $col)
@@ -165,7 +167,7 @@
                                             <td>
                                                 <a href="{{getRoute('edit',$item->{$item->getRouteKeyName()})}}">
                                                     <b>
-                                                        {{$item?->{$cols[0]} }}
+                                                        {{strip_tags($item?->{$cols[0]}) }}
                                                     </b>
                                                 </a>
                                             </td>

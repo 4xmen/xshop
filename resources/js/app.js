@@ -52,7 +52,7 @@ app.component('vue-date-range-picker-input', vueDateRangePicker);
 import SearchableSelect from "./components/SearchableSelect.vue";
 app.component('searchable-select', SearchableSelect);
 
-import SearchableMultiSelect from "./components/searchableMultiSelect.vue";
+import SearchableMultiSelect from "./components/SearchableMultiSelect.vue";
 app.component('searchable-multi-select', SearchableMultiSelect);
 
 import Increment from "./components/Increment.vue";
@@ -60,6 +60,9 @@ app.component('increment', Increment);
 
 import TagInput from "./components/TagInput.vue";
 app.component('tag-input', TagInput);
+
+import SliderData from "./components/SliderData.vue";
+app.component('slider-data', SliderData);
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue

@@ -58,7 +58,7 @@ import CurrencyInput from "./CurrencyInput.vue";
 import fontAwesomeIconPicker from "./FontAwesomeIconPicker.vue";
 import remixIconPicker from "./RemixIconPicker.vue";
 import searchableSelect from "./SearchableSelect.vue";
-import searchableMultiSelect from "./searchableMultiSelect.vue";
+import SearchableMultiSelect from "./SearchableMultiSelect.vue";
 import vueDateTimePicker from "./vueDateTimePicker.vue";
 import vueDateRangePicker from "./vueDateRangePicker.vue";
 import Increment from "./Increment.vue";
@@ -66,7 +66,7 @@ export default {
     name: "example",
     components: {
         CurrencyInput, fontAwesomeIconPicker, remixIconPicker,Increment,
-        searchableSelect, searchableMultiSelect, vueDateRangePicker, vueDateTimePicker
+        searchableSelect, SearchableMultiSelect, vueDateRangePicker, vueDateTimePicker
     },
     data: () => {
         return {
