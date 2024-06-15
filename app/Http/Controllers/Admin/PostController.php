@@ -123,6 +123,7 @@ class PostController extends XController
                     $this->_MODEL_::withTrashed()->find($id)->restore();
                 }
                 break;
+            /*restore**/
             case 'publish':
                 $this->_MODEL_::whereIn('id', $request->input('id'))->update(['status' => 1]);
                 $msg = __(':COUNT items published successfully', ['COUNT' => count($ids)]);
@@ -131,7 +132,6 @@ class PostController extends XController
                 $this->_MODEL_::whereIn('id', $request->input('id'))->update(['status' => 0]);
                 $msg = __(':COUNT items drafted successfully', ['COUNT' => count($ids)]);
                 break;
-            /*restore**/
             default:
                 $msg = __('Unknown bulk action : :ACTION', ["ACTION" => $action]);
         }

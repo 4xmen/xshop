@@ -90,5 +90,17 @@ Route::prefix(config('app.panel.prefix'))->name('admin.')->group(
                         Route::get('delete/{item}', [\App\Http\Controllers\Admin\GalleryController::class, 'destroy'])->name('destroy');
                         Route::post('bulk', [\App\Http\Controllers\Admin\GalleryController::class, "bulk"])->name('bulk');
                     });
+                Route::prefix('sliders')->name('slider.')->group(
+                    function () {
+                        Route::get('', [\App\Http\Controllers\Admin\SliderController::class, 'index'])->name('index');
+                        Route::get('create', [\App\Http\Controllers\Admin\SliderController::class, 'create'])->name('create');
+                        Route::post('store', [\App\Http\Controllers\Admin\SliderController::class, 'store'])->name('store');
+                        Route::get('show/{item}', [\App\Http\Controllers\Admin\SliderController::class, 'show'])->name('show');
+                        Route::post('title/update', [\App\Http\Controllers\Admin\SliderController::class, 'updateTitle'])->name('title');
+                        Route::get('edit/{item}', [\App\Http\Controllers\Admin\SliderController::class, 'edit'])->name('edit');
+                        Route::post('update/{item}', [\App\Http\Controllers\Admin\SliderController::class, 'update'])->name('update');
+                        Route::get('delete/{item}', [\App\Http\Controllers\Admin\SliderController::class, 'destroy'])->name('destroy');
+                        Route::post('bulk', [\App\Http\Controllers\Admin\SliderController::class, "bulk"])->name('bulk');
+                    });
             });
     });

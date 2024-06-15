@@ -123,7 +123,7 @@
                     </a>
                 </li>
                 <li>
-                    <a>
+                    <a href="{{route('admin.slider.index')}}">
                         <i class="ri-image-fill"></i>
                         {{__("Slider")}}
                     </a>
