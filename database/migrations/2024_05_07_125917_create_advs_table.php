@@ -14,11 +14,11 @@ return new class extends Migration
         Schema::create('advs', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->timestamp('expire');
+            $table->date('expire');
             $table->string('image');
             $table->unsignedInteger('max_click')->default(0);
             $table->unsignedInteger('click')->default(0);
-            $table->boolean('active')->default(true);
+            $table->boolean('status')->default(0);
             $table->string('link');
             $table->unsignedBigInteger('user_id');
             $table->softDeletes();
