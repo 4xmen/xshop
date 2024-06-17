@@ -91,6 +91,19 @@ Route::prefix(config('app.panel.prefix'))->name('admin.')->group(
                         Route::post('bulk', [\App\Http\Controllers\Admin\ClipController::class, "bulk"])->name('bulk');
                         Route::get('trashed', [\App\Http\Controllers\Admin\ClipController::class, "trashed"])->name('trashed');
                     });
+                Route::prefix('adv')->name('adv.')->group(
+                    function () {
+                        Route::get('', [\App\Http\Controllers\Admin\AdvController::class, 'index'])->name('index');
+                        Route::get('create', [\App\Http\Controllers\Admin\AdvController::class, 'create'])->name('create');
+                        Route::post('store', [\App\Http\Controllers\Admin\AdvController::class, 'store'])->name('store');
+                        Route::get('show/{item}', [\App\Http\Controllers\Admin\AdvController::class, 'show'])->name('show');
+                        Route::get('edit/{item}', [\App\Http\Controllers\Admin\AdvController::class, 'edit'])->name('edit');
+                        Route::post('update/{item}', [\App\Http\Controllers\Admin\AdvController::class, 'update'])->name('update');
+                        Route::get('delete/{item}', [\App\Http\Controllers\Admin\AdvController::class, 'destroy'])->name('destroy');
+                        Route::get('restore/{item}', [\App\Http\Controllers\Admin\AdvController::class, 'restore'])->name('restore');
+                        Route::post('bulk', [\App\Http\Controllers\Admin\AdvController::class, "bulk"])->name('bulk');
+                        Route::get('trashed', [\App\Http\Controllers\Admin\AdvController::class, "trashed"])->name('trashed');
+                    });
                 Route::prefix('galleries')->name('gallery.')->group(
                     function () {
                         Route::get('', [\App\Http\Controllers\Admin\GalleryController::class, 'index'])->name('index');

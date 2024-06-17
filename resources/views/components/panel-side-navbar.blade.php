@@ -85,7 +85,7 @@
                     </a>
                 </li>
                 <li>
-                    <a>
+                    <a href="{{route('admin.adv.index')}}">
                         <i class="ri-threads-line"></i>
                         {{__("Advertise")}}
                     </a>

@@ -143,16 +143,16 @@
                                         >
                                             AM
                                         </div>
-                                        <div  :class="`vuejs-btn ${mode == 'PM'?'active-selected':''}`"
-                                              @click="changeMode('PM')"
-                                              @touchend="changeMode('PM')"
+                                        <div :class="`vuejs-btn ${mode == 'PM'?'active-selected':''}`"
+                                             @click="changeMode('PM')"
+                                             @touchend="changeMode('PM')"
                                         >
                                             PM
                                         </div>
                                     </div>
                                     <div id="time">
-                                        {{pDate.make2number(cTime[0])}} :
-                                        {{pDate.make2number(cTime[1])}}
+                                        {{ pDate.make2number(cTime[0]) }} :
+                                        {{ pDate.make2number(cTime[1]) }}
                                     </div>
                                     <div id="clock-container">
                                         <div class="wrapper">
@@ -282,6 +282,14 @@ export default {
             default: null,
             type: Number,
         },
+        xmax: {
+            default: null,
+            type: Number,
+        },
+        xmin: {
+            default: null,
+            type: Number,
+        },
         xshow: {
             default: 'pdate', // show value
             type: String,
@@ -339,7 +347,7 @@ export default {
     },
     mounted() {
         this.pDate = new persianDate();
-        let dt ;
+        let dt;
         // check value changed by user or not, then ignore xvalue
         if (this.val == null) {
 
@@ -354,7 +362,7 @@ export default {
                     this.current = new Date(parseInt(this.modelValue));
                     this.val = this.modelValue;
                 }
-            }else{
+            } else {
                 dt = new Date(parseInt(this.xvalue) * 1000);
                 if (this.xvalue == null || this.xvalue == '' || this.xvalue == 'null') {
                     dt = new Date();
@@ -365,6 +373,8 @@ export default {
                     this.val = this.xvalue;
                 }
             }
+            // tab fix
+            this.tabIndex = parseInt(this.defTab);
 
 
         } else {
@@ -377,7 +387,7 @@ export default {
         // }
     },
     computed: {
-        selectedDateTime(){
+        selectedDateTime() {
             // fullData[xshow]
             const dt = new Date(this.val * 1000);
             return this.makeDateObject(dt)[this.xshow];
@@ -517,6 +527,13 @@ export default {
         },
         // handle select
         select(obj) {
+
+            if (this.xmax != null && obj.unix > this.xmax) {
+                return;
+            }
+            if (this.xmin != null && obj.unix < this.xmin) {
+                return;
+            }
             if (this.isSwiping) {
                 return false;
             }
@@ -533,7 +550,7 @@ export default {
             this.val = obj.unix;
             this.fullData = obj;
             this.current = this.val = obj.unix;
-            if (this.closeOnSelect){
+            if (this.closeOnSelect) {
                 this.canCloseModal = true;
                 this.hideModal();
             }
@@ -619,7 +636,7 @@ export default {
             this.current = Math.floor(dt / 1000);
         },
         makeDateObject(dt, cls) {
-            dt.setHours(this.cTime[0],this.cTime[1]);
+            dt.setHours(this.cTime[0], this.cTime[1]);
             return {
                 day: this.pDate.make2number(dt.getDate()), // day
                 pDay: this.pDate.convertDate2Persian(dt)[2], // persian date
@@ -669,18 +686,25 @@ export default {
         // is selected this td
         isActive(obj) {
             let dt = new Date(this.val * 1000);
+            let r = '';
             if (dt.getFullYear() + '-' + dt.getMonth() + '-' + dt.getDate() == obj.date) {
-                return 'active-selected';
+                r = 'active-selected';
             }
-            return '';
+            if (this.xmax != null && obj.unix > this.xmax) {
+                r += ' disabled-date';
+            }
+            if (this.xmin != null && obj.unix < this.xmin) {
+                r += ' disabled-date';
+            }
+            return r;
         },
         // select hour
         pickHour(i, ignore = false) {
             let dt = new Date(this.val * 1000);
-            if (ignore){
+            if (ignore) {
                 dt.setHours(i);
-            }else{
-                dt.setHours((this.mode == 'AM'? i : (i + 12) ));
+            } else {
+                dt.setHours((this.mode == 'AM' ? i : (i + 12)));
             }
             dt.setMinutes(this.cTime[1]);
             this.val = Math.floor(dt.getTime() / 1000);
@@ -804,7 +828,7 @@ export default {
         triggerSwipe(direction) {
             // Update content padding based on swipe direction
             let y = parseInt(this.peDate[0]);
-            if (this.tabIndex == 1){
+            if (this.tabIndex == 1) {
                 y = parseInt(this.geDate[1]);
             }
             switch (direction) {
@@ -826,29 +850,29 @@ export default {
 
 
         // change mode am/pm
-        changeMode(mode){
+        changeMode(mode) {
             // ignore AM while AM
-            if (this.mode == 'AM' && mode == 'AM'){
-                return ;
+            if (this.mode == 'AM' && mode == 'AM') {
+                return;
             }
             // ignore PM while PM
-            if (this.mode == 'PM' && mode == 'PM'){
-                return ;
+            if (this.mode == 'PM' && mode == 'PM') {
+                return;
             }
 
-            if (mode == 'AM'){
+            if (mode == 'AM') {
 
-                if (this.cTime[0]  == 12){
+                if (this.cTime[0] == 12) {
                     this.pickHour(12);
-                }else{
+                } else {
                     this.pickHour(this.cTime[0] - 12, true);
                 }
-            }else{
+            } else {
                 this.pickHour(this.cTime[0] + 12, true);
             }
         },
 
-        selfUpdate(){
+        selfUpdate() {
             let dt;
             // check value changed by user or not, then ignore xvalue
             if (this.val == null) {
@@ -1169,21 +1193,27 @@ export default {
     border-radius: 2px;
 }
 
-#modes{
+#modes {
     position: absolute;
     left: 5px;
     top: 5px;
 }
-#modes .vuejs-btn{
+
+#modes .vuejs-btn {
     padding: 5px;
     width: 40px;
     text-align: center;
     padding-top: 10px;
 }
-#time{
+
+#time {
     position: absolute;
     right: 5px;
     top: 5px;
     font-size: 25px;
+}
+
+.disabled-date {
+    background: silver;
 }
 </style>

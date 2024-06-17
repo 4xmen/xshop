@@ -12,9 +12,9 @@ class Adv extends Model
     public function imgUrl()
     {
         if ($this->image == null) {
-            return null;
+            return asset('assets/upload/logo.svg');
         }
 
-        return \Storage::url('advs/' . $this->image);
+        return \Storage::url('ad/' . $this->image);
     }
 }
