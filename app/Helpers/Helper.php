@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Route;
  * @param $lang code like fa
  * @return string
  */
-function getEmojiLanguagebyCode($lang) : string
+function getEmojiLanguagebyCode($lang): string
 {
     $languages = [
         "af" => "🇿🇦", // Afrikaans
@@ -93,12 +93,12 @@ function getEmojiLanguagebyCode($lang) : string
  * @return bool
  */
 
-function hasRoute($name) : bool
+function hasRoute($name): bool
 {
     // create route
-    $routes = explode('.',request()->route()->getName());
-    $routes[count($routes) - 1 ] = $name;
-    $cRuote = implode('.',$routes);
+    $routes = explode('.', request()->route()->getName());
+    $routes[count($routes) - 1] = $name;
+    $cRuote = implode('.', $routes);
 
     if (\Illuminate\Support\Facades\Route::has($cRuote)) {
         return true;
@@ -113,12 +113,12 @@ function hasRoute($name) : bool
  * @param $args array
  * @return string|null
  */
-function getRoute($name, $args = []) : string | null
+function getRoute($name, $args = []): string|null
 {
     // create route
-    $routes = explode('.',request()->route()->getName());
-    $routes[count($routes) - 1 ] = $name;
-    $cRuote = implode('.',$routes);
+    $routes = explode('.', request()->route()->getName());
+    $routes[count($routes) - 1] = $name;
+    $cRuote = implode('.', $routes);
 
     if (\Illuminate\Support\Facades\Route::has($cRuote)) {
         return \route($cRuote, $args);
@@ -133,7 +133,7 @@ function getRoute($name, $args = []) : string | null
  * @param $col string
  * @return string
  */
-function sortSuffix($col) : string
+function sortSuffix($col): string
 {
     if (request()->sort == $col) {
         if (request('sortType', 'asc') == 'desc') {
@@ -153,7 +153,7 @@ function sortSuffix($col) : string
  * @param $translate
  * @return false|string
  */
-function arrayNormolizeVueCompatible($array, $translate = false): false | string
+function arrayNormolizeVueCompatible($array, $translate = false): false|string
 {
     $result = [];
     foreach ($array as $index => $item) {
@@ -168,7 +168,8 @@ function arrayNormolizeVueCompatible($array, $translate = false): false | string
  * @param $string
  * @return bool
  */
-function isJson($string) : bool {
+function isJson($string): bool
+{
     json_decode($string);
     return json_last_error() === JSON_ERROR_NONE;
 }
@@ -200,7 +201,7 @@ function logAdminBatch($method, $cls, $ids): void
  * @param $id
  * @return void
  */
-function logAdmin($method, $cls, $id) :void
+function logAdmin($method, $cls, $id): void
 {
     $act = explode('\\', $method);
     auth()->user()->logs()->create([
@@ -216,9 +217,10 @@ function logAdmin($method, $cls, $id) :void
  * @param $except
  * @return string
  */
-function queryBuilder($except = null){
+function queryBuilder($except = null)
+{
     $queries = request()->toArray();
-    if ($except != null){
+    if ($except != null) {
         unset($queries[$except]);
         unset($queries['sortType']);
     }
@@ -234,7 +236,7 @@ function queryBuilder($except = null){
 function sluger($name, $replace_char = '-')
 {
     // special chars
-    $name = str_replace(['&', '+' , '@', '*'], ['and', 'plus', 'at', 'star'], $name);
+    $name = str_replace(['&', '+', '@', '*'], ['and', 'plus', 'at', 'star'], $name);
 
     // replace non letter or digits by -
     $name = preg_replace('~[^\pL\d\.]+~u', $replace_char, $name);
@@ -367,9 +369,10 @@ function showCatNestedControl($cats, $checked = [], $parent = null)
  * @param $modelable_id
  * @return string
  */
-function getModelName($modelable_type,$modelable_id){
-    $r = explode('\\',$modelable_type);
-    return $r[count($r)-1].':'.$modelable_id;
+function getModelName($modelable_type, $modelable_id)
+{
+    $r = explode('\\', $modelable_type);
+    return $r[count($r) - 1] . ':' . $modelable_id;
 }
 
 /**
@@ -378,22 +381,36 @@ function getModelName($modelable_type,$modelable_id){
  * @param $modelable_id
  * @return string
  */
-function getModelLink($modelable_type,$modelable_id){
-    $r = explode('\\',$modelable_type);
-    $model = strtolower($r[count($r)-1]);
-    $name = 'admin.'.$model.'.show';
-    if (Route::has($name)){
-        return \route($name,$modelable_id);
-    }else{
+function getModelLink($modelable_type, $modelable_id)
+{
+    $r = explode('\\', $modelable_type);
+    $model = strtolower($r[count($r) - 1]);
+    $name = 'admin.' . $model . '.show';
+    if (Route::has($name)) {
+        return \route($name, $modelable_id);
+    } else {
         return '';
     }
 }
 
-function getAction($act){
-    $r = explode('::',$act);
-    return ucfirst($r[count($r)-1]);
+function getAction($act)
+{
+    $r = explode('::', $act);
+    return ucfirst($r[count($r) - 1]);
 
 }
 
+function getAdminRoutes()
+{
+    $routes = [];
+    foreach (Illuminate\Support\Facades\Route::getRoutes() as $r) {
+        if (strpos($r->getName(), 'admin') !== false) {
+            $routes[] = [
+                'name' => $r->getName(),
+                'url' => $r->uri(),
+            ];
+        }
+    }
 
-
+    return $routes;
+}

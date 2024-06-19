@@ -16,8 +16,10 @@
         "vue": "^3.2.37"
     },
     "dependencies": {
+        "leaflet": "^1.9.4",
         "remixicon": "^4.2.0",
         "three": "0.150.0",
-        "vazirmatn": "^33.0.3"
+        "vazirmatn": "^33.0.3",
+        "vue-toast-notification": "^3.1.2"
     }
 }

@@ -14,6 +14,7 @@
         "dpsoft/saderat": "^4.0",
         "dpsoft/zibal": "^2.0",
         "laravel/framework": "^11.0",
+        "laravel/sanctum": "^4.0",
         "laravel/tinker": "^2.9",
         "laravel/ui": "^4.5",
         "pishran/zarinpal": "^4.3",

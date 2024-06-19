@@ -63,6 +63,9 @@ app.component('tag-input', TagInput);
 
 import SliderData from "./components/SliderData.vue";
 app.component('slider-data', SliderData);
+
+import AddressInput from "./components/AddressInput.vue";
+app.component('address-input', AddressInput);
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
