@@ -2,7 +2,9 @@
 
 namespace Database\Seeders;
 
+use App\Models\Customer;
 use App\Models\Post;
+use App\Models\State;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Storage;
 
@@ -24,10 +26,11 @@ class DatabaseSeeder extends Seeder
 ');
 
         $this->call([
-
                 UserSeeder::class,
                 GroupSeeder::class,
                 PostSeeder::class,
+                StateSeeder::class,
+                CustomerSeeder::class,
             ]
         );
     }

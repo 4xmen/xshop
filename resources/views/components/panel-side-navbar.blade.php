@@ -13,7 +13,7 @@
             </a>
             <ul id="card">
                 <li>
-                    <a href="">
+                    <a href="{{route('admin.customer.index')}}">
                         <i class="ri-team-fill"></i>
 
                         {{__('Customers')}}

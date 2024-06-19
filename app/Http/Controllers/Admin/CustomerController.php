@@ -4,27 +4,26 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\XController;
-use App\Http\Requests\CategorySaveRequest;
+use App\Http\Requests\CustomerSaveRequest;
 use App\Models\Access;
-use App\Models\Category;
+use App\Models\Customer;
 use Illuminate\Http\Request;
 use App\Helper;
 use function App\Helpers\hasCreateRoute;
 
-class CategoryController extends XController
+class CustomerController extends XController
 {
 
-    // protected  $_MODEL_ = Category::class;
-    // protected  $SAVE_REQUEST = CategorySaveRequest::class;
+    // protected  $_MODEL_ = Customer::class;
+    // protected  $SAVE_REQUEST = CustomerSaveRequest::class;
 
-    protected $cols = ['name','subtitle','parent_id'];
-    protected $extra_cols = ['id','slug','image'];
+    protected $cols = ['name','mobile','email'];
+    protected $extra_cols = ['id','deleted_at'];
 
-    protected $searchable = ['name','subtitle','description'];
+    protected $searchable = ['name','mobile','email'];
 
-
-    protected $listView = 'admin.categories.category-list';
-    protected $formView = 'admin.categories.category-form';
+    protected $listView = 'admin.customers.customer-list';
+    protected $formView = 'admin.customers.customer-form';
 
 
     protected $buttons = [
@@ -39,30 +38,35 @@ class CategoryController extends XController
 
     public function __construct()
     {
-        parent::__construct(Category::class, CategorySaveRequest::class);
+        parent::__construct(Customer::class, CustomerSaveRequest::class);
     }
 
     /**
-     * @param $category Category
-     * @param $request  CategorySaveRequest
-     * @return Category
+     * @param $customer Customer
+     * @param $request  CustomerSaveRequest
+     * @return Customer
      */
-    public function save($category, $request)
+    public function save($customer, $request)
     {
 
-        $category->name = $request->input('name');
-        $category->subtitle = $request->input('subtitle');
-        $category->description = $request->input('description');
-        $category->parent_id = $request->input('parent_id');
-        $category->slug = $this->getSlug($category);
-        if ($request->has('image')){
-            $category->image = $this->storeFile('image',$category, 'categories');
+        $customer->name = $request->input('name');
+        $customer->address = $request->input('address');
+        $customer->state = $request->input('state');
+        $customer->credit = $request->input('credit')??0 ;
+        $customer->city = $request->input('city');
+        $customer->postal_code = $request->input('postal_code');
+        if ($request->has('email')) {
+            $customer->email = $request->input('email');
         }
-        if ($request->has('bg')){
-            $category->bg = $this->storeFile('bg',$category, 'categories');
+        $customer->mobile = $request->input('mobile');
+        $customer->description = $request->input('description');
+
+        if (trim($request->input('password')) != '') {
+            $customer->password = bcrypt($request->input('password'));
         }
-        $category->save();
-        return $category;
+        $customer->colleague = $request->has('colleague');
+        $customer->save();
+        return $customer;
 
     }
 
@@ -73,18 +77,16 @@ class CategoryController extends XController
     public function create()
     {
         //
-        $cats = Category::all();
-        return view($this->formView,compact('cats'));
+        return view($this->formView);
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Category $item)
+    public function edit(Customer $item)
     {
         //
-        $cats = Category::all();
-        return view($this->formView, compact('item','cats'));
+        return view($this->formView, compact('item'));
     }
 
     public function bulk(Request $request)
@@ -99,6 +101,7 @@ class CategoryController extends XController
                 $msg = __(':COUNT items deleted successfully', ['COUNT' => count($ids)]);
                 $this->_MODEL_::destroy($ids);
                 break;
+            /**restore*/
             case 'restore':
                 $msg = __(':COUNT items restored successfully', ['COUNT' => count($ids)]);
                 foreach ($ids as $id) {
@@ -113,22 +116,24 @@ class CategoryController extends XController
         return $this->do_bulk($msg, $action, $ids);
     }
 
-    public function destroy(Category $item)
+    public function destroy(Customer $item)
     {
         return parent::delete($item);
     }
 
 
-    public function update(Request $request, Category $item)
+    public function update(Request $request, Customer $item)
     {
         return $this->bringUp($request, $item);
     }
 
+
     /**restore*/
     public function restore($item)
     {
-        return parent::restoreing(Category::withTrashed()->where('id', $item)->first());
+        return parent::restoreing(Customer::withTrashed()->where('id', $item)->first());
     }
     /*restore**/
+
 
 }

@@ -17,13 +17,18 @@ return new class extends Migration
             $table->unsignedBigInteger('customer_id');
             $table->double('lat')->nullable();
             $table->double('lng')->nullable();
-            $table->unsignedInteger('state')->nullable()->default(null);
-            $table->unsignedInteger('city')->nullable()->default(null);
-            $table->json('data');
+            $table->unsignedBigInteger('state_id')->nullable()->default(null);
+            $table->unsignedBigInteger('city_id')->nullable()->default(null);
+            $table->json('data')->nullable();
+            $table->string('zip')->nullable()->comment('postal code');
             $table->timestamps();
             $table->softDeletes();
             $table->foreign('customer_id')->references('id')
                 ->on('customers')->onDelete('cascade');
+            $table->foreign('state_id')->references('id')
+                ->on('states')->onDelete('cascade');
+            $table->foreign('city_id')->references('id')
+                ->on('cities')->onDelete('cascade');
         });
     }
 

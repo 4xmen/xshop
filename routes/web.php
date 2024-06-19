@@ -104,6 +104,19 @@ Route::prefix(config('app.panel.prefix'))->name('admin.')->group(
                         Route::post('bulk', [\App\Http\Controllers\Admin\AdvController::class, "bulk"])->name('bulk');
                         Route::get('trashed', [\App\Http\Controllers\Admin\AdvController::class, "trashed"])->name('trashed');
                     });
+                Route::prefix('customers')->name('customer.')->group(
+                    function () {
+                        Route::get('', [\App\Http\Controllers\Admin\CustomerController::class, 'index'])->name('index');
+                        Route::get('create', [\App\Http\Controllers\Admin\CustomerController::class, 'create'])->name('create');
+                        Route::post('store', [\App\Http\Controllers\Admin\CustomerController::class, 'store'])->name('store');
+                        Route::get('show/{item}', [\App\Http\Controllers\Admin\CustomerController::class, 'show'])->name('show');
+                        Route::get('edit/{item}', [\App\Http\Controllers\Admin\CustomerController::class, 'edit'])->name('edit');
+                        Route::post('update/{item}', [\App\Http\Controllers\Admin\CustomerController::class, 'update'])->name('update');
+                        Route::get('delete/{item}', [\App\Http\Controllers\Admin\CustomerController::class, 'destroy'])->name('destroy');
+                        Route::get('restore/{item}', [\App\Http\Controllers\Admin\CustomerController::class, 'restore'])->name('restore');
+                        Route::post('bulk', [\App\Http\Controllers\Admin\CustomerController::class, "bulk"])->name('bulk');
+                        Route::get('trashed', [\App\Http\Controllers\Admin\CustomerController::class, "trashed"])->name('trashed');
+                    });
                 Route::prefix('galleries')->name('gallery.')->group(
                     function () {
                         Route::get('', [\App\Http\Controllers\Admin\GalleryController::class, 'index'])->name('index');
@@ -128,5 +141,17 @@ Route::prefix(config('app.panel.prefix'))->name('admin.')->group(
                         Route::get('delete/{item}', [\App\Http\Controllers\Admin\SliderController::class, 'destroy'])->name('destroy');
                         Route::post('bulk', [\App\Http\Controllers\Admin\SliderController::class, "bulk"])->name('bulk');
                     });
+                Route::prefix('addresses')->name('address.')->group(
+                    function () {
+                        Route::get('customer/{item}', [\App\Http\Controllers\Admin\AddressController::class, 'customer'])->name('customer');
+                        Route::post('add/{item}', [\App\Http\Controllers\Admin\AddressController::class, 'store'])->name('store');
+                        Route::post('update/{item}', [\App\Http\Controllers\Admin\AddressController::class, 'update'])->name('update');
+                        Route::get('destroy/{item}', [\App\Http\Controllers\Admin\AddressController::class, 'destroy'])->name('destroy');
+                    });
             });
+
     });
+
+Route::get('test',function (){
+   return \App\Helpers\PersianFaker::color();
+});
