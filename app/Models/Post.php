@@ -88,14 +88,15 @@ class Post extends Model implements HasMedia
         return $this->morphMany(Comment::class, 'commentable');
     }
 
-    public function approved_comments()
+    public function approvedComments()
     {
         return $this->morphMany(Comment::class, 'commentable')->where('status', 1);
     }
 
-    public function main_group(){
+    public function mainGroup(){
         return $this->belongsTo(Group::class);
     }
+
 
 //    public function toArray()
 //    {

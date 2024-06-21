@@ -79,6 +79,8 @@ class PostController extends XController
                 ->toMediaCollection(); //finishing method
         }
 
+
+
         return $post;
 
     }
@@ -90,7 +92,7 @@ class PostController extends XController
     public function create()
     {
         //
-        $cats = Group::all();
+        $cats = Group::all(['name','id','parent_id']);
         return view($this->formView, compact('cats'));
     }
 
@@ -100,7 +102,7 @@ class PostController extends XController
     public function edit(Post $item)
     {
         //
-        $cats = Group::all();
+        $cats = Group::all(['name','id','parent_id']);
         return view($this->formView, compact('item', 'cats'));
     }
 

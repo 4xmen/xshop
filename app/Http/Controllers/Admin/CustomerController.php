@@ -18,7 +18,7 @@ class CustomerController extends XController
     // protected  $SAVE_REQUEST = CustomerSaveRequest::class;
 
     protected $cols = ['name','mobile','email'];
-    protected $extra_cols = ['id','deleted_at'];
+    protected $extra_cols = ['id'];
 
     protected $searchable = ['name','mobile','email'];
 

@@ -359,7 +359,7 @@ function showCatNestedControl($cats, $checked = [], $parent = null)
     if ($parent == null) {
         return $ret;
     } else {
-        return "<ul> $ret </ul>";
+        return "<ul class='ps-3'> $ret </ul>";
     }
 }
 

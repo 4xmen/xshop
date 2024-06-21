@@ -19,6 +19,8 @@ import './panel/navbar.js';
 import './panel/list-checkboxs.js';
 import './panel/general-events.js';
 import './panel/editor-handle.js';
+import './panel/step-controller.js';
+import './panel/product-upload-controller.js';
 
 /**
  * Next, we will create a fresh Vue application instance. You may then begin

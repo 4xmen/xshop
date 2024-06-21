@@ -40,7 +40,7 @@
             </a>
             <ul id="catalog">
                 <li>
-                    <a>
+                    <a href="{{route('admin.product.index')}}">
                         <i class="ri-vip-diamond-fill"></i>
                         {{__('Products')}}
                     </a>

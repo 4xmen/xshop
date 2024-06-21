@@ -5,7 +5,7 @@
                     {{$tag}}
                  <i class="ri-close-line" @click="rem($tag)"></i>
              </span>
-            <input type="text" v-model="tag"
+            <input type="text" v-model="tag" :id="xid"
                    @keyup.enter.prevent="addTag"
                    @focus="disableSubmit"
                    @blur="enableSubmit" :placeholder="xtitle">
@@ -30,6 +30,9 @@ export default {
     },
     emits: ['update:modelValue'],
     props: {
+        xid:{
+          default: 'tags',
+        },
         modelValue: {
             default: null,
         },
@@ -77,9 +80,11 @@ export default {
         },
         disableSubmit(e){
             e.target.closest('form').addEventListener('submit',noSubmit);
+            window.noSubmit = true;
         },
         enableSubmit(e){
             e.target.closest('form').removeEventListener('submit',noSubmit);
+            window.noSubmit = false;
         },
         rem(tag){
             this.tags.splice(this.tags.indexOf(tag),1);
@@ -91,7 +96,7 @@ export default {
 
 <style scoped>
 #tag-input {
-    padding: .5rem;
+    padding: .5rem 0;
 }
 
 #tag-input input{

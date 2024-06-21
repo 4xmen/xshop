@@ -31,6 +31,7 @@ class DatabaseSeeder extends Seeder
                 PostSeeder::class,
                 StateSeeder::class,
                 CustomerSeeder::class,
+                CategorySeeder::class,
             ]
         );
     }

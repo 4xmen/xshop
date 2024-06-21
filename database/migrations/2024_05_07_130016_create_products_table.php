@@ -16,6 +16,7 @@ return new class extends Migration
             $table->text('name');
             $table->string('slug')->unique()->index();
             $table->longText('description')->nullable();
+            $table->longText('table')->nullable();
             $table->text('excerpt')->nullable()->comment('Quick summary for product. This will appear on the product page under the product name and for SEO purpose.');
             $table->string('sku')->nullable()->unique()->comment('SKU refers to a Stock-keeping unit, a unique identifier for each distinct product and service that can be purchased.');
             $table->boolean('virtual')->nullable()->default(false)->index()->comment('If this product is a non-physical item, for example a service, which does not need shipping.');
@@ -25,11 +26,11 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id');
             $table->boolean('on_sale')->nullable()->default(true)->index();
             $table->unsignedBigInteger('stock_quantity')->nullable()->default(0);
-            $table->enum('stock_status',['IN_STOCK','OUT_STOCK','BACK_ORDER'])->nullable()->default('IN_STOCK')->index();
+            $table->enum('stock_status',\App\Models\Product::$stock_status)->nullable()->default(\App\Models\Product::$stock_status[0])->index();
             $table->unsignedBigInteger('rating_count')->nullable()->default(0);
             $table->decimal('average_rating',3,2)->unsigned()->nullable()->default(0.00);
-            $table->unsignedBigInteger('total_sales')->nullable()->default(0);
-            $table->boolean('active')->default(true);
+//            $table->unsignedBigInteger('total_sales')->nullable()->default(0);
+            $table->unsignedTinyInteger('status')->default(0);
             $table->unsignedBigInteger('view_count')->default(0);
             $table->unsignedBigInteger('sell_count')->default(0);
             $table->unsignedTinyInteger('image_index')->default(0);
