@@ -82,8 +82,9 @@ a.btn,a.action-btn,a.circle-btn{
     list-style: none;
     overflow-y: auto;
     padding: 0 .5rem;
+    height: 12rem;
     ul{
-        padding: 0 .5rem;
+        list-style: none;
     }
     input{
         margin: 0 .5rem;

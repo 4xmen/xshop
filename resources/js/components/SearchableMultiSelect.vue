@@ -10,10 +10,16 @@
                         <template v-for="(item,i) in items">
                             <li
                                 tabindex="-1"
-                                v-if="(q != '' && item[titleField].toLocaleLowerCase().indexOf(q.toLocaleLowerCase()) != -1) || (q == '')"
+                                v-if="finder(item[titleField])"
                                 @click="selecting(item[valueField])"
                                 :class="`list-group-item ${val.indexOf(item[valueField]) !== -1?'selected':''} ${focsed == i?'focused':''}`">
-                                {{ item[titleField] }}
+                                <template v-if="xlang == null">
+                                    {{ item[titleField] }}
+                                </template>
+                                <template v-else>
+                                    {{ item[titleField][xlang] }}
+                                </template>
+
                             </li>
                         </template>
                     </ul>
@@ -29,7 +35,12 @@
             <div class="form-control" id="vue-lst" @click.self="showModal">
                 <template v-for="item in items">
                     <span class="tag-select" v-if=" val.indexOf(item[valueField]) !== -1">
-                        {{ item[titleField] }}
+                        <template v-if="xlang == null">
+                                    {{ item[titleField] }}
+                        </template>
+                        <template v-else>
+                            {{ item[titleField][xlang] }}
+                        </template>
                         <i class="ri-close-line" @click="rem(item[valueField])"></i>
                     </span>
                 </template>
@@ -54,6 +65,9 @@ export default {
     },
     emits: ['update:modelValue'],
     props: {
+        xlang: {
+            default: null
+        },
         modelValue: {
             default: 'nop',
         },
@@ -118,6 +132,29 @@ export default {
         },
     },
     methods: {
+        finder(term = '') {
+            //(q != '' && item[titleField].indexOf(q) != -1) || (q == '')
+            if (this.q == '' || term == '') {
+                return true;
+            }
+            if (typeof term == 'string' && term.toLocaleLowerCase().indexOf(this.q.toLocaleLowerCase()) != -1) {
+                return true
+            } else if (typeof term == 'object') {
+                try {
+                    for (const t in term) {
+                        if (term[t].toLowerCase().indexOf(this.q.toLocaleLowerCase()) != -1) {
+                            return true;
+                        }
+                    }
+                } catch (e) {
+
+                    console.log(e.message);
+                }
+            } else {
+                return true;
+            }
+            return false;
+        },
         rem(i) {
             this.val.splice(this.val.indexOf(i), 1);
             this.onSelect(this.val, i);

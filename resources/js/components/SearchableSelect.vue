@@ -8,29 +8,39 @@
                 <div class="p-2">
                     <ul id="vue-search-list" class="list-group list-group-flush">
                         <template v-for="item in items">
-                        <li
-                            v-if="(q != '' && item[titleField].indexOf(q) != -1) || (q == '')"
-                            @click="selecting(item[valueField])"
-                            :class="`list-group-item ${val == item[valueField]?'selected':''}`">
-                            {{item[titleField]}}
-                        </li>
+                            <li
+                                v-if="finder(item[titleField])"
+                                @click="selecting(item[valueField])"
+                                :class="`list-group-item ${val == item[valueField]?'selected':''}`">
+                                <template v-if="xlang == null">
+                                    {{ item[titleField] }}
+                                </template>
+                                <template v-else>
+                                    {{ item[titleField][xlang] }}
+                                </template>
+                            </li>
                         </template>
                     </ul>
                 </div>
             </div>
         </div>
         <div class="input-group mb-3">
-            <div class="input-group-prepend" id="vue-search-btn" @click="showModal" >
+            <div class="input-group-prepend" id="vue-search-btn" @click="showModal">
                 <span class="input-group-text" id="basic-addon1">
                     <i class="ri-search-2-line"></i>
                 </span>
             </div>
-            <select  :id="xid" :class="getClass" v-model="val" @change="select">
-                <option value=""> {{xtitle}} </option>
+            <select :id="xid" :class="getClass" v-model="val" @change="select">
+                <option value=""> {{ xtitle }}</option>
                 <option v-for="item in items"
                         :value="item[valueField]"
                         :selected="item[valueField] == val">
-                     {{item[titleField]}}
+                    <template v-if="xlang == null">
+                        {{ item[titleField] }}
+                    </template>
+                    <template v-else>
+                        {{ item[titleField][xlang] }}
+                    </template>
                 </option>
             </select>
         </div>
@@ -46,53 +56,56 @@ export default {
         return {
             modalShow: false, // modal handle
             q: '', // search query
-            val:'',
+            val: '',
         }
     },
     emits: ['update:modelValue'],
     props: {
+        xlang: {
+            default: null
+        },
         modelValue: {
             default: NaN,
         },
-        items:{
+        items: {
             required: true,
             default: [],
             type: Array,
         },
-        valueField:{
+        valueField: {
             default: 'id',
             type: String,
         },
-        titleField:{
+        titleField: {
             default: 'title',
             type: String,
         },
-        xname:{
+        xname: {
             default: "",
             type: String,
         },
-        xtitle:{
+        xtitle: {
             default: "Please select",
             type: String,
         },
-        xvalue:{
+        xvalue: {
             default: "",
             type: String,
         },
-        xid:{
+        xid: {
             default: "",
             type: String,
         },
-        customClass:{
+        customClass: {
             default: "",
             type: String,
         },
-        err:{
+        err: {
             default: false,
             type: Boolean,
         },
 
-        onSelect:{
+        onSelect: {
             default: function () {
 
             },
@@ -106,33 +119,56 @@ export default {
     mounted() {
         if (!isNaN(this.modelValue)) {
             this.val = this.modelValue;
-        }else{
+        } else {
             this.val = this.xvalue;
         }
     },
     computed: {
         getClass: function () {
-            if (this.err == true || ( typeof this.err == 'String' && this.err.trim() == '1' )) {
-                return 'form-control is-invalid '+this.customClass;
+            if (this.err == true || (typeof this.err == 'String' && this.err.trim() == '1')) {
+                return 'form-control is-invalid ' + this.customClass;
             }
-            return 'form-control '+this.customClass;
+            return 'form-control ' + this.customClass;
         },
     },
     methods: {
-        selecting(i){
+        finder(term = '') {
+            //(q != '' && item[titleField].indexOf(q) != -1) || (q == '')
+            if (this.q == '' || term == '') {
+                return true;
+            }
+            if (typeof term == 'string' && term.toLocaleLowerCase().indexOf(this.q.toLocaleLowerCase()) != -1) {
+                return true
+            } else if (typeof term == 'object') {
+                try {
+                    for (const t in term) {
+                        if (term[t].toLowerCase().indexOf(this.q.toLocaleLowerCase()) != -1) {
+                            return true;
+                        }
+                    }
+                } catch (e) {
+
+                    console.log(e.message);
+                }
+            } else {
+                return true;
+            }
+            return false;
+        },
+        selecting(i) {
             this.val = i;
             this.onSelect(this.val);
-            if (this.closeOnSelect){
+            if (this.closeOnSelect) {
                 this.hideModal();
             }
         },
-        select(){
+        select() {
             this.onSelect(this.val);
         },
-        hideModal:function () {
+        hideModal: function () {
             this.modalShow = false;
         },
-        showModal(){
+        showModal() {
             this.modalShow = true;
         }
     },
@@ -151,17 +187,17 @@ export default {
 
 }
 
-#vue-search-btn{
+#vue-search-btn {
     cursor: pointer;
     user-select: none;
 }
 
-#vue-search-btn:hover .input-group-text{
+#vue-search-btn:hover .input-group-text {
     background: darkred;
 }
 
 
-#ss-modal{
+#ss-modal {
     position: fixed;
     left: 0;
     right: 0;
@@ -173,7 +209,7 @@ export default {
     user-select: none;
 }
 
-#ss-selector{
+#ss-selector {
     height: 60vh;
     border-radius: 7px;
     min-width: 350px;
@@ -184,15 +220,16 @@ export default {
     padding: 5px;
 }
 
-#vue-search-list{
+#vue-search-list {
     height: calc(60vh - 90px);
-    overflow-x: auto ;
+    overflow-x: auto;
 }
 
-#vue-search-list .list-group-item:hover{
+#vue-search-list .list-group-item:hover {
     background: deepskyblue;
 }
-#vue-search-list .list-group-item.selected{
+
+#vue-search-list .list-group-item.selected {
     background: dodgerblue;
     color: white;;
 }

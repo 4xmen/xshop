@@ -32,6 +32,9 @@
     padding: 0;
     margin: 0;
 }
+html {
+    scroll-behavior: smooth;
+}
 body{
     min-height: 100vh;
     overflow-x: hidden;
@@ -65,3 +68,4 @@ a{
 @import "panel/navbar";
 @import "panel/breadcrumbs";
 @import "panel/item-list";
+@import "panel/steps";
