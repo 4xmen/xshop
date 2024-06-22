@@ -52,7 +52,7 @@
                     </a>
                 </li>
                 <li>
-                    <a>
+                    <a href="{{route('admin.prop.index')}}">
                         <i class="ri-file-list-3-fill"></i>
                         {{__("Properties meta")}}
                     </a>
