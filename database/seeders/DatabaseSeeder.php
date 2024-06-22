@@ -2,9 +2,6 @@
 
 namespace Database\Seeders;
 
-use App\Models\Customer;
-use App\Models\Post;
-use App\Models\State;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Storage;
 
@@ -32,6 +29,7 @@ class DatabaseSeeder extends Seeder
                 StateSeeder::class,
                 CustomerSeeder::class,
                 CategorySeeder::class,
+                PropSeeder::class,
             ]
         );
     }

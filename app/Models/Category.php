@@ -46,4 +46,8 @@ class Category extends Model
         return 'slug';
     }
 
+    public function props(){
+        return $this->belongsToMany(Prop::class);
+    }
+
 }

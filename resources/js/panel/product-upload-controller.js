@@ -120,7 +120,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     });
-    uploadingImages.addEventListener('dblclick', (e) => {
+    uploadingImages?.addEventListener('dblclick', (e) => {
         const imageIndex = e.target.closest('.image-index');
         if (imageIndex) {
             document.querySelectorAll('.indexed').forEach(el => el.classList.remove('indexed'));

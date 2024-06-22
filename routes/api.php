@@ -35,4 +35,5 @@ Route::prefix('v1')->name('v1.')->group(
 
         Route::get('states', [\App\Http\Controllers\Api\StateController::class,'index'])->name('state.index');
         Route::get('state/{state}', [\App\Http\Controllers\Api\StateController::class,'show'])->name('state.show');
+        Route::get('category/props/{category}', [\App\Http\Controllers\Api\CategoryController::class,'props'])->name('category.prop');
     });
