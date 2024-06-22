@@ -98,6 +98,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     if (res.data.link !== undefined) {
                         this.setAttribute('action', res.data.link);
                     }
+                    $toast.info(res.data.message);
                     if (document.querySelector('#price-amount').value.trim() !== '') {
                         window.location.reload();
                     }
