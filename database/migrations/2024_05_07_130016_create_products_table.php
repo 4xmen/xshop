@@ -22,6 +22,7 @@ return new class extends Migration
             $table->boolean('virtual')->nullable()->default(false)->index()->comment('If this product is a non-physical item, for example a service, which does not need shipping.');
             $table->boolean('downloadable')->nullable()->default(false)->index()->comment('If purchasing this product gives a customer access to a downloadable file, e.g. software');
             $table->unsignedBigInteger('price')->nullable()->default(null)->index();
+            $table->unsignedBigInteger('buy_price')->default(0)->comment('bye price to calculate your Gross Margin');
             $table->unsignedBigInteger('category_id')->comment('main category id');
             $table->unsignedBigInteger('user_id');
             $table->boolean('on_sale')->nullable()->default(true)->index();

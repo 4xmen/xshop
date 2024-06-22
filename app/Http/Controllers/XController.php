@@ -120,7 +120,9 @@ abstract class XController extends Controller
         logAdmin(__METHOD__, $this->_MODEL_, $item->id);
 
         if ($request->ajax()) {
-            return ['OK' => true, "message" => __('As you wished created successfully'), "id" => $item->id];
+            return ['OK' => true, "message" => __('As you wished created successfully'),
+                "id" => $item->id,
+                'url' => getRoute('edit', $item->{$item->getRouteKeyName()})];
         } else {
             return redirect(getRoute('edit', $item->{$item->getRouteKeyName()}))
                 ->with(['message' => __('As you wished created successfully')]);

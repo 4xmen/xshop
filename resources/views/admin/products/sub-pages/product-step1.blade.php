@@ -25,7 +25,7 @@
         </div>
 
 
-        <div class="col-lg-3 mt-3">
+        <div class="col-lg-6 mt-3">
             <div class="form-group">
                 <label for="price">
                     {{__('Base price')}}
@@ -35,7 +35,17 @@
                 :err="true" @enderror :xvalue="{{old('price',$item->price??null)}}"></currency-input>
             </div>
         </div>
-        <div class="col-lg-3 mt-3">
+        <div class="col-lg-6 mt-3">
+            <div class="form-group">
+                <label for="buy_price">
+                    {{__('Purchase price')}}
+                </label>
+
+                <currency-input name="buy_price" xid="buy_price" @error('buy_price')
+                :err="true" @enderror :xvalue="{{old('buy_price',$item->buy_price??0)}}"></currency-input>
+            </div>
+        </div>
+        <div class="col-lg-4 mt-3">
             <div class="form-group">
                 <label for="categoryId">
                     {{__('Main product category')}}1
@@ -55,7 +65,7 @@
                         :close-on-Select="true"></searchable-select>
             </div>
         </div>
-        <div class="col-lg-3 mt-3">
+        <div class="col-lg-4 mt-3">
             <div class="form-group">
                 <label for="price">
                     {{__('SKU')}}
@@ -67,7 +77,7 @@
                        value="{{old('sku',$item->sku??null)}}"/>
             </div>
         </div>
-        <div class="col-lg-3 mt-3">
+        <div class="col-lg-4 mt-3">
             <div class="form-group">
                 <label for="status">
                     {{__('Status')}}

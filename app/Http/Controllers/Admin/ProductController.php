@@ -52,11 +52,15 @@ class ProductController extends XController
 
 //        dd($request->all());
         $product->name = $request->input('name');
-        $product->slug = $this->getSlug($product,'slug','title');
+        $product->slug = $this->getSlug($product,'slug','name');
+
         $product->table = $request->input('table');
         $product->description = $request->input('desc');
         $product->excerpt = $request->input('excerpt');
         $product->stock_status = $request->input('stock_status');
+        $product->price = $request->input('price',0);
+        $product->buy_price = $request->input('bye_price',0);
+
         if (!$request->has('quantity')) {
             $product->price = $request->input('price',0);
             $product->stock_quantity = $request->input('stock_quantity');
