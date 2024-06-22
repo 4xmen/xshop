@@ -59,7 +59,7 @@ class ProductController extends XController
         $product->excerpt = $request->input('excerpt');
         $product->stock_status = $request->input('stock_status');
         $product->price = $request->input('price',0);
-        $product->buy_price = $request->input('bye_price',0);
+        $product->buy_price = $request->input('buy_price',0);
 
         if (!$request->has('quantity')) {
             $product->price = $request->input('price',0);

@@ -31,7 +31,7 @@
                     {{__('Base price')}}
                 </label>
 
-                <currency-input name="price" xid="price" @error('price')
+                <currency-input xname="price" xid="price" @error('price')
                 :err="true" @enderror :xvalue="{{old('price',$item->price??null)}}"></currency-input>
             </div>
         </div>
@@ -41,14 +41,14 @@
                     {{__('Purchase price')}}
                 </label>
 
-                <currency-input name="buy_price" xid="buy_price" @error('buy_price')
+                <currency-input xname="buy_price" xid="buy_price" @error('buy_price')
                 :err="true" @enderror :xvalue="{{old('buy_price',$item->buy_price??0)}}"></currency-input>
             </div>
         </div>
         <div class="col-lg-4 mt-3">
             <div class="form-group">
                 <label for="categoryId">
-                    {{__('Main product category')}}1
+                    {{__('Main product category')}}
                 </label>
 
 {{--                        data-url="{{route('props.list','')}}/"--}}
