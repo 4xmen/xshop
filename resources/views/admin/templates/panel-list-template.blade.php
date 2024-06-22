@@ -185,6 +185,11 @@
                                                             {{ $item->user?->name??'-' }}
                                                         </a>
                                                         @break
+                                                    @case($col == 'category_id')
+                                                        <a href="{{route('admin.category.edit',$item->category?->slug)}}">
+                                                            {{ $item->category?->name??'-' }}
+                                                        </a>
+                                                        @break
                                                     @default
                                                         {{$item->$col}}
                                                 @endswitch

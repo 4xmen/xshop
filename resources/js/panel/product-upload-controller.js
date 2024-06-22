@@ -114,10 +114,11 @@ document.addEventListener('DOMContentLoaded', () => {
             for (let i in error.response.data.errors) {
                 document.getElementById(i)?.classList.add('is-invalid');
                 for (const err of error.response.data.errors[i]) {
-                    // alertify.error(err);
-                    console.log(err);
+                    $toast.error(err);
+                    // console.log(err);
                 }
             }
+            $toast.error('Error:' +error.response.status);
         });
     });
     uploadingImages?.addEventListener('dblclick', (e) => {

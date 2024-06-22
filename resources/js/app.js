@@ -14,6 +14,8 @@
 
 import './bootstrap';
 import { createApp } from 'vue';
+import ToastPlugin from 'vue-toast-notification';
+import {useToast} from 'vue-toast-notification';
 import './panel/raw.js';
 import './panel/navbar.js';
 import './panel/list-checkboxs.js';
@@ -29,6 +31,9 @@ import './panel/product-upload-controller.js';
  */
 
 const app = createApp({});
+const $toast = useToast({
+    duration: 10000,
+});
 
 import ExampleComponent from './components/ExampleComponent.vue';
 app.component('example-component', ExampleComponent);
@@ -37,7 +42,7 @@ import VueJalaliCalendar from './components/vueJalaliCalendar.vue';
 app.component('vue-jalali-calendar', VueJalaliCalendar);
 
 import CurrencyInput from './components/CurrencyInput.vue';
-app.component('currency-input', CurrencyInput);
+app.component('currency-input',CurrencyInput);
 
 import RemixIconPicker from './components/RemixIconPicker.vue';
 app.component('remix-icon-picker', RemixIconPicker);
@@ -88,5 +93,8 @@ app.component('props-type-input', PropTypeInput);
  * an "id" attribute of "app". This element is included with the "auth"
  * scaffolding. Otherwise, you will need to add an element yourself.
  */
-
+app.use(ToastPlugin);
 app.mount('#app');
+
+window.app = app;
+window.$toast = $toast;
