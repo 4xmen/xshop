@@ -225,10 +225,41 @@ abstract class XController extends Controller
     public function getSlug($model, $key = 'slug', $name = 'name')
     {
         if (!\request()->has('slug') || request()->input('slug') == null) {
-            return sluger($model->$name);
+            $slug = sluger($model->$name);
         } else {
-            return sluger(\request()->input($key, $model->$name));
+            $slug = sluger(\request()->input($key, $model->$name));
         }
+
+        return $this->createUniqueSlug($slug,$model->id);
+    }
+
+
+    /**
+     * create unique slug
+     * @param $slug
+     * @param $id integer|null
+     * @return mixed|string
+     */
+    public function createUniqueSlug($slug,$id = null)
+    {
+        $originalSlug = $slug;
+        $counter = 1;
+
+        $q  = $this->_MODEL_::where('slug', $slug);
+        if ($id != null){
+            $q = $q->where('id','<>',$id);
+        }
+
+        while ($q->count() > 0) {
+            $slug = $originalSlug . '-' . $counter;
+            $counter++;
+            $q  = $this->_MODEL_::where('slug', $slug);
+            if ($id != null){
+                $q = $q->where('id','<>',$id);
+            }
+        }
+
+        return $slug;
     }
 
 }
