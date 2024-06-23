@@ -61,6 +61,9 @@ export default {
     },
     emits: ['update:modelValue'],
     props: {
+        vuexDispatch:{
+          default: null,
+        },
         xlang: {
             default: null
         },
@@ -176,6 +179,9 @@ export default {
         val(newValue) {
             if (!isNaN(this.modelValue)) {
                 this.$emit('update:modelValue', newValue);
+            }
+            if (this.vuexDispatch != null){
+                this.$store.dispatch(this.vuexDispatch, newValue);
             }
         }
     }

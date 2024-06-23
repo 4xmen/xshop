@@ -16,6 +16,7 @@ import './bootstrap';
 import { createApp } from 'vue';
 import ToastPlugin from 'vue-toast-notification';
 import {useToast} from 'vue-toast-notification';
+import store from "./components/libs/store.js";
 import './panel/raw.js';
 import './panel/navbar.js';
 import './panel/list-checkboxs.js';
@@ -76,6 +77,10 @@ app.component('address-input', AddressInput);
 
 import PropTypeInput from "./components/PropTypeInput.vue";
 app.component('props-type-input', PropTypeInput);
+
+import MetaInput from "./components/MetaInput.vue";
+app.component('meta-input', MetaInput);
+
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
@@ -94,6 +99,7 @@ app.component('props-type-input', PropTypeInput);
  * scaffolding. Otherwise, you will need to add an element yourself.
  */
 app.use(ToastPlugin);
+app.use(store);
 app.mount('#app');
 
 window.app = app;
