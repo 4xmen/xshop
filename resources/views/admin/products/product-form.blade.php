@@ -2,7 +2,7 @@
 
 @section('title')
     @if(isset($item))
-        {{__("Edit product")}} [{{$item->id}}]
+        {{__("Edit product")}} [{{$item->name}}]
     @else
         {{__("Add new product")}}
     @endif -

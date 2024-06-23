@@ -19,6 +19,7 @@ class PropCollection extends JsonResource
             'id' => $this->id,
             'name' => $this->name,
             'label' => $this->label,
+            'type' => $this->type,
             'searchable' => (bool) $this->searchable,
             'priceable'=> (bool) $this->priceable,
             'unit' => $this->unit,

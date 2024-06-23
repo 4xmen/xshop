@@ -95,6 +95,11 @@ class ProductController extends XController
             }
         }
 
+        if ($request->has('meta')) {
+//            dd($request->input('meta'));
+            $product->syncMeta(json_decode($request->get('meta','[]'),true));
+        }
+
         return $product;
 
     }

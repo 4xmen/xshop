@@ -53,6 +53,7 @@
 
 {{--                        data-url="{{route('props.list','')}}/"--}}
                     <searchable-select
+                        vuex-dispatch="updateCategory"
                         @error('category_id') :err="true" @enderror
                         :items='@json($cats)'
                         title-field="name"
