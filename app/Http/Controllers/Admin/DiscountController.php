@@ -17,7 +17,7 @@ class DiscountController extends XController
     // protected  $_MODEL_ = Discount::class;
     // protected  $SAVE_REQUEST = DiscountSaveRequest::class;
 
-    protected $cols = ['title','code','expire'];
+    protected $cols = ['title','code','expire','product_id'];
     protected $extra_cols = ['id'];
 
     protected $searchable = ['title','code','body'];
