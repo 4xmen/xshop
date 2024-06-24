@@ -113,6 +113,7 @@ Route::prefix(config('app.panel.prefix'))->name('admin.')->group(
                         Route::get('edit/{item}', [\App\Http\Controllers\Admin\AttachmentController::class, 'edit'])->name('edit');
                         Route::post('update/{item}', [\App\Http\Controllers\Admin\AttachmentController::class, 'update'])->name('update');
                         Route::get('delete/{item}', [\App\Http\Controllers\Admin\AttachmentController::class, 'destroy'])->name('destroy');
+                        Route::get('deattach/{item}', [\App\Http\Controllers\Admin\AttachmentController::class, 'deattach'])->name('deattach');
                         Route::post('bulk', [\App\Http\Controllers\Admin\AttachmentController::class, "bulk"])->name('bulk');
                     });
                 Route::prefix('clips')->name('clip.')->group(

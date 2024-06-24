@@ -21,6 +21,9 @@ class Product extends Model implements HasMedia
         'qidz' => 'array'
     ];
 
+    public function attachs(){
+        return $this->morphMany(Attachment::class,'attachable');
+    }
 
     protected $guarded = [];
 

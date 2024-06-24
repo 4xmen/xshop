@@ -41,4 +41,10 @@ class Clip extends Model
     {
         return $this->belongsTo(\App\Models\User::class);
     }
+
+    public function attachs(){
+        return $this->morphMany(Attachment::class,'attachable');
+    }
+
+
 }

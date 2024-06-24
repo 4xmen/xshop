@@ -115,6 +115,16 @@ class AttachmentController extends XController
     {
         return parent::delete($item);
     }
+    public function deattach(Attachment $item)
+    {
+        $item->attachable_id = null;
+        $item->attachable_type = null;
+        $item->save();
+
+        logAdmin(__METHOD__,__CLASS__,$item->id);
+        return redirect()->back()
+            ->with(['message' => __('As you wished deattached successfully')]);
+    }
 
 
     public function update(Request $request, Attachment $item)

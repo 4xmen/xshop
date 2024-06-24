@@ -175,3 +175,7 @@
 {{--    </div>--}}
 
 {{--</div>--}}
+<hr>
+<div class="mt-4">
+    @include('components.panel-attachs',['attachs' => $item->attachs])
+</div>
