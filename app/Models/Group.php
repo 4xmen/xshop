@@ -55,4 +55,8 @@ class Group extends Model
 
         return \Storage::url('groups/' . $this->bg);
     }
+
+    public function attachs(){
+        return $this->morphMany(Attachment::class,'attachable');
+    }
 }

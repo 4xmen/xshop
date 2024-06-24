@@ -50,4 +50,8 @@ class Category extends Model
         return $this->belongsToMany(Prop::class);
     }
 
+    public function attachs(){
+        return $this->morphMany(Attachment::class,'attachable');
+    }
+
 }

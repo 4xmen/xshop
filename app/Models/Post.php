@@ -97,6 +97,10 @@ class Post extends Model implements HasMedia
         return $this->belongsTo(Group::class);
     }
 
+    public function attachs(){
+        return $this->morphMany(Attachment::class,'attachable');
+    }
+
 
 //    public function toArray()
 //    {

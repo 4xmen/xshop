@@ -42,6 +42,14 @@
                 </div>
             @endif
 
+            @if(isset($item))
+                <div class="item-list mb-3">
+                    <div class="p-3">
+                        @include('components.panel-attachs',['attachs' => $item->attachs])
+                    </div>
+                </div>
+            @endif
+
 
         </div>
         <div class="col-lg-9 ps-xl-1 ps-xxl-1">

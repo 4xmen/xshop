@@ -37,4 +37,24 @@ class Attachment extends Model
 
         return \Storage::url('attachments/' . $this->file);
     }
+
+
+    public function ownerModel(){
+        switch ($this->attachable_type){
+            case Product::class:
+                return Product::whereId($this->attachable_id)->first();
+            case Post::class:
+                return Post::whereId($this->attachable_id)->first();
+            case Group::class:
+                return Group::whereId($this->attachable_id)->first();
+            case Category::class:
+                return Category::whereId($this->attachable_id)->first();
+            case Clip::class:
+                return Clip::whereId($this->attachable_id)->first();
+            case Gallery::class:
+                return Gallery::whereId($this->attachable_id)->first();
+            default:
+                return null;
+        }
+    }
 }

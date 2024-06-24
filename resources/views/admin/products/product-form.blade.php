@@ -76,6 +76,7 @@
                 <i class="ri-save-3-line"></i>
             </li>
         </ul>
+        @include('components.err')
         <div id="step-tabs">
             <div id="step1">
                 <div class="card">
