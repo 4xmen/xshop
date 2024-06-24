@@ -104,3 +104,4 @@ app.mount('#app');
 
 window.app = app;
 window.$toast = $toast;
+window.store = store;

@@ -122,6 +122,7 @@ abstract class XController extends Controller
         if ($request->ajax()) {
             return ['OK' => true, "message" => __('As you wished created successfully'),
                 "id" => $item->id,
+                "data" => modelWithCustomAttrs($item) ,
                 'url' => getRoute('edit', $item->{$item->getRouteKeyName()})];
         } else {
             return redirect(getRoute('edit', $item->{$item->getRouteKeyName()}))
@@ -150,7 +151,9 @@ abstract class XController extends Controller
         logAdmin(__METHOD__, $this->_MODEL_, $item->id);
 
         if ($request->ajax()) {
-            return ['OK' => true, "message" => __('As you wished updated successfully'), "id" => $item->id];
+            return ['OK' => true,
+                "data" => modelWithCustomAttrs($item) ,
+                "message" => __('As you wished updated successfully'), "id" => $item->id];
         } else {
             return redirect(getRoute('edit', $item->{$item->getRouteKeyName()}))
                 ->with(['message' => __('As you wished updated successfully')]);
