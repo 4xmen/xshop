@@ -65,9 +65,9 @@ window.addEventListener('load', function () {
                     checkbox.removeAttribute("checked");
                 }
             });
+            handleCheckChange();
 
         });
-        handleCheckChange();
     }
 // Attach an event listener for "change" and "click" events
     chkall.forEach(function (chkall) {
