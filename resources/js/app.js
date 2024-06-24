@@ -81,6 +81,9 @@ app.component('props-type-input', PropTypeInput);
 import MetaInput from "./components/MetaInput.vue";
 app.component('meta-input', MetaInput);
 
+import MorphSelector from "./components/MorphSelector.vue";
+app.component('morph-selector', MorphSelector);
+
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue

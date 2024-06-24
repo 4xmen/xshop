@@ -104,6 +104,17 @@ Route::prefix(config('app.panel.prefix'))->name('admin.')->group(
                         Route::post('bulk', [\App\Http\Controllers\Admin\PostController::class, "bulk"])->name('bulk');
                         Route::get('trashed', [\App\Http\Controllers\Admin\PostController::class, "trashed"])->name('trashed');
                     });
+                Route::prefix('attachments')->name('attachment.')->group(
+                    function () {
+                        Route::get('', [\App\Http\Controllers\Admin\AttachmentController::class, 'index'])->name('index');
+                        Route::get('create', [\App\Http\Controllers\Admin\AttachmentController::class, 'create'])->name('create');
+                        Route::post('store', [\App\Http\Controllers\Admin\AttachmentController::class, 'store'])->name('store');
+                        Route::get('show/{item}', [\App\Http\Controllers\Admin\AttachmentController::class, 'show'])->name('show');
+                        Route::get('edit/{item}', [\App\Http\Controllers\Admin\AttachmentController::class, 'edit'])->name('edit');
+                        Route::post('update/{item}', [\App\Http\Controllers\Admin\AttachmentController::class, 'update'])->name('update');
+                        Route::get('delete/{item}', [\App\Http\Controllers\Admin\AttachmentController::class, 'destroy'])->name('destroy');
+                        Route::post('bulk', [\App\Http\Controllers\Admin\AttachmentController::class, "bulk"])->name('bulk');
+                    });
                 Route::prefix('clips')->name('clip.')->group(
                     function () {
                         Route::get('', [\App\Http\Controllers\Admin\ClipController::class, 'index'])->name('index');

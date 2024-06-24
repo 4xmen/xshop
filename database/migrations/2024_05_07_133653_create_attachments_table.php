@@ -13,14 +13,16 @@ return new class extends Migration
     {
         Schema::create('attachments', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
-            $table->string('subtitle');
+            $table->text('title');
+            $table->string('slug')->unique();
+            $table->text('subtitle');
             $table->text('body');
-            $table->string('file',2048);
-            $table->string('type');
+            $table->string('file',2048)->nullable();
+            $table->string('ext')->nullable();
+            $table->unsignedBigInteger('downloads')->default(0)->comment('downloads count');
             $table->boolean('is_fillable')->default(true);
             $table->unsignedBigInteger('size')->default(0);
-            $table->morphs('attachable');
+            $table->nullableMorphs('attachable');
             $table->timestamps();
         });
     }

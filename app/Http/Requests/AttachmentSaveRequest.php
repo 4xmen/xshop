@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class ClipSaveRequest extends FormRequest
+class AttachmentSaveRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -21,12 +21,12 @@ class ClipSaveRequest extends FormRequest
      */
     public function rules(): array
     {
+
         return [
-            'title' => ['required', 'string', 'max:255','min:5'],
-            'body' => ['nullable', 'string',],
-            'active' => ['nullable', 'boolean'],
-            'clip' => ['nullable', 'mimes:mp4', 'max:'.'max:'.getMaxUploadSize()],
-            'cover' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif,svg', 'max:2048'],
+            'title' => ['required','string','min:2'],
+            'body' => ['nullable','string'],
+            'subtitle' => ['nullable','string'],
+            'file' => ['nullable','mimes:png,jpg,svg,mp4,pdf,docx,zip,rar','max:'.getMaxUploadSize()]
         ];
     }
 }
