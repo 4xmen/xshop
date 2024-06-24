@@ -32,6 +32,17 @@ class AppServiceProvider extends ServiceProvider
             $dt = TDate::GetInstance();
             return $dt->PDate($format, self::this()->timestamp);
         });
+        Carbon::macro('ldate', function ($format) {
+            if (self::this()->timestamp == 0){
+                return null;
+            }
+            if (config('app.locale') == 'fa'){
+                $format = str_replace('-','/',$format);
+                return self::this()->jdate($format);
+            }else{
+                return date($format,self::this()->timestamp);
+            }
+        });
 
 
     }

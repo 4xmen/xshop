@@ -63,8 +63,8 @@
                                 xlang="{{config('app.locale')}}"
                                 xid="product_id"
                                 xname="product_id"
-                                @error('category_id') :err="true" @enderror
-                                xvalue='{{old('product_id',$item->product_id??null)}}'
+                                @error('product_id') :err="true" @enderror
+                                xvalue='{{old('product_id',$item->product_id??request()->get('product_id'))}}'
                                 :close-on-Select="true"></searchable-select>
                         </div>
                     </div>
@@ -97,10 +97,10 @@
                     <div class="col-md-12 mt-3">
                         <div class="form-group">
                             <label for="body">
-                                {{__('Post Text')}}
+                                {{__('Description')}}
                             </label>
                             <textarea name="body" class="ckeditorx form-control @error('body') is-invalid @enderror"
-                                      placeholder="{{__('Post Text')}}"
+                                      placeholder="{{__('Description')}}"
                                       rows="8">{{old('body',$item->body??null)}}</textarea>
                             {{--                                    @trix(\App\Post::class, 'body')--}}
 
@@ -126,7 +126,7 @@
                                 {{__('Amount')}}
                             </label>
 
-                            <currency-input xname="amount" xid="amount" @error('amount')
+                            <currency-input xname="amount" xid="amount" @error('amount') xtitle="{{__('Title')}}"
                             :err="true" @enderror :xvalue="{{old('amount',$item->amount??null)}}"></currency-input>
                         </div>
                     </div>

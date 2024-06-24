@@ -23,12 +23,12 @@
         <label for="tags" class="mt-2">
             {{__("Tags")}}
         </label>
-            <tag-input xname="tags" splitter=",," xid="tags"
-                       xtitle="{{__("Tags, Press enter")}}"
-                       @if(isset($item))
-                           xvalue="{{old('title',implode(',,',$item->tags->pluck('name')->toArray()??''))}}"
-                @endif
-            ></tag-input>
+        <tag-input xname="tags" splitter=",," xid="tags"
+                   xtitle="{{__("Tags, Press enter")}}"
+                   @if(isset($item))
+                       xvalue="{{old('title',implode(',,',$item->tags->pluck('name')->toArray()??''))}}"
+            @endif
+        ></tag-input>
 
     </div>
     <div class="col-md-6">
@@ -54,124 +54,124 @@
                   rows="8">{{old('table',$item->table??null)}}</textarea>
     </div>
 </div>
-<div class="accordion mt-2" id="accordionExample">
-    <div class="accordion-item">
-        <h2 class="accordion-header" id="headingTwo">
-            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                {{__("Discounts")}}
-            </button>
-        </h2>
-        <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"
-             data-bs-parent="#accordionExample">
-            <div class="accordion-body">
-                <table class="table" id="discounts">
-                    <tr>
-                        <th>
-                            {{__("Type")}}
-                        </th>
-                        <th>
-                            {{__("Amount")}}
-                        </th>
-                        <th>
-                            {{__("Discount code")}}
-                        </th>
-                        <th>
-                            {{__("Expire date")}}
-                        </th>
-                        <th>
-                            -
-                        </th>
-                    </tr>
-                    @if(isset($item))
-                        @foreach($item->discounts as $dis)
-                            <tr>
-                                <td>
-                                    {{$dis->type}}
-                                </td>
-                                <td>
-                                    {{$dis->amount}}
-                                </td>
-                                <td>
-                                    {{$dis->code}}
-                                </td>
-                                <td>
-                                    {{$dis->expire->jdate('Y/m/d')}}
-                                </td>
-                                <td>
-                                    <button type="button" class="btn btn-danger" data-id="{{$dis->id}}">
-                                        <span class="ri-close-line"></span>
-                                    </button>
-                                </td>
-                            </tr>
-                        @endforeach
+<hr>
+<h4 class="my-4">
+    {{__("Discounts")}}
+    <a href="{{route('admin.discount.create')}}?product_id={{$item->id??null}}" class="btn btn-light float-end">
+        <i class="ri-add-line"></i>
+        {{__("Add new discount")}}
+    </a>
+</h4>
+<table class="table" id="discounts">
+    <tr>
+        <th>
+            {{__("Title")}}
+        </th>
+        <th>
+            {{__("Type")}}
+        </th>
+        <th>
+            {{__("Amount")}}
+        </th>
+        <th>
+            {{__("Discount code")}}
+        </th>
+        <th>
+            {{__("Expire date")}}
+        </th>
+        <th>
+            -
+        </th>
+    </tr>
+    @if(isset($item))
+        @foreach($item->discounts as $dis)
+            <tr>
+                <td>
+                    {{$dis->title}}
+                </td>
+                <td>
+                    {{$dis->type}}
+                </td>
+                <td>
+                    {{number_format($dis->amount)}}
+                    @if($dis->type == "PERCENT")
+                        %
                     @endif
-                </table>
-                <input type="hidden" id="discount-rem" name="discount[remove]" value="[]">
+                </td>
+                <td>
+                    {{$dis->code}}
+                </td>
+                <td>
+                    {{$dis->expire->ldate('Y-m-d H:i:s')}}
+                </td>
+                <td>
+                    <a href="{{ route('admin.discount.destroy',$dis->id) }}" class="btn btn-danger" data-id="{{$dis->id}}">
+                        <span class="ri-close-line"></span>
+                    </a>
+                    <a href="{{route('admin.discount.edit',$dis->id)}}" class="btn btn-primary ms-1">
+                        <i class="ri-edit-line"></i>
+                    </a>
+                </td>
+            </tr>
+        @endforeach
+    @endif
+</table>
 
-            </div>
-        </div>
-    </div>
-    <div class="accordion-item">
-        <h2 class="accordion-header" id="headingThree">
-            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                {{__("New Discount")}}
-            </button>
-        </h2>
-        <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree"
-             data-bs-parent="#accordionExample">
-            <div class="accordion-body">
-                <table class="table" id="new-discount">
-                    <thead>
-                    <tr>
-                        <th>
-                            {{__("Type")}}
-                        </th>
-                        <th>
-                            {{__("Amount")}}
-                        </th>
-                        {{--                           <th>--}}
-                        {{--                               {{__("Discount code")}}--}}
-                        {{--                           </th>--}}
-                        <th>
-                            {{__("Expire date")}}
-                        </th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td>
-                            <label>
-                                {{__("by price")}}
-                                <input type="radio" checked name="discount[type]" value="price">
-                            </label>
-                            &nbsp;
-                            &nbsp;
-                            <label>
-                                {{__("by percent")}}
-                                <input type="radio" name="discount[type]" value="percent">
-                            </label>
-                        </td>
-                        <td>
-                            <input type="text" id="price-amount" placeholder="{{__("Amount")}}"
-                                   name="discount[amount]" class="form-control">
-                        </td>
-                        {{--                           <td>--}}
-                        {{--                               <input type="text" placeholder="{{__("Discount code")}}" name="discount[code]" class="form-control">--}}
-                        {{--                           </td>--}}
-                        <td>
-                            <input placeholder="{{__("Expire date")}}" type="text" data-reuslt="#exp-date"
-                                   class="form-control dtp">
-                            <input type="hidden" name="discount[expire]" id="exp-date">
-                        </td>
-                        <td>
 
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
-</div>
+
+{{--<div class="row">--}}
+{{--    <div class="col-md-6">--}}
+{{--        <div class="form-group mt-4">--}}
+{{--            <label for="title">--}}
+{{--                {{__('Title')}}--}}
+{{--            </label>--}}
+{{--            <input name="discount[type]" type="text" id="title"--}}
+{{--                   class="form-control @error('discount.type') is-invalid @enderror"--}}
+{{--                   placeholder="{{__('Title')}}" value="{{old('discount.type')}}"/>--}}
+{{--        </div>--}}
+{{--        <div class="form-group mt-4">--}}
+{{--            <label for="type">--}}
+{{--                {{__('Type')}}--}}
+{{--            </label>--}}
+{{--            <select name="discount[type]" id="type"--}}
+{{--                    class="form-control @error('type') is-invalid @enderror">--}}
+{{--                @foreach(\App\Models\Discount::$doscount_type as $k => $v)--}}
+{{--                    <option--}}
+{{--                        value="{{ $v }}" {{ old("discount",\App\Models\Discount::$doscount_type[0]) == $v ? "selected" : "" }}>{{ __($v) }}</option>--}}
+{{--                @endforeach--}}
+{{--            </select>--}}
+{{--        </div>--}}
+{{--        <div class="form-group mt-4">--}}
+{{--            <label for="amount">--}}
+{{--                {{__('Amount')}}--}}
+{{--            </label>--}}
+
+{{--            <currency-input xname="discount[amount]" xid="amount" xtitle="{{__('Amount')}}"--}}
+{{--                            @error('amount')--}}
+{{--                            :err="true"--}}
+{{--                            @enderror :xvalue="{{old('discount.amount')}}"></currency-input>--}}
+{{--        </div>--}}
+{{--        <div class="form-group mt-4">--}}
+{{--            <label for="expire">--}}
+{{--                {{__('Expire  date')}}--}}
+{{--            </label>--}}
+{{--            <vue-datetime-picker-input--}}
+{{--                :xmin="{{strtotime('yesterday')}}"--}}
+{{--                xid="dp" xname="discount[expire]" xshow="datetime" xtitle="Expire date" def-tab="1"--}}
+{{--                :timepicker="true"--}}
+{{--            ></vue-datetime-picker-input>--}}
+{{--        </div>--}}
+{{--    </div>--}}
+{{--    <div class="col-6 mt-3">--}}
+{{--        <div class="form-group">--}}
+{{--            <label for="body">--}}
+{{--                {{__('Description')}}--}}
+{{--            </label>--}}
+{{--            <textarea name="body" class="ckeditorx form-control @error('body') is-invalid @enderror"--}}
+{{--                      placeholder="{{__('Description')}}"--}}
+{{--                      rows="4">{{old('body',$item->body??null)}}</textarea>--}}
+
+{{--        </div>--}}
+{{--    </div>--}}
+
+{{--</div>--}}

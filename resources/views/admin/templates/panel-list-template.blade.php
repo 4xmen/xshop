@@ -190,6 +190,14 @@
                                                             {{ $item->category?->name??'-' }}
                                                         </a>
                                                         @break
+                                                    @case($col == 'product_id')
+                                                        <a href="{{route('admin.product.edit',$item->product?->slug)}}">
+                                                            {{ $item->product?->name??'-' }}
+                                                        </a>
+                                                        @break
+                                                    @case($col == 'expire')
+                                                        {{$item->expire->ldate("Y-m-d")}}
+                                                        @break
                                                     @default
                                                         {{$item->$col}}
                                                 @endswitch
