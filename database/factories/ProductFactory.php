@@ -16,8 +16,16 @@ class ProductFactory extends Factory
      */
     public function definition(): array
     {
+        $rand = rand(1,2);
+        $title = ($rand == 1?'mobile':'Tablet').' ' . $this->faker->unique()->firstNameFemale;
         return [
             //
+            'name' => $title,
+            'slug' => sluger($title),
+            'excerpt' => $this->faker->realText(150),
+            'user_id' => 1,
+            'category_id' => $rand,
+            'description' => $this->faker->realText(600),
         ];
     }
 }
