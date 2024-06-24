@@ -73,6 +73,7 @@ export default {
     },
     mounted() {
 
+
         if (this.modelValue !== 'nop') {
 
             if (typeof this.modelValue == 'number') {
@@ -94,9 +95,9 @@ export default {
     computed: {
         noComma: function () {
             const n = uncommafy(this.val);
-            if (this.modelValue != null) {
-                this.$emit('update:modelValue', n);
-            }
+            // if (this.modelValue != 'nop') {
+            //     this.$emit('update:modelValue', n);
+            // }
             return n;
         },
         getClass: function () {
@@ -109,10 +110,18 @@ export default {
     methods: {
         keyup: function () {
             this.val = commafy(this.val);
+            this.$emit('update:modelValue', this.noComma);
             if (typeof this.update === 'function') {
                 this.update(this.updateKey, parseInt(this.noComma));
             }
         },
+    },
+    watch: {
+        val(newValue) {
+            if (this.modelValue !== 'nop') {
+                this.$emit('update:modelValue', uncommafy(newValue));
+            }
+        }
     }
 }
 </script>
