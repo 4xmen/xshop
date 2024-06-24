@@ -58,7 +58,7 @@
                     </a>
                 </li>
                 <li>
-                    <a>
+                    <a href="{{ route('admin.transport.index') }}">
                         <i class="ri-truck-fill"></i>
                         {{__('Transports')}}
                     </a>

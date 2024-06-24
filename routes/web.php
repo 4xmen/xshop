@@ -64,6 +64,20 @@ Route::prefix(config('app.panel.prefix'))->name('admin.')->group(
                         Route::post('bulk', [\App\Http\Controllers\Admin\DiscountController::class, "bulk"])->name('bulk');
                         Route::get('trashed', [\App\Http\Controllers\Admin\DiscountController::class, "trashed"])->name('trashed');
                     });
+
+                Route::prefix('transports')->name('transport.')->group(
+                    function () {
+                        Route::get('', [\App\Http\Controllers\Admin\TransportController::class, 'index'])->name('index');
+                        Route::get('create', [\App\Http\Controllers\Admin\TransportController::class, 'create'])->name('create');
+                        Route::post('store', [\App\Http\Controllers\Admin\TransportController::class, 'store'])->name('store');
+                        Route::get('edit/{item}', [\App\Http\Controllers\Admin\TransportController::class, 'edit'])->name('edit');
+                        Route::post('update/{item}', [\App\Http\Controllers\Admin\TransportController::class, 'update'])->name('update');
+                        Route::get('delete/{item}', [\App\Http\Controllers\Admin\TransportController::class, 'destroy'])->name('destroy');
+                        Route::get('restore/{item}', [\App\Http\Controllers\Admin\TransportController::class, 'restore'])->name('restore');
+                        Route::post('bulk', [\App\Http\Controllers\Admin\TransportController::class, "bulk"])->name('bulk');
+                        Route::get('trashed', [\App\Http\Controllers\Admin\TransportController::class, "trashed"])->name('trashed');
+                    });
+
                 Route::prefix('categories')->name('category.')->group(
                     function () {
                         Route::get('', [\App\Http\Controllers\Admin\CategoryController::class, 'index'])->name('index');

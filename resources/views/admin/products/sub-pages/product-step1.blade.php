@@ -32,7 +32,7 @@
                 </label>
 
                 <currency-input xname="price" xid="price" @error('price')
-                :err="true" @enderror :xvalue="{{old('price',$item->price??null)}}"></currency-input>
+                :err="true" @enderror xtitle="{{__('Base price')}}" :xvalue="{{old('price',$item->price??null)}}"></currency-input>
             </div>
         </div>
         <div class="col-lg-6 mt-3">
