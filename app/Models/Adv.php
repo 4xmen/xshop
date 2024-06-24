@@ -9,6 +9,9 @@ class Adv extends Model
 {
     use SoftDeletes;
 
+    protected $casts = [
+        'expire' => 'date'
+    ];
     public function imgUrl()
     {
         if ($this->image == null) {

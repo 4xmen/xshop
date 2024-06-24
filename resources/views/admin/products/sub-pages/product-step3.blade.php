@@ -16,7 +16,7 @@
             <select class="form-control" name="stock_status" id="status">
                 @foreach(\App\Models\Product::$stock_status as $k => $v)
                     <option
-                        value="{{ $k }}" {{ old("stock_status", $item->stock_status??null) == $k ? "selected" : "" }}>{{ __($v) }}</option>
+                        value="{{ $v }}" {{ old("stock_status", $item->stock_status??null) == $v ? "selected" : "" }}>{{ __($v) }}</option>
                 @endforeach
             </select>
         </div>
