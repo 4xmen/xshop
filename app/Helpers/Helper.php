@@ -393,6 +393,11 @@ function getModelLink($modelable_type, $modelable_id)
     }
 }
 
+/**
+ * fix action in log
+ * @param $act
+ * @return string
+ */
 function getAction($act)
 {
     $r = explode('::', $act);
@@ -400,6 +405,10 @@ function getAction($act)
 
 }
 
+/**
+ * ge all admin routes array
+ * @return array
+ */
 function getAdminRoutes()
 {
     $routes = [];
@@ -414,3 +423,20 @@ function getAdminRoutes()
 
     return $routes;
 }
+
+
+/**
+ * get model with all custom attributes
+ * @param $model \Illuminate\Database\Eloquent\Model
+ * @return void
+ */
+function modelWithCustomAttrs($model){
+    $data = $model->toArray();
+    $attrs = $model->getMutatedAttributes();
+    $attrs = array_diff($attrs,['translations']);
+    foreach ($attrs as $attr) {
+        $data[$attr] = $model->getAttribute($attr);
+    }
+    return $data;
+}
+

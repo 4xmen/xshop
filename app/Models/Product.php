@@ -16,6 +16,30 @@ class Product extends Model implements HasMedia
 {
     use HasFactory, SoftDeletes, InteractsWithMedia, HasTranslations, HasTags, Metable;
 
+    protected $casts = [
+        'qz' => 'array',
+        'qidz' => 'array'
+    ];
+
+
+    protected $guarded = [];
+
+
+    public function getQzAttribute(){
+        $result = [];
+        foreach ($this->quantities as $q) {
+            if ($q->count > 0){
+                $q->data = json_decode($q->data);
+                $result[] = $q;
+            }
+        }
+
+        return $result;
+    }
+    public function getQidzAttribute(){
+        return $this->quantities()->pluck('id')->toArray();
+    }
+
     public static $stock_status = ['IN_STOCK', 'OUT_STOCK', 'BACK_ORDER'];
 
     public $translatable = ['name', 'excerpt', 'description','table'];
@@ -83,7 +107,7 @@ class Product extends Model implements HasMedia
 
     public function quantities()
     {
-        return $this->hasMany(Quantity::class, 'product_id');
+        return $this->hasMany(Quantity::class);
     }
 
     public function discounts()
@@ -146,6 +170,7 @@ class Product extends Model implements HasMedia
             return asset('assets/upload/logo.svg');
         }
     }
+
 
 
 }

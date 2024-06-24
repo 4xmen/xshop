@@ -8,6 +8,7 @@ use App\Http\Requests\ProductSaveRequest;
 use App\Models\Access;
 use App\Models\Category;
 use App\Models\Product;
+use App\Models\Quantity;
 use Illuminate\Http\Request;
 use App\Helper;
 use function App\Helpers\hasCreateRoute;
@@ -25,7 +26,6 @@ class ProductController extends XController
 
     protected $listView = 'admin.products.product-list';
     protected $formView = 'admin.products.product-form';
-
 
     protected $buttons = [
         'edit' =>
@@ -99,6 +99,30 @@ class ProductController extends XController
 //            dd($request->input('meta'));
             $product->syncMeta(json_decode($request->get('meta','[]'),true));
         }
+        $toRemoveQ = $product->quantities()->pluck('id')->toArray();
+        if ($request->has('q')){
+            $qz = json_decode($request->input('q'));
+            foreach ($qz as $qi){
+                if ($qi->id == null){
+                    $q = new Quantity();
+                }else{
+                    $q = Quantity::whereId($qi->id)->first();
+                    unset($toRemoveQ[array_search($q->id, $toRemoveQ) ]); // remove for to remove IDz
+                }
+                $q->image = $qi->image;
+                $q->count = $qi->count;
+                $q->price = $qi->price;
+                $q->product_id = $product->id;
+                $q->data = json_encode($qi->data);
+                $q->save();
+            }
+            $product->quantities()->whereIn('id',$toRemoveQ)->delete();
+
+            $product->stock_quantity = $product->quantities()->sum('count');
+            $product->price = $product->quantities()->min('price');
+            $product->save();
+        }
+
 
         return $product;
 
@@ -121,6 +145,7 @@ class ProductController extends XController
     public function edit(Product $item)
     {
         //
+
         $cats = Category::all(['id','name','parent_id']);
         return view($this->formView, compact('item','cats'));
     }
@@ -168,5 +193,6 @@ class ProductController extends XController
     {
         return parent::restoreing(Product::withTrashed()->where('id', $item)->first());
     }
+
     /*restore**/
 }

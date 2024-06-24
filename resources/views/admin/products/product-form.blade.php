@@ -165,3 +165,9 @@
     <br>
     @yield('out-of-form')
 @endsection
+@section('js-content')
+    <script>
+        var currentEditLink = '{{route('admin.product.edit','')}}/';
+        var currentUpdateLink = '{{route('admin.product.update','')}}/';
+    </script>
+@endsection

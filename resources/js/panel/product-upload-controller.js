@@ -98,10 +98,10 @@ document.addEventListener('DOMContentLoaded', () => {
                     if (res.data.link !== undefined) {
                         this.setAttribute('action', res.data.link);
                     }
+                    window.redirect = currentEditLink + res.data.data.slug;
+                    this.setAttribute('action', currentUpdateLink + res.data.data.slug)
                     $toast.info(res.data.message);
-                    if (document.querySelector('#price-amount').value.trim() !== '') {
-                        window.location.reload();
-                    }
+                    window.store.dispatch('updateQuantities',res.data.data.qidz);
                 }
             }
         }).catch(error => {
