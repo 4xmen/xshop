@@ -17,8 +17,8 @@ class AttachmentController extends XController
     // protected  $_MODEL_ = Attachment::class;
     // protected  $SAVE_REQUEST = AttachmentSaveRequest::class;
 
-    protected $cols = ['title'];
-    protected $extra_cols = ['slug'];
+    protected $cols = ['title','ext','is_fillable'];
+    protected $extra_cols = ['slug','id'];
 
     protected $searchable = ['title', 'subtitle', 'body'];
 

@@ -201,7 +201,7 @@
                                                     @case($col == 'icon')
                                                         <i class="{{$item->$col}}"></i>
                                                         @break
-                                                    @case($col == 'is_default')
+                                                    @case(substr($col,0,3) == 'is_')
                                                         @if($item->$col == 1)
                                                         <i class="ri-check-line"></i>
                                                         @endif
