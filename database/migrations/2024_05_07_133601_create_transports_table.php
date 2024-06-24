@@ -13,11 +13,12 @@ return new class extends Migration
     {
         Schema::create('transports', function (Blueprint $table) {
             $table->id();
-            $table->string('title',250);
+            $table->text('title');
             $table->text('description')->nullable()->default(null);
             $table->unsignedInteger('sort')->default(0);
             $table->boolean('is_default')->default(0);
             $table->unsignedInteger('price')->default(0);
+            $table->string('icon')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

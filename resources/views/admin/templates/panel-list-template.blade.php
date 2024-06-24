@@ -198,8 +198,20 @@
                                                     @case($col == 'expire')
                                                         {{$item->expire->ldate("Y-m-d")}}
                                                         @break
+                                                    @case($col == 'icon')
+                                                        <i class="{{$item->$col}}"></i>
+                                                        @break
+                                                    @case($col == 'is_default')
+                                                        @if($item->$col == 1)
+                                                        <i class="ri-check-line"></i>
+                                                        @endif
+                                                        @break
                                                     @default
-                                                        {{$item->$col}}
+                                                        @if(gettype($item->$col) == 'integer')
+                                                            {{number_format($item->$col)}}
+                                                        @else
+                                                            {{$item->$col}}
+                                                        @endif
                                                 @endswitch
                                             </td>
                                         @endif
