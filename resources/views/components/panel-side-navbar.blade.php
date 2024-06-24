@@ -26,7 +26,7 @@
                     </a>
                 </li>
                 <li>
-                    <a>
+                    <a href="{{route('admin.discount.index')}}">
                         <i class="ri-percent-fill"></i>
                         {{__('Discounts')}}
                     </a>
@@ -48,7 +48,7 @@
                 <li>
                     <a href="{{route('admin.category.index')}}">
                         <i class="ri-box-3-fill"></i>
-                        {{__('Product categories')}}
+                        {{__('Categories')}}
                     </a>
                 </li>
                 <li>

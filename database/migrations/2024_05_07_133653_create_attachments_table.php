@@ -18,7 +18,9 @@ return new class extends Migration
             $table->text('body');
             $table->string('file',2048);
             $table->string('type');
+            $table->boolean('is_fillable')->default(true);
             $table->unsignedBigInteger('size')->default(0);
+            $table->morphs('attachable');
             $table->timestamps();
         });
     }
