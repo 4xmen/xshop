@@ -103,7 +103,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="">
+                    <a href="{{route('admin.attachment.index')}}">
                         <i class="ri-attachment-2"></i>
                         {{__("Attachments")}}
                     </a>

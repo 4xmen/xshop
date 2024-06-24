@@ -440,3 +440,54 @@ function modelWithCustomAttrs($model){
     return $data;
 }
 
+
+/**
+ * get max size for upload
+ * @return int
+ */
+function getMaxUploadSize() {
+    $uploadMaxSize = returnBytes(ini_get('upload_max_filesize'));
+    $postMaxSize = returnBytes(ini_get('post_max_size'));
+
+    return min($uploadMaxSize, $postMaxSize);
+}
+
+
+/**
+ * convert text to byte
+ * @param $val
+ * @return float|int|string
+ */
+function returnBytes($val) {
+    $last = strtolower($val[strlen($val)-1]);
+    $val = trim(strtolower($val),'kgm');
+    switch($last) {
+        // The 'G' modifier is available since PHP 5.1.0
+        case 'g':
+            $val *= 1024 * 1024 * 1024;
+        case 'm':
+            $val *= 1024 * 1024;
+        case 'k':
+            $val *= 1024;
+    }
+
+    return $val;
+}
+
+
+/**
+ * convert byte to human readable
+ * @param $size
+ * @return string
+ */
+function formatFileSize($size) {
+    if ($size < 1024) {
+        return $size . ' bytes';
+    } elseif ($size < 1048576) {
+        return number_format($size / 1024, 1) . ' KB';
+    } elseif ($size < 1073741824) {
+        return number_format($size / 1048576, 1) . ' MB';
+    } else {
+        return number_format($size / 1073741824, 1) . ' GB';
+    }
+}

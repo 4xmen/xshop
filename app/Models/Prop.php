@@ -10,22 +10,24 @@ use Spatie\Translatable\HasTranslations;
 class Prop extends Model
 {
 
-    use HasFactory,HasTranslations,SoftDeletes;
-    public $translatable = ['label','unit'];
+    use HasFactory, HasTranslations, SoftDeletes;
+
+    public $translatable = ['label', 'unit'];
 
     protected $casts = [
         'dataz',
         'optionz'
     ];
 
-    public static  $prop_types = ['text','number','checkbox','color','select','multi','singlemulti'];
+    public static $prop_types = ['text', 'number', 'checkbox', 'color', 'select', 'multi', 'singlemulti'];
 
     public function categories()
     {
         return $this->belongsToMany(Category::class);
     }
 
-    public function getDatazAttribute(){
+    public function getDatazAttribute()
+    {
         $result = [];
         foreach (json_decode($this->options) as $item) {
             $result[$item->title] = $item->value;
@@ -33,7 +35,9 @@ class Prop extends Model
 
         return $result;
     }
-    public function getOptionzAttribute(){
+
+    public function getOptionzAttribute()
+    {
         return json_decode($this->options);
     }
 }
