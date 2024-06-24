@@ -178,7 +178,7 @@
                                                         {{ $item->parent?->{$cols[0]}??'-' }}
                                                         @break
                                                     @case($col == 'status')
-                                                        <div class="model-status status-{{$item->status}}"></div>
+                                                        <div class="model-status status-{{$item->status}} float-start"></div>
                                                         @break
                                                     @case($col == 'user_id')
                                                         <a href="{{route('admin.user.edit',$item->user?->email)}}">

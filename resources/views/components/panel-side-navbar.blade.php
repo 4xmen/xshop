@@ -149,7 +149,7 @@
             </a>
             <ul id="interaction">
                 <li>
-                    <a href="">
+                    <a href="{{route('admin.question.index')}}">
                         <i class="ri-question-mark"></i>
                         {{__('Questions')}}
                     </a>
