@@ -48,10 +48,12 @@ a{
     display: grid;
     grid-template-columns:50px 0 1fr;
     transition: 400ms;
+    min-height: calc(100vh - 60px);
 
     >aside{
         background-image: url("../images/pattern.png");
         background-color: lighten($body-bg,7);
+        position: relative;
     }
     &.sided{
         grid-template-columns:50px 250px 1fr;
