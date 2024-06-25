@@ -29,27 +29,35 @@ function handleCheckChange() {
     let frm = serializeForm('#main-form');
     let bi = document.querySelector('#bulk-idz');
 
-    bi.innerHTML = '';
-    for (const item of frm) {
-        let n = document.createElement("input");
-        n.name = item.name;
-        n.value = item.value;
-        n.type = 'hidden';
-        bi.appendChild(n);
+    if (bi != null) {
+
+        try {
+            bi.innerHTML = '';
+            for (const item of frm) {
+                let n = document.createElement("input");
+                n.name = item.name;
+                n.value = item.value;
+                n.type = 'hidden';
+                bi.appendChild(n);
+            }
+
+            if (frm.length == 0) {
+                document.querySelector('#bulk-from').style.maxHeight = '0';
+            } else {
+                document.querySelector('#bulk-from').style.maxHeight = '250px';
+            }
+        } catch (e) {
+            console.log(e.message);
+        }
     }
 
-    if (frm.length == 0) {
-        document.querySelector('#bulk-from').style.maxHeight = '0';
-    } else {
-        document.querySelector('#bulk-from').style.maxHeight = '250px';
-    }
 
 }
 
 window.addEventListener('load', function () {
     let chkall = document.querySelectorAll(".chkall");
 
-    if (chkall.length == 0){
+    if (chkall.length == 0) {
         return false;
     }
     let toggle = document.querySelector('#toggle-select');

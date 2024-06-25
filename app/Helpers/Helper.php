@@ -510,7 +510,17 @@ function generateUniqueID($length = 8) {
     return $uniqueID;
 }
 
+
+function commentStatuses()
+{
+    return [
+        ['name' => __("Approved"), 'id' => '1' ],
+        ['name' => __("Rejected"), 'id' => '-1' ],
+        ['name' => __("Pending"), 'id' => '0' ]
+    ];
+}
 function getSetting(){
     return 'test@xshop.ir';
 }
+
 

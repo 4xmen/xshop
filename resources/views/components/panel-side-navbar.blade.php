@@ -162,7 +162,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="">
+                    <a href="{{route('admin.comment.index')}}">
                         <i class="ri-chat-1-fill"></i>
                         {{__('Comments')}}
                     </a>
