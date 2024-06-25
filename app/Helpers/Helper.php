@@ -491,3 +491,26 @@ function formatFileSize($size) {
         return number_format($size / 1073741824, 1) . ' GB';
     }
 }
+
+
+/**
+ * generating hash UID by length
+ * @param $length
+ * @return string
+ */
+function generateUniqueID($length = 8) {
+    $chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890';
+    $uniqueID = '';
+
+    for ($i = 0; $i < $length; $i++) {
+        $randomChar = $chars[rand(0, strlen($chars) - 1)];
+        $uniqueID .= $randomChar;
+    }
+
+    return $uniqueID;
+}
+
+function getSetting(){
+    return 'test@xshop.ir';
+}
+
