@@ -97,12 +97,16 @@ a.btn,a.action-btn,a.circle-btn{
     margin: auto;
     border-radius: 3px;
 }
-.status-0{
+.status-0,.status-CLOSED {
     background: red;
 }
-.status-1{
+.status-ANSWERED{
     background: lime;
 }
+.status-PENDING{
+    background: gold;
+}
+
 
 .image-x64{
     height: 64px;

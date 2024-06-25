@@ -156,7 +156,7 @@
                 </li>
 
                 <li>
-                    <a href="">
+                    <a href="{{route('admin.ticket.index')}}">
                         <i class="ri-mail-fill"></i>
                         {{__('Tickets')}}
                     </a>

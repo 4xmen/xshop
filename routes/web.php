@@ -64,6 +64,16 @@ Route::prefix(config('app.panel.prefix'))->name('admin.')->group(
                         Route::post('bulk', [\App\Http\Controllers\Admin\DiscountController::class, "bulk"])->name('bulk');
                         Route::get('trashed', [\App\Http\Controllers\Admin\DiscountController::class, "trashed"])->name('trashed');
                     });
+                Route::prefix('tickets')->name('ticket.')->group(
+                    function () {
+                        Route::get('', [\App\Http\Controllers\Admin\TicketController::class, 'index'])->name('index');
+//                        Route::get('create', [\App\Http\Controllers\Admin\TicketController::class, 'create'])->name('create');
+                        Route::post('store', [\App\Http\Controllers\Admin\TicketController::class, 'store'])->name('store');
+                        Route::get('edit/{item}', [\App\Http\Controllers\Admin\TicketController::class, 'edit'])->name('edit');
+                        Route::post('update/{item}', [\App\Http\Controllers\Admin\TicketController::class, 'update'])->name('update');
+                        Route::get('delete/{item}', [\App\Http\Controllers\Admin\TicketController::class, 'destroy'])->name('destroy');
+                        Route::post('bulk', [\App\Http\Controllers\Admin\TicketController::class, "bulk"])->name('bulk');
+                    });
 
                 Route::prefix('transports')->name('transport.')->group(
                     function () {
