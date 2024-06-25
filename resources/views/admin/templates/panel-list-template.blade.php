@@ -174,45 +174,46 @@
                                         @else
                                             <td>
                                                 @switch($col)
-                                                    @case($col == 'parent_id')
+                                                    @case('parent_id')
                                                         {{ $item->parent?->{$cols[0]}??'-' }}
                                                         @break
-                                                    @case($col == 'status')
+                                                    @case('status')
                                                         <div class="model-status status-{{$item->status}} float-start"></div>
                                                         @break
-                                                    @case($col == 'user_id')
+                                                    @case('user_id')
                                                         <a href="{{route('admin.user.edit',$item->user?->email)}}">
                                                             {{ $item->user?->name??'-' }}
                                                         </a>
                                                         @break
-                                                    @case($col == 'customer_id')
+                                                    @case('customer_id')
                                                         <a href="{{route('admin.customer.edit',$item->customer?->id)}}">
                                                             {{ $item->customer?->name??'-' }}
                                                         </a>
                                                         @break
-                                                    @case($col == 'category_id')
+                                                    @case('category_id')
                                                         <a href="{{route('admin.category.edit',$item->category?->slug)}}">
                                                             {{ $item->category?->name??'-' }}
                                                         </a>
                                                         @break
-                                                    @case($col == 'product_id')
+                                                    @case('product_id')
                                                         <a href="{{route('admin.product.edit',$item->product?->slug)}}">
                                                             {{ $item->product?->name??'-' }}
                                                         </a>
                                                         @break
-                                                    @case($col == 'expire')
-                                                        {{$item->expire->ldate("Y-m-d")}}
+                                                    @case('expire')
+                                                    @case('created_at')
+                                                    @case('updated_at')
+                                                        {{$item->$col->ldate("Y-m-d H:i")}}
                                                         @break
-                                                    @case($col == 'icon')
+                                                    @case('icon')
                                                         <i class="{{$item->$col}}"></i>
                                                         @break
-                                                    @case(substr($col,0,3) == 'is_')
-                                                        @if($item->$col == 1)
-                                                        <i class="ri-check-line"></i>
-                                                        @endif
-                                                        @break
                                                     @default
-                                                        @if(gettype($item->$col) == 'integer')
+                                                        @if(substr($col,0,3) == 'is_')
+                                                            @if($item->$col == 1)
+                                                                <i class="ri-check-line"></i>
+                                                            @endif
+                                                        @elseif(gettype($item->$col) == 'integer')
                                                             {{number_format($item->$col)}}
                                                         @else
                                                             {{$item->$col}}
