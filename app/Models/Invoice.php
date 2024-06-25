@@ -8,4 +8,19 @@ use Illuminate\Database\Eloquent\Model;
 class Invoice extends Model
 {
     use HasFactory;
+
+
+    public function getRouteKey()
+    {
+        return 'hash';
+    }
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::creating(function($model) {
+            $model->hash = generateUniqueID( (strlen(Invoice::count()) + 2));
+        });
+    }
 }
