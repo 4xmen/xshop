@@ -16,12 +16,11 @@ return new class extends Migration
             $table->text('body');
             $table->string('name', 100)->nullable();
             $table->string('email', 100)->nullable();
-            $table->unsignedBigInteger('member_id')->nullable();
             $table->ipAddress('ip');
             $table->tinyInteger('status')->default('0');
-            $table->unsignedBigInteger('sub_comment_id')->nullable()->default(null);
+            $table->unsignedBigInteger('parent_id')->nullable()->default(null);
             $table->morphs('commentable');
-            $table->morphs('commentator');
+            $table->nullableMorphs('commentator');
             $table->timestamps();
 
         });

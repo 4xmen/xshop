@@ -84,6 +84,15 @@ Route::prefix(config('app.panel.prefix'))->name('admin.')->group(
                         Route::get('delete/{item}', [\App\Http\Controllers\Admin\ContactController::class, 'destroy'])->name('destroy');
                         Route::post('bulk', [\App\Http\Controllers\Admin\ContactController::class, "bulk"])->name('bulk');
                     });
+                Route::prefix('comments')->name('comment.')->group(
+                    function () {
+                        Route::get('', [\App\Http\Controllers\Admin\CommentController::class, 'index'])->name('index');
+                        Route::get('status/{item}/{status}', [\App\Http\Controllers\Admin\CommentController::class, 'status'])->name('status');
+                        Route::get('delete/{item}', [\App\Http\Controllers\Admin\CommentController::class, 'destroy'])->name('destroy');
+                        Route::get('reply/{item}', [\App\Http\Controllers\Admin\CommentController::class, 'reply'])->name('reply');
+                        Route::post('replying/{item}', [\App\Http\Controllers\Admin\CommentController::class, 'replying'])->name('replying');
+                        Route::post('bulk', [\App\Http\Controllers\Admin\CommentController::class, "bulk"])->name('bulk');
+                    });
 
                 Route::prefix('transports')->name('transport.')->group(
                     function () {
