@@ -74,6 +74,16 @@ Route::prefix(config('app.panel.prefix'))->name('admin.')->group(
                         Route::get('delete/{item}', [\App\Http\Controllers\Admin\TicketController::class, 'destroy'])->name('destroy');
                         Route::post('bulk', [\App\Http\Controllers\Admin\TicketController::class, "bulk"])->name('bulk');
                     });
+                Route::prefix('contacts')->name('contact.')->group(
+                    function () {
+                        Route::get('', [\App\Http\Controllers\Admin\ContactController::class, 'index'])->name('index');
+//                        Route::get('create', [\App\Http\Controllers\Admin\TicketController::class, 'create'])->name('create');
+                        Route::post('store', [\App\Http\Controllers\Admin\ContactController::class, 'store'])->name('store');
+                        Route::get('show/{item}', [\App\Http\Controllers\Admin\ContactController::class, 'show'])->name('show');
+                        Route::post('reply/{item}', [\App\Http\Controllers\Admin\ContactController::class, 'reply'])->name('reply');
+                        Route::get('delete/{item}', [\App\Http\Controllers\Admin\ContactController::class, 'destroy'])->name('destroy');
+                        Route::post('bulk', [\App\Http\Controllers\Admin\ContactController::class, "bulk"])->name('bulk');
+                    });
 
                 Route::prefix('transports')->name('transport.')->group(
                     function () {
@@ -240,5 +250,12 @@ Route::prefix(config('app.panel.prefix'))->name('admin.')->group(
     });
 
 Route::get('test',function (){
+    $c = new \App\Models\Contact();
+    $c->name = 'mamali';
+    $c->email = 'mamali@yahoo.com';
+    $c->mobile = '091212344557';
+    $c->body = 'test test contact';
+    $c->subject = ' this a subject';
+    $c->save();
    return \App\Helpers\PersianFaker::color();
 });

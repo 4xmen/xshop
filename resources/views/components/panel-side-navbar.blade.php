@@ -168,7 +168,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="">
+                    <a href="{{route('admin.contact.index')}}">
                         <i class="ri-mail-unread-fill"></i>
                         {{__("Contact us")}}
                     </a>
