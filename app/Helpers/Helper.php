@@ -1,6 +1,7 @@
 <?php
 
 use App\Helpers;
+use App\Models\Setting;
 use Illuminate\Support\Facades\Route;
 
 
@@ -430,10 +431,11 @@ function getAdminRoutes()
  * @param $model \Illuminate\Database\Eloquent\Model
  * @return void
  */
-function modelWithCustomAttrs($model){
+function modelWithCustomAttrs($model)
+{
     $data = $model->toArray();
     $attrs = $model->getMutatedAttributes();
-    $attrs = array_diff($attrs,['translations']);
+    $attrs = array_diff($attrs, ['translations']);
     foreach ($attrs as $attr) {
         $data[$attr] = $model->getAttribute($attr);
     }
@@ -445,7 +447,8 @@ function modelWithCustomAttrs($model){
  * get max size for upload
  * @return int
  */
-function getMaxUploadSize() {
+function getMaxUploadSize()
+{
     $uploadMaxSize = returnBytes(ini_get('upload_max_filesize'));
     $postMaxSize = returnBytes(ini_get('post_max_size'));
 
@@ -458,10 +461,11 @@ function getMaxUploadSize() {
  * @param $val
  * @return float|int|string
  */
-function returnBytes($val) {
-    $last = strtolower($val[strlen($val)-1]);
-    $val = trim(strtolower($val),'kgm');
-    switch($last) {
+function returnBytes($val)
+{
+    $last = strtolower($val[strlen($val) - 1]);
+    $val = trim(strtolower($val), 'kgm');
+    switch ($last) {
         // The 'G' modifier is available since PHP 5.1.0
         case 'g':
             $val *= 1024 * 1024 * 1024;
@@ -480,7 +484,8 @@ function returnBytes($val) {
  * @param $size
  * @return string
  */
-function formatFileSize($size) {
+function formatFileSize($size)
+{
     if ($size < 1024) {
         return $size . ' bytes';
     } elseif ($size < 1048576) {
@@ -498,7 +503,8 @@ function formatFileSize($size) {
  * @param $length
  * @return string
  */
-function generateUniqueID($length = 8) {
+function generateUniqueID($length = 8)
+{
     $chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890';
     $uniqueID = '';
 
@@ -510,17 +516,91 @@ function generateUniqueID($length = 8) {
     return $uniqueID;
 }
 
-
+/**
+ * comment status to bypass blade error
+ * @return array[]
+ */
 function commentStatuses()
 {
     return [
-        ['name' => __("Approved"), 'id' => '1' ],
-        ['name' => __("Rejected"), 'id' => '-1' ],
-        ['name' => __("Pending"), 'id' => '0' ]
+        ['name' => __("Approved"), 'id' => '1'],
+        ['name' => __("Rejected"), 'id' => '-1'],
+        ['name' => __("Pending"), 'id' => '0']
     ];
 }
-function getSetting(){
-    return 'test@xshop.ir';
+
+
+/**
+ * validate basic setting request b4 save
+ * @param $setting
+ * @param $newValue
+ * @return mixed|string
+ */
+function validateSettingRequest($setting, $newValue)
+{
+    if (!$setting->is_basic) {
+        return $newValue;
+    }
+
+    switch ($setting->key) {
+        case 'optimize':
+            if ($newValue != 'jpg' || $newValue != 'webp') {
+                return 'webp';
+            }
+        case 'gallery_thumb':
+        case 'post_thumb':
+        case 'product_thumb':
+        case 'product_image':
+            $temp = explode('x', $newValue);
+            if (count($temp) != 2) {
+                return '500x500';
+            } else {
+                if ((int)$temp[0] < 50 || (int)$temp[1] < 50) {
+                    return '500x500';
+                }
+            }
+    }
+    return $newValue;
+}
+
+
+/***
+ * get setting by key
+ * @param string $key setting key
+ * @return false|mixed|string|null
+ */
+function getSetting($key)
+{
+    if (!isset($_SERVER['SERVER_NAME']) || !\Schema::hasTable('settings')) {
+        return false;
+    }
+    $x = Setting::where('key', $key)->first();
+    if ($x == null) {
+//        $a = new \stdClass();
+        return '';
+    }
+    if (config('app.xlang') && ($x->type == 'group' || $x->type == 'category')) {
+        $defLang = config('app.xlang_main');
+        return $x->getTranslations('value')[$defLang];
+    }
+    return $x->value;
+}
+
+function imageSizeConvertValidate($size){
+    $s = getSetting($size);
+    if ($s == null){
+
+        $t = explode('x',$size);
+        if (config('app.media'.$size) == null || config('app.media'.$size) == ''){
+            $t[0] = 500 ;
+            $t[1] = 500 ;
+        }
+
+    }else{
+        $t = explode('x',$s);
+    }
+    return $t;
+
 }
 
 

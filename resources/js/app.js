@@ -24,6 +24,7 @@ import './panel/general-events.js';
 import './panel/editor-handle.js';
 import './panel/step-controller.js';
 import './panel/product-upload-controller.js';
+import './panel/setting-section-controller.js';
 
 /**
  * Next, we will create a fresh Vue application instance. You may then begin

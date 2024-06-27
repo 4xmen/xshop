@@ -254,6 +254,15 @@ Route::prefix(config('app.panel.prefix'))->name('admin.')->group(
                         Route::post('update/{item}', [\App\Http\Controllers\Admin\AddressController::class, 'update'])->name('update');
                         Route::get('destroy/{item}', [\App\Http\Controllers\Admin\AddressController::class, 'destroy'])->name('destroy');
                     });
+
+                Route::prefix('setting')->name('setting.')->group(
+                    function () {
+                        Route::get('index', [\App\Http\Controllers\Admin\SettingController::class, "index"])->name('index');
+                        Route::post('store', [\App\Http\Controllers\Admin\SettingController::class, "store"])->name('store');
+                        Route::post('update', [\App\Http\Controllers\Admin\SettingController::class, "update"])->name('update');
+                    }
+                );
+
             });
 
     });

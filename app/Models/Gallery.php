@@ -4,6 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Image\Enums\AlignPosition;
+use Spatie\Image\Enums\Fit;
+use Spatie\Image\Enums\Unit;
 use Spatie\MediaLibrary\Conversions\Manipulations;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
@@ -25,20 +28,21 @@ class Gallery extends Model implements HasMedia
     {
         $this->addMediaConversion('gallery-image')->optimize();
 
-        $t = explode('x',config('app.media.gallery_thumb'));
+        $t = imageSizeConvertValidate('gallery_thumb');
 
-        if (config('starter-kit.gallery_thumb') == null || config('starter-kit.gallery_thumb') == ''){
-            $t[0] = 500 ;
-            $t[1] = 500 ;
-        }
-
-
-        $this->addMediaConversion('gthumb')->width($t[0])
+        $mc = $this->addMediaConversion('gthumb')->width($t[0])
             ->height($t[1])
             ->nonQueued()
-            ->crop( $t[0], $t[1])->optimize();
-//                    ->watermark(public_path('images/logo.png'))->watermarkOpacity(50);
-//                    ->withResponsiveImages();
+            ->crop( $t[0], $t[1])
+            ->optimize()
+            ->format(getSetting('optimize'));
+        if (getSetting('watermark')){
+            $mc->watermark(public_path('upload/images/logo.png'),
+                AlignPosition::BottomLeft,5,5,Unit::Percent,
+                15,Unit::Percent,15,Unit::Percent,Fit::Contain,50);
+        }
+
+//            ->withResponsiveImages();
     }
 
     public function getRouteKeyName()
