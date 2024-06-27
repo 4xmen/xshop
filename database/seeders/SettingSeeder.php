@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Setting;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -13,5 +14,174 @@ class SettingSeeder extends Seeder
     public function run(): void
     {
         //
+        $sections = [
+            'General' => [
+                [
+                    'title' => __("Email"),
+                    'key' => 'email',
+                    'type' => 'TEXT',
+                    'ltr' => true,
+                    'value' => 'xshop@xstack.ir',
+                    'size' => '6',
+                ],
+                [
+                    'title' => __("Tel"),
+                    'key' => 'tel',
+                    'type' => 'TEXT',
+                    'ltr' => true,
+                    'value' => '+98-21-9988-7766',
+                    'size' => '6',
+                ],
+                [
+                    'title' => __("Subtitle"),
+                    'key' => 'subtitle',
+                    'type' => 'TEXT',
+                    'value' => 'another shop with xShop',
+                ],
+                [
+                    'title' => __("copyright"),
+                    'key' => 'copyright',
+                    'type' => 'TEXT',
+                    'value' => 'xShop community © ' . date('Y'),
+                ],
+                [
+                    'title' => __("Twitter (x)"),
+                    'key' => 'tw',
+                    'type' => 'TEXT',
+                    'size' => '4',
+                ],
+                [
+                    'title' => __("Facebook"),
+                    'key' => 'fb',
+                    'type' => 'TEXT',
+                    'size' => '4',
+                ],
+                [
+                    'title' => __("Instagram"),
+                    'key' => 'in',
+                    'type' => 'TEXT',
+                    'size' => '4',
+                ],
+                [
+                    'title' => __("LinkedIn"),
+                    'key' => 'li',
+                    'type' => 'TEXT',
+                    'size' => '4',
+                ],
+
+                [
+                    'title' => __("Youtube"),
+                    'key' => 'yt',
+                    'type' => 'TEXT',
+                    'size' => '4',
+                ],
+                [
+                    'title' => __("Telegram"),
+                    'key' => 'tg',
+                    'type' => 'TEXT',
+                    'size' => '4',
+                ],
+                [
+                    'title' => __('Under construction'),
+                    'key' => 'under',
+                    'type' => 'CHECKBOX',
+                    'value' => 0,
+                ],
+
+            ],
+            'SEO' => [
+                [
+                    'title' => __("Common keyword"),
+                    'key' => 'keyword',
+                    'type' => 'TEXT',
+                    'value' => 'shop,xshop, sale, xStack',
+                ],
+                [
+                    'title' => __("Common description"),
+                    'key' => 'desc',
+                    'type' => 'TEXT',
+                    'value' => 'Best customizable shop in the world',
+                ],
+                [
+                    'title' => __("Google Webmaster code"),
+                    'key' => 'google-webmaster-code',
+                    'type' => 'CODE',
+                ],
+                [
+                    'title' => __("SEO image"),
+                    'key' => 'site_image',
+                    'type' => 'FILE',
+                ],
+            ],
+            'Media' => [
+                [
+                    'title' => __("Logo (svg)"),
+                    'key' => 'logo_svg',
+                    'type' => 'FILE',
+                ],
+                [
+                    'title' => __("Logo (png)"),
+                    'key' => 'logo_png',
+                    'type' => 'FILE',
+                ],
+                [
+                    'title' => __('Optimize type'),
+                    'key' => 'optimize',
+                    'type' => 'TEXT',
+                    'value' => 'webp',
+                    'size' => '6',
+                ],
+                [
+                    'title' => __('Watermark'),
+                    'key' => 'watermark',
+                    'type' => 'CHECKBOX',
+                    'value' => false,
+                    'size' => '6',
+                ],
+                [
+                    'title' => __('Product thumbnail size'),
+                    'key' => 'product_image',
+                    'type' => 'TEXT',
+                    'value' => '1200x1200',
+                    'size' => '6',
+                ],
+                [
+                    'title' => __('Product image size'),
+                    'key' => 'product_thumb',
+                    'type' => 'TEXT',
+                    'value' => '500x500',
+                    'size' => '6',
+                ],
+                [
+                    'title' => __('Post thumbnail size'),
+                    'key' => 'post_thumb',
+                    'type' => 'TEXT',
+                    'value' => '500x500',
+                    'size' => '6',
+                ],
+                [
+                    'title' => __('Gallery thumbnail size'),
+                    'key' => 'gallery_thumb',
+                    'type' => 'TEXT',
+                    'value' => '500x500',
+                    'size' => '6',
+                ],
+            ]
+        ];
+        foreach ($sections as $section => $section_data) {
+            foreach ($section_data as $set) {
+
+                $setting = new Setting();
+                $setting->title = $set['title'];
+                $setting->section = $section;
+                $setting->key = $set['key'];
+                $setting->value = $set['value']??null;
+                $setting->type = $set['type']??'TEXT';
+                $setting->ltr = $set['ltr']??false;
+                $setting->is_basic = true;
+                $setting->size = $set['size']??12;;
+                $setting->save();
+            }
+        }
     }
 }

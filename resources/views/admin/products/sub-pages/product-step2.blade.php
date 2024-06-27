@@ -17,7 +17,7 @@
         @foreach($item->getMedia() as $k => $media)
             <div data-id="-1" data-key="{{$k}}"
                  class="image-index col-xl-3 col-md-4 border p-3 @if($k == $item->image_index) indexed @endif">
-                <img class="img-list" src="{{$media->getUrl()}}" alt="{{$k}}">
+                <img class="img-list" src="{{$media->getUrl('product-image')}}" alt="{{$k}}">
                 <div class="btn btn-danger upload-remove-image d-block">
                      <span class="ri-close-line"></span>
                 </div>

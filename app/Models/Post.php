@@ -5,6 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Spatie\Image\Enums\AlignPosition;
+use Spatie\Image\Enums\Fit;
+use Spatie\Image\Enums\Unit;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
@@ -38,19 +41,22 @@ class Post extends Model implements HasMedia
     {
         $t = explode('x', config('app.media.post_thumb'));
 
-        if (config('app.media.post_thumb') == null || config('app.media.post_thumb') == '') {
-            $t[0] = 500;
-            $t[1] = 500;
-        }
+        $t = imageSizeConvertValidate('post_thumb');
 
-        $this->addMediaConversion('post-image')
+        $mc  =  $this->addMediaConversion('post-image')
             ->width($t[0])
             ->height($t[1])
             ->crop( $t[0], $t[1])
             ->optimize()
             ->sharpen(10)
             ->nonQueued()
-            ->format('webp');
+            ->format(getSetting('optimize'));
+
+        if (getSetting('watermark')){
+            $mc->watermark(public_path('upload/images/logo.png'),
+                AlignPosition::BottomLeft,5,5,Unit::Percent,
+                15,Unit::Percent,15,Unit::Percent,Fit::Contain,50);
+        }
 
     }
 

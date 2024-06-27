@@ -128,3 +128,33 @@ a.btn,a.action-btn,a.circle-btn{
     z-index: 1;
     margin-bottom: -75px;
 }
+
+.section-group{
+
+    .section-group-item{
+        display: block;
+        padding: .5rem;
+        background: #ffffff11;
+        border-bottom: 1px solid #00000022;
+        color: white;
+        &.active{
+            background: $primary-color-panel;
+        }
+
+        &:hover{
+            background: rgba($primary-color-panel,.7);
+        }
+    }
+}
+
+#setting-sections{
+    section{
+        display: none;
+        background: $lighter-color;
+        padding: 1rem;
+
+        .setting-field{
+            padding: 5px;
+        }
+    }
+}

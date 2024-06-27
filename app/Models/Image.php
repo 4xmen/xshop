@@ -4,6 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Image\Enums\AlignPosition;
+use Spatie\Image\Enums\Fit;
+use Spatie\Image\Enums\Unit;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
@@ -24,18 +27,23 @@ class Image extends Model implements HasMedia
     public function registerMediaConversions(Media $media = null): void
     {
 
-        $t = explode('x', config('starter-kit.post_thumb'));
-        if (config('starter-kit.gallery_thumb') == null || config('starter-kit.gallery_thumb') == '') {
-            $t[0] = 500;
-            $t[1] = 500;
-        }
+        $t = imageSizeConvertValidate('gallery_thumb');
 
         $this->addMediaConversion('image-image')->optimize();
 
-        $this->addMediaConversion('gthumb')->width($t[0])
+        $mc = $this->addMediaConversion('githumb')
+            ->width($t[0])
             ->height($t[1])
             ->nonQueued()
-            ->crop( $t[0], $t[1])->optimize();
+            ->crop( $t[0], $t[1])
+            ->optimize()
+            ->format(getSetting('optimize'));
+
+        if (getSetting('watermark')){
+            $mc->watermark(public_path('upload/images/logo.png'),
+                AlignPosition::BottomLeft,5,5,Unit::Percent,
+                15,Unit::Percent,15,Unit::Percent,Fit::Contain,50);
+        }
 //                    ->watermark(public_path('images/logo.png'))->watermarkOpacity(50);
 //                    ->withResponsiveImages();
     }
@@ -43,9 +51,9 @@ class Image extends Model implements HasMedia
     public function imgurl()
     {
         if ($this->getMedia()->count() > 0) {
-            return $this->getMedia()->first()->getUrl('gthumb');
+            return $this->getMedia()->first()->getUrl('githumb');
         } else {
-            return "no image";
+            return asset('assets/upload/logo.svg');
         }
     }
 }

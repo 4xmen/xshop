@@ -21,7 +21,7 @@
                     <li>
                         {{__("If you want to only attach to other staff members and do not want to appear in the website attachment list, uncheck `fillable`")}}
                     </li>
-                    @if($item->file == null)
+                    @if(isset($item) && $item->file == null)
                         <li>
                             {{__("There is noting file to show!")}}
                         </li>
@@ -32,7 +32,7 @@
 
                 </ul>
             </div>
-            @if($item)
+            @if(isset($item))
                 <div class="item-list mb-3">
                     <h3 class="p-3">
                         <i class="ri-file-info-line"></i>

@@ -216,7 +216,7 @@
         </li>
         <li data-bs-toggle="tooltip" data-bs-placement="auto" data-bs-custom-class="custom-tooltip"
             data-bs-title="{{__("Setting")}}">
-            <a href="">
+            <a href="{{route('admin.setting.index')}}">
                 <i class="ri-settings-4-line"></i>
             </a>
         </li>

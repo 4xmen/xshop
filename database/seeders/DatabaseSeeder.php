@@ -32,6 +32,7 @@ class DatabaseSeeder extends Seeder
                 PropSeeder::class,
                 ProductSeeder::class,
                 CommentSeeder::class,
+                SettingSeeder::class,
             ]
         );
     }

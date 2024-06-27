@@ -6,6 +6,9 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Plank\Metable\Metable;
+use Spatie\Image\Enums\AlignPosition;
+use Spatie\Image\Enums\Fit;
+use Spatie\Image\Enums\Unit;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
@@ -49,37 +52,36 @@ class Product extends Model implements HasMedia
 
     public function registerMediaConversions(?Media $media = null): void
     {
-        $ti = explode('x', config('app.media.product_image'));
+        $ti = imageSizeConvertValidate('product_image');
+        $t = imageSizeConvertValidate('product_thumb');
 
-        if (config('app.media.product_image') == null || config('app.media.product_image') == '') {
-            $ti[0] = 1200;
-            $ti[1] = 1200;
-        }
-        $t = explode('x', config('app.media.product_thumb'));
-
-        if (config('app.media.product_thumb') == null || config('app.media.product_thumb') == '') {
-            $t[0] = 500;
-            $t[1] = 500;
-        }
-
-        $this->addMediaConversion('product-thumb')
+       $mc = $this->addMediaConversion('product-thumb')
             ->width($t[0])
             ->height($t[1])
             ->crop($t[0], $t[1])
             ->optimize()
             ->sharpen(10)
             ->nonQueued()
-            ->format('webp');
+            ->format(getSetting('optimize'));
 
-        $this->addMediaConversion('product-image')
+        $mc2 = $this->addMediaConversion('product-image')
             ->width($ti[0])
             ->height($ti[1])
             ->crop($ti[0], $ti[1])
             ->optimize()
             ->sharpen(10)
             ->nonQueued()
-            ->format('webp');
+            ->format(getSetting('optimize'));
 
+        if (getSetting('watermark')){
+            $mc->watermark(public_path('upload/images/logo.png'),
+                AlignPosition::BottomLeft,5,5,Unit::Percent,
+                15,Unit::Percent,15,Unit::Percent,Fit::Contain,50);
+
+            $mc2->watermark(public_path('upload/images/logo.png'),
+                AlignPosition::BottomLeft,5,5,Unit::Percent,
+                15,Unit::Percent,15,Unit::Percent,Fit::Contain,50);
+        }
     }
 
 
@@ -147,6 +149,13 @@ class Product extends Model implements HasMedia
 
     public function imgUrl(){
         if ($this->getMedia()->count() > 0) {
+            return $this->getMedia()[$this->image_index]->getUrl('product-image');
+        } else {
+            return asset('assets/upload/logo.svg');
+        }
+    }
+    public function orginalImageUrl(){
+        if ($this->getMedia()->count() > 0) {
             return $this->getMedia()[$this->image_index]->getUrl();
         } else {
             return asset('assets/upload/logo.svg');
@@ -154,7 +163,7 @@ class Product extends Model implements HasMedia
     }
     public function imgUrl2(){
         if ($this->getMedia()->count() > 0 && isset($this->getMedia()[1])) {
-            return $this->getMedia()[1]->getUrl();
+            return $this->getMedia()[1]->getUrl('product-image');
         } else {
             return asset('assets/upload/logo.svg');
         }
