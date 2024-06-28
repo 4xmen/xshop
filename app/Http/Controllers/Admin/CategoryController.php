@@ -137,7 +137,7 @@ class CategoryController extends XController
     public function sort(){
         $items = Category::orderBy('sort')
             ->get(['id','name','parent_id']);
-        return view('admin.categories.category-sort',compact('items'));
+        return view('admin.commons.sort',compact('items'));
     }
 
     public function sortSave(Request $request){

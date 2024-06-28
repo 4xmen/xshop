@@ -130,4 +130,24 @@ class GroupController extends XController
         return parent::restoreing(Group::withTrashed()->where('id', $item)->first());
     }
     /*restore**/
+
+    /**sort*/
+    public function sort(){
+        $items = Group::orderBy('sort')
+            ->get(['id','name','parent_id']);
+        return view('admin.commons.sort',compact('items'));
+    }
+
+    public function sortSave(Request $request){
+//        return $request->items;
+        foreach ($request->items as $key => $item){
+            $i = Group::whereId($item['id'])->first();
+            $i->sort = $key;
+            $i->parent_id = $item['parentId']??null;
+            $i->save();
+        }
+        logAdmin(__METHOD__,__CLASS__,null);
+        return ['OK' => true,'message' => __("As you wished sort saved")];
+    }
+    /*sort**/
 }
