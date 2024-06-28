@@ -158,3 +158,23 @@ a.btn,a.action-btn,a.circle-btn{
         }
     }
 }
+
+
+.ol-sortable {
+    padding-right: 1rem;
+    padding-left: 1rem;
+    list-style: none;
+    border-radius: 5px;
+    li {
+        border: 1px solid grey;
+        background: #ffffff11;
+        margin-bottom: .25rem;
+        border-radius: 5px;
+        span {
+            display: block;
+            padding: 7px;
+        }
+    }
+}
+
+
