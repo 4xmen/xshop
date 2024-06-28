@@ -51,6 +51,8 @@ Route::prefix(config('app.panel.prefix'))->name('admin.')->group(
                         Route::get('restore/{item}', [\App\Http\Controllers\Admin\GroupController::class, 'restore'])->name('restore');
                         Route::post('bulk', [\App\Http\Controllers\Admin\GroupController::class, "bulk"])->name('bulk');
                         Route::get('trashed', [\App\Http\Controllers\Admin\GroupController::class, "trashed"])->name('trashed');
+                        Route::post('sort/save', [\App\Http\Controllers\Admin\GroupController::class, 'sortSave'])->name('sort-save');
+                        Route::get('sort', [\App\Http\Controllers\Admin\GroupController::class, 'sort'])->name('sort');
                     });
                 Route::prefix('discounts')->name('discount.')->group(
                     function () {
@@ -129,7 +131,7 @@ Route::prefix(config('app.panel.prefix'))->name('admin.')->group(
                         Route::get('restore/{item}', [\App\Http\Controllers\Admin\CategoryController::class, 'restore'])->name('restore');
                         Route::post('bulk', [\App\Http\Controllers\Admin\CategoryController::class, "bulk"])->name('bulk');
                         Route::get('trashed', [\App\Http\Controllers\Admin\CategoryController::class, "trashed"])->name('trashed');
-                        Route::post('sort/save', [\App\Http\Controllers\Admin\CategoryController::class, 'sortSave'])->name('sort.save');
+                        Route::post('sort/save', [\App\Http\Controllers\Admin\CategoryController::class, 'sortSave'])->name('sort-save');
                         Route::get('sort', [\App\Http\Controllers\Admin\CategoryController::class, 'sort'])->name('sort');
                     });
 
@@ -223,7 +225,6 @@ Route::prefix(config('app.panel.prefix'))->name('admin.')->group(
                         Route::get('restore/{item}', [\App\Http\Controllers\Admin\ProductController::class, 'restore'])->name('restore');
                         Route::post('bulk', [\App\Http\Controllers\Admin\ProductController::class, "bulk"])->name('bulk');
                         Route::get('trashed', [\App\Http\Controllers\Admin\ProductController::class, "trashed"])->name('trashed');
-
                     });
                 Route::prefix('props')->name('prop.')->group(
                     function () {
