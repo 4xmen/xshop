@@ -124,7 +124,7 @@
                                 data-bs-toggle="tooltip"
                                 data-bs-placement="top"
                                 data-bs-custom-class="custom-tooltip"
-                                data-bs-title="{{__("Add another one")}}"
+                                data-bs-title="{{__("Save all settings")}}"
                                 href="{{getRoute('create')}}"
                         >
                             <i class="ri-save-2-line"></i>

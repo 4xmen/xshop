@@ -586,21 +586,41 @@ function getSetting($key)
     return $x->value;
 }
 
-function imageSizeConvertValidate($size){
+/**
+ * validae convert image size
+ * @param $size
+ * @return string[]
+ */
+function imageSizeConvertValidate($size)
+{
     $s = getSetting($size);
-    if ($s == null){
+    if ($s == null) {
 
-        $t = explode('x',$size);
-        if (config('app.media'.$size) == null || config('app.media'.$size) == ''){
-            $t[0] = 500 ;
-            $t[1] = 500 ;
+        $t = explode('x', $size);
+        if (config('app.media' . $size) == null || config('app.media' . $size) == '') {
+            $t[0] = 500;
+            $t[1] = 500;
         }
 
-    }else{
-        $t = explode('x',$s);
+    } else {
+        $t = explode('x', $s);
     }
     return $t;
 
 }
 
 
+function nestedWithData($items, $parent_id = null)
+{
+    $r = '<ol class="ol-sortable">' . PHP_EOL;
+    foreach ($items as $item) {
+        if ($item->parent_id == $parent_id) {
+            $name = $item->name ?? $item->title ?? $item->id;
+            $r .= "<li data-id='{$item->id}'> <span> <i class='ri-drag-move-2-line'></i> {$name}</span>" . PHP_EOL;
+            $r .= nestedWithData($items, $item->id);
+            $r .= PHP_EOL . ' </li>';
+        }
+    }
+    $r .=  '</ol>' . PHP_EOL;
+    return $r;
+}

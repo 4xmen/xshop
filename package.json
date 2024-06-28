@@ -18,6 +18,7 @@
     "dependencies": {
         "leaflet": "^1.9.4",
         "remixicon": "^4.2.0",
+        "sortablejs": "^1.15.2",
         "three": "0.150.0",
         "vazirmatn": "^33.0.3",
         "vue-toast-notification": "^3.1.2",

@@ -13,6 +13,7 @@
  */
 
 import './bootstrap';
+
 import { createApp } from 'vue';
 import ToastPlugin from 'vue-toast-notification';
 import {useToast} from 'vue-toast-notification';
@@ -25,6 +26,7 @@ import './panel/editor-handle.js';
 import './panel/step-controller.js';
 import './panel/product-upload-controller.js';
 import './panel/setting-section-controller.js';
+import './panel/sotable-controller.js';
 
 /**
  * Next, we will create a fresh Vue application instance. You may then begin
@@ -84,6 +86,7 @@ app.component('meta-input', MetaInput);
 
 import MorphSelector from "./components/MorphSelector.vue";
 app.component('morph-selector', MorphSelector);
+
 
 /**
  * The following block of code may be used to automatically register your

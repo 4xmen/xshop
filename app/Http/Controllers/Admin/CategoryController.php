@@ -124,11 +124,35 @@ class CategoryController extends XController
         return $this->bringUp($request, $item);
     }
 
+
     /**restore*/
     public function restore($item)
     {
         return parent::restoreing(Category::withTrashed()->where('id', $item)->first());
     }
     /*restore**/
+
+
+    /**sort*/
+    public function sort(){
+        $items = Category::orderBy('sort')
+            ->get(['id','name','parent_id']);
+        return view('admin.categories.category-sort',compact('items'));
+    }
+
+    public function sortSave(Request $request){
+//        return $request->items;
+        foreach ($request->items as $key => $item){
+            $i = Category::whereId($item['id'])->first();
+            $i->sort = $key;
+            $i->parent_id = $item['parentId']??null;
+            $i->save();
+        }
+        logAdmin(__METHOD__,__CLASS__,null);
+        return ['OK' => true,'message' => __("As you wished sort saved")];
+    }
+    /*sort**/
+
+
 
 }
