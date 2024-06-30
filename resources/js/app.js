@@ -87,6 +87,9 @@ app.component('meta-input', MetaInput);
 import MorphSelector from "./components/MorphSelector.vue";
 app.component('morph-selector', MorphSelector);
 
+import Gfxer from "./components/Gfxer.vue";
+app.component('gfxer', Gfxer);
+
 
 /**
  * The following block of code may be used to automatically register your

@@ -33,6 +33,7 @@ class DatabaseSeeder extends Seeder
                 ProductSeeder::class,
                 CommentSeeder::class,
                 SettingSeeder::class,
+                GfxSeeder::class,
             ]
         );
     }

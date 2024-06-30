@@ -129,7 +129,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="">
+                    <a href="{{route('admin.gfx.index')}}">
                         <i class="ri-color-filter-line"></i>
                         {{__("Graphic")}}
                     </a>

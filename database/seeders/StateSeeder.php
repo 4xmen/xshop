@@ -70,5 +70,16 @@ class StateSeeder extends Seeder
                 $c->save();
             }
         }
+
+        // dehloran
+        City::whereId(250)->update([
+            'lat'=> 32.6894,
+            'lng' => 47.2691,
+        ]);
+        // karaj
+        City::whereId(228)->update([
+            'lat'=> 35.8439,
+            'lng' => 50.9715,
+        ]);
     }
 }
