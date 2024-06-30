@@ -46,6 +46,7 @@ class SettingController extends Controller
         $set->type = $request->type;
         $set->size = $request->size;
         $set->save();
+        logAdmin(__METHOD__,__CLASS__,$set->id);
         return redirect()->back()->with(['message' => __('Setting added to website')]);
     }
 
@@ -89,6 +90,7 @@ class SettingController extends Controller
                 }
             }
         }
+        logAdmin(__METHOD__,__CLASS__,null);
         return redirect()->back()->with(['message' => __('Setting of website updated')]);
     }
 
