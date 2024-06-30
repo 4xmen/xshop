@@ -32,6 +32,9 @@ class ImageController extends Controller
     public function store(Request $request, Gallery $gallery)
     {
 
+        $request->validate([
+            'image' => ['required']
+        ]);
 
         foreach ($request->file('image') as $k => $item) {
 
