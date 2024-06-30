@@ -154,5 +154,4 @@ class CategoryController extends XController
     /*sort**/
 
 
-
 }

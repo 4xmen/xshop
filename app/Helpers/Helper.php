@@ -212,6 +212,10 @@ function logAdmin($method, $cls, $id): void
     ]);
 }
 
+function gfx(){
+    return \App\Models\Gfx::pluck('value','key');
+}
+
 
 /**
  * build query with excepts

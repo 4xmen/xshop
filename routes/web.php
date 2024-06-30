@@ -265,6 +265,13 @@ Route::prefix(config('app.panel.prefix'))->name('admin.')->group(
                         Route::post('update', [\App\Http\Controllers\Admin\SettingController::class, "update"])->name('update');
                     }
                 );
+                Route::prefix('gfx')->name('gfx.')->group(
+                    function () {
+                        Route::get('index', [\App\Http\Controllers\Admin\GfxController::class, "index"])->name('index');
+//                        Route::post('store', [\App\Http\Controllers\Admin\SettingController::class, "store"])->name('store');
+                        Route::post('update', [\App\Http\Controllers\Admin\GfxController::class, "update"])->name('update');
+                    }
+                );
 
             });
 
