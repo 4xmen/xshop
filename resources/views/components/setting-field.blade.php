@@ -104,5 +104,4 @@
                    value="{{old($setting->key, $setting->value)}}" @if($setting->ltr) dir="ltr" @endif>
             @endif
     @endswitch
-
 </div>

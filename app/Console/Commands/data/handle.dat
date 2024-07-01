@@ -1,0 +1,16 @@
+<?php
+
+namespace App\Http\Controllers;
+
+class Handle
+{
+    public static function onAdd(){
+
+    }
+    public static function onRemove(){
+
+    }
+    public static function onMount(){
+
+    }
+}
