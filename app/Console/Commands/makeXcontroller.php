@@ -21,7 +21,7 @@ class makeXcontroller extends Command
      *
      * @var string
      */
-    protected $description = 'create new xContoller';
+    protected $description = 'create new xController';
 
     /**
      * Execute the console command.
@@ -41,7 +41,7 @@ class makeXcontroller extends Command
         }
 
         // get controller content
-        $content = file_get_contents(__DIR__ . '/xcontroller.dat');
+        $content = file_get_contents(__DIR__ . '/data/xcontroller.dat');
 
         // replace variables
         $content = str_replace('User', $model, $content);
@@ -77,13 +77,13 @@ class makeXcontroller extends Command
 
         // make list blade
         $model = strtolower($model);
-        $content = file_get_contents(__DIR__ . '/listblade.dat');
+        $content = file_get_contents(__DIR__ . '/data/listblade.dat');
         $content = str_replace('Users',$plural,$content);
         file_put_contents($folderPath.'/'.$model.'-list.blade.php',$content);
         $this->info($model.'-list.blade.php created');
 
         // make form blade
-        $content = file_get_contents(__DIR__ . '/formblade.dat');
+        $content = file_get_contents(__DIR__ . '/data/formblade.dat');
         $content = str_replace('Users',$plural,$content);
         $content = str_replace('user',strtolower($model),$content);
         file_put_contents($folderPath.'/'.$model.'-form.blade.php',$content);
