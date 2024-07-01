@@ -13,5 +13,5 @@ class Setting extends Model
     public $translatable = ['value'];
 
     public static $settingTypes = ['TEXT', 'LONGTEXT', 'CODE', 'EDITOR',
-        'CATEGORY', 'GROUP', 'CHECKBOX', 'FILE'];
+        'CATEGORY', 'GROUP', 'CHECKBOX', 'FILE','COLOR'];
 }

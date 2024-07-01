@@ -56,6 +56,12 @@
                 xvalue='{{old($setting->key,$setting->value??null)}}'
                 :close-on-Select="true"></searchable-select>
             @break
+        @case('COLOR')
+            <br>
+            <input type="color" id="{{$setting->key}}"
+                   name="{{$setting->key}}" class="form-control-color w-100"
+                   value="{{old($setting->key, $setting->value)}}" >
+            @break
         @case('FILE')
             <div class="row">
                 @php($ext = strtolower(pathinfo(str_replace('_','.',$setting->key), PATHINFO_EXTENSION)))
@@ -87,9 +93,9 @@
         @default
             @if($setting->key == 'optimize')
                 <select  class="form-control" name="{{$setting->key}}" id="{{$setting->key}}">
-                    <option value="1"
+                    <option value="jpg"
                             @if (old($setting->key, $setting->value??'webp') == 'jpg' ) selected @endif >{{__("jpg")}} </option>
-                    <option value="0"
+                    <option value="webp"
                             @if (old($setting->key, $setting->value??'webp') == 'webp' ) selected @endif >{{__("webp")}} </option>
                 </select>
             @else

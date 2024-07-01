@@ -62,7 +62,7 @@
                                     <select name="type" id="type"
                                             class="form-control @error('type') is-invalid @enderror">
                                         @foreach(\App\Models\Setting::$settingTypes as $type)
-                                            <option value="text"
+                                            <option value="{{$type}}"
                                                     @if (old('type') == $type ) selected @endif >{{__($type)}} </option>
                                         @endforeach
 
