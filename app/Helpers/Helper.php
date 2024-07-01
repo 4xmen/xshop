@@ -548,8 +548,10 @@ function validateSettingRequest($setting, $newValue)
 
     switch ($setting->key) {
         case 'optimize':
-            if ($newValue != 'jpg' || $newValue != 'webp') {
+            if ($newValue != 'jpg' && $newValue != 'webp') {
                 return 'webp';
+            }else{
+                return  $newValue;
             }
         case 'gallery_thumb':
         case 'post_thumb':
