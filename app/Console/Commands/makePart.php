@@ -80,7 +80,7 @@ DOC;
         file_put_contents($folderPath . '/' . $part . '.json', json_encode($detail,JSON_PRETTY_PRINT));
         file_put_contents($folderPath . '/' . ucfirst($part) . '.php', $handler);
         file_put_contents($folderPath . '/' . $part . '.scss', $scss);
-        File::copy(__DIR__.'/data/screenshot.dat',$folderPath .'/screenshot.png');
+        File::copy(__DIR__.'/data/screen.png',$folderPath .'/screenshot.png');
 
 
         $this->info(__("Theme part created successfully: [blade, js, json, scss, php, assets, screenshot]"));
