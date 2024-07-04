@@ -327,6 +327,10 @@ function lastCrump()
                 $title = __('Trashed') . ' ' . __($routes[count($routes) - 2]);
                 $icon = 'ri-delete-bin-6-line';
                 break;
+            case 'design':
+                $title = __('Design') . ' ' . __($routes[count($routes) - 2]);
+                $icon = 'ri-paint-brush-line';
+                break;
             default:
                 $title = __('') . ' ' . __(ucfirst($routes[count($routes) - 1]));
                 $icon = 'ri-bubble-chart-line';

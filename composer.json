@@ -43,6 +43,9 @@
         },
         "files": [
             "app/Helpers/Helper.php"
+        ],
+        "classmap": [
+            "resources/views/segments"
         ]
     },
     "autoload-dev": {

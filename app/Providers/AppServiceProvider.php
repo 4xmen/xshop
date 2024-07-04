@@ -3,6 +3,10 @@
 namespace App\Providers;
 use App\Helpers\TDate;
 use App\Http\Middleware\Acl;
+use App\Models\Area;
+use App\Models\Part;
+use App\Observers\AreaObsever;
+use App\Observers\PartObsever;
 use Carbon\Carbon;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Blade;
@@ -43,6 +47,8 @@ class AppServiceProvider extends ServiceProvider
                 return date($format,self::this()->timestamp);
             }
         });
+
+        Part::observe(PartObsever::class);
 
 
     }

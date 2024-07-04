@@ -2,9 +2,11 @@
 
 namespace App\Console\Commands;
 
-use App\Models\Theme;
+use App\Models\Area;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\File;
+use Symfony\Component\Process\Process;
 
 class makePart extends Command
 {
@@ -15,14 +17,14 @@ class makePart extends Command
      *
      * @var string
      */
-    protected $signature = 'make:part {part} {section}';
+    protected $signature = 'make:part {part} {segment}';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'make theme part';
+    protected $description = 'make segment part';
 
     /**
      * Execute the console command.
@@ -30,8 +32,8 @@ class makePart extends Command
     public function handle()
     {
         //
-        $part = strtolower($this->argument('part'));
-        $section = strtolower($this->argument('section'));
+        $part = $this->argument('part');
+        $segment = strtolower($this->argument('segment'));
 
         // make detail
         $detail = [
@@ -45,13 +47,13 @@ class makePart extends Command
             'packages' => [],
         ];
         // check section
-        if (!in_array($section, Theme::$sections)) {
-             $this->error(__('Invalid theme section'));
+        if (!in_array($segment, Area::$allSegments)) {
+             $this->error(__('Invalid area segment'));
              return  -1;
         }
 
 
-        $folderPath = resource_path() . '/views/segments/' . $section . '/' . $part;
+        $folderPath = resource_path() . '/views/segments/' . $segment . '/' . ucfirst($part);
 
 
         // check is exists
@@ -64,7 +66,7 @@ class makePart extends Command
         File::makeDirectory($folderPath, 0755, true);
         File::makeDirectory($folderPath.'/assets', 0755, true);
 
-        $this->info('Directory created as: /theme/' . $section . '/' . $part);
+        $this->info('Directory created as: /segments/' . $segment . '/' . ucfirst($part));
 
         $handler = file_get_contents(__DIR__.'/data/handle.dat');
 
@@ -83,6 +85,9 @@ DOC;
         File::copy(__DIR__.'/data/screen.png',$folderPath .'/screenshot.png');
 
 
+
+        $process = new Process(['composer', 'dump-autoload']);
+        $process->setWorkingDirectory(base_path())->run();
         $this->info(__("Theme part created successfully: [blade, js, json, scss, php, assets, screenshot]"));
         return  0;
 
