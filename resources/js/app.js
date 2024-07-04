@@ -90,6 +90,9 @@ app.component('morph-selector', MorphSelector);
 import Gfxer from "./components/Gfxer.vue";
 app.component('gfxer', Gfxer);
 
+import AreaDesginer from "./components/AreaDesginer.vue";
+app.component('area-designer', AreaDesginer);
+
 
 /**
  * The following block of code may be used to automatically register your

@@ -272,18 +272,24 @@ Route::prefix(config('app.panel.prefix'))->name('admin.')->group(
                         Route::post('update', [\App\Http\Controllers\Admin\GfxController::class, "update"])->name('update');
                     }
                 );
+                Route::prefix('area')->name('area.')->group(
+                    function () {
+                        Route::get('index', [\App\Http\Controllers\Admin\AreaController::class, "index"])->name('index');
+                        Route::get('design/{area}', [\App\Http\Controllers\Admin\AreaController::class, "desgin"])->name('design');
+                        Route::get('image/{segment}/{part}', [\App\Http\Controllers\Admin\AreaController::class, "image"])->name('image');
+//                        Route::post('store', [\App\Http\Controllers\Admin\SettingController::class, "store"])->name('store');
+                        Route::post('update/{area}', [\App\Http\Controllers\Admin\AreaController::class, "update"])->name('update');
+                    }
+                );
 
             });
 
     });
 
 Route::get('test',function (){
-    $c = new \App\Models\Contact();
-    $c->name = 'mamali';
-    $c->email = 'mamali@yahoo.com';
-    $c->mobile = '091212344557';
-    $c->body = 'test test contact';
-    $c->subject = ' this a subject';
-    $c->save();
-   return \App\Helpers\PersianFaker::color();
+
+//    return \Resources\Views\Segments\PreloaderCircle::onAdd();
+
+    Log::info('--test--');
 });
+

@@ -34,6 +34,8 @@ class DatabaseSeeder extends Seeder
                 CommentSeeder::class,
                 SettingSeeder::class,
                 GfxSeeder::class,
+                AreaSeeder::class,
+                PartSeeder::class,
             ]
         );
     }

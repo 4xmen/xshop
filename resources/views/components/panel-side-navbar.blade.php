@@ -135,9 +135,9 @@
                     </a>
                 </li>
                 <li>
-                    <a href="">
+                    <a href="{{route('admin.area.index')}}">
                         <i class="ri-paint-brush-line"></i>
-                        {{__("Design")}}
+                        {{__("Area design")}}
                     </a>
                 </li>
             </ul>

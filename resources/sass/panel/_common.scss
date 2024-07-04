@@ -178,3 +178,19 @@ a.btn,a.action-btn,a.circle-btn{
 }
 
 
+.area-list-item{
+    background: #00000022;
+    height: 125px;
+    text-align: center;
+    display: block;
+    color: $text-muted;
+
+    &:hover{
+        color: lighten($primary-color-panel,10);
+    }
+    i{
+        font-size: 45px;
+        display: block;
+        margin: 1rem auto;
+    }
+}
