@@ -66,6 +66,7 @@ class AreaController extends Controller
                 $part->save();
             }
         }
+        \Artisan::call('client');
         logAdmin(__METHOD__,__CLASS__,$area->id);
         return redirect()->back()->with(['message' => __('area :NAME of website updated',['NAME' => $area->name])]);
     }

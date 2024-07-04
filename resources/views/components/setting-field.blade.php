@@ -75,7 +75,7 @@
                         </a>
                     </div>
                 @endif
-                <div class="col-md-5">
+                <div class="col-md-5 text-center">
                     @if($ext == 'mp4')
                         <video controls src="{{asset('upload/file/'.str_replace('_','.',$setting->key))}}?{{time()}}" class="img-fluid" style="max-height: 150px;max-width: 45%" ></video>
                         <br>

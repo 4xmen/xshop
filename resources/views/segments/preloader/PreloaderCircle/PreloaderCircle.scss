@@ -1,3 +1,63 @@
 #PreloaderCircle {
     // scss
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 999999;
+    background: var(--xshop-background);
+
+
+    @keyframes draw-small {
+        0% {
+            stroke-dashoffset: 0;
+            transform: rotate(0deg);
+        }
+        100% {
+            stroke-dashoffset: 210;
+            transform: rotate(360deg);
+        }
+    }
+    @keyframes draw-big {
+        0% {
+            stroke-dashoffset: 0;
+            transform: rotateY(180deg) rotate(360deg);
+        }
+        100% {
+            stroke-dashoffset: 240;
+            transform: rotateY(180deg) rotate(0deg);
+        }
+    }
+    svg {
+        width: 100%;
+        height: 100%;
+    }
+    * {
+        box-sizing: border-box;
+    }
+    .preloader {
+        position: absolute;
+        width: 102px;
+        height: 102px;
+        left: 50%;
+        top: 50%;
+        min-height: 102px;
+        transform: translateX(-50%) translateY(-50%);
+        .small-circle {
+            stroke-dasharray: 210;
+            stroke-dashoffset: 210;
+            transform-origin: 50%;
+            animation: 1s draw-small infinite alternate;
+            stroke: var(--xshop-primary);
+        }
+        .big-circle {
+            stroke-dasharray: 240;
+            stroke-dashoffset: 240;
+            transform-origin: 50%;
+            animation: 1s draw-big infinite alternate 0.5s;
+            stroke: var(--xshop-secondary);
+        }
+    }
+
 }

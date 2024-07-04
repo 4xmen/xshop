@@ -1,3 +1,18 @@
 #PreloaderImage {
     // scss
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 999999;
+    background: var(--xshop-background);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    img{
+        max-height: 40vh;
+    }
+
 }

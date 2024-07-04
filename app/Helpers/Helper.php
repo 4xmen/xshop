@@ -327,6 +327,7 @@ function lastCrump()
                 $title = __('Trashed') . ' ' . __($routes[count($routes) - 2]);
                 $icon = 'ri-delete-bin-6-line';
                 break;
+
             case 'design':
                 $title = __('Design') . ' ' . __($routes[count($routes) - 2]);
                 $icon = 'ri-paint-brush-line';
@@ -620,6 +621,12 @@ function imageSizeConvertValidate($size)
 }
 
 
+/**
+ * nested model with data
+ * @param $items
+ * @param $parent_id
+ * @return string
+ */
 function nestedWithData($items, $parent_id = null)
 {
     $r = '<ol class="ol-sortable">' . PHP_EOL;
@@ -633,4 +640,24 @@ function nestedWithData($items, $parent_id = null)
     }
     $r .=  '</ol>' . PHP_EOL;
     return $r;
+}
+
+
+/**
+ * check has part if return first
+ * @param $areaName
+ * @return \App\Models\Part|false
+ */
+function hasPart($areaName){
+    $a = \App\Models\Area::where('name',$areaName)->first();
+    if ($a == null){
+        return false;
+    }
+
+    $p = \App\Models\Part::where('area_id',$a->id)->first();
+    if ($p == null){
+        return  false;
+    }
+    return $p ;
+
 }
