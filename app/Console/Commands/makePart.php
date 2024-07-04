@@ -51,7 +51,7 @@ class makePart extends Command
         }
 
 
-        $folderPath = __DIR__ . '/../../../resources/views/segments/' . $section . '/' . $part;
+        $folderPath = resource_path() . '/views/segments/' . $section . '/' . $part;
 
 
         // check is exists

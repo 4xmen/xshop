@@ -21,6 +21,7 @@ class GfxController extends Controller
             $g->save();
         }
         logAdmin(__METHOD__,__CLASS__,null);
+        \Artisan::call('client');
         return redirect()->back()->with(['message' => __('GFX of website updated')]);
     }
 }
