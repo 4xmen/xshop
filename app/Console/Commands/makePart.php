@@ -51,12 +51,12 @@ class makePart extends Command
         }
 
 
-        $folderPath = __DIR__ . '/../../../resources/views/theme/' . $section . '/' . $part;
+        $folderPath = __DIR__ . '/../../../resources/views/segments/' . $section . '/' . $part;
 
 
         // check is exists
         if (File::exists($folderPath)) {
-             $this->warn(__('Command ignored, theme part exists!'));
+             $this->warn(__('Command ignored, segment part exists!'));
             return -1;
         }
 
@@ -85,6 +85,7 @@ DOC;
 
         $this->info(__("Theme part created successfully: [blade, js, json, scss, php, assets, screenshot]"));
         return  0;
+
     }
 
 
