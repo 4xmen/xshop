@@ -11,6 +11,7 @@
 <body>
     <h1>
         xshop
+        <i class="ri-check-double-line"></i>
     </h1>
 </body>
 </html>
