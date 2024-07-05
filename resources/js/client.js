@@ -5,3 +5,4 @@ import "./client-custom/confirm.js";
 import "../views/segments/preloader/PreloaderCircle/PreloaderCircle.js";
 import "../views/segments/top/TopSimple/TopSimple.js";
 import "../views/segments/slider/SliderSimple/SliderSimple.js";
+import "../views/segments/top/TopSimple/TopSimple.js";

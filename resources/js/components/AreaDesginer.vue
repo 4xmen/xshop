@@ -2,21 +2,29 @@
     <div id="area-designer">
         <div class="card mt-2" v-for="(part,p) in partsData">
             <div class="card-header">
-                Part {{p+1}}
+                Part {{ p + 1 }}
+                <span v-if="p !== 0" class="btn btn-secondary btn-sm float-end mx-1" @click="shiftArray(p,-1)">
+                    <i class="ri-arrow-up-line"></i>
+                </span>
+                <span v-if="p != partsData.length - 1" class="btn btn-secondary btn-sm float-end mx-1" @click="shiftArray(p,1)">
+                    <i class="ri-arrow-down-line"></i>
+                </span>
             </div>
             <div class="part-body">
                 <div class="row">
                     <template v-for="(valid,i) in valids">
-                    <div @click="changePart(p,valid.segment,valid.part)" :class="`col-md-3 `+(valid.data.name == part.part?'selected-part':'can-select')" >
-                        <img class="img-fluid mt-2" :src="imageLink+'/'+valid.segment+'/'+valid.part" alt="screeshot">
-                        {{valid.part}} [v{{valid.data.version}}]
-                    </div>
+                        <div @click="changePart(p,valid.segment,valid.part)"
+                             :class="`col-md-3 `+(valid.data.name == part.part?'selected-part':'can-select')">
+                            <img class="img-fluid mt-2" :src="imageLink+'/'+valid.segment+'/'+valid.part"
+                                 alt="screeshot">
+                            {{ valid.part }} [v{{ valid.data.version }}]
+                        </div>
                     </template>
                 </div>
             </div>
             <div class="card-footer">
                 <button type="button" class="btn btn-danger" @click="rem(p)">
-                <i class="ri-close-line"></i>
+                    <i class="ri-close-line"></i>
                 </button>
             </div>
             <input type="hidden" name="parts[]" :value="JSON.stringify(part)" class="form-control">
@@ -36,24 +44,24 @@ export default {
     components: {},
     data: () => {
         return {
-            partsData:[],
-            removed:[],
+            partsData: [],
+            removed: [],
         }
     },
     props: {
-        valids:{
-            default:[],
+        valids: {
+            default: [],
             type: Array,
         },
-        parts:{
-            default:[],
+        parts: {
+            default: [],
             type: Array,
         },
-        area:{
+        area: {
             required: true,
             type: Object,
         },
-        imageLink:{
+        imageLink: {
             required: true,
         }
     },
@@ -62,25 +70,45 @@ export default {
     },
     computed: {},
     methods: {
-        changePart(p,segment,part){
+        changePart(p, segment, part) {
             this.partsData[p].segment = segment;
             this.partsData[p].part = part;
         },
-        addPart(){
+        addPart() {
             this.partsData.push({
                 id: null,
                 segment: this.valids[0].segment,
                 part: this.valids[0].part,
             });
         },
-        rem(i){
-            if (!confirm('Are sure to remove?')){
-                return ;
+        rem(i) {
+            if (!confirm('Are sure to remove?')) {
+                return;
             }
             this.removed.push(this.partsData[i].id);
-            this.partsData.splice(i,1);
+            this.partsData.splice(i, 1);
+        },
+        shiftArray(index, offset) {
+            console.log(index,offset);
+            if (index < 0 || index >= this.partsData.length) {
+                return "Index out of bounds";
+            }
+
+            const removed = this.partsData.splice(index, 1)[0];
+            const newIndex = index + offset;
+
+            if (newIndex < 0) {
+                this.partsData.unshift(removed);
+            } else if (newIndex >= this.partsData.length) {
+                this.partsData.push(removed);
+            } else {
+                this.partsData.splice(newIndex, 0, removed);
+            }
+
         }
-    }
+
+
+    },
 }
 </script>
 
@@ -88,10 +116,12 @@ export default {
 #area-designer {
 
 }
-.selected-part{
+
+.selected-part {
     background: #32CD3233;
 }
-.can-select{
+
+.can-select {
     cursor: pointer;
 }
 </style>
