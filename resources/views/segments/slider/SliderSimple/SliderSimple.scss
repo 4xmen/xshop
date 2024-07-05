@@ -1,0 +1,20 @@
+.SliderSimple {
+    // scss
+    .item{
+        position: relative;
+        .desc{
+            position: absolute;
+            inset-inline-end: 10%;
+            background: #ffffff77;
+            color: black;
+            bottom:5%;
+            padding: 10px;
+            p{
+                margin-bottom: 0;
+            }
+        }
+    }
+    img{
+        width: 100%;
+    }
+}

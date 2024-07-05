@@ -9,9 +9,14 @@
     <title>
         @yield('title')
     </title>
+
+    <link rel="stylesheet" href="{{asset('assets/vendor/bootstrap/dist/css/bootstrap.min.css')}}">
+
     @vite(['resources/sass/client.scss', 'resources/js/client.js'])
 
     @yield('custom-head')
+
+{{--    WIP rtl or ltr--}}
 
 </head>
 <body @yield('body-attr')>

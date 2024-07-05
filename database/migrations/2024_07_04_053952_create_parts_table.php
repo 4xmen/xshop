@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('segment');
             $table->string('part');
             $table->json('data')->default('[]');
+            $table->integer('sort')->default(0);
             $table->timestamps();
         });
     }

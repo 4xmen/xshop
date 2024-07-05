@@ -279,9 +279,10 @@ Route::prefix(config('app.panel.prefix'))->name('admin.')->group(
                         Route::get('image/{segment}/{part}', [\App\Http\Controllers\Admin\AreaController::class, "image"])->name('image');
 //                        Route::post('store', [\App\Http\Controllers\Admin\SettingController::class, "store"])->name('store');
                         Route::post('update/{area}', [\App\Http\Controllers\Admin\AreaController::class, "update"])->name('update');
+                        Route::get('sort/{area}', [\App\Http\Controllers\Admin\AreaController::class, "sort"])->name('sort');
+                        Route::post('sort-save/{area}', [\App\Http\Controllers\Admin\AreaController::class, "sortSave"])->name('sort-save');
                     }
                 );
-
             });
 
     });

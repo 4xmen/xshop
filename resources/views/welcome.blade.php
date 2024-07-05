@@ -4,7 +4,7 @@
     welcome
 @endsection
 @section('content')
-    <h1>
-        Test
-    </h1>
+    @foreach(getParts('index') as $part)
+        @include($part->getBlade())
+    @endforeach
 @endsection
