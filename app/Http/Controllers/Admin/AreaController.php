@@ -50,7 +50,7 @@ class AreaController extends Controller
     public function update(Request $request, Area $area)
     {
 //        return $request->all();
-        foreach ($request->input('parts',[]) as $item) {
+        foreach ($request->input('parts',[]) as $i => $item) {
             $data = json_decode($item);
             if ($data == null){
                 continue;
@@ -61,11 +61,13 @@ class AreaController extends Controller
                 $part->area_id = $area->id;
                 $part->segment = $data->segment;
                 $part->part = $data->part;
+                $part->sort = $i;
                 $part->save();
             }else{
                 $part = Part::whereId($data->id)->first();
                 $part->segment = $data->segment;
                 $part->part = $data->part;
+                $part->sort = $i;
                 $part->save();
             }
         }
