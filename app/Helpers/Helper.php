@@ -2,8 +2,9 @@
 
 use App\Helpers;
 use App\Models\Setting;
+use App\Models\Area;
+use App\Models\Part;
 use Illuminate\Support\Facades\Route;
-
 
 /**
  * @param $lang code like fa
@@ -649,15 +650,44 @@ function nestedWithData($items, $parent_id = null)
  * @return \App\Models\Part|false
  */
 function hasPart($areaName){
-    $a = \App\Models\Area::where('name',$areaName)->first();
+    $a = Area::where('name',$areaName)->first();
     if ($a == null){
         return false;
     }
 
-    $p = \App\Models\Part::where('area_id',$a->id)->first();
+    $p = Part::where('area_id',$a->id)->first();
     if ($p == null){
         return  false;
     }
     return $p ;
 
+}
+
+
+/**
+ * get parts of area
+ * @param $areaName
+ * @return Part[]|\Illuminate\Database\Eloquent\Collection|\LaravelIdea\Helper\App\Models\_IH_Part_C
+ */
+function getParts($areaName){
+    $a = Area::where('name',$areaName)->first();
+    return $a->parts()->orderBy('sort')->get();
+}
+
+
+/**
+ * get setting by group
+ * @param $group
+ * @return array
+ */
+function getSettingsGroup($group){
+    $result = [];
+    foreach (Setting::where('key','LIKE',$group.'%')
+                  ->whereNotNull('value')->get(['key','value']) as $r){
+        if ($r->value != null){
+            $result[substr($r->key,mb_strlen($group))] = $r->value;
+        }
+    }
+
+    return $result;
 }

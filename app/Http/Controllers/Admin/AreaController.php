@@ -52,6 +52,9 @@ class AreaController extends Controller
 //        return $request->all();
         foreach ($request->input('parts',[]) as $item) {
             $data = json_decode($item);
+            if ($data == null){
+                continue;
+            }
             if ($data->id == null){
                 // create
                 $part = new Part();
@@ -66,8 +69,27 @@ class AreaController extends Controller
                 $part->save();
             }
         }
+        Part::whereIn('id', json_decode($request->input('removed')))->delete();
         \Artisan::call('client');
+
         logAdmin(__METHOD__,__CLASS__,$area->id);
+
+
         return redirect()->back()->with(['message' => __('area :NAME of website updated',['NAME' => $area->name])]);
+    }
+
+    public function sort(Area $area){
+        return view('admin.areas.area-sort',compact('area'));
+    }
+
+    public function sortSave(Request $request){
+        foreach ($request->input('items') as $key => $v){
+
+            $p = Part::whereId($v['id'])->first();
+            $p->sort = $key;
+            $p->save();
+        }
+        logAdmin(__METHOD__,__CLASS__,$p->area_id);
+        return ['OK' => true,'message' => __("As you wished sort saved")];
     }
 }

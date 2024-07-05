@@ -13,14 +13,20 @@
                     </div>
                     </template>
                 </div>
-                <input type="hidden" name="parts[]" :value="JSON.stringify(part)" class="form-control">
             </div>
+            <div class="card-footer">
+                <button type="button" class="btn btn-danger" @click="rem(p)">
+                <i class="ri-close-line"></i>
+                </button>
+            </div>
+            <input type="hidden" name="parts[]" :value="JSON.stringify(part)" class="form-control">
         </div>
         <div v-if="parts.length < parseInt(area.max)" class="p-2">
             <div class="btn btn-primary w-100" @click="addPart">
                 <i class="ri-add-line"></i>
             </div>
         </div>
+        <input type="hidden" name="removed" :value="JSON.stringify(removed)" class="form-control">
     </div>
 </template>
 
@@ -31,6 +37,7 @@ export default {
     data: () => {
         return {
             partsData:[],
+            removed:[],
         }
     },
     props: {
@@ -65,6 +72,13 @@ export default {
                 segment: this.valids[0].segment,
                 part: this.valids[0].part,
             });
+        },
+        rem(i){
+            if (!confirm('Are sure to remove?')){
+                return ;
+            }
+            this.removed.push(this.partsData[i].id);
+            this.partsData.splice(i,1);
         }
     }
 }

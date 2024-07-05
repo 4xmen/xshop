@@ -6,6 +6,7 @@
 
 @section('content')
 
+    @include('components.err')
     <form action="{{route('admin.area.update',$area->name)}}" method="post">
         @csrf
         <div class="general-form mb-5">
@@ -15,7 +16,7 @@
 
             <area-designer
                 image-link="{{route('admin.area.image',['',''])}}"
-                :parts='@json($area->parts)'
+                :parts='@json($area->parts()->orderBy('sort')->get())'
                 :valids='@json($valids)'
                 :area='@json($area)'
             ></area-designer>
@@ -31,8 +32,6 @@
             {{--        </div>--}}
         </div>
         <button
-            data-link="{{getRoute('sort-save')}}"
-            id="save-sort"
             class="action-btn circle-btn"
             data-bs-toggle="tooltip"
             data-bs-placement="top"
@@ -42,4 +41,18 @@
             <i class="ri-save-2-line"></i>
         </button>
     </form>
+    @if($area->max > 0 && $area->parts()->count() > 1)
+
+    <a
+       href="{{route('admin.area.sort',$area->name)}}"
+        class="action-btn circle-btn"
+        data-bs-toggle="tooltip"
+        data-bs-placement="top"
+        data-bs-custom-class="custom-tooltip"
+        data-bs-title="{{__("Sort")}}"
+       style="inset-inline-end: 1.2rem;inset-inline-start: auto;"
+    >
+        <i class="ri-sort-asc"></i>
+    </a>
+    @endif
 @endsection

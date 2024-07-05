@@ -1,0 +1,24 @@
+.TopSimple {
+    // scss
+
+    text-align: center;
+    .other-link{
+        position: relative;
+        top: -4px;
+        color: var(--xshop-text);
+    }
+    i{
+        font-size: 23px;
+        margin: 3px 3px ;
+    }
+    ul{
+        padding: 0;
+        margin: 0;
+        list-style: none;
+        display: flex;
+        padding-bottom: 5px;
+        li{
+            margin:0 3px;
+        }
+    }
+}

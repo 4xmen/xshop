@@ -24,11 +24,11 @@ class AreaSeeder extends Seeder
                 'icon' => 'ri-loader-2-line',
             ],
             [
-                'name' => 'top',
+                'name' => 'index',
                 'valid_segments' => json_encode(
-                    ['top']
+                    ['top','slider','header','footer','menu','parallax']
                 ),
-                'max' => 1,
+                'max' => 10,
                 'icon' => 'ri-layout-top-2-line',
             ],
         ];

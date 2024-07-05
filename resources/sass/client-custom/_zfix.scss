@@ -1,0 +1,22 @@
+.tns-outer{
+    .tns-nav,button{
+        display: none;
+    }
+}
+
+.slider-content{
+    direction: ltr;
+    overflow: hidden;
+    .item{
+
+    }
+}
+
+a,a:visited{
+    text-decoration: none;
+    color: var(--xshop-primary);
+
+    &:hover{
+        color: var(--xshop-secondary);
+    }
+}

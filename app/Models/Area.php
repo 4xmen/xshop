@@ -36,7 +36,7 @@ class Area extends Model
         'products',
         'questions',
         'search',
-        'search',
+        'slider',
         'top',
     ];
 
