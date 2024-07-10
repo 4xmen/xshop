@@ -184,8 +184,26 @@
             <ul id="manage">
                 <li>
                     <a href="{{route('admin.user.index')}}">
-                        <i class="ri-folder-user-fill"></i>
+                        <i class="ri-user-line"></i>
                         {{__("Users")}}
+                    </a>
+                </li>
+                <li>
+                    <a href="{{route('admin.state.index')}}">
+                        <i class="ri-map-line"></i>
+                        {{__("States")}}
+                    </a>
+                </li>
+                <li>
+                    <a href="{{route('admin.city.index')}}">
+                        <i class="ri-map-2-line"></i>
+                        {{__("City")}}
+                    </a>
+                </li>
+                <li>
+                    <a href="">
+                        <i class="ri-bar-chart-2-line"></i>
+                        {{__("Reports")}}
                     </a>
                 </li>
                 <li>
@@ -204,12 +222,6 @@
                     <a>
                         <i class="ri-global-fill"></i>
                         {{__("Languages")}}
-                    </a>
-                </li>
-                <li>
-                    <a href="">
-                        <i class="ri-bar-chart-2-line"></i>
-                        {{__("Reports")}}
                     </a>
                 </li>
             </ul>
