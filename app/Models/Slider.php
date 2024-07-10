@@ -18,7 +18,15 @@ class Slider extends Model
     public function imgUrl()
     {
         if ($this->image == null) {
-            return null;
+            return asset('/assets/upload/logo.svg');
+        }
+
+        return \Storage::url('sliders/optimized-' . $this->image);
+    }
+    public function imgOriginalUrl()
+    {
+        if ($this->image == null) {
+            return asset('/assets/upload/logo.svg');
         }
 
         return \Storage::url('sliders/' . $this->image);

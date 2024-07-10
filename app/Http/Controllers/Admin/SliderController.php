@@ -9,6 +9,10 @@ use App\Models\Access;
 use App\Models\Slider;
 use Illuminate\Http\Request;
 use App\Helper;
+use Spatie\Image\Enums\AlignPosition;
+use Spatie\Image\Enums\Fit;
+use Spatie\Image\Enums\Unit;
+use Spatie\Image\Image;
 use function App\Helpers\hasCreateRoute;
 
 class SliderController extends XController
@@ -57,11 +61,20 @@ class SliderController extends XController
             $name = time() . '.' . request()->cover->getClientOriginalExtension();
             $slider->image = $name;
             $request->file('cover')->storeAs('public/sliders', $name);
+
+            $key = 'cover';
+            $i = Image::load($request->file($key)->getPathname())
+                ->optimize()
+//                ->nonQueued()
+                ->format($request->file($key)->extension());
+            if (getSetting('watermark2')) {
+                $i->watermark(public_path('upload/images/logo.png'),
+                    AlignPosition::BottomLeft, 5, 5, Unit::Percent,
+                    15, Unit::Percent, 15, Unit::Percent, Fit::Contain, 50);
+            }
+            $i->save(storage_path() . '/app/public/sliders/optimized-'. $slider->image);
         }
 
-        if ($request->has('cover')){
-            $slider->image = $this->storeFile('cover',$slider, 'sliders');
-        }
         $slider->save();
         return $slider;
 

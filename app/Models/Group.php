@@ -38,7 +38,16 @@ class Group extends Model
         return $this->belongsTo(\App\Models\User::class);
     }
 
+
     public function imgUrl()
+    {
+        if ($this->image == null) {
+            return asset('/assets/upload/logo.svg');
+        }
+
+        return \Storage::url('groups/optimized-' . $this->image);
+    }
+    public function imgOriginalUrl()
     {
         if ($this->image == null) {
             return asset('/assets/upload/logo.svg');
@@ -53,9 +62,16 @@ class Group extends Model
             return asset('/assets/upload/logo.svg');
         }
 
+        return \Storage::url('groups/optimized-' . $this->bg);
+    }
+    public function bgOriginalUrl()
+    {
+        if ($this->bg == null) {
+            return asset('/assets/upload/logo.svg');
+        }
+
         return \Storage::url('groups/' . $this->bg);
     }
-
     public function attachs(){
         return $this->morphMany(Attachment::class,'attachable');
     }

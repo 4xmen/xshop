@@ -9,6 +9,10 @@ use App\Models\Access;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Helper;
+use Spatie\Image\Enums\AlignPosition;
+use Spatie\Image\Enums\Fit;
+use Spatie\Image\Enums\Unit;
+use Spatie\Image\Image;
 use function App\Helpers\hasCreateRoute;
 
 class CategoryController extends XController
@@ -17,10 +21,10 @@ class CategoryController extends XController
     // protected  $_MODEL_ = Category::class;
     // protected  $SAVE_REQUEST = CategorySaveRequest::class;
 
-    protected $cols = ['name','subtitle','parent_id'];
-    protected $extra_cols = ['id','slug','image'];
+    protected $cols = ['name', 'subtitle', 'parent_id'];
+    protected $extra_cols = ['id', 'slug', 'image'];
 
-    protected $searchable = ['name','subtitle','description'];
+    protected $searchable = ['name', 'subtitle', 'description'];
 
 
     protected $listView = 'admin.categories.category-list';
@@ -55,11 +59,33 @@ class CategoryController extends XController
         $category->description = $request->input('description');
         $category->parent_id = $request->input('parent_id');
         $category->slug = $this->getSlug($category);
-        if ($request->has('image')){
-            $category->image = $this->storeFile('image',$category, 'categories');
+        if ($request->has('image')) {
+            $category->image = $this->storeFile('image', $category, 'categories');
+            $key = 'image';
+            $i = Image::load($request->file($key)->getPathname())
+                ->optimize()
+//                ->nonQueued()
+                ->format($request->file($key)->extension());
+            if (getSetting('watermark2')) {
+                $i->watermark(public_path('upload/images/logo.png'),
+                    AlignPosition::BottomLeft, 5, 5, Unit::Percent,
+                    15, Unit::Percent, 15, Unit::Percent, Fit::Contain, 50);
+            }
+            $i->save(storage_path() . '/app/public/categories/optimized-'. $category->$key);
         }
-        if ($request->has('bg')){
-            $category->bg = $this->storeFile('bg',$category, 'categories');
+        if ($request->has('bg')) {
+            $category->bg = $this->storeFile('bg', $category, 'categories');
+            $key = 'bg';
+            $i = Image::load($request->file($key)->getPathname())
+                ->optimize()
+//                ->nonQueued()
+                ->format($request->file($key)->extension());
+            if (getSetting('watermark2')) {
+                $i->watermark(public_path('upload/images/logo.png'),
+                    AlignPosition::BottomLeft, 5, 5, Unit::Percent,
+                    15, Unit::Percent, 15, Unit::Percent, Fit::Contain, 50);
+            }
+            $i->save(storage_path() . '/app/public/categories/optimized-'. $category->$key);
         }
         $category->save();
         return $category;
@@ -74,7 +100,7 @@ class CategoryController extends XController
     {
         //
         $cats = Category::all();
-        return view($this->formView,compact('cats'));
+        return view($this->formView, compact('cats'));
     }
 
     /**
@@ -84,7 +110,7 @@ class CategoryController extends XController
     {
         //
         $cats = Category::all();
-        return view($this->formView, compact('item','cats'));
+        return view($this->formView, compact('item', 'cats'));
     }
 
     public function bulk(Request $request)
@@ -134,22 +160,24 @@ class CategoryController extends XController
 
 
     /**sort*/
-    public function sort(){
+    public function sort()
+    {
         $items = Category::orderBy('sort')
-            ->get(['id','name','parent_id']);
-        return view('admin.commons.sort',compact('items'));
+            ->get(['id', 'name', 'parent_id']);
+        return view('admin.commons.sort', compact('items'));
     }
 
-    public function sortSave(Request $request){
+    public function sortSave(Request $request)
+    {
 //        return $request->items;
-        foreach ($request->items as $key => $item){
+        foreach ($request->items as $key => $item) {
             $i = Category::whereId($item['id'])->first();
             $i->sort = $key;
-            $i->parent_id = $item['parentId']??null;
+            $i->parent_id = $item['parentId'] ?? null;
             $i->save();
         }
-        logAdmin(__METHOD__,__CLASS__,null);
-        return ['OK' => true,'message' => __("As you wished sort saved")];
+        logAdmin(__METHOD__, __CLASS__, null);
+        return ['OK' => true, 'message' => __("As you wished sort saved")];
     }
     /*sort**/
 

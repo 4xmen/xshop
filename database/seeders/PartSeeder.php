@@ -18,7 +18,7 @@ class PartSeeder extends Seeder
 
         $part = new Part();
         $part->segment = 'preloader';
-        $part->part = 'PreloaderImage';
+        $part->part = 'PreloaderCircle';
         $part->area_id = Area::where('name','preloader')->first()->id;
         $part->save();
 
