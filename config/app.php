@@ -149,6 +149,8 @@ return [
         'post_thumb' => env('MEDIA_POST_THUMB','500x500'),
         'product_thumb' => env('MEDIA_PRODUCT_THUMB','500x500'),
         'product_image' => env('MEDIA_PRODUCT_IMAGE','1200x1200'),
+        'watermark_size' => env('MEDIA_WATERMARK_SIZE',15),
+        'watermark_opacity' => env('MEDIA_WATERMARK_OPACITY',50),
     ],
 
 

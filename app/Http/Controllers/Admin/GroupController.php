@@ -68,7 +68,9 @@ class GroupController extends XController
             if (getSetting('watermark2')) {
                 $i->watermark(public_path('upload/images/logo.png'),
                     AlignPosition::BottomLeft, 5, 5, Unit::Percent,
-                    15, Unit::Percent, 15, Unit::Percent, Fit::Contain, 50);
+                    config('app.media.watermark_size'), Unit::Percent,
+                    config('app.media.watermark_size'), Unit::Percent, Fit::Contain,
+                    config('app.media.watermark_opacity'));
             }
             $i->save(storage_path() . '/app/public/groups/optimized-'. $group->$key);
         }
@@ -82,7 +84,9 @@ class GroupController extends XController
             if (getSetting('watermark2')) {
                 $i->watermark(public_path('upload/images/logo.png'),
                     AlignPosition::BottomLeft, 5, 5, Unit::Percent,
-                    15, Unit::Percent, 15, Unit::Percent, Fit::Contain, 50);
+                    config('app.media.watermark_size'), Unit::Percent,
+                    config('app.media.watermark_size'), Unit::Percent, Fit::Contain,
+                    config('app.media.watermark_opacity'));
             }
             $i->save(storage_path() . '/app/public/groups/optimized-'. $group->$key);
         }

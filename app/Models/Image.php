@@ -41,8 +41,10 @@ class Image extends Model implements HasMedia
 
         if (getSetting('watermark')){
             $mc->watermark(public_path('upload/images/logo.png'),
-                AlignPosition::BottomLeft,5,5,Unit::Percent,
-                15,Unit::Percent,15,Unit::Percent,Fit::Contain,50);
+                    AlignPosition::BottomLeft, 5, 5, Unit::Percent,
+                    config('app.media.watermark_size'), Unit::Percent,
+                    config('app.media.watermark_size'), Unit::Percent, Fit::Contain,
+                    config('app.media.watermark_opacity'));
         }
 //                    ->watermark(public_path('images/logo.png'))->watermarkOpacity(50);
 //                    ->withResponsiveImages();
