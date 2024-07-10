@@ -36,7 +36,7 @@
                         {{__("Index image")}}
                     </h3>
                     <div class="pb-4">
-                        <img src="{{$item->imgUrl()}}" class="img-fluid" alt="{{$item->title}}">
+                        <img src="{{$item->imgUrl()}}" data-open-file="#image" class="img-fluid" alt="{{$item->title}}">
                     </div>
                 </div>
             @endif
@@ -111,7 +111,7 @@
                             </label>
                             <input name="image" accept=".jpg,.png,.jpeg,.gif,.svg" type="file"
                                    class="form-control @error('image') is-invalid @enderror"
-                                   placeholder="{{__('Index image')}}" value="{{old('image',$item->image??null)}}"/>
+                                   placeholder="{{__('Index image')}}" id="image"/>
                         </div>
                     </div>
                     <div class="col-md-12">
@@ -143,7 +143,7 @@
                                 <a href="{{route('admin.image.destroy',$img->id)}}" class="btn btn-danger delete-confirm rm-img ms-2">
                                     <i class="ri-delete-bin-6-line"></i>
                                 </a>
-                                <img src="{{$img->imgUrl()}}" class="img-squire" alt="">
+                                <img src="{{$img->imgUrl()}}"  class="img-squire" alt="">
                                 <div class="row mt-2">
                                     <div class="col-md-10">
                                         <input type="text" class="form-control" name="titles[{{$img->id}}]"

@@ -29,7 +29,7 @@
                         <i class="ri-image-2-line"></i>
                         {{__("Index image")}}
                     </h3>
-                    <div>
+                    <div data-open-file="#customFile">
                         <img src="{{$item->imgUrl()}}" class="img-fluid" alt="{{$item->title}}">
                     </div>
                 </div>
