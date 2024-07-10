@@ -61,12 +61,15 @@ class SliderController extends XController
             $name = time() . '.' . request()->cover->getClientOriginalExtension();
             $slider->image = $name;
             $request->file('cover')->storeAs('public/sliders', $name);
-
+            $format = $request->file('cover')->guessExtension();
+            if (strtolower($format) == 'png'){
+                $format = 'webp';
+            }
             $key = 'cover';
             $i = Image::load($request->file($key)->getPathname())
                 ->optimize()
 //                ->nonQueued()
-                ->format($request->file($key)->extension());
+                ->format($format);
             if (getSetting('watermark2')) {
                 $i->watermark(public_path('upload/images/logo.png'),
                     AlignPosition::BottomLeft, 5, 5, Unit::Percent,

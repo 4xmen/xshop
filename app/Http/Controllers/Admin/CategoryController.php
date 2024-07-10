@@ -62,10 +62,14 @@ class CategoryController extends XController
         if ($request->has('image')) {
             $category->image = $this->storeFile('image', $category, 'categories');
             $key = 'image';
+            $format = $request->file($key)->guessExtension();
+            if (strtolower($format) == 'png'){
+                $format = 'webp';
+            }
             $i = Image::load($request->file($key)->getPathname())
                 ->optimize()
 //                ->nonQueued()
-                ->format($request->file($key)->extension());
+                ->format($format);
             if (getSetting('watermark2')) {
                 $i->watermark(public_path('upload/images/logo.png'),
                     AlignPosition::BottomLeft, 5, 5, Unit::Percent,
@@ -78,10 +82,14 @@ class CategoryController extends XController
         if ($request->has('bg')) {
             $category->bg = $this->storeFile('bg', $category, 'categories');
             $key = 'bg';
+            $format = $request->file($key)->guessExtension();
+            if (strtolower($format) == 'png'){
+                $format = 'webp';
+            }
             $i = Image::load($request->file($key)->getPathname())
                 ->optimize()
 //                ->nonQueued()
-                ->format($request->file($key)->extension());
+                ->format($format);
             if (getSetting('watermark2')) {
                 $i->watermark(public_path('upload/images/logo.png'),
                     AlignPosition::BottomLeft, 5, 5, Unit::Percent,
