@@ -195,6 +195,11 @@
                                                             {{ $item->category?->name??'-' }}
                                                         </a>
                                                         @break
+                                                    @case('state_id')
+                                                        <a href="{{route('admin.category.edit',$item->state?->id)}}">
+                                                            {{ $item->state?->name??'-' }}
+                                                        </a>
+                                                        @break
                                                     @case('product_id')
                                                         <a href="{{route('admin.product.edit',$item->product?->slug)}}">
                                                             {{ $item->product?->name??'-' }}

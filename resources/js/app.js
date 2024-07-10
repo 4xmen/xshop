@@ -93,6 +93,8 @@ app.component('gfxer', Gfxer);
 import AreaDesginer from "./components/AreaDesginer.vue";
 app.component('area-designer', AreaDesginer);
 
+import Latlng from "./components/latlng.vue";
+app.component('lat-lng', Latlng);
 
 /**
  * The following block of code may be used to automatically register your

@@ -12,4 +12,8 @@ class City extends Model
     use HasTranslations,SoftDeletes;
 
     public $translatable = ['name'];
+
+    public function state(){
+        return $this->belongsTo(State::class);
+    }
 }
