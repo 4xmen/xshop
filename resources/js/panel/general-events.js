@@ -1,26 +1,11 @@
-document.addEventListener('click', function(e) {
-    if (e.target.classList.contains('delete-confirm')) {
-        if (!confirm('Are you sure you want to delete this item?')) { // WIP Need to translate
-           e.preventDefault();
-        }
-    }
-});
-
-document.querySelectorAll('.delete-confirm')?.forEach(function (el) {
-  el.addEventListener('click',function (e) {
-      if (!confirm('Are you sure you want to delete this item?')) { // WIP Need to translate
-          e.preventDefault();
-      }
-  });
-});
 
 
-window.findUrl = function (name,item = null) {
+window.findUrl = function (name, item = null) {
     for (var i = 0; i < window.routesList.length; i++) {
         if (window.routesList[i].name === name) {
-            if (item != null){
+            if (item != null) {
                 return window.routesList[i].url.split('{item}').join(item);
-            }else{
+            } else {
                 return window.routesList[i].url;
             }
         }
@@ -30,3 +15,27 @@ window.findUrl = function (name,item = null) {
 
 
 
+document.addEventListener('DOMContentLoaded', () => {
+
+    document.addEventListener('click', function (e) {
+        if (e.target.classList.contains('delete-confirm')) {
+            if (!confirm('Are you sure you want to delete this item?')) { // WIP Need to translate
+                e.preventDefault();
+            }
+        }
+    });
+
+    document.querySelectorAll('.delete-confirm')?.forEach(function (el) {
+        el.addEventListener('click', function (e) {
+            if (!confirm('Are you sure you want to delete this item?')) { // WIP Need to translate
+                e.preventDefault();
+            }
+        });
+    });
+
+    document.querySelectorAll('[data-open-file]')?.forEach(function (el) {
+        el.addEventListener('click', function () {
+            document.querySelector(this.getAttribute('data-open-file')).click();
+        });
+    });
+});

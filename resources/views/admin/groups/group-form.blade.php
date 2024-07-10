@@ -29,7 +29,7 @@
                         <i class="ri-image-2-line"></i>
                         {{__('Feature image')}}
                     </h3>
-                    <img src="{{$item->imgUrl()}}" alt="{{$item->name}}" class="img-fluid">
+                    <img src="{{$item->imgUrl()}}" data-open-file="#image" alt="{{$item->name}}" class="img-fluid">
 
                 </div>
                 <div class="item-list mb-3">
@@ -37,7 +37,7 @@
                         <i class="ri-image-2-line"></i>
                         {{__('Background image')}}
                     </h3>
-                    <img src="{{$item->bgUrl()}}" alt="{{$item->name}}" class="img-fluid">
+                    <img src="{{$item->bgUrl()}}" data-open-file="#bg" alt="{{$item->name}}" class="img-fluid">
 
                 </div>
             @endif
