@@ -14,7 +14,6 @@ return new class extends Migration
         Schema::create('parts', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('area_id');
-            $table->integer('sort')->default(0);
             $table->string('segment');
             $table->string('part');
             $table->json('data')->default('[]');

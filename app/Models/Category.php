@@ -19,10 +19,26 @@ class Category extends Model
             return asset('/assets/upload/logo.svg');
         }
 
+        return \Storage::url('categories/optimized-' . $this->image);
+    }
+    public function imgOriginalUrl()
+    {
+        if ($this->image == null) {
+            return asset('/assets/upload/logo.svg');
+        }
+
         return \Storage::url('categories/' . $this->image);
     }
 
     public function bgUrl()
+    {
+        if ($this->bg == null) {
+            return asset('/assets/upload/logo.svg');
+        }
+
+        return \Storage::url('categories/optimized-' . $this->bg);
+    }
+    public function bgOriginalUrl()
     {
         if ($this->bg == null) {
             return asset('/assets/upload/logo.svg');

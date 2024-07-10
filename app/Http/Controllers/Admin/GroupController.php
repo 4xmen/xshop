@@ -9,6 +9,10 @@ use App\Models\Access;
 use App\Models\Group;
 use Illuminate\Http\Request;
 use App\Helper;
+use Spatie\Image\Enums\AlignPosition;
+use Spatie\Image\Enums\Fit;
+use Spatie\Image\Enums\Unit;
+use Spatie\Image\Image;
 use function App\Helpers\hasCreateRoute;
 
 class GroupController extends XController
@@ -56,9 +60,31 @@ class GroupController extends XController
         $group->slug = $this->getSlug($group);
         if ($request->has('image')){
             $group->image = $this->storeFile('image',$group, 'groups');
+            $key = 'image';
+            $i = Image::load($request->file($key)->getPathname())
+                ->optimize()
+//                ->nonQueued()
+                ->format($request->file($key)->extension());
+            if (getSetting('watermark2')) {
+                $i->watermark(public_path('upload/images/logo.png'),
+                    AlignPosition::BottomLeft, 5, 5, Unit::Percent,
+                    15, Unit::Percent, 15, Unit::Percent, Fit::Contain, 50);
+            }
+            $i->save(storage_path() . '/app/public/groups/optimized-'. $group->$key);
         }
         if ($request->has('bg')){
             $group->bg = $this->storeFile('bg',$group, 'groups');
+            $key = 'bg';
+            $i = Image::load($request->file($key)->getPathname())
+                ->optimize()
+//                ->nonQueued()
+                ->format($request->file($key)->extension());
+            if (getSetting('watermark2')) {
+                $i->watermark(public_path('upload/images/logo.png'),
+                    AlignPosition::BottomLeft, 5, 5, Unit::Percent,
+                    15, Unit::Percent, 15, Unit::Percent, Fit::Contain, 50);
+            }
+            $i->save(storage_path() . '/app/public/groups/optimized-'. $group->$key);
         }
         $group->save();
         return $group;
