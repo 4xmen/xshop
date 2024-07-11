@@ -138,4 +138,20 @@ class PropController extends XController
         return parent::restoreing(Prop::withTrashed()->where('id', $item)->first());
     }
     /*restore**/
+
+
+    public function sort(){
+        return view('admin.props.prop-sort');
+    }
+
+    public function sortSave(Request $request){
+        foreach ($request->input('items') as $key => $v){
+
+            $p = Prop::whereId($v['id'])->first();
+            $p->sort = $key;
+            $p->save();
+        }
+        logAdmin(__METHOD__,__CLASS__,null);
+        return ['OK' => true,'message' => __("As you wished sort saved")];
+    }
 }
