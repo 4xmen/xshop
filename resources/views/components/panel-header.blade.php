@@ -16,4 +16,4 @@
     @include('components.assets')
 
 </head>
-<body>
+<body class="@yield('body-class')" @if(langIsRTL(config('app.locale'))) dir="rtl" @endif>

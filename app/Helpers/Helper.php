@@ -6,8 +6,43 @@ use App\Models\Area;
 use App\Models\Part;
 use Illuminate\Support\Facades\Route;
 
+
 /**
- * @param $lang code like fa
+ * @param $langCode string code like fa
+ * @return bool
+ */
+function langIsRTL($langCode) {
+    $rtlLanguages = [
+        'ar', // Arabic
+        'arc', // Aramaic
+        'dv', // Divehi
+        'fa', // Persian (Farsi)
+        'ha', // Hausa
+        'he', // Hebrew
+        'khw', // Khowar
+        'ks', // Kashmiri
+        'ku', // Kurdish
+        'ps', // Pashto
+        'ur', // Urdu
+        'yi', // Yiddish
+        'ug', // Uyghur
+        'sd', // Sindhi
+        'syr', // Syriac
+        'dhv', // Dhivehi
+        'sqr', // Siirt Arabic
+        'sam', // Samaritan Aramaic
+        'man', // Mandaic
+        'men', // Mende
+        'nqo', // N'Ko
+        'phn', // Phoenician
+        'syr', // Syriac
+        'th', // Thaana
+    ];
+
+    return in_array(strtolower($langCode), $rtlLanguages);
+}
+/**
+ * @param $lang string code like fa
  * @return string
  */
 function getEmojiLanguagebyCode($lang): string
