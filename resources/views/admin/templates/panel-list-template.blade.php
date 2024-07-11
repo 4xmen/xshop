@@ -341,6 +341,7 @@
         {{--   list content end--}}
     </div>
 
+    @yield('list-foot')
     @if(hasRoute('create'))
         <a class="action-btn circle-btn"
            data-bs-toggle="tooltip"

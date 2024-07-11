@@ -263,6 +263,8 @@ Route::prefix(config('app.panel.prefix'))->name('admin.')->group(
                         Route::post('update/{item}', [\App\Http\Controllers\Admin\PropController::class, 'update'])->name('update');
                         Route::get('delete/{item}', [\App\Http\Controllers\Admin\PropController::class, 'destroy'])->name('destroy');
                         Route::post('bulk', [\App\Http\Controllers\Admin\PropController::class, "bulk"])->name('bulk');
+                        Route::post('sort/save', [\App\Http\Controllers\Admin\PropController::class, 'sortSave'])->name('sort-save');
+                        Route::get('sort', [\App\Http\Controllers\Admin\PropController::class, 'sort'])->name('sort');
                     });
                 Route::prefix('sliders')->name('slider.')->group(
                     function () {
