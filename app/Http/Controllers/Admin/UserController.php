@@ -108,7 +108,7 @@ class UserController extends XController
                     $user->syncRoles([strtolower($data[1])]);
                     $user->save();
                 }
-                $msg = __(':COUNT user role changed to :NEWROLE successfully', ['COUNT' => count($ids), 'NEWROLE' => __($data[1])]);
+                $msg = __(':COUNT users role changed to :NEWROLE successfully', ['COUNT' => count($ids), 'NEWROLE' => __($data[1])]);
                 break;
             default:
                 $msg = __('Unknown bulk action : :ACTION', ["ACTION" => $action]);
