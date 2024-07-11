@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title')
-    {{__("Area desgin")}}
+    {{__("Area design")}}
 @endsection
 @section('content')
     <div class="row">
