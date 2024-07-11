@@ -11,6 +11,7 @@ use Carbon\Carbon;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
+use Translator\Framework\TranslatorCommand;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -20,6 +21,9 @@ class AppServiceProvider extends ServiceProvider
     public function register(): void
     {
         //
+        $this->commands([
+            TranslatorCommand::class,
+        ]);
     }
 
     /**

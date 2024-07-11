@@ -1,11 +1,17 @@
 window.addEventListener('load', function () {
-    let dirx = 'ltr';
+    let dirx = document.querySelector('#panel-dir').value;
     let editors = {};
     document.querySelectorAll('.ckeditorx')?.forEach(function (el) {
+
+        const currentDir = el.getAttribute('dir');
+        let finalDir = dirx;
+        if (currentDir != null){
+            finalDir = currentDir;
+        }
         editors[el.getAttribute('name')] = CKEDITOR.replace(el.getAttribute('name'), {
             filebrowserUploadUrl: xupload,
             filebrowserUploadMethod: 'form',
-            contentsLangDirection: dirx,
+            contentsLangDirection: finalDir,
             skin: 'moono-dark',
         });
 

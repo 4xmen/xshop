@@ -218,12 +218,14 @@
                         {{__('Logs of guests')}}
                     </a>
                 </li>
-                <li>
-                    <a>
-                        <i class="ri-global-fill"></i>
-                        {{__("Languages")}}
-                    </a>
-                </li>
+                @if(auth()->user()->hasRole('developer') && config('app.xlang.active'))
+                    <li>
+                        <a href="{{ route('admin.lang.index') }}">
+                            <i class="ri-global-fill"></i>
+                            {{__("Languages")}}
+                        </a>
+                    </li>
+                @endif
             </ul>
         </li>
         <li data-bs-toggle="tooltip" data-bs-placement="auto" data-bs-custom-class="custom-tooltip"

@@ -152,6 +152,11 @@ return [
         'watermark_size' => env('MEDIA_WATERMARK_SIZE',15),
         'watermark_opacity' => env('MEDIA_WATERMARK_OPACITY',50),
     ],
+    'xlang' => [
+        'active' => (bool) env('XLANG_ACTIVE',false),
+        'main' => env('XLANG_MAIN','en'),
+        'api_url' => env('XLANG_API_URL',''),
+    ],
 
 
 

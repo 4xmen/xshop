@@ -1,6 +1,8 @@
 @include('components.panel-header')
 <div id="app">
 
+    <input type="hidden" id="panel-dir" @if(langIsRTL(config('app.locale'))) value="rtl" @else value="ltr" @endif>
+
     @include('components.panel-top-navbar')
 
     <div>

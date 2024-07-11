@@ -23,6 +23,7 @@ class DatabaseSeeder extends Seeder
 ');
 
         $this->call([
+                XLangSeeder::class,
                 UserSeeder::class,
                 GroupSeeder::class,
                 PostSeeder::class,

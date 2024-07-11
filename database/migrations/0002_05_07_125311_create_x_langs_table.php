@@ -11,8 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('x_langs', function (Blueprint $table) {
+        Schema::create('xlangs', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
+            $table->string('tag',7)->unique();
+            $table->boolean('rtl')->default(false);
+            $table->boolean('is_default')->default(false);
+            $table->string('img')->nullable()->default(null);
+            $table->string('emoji')->nullable()->default(null);
+            $table->tinyInteger('sort')->default(0);
+            $table->softDeletes();
             $table->timestamps();
         });
     }

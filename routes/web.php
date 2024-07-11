@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -313,12 +314,35 @@ Route::prefix(config('app.panel.prefix'))->name('admin.')->group(
                 );
             });
 
+
+        Route::prefix('langs')->name('lang.')->group(
+            function () {
+                Route::get('/', [\App\Http\Controllers\Admin\XLangController::class, 'index'])->name('index');
+                Route::get('/translates', [\App\Http\Controllers\Admin\XLangController::class, 'translate'])->name('translate');
+                Route::get('/delete/{item}', [\App\Http\Controllers\Admin\XLangController::class, 'destroy'])->name('delete');
+                Route::get('/create', [\App\Http\Controllers\Admin\XLangController::class, 'create'])->name('create');
+                Route::post('/store', [\App\Http\Controllers\Admin\XLangController::class, 'store'])->name('store');
+                Route::get('/edit/{item}', [\App\Http\Controllers\Admin\XLangController::class, 'edit'])->name('edit');
+                Route::post('/update/{item}', [\App\Http\Controllers\Admin\XLangController::class, 'update'])->name('update');
+                Route::post('bulk', [\App\Http\Controllers\Admin\XLangController::class, "bulk"])->name('bulk');
+                Route::get('/download/{tag}', [\App\Http\Controllers\Admin\XLangController::class, 'download'])->name('download');
+                Route::get('/ai/{tag}', [\App\Http\Controllers\Admin\XLangController::class, 'ai'])->name('ai');
+                Route::post('/upload/{tag}', [\App\Http\Controllers\Admin\XLangController::class, 'upload'])->name('upload');
+                Route::get('/model/translate/{id}/{model}', [\App\Http\Controllers\Admin\XLangController::class, 'translateModel'])->name('model');
+                Route::post('/model/translate/save/{id}/{model}', [\App\Http\Controllers\Admin\XLangController::class, 'translateModelSave'])->name('modelSave');
+                Route::get('/model/ai/{id}/{model}/{field}/{lang}', [\App\Http\Controllers\Admin\XLangController::class, 'translateModelAi'])->name('aiText');
+                Route::get('restore/{item}', [\App\Http\Controllers\Admin\XLangController::class, 'restore'])->name('restore');
+                Route::get('trashed', [\App\Http\Controllers\Admin\XLangController::class, "trashed"])->name('trashed');
+
+            });
+
     });
 
 Route::get('test',function (){
-
 //    return \Resources\Views\Segments\PreloaderCircle::onAdd();
+   Log::info('--test--');
+   $i = \App\Models\Product::first();
+   return get_class($i);
 
-    Log::info('--test--');
 });
 

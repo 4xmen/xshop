@@ -110,11 +110,11 @@
                         <tr>
                             <th>
                                 <div
-                                    data-bs-toggle="tooltip"
-                                    data-bs-placement="top"
-                                    data-bs-custom-class="custom-tooltip"
-                                    data-bs-title="{{__("Check all")}}"
-                                    class="form-check form-switch mt-1 mx-2">
+                                        data-bs-toggle="tooltip"
+                                        data-bs-placement="top"
+                                        data-bs-custom-class="custom-tooltip"
+                                        data-bs-title="{{__("Check all")}}"
+                                        class="form-check form-switch mt-1 mx-2">
                                     <input class="form-check-input chkall"
                                            type="checkbox" role="switch">
                                 </div>
@@ -158,7 +158,7 @@
                                     @if(isset($item) && method_exists($item,'imgUrl'))
                                         <td>
                                             <a href="{{getRoute('edit',$item->{$item->getRouteKeyName()})}}">
-                                            <img src="{{$item->imgUrl()}}" class="image-x64" alt="">
+                                                <img src="{{$item->imgUrl()}}" class="image-x64" alt="">
                                             </a>
                                         </td>
                                     @endif
@@ -257,6 +257,15 @@
                                                             </a>
                                                         </li>
                                                     @endforeach
+                                                        @if(config('app.xlang.active') && isset($item->translatable))
+                                                        <li>
+                                                            <a class="dropdown-item" href="{{route('admin.lang.model',[$item->id, get_class($item)])}}">
+                                                                <i class="ri-translate"></i>
+                                                                &nbsp;
+                                                                {{__("Translate")}}
+                                                            </a>
+                                                        </li>
+                                                        @endif
                                                 </ul>
                                             </div>
                                         @endif
@@ -298,6 +307,12 @@
                                                     @endif
                                                 @endif
                                             @endforeach
+                                            @if(config('app.xlang.active') && isset($item->translatable))
+                                                <a href="{{route('admin.lang.model',[$item->id, get_class($item)])}}"
+                                                   class="btn btn-outline-secondary translat-btn btn-sm mx-1">
+                                                    <i class="ri-translate"></i>
+                                                </a>
+                                            @endif
                                         </div>
                                     </td>
                                 </tr>
@@ -315,12 +330,12 @@
                                 <div class="row">
                                     <div class="col-md-3 text-start">
                                         <div
-                                            id="toggle-select"
-                                            class="btn btn-outline-light mx-2"
-                                            data-bs-toggle="tooltip"
-                                            data-bs-placement="top"
-                                            data-bs-custom-class="custom-tooltip"
-                                            data-bs-title="{{__("Toggle selection")}}">
+                                                id="toggle-select"
+                                                class="btn btn-outline-light mx-2"
+                                                data-bs-toggle="tooltip"
+                                                data-bs-placement="top"
+                                                data-bs-custom-class="custom-tooltip"
+                                                data-bs-title="{{__("Toggle selection")}}">
                                             <i class="ri-toggle-line"></i>
                                         </div>
                                     </div>
