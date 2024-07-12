@@ -71,7 +71,9 @@ class AreaController extends Controller
                 $part->save();
             }
         }
-        Part::whereIn('id', json_decode($request->input('removed')))->delete();
+        foreach ( json_decode($request->input('removed')) as $id){
+            Part::where('id',$id)->first()->delete();
+        }
         \Artisan::call('client');
 
         logAdmin(__METHOD__,__CLASS__,$area->id);

@@ -83,7 +83,7 @@ class SettingController extends Controller
         $files = $request->allFiles();
         if (isset($files['file'])) {
             foreach ($files['file'] as $index => $file) {
-                if ($file->extension() == 'mp4' || $file->extension() == 'mp3'){
+                if ($file->guessExtension() == 'mp4' || $file->guessExtension() == 'mp3'){
                     $file->move(public_path('upload/media/'), str_replace('_','.',$index) );//store('/images/'.,['disk' => 'public']);
                 }else{
                     $file->move(public_path('upload/images/'), str_replace('_','.',$index) );//store('/images/'.,['disk' => 'public']);

@@ -28,7 +28,7 @@ class AreaSeeder extends Seeder
                 'valid_segments' => json_encode(
                     ["top","slider","header","footer","menu",
                         "parallax","other","posts","products","attachments"
-                        ,"groups","categories"]
+                        ,"groups","categories","category","group"]
                 ),
                 'max' => 10,
                 'icon' => 'ri-layout-top-2-line',

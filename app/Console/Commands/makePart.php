@@ -72,12 +72,12 @@ class makePart extends Command
 
         $handler = str_replace('Handle',ucfirst($part), $handler);
         $scss = <<<DOC
-#$part {
+.$part {
     // scss
 }
 DOC;
 
-        file_put_contents($folderPath . '/' . $part . '.blade.php', "<div id='{$part}'></div>");
+        file_put_contents($folderPath . '/' . $part . '.blade.php', "<section class='{$part}'></section>");
         file_put_contents($folderPath . '/' . $part . '.js', '');
         file_put_contents($folderPath . '/' . $part . '.json', json_encode($detail,JSON_PRETTY_PRINT));
         file_put_contents($folderPath . '/' . ucfirst($part) . '.php', $handler);

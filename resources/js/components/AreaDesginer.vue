@@ -11,10 +11,10 @@
                 </span>
             </div>
             <div class="part-body">
-                <div class="row">
+                <div class="rw">
                     <template v-for="(valid,i) in valids">
                         <div @click="changePart(p,valid.segment,valid.part)"
-                             :class="`col-md-3 `+(valid.data.name == part.part?'selected-part':'can-select')">
+                             :class="``+(valid.data.name == part.part?'selected-part':'can-select')">
                             <img class="img-fluid mt-2" :src="imageLink+'/'+valid.segment+'/'+valid.part"
                                  alt="screeshot">
                             {{ valid.part }} [v{{ valid.data.version }}]
@@ -123,5 +123,12 @@ export default {
 
 .can-select {
     cursor: pointer;
+}
+
+.rw{
+    column-count: 3;
+    div{
+        margin-bottom: 1rem;
+    }
 }
 </style>

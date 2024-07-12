@@ -16,7 +16,8 @@ class Prop extends Model
 
     protected $casts = [
         'dataz',
-        'optionz'
+        'optionz',
+        'datas'
     ];
 
     public static $prop_types = ['text', 'number', 'checkbox', 'color', 'select', 'multi', 'singlemulti'];
@@ -31,6 +32,15 @@ class Prop extends Model
         $result = [];
         foreach (json_decode($this->options) as $item) {
             $result[$item->title] = $item->value;
+        }
+
+        return $result;
+    }
+    public function getDatasAttribute()
+    {
+        $result = [];
+        foreach (json_decode($this->options) as $item) {
+            $result[$item->value] = $item->title;
         }
 
         return $result;

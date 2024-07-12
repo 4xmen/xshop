@@ -24,17 +24,19 @@ class Product extends Model implements HasMedia
         'qidz' => 'array'
     ];
 
-    public function attachs(){
-        return $this->morphMany(Attachment::class,'attachable');
+    public function attachs()
+    {
+        return $this->morphMany(Attachment::class, 'attachable');
     }
 
     protected $guarded = [];
 
 
-    public function getQzAttribute(){
+    public function getQzAttribute()
+    {
         $result = [];
         foreach ($this->quantities as $q) {
-            if ($q->count > 0){
+            if ($q->count > 0) {
                 $q->data = json_decode($q->data);
                 $result[] = $q;
             }
@@ -42,20 +44,22 @@ class Product extends Model implements HasMedia
 
         return $result;
     }
-    public function getQidzAttribute(){
+
+    public function getQidzAttribute()
+    {
         return $this->quantities()->pluck('id')->toArray();
     }
 
     public static $stock_status = ['IN_STOCK', 'OUT_STOCK', 'BACK_ORDER'];
 
-    public $translatable = ['name', 'excerpt', 'description','table'];
+    public $translatable = ['name', 'excerpt', 'description', 'table'];
 
     public function registerMediaConversions(?Media $media = null): void
     {
         $ti = imageSizeConvertValidate('product_image');
         $t = imageSizeConvertValidate('product_thumb');
 
-       $mc = $this->addMediaConversion('product-thumb')
+        $mc = $this->addMediaConversion('product-thumb')
             ->width($t[0])
             ->height($t[1])
             ->crop($t[0], $t[1])
@@ -73,19 +77,25 @@ class Product extends Model implements HasMedia
             ->nonQueued()
             ->format(getSetting('optimize'));
 
-        if (getSetting('watermark')){
+        if (getSetting('watermark')) {
             $mc->watermark(public_path('upload/images/logo.png'),
-                    AlignPosition::BottomLeft, 5, 5, Unit::Percent,
-                    config('app.media.watermark_size'), Unit::Percent,
-                    config('app.media.watermark_size'), Unit::Percent, Fit::Contain,
-                    config('app.media.watermark_opacity'));
+                AlignPosition::BottomLeft, 5, 5, Unit::Percent,
+                config('app.media.watermark_size'), Unit::Percent,
+                config('app.media.watermark_size'), Unit::Percent, Fit::Contain,
+                config('app.media.watermark_opacity'));
 
             $mc2->watermark(public_path('upload/images/logo.png'),
-                    AlignPosition::BottomLeft, 5, 5, Unit::Percent,
-                    config('app.media.watermark_size'), Unit::Percent,
-                    config('app.media.watermark_size'), Unit::Percent, Fit::Contain,
-                    config('app.media.watermark_opacity'));
+                AlignPosition::BottomLeft, 5, 5, Unit::Percent,
+                config('app.media.watermark_size'), Unit::Percent,
+                config('app.media.watermark_size'), Unit::Percent, Fit::Contain,
+                config('app.media.watermark_opacity'));
         }
+
+        $this->addMediaConversion('product-optimized')
+            ->optimize()
+            ->sharpen(10)
+            ->nonQueued()
+            ->format('webp');
     }
 
 
@@ -151,35 +161,52 @@ class Product extends Model implements HasMedia
         }
     }
 
-    public function imgUrl(){
+    public function imgUrl()
+    {
         if ($this->getMedia()->count() > 0) {
             return $this->getMedia()[$this->image_index]->getUrl('product-image');
         } else {
             return asset('assets/upload/logo.svg');
         }
     }
-    public function orginalImageUrl(){
+
+    public function originalImageUrl()
+    {
         if ($this->getMedia()->count() > 0) {
             return $this->getMedia()[$this->image_index]->getUrl();
         } else {
             return asset('assets/upload/logo.svg');
         }
     }
-    public function imgUrl2(){
+    public function originalOptimizedImageUrl()
+    {
+        if ($this->getMedia()->count() > 0) {
+            return $this->getMedia()[$this->image_index]->getUrl('product-optimized');
+        } else {
+            return asset('assets/upload/logo.svg');
+        }
+    }
+
+    public function imgUrl2()
+    {
         if ($this->getMedia()->count() > 0 && isset($this->getMedia()[1])) {
             return $this->getMedia()[1]->getUrl('product-image');
         } else {
             return asset('assets/upload/logo.svg');
         }
     }
-    public function thumbUrl(){
+
+    public function thumbUrl()
+    {
         if ($this->getMedia()->count() > 0) {
             return $this->getMedia()[$this->image_index]->getUrl('product-thumb');
         } else {
             return asset('assets/upload/logo.svg');
         }
     }
-    public function thumbUrl2(){
+
+    public function thumbUrl2()
+    {
         if ($this->getMedia()->count() > 0 && isset($this->getMedia()[1])) {
             return $this->getMedia()[1]->getUrl('product-thumb');
         } else {
@@ -188,8 +215,60 @@ class Product extends Model implements HasMedia
     }
 
 
-    public function webUrl(){
-        return  '#';// WIP
+    public function fullMeta($limit = 99)
+    {
+        $metas = $this->getAllMeta()->toArray();
+        $result = [];
+        $i = 0;
+        foreach ($metas as $key => $value) {
+            $result[$key] = [
+                'value' => $value,
+                'data' => Prop::where('name', $key)->first(),
+            ];
+            switch ($result[$key]['data']['type']) {
+                case 'color':
+                    $result[$key]['human_value'] = "<div style='background:  $value' class='color-bullet'> &nbsp; </div>";
+                    break;
+                case 'checkbox':
+                    $result[$key]['human_value'] = $value ? '✅' : '❌';
+                    break;
+                case 'multi':
+                case 'select':
+                case 'singlemulti':
+                    if (!is_array($value)) {
+                        $result[$key]['human_value'] = $result[$key]['data']->datas[$value];
+                    } else {
+                        $result[$key]['human_value'] = '';
+                        foreach ($value as $k => $v) {
+                            $result[$key]['human_value'] = $result[$key]['data']->datas[$v].', ';
+                        }
+                        $result[$key]['human_value'] = trim($result[$key]['human_value'],' ,');
+                    }
+                    break;
+                default:
+                    if (is_array($value)) {
+                        $result[$key]['human_value'] = implode(', ', $value);
+                    } else {
+
+                        $result[$key]['human_value'] = $value;
+                    }
+            }
+
+            $result[$key]['human_value'] .= ' ' . $result[$key]['data']['unit'];
+        }
+
+        usort($result, function ($a, $b) {
+            return $a['data']['sort'] - $b['data']['sort'];
+        });
+
+        $result = array_slice($result, 0, $limit);
+
+        return $result;
+    }
+
+    public function webUrl()
+    {
+        return '#';// WIP
         return route('');
     }
 
