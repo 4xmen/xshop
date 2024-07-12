@@ -14,16 +14,17 @@ php artisan make:xcontroller User
 ## make theme part 
 
 Theme part usable in area
+
 PartName [`theme aprt name`]
 
-segment [`group`, `category`, `preloader`, ...], 
+segmentName [`group`, `category`, `preloader`, ...], 
 
 ```bash
 php artisan  make:part PartName segmentName
 ```
 
 ## client optimize 
-Opimize client assets, `scss`,`js`,`css`
+Optimize client assets, `scss`,`js`,`css`
 
 ```bash
 php artisan  client
