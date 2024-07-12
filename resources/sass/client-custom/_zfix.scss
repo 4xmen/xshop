@@ -66,3 +66,13 @@ a,a:visited{
         background: darken($xshop-secondary,10); ;
     }
 }
+
+.btn-outline-invert{
+    border-color: $xshop-diff;
+    color: $xshop-diff;
+
+    &:hover{
+        background: $xshop-diff;
+        color: $xshop-primary;
+    }
+}
