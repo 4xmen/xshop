@@ -1,0 +1,22 @@
+.FavProductWithMeta {
+    // scss
+    i{
+        font-size: 128px;
+        -webkit-text-stroke: 6px $xshop-background;
+    }
+
+    [class^="col-md"]{
+        &:nth-child(1) i{
+            color: darkgoldenrod;
+        }
+        &:nth-child(2) i{
+            color: forestgreen;
+        }
+        &:nth-child(3) i{
+            color: dodgerblue;
+        }
+        &:nth-child(4) i{
+            color: red;
+        }
+    }
+}
