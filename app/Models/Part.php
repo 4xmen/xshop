@@ -16,4 +16,13 @@ class Part extends Model
         $handle::onMount($this);
         return 'segments.'.$this->segment.'.'.$this->part.'.'.$this->part;
     }
+    public function getBladeWithData(){
+        $className= ucfirst($this->part);
+        $handle = "\\Resources\\Views\\Segments\\$className";
+        return ['blade' => 'segments.'.$this->segment.'.'.$this->part.'.'.$this->part, 'data' =>  $handle::onMount($this)];
+    }
+
+    public function area(){
+        return $this->belongsTo(Area::class);
+    }
 }

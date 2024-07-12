@@ -22,6 +22,7 @@ return new class extends Migration
             $table->boolean('ltr')->default(false);
             $table->boolean('is_basic')->default(false);
             $table->boolean('size')->default('12');
+            $table->json('data')->nullable();
             $table->timestamps();
         });
     }

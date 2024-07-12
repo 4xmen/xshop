@@ -2,6 +2,7 @@
 
 use App\Helpers;
 use App\Models\Setting;
+use App\Models\Group;
 use App\Models\Area;
 use App\Models\Part;
 use Illuminate\Support\Facades\Route;
@@ -684,17 +685,18 @@ function nestedWithData($items, $parent_id = null)
  * @param $areaName
  * @return \App\Models\Part|false
  */
-function hasPart($areaName){
-    $a = Area::where('name',$areaName)->first();
-    if ($a == null){
+function hasPart($areaName)
+{
+    $a = Area::where('name', $areaName)->first();
+    if ($a == null) {
         return false;
     }
 
-    $p = Part::where('area_id',$a->id)->first();
-    if ($p == null){
-        return  false;
+    $p = Part::where('area_id', $a->id)->first();
+    if ($p == null) {
+        return false;
     }
-    return $p ;
+    return $p;
 
 }
 
@@ -704,8 +706,9 @@ function hasPart($areaName){
  * @param $areaName
  * @return Part[]|\Illuminate\Database\Eloquent\Collection|\LaravelIdea\Helper\App\Models\_IH_Part_C
  */
-function getParts($areaName){
-    $a = Area::where('name',$areaName)->first();
+function getParts($areaName)
+{
+    $a = Area::where('name', $areaName)->first();
     return $a->parts()->orderBy('sort')->get();
 }
 
@@ -715,14 +718,61 @@ function getParts($areaName){
  * @param $group
  * @return array
  */
-function getSettingsGroup($group){
+function getSettingsGroup($group)
+{
     $result = [];
-    foreach (Setting::where('key','LIKE',$group.'%')
-                  ->whereNotNull('value')->get(['key','value']) as $r){
-        if ($r->value != null){
-            $result[substr($r->key,mb_strlen($group))] = $r->value;
+    foreach (Setting::where('key', 'LIKE', $group . '%')
+                 ->whereNotNull('value')->get(['key', 'value']) as $r) {
+        if ($r->value != null) {
+            $result[substr($r->key, mb_strlen($group))] = $r->value;
         }
     }
 
     return $result;
+}
+
+
+/**
+ * get different color by backgroun
+ * @param $bgColor
+ * @return string
+ */
+function getGrayscaleTextColor($bgColor)
+{
+    // Convert the provided background color to RGB
+    $bgRgb = sscanf($bgColor, "#%02x%02x%02x");
+
+    // Calculate the luminance of the background color
+    $luminance = (0.299 * $bgRgb[0] + 0.587 * $bgRgb[1] + 0.114 * $bgRgb[2]) / 255;
+
+    // Determine the best color for text based on luminance
+    if ($luminance > 0.5) {
+        $textColor = '#000000'; // Black text
+    } else {
+        $textColor = '#ffffff'; // White text
+    }
+
+    return $textColor;
+}
+
+/**
+ * get group by setting key
+ * @param $key
+ * @return Group
+ */
+function getGroupBySetting($key)
+{
+    return Group::where('id', getSetting($key) ?? 1)->first();
+}
+
+/**
+ * get group's posts by setting key
+ * @param $key
+ * @param $limit
+ * @return \App\Models\Post[]|\Illuminate\Database\Eloquent\Collection|\LaravelIdea\Helper\App\Models\_IH_Post_C
+ */
+function getGroupPostsBySetting($key, $limit = 10)
+{
+    return Group::where('id', getSetting($key) ?? 1)->first()
+        ->posts()->where('status', 1)->limit($limit)->get();
 }

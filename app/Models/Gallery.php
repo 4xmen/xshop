@@ -69,4 +69,9 @@ class Gallery extends Model implements HasMedia
     public function attachs(){
         return $this->morphMany(Attachment::class,'attachable');
     }
+
+    public function webUrl(){
+        return  '#';// WIP
+        return route('');
+    }
 }

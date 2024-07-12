@@ -188,5 +188,9 @@ class Product extends Model implements HasMedia
     }
 
 
+    public function webUrl(){
+        return  '#';// WIP
+        return route('');
+    }
 
 }

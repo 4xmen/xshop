@@ -4,6 +4,7 @@
             <i class="ri-subtract-line"></i>
         </div>
         <input type="text" class="form-control"
+               :name="xname"
                v-model="val"
                @keyup.up="inc"
                @keyup.down="dec">
@@ -40,6 +41,10 @@ export default {
             type: Number,
             default: 100
         },
+        xname:{
+            type: String,
+            default: '',
+        }
     },
     mounted() {
         if (!isNaN(this.modelValue)) {

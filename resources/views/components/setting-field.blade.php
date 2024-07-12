@@ -2,7 +2,7 @@
     <label for="{{$setting->key}}">
         {{$setting->title}}
 
-{{--        // WIP translate--}}
+        {{--        // WIP translate--}}
     </label>
 
     @switch($setting->type)
@@ -33,7 +33,7 @@
         @case('CATEGORY')
             <searchable-select
                 @error('category_id') :err="true" @enderror
-                :items='@json($cats)'
+            :items='@json($cats)'
                 title-field="name"
                 value-field="id"
                 xlang="{{config('app.locale')}}"
@@ -46,7 +46,7 @@
         @case('GROUP')
             <searchable-select
                 @error('category_id') :err="true" @enderror
-                :items='@json($groups)'
+            :items='@json($groups)'
                 title-field="name"
                 value-field="id"
                 xlang="{{config('app.locale')}}"
@@ -61,6 +61,13 @@
             <input type="color" id="{{$setting->key}}"
                    name="{{$setting->key}}" class="form-control-color w-100"
                    value="{{old($setting->key, $setting->value)}}" >
+            @break
+        @case('NUMBER')
+            <br>
+{{--            <input type="number" id="{{$setting->key}}"--}}
+{{--                   name="" class="form-control"--}}
+{{--                   value="" @if($setting->ltr) dir="ltr" @endif>--}}
+            <increment xname="{{$setting->key}}" xvalue="{{old($setting->key, $setting->value)}}" @foreach($setting->getData() as $k => $v) {{$k}}="{{$v}}" @endforeach ></increment>
             @break
         @case('FILE')
             <div class="row">
@@ -99,9 +106,9 @@
                             @if (old($setting->key, $setting->value??'webp') == 'webp' ) selected @endif >{{__("webp")}} </option>
                 </select>
             @else
-            <input type="text" id="{{$setting->key}}"
-                   name="{{$setting->key}}" class="form-control"
-                   value="{{old($setting->key, $setting->value)}}" @if($setting->ltr) dir="ltr" @endif>
+                <input type="text" id="{{$setting->key}}"
+                       name="{{$setting->key}}" class="form-control"
+                       value="{{old($setting->key, $setting->value)}}" @if($setting->ltr) dir="ltr" @endif>
             @endif
     @endswitch
 </div>
