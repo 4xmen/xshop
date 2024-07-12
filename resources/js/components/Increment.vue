@@ -50,7 +50,7 @@ export default {
         if (!isNaN(this.modelValue)) {
             this.val = this.modelValue;
         }else{
-            this.val = this.xvalue;
+            this.val = parseInt(this.xvalue.toString());
         }
     },
     computed: {},
