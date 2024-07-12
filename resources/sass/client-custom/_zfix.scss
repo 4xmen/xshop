@@ -20,3 +20,49 @@ a,a:visited{
         color: var(--xshop-secondary);
     }
 }
+
+
+
+.btn{
+    border-radius: $xshop-border-radius;
+}
+.btn-primary{
+    background: $xshop-primary;
+    border-color: lighten($xshop-primary,5);
+    color: $xshop-diff !important;
+
+    &:hover{
+        border-color: lighten($xshop-primary,10);
+        background: darken($xshop-primary,10); ;
+    }
+}
+
+.btn-outline-primary{
+    border-color: $xshop-primary;
+    color: $xshop-primary;
+    &:hover{
+        border-color: lighten($xshop-primary,10);
+        color: $xshop-diff !important;
+        background: darken($xshop-primary,10); ;
+    }
+}
+.btn-secondary{
+    background: $xshop-secondary;
+    border-color: lighten($xshop-secondary,5);
+    color: $xshop-diff !important;
+
+    &:hover{
+        border-color: lighten($xshop-secondary,10);
+        background: darken($xshop-secondary,10); ;
+    }
+}
+
+.btn-outline-secondary{
+    border-color: $xshop-secondary;
+    color: $xshop-secondary;
+    &:hover{
+        border-color: lighten($xshop-secondary,10);
+        color: $xshop-diff !important;
+        background: darken($xshop-secondary,10); ;
+    }
+}

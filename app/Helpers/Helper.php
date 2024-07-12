@@ -3,6 +3,7 @@
 use App\Helpers;
 use App\Models\Setting;
 use App\Models\Group;
+use App\Models\Category;
 use App\Models\Area;
 use App\Models\Part;
 use Illuminate\Support\Facades\Route;
@@ -775,4 +776,16 @@ function getGroupPostsBySetting($key, $limit = 10)
 {
     return Group::where('id', getSetting($key) ?? 1)->first()
         ->posts()->where('status', 1)->limit($limit)->get();
+}
+
+/**
+ * get group's posts by setting key
+ * @param $key
+ * @param $limit
+ * @return \App\Models\Post[]|\Illuminate\Database\Eloquent\Collection|\LaravelIdea\Helper\App\Models\_IH_Post_C
+ */
+function getCategoryProductBySetting($key, $limit = 10)
+{
+    return Category::where('id', getSetting($key) ?? 1)->first()
+        ->products()->where('status', 1)->limit($limit)->get();
 }

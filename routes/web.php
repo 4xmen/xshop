@@ -340,9 +340,9 @@ Route::prefix(config('app.panel.prefix'))->name('admin.')->group(
 
 Route::get('test',function (){
 //    return \Resources\Views\Segments\PreloaderCircle::onAdd();
-   Log::info('--test--');
-   $i = \App\Models\Product::first();
-   return get_class($i);
+   $p = \App\Models\Product::where('id',31)->first();
+
+   return $p->fullMeta();
 
 });
 
