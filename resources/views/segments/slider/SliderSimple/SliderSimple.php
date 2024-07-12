@@ -16,6 +16,6 @@ class SliderSimple
     }
     public static function onMount(Part $part = null)
     {
-
+        return $part;
     }
 }

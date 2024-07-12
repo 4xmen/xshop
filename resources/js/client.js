@@ -2,4 +2,7 @@
 // IF YOU WANT ADD ANY CODE CREATE NEW JS INTO client-custom
 import "./client-custom/assetsNode.js";
 import "./client-custom/confirm.js";
-import "../views/segments/preloader/PreloaderImage/PreloaderImage.js";
+import "../views/segments/preloader/PreloaderCircle/PreloaderCircle.js";
+import "../views/segments/top/TopSimple/TopSimple.js";
+import "../views/segments/slider/SliderSimple/SliderSimple.js";
+import "../views/segments/posts/PostsIconSimple/PostsIconSimple.js";

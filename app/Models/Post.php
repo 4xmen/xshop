@@ -122,4 +122,9 @@ class Post extends Model implements HasMedia
 //            'tags' => $this->tags->implode(' ') ?? null,
 //        ];
 //    }
+
+    public function webUrl(){
+        return  '#';// WIP
+        return route('');
+    }
 }

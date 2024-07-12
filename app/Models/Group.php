@@ -75,4 +75,9 @@ class Group extends Model
     public function attachs(){
         return $this->morphMany(Attachment::class,'attachable');
     }
+
+    public function webUrl(){
+        return  '#';// WIP
+        return route('');
+    }
 }

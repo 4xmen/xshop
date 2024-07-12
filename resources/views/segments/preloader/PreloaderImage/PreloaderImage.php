@@ -10,7 +10,6 @@ class PreloaderImage
 {
     public static function onAdd(Part $part = null)
     {
-        \Log::info('added '.$part->part.' on '.$part->segment);
         $setting = new Setting();
         $setting->key = 'PreloaderImage_gif';
         $setting->title = '';
@@ -21,12 +20,11 @@ class PreloaderImage
     }
     public static function onRemove(Part $part = null)
     {
-        \Log::info('remove '.$part->part.' on '.$part->segment);
         Setting::where('key','PreloaderImage_gif')->delete();
         File::delete(public_path('upload/images/').'PreloaderImage.gif');
     }
     public static function onMount(Part $part = null)
     {
-        \Log::info('monted '.$part->part.' on '.$part->segment);
+        return $part;
     }
 }

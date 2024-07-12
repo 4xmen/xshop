@@ -25,9 +25,11 @@ class PartObsever
         // remove old part  add new part
 
         if ($part->isDirty('part')){
-            $className = ucfirst($part->getOriginal('part'));
-            $handle = "\\Resources\\Views\\Segments\\$className";
-            $handle::onRemove($part);
+            $p = clone $part;
+            $p->part = $part->getOriginal('part');
+            $classNameOld = ucfirst($part->getOriginal('part'));
+            $handleOld = "\\Resources\\Views\\Segments\\$classNameOld";
+            $handleOld::onRemove($p);
 
             $className = $part->part;
             $className= ucfirst($part->part);
@@ -36,6 +38,7 @@ class PartObsever
         }
 
     }
+
 
     /**
      * Handle the Part "deleted" event.

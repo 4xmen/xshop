@@ -18,7 +18,7 @@ class AreaSeeder extends Seeder
             [
                 'name' => 'preloader',
                 'valid_segments' => json_encode(
-                    ['preloader']
+                    ["preloader"]
                 ),
                 'max' => 1,
                 'icon' => 'ri-loader-2-line',
@@ -26,7 +26,9 @@ class AreaSeeder extends Seeder
             [
                 'name' => 'index',
                 'valid_segments' => json_encode(
-                    ['top','slider','header','footer','menu','parallax']
+                    ["top","slider","header","footer","menu",
+                        "parallax","other","posts","products","attachments"
+                        ,"groups","categories"]
                 ),
                 'max' => 10,
                 'icon' => 'ri-layout-top-2-line',

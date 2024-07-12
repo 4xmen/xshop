@@ -70,4 +70,9 @@ class Category extends Model
         return $this->morphMany(Attachment::class,'attachable');
     }
 
+    public function webUrl(){
+        return  '#';// WIP
+        return route('');
+    }
+
 }

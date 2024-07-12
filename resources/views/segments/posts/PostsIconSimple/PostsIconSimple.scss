@@ -1,0 +1,20 @@
+.PostsIconSimple {
+    // scss
+
+    h1{
+        a{
+            color: $xshop-text ;
+        }
+    }
+    .row{
+        text-align: center;
+
+        i{
+            font-size: 75px;
+            color: var(--xshop-primary);
+        }
+        p{
+            text-align: justify;
+        }
+    }
+}

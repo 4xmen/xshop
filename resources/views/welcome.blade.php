@@ -5,6 +5,7 @@
 @endsection
 @section('content')
     @foreach(getParts('index') as $part)
-        @include($part->getBlade())
+        @php($p = $part->getBladeWithData())
+        @include($p['blade'],['data' => $p['data']])
     @endforeach
 @endsection
