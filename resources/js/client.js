@@ -6,3 +6,4 @@ import "../views/segments/preloader/PreloaderCircle/PreloaderCircle.js";
 import "../views/segments/top/TopSimple/TopSimple.js";
 import "../views/segments/slider/SliderSimple/SliderSimple.js";
 import "../views/segments/posts/PostsIconSimple/PostsIconSimple.js";
+import "../views/segments/index/GradientTextLink/GradientTextLink.js";
