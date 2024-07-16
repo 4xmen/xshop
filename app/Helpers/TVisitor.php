@@ -2,6 +2,8 @@
 
 namespace App\Helpers;
 
+use App\Models\Visitor;
+
 /**
  * @package Helpers
  * @author A1Gard <a1gard@4xmen.ir>
@@ -25,45 +27,7 @@ class TVisitor {
         if (!isset($_SERVER['HTTP_USER_AGENT']))
             return 0;
 
-        $os_list = array(
-            '(Linux)',
-            '(Windows NT 11.0)', // Added Windows 11
-            '(Windows NT 10.0)',
-            '(Windows NT 6.3)',
-            '(Windows NT 6.2)',
-            '(Windows NT 6.1)',
-            '(Windows NT 6.0)',
-            '(Windows NT 5.2)',
-            '(Windows NT 5.1)',
-            '(Windows NT 5.0)',
-            '(Windows NT 4.0)',
-            '(Win 9x 4.90)',
-            '(Windows 98)',
-            '(Windows 95)',
-            '(Windows CE)',
-            'Windows (iPhone|iPad)',
-            '(iPhone)|(iPad)',
-            '(Mac OS X)',
-            '(MacPPC)|(Mac_PowerPC)|(Macintosh)',
-            '(Ubuntu)',
-            '(Linux Mint)',
-            '(Debian)',
-            '(Fedora)',
-            '(Red Hat)',
-            '(SuSE)',
-            '(Android)',
-            '(webOS)|(hpwOS)',
-            '(BlackBerry)',
-            '(Symbian)',
-            '(FreeBSD)',
-            '(OpenBSD)',
-            '(NetBSD)',
-            '(SunOS)',
-            '(OpenSolaris)',
-            '(Chrome OS)',
-            '(CrOS)',
-            '(bot)'
-        );
+        $os_list = array_values(Visitor::$osList);
 
         foreach ($os_list as $index => $match) {
             if (preg_match("/$match/i", $_SERVER['HTTP_USER_AGENT'])) {
@@ -82,43 +46,7 @@ class TVisitor {
         if (!isset($_SERVER['HTTP_USER_AGENT']))
             return 'Unknown';
 
-        $os_list = array(
-            'Linux' => '(Linux)',
-            'Windows 11' => '(Windows NT 11.0)', // Added Windows 11
-            'Windows 10' => '(Windows NT 10.0)',
-            'Windows 8.1' => '(Windows NT 6.3)',
-            'Windows 8' => '(Windows NT 6.2)',
-            'Windows 7' => '(Windows NT 6.1)',
-            'Windows Vista' => '(Windows NT 6.0)',
-            'Windows Server 2003/XP x64' => '(Windows NT 5.2)',
-            'Windows XP' => '(Windows NT 5.1)',
-            'Windows 2000' => '(Windows NT 5.0)',
-            'Windows ME' => '(Win 9x 4.90)',
-            'Windows 98' => '(Windows 98)',
-            'Windows 95' => '(Windows 95)',
-            'Windows CE' => '(Windows CE)',
-            'Windows (iPhone/iPad)' => 'Windows (iPhone|iPad)',
-            'iPhone/iPad' => '(iPhone)|(iPad)',
-            'Mac OS X' => '(Mac OS X)',
-            'Mac OS' => '(MacPPC)|(Mac_PowerPC)|(Macintosh)',
-            'Ubuntu' => '(Ubuntu)',
-            'Linux Mint' => '(Linux Mint)',
-            'Debian' => '(Debian)',
-            'Fedora' => '(Fedora)',
-            'Red Hat' => '(Red Hat)',
-            'SuSE' => '(SuSE)',
-            'Android' => '(Android)',
-            'webOS' => '(webOS)|(hpwOS)',
-            'BlackBerry' => '(BlackBerry)',
-            'Symbian' => '(Symbian)',
-            'FreeBSD' => '(FreeBSD)',
-            'OpenBSD' => '(OpenBSD)',
-            'NetBSD' => '(NetBSD)',
-            'SunOS' => '(SunOS)',
-            'OpenSolaris' => '(OpenSolaris)',
-            'Chrome OS' => '(Chrome OS)|(CrOS)',
-            'bot' => '(bot)'
-        );
+        $os_list = Visitor::$osList;
 
         foreach ($os_list as $os => $pattern) {
             if (preg_match("/$pattern/i", $_SERVER['HTTP_USER_AGENT'])) {
@@ -145,7 +73,7 @@ class TVisitor {
             'mobile', 'android', 'iphone', 'ipod', 'ipad', 'windows phone', 'blackberry', 'kindle', 'silk',
             'opera mini', 'opera mobi', 'webos', 'symbian', 'nokia', 'samsung', 'lg', 'htc', 'mot', 'tablet',
             'rim tablet', 'meego', 'netfront', 'bolt', 'fennec', 'series60', 'maemo', 'midp', 'cldc', 'up.browser',
-            'up.link', 'mmp', 'symbian', 'smartphone', 'wap'
+            'up.link', 'mmp', 'symbian', 'smartphone', 'wap',
         ];
 
         // Check if user agent contains any mobile keywords
@@ -192,24 +120,7 @@ class TVisitor {
         if (!isset($_SERVER['HTTP_USER_AGENT']))
             return 'Unknown';
 
-        $browser_list = array(
-            'Firefox' => '(Firefox)',
-            'Edge' => '(Edg|Edge)',
-            'Chrome' => '(Chrome)(?!.*Edge)',
-            'Safari' => '(Safari)(?!.*Chrome)',
-            'Opera' => '(OPR|Opera)',
-            'Brave' => '(Brave)',
-            'Internet Explorer' => '(MSIE|Trident)',
-            'DeepNet Explorer' => '(Deepnet)',
-            'Flock' => '(Flock)',
-            'Maxthon' => '(Maxthon)',
-            'Avant Browser' => '(Avant)',
-            'AOL' => '(AOL)',
-            'Vivaldi' => '(Vivaldi)',
-            'UC Browser' => '(UCBrowser)',
-            'Yandex Browser' => '(YaBrowser)',
-            'Samsung Internet' => '(SamsungBrowser)',
-        );
+        $browser_list = Visitor::$browserList;
 
         foreach ($browser_list as $browser => $pattern) {
             if (preg_match("/$pattern/i", $_SERVER['HTTP_USER_AGENT'])) {
@@ -228,24 +139,7 @@ class TVisitor {
         if (!isset($_SERVER['HTTP_USER_AGENT']))
             return 0;
 
-        $browser_list = array(
-            '(Firefox)',
-            '(Edg|Edge)',
-            '(Chrome)(?!.*Edge)',
-            '(Safari)(?!.*Chrome)',
-            '(OPR|Opera)',
-            '(Brave)',
-            '(MSIE|Trident)',
-            '(Deepnet)',
-            '(Flock)',
-            '(Maxthon)',
-            '(Avant)',
-            '(AOL)',
-            '(Vivaldi)',
-            '(UCBrowser)',
-            '(YaBrowser)',
-            '(SamsungBrowser)',
-        );
+        $browser_list = array_values(Visitor::$browserList);
 
         foreach ($browser_list as $index => $pattern) {
             if (preg_match("/$pattern/i", $_SERVER['HTTP_USER_AGENT'])) {
@@ -328,18 +222,7 @@ class TVisitor {
             return null;
         }
 
-        $engines = [
-            'google' => ['q', 'query'],
-            'bing' => ['q'],
-            'yahoo' => ['p'],
-            'yandex' => ['text'],
-            'baidu' => ['wd', 'word'],
-            'duckduckgo' => ['q'],
-            'ask' => ['q'],
-            'aol' => ['q'],
-            'naver' => ['query'],
-            'ecosia' => ['q'],
-        ];
+        $engines = Visitor::$engines;
 
         $parsed_url = parse_url($referer);
         $host = isset($parsed_url['host']) ? strtolower($parsed_url['host']) : '';

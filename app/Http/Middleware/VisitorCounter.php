@@ -4,12 +4,11 @@ namespace App\Http\Middleware;
 
 use App\Helpers\TVisitor;
 use App\Models\Visitor;
-use Carbon\Carbon;
 use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class VisitorDetector
+class VisitorCounter
 {
     /**
      * Handle an incoming request.
@@ -18,20 +17,26 @@ class VisitorDetector
      */
     public function handle(Request $request, Closure $next): Response
     {
-
         $visitor = Visitor::where('updated_at','>',date("Y-m-d H:i:s" ,time() - (60*60)))
             ->where('ip', $request->ip())->first();
         if ($visitor === null) {
             $visitor = new Visitor();
             $visitor->ip = $request->ip();
-            $visitor->browser = TVisitor::DetectBrowserI();
-            $visitor->os = TVisitor::DetectOSI();
+            $visitor->browser = TVisitor::DetectBrowser();
+            $visitor->os = TVisitor::DetectOS();
             $visitor->version = TVisitor::BrowserVersion();
-            $visitor->keywords = TVisitor::GetKeyword();
+            $ref =  TVisitor::GetKeyword();
+            if ($ref !== null) {
+                $visitor->keywords = $ref['keyword'];
+                $visitor->engine = $ref['engine'];
+            }
             $visitor->is_mobile = TVisitor::IsMobile();
+            $visitor->page = $request->route()->getName();
             $visitor->save();
         }else{
             $visitor->increment('visit');
+            $visitor->page = $request->route()->getName();
+            $visitor->save();
         }
         return $next($request);
     }
