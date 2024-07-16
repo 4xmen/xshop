@@ -14,6 +14,6 @@ class VisitorSeeder extends Seeder
     public function run(): void
     {
         //
-        Visitor::factory()->count(110)->create();
+        Visitor::factory()->count(1250)->create();
     }
 }

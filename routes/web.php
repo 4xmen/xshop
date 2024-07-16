@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
-})->name('welcome')->middleware(\App\Http\Middleware\VisitorDetector::class);
+})->name('welcome')->middleware(\App\Http\Middleware\VisitorCounter::class);
 
 Auth::routes(['register' => false]);
 
@@ -340,9 +340,7 @@ Route::prefix(config('app.panel.prefix'))->name('admin.')->group(
 
 Route::get('test',function (){
 //    return \Resources\Views\Segments\PreloaderCircle::onAdd();
-   $p = \App\Models\Product::where('id',31)->first();
-
-   return $p->fullMeta();
+   return \App\Helpers\TVisitor::GetKeyword();
 
 });
 
