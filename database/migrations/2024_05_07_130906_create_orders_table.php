@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('invoice_id');
             $table->unsignedBigInteger('product_id');
-            $table->unsignedBigInteger('quantity_id');
+            $table->unsignedBigInteger('quantity_id')->nullable();
             $table->integer('count')->nullable()->default(1);
             $table->unsignedInteger('price_total');
             $table->json('data')->nullable()->default(null);;
