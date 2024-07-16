@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\TDate;
+use App\Models\Visitor;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
@@ -23,6 +27,25 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+
+        $visits = Visitor::where('created_at', '>=', Carbon::now()->subMonth())
+            ->groupBy('date')
+            ->orderBy('date', 'DESC')
+            ->get(array(
+                DB::raw('Date(created_at) as date'),
+                DB::raw('COUNT(*) as "count"'),
+                DB::raw('SUM(visit) as "visits"'),
+            ))->toArray();
+        $dates = range((count($visits) - 1) * -1, 0);
+        $dt = new TDate();
+        array_walk($dates, function (&$item, $key) use ($dt) {
+            $x = strtotime($item . ' days');
+            if (config('app.locale') == 'fa') {
+                $item = $dt->PDate('Y/m/d', $x);
+            } else {
+                $item = date('Y-m-d', $x);
+            }
+        });
+        return view('home',compact('dates','visits'));
     }
 }

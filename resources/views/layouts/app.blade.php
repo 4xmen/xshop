@@ -18,4 +18,5 @@
         </div>
     </div>
 </div>
+@yield('js-content')
 @include('components.panel-footer')
