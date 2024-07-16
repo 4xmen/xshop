@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
-})->name('welcome');
+})->name('welcome')->middleware(\App\Http\Middleware\VisitorDetector::class);
 
 Auth::routes(['register' => false]);
 
@@ -345,4 +345,6 @@ Route::get('test',function (){
    return $p->fullMeta();
 
 });
+
+
 
