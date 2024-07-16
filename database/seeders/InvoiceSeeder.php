@@ -26,6 +26,8 @@ class InvoiceSeeder extends Seeder
                 $order->price_total = rand(100,2000).'000';
                 $total = $order->price_total ;
                 $order->invoice_id = $it->id;
+                $order->created_at = $it->created_at;
+                $order->updated_at = $it->updated_at;
                 $order->save();
             }
             $it->total_price = $total;

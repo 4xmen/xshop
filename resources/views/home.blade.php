@@ -200,6 +200,7 @@
                     }
                 }
             });
+
             let ctx2 = document.getElementById('visitor-device').getContext('2d');
             // document.getElementById('visitor-chart').setAttribute('width', document.querySelector('#visitor-container').clientWidth - 45);
             window.dchart = new window.chartjs(ctx2, {
@@ -219,6 +220,51 @@
                             borderColor: '#00000011'
 
                         }
+                    ]
+                },
+
+                // Configuration options
+                options: {
+                    maintainAspectRatio: false,
+                    resizeDelay: 1000,
+                    // aspectRatio: 6,
+                    layout: {
+                        padding: 10
+                    },
+                    legend: {
+                        position: 'bottom',
+                    },
+                    title: {
+                        display: true,
+                        text: 'Visitor device'
+                    }
+                }
+            });
+
+            let ctx3 = document.getElementById('orders-chart').getContext('2d');
+            // document.getElementById('visitor-chart').setAttribute('width', document.querySelector('#visitor-container').clientWidth - 45);
+            window.dchart = new window.chartjs(ctx3, {
+                // The type of chart we want to create
+                type: 'bar', // also try bar or other graph types
+
+                // The data for our dataset
+                data: {
+                    labels: @json($week),
+                    datasets: [
+                        {
+                            label: "{{__('Orders')}}",
+                            backgroundColor: 'rgba(128,0,255,0.4)',
+                            borderColor: 'rgba(140,0,255,0.6)',
+                            data: @json($orders),
+                            fill: true,
+                        },
+                        {
+                            label: "{{__('Invoices')}}",
+                            backgroundColor: 'rgba(255,0,0,0.4)',
+                            borderColor: '#ff000099',
+                            data: @json($invoices),
+                            fill: true,
+                        },
                     ]
                 },
 
