@@ -30,6 +30,17 @@ import './panel/setting-section-controller.js';
 import './panel/sotable-controller.js';
 import './panel/prototypes.js';
 
+// chartjs.defaults.defaultFontFamily = "Vazir";
+// chartjs.defaults.defaultFontSize = 18;
+
+// chartjs.defaults.backgroundColor = '#0097ff';
+chartjs.defaults.borderColor = 'rgba(255,255,255,0.05)';
+chartjs.defaults.color = '#fff';
+chartjs.defaults.font.family = 'Vazir';
+// chartjs.defaults.font.size = '14';
+// chartjs.defaults.font.weight = '100';
+
+
 window.chartjs = chartjs;
 window.isPaintedChart = false;
 

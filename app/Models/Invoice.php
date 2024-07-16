@@ -17,6 +17,11 @@ class Invoice extends Model
         return 'hash';
     }
 
+
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
+    }
     protected static function boot()
     {
         parent::boot();

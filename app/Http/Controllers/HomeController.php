@@ -46,6 +46,9 @@ class HomeController extends Controller
                 $item = date('Y-m-d', $x);
             }
         });
-        return view('home',compact('dates','visits'));
+
+        $mobiles_count = Visitor::where('created_at', '>=', Carbon::now()->subMonth())->where('is_mobile',1)->count();
+        $all_visitor = Visitor::where('created_at', '>=', Carbon::now()->subMonth())->count();
+        return view('home',compact('dates','visits','all_visitor','mobiles_count'));
     }
 }

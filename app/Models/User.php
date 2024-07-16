@@ -58,17 +58,47 @@ class User extends Authenticatable
     {
         return $this->hasMany(Post::class);
     }
+    public function postsPercent()
+    {
+        if (Post::count() == 0) {
+            return 100;
+        }
+        return $this->posts()->count() * 100 / Post::count();
+    }
     public function products()
     {
         return $this->hasMany(Product::class);
+    }
+    public function productsPercent()
+    {
+
+        if (Product::count() == 0) {
+            return 100;
+        }
+        return $this->products()->count() * 100 / Product::count();
     }
     public function tickets()
     {
         return $this->hasMany(Ticket::class);
     }
+    public function ticketsPercent()
+    {
+        if (Ticket::count() == 0) {
+            return 100;
+        }
+        return $this->tickets()->count() * 100 / Ticket::count();
+    }
     public function comments()
     {
         return $this->morphMany(Comment::class,'commentator');
+    }
+
+    public function commentsPercent()
+    {
+        if (Comment::count() == 0) {
+            return 100;
+        }
+        return $this->comments()->count() * 100 / Comment::count();
     }
 
     public function logs()

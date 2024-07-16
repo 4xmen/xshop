@@ -37,6 +37,7 @@ class DatabaseSeeder extends Seeder
                 GfxSeeder::class,
                 AreaSeeder::class,
                 PartSeeder::class,
+                InvoiceSeeder::class,
                 VisitorSeeder::class
             ]
         );
