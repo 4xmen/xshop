@@ -15,6 +15,12 @@ class Ticket extends Model
         return $this->belongsTo(Customer::class);
     }
 
+    public function user(){
+        return $this->belongsTo(User::class);
+    }
+
+
+
     public function subTickets(){
         return $this->hasMany(Ticket::class,'parent_id','id')->orderBy('id');
     }

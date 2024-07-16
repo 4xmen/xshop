@@ -206,3 +206,69 @@ a.btn,a.action-btn,a.circle-btn{
     object-fit: cover;
     border: 3px rgba($primary-color-panel,127) solid ;
 }
+
+.skewed-container{
+    overflow: hidden;
+    position: relative;
+    min-height: 128px;
+}
+.skewed-icon{
+    font-size: 128px;
+    opacity: .3;
+    position: absolute;
+    transform: rotateZ(27deg);
+    inset-inline-end: 1%;
+    top: -30px;
+}
+
+
+.order-card{
+    background: rgba(255, 196, 0, 0.8) !important;
+
+    .card-header{
+        background: #ffffff22 !important;
+        color:  $secondary-color-panel;
+    }
+    .card-body{
+        background: #00000011;
+        text-align: center;
+    }
+    i{
+        font-size: 100px;
+    }
+    a{
+        color: white;
+    }
+}
+
+.ticket-card{
+    background: rgba(0, 255, 166, 0.8) !important;
+
+    .card-header{
+        background: #ffffff22 !important;
+        color:  $secondary-color-panel;
+    }
+    .card-body{
+        background: #00000011;
+        text-align: center;
+    }
+    i{
+        font-size: 100px;
+    }
+    a,a:visited{
+        color: white;
+    }
+}
+
+.equal-height {
+    display: flex;
+    display: -webkit-flex;
+    flex-wrap: wrap;
+}
+
+@media (min-width: 768px) {
+    .row.equal {
+        display: flex;
+        flex-wrap: wrap;
+    }
+}

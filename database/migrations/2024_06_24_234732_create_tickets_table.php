@@ -15,12 +15,15 @@ return new class extends Migration
             $table->id();
             $table->string('title',128)->nullable()->default(null);
             $table->unsignedBigInteger('customer_id');
+            $table->unsignedBigInteger('user_id')->nullable();
             $table->text('body');
             $table->enum('status',['PENDING','ANSWERED','CLOSED'])->default('PENDING');
             $table->text('answer')->nullable()->default(null);
             $table->unsignedInteger('parent_id')->nullable()->default(null)->index();
             $table->timestamps();
             $table->foreign('customer_id')->on('customers')
+                ->references('id')->onDelete('cascade');
+            $table->foreign('user_id')->on('users')
                 ->references('id')->onDelete('cascade');
         });
     }
