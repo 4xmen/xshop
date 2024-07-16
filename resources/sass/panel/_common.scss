@@ -197,3 +197,12 @@ a.btn,a.action-btn,a.circle-btn{
 [data-open-file]{
     cursor: pointer;
 }
+
+.avatar-x64{
+    background: $body-bg;
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px rgba($primary-color-panel,127) solid ;
+}

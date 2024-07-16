@@ -20,7 +20,7 @@ class VisitorFactory extends Factory
     {
 
         $displays = ['1920x1080', '1366x768', '1920x1080', '1366x768', '1280x1024', null, null];
-        $displays_mobile = ['360x780', '430x932', '390x844', '375x667', '412x915', null, null];
+        $displays_mobile = ['360x780', '430x932', '390x844', '375x667', '412x915', '428x926', null];
         if (rand(0, 2) == 1) {
             $date = $this->faker->dateTimeBetween('-30 days', 'now');
         } else {

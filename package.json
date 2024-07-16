@@ -17,6 +17,7 @@
         "vue": "^3.2.37"
     },
     "dependencies": {
+        "chart.js": "^4.4.3",
         "leaflet": "^1.9.4",
         "remixicon": "^4.2.0",
         "sortablejs": "^1.15.2",

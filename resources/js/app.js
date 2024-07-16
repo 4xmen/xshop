@@ -18,6 +18,7 @@ import { createApp } from 'vue';
 import ToastPlugin from 'vue-toast-notification';
 import {useToast} from 'vue-toast-notification';
 import store from "./components/libs/store.js";
+import chartjs from 'chart.js/auto';
 import './panel/raw.js';
 import './panel/navbar.js';
 import './panel/list-checkboxs.js';
@@ -27,6 +28,10 @@ import './panel/step-controller.js';
 import './panel/product-upload-controller.js';
 import './panel/setting-section-controller.js';
 import './panel/sotable-controller.js';
+import './panel/prototypes.js';
+
+window.chartjs = chartjs;
+window.isPaintedChart = false;
 
 /**
  * Next, we will create a fresh Vue application instance. You may then begin

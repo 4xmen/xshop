@@ -7,6 +7,7 @@ import bootstrap from 'bootstrap/dist/js/bootstrap.bundle.min.js';
  */
 
 import axios from 'axios';
+
 window.axios = axios;
 
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
@@ -34,7 +35,7 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 // });
 
 // fixed tooptips
-document.addEventListener('readystatechange',function () {
+document.addEventListener('DOMContentLoaded',function () {
     [...document.querySelectorAll('[data-bs-toggle="tooltip"]')]
         .forEach(function (el) {
             let e = new bootstrap.Tooltip(el);
