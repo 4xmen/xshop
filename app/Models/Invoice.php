@@ -10,6 +10,8 @@ class Invoice extends Model
     use HasFactory;
 
 
+    public static $invoiceStatus = ['PENDING', 'CANCELED', 'FAILED', 'PAID', 'PROCESSING', 'COMPLETED'];
+
     public function getRouteKey()
     {
         return 'hash';
@@ -19,8 +21,8 @@ class Invoice extends Model
     {
         parent::boot();
 
-        static::creating(function($model) {
-            $model->hash = generateUniqueID( (strlen(Invoice::count()) + 2));
+        static::creating(function ($model) {
+            $model->hash = generateUniqueID((strlen(Invoice::count()) + 2));
         });
     }
 }

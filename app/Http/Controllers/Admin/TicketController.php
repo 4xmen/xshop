@@ -121,6 +121,7 @@ class TicketController extends XController
     {
         $item->answer = $request->answer;
         $item->status = $request->status;
+        $item->user_id = auth()->id();
         $item->save();
         if ($request->has('answers')){
             foreach ($request->answers as $id => $answer) {

@@ -58,6 +58,18 @@ class User extends Authenticatable
     {
         return $this->hasMany(Post::class);
     }
+    public function products()
+    {
+        return $this->hasMany(Product::class);
+    }
+    public function tickets()
+    {
+        return $this->hasMany(Ticket::class);
+    }
+    public function comments()
+    {
+        return $this->morphMany(Comment::class,'commentator');
+    }
 
     public function logs()
     {

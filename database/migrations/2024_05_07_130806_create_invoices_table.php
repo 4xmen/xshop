@@ -15,7 +15,7 @@ return new class extends Migration
         Schema::create('invoices', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('customer_id');
-            $table->enum("status", ['PENDING', 'PROCESSING', 'COMPLETED', 'CANCELED', 'FAILED',])->nullable()->default("PENDING");
+            $table->enum("status",\App\Models\Invoice::$invoiceStatus)->nullable()->default("PENDING");
             $table->unsignedBigInteger('total_price')->nullable()->default(0);
             $table->json('meta')->nullable();
             $table->unsignedBigInteger('discount_id')->nullable()->default(null);
