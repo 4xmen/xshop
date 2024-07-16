@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('version')->nullable();
             $table->string('display')->nullable();
             $table->string('keywords')->nullable();
+            $table->string('referer')->nullable();
             $table->boolean('is_mobile')->default(false);
             $table->string('page')->nullable();
             $table->timestamps();

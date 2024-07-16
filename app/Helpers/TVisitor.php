@@ -306,4 +306,14 @@ class TVisitor {
 //        return $result;
 //    }
 
+    public static function getRefererDomain() {
+        if(isset($_SERVER['HTTP_REFERER'])) {
+            $referer = parse_url($_SERVER['HTTP_REFERER']);
+            $domain = isset($referer['host']) ? $referer['host'] : null;
+            return $domain;
+        } else {
+            return null;
+        }
+    }
+
 }
