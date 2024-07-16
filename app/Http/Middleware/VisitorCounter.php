@@ -25,6 +25,7 @@ class VisitorCounter
             $visitor->browser = TVisitor::DetectBrowser();
             $visitor->os = TVisitor::DetectOS();
             $visitor->version = TVisitor::BrowserVersion();
+            $visitor->referer = TVisitor::getRefererDomain();
             $ref =  TVisitor::GetKeyword();
             if ($ref !== null) {
                 $visitor->keywords = $ref['keyword'];
