@@ -7,34 +7,37 @@
                         <i class="ri-brush-2-line"></i>
                         GFX
                     </h3>
-                    <div v-for="(v,i) in values" class="p-2 item-gfx">
-                        <div class="float-end"
-                             v-if="i == 'background' || i == 'primary' || i == 'secondary' || i == 'text'">
-                            <input type="color" v-model="values[i]" class="form-control-color">
+                    <template v-for="(v,i) in values" >
+                        <div v-if="v != undefined" class="p-2 item-gfx">
+                            <div class="float-end"
+                                 v-if="i == 'background' || i == 'primary' || i == 'secondary' || i == 'text'">
+                                <input type="color" v-model="values[i]" class="form-control-color">
+                            </div>
+                            <label class="pt-2 mb-1">
+                                {{ titles[i] }}
+                            </label>
+                            <br>
+                            <template v-if="i == 'border-radius'">
+                                <border-radios-input v-model="values[i]"></border-radios-input>
+                            </template>
+                            <template v-if="i == 'shadow'">
+                                <shadow-input v-model="values[i]"></shadow-input>
+                            </template>
+                            <template v-if="i == 'font'">
+                                <select v-model="values[i]" class="form-control">
+                                    <option value="Vazir"> Vazir</option>
+                                </select>
+                            </template>
+                            <template v-if="i == 'container'">
+                                <select v-model="values[i]" class="form-control">
+                                    <option value="container"> Container</option>
+                                    <option value="container-fluid"> Container fluid</option>
+                                </select>
+                            </template>
+
+                            <input :name="'gfx['+i+']'" :type="_dbg_" :value="v">
                         </div>
-                        <label class="pt-2 mb-1">
-                            {{ titles[i] }}
-                        </label>
-                        <br>
-                        <template v-if="i == 'border-radius'">
-                            <border-radios-input v-model="values[i]"></border-radios-input>
-                        </template>
-                        <template v-if="i == 'shadow'">
-                            <shadow-input v-model="values[i]"></shadow-input>
-                        </template>
-                        <template v-if="i == 'font'">
-                            <select v-model="values[i]" class="form-control">
-                                <option value="Vazir"> Vazir</option>
-                            </select>
-                        </template>
-                        <template v-if="i == 'container'">
-                            <select v-model="values[i]" class="form-control">
-                                <option value="container"> Container</option>
-                                <option value="container-fluid"> Container fluid</option>
-                            </select>
-                        </template>
-                        <input :name="'gfx['+i+']'" :type="_dbg_" :value="v">
-                    </div>
+                    </template>
                     <div class="p-2">
                         <select v-model="device" class="form-control">
                             <option value="desktop"> Desktop</option>
@@ -128,13 +131,13 @@
                                 <i class="ri-wifi-line"></i>
                             </span>
                             <span>
-                                {{nowTime}}
+                                {{ nowTime }}
                             </span>
                             <i class="ri-battery-low-line"></i>
                         </div>
-                        <div  :style="`background: ${values.primary};`" >
+                        <div :style="`background: ${values.primary};`">
                             <div class="diff p-2">
-                                {{tempUrl}}
+                                {{ tempUrl }}
                             </div>
                         </div>
                     </div>
@@ -258,46 +261,46 @@ export default {
 
             return css;
         },
-        tempUrl(){
+        tempUrl() {
             return window.location.hostname;
         },
-        nowTime(){
+        nowTime() {
             const dt = new Date();
-            return dt.getHours()+':'+dt.getMinutes();
+            return dt.getHours() + ':' + dt.getMinutes();
         },
-        lighter(){
-            if (this.values.primary != undefined){
+        lighter() {
+            if (this.values.primary != undefined) {
                 return this.lightenColor(this.values.primary);
             }
         }
 
     },
     methods: {
-        lightenColor(col,amt = 20) {
+        lightenColor(col, amt = 20) {
             var usePound = false;
-            if ( col[0] == "#" ) {
+            if (col[0] == "#") {
                 col = col.slice(1);
                 usePound = true;
             }
 
-            var num = parseInt(col,16);
+            var num = parseInt(col, 16);
 
             var r = (num >> 16) + amt;
 
-            if ( r > 255 ) r = 255;
-            else if  (r < 0) r = 0;
+            if (r > 255) r = 255;
+            else if (r < 0) r = 0;
 
             var b = ((num >> 8) & 0x00FF) + amt;
 
-            if ( b > 255 ) b = 255;
-            else if  (b < 0) b = 0;
+            if (b > 255) b = 255;
+            else if (b < 0) b = 0;
 
             var g = (num & 0x0000FF) + amt;
 
-            if ( g > 255 ) g = 255;
-            else if  ( g < 0 ) g = 0;
+            if (g > 255) g = 255;
+            else if (g < 0) g = 0;
 
-            return (usePound?"#":"") + (g | (b << 8) | (r << 16)).toString(16);
+            return (usePound ? "#" : "") + (g | (b << 8) | (r << 16)).toString(16);
         }
     }
 }
@@ -317,7 +320,7 @@ export default {
     overflow-y: auto;
 }
 
-#m-content{
+#m-content {
     border-radius: 20px;
     overflow: hidden;
 }
@@ -393,7 +396,8 @@ export default {
     padding: 3rem;
 }
 
-.diff{
-    filter: invert(1);mix-blend-mode: difference;
+.diff {
+    filter: invert(1);
+    mix-blend-mode: difference;
 }
 </style>
