@@ -17,6 +17,7 @@ return new class extends Migration
             $table->tinyInteger('max')->default(1);
             $table->string('icon')->nullable();
             $table->json('valid_segments');
+            $table->string('preview')->nullable();
             $table->timestamps();
         });
     }

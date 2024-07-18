@@ -1,5 +1,7 @@
 @extends('layouts.app')
-
+@section('title')
+    {{__("GFX")}} -
+@endsection
 @section('content')
     <form action="{{route('admin.gfx.update')}}" method="post" class="mb-5 pb-5">
         @csrf
