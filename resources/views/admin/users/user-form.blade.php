@@ -107,8 +107,90 @@
                         <label> &nbsp;</label>
                         <input name="" type="submit" class="btn btn-primary mt-2" value="{{__('Save')}}"/>
                     </div>
+
+
+
+
+                    @if(isset($item) && $item->hasRole('user'))
+
+                        <div class="col-12">
+                            <br>
+                            <button class="btn btn-secondary" type="button"
+                                    data-bs-toggle="collapse" href="#collapseExample" role="button"
+                                    aria-expanded="false" aria-controls="collapseExample">
+                                {{__("ACL")}}
+                                ({{$item->accesses()->count()}})
+                            </button>
+                            <div class="mt-2">
+                                <div class="collapse" id="collapseExample">
+                                    <div class="card card-body">
+                                        @foreach($routes as $name => $route)
+
+                                            <div class="switches-holder">
+
+                                                <div class="rule-title">
+                                                    <div class="form-check form-switch">
+                                                        <input class="form-check-input main-switch" type="checkbox"
+                                                               role="switch"
+                                                               id="main{{$name}}">
+                                                        <label class="form-check-label"
+                                                               for="main{{$name}}"> {{__($name)}} </label>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    @foreach($route as $r)
+                                                        <div class="col-md-3">
+                                                            <div class="px-3 py-2">
+                                                                <div class="form-check form-switch">
+                                                                    <input class="form-check-input" type="checkbox"
+                                                                           role="switch"
+                                                                           name="acl[]"
+                                                                           @if ($item->hasAccess("admin.{$name}.{$r}"))
+                                                                               checked
+                                                                           @endif
+                                                                           value="admin.{{$name}}.{{$r}}"
+                                                                           id="s{{$r}}">
+                                                                    <label class="form-check-label"
+                                                                           for="s{{$r}}">
+                                                                        @if($r == 'all' || $r == 'index' | $r == 'list')
+                                                                            {{__("Show list")}}
+                                                                        @else
+                                                                            {{__('!'.$r)}}
+                                                                        @endif
+                                                                    </label>
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
+                                                    @endforeach
+                                                </div>
+                                            </div>
+                                            <hr>
+                                        @endforeach
+                                    </div>
+                                </div>
+                            </div>
+                            <hr>
+                        </div>
+                    @endif
                 </div>
             </div>
         </div>
     </div>
+@endsection
+
+
+@section('js-content')
+    <script>
+        document.addEventListener('DOMContentLoaded',function () {
+            document.querySelectorAll('.main-switch').forEach(function (chk) {
+                chk.addEventListener('change', function () {
+                    let state = this.checked;
+                    this.closest('.switches-holder').querySelectorAll('.row input[type="checkbox"]').forEach(function (subCheck) {
+                        subCheck.checked = state;
+                    });
+                });
+            });
+        });
+    </script>
 @endsection

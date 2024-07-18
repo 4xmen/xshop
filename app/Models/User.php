@@ -105,4 +105,24 @@ class User extends Authenticatable
     {
         return $this->hasMany(AdminLog::class, 'user_id', 'id');
     }
+
+    public function accesses(){
+        return $this->hasMany(Access::class);
+    }
+    public function hasAnyAccess($name){
+        if ($this->hasRole('SUSPENDED')){
+            return  false;
+        }
+        if ($this->hasRole('admin') || $this->hasRole('developer')) {
+            return  true;
+        }
+        return $this->accesses()->where('route','LIKE','%.'.$name.'.%')->count() > 0;
+    }
+
+    public function hasAccess($route){
+        if ($this->hasRole('SUSPENDED')){
+            return  false;
+        }
+        return $this->accesses()->where('route',$route)->count() > 0;
+    }
 }
