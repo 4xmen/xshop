@@ -79,8 +79,27 @@ class UserController extends XController
      */
     public function edit(User $item)
     {
+        $routes = [];
+        foreach (\Route::getRoutes()->getRoutes() as $route) {
+            $action = $route->getAction();
+            if (array_key_exists('as', $action)) {
+                $routeName = explode('.', $action['as']);
+                if (isset($routeName[2]) && $routeName[0] == 'admin') {
+                    if (!isset($routes[$routeName[1]])) {
+                        $routes[$routeName[1]] = [];
+                        if ($routeName[2] != 'edit' && $routeName[2] != 'create')
+                            $routes[$routeName[1]][] = $routeName[2];
+
+                    } else {
+                        if ($routeName[2] != 'edit' && $routeName[2] != 'create')
+                            $routes[$routeName[1]][] = $routeName[2];
+                    }
+                }
+            }
+        }
+        unset($routes['home'], $routes['user'], $routes['ckeditor'],$routes['area'],$routes['lang'],$routes['gfx']);
         //
-        return view($this->formView, compact('item'));
+        return view($this->formView, compact('item','routes'));
     }
 
     public function bulk(Request $request)
