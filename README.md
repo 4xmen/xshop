@@ -19,8 +19,8 @@
 - Developer Friendlier
 
 ## Access to xShop/v1
-
-<a href="https://github.com/a1Gard/xshop.v1">https://github.com/a1Gard/xshop.v1</a>
+> [!WARNING]  
+> xShop/v1 available here: <a href="https://github.com/a1Gard/xshop.v1">https://github.com/a1Gard/xshop.v1</a>
 
 
 ## Installation
