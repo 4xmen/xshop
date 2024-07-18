@@ -18,7 +18,7 @@ class PropController extends XController
     // protected  $_MODEL_ = Prop::class;
     // protected  $SAVE_REQUEST = PropSaveRequest::class;
 
-    protected $cols = ['name','label'];
+    protected $cols = ['name','label','icon'];
     protected $extra_cols = ['id'];
 
     protected $searchable = ['name','label'];
