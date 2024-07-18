@@ -213,6 +213,8 @@ Route::prefix(config('app.panel.prefix'))->name('admin.')->group(
                         Route::get('restore/{item}', [\App\Http\Controllers\Admin\MenuController::class, 'restore'])->name('restore');
                         Route::post('bulk', [\App\Http\Controllers\Admin\MenuController::class, "bulk"])->name('bulk');
                         Route::get('trashed', [\App\Http\Controllers\Admin\MenuController::class, "trashed"])->name('trashed');
+                        Route::post('sort/save', [\App\Http\Controllers\Admin\MenuController::class, 'sortSave'])->name('sort-save');
+                        Route::get('sort/{item}', [\App\Http\Controllers\Admin\MenuController::class, 'sort'])->name('sort');
                     });
                 Route::prefix('states')->name('state.')->group(
                     function () {
