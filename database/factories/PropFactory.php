@@ -18,6 +18,7 @@ class PropFactory extends Factory
     {
         return [
             //
+            'icon' => 'remixicon-line',
         ];
     }
 }
