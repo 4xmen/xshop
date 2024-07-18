@@ -4,7 +4,7 @@
     welcome
 @endsection
 @section('content')
-    @foreach(getParts('index') as $part)
+    @foreach(getParts($area) as $part)
         @php($p = $part->getBladeWithData())
         @include($p['blade'],['data' => $p['data']])
     @endforeach

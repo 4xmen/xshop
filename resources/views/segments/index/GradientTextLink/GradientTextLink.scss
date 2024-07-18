@@ -1,7 +1,7 @@
 .GradientTextLink {
     // scss
-    background: linear-gradient( var(--deg), $xshop-primary, $xshop-secondary 100%);
-    color: $xshop-diff;
+    background: linear-gradient( var(--deg), var(--xshop-primary), var(--xshop-secondary) 100%);
+    color: var(--xshop-diff);
 
     h1{
         font-size: 24px;

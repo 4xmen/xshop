@@ -6,7 +6,10 @@
     <form action="{{route('admin.gfx.update')}}" method="post" class="mb-5 pb-5">
         @csrf
         @include('components.err')
-        <gfxer :items='@json(\App\Models\Gfx::all('key','label','value'))'></gfxer>
+        <gfxer
+            :items='@json(\App\Models\Gfx::all('key','label','value'))'
+            :previews='@json($prviews)'
+        ></gfxer>
         <button
             data-link="{{getRoute('update')}}"
             id="save-sort"

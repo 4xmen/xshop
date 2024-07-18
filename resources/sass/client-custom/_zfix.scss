@@ -24,55 +24,55 @@ a,a:visited{
 
 
 .btn{
-    border-radius: $xshop-border-radius;
+    border-radius: var(--xshop-border-radius);
 }
 .btn-primary{
-    background: $xshop-primary;
-    border-color: lighten($xshop-primary,5);
-    color: $xshop-diff !important;
+    background: var(--xshop-primary);
+    border-color: var(--xshop-secondary);
+    color: var(--xshop-diff) !important;
 
     &:hover{
-        border-color: lighten($xshop-primary,10);
-        background: darken($xshop-primary,10); ;
+        border-color:  var(--xshop-primary);
+        background:  var(--xshop-secondary); ;
     }
 }
 
 .btn-outline-primary{
-    border-color: $xshop-primary;
-    color: $xshop-primary;
+    border-color: var(--xshop-primary);
+    color:var(--xshop-primary);
     &:hover{
-        border-color: lighten($xshop-primary,10);
-        color: $xshop-diff !important;
-        background: darken($xshop-primary,10); ;
+        border-color: var(--xshop-secondary);
+        color:  var(--xshop-diff) !important;
+        background: var(--xshop-secondary); ;
     }
 }
 .btn-secondary{
-    background: $xshop-secondary;
-    border-color: lighten($xshop-secondary,5);
-    color: $xshop-diff !important;
+    background: var(--xshop-secondary);
+    border-color: var(--xshop-secondary);
+    color:  var(--xshop-diff) !important;
 
     &:hover{
-        border-color: lighten($xshop-secondary,10);
-        background: darken($xshop-secondary,10); ;
+        border-color: var(--xshop-primary);
+        background: var(--xshop-secondary); ;
     }
 }
 
 .btn-outline-secondary{
-    border-color: $xshop-secondary;
-    color: $xshop-secondary;
+    border-color: var(--xshop-secondary);
+    color: var(--xshop-secondary);
     &:hover{
-        border-color: lighten($xshop-secondary,10);
-        color: $xshop-diff !important;
-        background: darken($xshop-secondary,10); ;
+        border-color: var(--xshop-primary);
+        color:  var(--xshop-diff) !important;
+        background: var(--xshop-primary); ;
     }
 }
 
 .btn-outline-invert{
-    border-color: $xshop-diff;
-    color: $xshop-diff;
+    border-color:  var(--xshop-diff);
+    color:  var(--xshop-diff);
 
     &:hover{
-        background: $xshop-diff;
-        color: $xshop-primary;
+        background:  var(--xshop-diff);
+        color: var(--xshop-primary);
     }
 }

@@ -7,7 +7,7 @@
                         <i class="ri-brush-2-line"></i>
                         GFX
                     </h3>
-                    <template v-for="(v,i) in values" >
+                    <template v-for="(v,i) in values">
                         <div v-if="v != undefined" class="p-2 item-gfx">
                             <div class="float-end"
                                  v-if="i == 'background' || i == 'primary' || i == 'secondary' || i == 'text'">
@@ -38,90 +38,104 @@
                             <input :name="'gfx['+i+']'" :type="_dbg_" :value="v">
                         </div>
                     </template>
-                    <div class="p-2">
-                        <select v-model="device" class="form-control">
-                            <option value="desktop"> Desktop</option>
-                            <option value="mobile"> Mobile</option>
-                        </select>
-                    </div>
                 </div>
             </div>
             <div class="col-xl-9">
+                <div class="item-gfx p-2 mb-2">
+                    <div class="row">
+                        <div class="col-md">
+                            Device
+                            <select v-model="device" class="form-control">
+                                <option value="desktop"> Desktop</option>
+                                <option value="mobile"> Mobile</option>
+                            </select>
+                        </div>
+                        <div class="col-md">
+                            Preview
+                            <select v-model="preview" class="form-control">
+                                <option :value="k" v-for="(k,p) in previews"> {{ p }}</option>
+                            </select>
+                        </div>
+
+                    </div>
+                </div>
                 <div id="browser" :style="generalStyle" v-if="device != 'mobile'">
                     <div id="bar">
                         Browser
                     </div>
                     <div id="b-content">
-                        <div :class="values.container">
-                            <div class="row" id="items-icon">
-                                <div class="col-md-4">
-                                    <i class="ri-twitter-line"
-                                       :style="`color: ${values.primary};`"></i>
-                                    <h3 :style="`color: ${values.secondary};`">
-                                        Social media
-                                    </h3>
-                                    <p>
-                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. A aperiam doloremque
-                                        eligendi reprehenderit voluptas? Ab amet autem doloremque, eius et harum magnam
-                                        maxime minima odio pariatur quaerat soluta temporibus velit.
-                                    </p>
-                                    <a class="btn-read-more"
-                                       :style="`box-shadow: ${values.shadow} ;
-                                       border-radius: ${values['border-radius']} ;
-                                       border-color: ${values.primary};
-                                       color: ${values.primary};`">
-                                        Read more
-                                    </a>
-                                </div>
-                                <div class="col-md-4">
-                                    <i class="ri-mail-line"
-                                       :style="`color: ${values.primary};`"></i>
-                                    <h3 :style="`color: ${values.secondary};`">
-                                        Contact
-                                    </h3>
-                                    <p>
-                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. A aperiam doloremque
-                                        eligendi reprehenderit voluptas? Ab amet autem doloremque, eius et harum magnam
-                                        maxime minima odio pariatur quaerat soluta temporibus velit.
-                                    </p>
-                                    <a class="btn-read-more"
-                                       :style="`box-shadow: ${values.shadow} ;
-                                       border-radius: ${values['border-radius']} ;
-                                       border-color: ${values.primary};
-                                       color: ${values.primary};`">
-                                        Read more
-                                    </a>
-                                </div>
-                                <div class="col-md-4">
-                                    <i class="ri-brush-4-line"
-                                       :style="`color: ${values.primary};`"></i>
-                                    <h3 :style="`color: ${values.secondary};`">
-                                        Design
-                                    </h3>
-                                    <p>
-                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. A aperiam doloremque
-                                        eligendi reprehenderit voluptas? Ab amet autem doloremque, eius et harum magnam
-                                        maxime minima odio pariatur quaerat soluta temporibus velit.
-                                    </p>
-                                    <a class="btn-read-more"
-                                       :style="`box-shadow: ${values.shadow} ;
-                                       border-radius: ${values['border-radius']} ;
-                                       border-color: ${values.primary};
-                                       color: ${values.primary};`">
-                                        Read more
-                                    </a>
-                                </div>
-                            </div>
 
-                            <div id="big-box" :style="`box-shadow: ${values.shadow} ;
-                                       border-radius: ${values['border-radius']} ;
-                                        background: linear-gradient(49deg, ${values.primary} 42%, ${values.secondary} 100%);`">
-                                <h3 class="diff">
-                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cupiditate iste ut
-                                    veritatis?
-                                </h3>
-                            </div>
-                        </div>
+                        <iframe :src="preview" class="preview-frame"></iframe>
+                        <!--                        <div :class="values.container">-->
+                        <!--                            <div class="row" id="items-icon">-->
+                        <!--                                <div class="col-md-4">-->
+                        <!--                                    <i class="ri-twitter-line"-->
+                        <!--                                       :style="`color: ${values.primary};`"></i>-->
+                        <!--                                    <h3 :style="`color: ${values.secondary};`">-->
+                        <!--                                        Social media-->
+                        <!--                                    </h3>-->
+                        <!--                                    <p>-->
+                        <!--                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. A aperiam doloremque-->
+                        <!--                                        eligendi reprehenderit voluptas? Ab amet autem doloremque, eius et harum magnam-->
+                        <!--                                        maxime minima odio pariatur quaerat soluta temporibus velit.-->
+                        <!--                                    </p>-->
+                        <!--                                    <a class="btn-read-more"-->
+                        <!--                                       :style="`box-shadow: ${values.shadow} ;-->
+                        <!--                                       border-radius: ${values['border-radius']} ;-->
+                        <!--                                       border-color: ${values.primary};-->
+                        <!--                                       color: ${values.primary};`">-->
+                        <!--                                        Read more-->
+                        <!--                                    </a>-->
+                        <!--                                </div>-->
+                        <!--                                <div class="col-md-4">-->
+                        <!--                                    <i class="ri-mail-line"-->
+                        <!--                                       :style="`color: ${values.primary};`"></i>-->
+                        <!--                                    <h3 :style="`color: ${values.secondary};`">-->
+                        <!--                                        Contact-->
+                        <!--                                    </h3>-->
+                        <!--                                    <p>-->
+                        <!--                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. A aperiam doloremque-->
+                        <!--                                        eligendi reprehenderit voluptas? Ab amet autem doloremque, eius et harum magnam-->
+                        <!--                                        maxime minima odio pariatur quaerat soluta temporibus velit.-->
+                        <!--                                    </p>-->
+                        <!--                                    <a class="btn-read-more"-->
+                        <!--                                       :style="`box-shadow: ${values.shadow} ;-->
+                        <!--                                       border-radius: ${values['border-radius']} ;-->
+                        <!--                                       border-color: ${values.primary};-->
+                        <!--                                       color: ${values.primary};`">-->
+                        <!--                                        Read more-->
+                        <!--                                    </a>-->
+                        <!--                                </div>-->
+                        <!--                                <div class="col-md-4">-->
+                        <!--                                    <i class="ri-brush-4-line"-->
+                        <!--                                       :style="`color: ${values.primary};`"></i>-->
+                        <!--                                    <h3 :style="`color: ${values.secondary};`">-->
+                        <!--                                        Design-->
+                        <!--                                    </h3>-->
+                        <!--                                    <p>-->
+                        <!--                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. A aperiam doloremque-->
+                        <!--                                        eligendi reprehenderit voluptas? Ab amet autem doloremque, eius et harum magnam-->
+                        <!--                                        maxime minima odio pariatur quaerat soluta temporibus velit.-->
+                        <!--                                    </p>-->
+                        <!--                                    <a class="btn-read-more"-->
+                        <!--                                       :style="`box-shadow: ${values.shadow} ;-->
+                        <!--                                       border-radius: ${values['border-radius']} ;-->
+                        <!--                                       border-color: ${values.primary};-->
+                        <!--                                       color: ${values.primary};`">-->
+                        <!--                                        Read more-->
+                        <!--                                    </a>-->
+                        <!--                                </div>-->
+                        <!--                            </div>-->
+
+                        <!--                            <div id="big-box" :style="`box-shadow: ${values.shadow} ;-->
+                        <!--                                       border-radius: ${values['border-radius']} ;-->
+                        <!--                                        background: linear-gradient(49deg, ${values.primary} 42%, ${values.secondary} 100%);`">-->
+                        <!--                                <h3 class="diff">-->
+                        <!--                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cupiditate iste ut-->
+                        <!--                                    veritatis?-->
+                        <!--                                </h3>-->
+                        <!--                            </div>-->
+                        <!--                        </div>-->
                     </div>
                 </div>
                 <div id="mobile" :style="generalStyle" v-if="device == 'mobile'">
@@ -141,76 +155,77 @@
                             </div>
                         </div>
                     </div>
-                    <div id="m-content" :class="values.container">
-                        <div class="row" id="items-icon">
-                            <div class="col-md-12">
-                                <i class="ri-twitter-line"
-                                   :style="`color: ${values.primary};`"></i>
-                                <h3 :style="`color: ${values.secondary};`">
-                                    Social media
-                                </h3>
-                                <p>
-                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. A aperiam doloremque
-                                    eligendi reprehenderit voluptas? Ab amet autem doloremque, eius et harum magnam
-                                    maxime minima odio pariatur quaerat soluta temporibus velit.
-                                </p>
-                                <a class="btn-read-more"
-                                   :style="`box-shadow: ${values.shadow} ;
-                                       border-radius: ${values['border-radius']} ;
-                                       border-color: ${values.primary};
-                                       color: ${values.primary};`">
-                                    Read more
-                                </a>
-                            </div>
-                            <div class="col-12">
-                                <i class="ri-mail-line"
-                                   :style="`color: ${values.primary};`"></i>
-                                <h3 :style="`color: ${values.secondary};`">
-                                    Contact
-                                </h3>
-                                <p>
-                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. A aperiam doloremque
-                                    eligendi reprehenderit voluptas? Ab amet autem doloremque, eius et harum magnam
-                                    maxime minima odio pariatur quaerat soluta temporibus velit.
-                                </p>
-                                <a class="btn-read-more"
-                                   :style="`box-shadow: ${values.shadow} ;
-                                       border-radius: ${values['border-radius']} ;
-                                       border-color: ${values.primary};
-                                       color: ${values.primary};`">
-                                    Read more
-                                </a>
-                            </div>
-                            <div class="col-12">
-                                <i class="ri-brush-4-line"
-                                   :style="`color: ${values.primary};`"></i>
-                                <h3 :style="`color: ${values.secondary};`">
-                                    Design
-                                </h3>
-                                <p>
-                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. A aperiam doloremque
-                                    eligendi reprehenderit voluptas? Ab amet autem doloremque, eius et harum magnam
-                                    maxime minima odio pariatur quaerat soluta temporibus velit.
-                                </p>
-                                <a class="btn-read-more"
-                                   :style="`box-shadow: ${values.shadow} ;
-                                       border-radius: ${values['border-radius']} ;
-                                       border-color: ${values.primary};
-                                       color: ${values.primary};`">
-                                    Read more
-                                </a>
-                            </div>
-                        </div>
+                    <iframe :src="preview" class="preview-frame"></iframe>
+                    <!--                    <div id="m-content" :class="values.container">-->
+                    <!--                        <div class="row" id="items-icon">-->
+                    <!--                            <div class="col-md-12">-->
+                    <!--                                <i class="ri-twitter-line"-->
+                    <!--                                   :style="`color: ${values.primary};`"></i>-->
+                    <!--                                <h3 :style="`color: ${values.secondary};`">-->
+                    <!--                                    Social media-->
+                    <!--                                </h3>-->
+                    <!--                                <p>-->
+                    <!--                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. A aperiam doloremque-->
+                    <!--                                    eligendi reprehenderit voluptas? Ab amet autem doloremque, eius et harum magnam-->
+                    <!--                                    maxime minima odio pariatur quaerat soluta temporibus velit.-->
+                    <!--                                </p>-->
+                    <!--                                <a class="btn-read-more"-->
+                    <!--                                   :style="`box-shadow: ${values.shadow} ;-->
+                    <!--                                       border-radius: ${values['border-radius']} ;-->
+                    <!--                                       border-color: ${values.primary};-->
+                    <!--                                       color: ${values.primary};`">-->
+                    <!--                                    Read more-->
+                    <!--                                </a>-->
+                    <!--                            </div>-->
+                    <!--                            <div class="col-12">-->
+                    <!--                                <i class="ri-mail-line"-->
+                    <!--                                   :style="`color: ${values.primary};`"></i>-->
+                    <!--                                <h3 :style="`color: ${values.secondary};`">-->
+                    <!--                                    Contact-->
+                    <!--                                </h3>-->
+                    <!--                                <p>-->
+                    <!--                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. A aperiam doloremque-->
+                    <!--                                    eligendi reprehenderit voluptas? Ab amet autem doloremque, eius et harum magnam-->
+                    <!--                                    maxime minima odio pariatur quaerat soluta temporibus velit.-->
+                    <!--                                </p>-->
+                    <!--                                <a class="btn-read-more"-->
+                    <!--                                   :style="`box-shadow: ${values.shadow} ;-->
+                    <!--                                       border-radius: ${values['border-radius']} ;-->
+                    <!--                                       border-color: ${values.primary};-->
+                    <!--                                       color: ${values.primary};`">-->
+                    <!--                                    Read more-->
+                    <!--                                </a>-->
+                    <!--                            </div>-->
+                    <!--                            <div class="col-12">-->
+                    <!--                                <i class="ri-brush-4-line"-->
+                    <!--                                   :style="`color: ${values.primary};`"></i>-->
+                    <!--                                <h3 :style="`color: ${values.secondary};`">-->
+                    <!--                                    Design-->
+                    <!--                                </h3>-->
+                    <!--                                <p>-->
+                    <!--                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. A aperiam doloremque-->
+                    <!--                                    eligendi reprehenderit voluptas? Ab amet autem doloremque, eius et harum magnam-->
+                    <!--                                    maxime minima odio pariatur quaerat soluta temporibus velit.-->
+                    <!--                                </p>-->
+                    <!--                                <a class="btn-read-more"-->
+                    <!--                                   :style="`box-shadow: ${values.shadow} ;-->
+                    <!--                                       border-radius: ${values['border-radius']} ;-->
+                    <!--                                       border-color: ${values.primary};-->
+                    <!--                                       color: ${values.primary};`">-->
+                    <!--                                    Read more-->
+                    <!--                                </a>-->
+                    <!--                            </div>-->
+                    <!--                        </div>-->
 
-                        <div id="big-box" :style="`box-shadow: ${values.shadow} ;
-                                       border-radius: ${values['border-radius']} ;
-                                        background: linear-gradient(49deg, ${values.primary} 42%, ${values.secondary} 100%);`">
-                            <h3 style="filter: invert(1);mix-blend-mode: difference;">
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cupiditate iste ut
-                                veritatis?
-                            </h3>
-                        </div>
-                    </div>
+                    <!--                        <div id="big-box" :style="`box-shadow: ${values.shadow} ;-->
+                    <!--                                       border-radius: ${values['border-radius']} ;-->
+                    <!--                                        background: linear-gradient(49deg, ${values.primary} 42%, ${values.secondary} 100%);`">-->
+                    <!--                            <h3 style="filter: invert(1);mix-blend-mode: difference;">-->
+                    <!--                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cupiditate iste ut-->
+                    <!--                                veritatis?-->
+                    <!--                            </h3>-->
+                    <!--                        </div>-->
+                    <!--                    </div>-->
                 </div>
             </div>
         </div>
@@ -221,6 +236,11 @@
 
 import BorderRadiosInput from "./BorderRadiosInput.vue";
 import ShadowInput from "./ShadowInput.vue";
+function iframeRef( frameRef ) {
+    return frameRef.contentWindow
+        ? frameRef.contentWindow.document
+        : frameRef.contentDocument
+}
 
 export default {
     name: "gfxer",
@@ -233,11 +253,18 @@ export default {
             _dbg_: 'hidden',
             values: {},
             titles: {},
+            preview: null,
             device: 'desktop', // desktop
         }
     },
     props: {
-        items: {},
+        items: {
+            required: true,
+        },
+        previews: {
+            default: [],
+            type: Array,
+        },
     },
     mounted() {
         for (const i in this.items) {
@@ -245,8 +272,10 @@ export default {
             this.titles[item.key] = item.label;
             this.values[item.key] = item.value;
         }
-
-        console.log(this.items);
+        if (Object.keys(this.previews).length > 0) {
+            this.preview = Object.values(this.previews)[0];
+            console.log(this.preview, 'x');
+        }
     },
     computed: {
         generalStyle() { //
@@ -301,8 +330,48 @@ export default {
             else if (g < 0) g = 0;
 
             return (usePound ? "#" : "") + (g | (b << 8) | (r << 16)).toString(16);
+        },
+        updateIframes(newVal){
+            document.querySelectorAll('.preview-frame').forEach( (preview) =>  {
+                let doc = iframeRef(preview);
+                let sty =  doc.documentElement.style ;
+                sty.setProperty('--xshop-primary',newVal.primary);
+                sty.setProperty('--xshop-background',newVal.background);
+                sty.setProperty('--xshop-secondary',newVal.secondary);
+                sty.setProperty('--xshop-text',newVal.text);
+                sty.setProperty('--xshop-border-radius',newVal['border-radius']);
+                sty.setProperty('--xshop-shadow',newVal.shadow);
+                let newContainer = 'container';
+                let oldContainer = 'container-fluid';
+                if (newVal.container == 'container-fluid'){
+                    newContainer = 'container-fluid';
+                    oldContainer = 'container';
+                }
+                doc.querySelectorAll('.'+oldContainer).forEach(function (el) {
+                  el.classList.remove(oldContainer);
+                  el.classList.add(newContainer);
+                });
+            });
         }
-    }
+    },
+    watch: {
+        values:{
+            handler (val) {
+                this.updateIframes(val);
+            },
+            deep: true
+        },
+        device(){
+            setTimeout( () => {
+                this.updateIframes(this.values);
+            },750);
+        },
+        preview(){
+            setTimeout( () => {
+                this.updateIframes(this.values);
+            },750);
+        }
+    },
 }
 </script>
 
@@ -399,5 +468,10 @@ export default {
 .diff {
     filter: invert(1);
     mix-blend-mode: difference;
+}
+
+.preview-frame {
+    height: 80vh;
+    width: 100%;
 }
 </style>

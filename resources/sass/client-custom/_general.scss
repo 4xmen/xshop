@@ -35,3 +35,23 @@ body{
     margin: auto;
     border-radius: 50%;
 }
+
+
+#do-edit{
+    position: fixed;
+    inset-inline-start: 0;
+    top: 5%;
+    background: #21252BFF;
+    color: white;
+    z-index: 999;
+    padding: 10px;
+    width: 50px;
+    opacity: .4;
+    transition: 1s;
+    &:hover{
+        opacity: 1;
+    }
+    i{
+        font-size: 25px;
+    }
+}

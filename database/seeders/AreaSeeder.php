@@ -35,6 +35,16 @@ class AreaSeeder extends Seeder
                 'preview' => 'welcome',
                 'icon' => 'ri-layout-top-2-line',
             ],
+            [
+                'name' => 'post',
+                'valid_segments' => json_encode(
+                    ["top","header","footer","menu",
+                        "parallax","other","post"]
+                ),
+                'max' => 6,
+                'preview' => 'test',
+                'icon' => 'ri-layout-top-2-line',
+            ],
         ];
         foreach ($areas as $area){
             $a = new Area();
