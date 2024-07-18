@@ -29,6 +29,30 @@
                     @endif
                 </ul>
             </div>
+            @if(isset($item))
+
+                <div class="item-list mb-3">
+                    <h3 class="p-3">
+                        <i class="ri-eye-2-line"></i>
+                        {{__("Preview")}}
+                    </h3>
+                    <div class="p-2">
+                        <ul class="list-group">
+                            @foreach($item->items as $i)
+                                <li class="list-group-item">
+                                    {{$i->title}}
+                                </li>
+                            @endforeach
+                        </ul>
+                    </div>
+                    <div class="p-2 pt-0">
+                        <a href="{{ route('admin.menu.sort',$item->id) }}" class="btn btn-primary w-100">
+                            <i class="ri-sort-desc"></i>
+                            {{__("Change items sort")}}
+                        </a>
+                    </div>
+                </div>
+            @endif
 
         </div>
         <div class="col-lg-9 ps-xl-1 ps-xxl-1">
@@ -66,13 +90,13 @@
                     <h4 class="px-4">
                         {{__("Menu items")}}
                     </h4>
-                <menu-item-input
-                    :morphs='@json(\App\Models\Menu::$mrohps)'
-                    morph-search-link="{{route('v1.morph.search')}}"
-                    xlang="{{config('app.locale')}}"
-                    :items='@json($item->items)'
-                    menu-id="{{$item->id}}"
-                ></menu-item-input>
+                    <menu-item-input
+                        :morphs='@json(\App\Models\Menu::$mrohps)'
+                        morph-search-link="{{route('v1.morph.search')}}"
+                        xlang="{{config('app.locale')}}"
+                        :items='@json($item->items)'
+                        menu-id="{{$item->id}}"
+                    ></menu-item-input>
                 @endif
             </div>
         </div>

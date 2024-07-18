@@ -14,6 +14,6 @@ class Menu extends Model
         Category::class,Clip::class,Gallery::class];
     public function items()
     {
-        return $this->hasMany(Item::class);
+        return $this->hasMany(Item::class)->orderBy('sort');
     }
 }

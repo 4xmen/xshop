@@ -143,5 +143,22 @@ class MenuController extends XController
     {
         return parent::restoreing(Menu::withTrashed()->where('id', $item)->first());
     }
+
+    public function sort(Menu $item){
+        return view('admin.menus.menu-sort', compact('item'));
+    }
+
+
+    public function sortSave(Request $request){
+        foreach ($request->input('items') as $key => $v){
+
+            $p = Item::whereId($v['id'])->first();
+            $p->sort = $key;
+            $p->save();
+        }
+        logAdmin(__METHOD__,__CLASS__,null);
+        return ['OK' => true,'message' => __("As you wished sort saved")];
+    }
+
     /*restore**/
 }
