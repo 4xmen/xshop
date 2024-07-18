@@ -117,7 +117,7 @@
             </a>
             <ul id="themes">
                 <li>
-                    <a href="">
+                    <a href="{{route('admin.menu.index')}}">
                         <i class="ri-list-check"></i>
                         {{__("Menus")}}
                     </a>
