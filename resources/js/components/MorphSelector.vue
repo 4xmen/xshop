@@ -1,16 +1,17 @@
 <template>
-    <div id="morph-selector">
+    <div class="morph-selector">
         <div v-if="this.morph != null && this.id != null">
             {{ humanReadableMorph(morph) }}: [{{ id }}]
         </div>
-        <select class="form-control" v-model="morph" @change="updateList">
+        <select class="form-control mt-2" v-model="morph" @change="updateList">
+            <option :value="null"> Module</option>
             <option v-for="m in morphs" :value="m"> {{ humanReadableMorph(m) }}</option>
         </select>
         <label id="q" class="mt-2">
             Search
             <!-- WIP : translate-->
         </label>
-        <input @input="updateList" type="text" id="q" v-model="q" class="form-control">
+        <input @input="updateList" type="text" id="q" v-model="q" class="form-control" placeholder="search">
         <div v-if="all.length > 0">
 
             <ul class="list-group my-2">
@@ -38,8 +39,8 @@
             </ul>
         </div>
         <div v-if="this.morph != null && this.id != null">
-            <input type="hidden" :value="morph" name="attachable_type">
-            <input type="hidden" :value="id" name="attachable_id">
+            <input type="hidden" :value="morph" :name="xnameType">
+            <input type="hidden" :value="id" :name="xnameId">
         </div>
     </div>
 </template>
@@ -54,10 +55,24 @@ export default {
             q: '',
             all: [],
             id: null,
-
         }
     },
     props: {
+        emits: ['update:modelType', 'update:modelId'],
+        modelType: {
+            default: 'noting',
+            type: String,
+        },
+        modelId: {
+            default: 'noting',
+            type: String,
+        },
+        xnameType: {
+            default: 'attachable_type'
+        },
+        xnameId: {
+            default: 'attachable_id'
+        },
         morphs: {
             default: [],
         },
@@ -75,11 +90,17 @@ export default {
         }
     },
     mounted() {
-        if (this.xmorph != null && this.xmorph != 'null' && this.xmorph != '') {
-            this.morph = this.xmorph;
-        }
-        if (this.xid != null && this.xid != 'null' && this.xid != '') {
-            this.id = parseInt(this.xid);
+        if (this.modelType == 'noting' || this.modelType == 'noting') {
+
+            if (this.xmorph != null && this.xmorph != 'null' && this.xmorph != '') {
+                this.morph = this.xmorph;
+            }
+            if (this.xid != null && this.xid != 'null' && this.xid != '') {
+                this.id = parseInt(this.xid);
+            }
+        } else {
+            this.morph = this.modelType;
+            this.id = this.modelId;
         }
     },
     computed: {},
@@ -103,13 +124,27 @@ export default {
         humanReadableMorph(morph) {
             const tmp = morph.split('\\');
             return tmp[tmp.length - 1];
-        }
+        },
+
+
+    },
+    watch: {
+        morph(newValue) {
+            if (this.modelType != 'noting') {
+                this.$emit('update:modelType', newValue);
+            }
+        },
+        id(newValue) {
+            if (this.modelId != 'noting' && newValue != null) {
+                this.$emit('update:modelId', newValue.toString());
+            }
+        },
     }
 }
 </script>
 
 <style scoped>
-#morph-selector {
+.morph-selector {
 
 }
 

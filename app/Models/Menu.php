@@ -10,6 +10,8 @@ class Menu extends Model
 {
     use HasFactory,SoftDeletes;
 
+    public static $mrohps = [Product::class,Post::class,Group::class,
+        Category::class,Clip::class,Gallery::class];
     public function items()
     {
         return $this->hasMany(Item::class);

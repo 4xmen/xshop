@@ -201,6 +201,19 @@ Route::prefix(config('app.panel.prefix'))->name('admin.')->group(
                         Route::post('bulk', [\App\Http\Controllers\Admin\CustomerController::class, "bulk"])->name('bulk');
                         Route::get('trashed', [\App\Http\Controllers\Admin\CustomerController::class, "trashed"])->name('trashed');
                     });
+                Route::prefix('menus')->name('menu.')->group(
+                    function () {
+                        Route::get('', [\App\Http\Controllers\Admin\MenuController::class, 'index'])->name('index');
+                        Route::get('create', [\App\Http\Controllers\Admin\MenuController::class, 'create'])->name('create');
+                        Route::post('store', [\App\Http\Controllers\Admin\MenuController::class, 'store'])->name('store');
+                        Route::get('show/{item}', [\App\Http\Controllers\Admin\MenuController::class, 'show'])->name('show');
+                        Route::get('edit/{item}', [\App\Http\Controllers\Admin\MenuController::class, 'edit'])->name('edit');
+                        Route::post('update/{item}', [\App\Http\Controllers\Admin\MenuController::class, 'update'])->name('update');
+                        Route::get('delete/{item}', [\App\Http\Controllers\Admin\MenuController::class, 'destroy'])->name('destroy');
+                        Route::get('restore/{item}', [\App\Http\Controllers\Admin\MenuController::class, 'restore'])->name('restore');
+                        Route::post('bulk', [\App\Http\Controllers\Admin\MenuController::class, "bulk"])->name('bulk');
+                        Route::get('trashed', [\App\Http\Controllers\Admin\MenuController::class, "trashed"])->name('trashed');
+                    });
                 Route::prefix('states')->name('state.')->group(
                     function () {
                         Route::get('', [\App\Http\Controllers\Admin\StateController::class, 'index'])->name('index');
