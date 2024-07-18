@@ -4,7 +4,8 @@
 
 # xShop/v2
 
-xShop is an open source shop developed in laravel, very customizable!
+> [!NOTE]
+> xShop is an open source shop developed in laravel, very customizable!
 
 ## New Features:
 
@@ -24,8 +25,8 @@ xShop is an open source shop developed in laravel, very customizable!
 
 ## Installation
 
-[!IMPORTANT]
-Create new database and rename `.env.example` to `.env` then update you `.env` configs so run this commands:
+> [!IMPORTANT]  
+> Create new database and rename `.env.example` to `.env` then update you `.env` configs so run this commands:
 
 ```bash
 git clone https://github.com/4xmen/xshop.git
@@ -37,8 +38,8 @@ php artisan key:generate
 php artisan serv
 ```
 
-[!NOTE]
-Default admin email is : `admin@example.com` and default password is: `password`
+> [!TIP]
+> Default admin email is : `admin@example.com` and default password is: `password`
 
 ## Requirement
 
