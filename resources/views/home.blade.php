@@ -102,7 +102,7 @@
                 <div class="card skewed-container">
                     <i class="ri-bar-chart-box-line skewed-icon"></i>
                     <div class="card-header">
-                        {{__("last month visits")}}
+                        {{__("Last month visits")}}
                     </div>
                     <div class="card-body">
                         <canvas id="visitor-chart"></canvas>

@@ -17,8 +17,10 @@ class GfxController extends Controller
 
         foreach ($request->input('gfx',[]) as $key => $gfx){
             $g = Gfx::where('key',$key)->first();
-            $g->value = $gfx;
-            $g->save();
+            if ($g != null){
+                $g->value = $gfx;
+                $g->save();
+            }
         }
 
         logAdmin(__METHOD__,__CLASS__,null);
