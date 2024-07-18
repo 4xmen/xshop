@@ -274,3 +274,52 @@ a.btn,a.action-btn,a.circle-btn{
 }
 
 
+#panel-preloader{
+    transition: 490ms;
+    position: fixed;
+    z-index: 9999999;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    background: #00000099;
+    backdrop-filter: blur(7px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: lighten($primary-color-panel,15);
+    .loader {
+        position: relative;
+        width: 100px;
+        height: 100px;
+        &:before {
+            content: '';
+            border-radius: 50%;
+            position: absolute;
+            inset: 0;
+            box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.3) inset;
+        }
+        &:after {
+            content: '';
+            border-radius: 50%;
+            position: absolute;
+            inset: 0;
+            box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.3) inset;
+            box-shadow: 0 2px 0 #FF3D00 inset;
+            animation: rotate 2s linear infinite;
+        }
+    }
+
+
+}
+
+
+
+@keyframes rotate {
+    0% {
+        transform: rotate(0);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
