@@ -2,7 +2,7 @@
     // scss
     i{
         font-size: 128px;
-        -webkit-text-stroke: 6px $xshop-background;
+        -webkit-text-stroke: 6px var(--xshop-background);
     }
 
     [class^="col-md"]{

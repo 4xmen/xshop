@@ -1,8 +1,8 @@
 .SimpleTextLink {
     // scss
 
-    background: $xshop-primary;
-    color: $xshop-diff;
+    background: var(--xshop-primary);
+    color:var(--xshop-diff);
 
     h1{
         font-size: 24px;

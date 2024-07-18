@@ -4,7 +4,8 @@ use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return view('welcome');
+    $area = 'index';
+    return view('welcome',compact('area'));
 })->name('welcome')->middleware(\App\Http\Middleware\VisitorCounter::class);
 
 Auth::routes(['register' => false]);
@@ -342,7 +343,7 @@ Route::get('test',function (){
 //    return \Resources\Views\Segments\PreloaderCircle::onAdd();
    return \App\Helpers\TVisitor::GetKeyword();
 
-});
+})->name('test');
 
 
 

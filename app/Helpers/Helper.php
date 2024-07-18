@@ -454,7 +454,7 @@ function getAction($act)
 }
 
 /**
- * ge all admin routes array
+ * get all admin routes array
  * @return array
  */
 function getAdminRoutes()
@@ -462,6 +462,24 @@ function getAdminRoutes()
     $routes = [];
     foreach (Illuminate\Support\Facades\Route::getRoutes() as $r) {
         if (strpos($r->getName(), 'admin') !== false) {
+            $routes[] = [
+                'name' => $r->getName(),
+                'url' => $r->uri(),
+            ];
+        }
+    }
+
+    return $routes;
+}
+/**
+ * get all client routes array
+ * @return array
+ */
+function getClientRoutes()
+{
+    $routes = [];
+    foreach (Illuminate\Support\Facades\Route::getRoutes() as $r) {
+        if (strpos($r->getName(), 'admin') === false) {
             $routes[] = [
                 'name' => $r->getName(),
                 'url' => $r->uri(),
