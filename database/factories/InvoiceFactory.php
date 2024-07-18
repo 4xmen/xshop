@@ -19,11 +19,12 @@ class InvoiceFactory extends Factory
     public function definition(): array
     {
         $date =  $this->faker->dateTimeBetween('-1 months', 'now');
+        $c = Customer::inRandomOrder()->first();
         return [
-            'customer_id' => Customer::inRandomOrder()->first()->id,
+            'customer_id' => $c->id,
             'status' => Invoice::$invoiceStatus[rand(0,count(Invoice::$invoiceStatus)-1)],
             'desc' => $this->faker->realText(),
-            'address_id' => null,
+            'address_id' => $c->addresses()->inRandomOrder()->first()->id,
             'transport_id' => null,
             'transport_price' => 0,
             'created_at' => $date,

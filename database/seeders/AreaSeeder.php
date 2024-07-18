@@ -21,6 +21,7 @@ class AreaSeeder extends Seeder
                     ["preloader"]
                 ),
                 'max' => 1,
+                'preview' => null,
                 'icon' => 'ri-loader-2-line',
             ],
             [
@@ -31,6 +32,7 @@ class AreaSeeder extends Seeder
                         ,"groups","categories","category","group","index"]
                 ),
                 'max' => 10,
+                'preview' => 'welcome',
                 'icon' => 'ri-layout-top-2-line',
             ],
         ];
@@ -40,6 +42,7 @@ class AreaSeeder extends Seeder
             $a->max = $area['max'];
             $a->valid_segments = $area['valid_segments'];
             $a->icon = $area['icon'];
+            $a->preview = $area['preview'];
             $a->save();
         }
     }

@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Customer;
+use App\Models\State;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -15,5 +16,17 @@ class CustomerSeeder extends Seeder
     {
         //
         Customer::factory(35)->create();
+        foreach (Customer::all() as $customer) {
+            $s = State::inRandomOrder()->first();
+            $c = $s->cities()->inRandomOrder()->first();
+            $customer->addresses()->create([
+                'state_id' => $s->id,
+                'city_id' => $c->id,
+                'zip' => rand(12345, 54321),
+                'lat' => $c->lat,
+                'lng' => $c->lng,
+                'address' => 'some address',
+            ]);
+        }
     }
 }
