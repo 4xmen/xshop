@@ -118,6 +118,19 @@ class User extends Authenticatable
         }
         return $this->accesses()->where('route','LIKE','%.'.$name.'.%')->count() > 0;
     }
+    public function hasAnyAccesses($array){
+        if ($this->hasRole('SUSPENDED')){
+            return  false;
+        }
+        if ($this->hasRole('admin') || $this->hasRole('developer')) {
+            return  true;
+        }
+       foreach ($array as $access){
+           if ($this->hasAnyAccess($access)){
+               return true;
+           }
+       }
+    }
 
     public function hasAccess($route){
         if ($this->hasRole('SUSPENDED')){
