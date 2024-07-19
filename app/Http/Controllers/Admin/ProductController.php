@@ -19,7 +19,7 @@ class ProductController extends XController
     // protected  $_MODEL_ = Product::class;
     // protected  $SAVE_REQUEST = ProductSaveRequest::class;
 
-    protected $cols = ['name','category_id','view_count','sell_count'];
+    protected $cols = ['name','category_id','view','sell'];
     protected $extra_cols = ['id','slug','image_index'];
 
     protected $searchable = ['name','slug','description','excerpt','sku','table'];

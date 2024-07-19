@@ -35,11 +35,11 @@ class HomeController extends Controller
         $visits = Visitor::where('created_at', '>=', Carbon::now()->subMonth())
             ->groupBy('date')
             ->orderBy('date', 'DESC')
-            ->get(array(
+            ->get([
                 DB::raw('Date(created_at) as date'),
                 DB::raw('COUNT(*) as "count"'),
                 DB::raw('SUM(visit) as "visits"'),
-            ))->toArray();
+            ])->toArray();
         $dates = range((count($visits) - 1) * -1, 0);
         $dt = new TDate();
         array_walk($dates, function (&$item, $key) use ($dt) {

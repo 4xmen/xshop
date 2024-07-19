@@ -5,13 +5,15 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\DB;
 use Spatie\Translatable\HasTranslations;
 
 class Group extends Model
 {
-    use HasFactory, SoftDeletes,HasTranslations;
+    use HasFactory, SoftDeletes, HasTranslations;
 
-    public $translatable = ['name','subtitle','description'];
+    public $translatable = ['name', 'subtitle', 'description'];
+
     public function posts()
     {
         return $this->belongsToMany(Post::class);
@@ -47,6 +49,7 @@ class Group extends Model
 
         return \Storage::url('groups/optimized-' . $this->image);
     }
+
     public function imgOriginalUrl()
     {
         if ($this->image == null) {
@@ -64,6 +67,7 @@ class Group extends Model
 
         return \Storage::url('groups/optimized-' . $this->bg);
     }
+
     public function bgOriginalUrl()
     {
         if ($this->bg == null) {
@@ -72,12 +76,21 @@ class Group extends Model
 
         return \Storage::url('groups/' . $this->bg);
     }
-    public function attachs(){
-        return $this->morphMany(Attachment::class,'attachable');
+
+    public function attachs()
+    {
+        return $this->morphMany(Attachment::class, 'attachable');
     }
 
-    public function webUrl(){
-        return  '#';// WIP
+    public function webUrl()
+    {
+        return '#';// WIP
         return route('');
+    }
+
+    public function published($limit = 10, $order = 'id', $dir = 'DESC')
+    {
+        return $this->posts()->where('status', 1)
+            ->orderBy($order, $dir)->limit($limit)->get(['title', 'slug', 'icon']);
     }
 }

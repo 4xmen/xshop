@@ -5,11 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\DB;
 use Spatie\Translatable\HasTranslations;
 
 class Category extends Model
 {
-    use HasFactory, HasTranslations,SoftDeletes;
+    use HasFactory, HasTranslations, SoftDeletes;
 
     public $translatable = ['name', 'subtitle', 'description'];
 
@@ -21,6 +22,7 @@ class Category extends Model
 
         return \Storage::url('categories/optimized-' . $this->image);
     }
+
     public function imgOriginalUrl()
     {
         if ($this->image == null) {
@@ -38,6 +40,7 @@ class Category extends Model
 
         return \Storage::url('categories/optimized-' . $this->bg);
     }
+
     public function bgOriginalUrl()
     {
         if ($this->bg == null) {
@@ -62,21 +65,35 @@ class Category extends Model
         return 'slug';
     }
 
-    public function props(){
+    public function props()
+    {
         return $this->belongsToMany(Prop::class);
     }
 
-    public function attachs(){
-        return $this->morphMany(Attachment::class,'attachable');
+    public function attachs()
+    {
+        return $this->morphMany(Attachment::class, 'attachable');
     }
 
-    public function webUrl(){
-        return  '#';// WIP
+    public function webUrl()
+    {
+        return '#';// WIP
         return route('');
     }
 
-    public function products(){
+    public function products()
+    {
         return $this->belongsToMany(Product::class);
+    }
+
+
+    public function published($limit = 10, $order = 'id', $dir = 'DESC')
+    {
+        return $this->products()->where('status', 1)
+            ->orderBy($order, $dir)->limit($limit)->get([
+                DB::raw('name as "title"'),
+                'slug'
+            ]);
     }
 
 }
