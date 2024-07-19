@@ -32,8 +32,8 @@ return new class extends Migration
             $table->decimal('average_rating',3,2)->unsigned()->nullable()->default(0.00);
 //            $table->unsignedBigInteger('total_sales')->nullable()->default(0);
             $table->unsignedTinyInteger('status')->default(0);
-            $table->unsignedBigInteger('view_count')->default(0);
-            $table->unsignedBigInteger('sell_count')->default(0);
+            $table->unsignedBigInteger('view')->default(0);
+            $table->unsignedBigInteger('sell')->default(0);
             $table->unsignedTinyInteger('image_index')->default(0);
             $table->softDeletes();
             $table->timestamps();
