@@ -1,0 +1,65 @@
+#RecetMenu {
+    // scss
+    position: fixed;
+    inset-inline-start: 1rem;
+    inset-inline-end: 1rem;
+    top: 1rem;
+    background: #ffffff77;
+    backdrop-filter: blur(5px);
+    z-index: 88;
+    border-radius: var(--xshop-border-radius);
+
+    ul {
+        margin: 0;
+        padding-right: 1rem;
+        padding-left: 1rem;
+
+        li {
+            display: inline-block;
+
+            a,a:visited {
+                display: block;
+                padding:  1rem;
+                color: black;
+                &:hover{
+                    color: var(--xshop-primary);
+                }
+            }
+            &:first-child{
+                display: none;
+            }
+        }
+    }
+}
+
+/*-768px width*/
+@media (max-width: 768px) {
+    #RecetMenu{
+        ul {
+            li {
+                display: none ;
+
+                &:first-child, &:last-child {
+                    display: inline-block;
+                }
+            }
+        }
+        &.show-menu{
+            ul{
+                li {
+                    display: flex !important;
+                    float: none !important;
+
+                    a{
+                        padding-bottom: 0;
+                    }
+                    &:last-child{
+                        padding-bottom: 1rem;
+                        justify-content: space-evenly;
+                    }
+
+                }
+            }
+        }
+    }
+}

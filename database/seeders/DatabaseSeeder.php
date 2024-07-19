@@ -38,7 +38,8 @@ class DatabaseSeeder extends Seeder
                 AreaSeeder::class,
                 PartSeeder::class,
                 InvoiceSeeder::class,
-                VisitorSeeder::class
+                VisitorSeeder::class,
+                MenuSeeder::class,
             ]
         );
     }

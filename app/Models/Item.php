@@ -26,4 +26,8 @@ class Item extends Model
     {
         return $this->hasMany(MenuItem::class, 'parent');
     }
+
+    public function dest(){
+        return $this->morphTo('menuable','menuable_type','menuable_id');
+    }
 }

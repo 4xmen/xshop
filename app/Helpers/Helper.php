@@ -6,6 +6,7 @@ use App\Models\Group;
 use App\Models\Category;
 use App\Models\Area;
 use App\Models\Part;
+use App\Models\Menu;
 use Illuminate\Support\Facades\Route;
 
 
@@ -782,6 +783,15 @@ function getGrayscaleTextColor($bgColor)
 function getGroupBySetting($key)
 {
     return Group::where('id', getSetting($key) ?? 1)->first();
+}
+/**
+ * get group by setting key
+ * @param $key
+ * @return Menu
+ */
+function getMenuBySetting($key)
+{
+    return Menu::where('id', getSetting($key) ?? 1)->first();
 }
 
 /**
