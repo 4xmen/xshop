@@ -56,6 +56,18 @@
                 xvalue='{{old($setting->key,$setting->value??null)}}'
                 :close-on-Select="true"></searchable-select>
             @break
+        @case('MENU')
+            <searchable-select
+                @error('category_id') :err="true" @enderror
+            :items='@json($menus)'
+                title-field="name"
+                value-field="id"
+                xid="{{$setting->key}}"
+                xname="{{$setting->key}}"
+                @error('category_id') :err="true" @enderror
+                xvalue='{{old($setting->key,$setting->value??null)}}'
+                :close-on-Select="true"></searchable-select>
+            @break
         @case('COLOR')
             <br>
             <input type="color" id="{{$setting->key}}"

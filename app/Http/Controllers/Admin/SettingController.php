@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\SettingSaveRequest;
 use App\Models\Category;
 use App\Models\Group;
+use App\Models\Menu;
 use App\Models\Setting;
 use Illuminate\Http\Request;
 
@@ -20,9 +21,10 @@ class SettingController extends Controller
         $settings = Setting::where('active', 1)
             ->orderBy('section')->get();  //ESH// just active setting`s show
         $cats = Category::all(['id','name']);
+        $menus = Menu::all(['id','name']);
         $groups = Group::all(['id','name']);
         return view('admin.commons.setting',
-            compact('settings', 'cats','groups'));
+            compact('settings', 'cats','groups','menus'));
     }
 
     /**
