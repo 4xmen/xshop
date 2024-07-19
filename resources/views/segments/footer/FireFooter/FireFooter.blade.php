@@ -275,8 +275,7 @@
                             {{getSetting($data->area->name.'_'.$data->part.'_title2')}}
                         </h3>
                         <ul>
-                            @foreach( getGroupBySetting($data->area->name.'_'.$data->part.'_group')->posts()->limit(5)->get() as $post )
-
+                            @foreach( getGroupPostsBySetting($data->area->name.'_'.$data->part.'_group',5) as $post )
                             <li>
                                 <a href="{{$post->webUrl()}}">
                                     {{Str::limit($post->title,40)}}
@@ -291,9 +290,9 @@
                 </div>
             </div>
             <div class="p2 text-center">
-                <ul class="justify-content-center d-flex social">
+                <ul class="social text-center">
                     @foreach(getSettingsGroup('social_')??[] as $k => $social)
-                        <li class="mx-3">
+                        <li class="d-inline-block mx-2">
                             <a href="{{$social}}">
                                 <i class="ri-{{$k}}-line"></i>
                             </a>

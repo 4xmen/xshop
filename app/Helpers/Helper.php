@@ -747,7 +747,7 @@ function getSettingsGroup($group)
     $result = [];
     foreach (Setting::where('key', 'LIKE', $group . '%')
                  ->whereNotNull('value')->get(['key', 'value']) as $r) {
-        if ($r->value != null) {
+        if ($r->value != null && $r->value != '') {
             $result[substr($r->key, mb_strlen($group))] = $r->value;
         }
     }
