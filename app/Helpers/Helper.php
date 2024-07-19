@@ -14,7 +14,8 @@ use Illuminate\Support\Facades\Route;
  * @param $langCode string code like fa
  * @return bool
  */
-function langIsRTL($langCode) {
+function langIsRTL($langCode)
+{
     $rtlLanguages = [
         'ar', // Arabic
         'arc', // Aramaic
@@ -44,6 +45,7 @@ function langIsRTL($langCode) {
 
     return in_array(strtolower($langCode), $rtlLanguages);
 }
+
 /**
  * @param $lang string code like fa
  * @return string
@@ -251,8 +253,9 @@ function logAdmin($method, $cls, $id): void
     ]);
 }
 
-function gfx(){
-    return \App\Models\Gfx::pluck('value','key');
+function gfx()
+{
+    return \App\Models\Gfx::pluck('value', 'key');
 }
 
 
@@ -472,6 +475,7 @@ function getAdminRoutes()
 
     return $routes;
 }
+
 /**
  * get all client routes array
  * @return array
@@ -612,8 +616,8 @@ function validateSettingRequest($setting, $newValue)
         case 'optimize':
             if ($newValue != 'jpg' && $newValue != 'webp') {
                 return 'webp';
-            }else{
-                return  $newValue;
+            } else {
+                return $newValue;
             }
         case 'gallery_thumb':
         case 'post_thumb':
@@ -695,7 +699,7 @@ function nestedWithData($items, $parent_id = null)
             $r .= PHP_EOL . ' </li>';
         }
     }
-    $r .=  '</ol>' . PHP_EOL;
+    $r .= '</ol>' . PHP_EOL;
     return $r;
 }
 
@@ -784,6 +788,7 @@ function getGroupBySetting($key)
 {
     return Group::where('id', getSetting($key) ?? 1)->first();
 }
+
 /**
  * get group by setting key
  * @param $key
@@ -816,4 +821,63 @@ function getCategoryProductBySetting($key, $limit = 10)
 {
     return Category::where('id', getSetting($key) ?? 1)->first()
         ->products()->where('status', 1)->limit($limit)->get();
+}
+
+/**
+ * @param null $data
+ * @param null $message
+ * @param null $metaTitle
+ * @param null $metaDescription
+ * @param null $metaImage
+ * @param null $metaSourceImage
+ * @param null $ogUrl
+ * @param null $ogType
+ * @param string $ogLocate
+ * @param null $canonical_url
+ * @return \Illuminate\Http\JsonResponse
+ */
+function success($data = null, $message = null, $meta = [], $og = [], $twitter = [], $canonical_url = null, $jsonLd = null)
+{
+    $defaultMeta = [
+        'title' => null,
+        'description' => null,
+        'image' => null,
+        'secure_image' => null,
+    ];
+
+    $defaultOg = [
+        'url' => null,
+        'type' => null,
+        'site_name' => env('APP_NAME'),
+        'description' => null,
+        'locate' => 'fa_IR'
+    ];
+
+    $defaultTwitter = [
+        'card' => 'summary_large_image',
+        'site' => '@yourTwitterHandle',
+        'title' => null,
+        'description' => null,
+        'image' => null,
+    ];
+
+    return response()->json([
+        "success" => true,
+        "message" => $message,
+        "data" => $data,
+        "meta" => array_merge($defaultMeta, $meta),
+        "og" => array_merge($defaultOg, $og),
+        "twitter" => array_merge($defaultTwitter, $twitter),
+        "canonical_url" => $canonical_url,
+    ]);
+}
+
+function errors($errors, $status = 422, $message = null, $data = null)
+{
+    return response()->json([
+        "success" => false,
+        "errors" => $errors,
+        "message" => $message,
+        "data" => $data,
+    ], $status);
 }
