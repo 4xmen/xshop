@@ -1,3 +1,4 @@
+
 <footer class='WaveFooter'
         style="--speed: {{getSetting($data->area->name.'_'.$data->part.'_speed')}}s;
         --speed2: {{getSetting($data->area->name.'_'.$data->part.'_speed2')}}s;
@@ -42,7 +43,6 @@
     </svg>
     <div class="content">
         <div class="{{gfx()['container']}}">
-            {{getSetting('copyright')}}
-        </div>
+            {{getSetting('copyright')}}        </div>
     </div>
 </footer>
