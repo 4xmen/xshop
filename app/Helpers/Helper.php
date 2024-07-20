@@ -805,10 +805,10 @@ function getMenuBySetting($key)
  * @param $limit
  * @return \App\Models\Post[]|\Illuminate\Database\Eloquent\Collection|\LaravelIdea\Helper\App\Models\_IH_Post_C
  */
-function getGroupPostsBySetting($key, $limit = 10)
+function getGroupPostsBySetting($key, $limit = 10, $order = 'id', $dir = "DESC")
 {
     return Group::where('id', getSetting($key) ?? 1)->first()
-        ->posts()->where('status', 1)->limit($limit)->get();
+        ->posts()->where('status', 1)->orderBy($order, $dir)->limit($limit)->get();
 }
 
 /**
@@ -817,10 +817,10 @@ function getGroupPostsBySetting($key, $limit = 10)
  * @param $limit
  * @return \App\Models\Post[]|\Illuminate\Database\Eloquent\Collection|\LaravelIdea\Helper\App\Models\_IH_Post_C
  */
-function getCategoryProductBySetting($key, $limit = 10)
+function getCategoryProductBySetting($key, $limit = 10, $order = 'id', $dir = "DESC")
 {
     return Category::where('id', getSetting($key) ?? 1)->first()
-        ->products()->where('status', 1)->limit($limit)->get();
+        ->products()->where('status', 1)->orderBy($order, $dir)->limit($limit)->get();
 }
 
 /**
