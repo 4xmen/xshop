@@ -28,7 +28,7 @@ a,a:visited{
 }
 .btn-primary{
     background: var(--xshop-primary);
-    border-color: var(--xshop-secondary);
+    border-color: var(--xshop-primary);
     color: var(--xshop-diff) !important;
 
     &:hover{

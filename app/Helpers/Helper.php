@@ -802,7 +802,7 @@ function getMenuBySetting($key)
 /**
  * get group's posts by setting key
  * @param $key
- * @param $limit
+ * @param integer $limit
  * @return \App\Models\Post[]|\Illuminate\Database\Eloquent\Collection|\LaravelIdea\Helper\App\Models\_IH_Post_C
  */
 function getGroupPostsBySetting($key, $limit = 10, $order = 'id', $dir = "DESC")
@@ -814,7 +814,9 @@ function getGroupPostsBySetting($key, $limit = 10, $order = 'id', $dir = "DESC")
 /**
  * get group's posts by setting key
  * @param $key
- * @param $limit
+ * @param integer $limit
+ * @param string $order
+ * @param string $dir
  * @return \App\Models\Post[]|\Illuminate\Database\Eloquent\Collection|\LaravelIdea\Helper\App\Models\_IH_Post_C
  */
 function getCategoryProductBySetting($key, $limit = 10, $order = 'id', $dir = "DESC")
