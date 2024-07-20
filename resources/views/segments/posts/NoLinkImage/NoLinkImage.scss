@@ -1,0 +1,30 @@
+.NoLinkImage {
+    padding: 1rem 0;
+    // scss
+    .no-link-item{
+        transition: .4s;
+        background: #ffffff;
+        padding: 5px;
+        border-radius: var(--xshop-border-radius);
+        h3{
+            font-size: 20px;
+            margin-top: .4rem;
+        }
+        p{
+            color: gray;
+        }
+        img{
+            height: 64px;
+        }
+        &:hover{
+            filter: grayscale(1);
+        }
+    }
+
+    &.dark-mode{
+        .no-link-item{
+            background: #21252b;
+            color: whitesmoke;
+        }
+    }
+}

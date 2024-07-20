@@ -4,6 +4,10 @@ var sliderSimple ;
 
 document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('.SliderSimple')?.forEach(function (el) {
+        if (el.classList.contains('.tns-slider')){
+            console.log('ignore');
+            return 'ignore';
+        }
         sliderSimple = tns({
             container: el,
             items: 1,
