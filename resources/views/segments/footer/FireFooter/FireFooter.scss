@@ -1,0 +1,93 @@
+.FireFooter {
+
+    overflow: hidden;
+    padding-top: 7rem;
+
+    .footer {
+
+        .social{
+            list-style: none;
+            i{
+                font-size: 25px;
+            }
+        }
+
+        color: var(--xshop-diff);
+
+        a,a:visited{
+            color: var(--xshop-diff);
+        }
+        z-index: 1;
+        --footer-background: var(--xshop-primary);
+        display: grid;
+        position: relative;
+        grid-area: footer;
+        min-height: 12rem;
+
+        .bubbles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1rem;
+            background: var(--xshop-primary);
+            filter: url("#blob");
+
+            .bubble {
+                position: absolute;
+                left: var(--position, 50%);
+                background: var(--xshop-primary);
+                border-radius: 100%;
+                //-webkit-animation: bubble-size var(--time, 4s) ease-in infinite var(--delay, 0s), bubble-move var(--time, 4s) ease-in infinite var(--delay, 0s);
+                animation: bubble-size var(--time, 4s) ease-in infinite var(--delay, 0s), bubble-move var(--time, 4s) ease-in infinite var(--delay, 0s);
+                transform: translate(-50%, 100%);
+            }
+        }
+
+        .content {
+            padding: 6rem 1rem 2rem;
+            background: var(--xshop-primary);
+            z-index: 2;
+        }
+    }
+}
+
+@-webkit-keyframes bubble-size {
+    0%, 75% {
+        width: var(--size, 4rem);
+        height: var(--size, 4rem);
+    }
+    100% {
+        width: 0rem;
+        height: 0rem;
+    }
+}
+
+@keyframes bubble-size {
+    0%, 75% {
+        width: var(--size, 4rem);
+        height: var(--size, 4rem);
+    }
+    100% {
+        width: 0rem;
+        height: 0rem;
+    }
+}
+
+@-webkit-keyframes bubble-move {
+    0% {
+        bottom: -4rem;
+    }
+    100% {
+        bottom: var(--distance, 10rem);
+    }
+}
+
+@keyframes bubble-move {
+    0% {
+        bottom: -4rem;
+    }
+    100% {
+        bottom: var(--distance, 10rem);
+    }
+}

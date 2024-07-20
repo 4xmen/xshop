@@ -356,7 +356,7 @@ Route::prefix(config('app.panel.prefix'))->name('admin.')->group(
 
 Route::get('test',function (){
 //    return \Resources\Views\Segments\PreloaderCircle::onAdd();
-   return \App\Helpers\TVisitor::GetKeyword();
+   return getCategoryProductBySetting('index_TreeGridProducts_category');
 
 })->name('test');
 

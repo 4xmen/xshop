@@ -747,7 +747,7 @@ function getSettingsGroup($group)
     $result = [];
     foreach (Setting::where('key', 'LIKE', $group . '%')
                  ->whereNotNull('value')->get(['key', 'value']) as $r) {
-        if ($r->value != null) {
+        if ($r->value != null && $r->value != '') {
             $result[substr($r->key, mb_strlen($group))] = $r->value;
         }
     }
@@ -802,25 +802,27 @@ function getMenuBySetting($key)
 /**
  * get group's posts by setting key
  * @param $key
- * @param $limit
+ * @param integer $limit
  * @return \App\Models\Post[]|\Illuminate\Database\Eloquent\Collection|\LaravelIdea\Helper\App\Models\_IH_Post_C
  */
-function getGroupPostsBySetting($key, $limit = 10)
+function getGroupPostsBySetting($key, $limit = 10, $order = 'id', $dir = "DESC")
 {
     return Group::where('id', getSetting($key) ?? 1)->first()
-        ->posts()->where('status', 1)->limit($limit)->get();
+        ->posts()->where('status', 1)->orderBy($order, $dir)->limit($limit)->get();
 }
 
 /**
  * get group's posts by setting key
  * @param $key
- * @param $limit
+ * @param integer $limit
+ * @param string $order
+ * @param string $dir
  * @return \App\Models\Post[]|\Illuminate\Database\Eloquent\Collection|\LaravelIdea\Helper\App\Models\_IH_Post_C
  */
-function getCategoryProductBySetting($key, $limit = 10)
+function getCategoryProductBySetting($key, $limit = 10, $order = 'id', $dir = "DESC")
 {
     return Category::where('id', getSetting($key) ?? 1)->first()
-        ->products()->where('status', 1)->limit($limit)->get();
+        ->products()->where('status', 1)->orderBy($order, $dir)->limit($limit)->get();
 }
 
 /**

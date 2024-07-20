@@ -272,4 +272,8 @@ class Product extends Model implements HasMedia
         return route('');
     }
 
+
+    public function getPrice(){
+        return number_format($this->price);
+    }
 }

@@ -74,7 +74,7 @@ class Post extends Model implements HasMedia
     public function orgUrl()
     {
         if ($this->getMedia()->count() > 0) {
-            return $this->getMedia()[$this->image_index]->getUrl();
+            return $this->getMedia()->first()->getUrl();
         } else {
             return asset('assets/upload/logo.svg');
 
