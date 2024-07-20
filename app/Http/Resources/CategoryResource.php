@@ -21,9 +21,11 @@ class CategoryResource extends JsonResource
         /**
          * @var $this Category
          */
-        $request->merge([
-            'loadCategory' => false
-        ]);
+
+        if (!$request['loadCategory'])
+            $request->merge([
+                'loadCategory' => false
+            ]);
         return [
             'id' => $this->id,
             'name' => $this->name,
@@ -33,7 +35,7 @@ class CategoryResource extends JsonResource
             'sort' => $this->sort,
             'image' => $this->image,
             'bg' => $this->bg,
-            'products' => $this->when($request->input('loadProduct' , true) , ProductResource::collection($this->products)->additional(['request' => $request['loadCategory']]) )
+            'products' => $this->when($request->input('loadProduct', true), ProductResource::collection($this->products)->additional(['request' => $request['loadCategory']]))
         ];
     }
 }
