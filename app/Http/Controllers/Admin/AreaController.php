@@ -22,14 +22,16 @@ class AreaController extends Controller
 
         $valids = [];
         foreach ($area->segment as $seg) {
-            $dirs = File::directories(resource_path() . '/views/segments/' . $seg);
-            foreach ($dirs as $dir) {
-                $temp = explode('/', $dir);
-                $valids[] = [
-                    'segment' => $temp[count($temp) - 2],
-                    'part' => $temp[count($temp) - 1],
-                    'data' => json_decode(file_get_contents($dir . '/' . $temp[count($temp) - 1] . '.json'), true)
-                ];
+            if (File::exists(resource_path() . '/views/segments/' . $seg)) {
+                $dirs = File::directories(resource_path() . '/views/segments/' . $seg);
+                foreach ($dirs as $dir) {
+                    $temp = explode('/', $dir);
+                    $valids[] = [
+                        'segment' => $temp[count($temp) - 2],
+                        'part' => $temp[count($temp) - 1],
+                        'data' => json_decode(file_get_contents($dir . '/' . $temp[count($temp) - 1] . '.json'), true)
+                    ];
+                }
             }
         }
 
@@ -50,12 +52,12 @@ class AreaController extends Controller
     public function update(Request $request, Area $area)
     {
 //        return $request->all();
-        foreach ($request->input('parts',[]) as $i => $item) {
+        foreach ($request->input('parts', []) as $i => $item) {
             $data = json_decode($item);
-            if ($data == null){
+            if ($data == null) {
                 continue;
             }
-            if ($data->id == null){
+            if ($data->id == null) {
                 // create
                 $part = new Part();
                 $part->area_id = $area->id;
@@ -63,7 +65,7 @@ class AreaController extends Controller
                 $part->part = $data->part;
                 $part->sort = $i;
                 $part->save();
-            }else{
+            } else {
                 $part = Part::whereId($data->id)->first();
                 $part->segment = $data->segment;
                 $part->part = $data->part;
@@ -71,29 +73,31 @@ class AreaController extends Controller
                 $part->save();
             }
         }
-        foreach ( json_decode($request->input('removed')) as $id){
-            Part::where('id',$id)->first()->delete();
+        foreach (json_decode($request->input('removed')) as $id) {
+            Part::where('id', $id)->first()->delete();
         }
         \Artisan::call('client');
 
-        logAdmin(__METHOD__,__CLASS__,$area->id);
+        logAdmin(__METHOD__, __CLASS__, $area->id);
 
 
-        return redirect()->back()->with(['message' => __('area :NAME of website updated',['NAME' => $area->name])]);
+        return redirect()->back()->with(['message' => __('area :NAME of website updated', ['NAME' => $area->name])]);
     }
 
-    public function sort(Area $area){
-        return view('admin.areas.area-sort',compact('area'));
+    public function sort(Area $area)
+    {
+        return view('admin.areas.area-sort', compact('area'));
     }
 
-    public function sortSave(Request $request){
-        foreach ($request->input('items') as $key => $v){
+    public function sortSave(Request $request)
+    {
+        foreach ($request->input('items') as $key => $v) {
 
             $p = Part::whereId($v['id'])->first();
             $p->sort = $key;
             $p->save();
         }
-        logAdmin(__METHOD__,__CLASS__,$p->area_id);
-        return ['OK' => true,'message' => __("As you wished sort saved")];
+        logAdmin(__METHOD__, __CLASS__, $p->area_id);
+        return ['OK' => true, 'message' => __("As you wished sort saved")];
     }
 }
