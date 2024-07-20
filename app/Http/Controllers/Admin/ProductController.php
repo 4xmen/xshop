@@ -19,7 +19,7 @@ class ProductController extends XController
     // protected  $_MODEL_ = Product::class;
     // protected  $SAVE_REQUEST = ProductSaveRequest::class;
 
-    protected $cols = ['name','category_id','view','sell'];
+    protected $cols = ['name','category_id','view','sell','status'];
     protected $extra_cols = ['id','slug','image_index'];
 
     protected $searchable = ['name','slug','description','excerpt','sku','table'];
@@ -170,6 +170,14 @@ class ProductController extends XController
                 }
                 break;
             /*restore**/
+            case 'publish':
+                $this->_MODEL_::whereIn('id', $request->input('id'))->update(['status' => 1]);
+                $msg = __(':COUNT items published successfully', ['COUNT' => count($ids)]);
+                break;
+            case 'draft':
+                $this->_MODEL_::whereIn('id', $request->input('id'))->update(['status' => 0]);
+                $msg = __(':COUNT items drafted successfully', ['COUNT' => count($ids)]);
+                break;
             default:
                 $msg = __('Unknown bulk action : :ACTION', ["ACTION" => $action]);
         }
