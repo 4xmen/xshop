@@ -40,4 +40,5 @@ Route::prefix('v1')->name('v1.')->group(
         Route::post('visitor/display', [\App\Http\Controllers\Api\VisitorController::class, 'display'])->name('visitor.display');
 
         Route::apiResource('web', \App\Http\Controllers\Api\Web\HomeController::class)->only('index');
+        Route::apiResource('products' , \App\Http\Controllers\Api\Web\ProductController::class)->only('index');
     });

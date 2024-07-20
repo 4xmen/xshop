@@ -18,22 +18,26 @@ class ProductResource extends JsonResource
         /**
          * @var $this Product
          */
-        $request->merge([
-            'loadProduct' => false
-        ]);
+        if (!$request['loadProduct'])
+            $request->merge([
+                'loadProduct' => false
+            ]);
+
         return [
             'id' => $this->id,
+            'name' => $this->name,
             'slug' => $this->slug,
             'description' => $this->description,
             'table' => $this->table,
             'sku' => $this->sku,
             'virtual' => $this->virtual,
             'downloadable' => $this->downloadable,
-            'price' => $this->price,
+            'price' => intval($this->price),
             'buy_price' => $this->buy_price,
-            'average_rating' => $this->average_rating,
+            'average_rating' => floatval($this->average_rating),
             'view' => $this->view,
-            'category' => $this->when($request->input('loadCategory', true), new CategoryResource($this->category))
+            'category' => $this->when($request->input('loadCategory', true), new CategoryResource($this->category)),
+            'image' => $this->imgUrl()
         ];
     }
 }
