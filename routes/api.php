@@ -9,12 +9,12 @@ Route::get('/user', function (Request $request) {
 
 
 Route::get('', function () {
-    return 'xshop api:'.config('app.name');
+    return 'xshop api:' . config('app.name');
 });
 
 Route::get('/clear', function () {
 
-    if (!auth()->check()){
+    if (!auth()->check()) {
         return abort(403);
     }
     Artisan::call('cache:clear');
@@ -33,9 +33,12 @@ Route::prefix('v1')->name('v1.')->group(
             return 'xShop api v1';
         });
 
-        Route::get('states', [\App\Http\Controllers\Api\StateController::class,'index'])->name('state.index');
-        Route::get('state/{state}', [\App\Http\Controllers\Api\StateController::class,'show'])->name('state.show');
-        Route::get('category/props/{category}', [\App\Http\Controllers\Api\CategoryController::class,'props'])->name('category.prop');
-        Route::post('morph/search', [\App\Http\Controllers\Api\MorphController::class,'search'])->name('morph.search');
-        Route::post('visitor/display', [\App\Http\Controllers\Api\VisitorController::class,'display'])->name('visitor.display');
+        Route::get('states', [\App\Http\Controllers\Api\StateController::class, 'index'])->name('state.index');
+        Route::get('state/{state}', [\App\Http\Controllers\Api\StateController::class, 'show'])->name('state.show');
+        Route::get('category/props/{category}', [\App\Http\Controllers\Api\CategoryController::class, 'props'])->name('category.prop');
+        Route::post('morph/search', [\App\Http\Controllers\Api\MorphController::class, 'search'])->name('morph.search');
+        Route::post('visitor/display', [\App\Http\Controllers\Api\VisitorController::class, 'display'])->name('visitor.display');
+
+        Route::apiResource('web', \App\Http\Controllers\Api\Web\HomeController::class)->only('index');
+        Route::apiResource('products' , \App\Http\Controllers\Api\Web\ProductController::class)->only('index');
     });
