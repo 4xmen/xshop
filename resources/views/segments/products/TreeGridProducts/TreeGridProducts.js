@@ -3,6 +3,7 @@ import {tns} from "tiny-slider/src/tiny-slider";
 var treeSlider,treeSliderX, treeSliderY ;
 
 document.addEventListener('DOMContentLoaded', () => {
+    console.log('3 slider');
     document.querySelectorAll('.tree-grid .section-main')?.forEach(function (el) {
         if (el.classList.contains('.tns-slider')){
             console.log('ignore');
