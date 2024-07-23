@@ -1,4 +1,4 @@
-<section class='GradientTextLink py-4' style="--deg: {{getSetting($data->area->name.'_'.$data->part.'_deg')}}deg">
+<section class='GradientTextLink py-4'>
     <div class="{{gfx()['container']}} py-4 text-center">
         <h1>
             {{getSetting($data->area->name.'_'.$data->part.'_title')}}

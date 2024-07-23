@@ -1,4 +1,4 @@
-<nav id='SideMenu'  style="---side-bg: {{getSetting($data->area->name.'_'.$data->part.'_bg')}};">
+<nav id='SideMenu'>
     <div class="text-center py-3" id="side-menu-logo">
         <a href="{{url('/')}}">
             <img src="{{asset('upload/images/logo.svg')}}" alt="">

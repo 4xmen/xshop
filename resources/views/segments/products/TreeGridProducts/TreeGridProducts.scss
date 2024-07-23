@@ -53,19 +53,18 @@
             &:first-child {
                 grid-column: 1/5 span;
                 grid-row: 1/3;
-                background: var(---main-bg);
+                background: var(--three-main-bg-color);
             }
             &:nth-child(2) {
                 grid-column: 6/3 span;
                 grid-row: 1/2;
-                background: rgb(255,125,51);
-                background: linear-gradient(180deg, var(--gx1) 0%, var(--gx2) 100%);
+                background: linear-gradient(180deg, var(--three-main-bg-gx1) 0%, var(--three-main-bg-gx2) 100%);
                 overflow: hidden;
             }
             &:nth-child(3) {
                 grid-column: 6/3 span;
                 grid-row: 2/2;
-                background: linear-gradient(180deg, var(--gy1) 0%, var(--gy2) 100%);
+                background: linear-gradient(180deg, var(--three-main-bg-gy1) 0%, var(--three-main-bg-gy2) 100%);
                 overflow: hidden;
             }
         }

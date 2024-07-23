@@ -1,5 +1,5 @@
 <section class='TreeGridProducts'
-         style="---main-bg: {{getSetting($data->area->name.'_'.$data->part.'_color')}};
+         style="---three-main-bg-color: {{getSetting($data->area->name.'_'.$data->part.'_color')}};
         --gx1: {{getSetting($data->area->name.'_'.$data->part.'_gradx1')}};
         --gx2: {{getSetting($data->area->name.'_'.$data->part.'_gradx2')}};
         --gy1: {{getSetting($data->area->name.'_'.$data->part.'_grady1')}};

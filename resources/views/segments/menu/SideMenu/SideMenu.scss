@@ -4,47 +4,55 @@
     overflow: hidden;
     overflow-y: auto;
     z-index: 8;
-    background: var(---side-bg);
+    background: var(--side-menu-bg-color);
     width: 20rem;
     bottom: 0;
     top: 0;
     inset-inline-start: 0;
-    img{
+
+    img {
         width: 50% !important;
         height: auto !important;
     }
-    ul{
+
+    ul {
         list-style: none;
         padding: 0;
-        li{
+
+        li {
             transition: 600ms;
-            a{
+
+            a {
                 padding: .75rem 1rem;
                 display: block;
             }
+
             text-align: center;
 
-            &:hover{
+            &:hover {
                 background: var(--xshop-secondary);
-               a{
-                   color: var(--xshop-diff);
-               }
+
+                a {
+                    color: var(--xshop-diff);
+                }
             }
 
-            &.current-page{
+            &.current-page {
                 background: var(--xshop-primary);
-                a{
+
+                a {
                     color: var(--xshop-diff);
                 }
             }
         }
     }
-    #side-menu-btn{
+
+    #side-menu-btn {
         display: none;
     }
 }
 
-main{
+main {
     position: relative;
     inset-inline-start: 20rem;
     width: calc(100% - 20rem);
@@ -53,56 +61,61 @@ main{
 
 /*-1024px width*/
 @media (max-width: 1024px) {
-    main{
+    main {
         position: static;
         width: auto;
     }
 
-    #SideMenu{
+    #SideMenu {
         inset-inline-start: 0;
         width: 100%;
         bottom: auto;
         overflow: visible !important;
         //position: relative;
 
-        #side-menu-logo{
+        #side-menu-logo {
             float: left;
-            img{
+
+            img {
                 width: auto !important;
                 height: 48px !important;
                 margin-right: 1rem;
                 margin-left: 1rem;
             }
         }
-        ul{
+
+        ul {
             display: none;
             position: absolute;
             top: 100%;
             left: 0;
             right: 0;
             background: var(--xshop-background);
-            li{
+
+            li {
                 text-align: start;
             }
-            &.active{
-                display: block ;
+
+            &.active {
+                display: block;
             }
         }
-        #side-menu-btn{
+
+        #side-menu-btn {
             display: block !important;
             float: right;
             padding: 1.7rem 2rem;
-            &:hover{
+
+            &:hover {
                 background: var(--xshop-primary);
                 color: var(--xshop-diff);
             }
         }
 
-        #side-menu-content{
-            display:  none !important;
+        #side-menu-content {
+            display: none !important;
         }
     }
-
 
 
 }
