@@ -1,0 +1,108 @@
+#SideMenu {
+    // scss
+    position: fixed;
+    overflow: hidden;
+    overflow-y: auto;
+    z-index: 8;
+    background: var(---side-bg);
+    width: 20rem;
+    bottom: 0;
+    top: 0;
+    inset-inline-start: 0;
+    img{
+        width: 50% !important;
+        height: auto !important;
+    }
+    ul{
+        list-style: none;
+        padding: 0;
+        li{
+            transition: 600ms;
+            a{
+                padding: .75rem 1rem;
+                display: block;
+            }
+            text-align: center;
+
+            &:hover{
+                background: var(--xshop-secondary);
+               a{
+                   color: var(--xshop-diff);
+               }
+            }
+
+            &.current-page{
+                background: var(--xshop-primary);
+                a{
+                    color: var(--xshop-diff);
+                }
+            }
+        }
+    }
+    #side-menu-btn{
+        display: none;
+    }
+}
+
+main{
+    position: relative;
+    inset-inline-start: 20rem;
+    width: calc(100% - 20rem);
+}
+
+
+/*-1024px width*/
+@media (max-width: 1024px) {
+    main{
+        position: static;
+        width: auto;
+    }
+
+    #SideMenu{
+        inset-inline-start: 0;
+        width: 100%;
+        bottom: auto;
+        overflow: visible !important;
+        //position: relative;
+
+        #side-menu-logo{
+            float: left;
+            img{
+                width: auto !important;
+                height: 48px !important;
+                margin-right: 1rem;
+                margin-left: 1rem;
+            }
+        }
+        ul{
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: var(--xshop-background);
+            li{
+                text-align: start;
+            }
+            &.active{
+                display: block ;
+            }
+        }
+        #side-menu-btn{
+            display: block !important;
+            float: right;
+            padding: 1.7rem 2rem;
+            &:hover{
+                background: var(--xshop-primary);
+                color: var(--xshop-diff);
+            }
+        }
+
+        #side-menu-content{
+            display:  none !important;
+        }
+    }
+
+
+
+}
