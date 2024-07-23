@@ -80,6 +80,10 @@ class SliderController extends XController
             $i->save(storage_path() . '/app/public/sliders/optimized-'. $slider->image);
         }
 
+        if ($slider->id == null && Slider::count() > 0) {
+            $slider->data = Slider::first()->data;
+        }
+
         $slider->save();
         return $slider;
 
