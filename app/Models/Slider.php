@@ -8,7 +8,10 @@ use Spatie\Translatable\HasTranslations;
 
 class Slider extends Model
 {
-    use HasFactory,HasTranslations;
+
+
+    use HasFactory, HasTranslations;
+
     public $translatable = ['body'];
 
     protected $casts = [
@@ -23,6 +26,7 @@ class Slider extends Model
 
         return \Storage::url('sliders/optimized-' . $this->image);
     }
+
     public function imgOriginalUrl()
     {
         if ($this->image == null) {
@@ -37,7 +41,8 @@ class Slider extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function getDatazAttribute(){
+    public function getDatazAttribute()
+    {
         $result = [];
         foreach (json_decode($this->data) as $item) {
             $result[$item->key] = $item->value;
@@ -45,4 +50,32 @@ class Slider extends Model
 
         return $result;
     }
+
+
+    public static function addData($key, $defaultValue = null)
+    {
+        foreach (Slider::all() as $item) {
+            $data = json_decode($item->data, true);
+            $data[] = ['key' => $key, 'value' => $defaultValue];
+            $item->data = json_encode($data);
+            $item->save();
+        }
+    }
+
+    public static function remData($key)
+    {
+        foreach (Slider::all() as $item) {
+            $tmp = $item->dataz;
+            $data = [];
+            foreach ($tmp as $k => $v) {
+                if ($key != $k) {
+                    $data[] = ['key' => $k, 'value' => $v];
+                }
+            }
+
+            $item->data = json_encode($data);
+            $item->save();
+        }
+    }
+
 }
