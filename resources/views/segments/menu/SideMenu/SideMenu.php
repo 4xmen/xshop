@@ -36,6 +36,7 @@ class SideMenu
         $setting->value = '#ececec';
         $setting->type = 'COLOR';
         $setting->size = 3;
+        $setting->data = json_encode(['name' => 'side-menu-bg-color']);
         $setting->title =  $part->area->name . ' ' . $part->part .' background';
         $setting->save();
     }
@@ -43,7 +44,7 @@ class SideMenu
     {
         Setting::where('key',$part->area->name . '_' . $part->part.'_menu')->first()?->delete();
         Setting::where('key',$part->area->name . '_' . $part->part.'_text')->first()?->delete();
-        Setting::where('key',$part->area->name . '_' . $part->part.'bg')->first()?->delete();
+        Setting::where('key',$part->area->name . '_' . $part->part.'_bg')->first()?->delete();
     }
     public static function onMount(Part $part = null)
     {

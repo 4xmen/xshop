@@ -12,6 +12,7 @@
 
     <link rel="stylesheet" href="{{asset('assets/vendor/bootstrap/dist/css/bootstrap.min.css')}}">
 
+    <link rel="stylesheet" href="{{ route('theme.variable.css') }}">
     @vite(['resources/sass/client.scss', 'resources/js/client.js'])
 
     @yield('custom-head')

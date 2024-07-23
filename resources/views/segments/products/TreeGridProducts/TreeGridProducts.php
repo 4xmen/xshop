@@ -25,6 +25,7 @@ class TreeGridProducts
         $setting->key = $part->area->name . '_' . $part->part.'_color';
         $setting->value = '#273763';
         $setting->type = 'COLOR';
+        $setting->data = json_encode(['name' => 'three-main-bg-color']);
         $setting->size = 4;
         $setting->title =  $part->area->name . ' ' . $part->part .' main color';
         $setting->save();
@@ -52,6 +53,7 @@ class TreeGridProducts
         $setting->key = $part->area->name . '_' . $part->part.'_gradx1';
         $setting->value = '#FF7D33';
         $setting->type = 'COLOR';
+        $setting->data = json_encode(['name' => 'three-main-bg-gx1']);
         $setting->size = 3;
         $setting->title =  $part->area->name . ' ' . $part->part .' second gradiant color 1';
         $setting->save();
@@ -60,8 +62,10 @@ class TreeGridProducts
         $setting->section = 'theme';
         $setting->key = $part->area->name . '_' . $part->part.'_gradx2';
         $setting->value = '#FF971D';
+        $setting->data = json_encode(['name' => 'three-main-bg-gx2']);
         $setting->type = 'COLOR';
         $setting->size = 3;
+
         $setting->title =  $part->area->name . ' ' . $part->part .' second gradiant color 2';
         $setting->save();
 
@@ -86,8 +90,9 @@ class TreeGridProducts
         $setting = new Setting();
         $setting->section = 'theme';
         $setting->key = $part->area->name . '_' . $part->part.'_grady1';
-        $setting->value = '#FF7D33';
+        $setting->value = '#3368ff';
         $setting->type = 'COLOR';
+        $setting->data = json_encode(['name' => 'three-main-bg-gy1']);
         $setting->size = 3;
         $setting->title =  $part->area->name . ' ' . $part->part .' third gradiant color 1';
         $setting->save();
@@ -97,6 +102,7 @@ class TreeGridProducts
         $setting->key = $part->area->name . '_' . $part->part.'_grady2';
         $setting->value = '#430392';
         $setting->type = 'COLOR';
+        $setting->data = json_encode(['name' => 'three-main-bg-gy2']);
         $setting->size = 3;
         $setting->title =  $part->area->name . ' ' . $part->part .' third gradiant color 2';
         $setting->save();
