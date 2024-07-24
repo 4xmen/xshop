@@ -12,7 +12,6 @@ document.addEventListener('DOMContentLoaded', () => {
         treeSlider = tns({
             container: el,
             items: 3,
-            slideBy: 'page',
             autoplay: true,
             autoplayButton: false,
             // nextButton: false,
@@ -46,7 +45,6 @@ document.addEventListener('DOMContentLoaded', () => {
         treeSliderX = tns({
             container: el,
             items: 1,
-            slideBy: 'page',
             autoplay: true,
             autoplayButton: false,
             // nextButton: false,
@@ -67,7 +65,6 @@ document.addEventListener('DOMContentLoaded', () => {
         treeSliderX = tns({
             container: el,
             items: 1,
-            slideBy: 'page',
             autoplay: true,
             autoplayTimeout: 7500,
             autoplayButton: false,

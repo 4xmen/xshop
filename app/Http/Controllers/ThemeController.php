@@ -14,8 +14,7 @@ class ThemeController extends Controller
         foreach (Setting::where('section', 'Theme')->whereNotNull('data')
                      ->get(['value', 'data']) as $color) {
             $data = json_decode($color->data);
-            if ($data->name) {
-
+            if (isset($data->name)) {
                 $response .= '--' . $data->name . ':' . $color->value;
                 if (isset($data->suffix)) {
                     $response .= $data->suffix;
