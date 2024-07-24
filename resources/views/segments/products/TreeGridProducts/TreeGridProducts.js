@@ -62,7 +62,7 @@ document.addEventListener('DOMContentLoaded', () => {
             console.log('ignore');
             return 'ignore';
         }
-        treeSliderX = tns({
+        treeSliderY = tns({
             container: el,
             items: 1,
             autoplay: true,
