@@ -11,7 +11,6 @@ document.addEventListener('DOMContentLoaded', () => {
         sliderSimple = tns({
             container: el,
             items: 1,
-            slideBy: 'page',
             autoplay: true,
             autoplayButton: false,
             // nextButton: false,
@@ -21,4 +20,5 @@ document.addEventListener('DOMContentLoaded', () => {
             // speed:10000,
         });
     });
+
 });

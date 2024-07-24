@@ -1,0 +1,34 @@
+#ParallaxSlider {
+
+    #ParallaxSliderTns > div{
+        position: relative;
+        overflow: hidden;
+        height: 750px;
+    }
+
+    .parallax-slide-item{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: 750px;
+    }
+    // scss
+    .parallax-slider {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 750px;
+        background-size: auto 120vh;
+        background-position: center 0;
+
+
+    }
+    .main-content{
+        position: relative;
+        z-index: 2;
+        max-width: 80%;
+        width: 500px;
+    }
+}
