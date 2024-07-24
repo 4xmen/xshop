@@ -10,7 +10,6 @@
                         <p class="text-center">
                             {{$slider->dataz['index_ParallaxSlider_subtitle']}}
                             <br>
-
                             <a class="btn btn-outline-dark mt-5"
                                href="{{$slider->dataz['index_ParallaxSlider_link']}}">
                                 {{$slider->dataz['index_ParallaxSlider_btn']}}

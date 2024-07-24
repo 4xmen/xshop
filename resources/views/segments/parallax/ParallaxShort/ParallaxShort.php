@@ -20,7 +20,7 @@ class ParallaxShort
         $setting->title =  $part->area->name . ' ' . $part->part.' Image';
         $setting->save();
 
-        File::copy(__DIR__.'/assets/bg.jpg',public_path('upload/images/').$part->area->name . '.' . $part->part.'.jpg');
+        File::copy(__DIR__.'/../../default-assets/bg.jpg',public_path('upload/images/').$part->area->name . '.' . $part->part.'.jpg');
 
         $setting = new Setting();
         $setting->section = 'theme';

@@ -1,0 +1,94 @@
+.LongHeightPosts {
+    // scss
+    background-size: cover;
+    background-position: center;
+
+    h1 {
+        padding: 3rem 0;
+        color: var(--xshop-primary);
+        position: relative;
+
+        &:before {
+            content: ' ';
+            position: absolute;
+            inset-inline-end: 0;
+            height: 2px;
+            width: 15%;
+            top: 50%;
+            background: var(--xshop-primary);
+        }
+    }
+
+    h3 {
+        padding: 3rem 0;
+        color: var(--xshop-primary);
+        position: relative;
+        text-align: center;
+        font-weight: 200;
+        font-size: 17px;
+
+        .btn {
+            margin-top: -9px;
+        }
+
+        &:before {
+            content: ' ';
+            position: absolute;
+            inset-inline-start: 0;
+            height: 2px;
+            width: 15%;
+            top: 50%;
+            background: var(--xshop-primary);
+        }
+    }
+
+    .post-height-img-item {
+        margin-bottom: 1rem;
+        background-size: cover;
+        background-position: center;
+        height: 450px;
+        position: relative;
+        border-radius: var(--xshop-border-radius);
+        overflow: hidden;
+
+        .post-height-img-detail {
+            display: block;
+            transition: 500ms;
+            position: absolute;
+            padding: 1rem;
+            left: 0;
+            right: 0;
+            bottom: 0;
+
+            h4, p {
+                color: var(--xshop-diff);
+            }
+
+            p {
+                transition: 500ms;
+                max-height: 2.6em;
+                overflow: hidden;
+            }
+
+            h4 {
+                opacity: .5;
+                transition: 500ms;
+            }
+
+
+        }
+
+        &:hover {
+            .post-height-img-detail {
+                background: var(--xshop-primary);
+
+                h4 {
+                    opacity: 1;
+                }
+                p{
+                    max-height: 5.7em;
+                }
+            }
+        }
+    }
+}
