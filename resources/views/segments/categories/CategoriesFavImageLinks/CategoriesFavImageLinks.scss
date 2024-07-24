@@ -1,0 +1,45 @@
+#CategoriesFavImageLinks {
+    padding: 4rem 0;
+
+    h1{
+        text-align: center;
+        font-weight: 200;
+        font-size: 28px;
+        margin-bottom: 2rem;
+    }
+
+    #brands-slider{
+        .item{
+            text-align: center;
+        }
+    }
+    img{
+        height: 64px;
+    }
+    .tns-nav,button{
+        display: inline-block;
+    }
+    [data-action="stop"], [data-action="start"]{
+        display: none;
+    }
+
+    .tns-nav{
+        margin-top: 2rem;
+        display: block;
+        text-align: center;
+        button{
+            opacity: .4;
+            margin: .4rem;
+            height: 12px;
+            width: 12px;
+            border-radius: 50%;
+            background: var(--xshop-primary);
+            border: 0;
+            transition: 400ms;
+
+            &.tns-nav-active{
+                opacity: 1;
+            }
+        }
+    }
+}
