@@ -1,0 +1,71 @@
+.ParallaxFooter {
+    padding: 3rem 0;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    h3{
+        color: var(--xshop-primary);
+        text-align: center;
+        position: relative;
+        font-weight: 200;
+        &:before,&:after{
+            position: absolute;
+            content: ' ';
+            height: 1px;
+            width: 10%;
+            top: 48%;
+        }
+
+        &:before{
+            inset-inline-start: 0;
+            background: linear-gradient(90deg, var(--xshop-primary) 0%, #ffffff00 100%);
+        }
+        &:after{
+            inset-inline-end: 0;
+            background: linear-gradient(-90deg, var(--xshop-primary) 0%, #ffffff00 100%);
+        }
+    }
+
+    .row{
+        ul{
+            list-style: none;
+            padding: 0;
+
+
+            li{
+                position: relative;
+
+                &:before{
+                    position: absolute;
+                    inset-inline-start: -24px;
+                    top: 40%;
+                    height: 1px;
+                    content: ' ';
+                    width: 14px;
+                    background: linear-gradient(90deg, var(--xshop-primary) 0%, #ffffff00 100%);
+                }
+            }
+        }
+    }
+
+    .social{
+        position: relative;
+        padding: 1rem;
+        margin: 1rem;
+        &:before,&:after{
+            position: absolute;
+            content: ' ';
+            height: 1px;
+            width: 70%;
+            top: 0;
+            left: 15%;
+            right: 15%;
+            background: linear-gradient(90deg,#ffffff00 0%, var(--xshop-primary) 50%, #ffffff00 100%);
+        }
+
+        &:after{
+            top: auto;
+            bottom: 0;
+        }
+    }
+}
