@@ -1,0 +1,40 @@
+.CategoriesGrid {
+    padding: 3rem 0;
+    h1{
+        margin-bottom: 2rem;
+        font-weight: 300;
+    }
+
+    .row{
+        column-gap: 7px;
+    }
+    // scss
+    .cat-grid-list{
+        .cat-grid-item{
+            border-radius: var(--xshop-border-radius);
+            overflow: hidden;
+            text-align: center;
+            box-shadow: var(--xshop-shadow);
+
+            h3{
+                font-size: 22px;
+                font-weight: 200;
+                background: var(--xshop-primary);
+                color: var(--xshop-diff);
+                margin-bottom: 0;
+            }
+            img{
+                height: 25vh;
+                object-fit: cover;
+                transition: 400ms;
+                width: 100%;
+            }
+
+            &:hover{
+                img{
+                    transform: scale(1.7);
+                }
+            }
+        }
+    }
+}

@@ -3,11 +3,10 @@
 namespace Resources\Views\Segments;
 
 use App\Models\Category;
-use App\Models\Group;
 use App\Models\Part;
 use App\Models\Setting;
 
-class CategoriesFavImageLinks
+class CategoriesGrid
 {
     public static function onAdd(Part $part = null)
     {
@@ -15,11 +14,21 @@ class CategoriesFavImageLinks
         $setting = new Setting();
         $setting->section = 'theme';
         $setting->key = $part->area->name . '_' . $part->part.'_title';
-        $setting->value = 'Brands';
-        $setting->size = 6;
+        $setting->value =  Category::first()->name;
+        $setting->size = 4;
         $setting->type = 'TEXT';
 //        $setting->data = json_encode(['xmin' => 2, 'xmax' => 90]);
         $setting->title =  $part->area->name . ' ' . $part->part. ' title';
+        $setting->save();
+
+        $setting = new Setting();
+        $setting->section = 'theme';
+        $setting->key = $part->area->name . '_' . $part->part.'_limit';
+        $setting->value = '4';
+        $setting->size = 4;
+        $setting->type = 'NUMBER';
+        $setting->data = json_encode(['xmin' => 2, 'xmax' => 6]);
+        $setting->title =  $part->area->name . ' ' . $part->part. ' count';
         $setting->save();
 
 
@@ -27,16 +36,16 @@ class CategoriesFavImageLinks
         $setting->section = 'theme';
         $setting->key = $part->area->name . '_' . $part->part.'_category';
         $setting->value = Category::first()->id;
-        $setting->size = 6;
+        $setting->size = 4;
         $setting->type = 'CATEGORY';
 //        $setting->data = json_encode(['xmin' => 2, 'xmax' => 90]);
         $setting->title =  $part->area->name . ' ' . $part->part. ' category';
         $setting->save();
-
     }
     public static function onRemove(Part $part = null)
     {
         Setting::where('key',$part->area->name . '_' . $part->part.'_title')->first()?->delete();
+        Setting::where('key',$part->area->name . '_' . $part->part.'_limit')->first()?->delete();
         Setting::where('key',$part->area->name . '_' . $part->part.'_category')->first()?->delete();
     }
     public static function onMount(Part $part = null)

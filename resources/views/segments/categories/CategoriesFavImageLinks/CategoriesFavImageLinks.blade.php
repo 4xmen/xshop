@@ -8,7 +8,7 @@
             @foreach( getCategorySubCatsBySetting($data->area->name.'_'.$data->part.'_category',8) as $category )
                 <div class="item">
                     <a href="{{$category->webUrl()}}">
-                        <img src="{{$category->imgUrl()}}" alt="{{$category->name}}" title="{{$category->title}}">
+                        <img src="{{$category->imgUrl()}}" alt="{{$category->name}}" title="{{$category->name}}">
                     </a>
                 </div>
             @endforeach
