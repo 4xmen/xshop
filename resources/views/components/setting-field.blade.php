@@ -16,6 +16,9 @@
                       class="form-control"
                       rows="5">{{old($setting->key, $setting->value)}}</textarea>
             @break
+        @case('ICON')
+            <remix-icon-picker xname="{{$setting->key}}" xvalue="{{old($setting->key, $setting->value)}}"></remix-icon-picker>
+            @break
         @case('EDITOR')
             <textarea name="{{$setting->key}}" id="{{$setting->key}}"
                       class="form-control ckeditorx"
