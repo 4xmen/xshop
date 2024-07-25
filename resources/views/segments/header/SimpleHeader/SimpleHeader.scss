@@ -1,0 +1,48 @@
+.SimpleHeader {
+
+    overflow: hidden;
+
+    position: relative;
+    background: var(--xshop-background);
+    border-bottom: 2px solid var(--xshop-primary);;
+    .container, .container-fluid {
+        padding: 3rem;
+        position: relative;
+
+        h1{
+            color: var(--xshop-primary);
+            font-weight: 200;
+        }
+
+        h2{
+            opacity: .3;
+            position: absolute;
+            top: 35%;
+            inset-inline-end: 10%;
+            font-weight: 300;
+        }
+    }
+
+    &:after {
+        content:' ';
+        width: 25vw;
+        height: 25vw;
+        background: var(--xshop-primary);
+        position: absolute;
+        top: -10vw;
+        border-radius: 50%;
+        inset-inline-end: 10%;
+        opacity: .3;
+    }
+}
+
+
+/*-1000px width*/
+@media (max-width: 1000px) {
+    .SimpleHeader{
+        &:after{
+            height: 24vh;
+            width: 25vh;
+        }
+    }
+}
