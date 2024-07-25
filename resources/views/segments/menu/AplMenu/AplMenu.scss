@@ -1,9 +1,12 @@
+main{
+    padding-top: 47px;
+}
 #AplMenu {
     position: fixed;
     left: 0;
     top: 0;
     right: 0;
-    z-index: 99;
+    z-index: 9999;
     background: #434344;
     transition: 200ms;
 
