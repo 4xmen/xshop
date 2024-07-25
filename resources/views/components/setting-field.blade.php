@@ -19,6 +19,10 @@
         @case('ICON')
             <remix-icon-picker xname="{{$setting->key}}" xvalue="{{old($setting->key, $setting->value)}}"></remix-icon-picker>
             @break
+        @case('LOCATION')
+            @php($latlng = explode(',',old($setting->key, $setting->value)))
+            <lat-lng xname="{{$setting->key}}" :ilat="{{$latlng[0]}}" :ilng="{{$latlng[1]}}" :izoom="{{$latlng[2]}}" :dark-mode="true"></lat-lng>
+            @break
         @case('EDITOR')
             <textarea name="{{$setting->key}}" id="{{$setting->key}}"
                       class="form-control ckeditorx"
