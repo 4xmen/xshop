@@ -19,6 +19,8 @@ document.addEventListener('DOMContentLoaded', () => {
             autoplayHoverPause: true,
             mouseDrag: true,
             gutter: 7,
+            slideBy: 1,
+            autoplayTimeout: 5000,
             responsive:{
                 560:{
                     items: 1,
@@ -54,6 +56,7 @@ document.addEventListener('DOMContentLoaded', () => {
             mouseDrag: true,
             gutter: 7,
             edgePadding: 60,
+            slideBy: 1,
             // speed:10000,
         });
     });
@@ -74,6 +77,7 @@ document.addEventListener('DOMContentLoaded', () => {
             mouseDrag: true,
             gutter: 7,
             edgePadding: 60,
+            slideBy: 1,
             // speed:10000,
         });
     });

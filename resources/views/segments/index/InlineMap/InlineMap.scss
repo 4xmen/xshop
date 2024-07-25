@@ -1,0 +1,12 @@
+@import 'leaflet/dist/leaflet.css';
+
+#InlineMap {
+    padding: 0;
+    margin: 0;
+    #mapContainer{
+        height: 400px;
+        &.dark-mode{
+            filter: invert(100%) hue-rotate(120deg) brightness(95%) contrast(90%);
+        }
+    }
+}
