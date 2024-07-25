@@ -69,6 +69,7 @@ class ParallaxFooter
         Setting::where('key',$part->area->name . '_' . $part->part.'_title2')->first()?->delete();
         Setting::where('key',$part->area->name . '_' . $part->part.'_group')->first()?->delete();
         Setting::where('key',$part->area->name . '_' . $part->part.'_last')->first()?->delete();
+        Setting::where('key',$part->area->name . '_' . $part->part.'_jpg')->first()?->delete();
     }
     public static function onMount(Part $part = null)
     {

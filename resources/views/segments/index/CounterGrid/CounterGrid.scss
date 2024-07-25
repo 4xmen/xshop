@@ -1,0 +1,16 @@
+#CounterGrid {
+    padding: 4rem;
+    background: var(--xshop-secondary);
+    color: var(--xshop-diff);
+    text-align: center;
+    i{
+        font-size: 128px;
+        display: block;
+        margin: .5rem auto;
+        -webkit-text-stroke: 6px  var(--xshop-secondary);
+    }
+
+    .grid-counter{
+        font-size: 35px;
+    }
+}
