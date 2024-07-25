@@ -17,6 +17,8 @@ document.addEventListener('DOMContentLoaded', () => {
             controls: false,
             autoplayHoverPause: true,
             mouseDrag: true,
+            slideBy: 1,
+            autoplayTimeout: 5000,
             // speed:10000,
         });
     });

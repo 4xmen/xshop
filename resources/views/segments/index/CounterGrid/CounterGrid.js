@@ -61,7 +61,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 });
             }
             // Remove event listener if you only want to alert once
-            this.removeEventListener('scroll', arguments.callee);
+            // this.removeEventListener('scroll', arguments.callee);
         }
     });
 
