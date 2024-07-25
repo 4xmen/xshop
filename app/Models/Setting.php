@@ -12,10 +12,11 @@ class Setting extends Model
 
     public $translatable = ['value'];
 
-    public static $settingTypes = ['TEXT','NUMBER', 'LONGTEXT', 'CODE', 'EDITOR',
-        'CATEGORY', 'GROUP', 'CHECKBOX', 'FILE', 'COLOR','SELECT','MENU'];
+    public static $settingTypes = ['TEXT', 'NUMBER', 'LONGTEXT', 'CODE', 'EDITOR',
+        'CATEGORY', 'GROUP', 'CHECKBOX', 'FILE', 'COLOR', 'SELECT', 'MENU', 'LOCATION', 'ICON'];
 
-    public function getData(){
-        return json_decode($this->data,true);
+    public function getData()
+    {
+        return json_decode($this->data, true);
     }
 }
