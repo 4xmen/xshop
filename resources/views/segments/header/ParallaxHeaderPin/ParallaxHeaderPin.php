@@ -17,7 +17,7 @@ class ParallaxHeaderPin
         $setting->key = $part->area->name . '_' . $part->part.'_jpg';
         $setting->value = null;
         $setting->type = 'FILE';
-        $setting->size = 6;
+        $setting->size = 12;
         $setting->title =  $part->area->name . ' ' . $part->part.' default image';
         $setting->save();
 
