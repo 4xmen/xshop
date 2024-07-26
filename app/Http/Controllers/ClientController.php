@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Post;
 use Illuminate\Http\Request;
+use Spatie\Tags\Tag;
 
 class ClientController extends Controller
 {
@@ -20,5 +21,11 @@ class ClientController extends Controller
         $title = $post->title;
         $subtitle = $post->subtitle;
         return view('client.post',compact('area','post','title','subtitle'));
+    }
+
+    public function tag($slug){
+
+        $tag = Tag::where('slug->'.config('app.locale'),'like',$slug)->first();
+        return $tag;
     }
 }

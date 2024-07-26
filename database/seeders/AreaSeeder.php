@@ -32,7 +32,7 @@ class AreaSeeder extends Seeder
                         ,"groups","categories","category","group","index"]
                 ),
                 'max' => 10,
-                'preview' => 'welcome',
+                'preview' => 'client.welcome',
                 'icon' => 'ri-layout-top-2-line',
             ],
             [
@@ -42,7 +42,7 @@ class AreaSeeder extends Seeder
                         "parallax","other","post"]
                 ),
                 'max' => 6,
-                'preview' => 'test',
+                'preview' => 'client.post',
                 'icon' => 'ri-layout-top-2-line',
             ],
         ];
