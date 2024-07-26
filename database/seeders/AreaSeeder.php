@@ -27,9 +27,9 @@ class AreaSeeder extends Seeder
             [
                 'name' => 'index',
                 'valid_segments' => json_encode(
-                    ["top","slider","header","footer","menu",
-                        "parallax","other","posts","products","attachments"
-                        ,"groups","categories","category","group","index"]
+                    ["top", "slider", "header", "footer", "menu",
+                        "parallax", "other", "posts", "products", "attachments"
+                        , "groups", "categories", "category", "group", "index"]
                 ),
                 'max' => 10,
                 'preview' => 'client.welcome',
@@ -38,15 +38,15 @@ class AreaSeeder extends Seeder
             [
                 'name' => 'post',
                 'valid_segments' => json_encode(
-                    ["top","header","footer","menu",
-                        "parallax","other","post"]
+                    ["top", "header", "footer", "menu",
+                        "parallax", "other", "post", "comments"]
                 ),
                 'max' => 6,
                 'preview' => 'client.post',
                 'icon' => 'ri-layout-top-2-line',
             ],
         ];
-        foreach ($areas as $area){
+        foreach ($areas as $area) {
             $a = new Area();
             $a->name = $area['name'];
             $a->max = $area['max'];
