@@ -72,4 +72,8 @@ class ClientController extends Controller
 
         return redirect()->back()->with(['message' => __('Your comment has been submitted')]);
     }
+
+    public function search(Request $request){
+
+    }
 }

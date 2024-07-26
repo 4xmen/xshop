@@ -359,6 +359,7 @@ Route::name('client.')->group(function (){
     Route::get('/', [\App\Http\Controllers\ClientController::class,'welcome'])->name('welcome');
     Route::get('/{post}', [\App\Http\Controllers\ClientController::class,'post'])->name('post');
     Route::get('/tag/{post}', [\App\Http\Controllers\ClientController::class,'tag'])->name('tag');
+    Route::get('/search', [\App\Http\Controllers\ClientController::class,'search'])->name('search');
 
 
     Route::post('/comment/submit', [\App\Http\Controllers\ClientController::class,'submitComment'])->name('comment.submit');
