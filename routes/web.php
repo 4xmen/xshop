@@ -4,12 +4,7 @@ use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 
 
-Route::get('/', function () {
-    $area = 'index';
-    $title = config('app.name');
-    $subtitle = getSetting('subtitle');
-    return view('welcome',compact('area','title','subtitle'));
-})->name('welcome')->middleware(\App\Http\Middleware\VisitorCounter::class);
+
 
 Auth::routes(['register' => false]);
 
@@ -357,14 +352,19 @@ Route::prefix(config('app.panel.prefix'))->name('admin.')->group(
 
     });
 
-
 Route::get('theme/variable.css',[\App\Http\Controllers\ThemeController::class,'cssVariables'])->name('theme.variable.css');
+
+Route::name('client.')->group(function (){
+    // index
+    Route::get('/', [\App\Http\Controllers\ClientController::class,'welcome'])->name('welcome');
+    Route::get('/{post}', [\App\Http\Controllers\ClientController::class,'post'])->name('post');
+
+})->middleware([\App\Http\Middleware\VisitorCounter::class]);
 
 Route::get('test',function (){
 //    return \Resources\Views\Segments\PreloaderCircle::onAdd();
    return getCategoryProductBySetting('index_TreeGridProducts_category');
 
 })->name('test');
-
 
 

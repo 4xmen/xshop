@@ -133,9 +133,14 @@ abstract class XController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show($user)
+    public function show($item)
     {
+        $x = new $this->_MODEL_();
+        $m = $this->_MODEL_::where($x->getRouteKeyName(), $item)->first();
         //
+        if (method_exists($m,'webUrl')){
+            return redirect($m->webUrl());
+        }
     }
 
 
