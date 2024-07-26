@@ -3,9 +3,12 @@
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 
+
 Route::get('/', function () {
     $area = 'index';
-    return view('welcome',compact('area'));
+    $title = config('app.name');
+    $subtitle = getSetting('subtitle');
+    return view('welcome',compact('area','title','subtitle'));
 })->name('welcome')->middleware(\App\Http\Middleware\VisitorCounter::class);
 
 Auth::routes(['register' => false]);

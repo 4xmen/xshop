@@ -29,6 +29,7 @@ class Area extends Model
         'group',
         'groups',
         'groups_page',
+        'header',
         'index',
         'invoice',
         'login',

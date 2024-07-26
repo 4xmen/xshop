@@ -2,6 +2,7 @@ import L from 'leaflet';
 
 var map,marker ;
 window.addEventListener('load',function () {
+
     const lat = parseFloat(document.querySelector('#maplat').value);
     const lng = parseFloat(document.querySelector('#maplng').value);
     const zoom = parseInt(document.querySelector('#mapzoom').value);
