@@ -20,6 +20,7 @@ class ClientController extends Controller
         $area = 'post';
         $title = $post->title;
         $subtitle = $post->subtitle;
+        $post->increment('view');
         return view('client.post',compact('area','post','title','subtitle'));
     }
 
