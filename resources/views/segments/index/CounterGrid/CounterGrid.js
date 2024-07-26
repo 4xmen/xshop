@@ -35,6 +35,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
     window.addEventListener('scroll', function() {
         const container = document.getElementById('CounterGrid');
+        if (container == null){
+            return ;
+        }
         if (isElementInViewport(container)) {
             if (!isCounterInited){
                 isCounterInited = true;

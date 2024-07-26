@@ -6,7 +6,7 @@
 @section('content')
     <main>
     @foreach(getParts($area) as $part)
-        @php($p = $part->getBladeWithData())
+        @php($p = $part->getBladeWithData($post))
         @include($p['blade'],['data' => $p['data']])
     @endforeach
     </main>

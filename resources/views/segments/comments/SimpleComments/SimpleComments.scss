@@ -1,0 +1,50 @@
+.SimpleComments {
+    .simple-single-comment{
+        margin-bottom: 3px;
+        padding: 10px 1rem;
+        p{
+            padding: 1rem;
+            margin: 0;
+        }
+
+        .tag{
+            background: var(--xshop-secondary);
+            color: var(--xshop-diff);
+            border-radius: var(--xshop-border-radius);
+            display: inline-block;
+            padding: 2px 1rem;
+            opacity: .2;
+            transition: 470ms;
+        }
+        border: 1px solid rgba($xshop-text,.3);
+        border-radius: var(--xshop-border-radius);
+
+        &:hover{
+            .tag{
+                opacity: 1;
+            }
+        }
+
+        .comment-reply{
+            margin: -5px -.7rem;
+        }
+    }
+
+    #comment-form{
+        border-radius: var(--xshop-border-radius);
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+        background: #ffffff44;
+        padding: 1rem;
+    }
+
+    .comment-as{
+        font-weight: 700;
+        color: var(--xshop-primary);
+    }
+
+    .on-reply{
+        background: var(--xshop-secondary);
+        color: var(--xshop-diff);
+    }
+}
