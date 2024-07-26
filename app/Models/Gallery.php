@@ -74,4 +74,15 @@ class Gallery extends Model implements HasMedia
         return  '#';// WIP
         return route('');
     }
+
+
+    public function comments()
+    {
+        return $this->morphMany(Comment::class, 'commentable');
+    }
+
+    public function approvedComments()
+    {
+        return $this->morphMany(Comment::class, 'commentable')->where('status', 1);
+    }
 }
