@@ -87,7 +87,7 @@ class Post extends Model implements HasMedia
         $word = strlen(strip_tags($this->body));
         $m = ceil($word / 1350);
 
-        return $m . ' ' . __('minute');
+        return $m . ' ' . __('minute(s)');
     }
 
 
