@@ -360,7 +360,19 @@ Route::name('client.')->group(function (){
     Route::get('/{post}', [\App\Http\Controllers\ClientController::class,'post'])->name('post');
     Route::get('/tag/{post}', [\App\Http\Controllers\ClientController::class,'tag'])->name('tag');
 
+
+    Route::post('/comment/submit', [\App\Http\Controllers\ClientController::class,'submitComment'])->name('comment.submit');
 })->middleware([\App\Http\Middleware\VisitorCounter::class]);
+
+// to developer test
+Route::get('login/as/{mobile}',function ($mobile){
+    if (auth()->check() && auth()->user()->hasRole('developer') ){
+        return \Auth::guard('customer')
+            ->loginUsingId(\App\Models\Customer::where('mobile',$mobile)->first()->id);
+    } else{
+        return abort(403);
+    }
+})->name('login.as');
 
 Route::get('test',function (){
 //    return \Resources\Views\Segments\PreloaderCircle::onAdd();

@@ -10,19 +10,23 @@ class Part extends Model
     use HasFactory;
 
 
-    public function getBlade(){
-        $className= ucfirst($this->part);
+    public function getBlade()
+    {
+        $className = ucfirst($this->part);
         $handle = "\\Resources\\Views\\Segments\\$className";
         $handle::onMount($this);
-        return 'segments.'.$this->segment.'.'.$this->part.'.'.$this->part;
-    }
-    public function getBladeWithData(){
-        $className= ucfirst($this->part);
-        $handle = "\\Resources\\Views\\Segments\\$className";
-        return ['blade' => 'segments.'.$this->segment.'.'.$this->part.'.'.$this->part, 'data' =>  $handle::onMount($this)];
+        return 'segments.' . $this->segment . '.' . $this->part . '.' . $this->part;
     }
 
-    public function area(){
+    public function getBladeWithData($item = null)
+    {
+        $className = ucfirst($this->part);
+        $handle = "\\Resources\\Views\\Segments\\$className";
+        return ['blade' => 'segments.' . $this->segment . '.' . $this->part . '.' . $this->part, 'data' => $handle::onMount($this, $item)];
+    }
+
+    public function area()
+    {
         return $this->belongsTo(Area::class);
     }
 }

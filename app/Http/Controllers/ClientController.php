@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Comment;
+use App\Models\Customer;
 use App\Models\Post;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Spatie\Tags\Tag;
 
@@ -28,5 +31,45 @@ class ClientController extends Controller
 
         $tag = Tag::where('slug->'.config('app.locale'),'like',$slug)->first();
         return $tag;
+    }
+
+
+    public function submitComment(Request $request){
+        $request->validate([
+            'commentable_type' => ['required','string','min:5'],
+            'commentable_id' => ['required','integer'],
+            'message' => ['required','string','min:5'],
+            'parent_id' => ['nullable','integer'],
+        ]);
+
+        $comment = new Comment();
+        if (!auth()->check() && !auth('customer')->check()){
+            $request->validate([
+                'name' => ['required','string','min:2'],
+                'email' => ['required','email'],
+            ]);
+            $comment->name = $request->name;
+            $comment->email = $request->email;
+            $comment->status = 0;
+        }else{
+            if (auth()->check() ){
+                $comment->commentator_type  = User::class;
+                $comment->commentator_id   = auth()->id();
+                $comment->status = 1;
+            }else{
+                $comment->commentator_type  = Customer::class;
+                $comment->commentator_id   = auth('customer')->id();
+                $comment->status = 0;
+            }
+        }
+
+        $comment->parent_id = $request->input('parent_id',null);
+        $comment->body = $request->input('message');
+        $comment->commentable_type = $request->input('commentable_type');
+        $comment->commentable_id = $request->input('commentable_id');
+        $comment->ip = request()->ip();
+        $comment->save();
+
+        return redirect()->back()->with(['message' => __('Your comment has been submitted')]);
     }
 }
