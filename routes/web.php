@@ -358,6 +358,7 @@ Route::name('client.')->group(function (){
     // index
     Route::get('/', [\App\Http\Controllers\ClientController::class,'welcome'])->name('welcome');
     Route::get('/{post}', [\App\Http\Controllers\ClientController::class,'post'])->name('post');
+    Route::get('/tag/{post}', [\App\Http\Controllers\ClientController::class,'tag'])->name('tag');
 
 })->middleware([\App\Http\Middleware\VisitorCounter::class]);
 
