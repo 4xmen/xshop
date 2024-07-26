@@ -124,7 +124,6 @@ class Post extends Model implements HasMedia
 //    }
 
     public function webUrl(){
-        return  '#';// WIP
-        return route('');
+        return route('client.post',$this->slug);
     }
 }

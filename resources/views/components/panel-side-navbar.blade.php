@@ -2,7 +2,7 @@
     <ul>
         <li data-bs-toggle="tooltip" data-bs-placement="auto" data-bs-custom-class="custom-tooltip"
             data-bs-title="{{__("xShop")}}">
-            <a href="{{route('welcome')}}" target="_blank">
+            <a href="{{route('client.welcome')}}" target="_blank">
                 <i class="ri-home-smile-fill"></i>
             </a>
         </li>
