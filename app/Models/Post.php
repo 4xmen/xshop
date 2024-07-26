@@ -98,7 +98,7 @@ class Post extends Model implements HasMedia
 
     public function approvedComments()
     {
-        return $this->morphMany(Comment::class, 'commentable')->where('status', 1);
+        return $this->morphMany(Comment::class, 'commentable');
     }
 
     public function mainGroup(){
@@ -108,6 +108,8 @@ class Post extends Model implements HasMedia
     public function attachs(){
         return $this->morphMany(Attachment::class,'attachable');
     }
+
+
 
 
 //    public function toArray()

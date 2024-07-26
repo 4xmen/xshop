@@ -106,7 +106,7 @@ class Product extends Model implements HasMedia
 
     public function approvedComments()
     {
-        return $this->morphMany(Comment::class, 'commentable')->where('status', 1)->whereNull('sub_comment_id');
+        return $this->morphMany(Comment::class, 'commentable')->where('status', 1);
     }
 
     public function categories()
