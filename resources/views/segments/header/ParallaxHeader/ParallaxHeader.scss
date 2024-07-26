@@ -1,0 +1,13 @@
+.ParallaxHeader {
+    background-size: cover;
+    background-attachment: fixed;
+    height: 250px;
+    color: var(--xshop-diff);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    h2{
+        opacity: .4;
+    }
+}
