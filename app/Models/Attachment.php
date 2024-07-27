@@ -57,4 +57,12 @@ class Attachment extends Model
                 return null;
         }
     }
+
+
+    public function webUrl()
+    {
+        return '#';// WIP
+        return route('');
+    }
+
 }

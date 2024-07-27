@@ -6,11 +6,7 @@
  window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 import "./client-custom/assetsNode.js";
 import "./client-custom/confirm.js";
+import "./client-custom/safeForm.js";
 import "./client-custom/windowLoader.js";
 import "../views/segments/preloader/PreloaderCircle/PreloaderCircle.js";
-import "../views/segments/top/TopSimple/TopSimple.js";
-import "../views/segments/slider/SliderSimple/SliderSimple.js";
-import "../views/segments/posts/PostsIconSimple/PostsIconSimple.js";
-import "../views/segments/index/GradientTextLink/GradientTextLink.js";
-import "../views/segments/category/FavProductWithMeta/FavProductWithMeta.js";
-import "../views/segments/parallax/ParallaxShort/ParallaxShort.js";
+import "../views/segments/posts_page/SimplePostList/SimplePostList.js";
