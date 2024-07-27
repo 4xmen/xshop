@@ -13,7 +13,7 @@ class AreaController extends Controller
     //
     public function index()
     {
-        $areas = Area::all('name', 'icon');
+        $areas = Area::all('name', 'icon')->sortBy('name');
         return view('admin.areas.area-list', compact('areas'));
     }
 

@@ -19,7 +19,7 @@
     "dependencies": {
         "chart.js": "^4.4.3",
         "leaflet": "^1.9.4",
-        "remixicon": "^4.2.0",
+        "remixicon": "^4.3.0",
         "sortablejs": "^1.15.2",
         "three": "0.150.0",
         "tiny-slider": "^2.9.4",
