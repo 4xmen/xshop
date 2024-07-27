@@ -887,6 +887,13 @@ function success($data = null, $message = null, $meta = [], $og = [], $twitter =
     ]);
 }
 
+/**
+ * @param $errors
+ * @param $status
+ * @param $message
+ * @param $data
+ * @return \Illuminate\Http\JsonResponse
+ */
 function errors($errors, $status = 422, $message = null, $data = null)
 {
     return response()->json([
@@ -895,4 +902,9 @@ function errors($errors, $status = 422, $message = null, $data = null)
         "message" => $message,
         "data" => $data,
     ], $status);
+}
+
+function readable($text)
+{
+  return ucfirst(trim(str_replace(['-','_'],' ',$text)));
 }

@@ -175,9 +175,8 @@
                     </div>
                     <div class="col-md-3 mt-3 pt-2">
                         <div class="form-group mt-4">
-
                             <div class="form-check form-switch">
-                                <input class="form-check-input" name="is_pin"  @if (old('is_pin',$item->is_pin??0) != 0)
+                                <input class="form-check-input" name="is_pin"  @if (old('is_pin',$item->is_pinned??0) != 0)
                                     checked
                                        @endif type="checkbox" id="ispin">
                                 <label class="form-check-label" for="ispin">{{__('Pin')}}</label>

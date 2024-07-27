@@ -11,59 +11,75 @@ use Spatie\Tags\Tag;
 
 class ClientController extends Controller
 {
+
+    public $paginate = 10;
+
     //
-    public function welcome(){
+    public function welcome()
+    {
         $area = 'index';
         $title = config('app.name');
         $subtitle = getSetting('subtitle');
-        return view('client.welcome',compact('area','title','subtitle'));
+        return view('client.welcome', compact('area', 'title', 'subtitle'));
     }
 
-    public function post(Post $post){
+    public function post(Post $post)
+    {
         $area = 'post';
         $title = $post->title;
         $subtitle = $post->subtitle;
         $post->increment('view');
-        return view('client.post',compact('area','post','title','subtitle'));
+        return view('client.post', compact('area', 'post', 'title', 'subtitle'));
     }
 
-    public function tag($slug){
+    public function posts()
+    {
+        $area = 'posts-list';
+        $title = __("Posts list");
+        $subtitle = '';
+        $posts = Post::where('status', 1)->orderByDesc('id')->paginate($this->paginate);
+        return view('client.posts', compact('area', 'posts', 'title', 'subtitle'));
+    }
 
-        $tag = Tag::where('slug->'.config('app.locale'),'like',$slug)->first();
+    public function tag($slug)
+    {
+
+        $tag = Tag::where('slug->' . config('app.locale'), 'like', $slug)->first();
         return $tag;
     }
 
 
-    public function submitComment(Request $request){
+    public function submitComment(Request $request)
+    {
         $request->validate([
-            'commentable_type' => ['required','string','min:5'],
-            'commentable_id' => ['required','integer'],
-            'message' => ['required','string','min:5'],
-            'parent_id' => ['nullable','integer'],
+            'commentable_type' => ['required', 'string', 'min:5'],
+            'commentable_id' => ['required', 'integer'],
+            'message' => ['required', 'string', 'min:5'],
+            'parent_id' => ['nullable', 'integer'],
         ]);
 
         $comment = new Comment();
-        if (!auth()->check() && !auth('customer')->check()){
+        if (!auth()->check() && !auth('customer')->check()) {
             $request->validate([
-                'name' => ['required','string','min:2'],
-                'email' => ['required','email'],
+                'name' => ['required', 'string', 'min:2'],
+                'email' => ['required', 'email'],
             ]);
             $comment->name = $request->name;
             $comment->email = $request->email;
             $comment->status = 0;
-        }else{
-            if (auth()->check() ){
-                $comment->commentator_type  = User::class;
-                $comment->commentator_id   = auth()->id();
+        } else {
+            if (auth()->check()) {
+                $comment->commentator_type = User::class;
+                $comment->commentator_id = auth()->id();
                 $comment->status = 1;
-            }else{
-                $comment->commentator_type  = Customer::class;
-                $comment->commentator_id   = auth('customer')->id();
+            } else {
+                $comment->commentator_type = Customer::class;
+                $comment->commentator_id = auth('customer')->id();
                 $comment->status = 0;
             }
         }
 
-        $comment->parent_id = $request->input('parent_id',null);
+        $comment->parent_id = $request->input('parent_id', null);
         $comment->body = $request->input('message');
         $comment->commentable_type = $request->input('commentable_type');
         $comment->commentable_id = $request->input('commentable_id');
@@ -73,7 +89,8 @@ class ClientController extends Controller
         return redirect()->back()->with(['message' => __('Your comment has been submitted')]);
     }
 
-    public function search(Request $request){
+    public function search(Request $request)
+    {
 
     }
 }
