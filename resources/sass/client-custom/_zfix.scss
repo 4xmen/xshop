@@ -1,86 +1,114 @@
-.tns-outer{
-    .tns-nav,button{
+.tns-outer {
+    .tns-nav, button {
         display: none;
     }
 }
 
-.slider-content{
+.slider-content {
     direction: ltr;
     overflow: hidden;
-    .item{
+
+    .item {
 
     }
 }
 
-a,a:visited{
+a, a:visited {
     text-decoration: none;
     color: var(--xshop-primary);
 
-    &:hover{
+    &:hover {
         color: var(--xshop-secondary);
     }
 }
 
 
-
-.btn{
+.btn {
     border-radius: var(--xshop-border-radius);
 }
-.btn-primary{
+
+.btn-primary {
     background: var(--xshop-primary);
     border-color: var(--xshop-primary);
     color: var(--xshop-diff) !important;
 
-    &:hover{
-        border-color:  var(--xshop-primary);
-        background:  var(--xshop-secondary); ;
+    &:hover {
+        border-color: var(--xshop-primary);
+        background: var(--xshop-secondary);;
     }
 }
 
-.btn-outline-primary{
+.btn-outline-primary {
     border-color: var(--xshop-primary);
-    color:var(--xshop-primary);
-    &:hover{
+    color: var(--xshop-primary);
+
+    &:hover {
         border-color: var(--xshop-secondary);
-        color:  var(--xshop-diff) !important;
-        background: var(--xshop-secondary); ;
+        color: var(--xshop-diff) !important;
+        background: var(--xshop-secondary);;
     }
 }
-.btn-secondary{
+
+.btn-secondary {
     background: var(--xshop-secondary);
     border-color: var(--xshop-secondary);
-    color:  var(--xshop-diff) !important;
+    color: var(--xshop-diff) !important;
 
-    &:hover{
+    &:hover {
         border-color: var(--xshop-primary);
-        background: var(--xshop-secondary); ;
+        background: var(--xshop-secondary);;
     }
 }
 
-.btn-outline-secondary{
+.btn-outline-secondary {
     border-color: var(--xshop-secondary);
     color: var(--xshop-secondary);
-    &:hover{
+
+    &:hover {
         border-color: var(--xshop-primary);
-        color:  var(--xshop-diff) !important;
-        background: var(--xshop-primary); ;
+        color: var(--xshop-diff) !important;
+        background: var(--xshop-primary);;
     }
 }
 
-.btn-outline-invert{
-    border-color:  var(--xshop-diff);
-    color:  var(--xshop-diff);
+.btn-outline-invert {
+    border-color: var(--xshop-diff);
+    color: var(--xshop-diff);
 
-    &:hover{
-        background:  var(--xshop-diff);
+    &:hover {
+        background: var(--xshop-diff);
         color: var(--xshop-primary);
     }
 }
 
-a.btn-outline-light{
+a.btn-outline-light {
     color: white;
 }
 
-a.btn-outline-dark{
+a.btn-outline-dark {
     color: black;
+}
+
+ul.pagination {
+    justify-content: center;
+    margin: 2rem 0;
+
+    .page-item{
+        .page-link{
+            color: var(--xshop-primary);
+
+            &:hover{
+                background: var(--xshop-secondary);
+                color: var(--xshop-diff);
+            }
+        }
+    }
+    .page-item.active {
+        .page-link {
+            background: var(--xshop-primary);
+            border-color: transparent;
+            color: var(--xshop-diff);
+        }
+
+    }
 }
