@@ -102,7 +102,7 @@ class Post extends Model implements HasMedia
     }
 
     public function mainGroup(){
-        return $this->belongsTo(Group::class);
+        return $this->belongsTo(Group::class,'group_id');
     }
 
     public function attachs(){

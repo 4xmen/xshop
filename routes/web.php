@@ -357,9 +357,10 @@ Route::get('theme/variable.css',[\App\Http\Controllers\ThemeController::class,'c
 Route::name('client.')->group(function (){
     // index
     Route::get('/', [\App\Http\Controllers\ClientController::class,'welcome'])->name('welcome');
-    Route::get('/{post}', [\App\Http\Controllers\ClientController::class,'post'])->name('post');
+    Route::get('/posts', [\App\Http\Controllers\ClientController::class,'posts'])->name('posts');
     Route::get('/tag/{post}', [\App\Http\Controllers\ClientController::class,'tag'])->name('tag');
     Route::get('/search', [\App\Http\Controllers\ClientController::class,'search'])->name('search');
+    Route::get('/{post}', [\App\Http\Controllers\ClientController::class,'post'])->name('post');
 
 
     Route::post('/comment/submit', [\App\Http\Controllers\ClientController::class,'submitComment'])->name('comment.submit');

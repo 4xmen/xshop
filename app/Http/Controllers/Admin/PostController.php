@@ -57,7 +57,7 @@ class PostController extends XController
         $post->status = $request->input('status');
         $post->group_id = $request->input('group_id');
         $post->user_id = auth()->id();
-        $post->is_pinned = $request->has('is_pinned');
+        $post->is_pinned = $request->has('is_pin');
         $post->icon = $request->input('icon');
 
         if ($post->hash == null) {
