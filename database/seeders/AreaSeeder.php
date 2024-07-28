@@ -154,16 +154,16 @@ class AreaSeeder extends Seeder
                 'preview' => 'client.attachment',
                 'icon' => 'ri-book-3-line',
             ],
-            [
-                'name' => 'categories-list',
-                'valid_segments' => json_encode(
-                    ["top", "header", "footer", "menu",
-                        "parallax", "other", "categories_page", "ads"]
-                ),
-                'max' => 6,
-                'preview' => 'client.categories',
-                'icon' => 'ri-file-copy-2-line',
-            ],
+//            [
+//                'name' => 'categories-list',
+//                'valid_segments' => json_encode(
+//                    ["top", "header", "footer", "menu",
+//                        "parallax", "other", "categories_page", "ads"]
+//                ),
+//                'max' => 6,
+//                'preview' => 'client.categories',
+//                'icon' => 'ri-file-copy-2-line',
+//            ],
             [
                 'name' => 'group',
                 'valid_segments' => json_encode(
@@ -172,18 +172,18 @@ class AreaSeeder extends Seeder
                 ),
                 'max' => 6,
                 'preview' => 'client.group',
-                'icon' => 'ri-book-line',
-            ],
-            [
-                'name' => 'groups-list',
-                'valid_segments' => json_encode(
-                    ["top", "header", "footer", "menu",
-                        "parallax", "other", "groups_page", "ads"]
-                ),
-                'max' => 6,
-                'preview' => 'client.groups',
                 'icon' => 'ri-book-shelf-line',
             ],
+//            [
+//                'name' => 'groups-list',
+//                'valid_segments' => json_encode(
+//                    ["top", "header", "footer", "menu",
+//                        "parallax", "other", "groups_page", "ads"]
+//                ),
+//                'max' => 6,
+//                'preview' => 'client.groups',
+//                'icon' => 'ri-book-shelf-line',
+//            ],
             [
                 'name' => 'card',
                 'valid_segments' => json_encode(

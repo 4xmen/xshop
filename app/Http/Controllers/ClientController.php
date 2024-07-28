@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Comment;
 use App\Models\Customer;
+use App\Models\Group;
 use App\Models\Post;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -92,5 +93,13 @@ class ClientController extends Controller
     public function search(Request $request)
     {
 
+    }
+
+    public function group(Group $group){
+        $area = 'group';
+        $title = $group->name;
+        $subtitle = $group->subtitle;
+        $posts = $group->posts()->orderByDesc('id')->paginate($this->paginate);
+        return view('client.group', compact('area', 'posts', 'title', 'subtitle','group'));
     }
 }

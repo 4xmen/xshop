@@ -1,4 +1,4 @@
-<section class='SimplePostListSideBar'>
+<section class='SimplePostListSideBar content'>
     <div class="{{gfx()['container']}}">
         <div class="row pinned-posts">
             @foreach(\App\Models\Post::where('status',1)->where('is_pinned',1)->limit(2)->get() as $post)
