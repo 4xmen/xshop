@@ -12,7 +12,7 @@ use Spatie\Tags\Tag;
 class ClientController extends Controller
 {
 
-    public $paginate = 10;
+    public $paginate = 12;
 
     //
     public function welcome()
