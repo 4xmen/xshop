@@ -47,6 +47,7 @@ Route::prefix(config('app.panel.prefix'))->name('admin.')->group(
                         Route::post('store', [\App\Http\Controllers\Admin\GroupController::class, 'store'])->name('store');
                         Route::get('edit/{item}', [\App\Http\Controllers\Admin\GroupController::class, 'edit'])->name('edit');
                         Route::post('update/{item}', [\App\Http\Controllers\Admin\GroupController::class, 'update'])->name('update');
+                        Route::get('show/{item}', [\App\Http\Controllers\Admin\GroupController::class, 'show'])->name('show');
                         Route::get('delete/{item}', [\App\Http\Controllers\Admin\GroupController::class, 'destroy'])->name('destroy');
                         Route::get('restore/{item}', [\App\Http\Controllers\Admin\GroupController::class, 'restore'])->name('restore');
                         Route::post('bulk', [\App\Http\Controllers\Admin\GroupController::class, "bulk"])->name('bulk');
@@ -358,7 +359,8 @@ Route::name('client.')->group(function (){
     // index
     Route::get('/', [\App\Http\Controllers\ClientController::class,'welcome'])->name('welcome');
     Route::get('/posts', [\App\Http\Controllers\ClientController::class,'posts'])->name('posts');
-    Route::get('/tag/{post}', [\App\Http\Controllers\ClientController::class,'tag'])->name('tag');
+    Route::get('/tag/{post}', [\App\Http\Controllers\ClientController::class,'tag'])->name('tag'); // wip
+    Route::get('/group/{group}', [\App\Http\Controllers\ClientController::class,'group'])->name('group');
     Route::get('/search', [\App\Http\Controllers\ClientController::class,'search'])->name('search');
     Route::get('/{post}', [\App\Http\Controllers\ClientController::class,'post'])->name('post');
 

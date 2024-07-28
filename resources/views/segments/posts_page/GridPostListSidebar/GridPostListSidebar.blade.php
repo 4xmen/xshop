@@ -1,4 +1,4 @@
-<section class='GridPostListSidebar'>
+<section class='GridPostListSidebar content'>
     <div class="{{gfx()['container']}}">
         <div class="row pinned-posts">
             @foreach(\App\Models\Post::where('status',1)->where('is_pinned',1)->limit(2)->get() as $post)
@@ -49,7 +49,7 @@
                                     </span>
                                     <span class="float-end">
                                         <i class="ri-eye-line"></i>
-                                        {{$post->view}}
+                                        {{number_format($post->view)}}
                                     </span>
                                 </div>
                                 <p>

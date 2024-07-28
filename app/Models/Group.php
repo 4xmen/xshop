@@ -84,8 +84,7 @@ class Group extends Model
 
     public function webUrl()
     {
-        return '#';// WIP
-        return route('');
+        return route('client.group',$this->slug);
     }
 
     public function published($limit = 10, $order = 'id', $dir = 'DESC')
