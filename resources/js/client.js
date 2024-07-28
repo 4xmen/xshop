@@ -9,4 +9,4 @@ import "./client-custom/confirm.js";
 import "./client-custom/safeForm.js";
 import "./client-custom/windowLoader.js";
 import "../views/segments/preloader/PreloaderCircle/PreloaderCircle.js";
-import "../views/segments/posts_page/SimplePostList/SimplePostList.js";
+import "../views/segments/posts_page/SimplePostListSideBar/SimplePostListSideBar.js";
