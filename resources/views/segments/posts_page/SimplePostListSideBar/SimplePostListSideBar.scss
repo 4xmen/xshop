@@ -1,0 +1,116 @@
+.SimplePostListSideBar {
+    // scss
+    .pinned-posts{
+        padding: 2rem 0;
+        //column-gap: 2px;
+        //row-gap: 2px;
+        .post-item{
+            position: relative;
+            height: 350px;
+            border-radius: var(--xshop-border-radius) ;
+            overflow: hidden;
+            background: #333;
+            img{
+                border-radius: var(--xshop-border-radius) ;
+                position: absolute;
+                left: 0;
+                right: 0;
+                top: 0;
+                bottom: 0;
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                transition: 400ms;
+                opacity: .7;
+            }
+
+            .detail{
+                position: absolute;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                z-index: 2;
+                padding: 1rem;
+                color: white;
+                span{
+                    opacity: .5;
+                }
+            }
+
+            .corner{
+                border-radius: var(--xshop-border-radius) ;
+                position: absolute;
+                inset-inline-start: 0;
+                top: 0;
+                background: var(--xshop-primary);
+                color: var(--xshop-diff);
+                z-index: 2;
+                padding: 4px 1rem;
+                font-size: 17px;
+
+            }
+
+            &:hover{
+                img{
+                    transform: scale(1.6);
+                }
+            }
+        }
+    }
+
+    .post-list-item{
+        border-bottom: #44444433 1px solid;
+        margin-bottom: 1rem;
+        min-height: 200px;
+        img{
+            height: 175px;
+            border-radius: var(--xshop-border-radius);
+        }
+
+    }
+
+    aside{
+        h4{
+            padding: .5rem;
+            position: relative;
+            text-align: center;
+            font-weight: 300;
+            font-size: 20px;
+            &:after{
+                position: absolute;
+                content: ' ';
+                height: 1px;
+                width: 70%;
+                bottom: 0;
+                left: 15%;
+                right: 15%;
+                background: linear-gradient(90deg,#ffffff00 0%, var(--xshop-primary) 50%, #ffffff00 100%);
+            }
+        }
+    }
+
+    .recent{
+        padding: 0;
+        list-style: none;
+        margin-top: 1rem;
+        li{
+            min-height: 60px;
+            margin-bottom: 1rem;
+        }
+        img{
+            width: 48px;
+            height: 48px;
+            object-fit: cover;
+        }
+
+        p{
+            height: 1.2em;
+            overflow: hidden;
+        }
+
+        h6{
+            max-height: 2.2em;
+            overflow: hidden;
+        }
+    }
+}

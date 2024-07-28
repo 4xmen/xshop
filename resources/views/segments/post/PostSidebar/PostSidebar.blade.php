@@ -2,11 +2,11 @@
     <div class="{{gfx()['container']}}">
         <dov class="row">
             @if(!getSetting($data->area->name.'_'.$data->part.'_invert'))
-            <div class="col-md-3 p-0">
+            <div class="col-lg-3 p-0">
                 @include('segments.post.PostSidebar.inc.sidebar')
             </div>
             @endif
-            <div class="col-md-9 p-0">
+            <div class="col-lg-9 p-0">
                 <div class="py-2 px-4">
                     <h1>
                         {{$post->title}}
@@ -48,11 +48,11 @@
                 </div>
 
             </div>
-                @if(getSetting($data->area->name.'_'.$data->part.'_invert'))
-                    <div class="col-md-3 p-0">
-                        @include('segments.post.PostSidebar.inc.sidebar')
-                    </div>
-                @endif
+            @if(getSetting($data->area->name.'_'.$data->part.'_invert'))
+                <div class="col-lg-3 p-0">
+                    @include('segments.post.PostSidebar.inc.sidebar')
+                </div>
+            @endif
         </dov>
     </div>
 </section>
