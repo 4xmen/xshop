@@ -58,4 +58,12 @@ class Image extends Model implements HasMedia
             return asset('assets/upload/logo.svg');
         }
     }
+    public function imgOriginalUrl()
+    {
+        if ($this->getMedia()->count() > 0) {
+            return $this->getMedia()->first()->getUrl();
+        } else {
+            return asset('assets/upload/logo.svg');
+        }
+    }
 }

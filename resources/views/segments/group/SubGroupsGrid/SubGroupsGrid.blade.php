@@ -7,7 +7,7 @@
                 </h3>
                 <div class="row">
                     @foreach($group->children as $subGroup)
-                        <div class="col-md-4">
+                        <div class="col-md">
                             <div class="sub-group">
                                 <img src="{{$subGroup->imgUrl()}}" alt="{{$subGroup->name}}" class="img-fluid">
                                 <h4>

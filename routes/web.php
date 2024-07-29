@@ -361,6 +361,7 @@ Route::name('client.')->group(function (){
     Route::get('/posts', [\App\Http\Controllers\ClientController::class,'posts'])->name('posts');
     Route::get('/tag/{post}', [\App\Http\Controllers\ClientController::class,'tag'])->name('tag'); // wip
     Route::get('/group/{group}', [\App\Http\Controllers\ClientController::class,'group'])->name('group');
+    Route::get('/gallery/{gallery}', [\App\Http\Controllers\ClientController::class,'gallery'])->name('gallery');
     Route::get('/search', [\App\Http\Controllers\ClientController::class,'search'])->name('search');
     Route::get('/{post}', [\App\Http\Controllers\ClientController::class,'post'])->name('post');
 

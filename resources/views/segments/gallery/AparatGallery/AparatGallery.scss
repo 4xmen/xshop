@@ -1,0 +1,35 @@
+#AparatGallery {
+    // scss
+    #aparat-main-image {
+        height: 80vh;
+        width: 100%;
+        object-fit: cover;
+    }
+
+    .aparat-list {
+
+        display: flex;
+        overflow-x: auto;
+        scroll-behavior: smooth;
+        scrollbar-width: none; /* Firefox */
+        -ms-overflow-style: none; /* Internet Explorer 10+ */
+
+        .aparat-item {
+            min-width: 350px;
+            display: inline-block;
+
+            .aparat-link {
+                img {
+                    height: 20vh;
+                    width: 100%;
+                    object-fit: cover;
+                }
+            }
+        }
+
+        &::-webkit-scrollbar {
+            display: none; /* WebKit */
+        }
+    }
+
+}

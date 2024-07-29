@@ -350,6 +350,11 @@ braces@~3.0.2:
   dependencies:
     fill-range "^7.0.1"
 
+bs5-lightbox@^1.8.3:
+  version "1.8.3"
+  resolved "https://registry.yarnpkg.com/bs5-lightbox/-/bs5-lightbox-1.8.3.tgz#01b5ad4fe10c81c4e88ef38ba4bffdcc04b9e411"
+  integrity sha512-fEIjplDAtWw17vi6dFeu7+Td52sk3qQ9FbOOVSpWM3nqio502vZKIA0Q0De9D9ah44BGd+zOKUsikRPlKE2hFg==
+
 chart.js@^4.4.3:
   version "4.4.3"
   resolved "https://registry.yarnpkg.com/chart.js/-/chart.js-4.4.3.tgz#3b2e11e7010fefa99b07d0349236f5098e5226ad"

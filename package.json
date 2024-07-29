@@ -17,6 +17,7 @@
         "vue": "^3.2.37"
     },
     "dependencies": {
+        "bs5-lightbox": "^1.8.3",
         "chart.js": "^4.4.3",
         "leaflet": "^1.9.4",
         "remixicon": "^4.3.0",
