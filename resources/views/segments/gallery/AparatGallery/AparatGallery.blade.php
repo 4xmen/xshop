@@ -7,7 +7,7 @@
                 <div class="aparat-item">
                     <a class="gallery-image aparat-link"
                        href="{{$image->imgOriginalUrl()}}">
-                        <img src="{{$image->imgurl()}}" class="img-fluid" alt="">
+                        <img src="{{$image->imgurl()}}" class="img-fluid" alt="{{$image->title}}" title="{{$image->title}}">
                     </a>
                 </div>
             @endforeach

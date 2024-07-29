@@ -1,0 +1,40 @@
+.GalleriesList {
+    margin-top: 2rem;
+   .gallrey-item{
+       height: 350px;
+       width: 100%;
+       position: relative;
+       overflow: hidden;
+       border-radius: var(--xshop-border-radius);
+
+       img,h4{
+           position: absolute;
+           left: 0;
+           right: 0;
+           transition: 400ms;
+       }
+
+       img{
+           top: 0;
+           height: 100%;
+           width: 100%;
+           object-fit: cover;
+       }
+
+       h4{
+           bottom: -60px;
+           background: var(--xshop-primary);
+           color: var(--xshop-diff);
+           padding: 11px 0;
+       }
+
+       &:hover{
+           img{
+                transform: scale(1.4);
+           }
+           h4{
+               bottom: 0;
+           }
+       }
+   }
+}

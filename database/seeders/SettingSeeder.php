@@ -176,7 +176,7 @@ class SettingSeeder extends Seeder
                     'title' => __('Gallery thumbnail size'),
                     'key' => 'gallery_thumb',
                     'type' => 'TEXT',
-                    'value' => '500x500',
+                    'value' => '900x900',
                     'size' => '6',
                 ],
             ]

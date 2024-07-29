@@ -3,6 +3,9 @@
         <h1>
             {{ getSetting($data->area->name.'_'.$data->part.'_title')}}
         </h1>
+        <p>
+            {{$gallery->description}}
+        </p>
         <div class="row">
             @foreach(\App\Models\Gallery::where('status',1)->orderBy('id')->limit( getSetting($data->area->name.'_'.$data->part.'_limit'))->get() as $gallery)
                 <div class="col-md p-1">
