@@ -1,0 +1,12 @@
+.SimpleAttachmentList {
+    // scss\
+    padding: 2rem 0;
+    .attach-table {
+        border-radius: var(--xshop-border-radius);
+        overflow: hidden;
+        span{
+            color: var(--xshop-secondary);
+        }
+
+    }
+}

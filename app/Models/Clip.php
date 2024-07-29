@@ -25,6 +25,14 @@ class Clip extends Model
             return asset('assets/upload/logo.svg');;
         }
 
+        return \Storage::url('clips/optimized-' . $this->cover);
+    }
+    public function imgOriginalUrl()
+    {
+        if ($this->cover == null) {
+            return asset('assets/upload/logo.svg');;
+        }
+
         return \Storage::url('clips/' . $this->cover);
     }
 

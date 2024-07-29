@@ -137,7 +137,7 @@
                             </label>
                             <input name="file" type="file" class="form-control @error('file') is-invalid @enderror"
                                    id="file" placeholder="{{__('File')}}"
-                                   accept=".png,.jpg,.svg,.mp4,.pdf,.docx,.zip,.rar"/>
+                                   accept=".png,.jpg,.svg,.mp4,.pdf,.docx,.zip,.rar,.mp3"/>
                         </div>
                     </div>
                     <div class="col-md-6 mt-3">

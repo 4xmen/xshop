@@ -26,7 +26,7 @@ class AttachmentSaveRequest extends FormRequest
             'title' => ['required','string','min:2'],
             'body' => ['nullable','string'],
             'subtitle' => ['nullable','string'],
-            'file' => ['nullable','mimes:png,jpg,svg,mp4,pdf,docx,zip,rar','max:'.getMaxUploadSize()]
+            'file' => ['nullable','mimes:png,jpg,svg,mp4,pdf,docx,zip,rar,mp3','max:'.getMaxUploadSize()]
         ];
     }
 }

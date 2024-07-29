@@ -31,10 +31,14 @@ class Attachment extends Model
 
     public function tempUrl() // WIP
     {
+
         if ($this->file == null) {
             return asset('/assets/upload/logo.svg');
         }
 
+        return \URL::temporarySignedRoute(
+            'client.attach-dl', now()->addMinutes(60), [$this->slug]
+        );
         return \Storage::url('attachments/' . $this->file);
     }
 

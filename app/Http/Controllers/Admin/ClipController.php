@@ -9,6 +9,10 @@ use App\Models\Access;
 use App\Models\Clip;
 use Illuminate\Http\Request;
 use App\Helper;
+use Spatie\Image\Enums\AlignPosition;
+use Spatie\Image\Enums\Fit;
+use Spatie\Image\Enums\Unit;
+use Spatie\Image\Image;
 use function App\Helpers\hasCreateRoute;
 
 class ClipController extends XController
@@ -67,7 +71,28 @@ class ClipController extends XController
 //        }
         if ($request->has('cover')){
             $clip->cover = $this->storeFile('cover',$clip, 'clips');
+
+            $key = 'cover';
+            $format = $request->file($key)->guessExtension();
+            if (strtolower($format) == 'png'){
+                $format = 'webp';
+            }
+            $i = Image::load($request->file($key)->getPathname())
+                ->optimize()
+//                ->nonQueued()
+                ->format($format);
+            if (getSetting('watermark2')) {
+                $i->watermark(public_path('upload/images/logo.png'),
+                    AlignPosition::BottomLeft, 5, 5, Unit::Percent,
+                    config('app.media.watermark_size'), Unit::Percent,
+                    config('app.media.watermark_size'), Unit::Percent, Fit::Contain,
+                    config('app.media.watermark_opacity'));
+            }
+            $i->save(storage_path() . '/app/public/cover/optimized-'. $clip->$key);
         }
+
+
+
         if ($request->has('clip')){
             $clip->file = $this->storeFile('clip',$clip, 'clips');
         }

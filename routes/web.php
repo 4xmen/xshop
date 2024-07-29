@@ -364,6 +364,7 @@ Route::name('client.')->group(function (){
     Route::get('/group/{group}', [\App\Http\Controllers\ClientController::class,'group'])->name('group');
     Route::get('/gallery/{gallery}', [\App\Http\Controllers\ClientController::class,'gallery'])->name('gallery');
     Route::get('/search', [\App\Http\Controllers\ClientController::class,'search'])->name('search');
+    Route::get('attach/download/{attachment}', [\App\Http\Controllers\ClientController::class,'attachDl'])->name('attach-dl');
     Route::get('/{post}', [\App\Http\Controllers\ClientController::class,'post'])->name('post');
 
 

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Attachment;
 use App\Models\Comment;
 use App\Models\Customer;
 use App\Models\Gallery;
@@ -27,6 +28,10 @@ class ClientController extends Controller
 
     public function post(Post $post)
     {
+
+        if ($post->status = 0 && !auth()->check()){
+            return abort(403);
+        }
         $area = 'post';
         $title = $post->title;
         $subtitle = $post->subtitle;
@@ -35,6 +40,9 @@ class ClientController extends Controller
     }
     public function gallery(Gallery $gallery)
     {
+        if ($gallery->status = 0 && !auth()->check()){
+            return abort(403);
+        }
         $area = 'gallery';
         $title = $gallery->title;
         $subtitle = \Str::limit(strip_tags($gallery->description),15);
@@ -119,5 +127,13 @@ class ClientController extends Controller
         $subtitle = $group->subtitle;
         $posts = $group->posts()->orderByDesc('id')->paginate($this->paginate);
         return view('client.group', compact('area', 'posts', 'title', 'subtitle','group'));
+    }
+
+    public function attachDl(Attachment $attachment){
+        $attachment->increment('downloads');
+        $file = (storage_path().'/app/public/attachments/'. $attachment->file);
+        if (file_exists($file)) {
+            return response()->download($file);
+        }
     }
 }
