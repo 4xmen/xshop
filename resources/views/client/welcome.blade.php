@@ -1,7 +1,7 @@
 @extends('website.inc.website-layout')
 
 @section('title')
-    welcome
+    {{config('app.name')}} - {{getSetting('subtitle')}}
 @endsection
 @section('content')
     <main>
