@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Comment;
 use App\Models\Customer;
+use App\Models\Gallery;
 use App\Models\Group;
 use App\Models\Post;
 use App\Models\User;
@@ -31,6 +32,14 @@ class ClientController extends Controller
         $subtitle = $post->subtitle;
         $post->increment('view');
         return view('client.post', compact('area', 'post', 'title', 'subtitle'));
+    }
+    public function gallery(Gallery $gallery)
+    {
+        $area = 'gallery';
+        $title = $gallery->title;
+        $subtitle = \Str::limit(strip_tags($gallery->description),15);
+        $gallery->increment('view');
+        return view('client.gallery', compact('area', 'gallery', 'title', 'subtitle'));
     }
 
     public function posts()

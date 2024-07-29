@@ -1,6 +1,6 @@
 .SubGroupsGrid {
     .row{
-        .col-md-4{
+        [class^="col-md"]{
             padding: 2px;
         }
     }
