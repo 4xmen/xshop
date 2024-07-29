@@ -1,4 +1,7 @@
 
 .GallaryGrid {
     // scss
+    img{
+        border-radius: var(--xshop-border-radius);
+    }
 }
