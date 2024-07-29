@@ -48,7 +48,16 @@ class ClientController extends Controller
         $title = __("Posts list");
         $subtitle = '';
         $posts = Post::where('status', 1)->orderByDesc('id')->paginate($this->paginate);
-        return view('client.posts', compact('area', 'posts', 'title', 'subtitle'));
+        return view('client.default-list', compact('area', 'posts', 'title', 'subtitle'));
+    }
+
+    public function galleries()
+    {
+        $area = 'galleries-list';
+        $title = __("Galleries list");
+        $subtitle = '';
+        $galleries = Gallery::where('status', 1)->orderByDesc('id')->paginate($this->paginate);
+        return view('client.default-list', compact('area', 'galleries', 'title', 'subtitle'));
     }
 
     public function tag($slug)
