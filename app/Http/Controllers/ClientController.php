@@ -30,7 +30,7 @@ class ClientController extends Controller
     public function post(Post $post)
     {
 
-        if ($post->status = 0 && !auth()->check()){
+        if ($post->status = 0 && !auth()->check()) {
             return abort(403);
         }
         $area = 'post';
@@ -39,14 +39,15 @@ class ClientController extends Controller
         $post->increment('view');
         return view('client.post', compact('area', 'post', 'title', 'subtitle'));
     }
+
     public function gallery(Gallery $gallery)
     {
-        if ($gallery->status = 0 && !auth()->check()){
+        if ($gallery->status = 0 && !auth()->check()) {
             return abort(403);
         }
         $area = 'gallery';
         $title = $gallery->title;
-        $subtitle = \Str::limit(strip_tags($gallery->description),15);
+        $subtitle = \Str::limit(strip_tags($gallery->description), 15);
         $gallery->increment('view');
         return view('client.gallery', compact('area', 'gallery', 'title', 'subtitle'));
     }
@@ -60,6 +61,7 @@ class ClientController extends Controller
             ->orderByDesc('id')->paginate($this->paginate);
         return view('client.default-list', compact('area', 'posts', 'title', 'subtitle'));
     }
+
     public function products()
     {
         $area = 'products-list';
@@ -133,22 +135,90 @@ class ClientController extends Controller
 
     }
 
-    public function group(Group $group){
+    public function group(Group $group)
+    {
         $area = 'group';
         $title = $group->name;
         $subtitle = $group->subtitle;
         $posts = $group->posts()->orderByDesc('id')->paginate($this->paginate);
-        return view('client.group', compact('area', 'posts', 'title', 'subtitle','group'));
+        return view('client.group', compact('area', 'posts', 'title', 'subtitle', 'group'));
     }
 
-    public function attachDl(Attachment $attachment){
+    public function attachDl(Attachment $attachment)
+    {
         $attachment->increment('downloads');
-        $file = (storage_path().'/app/public/attachments/'. $attachment->file);
+        $file = (storage_path() . '/app/public/attachments/' . $attachment->file);
         if (file_exists($file)) {
             return response()->download($file);
         }
     }
 
+
+    public function productCardToggle(Product $product)
+    {
+
+        $quantity = \request()->input('quantity', null);
+        if (\Cookie::has('card')) {
+            $cards = json_decode(\Cookie::get('card'),true);
+            $qs = json_decode(\Cookie::get('q'),true);
+            if (in_array($product->id, $cards)) {
+                $msg = "Product removed from card";
+                $i = array_search($product->id, $cards);
+                unset($cards[$i]);
+                unset($qs[$i]);
+            } else {
+                $cards[] = $product->id;
+                $qs[] = $quantity;
+                $msg = "Product added to card";
+            }
+            $count = count($cards);
+            \Cookie::queue('card', json_encode($cards), 2000);
+            \Cookie::queue('q', json_encode($qs), 2000);
+        } else {
+            $count = 1;
+            $msg = "Product added to card";
+            \Cookie::queue('card', "[$product->id]", 2000);
+            \Cookie::queue('q', "[$quantity]", 2000);
+            $qs = [$quantity];
+            $cards = [$product->id];
+        }
+
+        if ($count > 0 && auth('customer')->check()) {
+            $customer = auth('customer')->user();
+            $customer->card = json_encode(['cards' => $cards, 'quantities' => $qs]);
+            $customer->save();
+        }
+
+        if (\request()->ajax()) {
+            return success(['count' => $count], $msg);
+        } else {
+            return redirect()->back()->with(['message' => $msg]);
+        }
+    }
+
+    public function productCompareToggle(Product $product)
+    {
+        if (\Cookie::has('compares')) {
+            $compares = json_decode(\Cookie::get('compares'),true);
+            if (in_array($product->id, $compares)) {
+                $msg = "Product removed from compare";
+                unset($compares[array_search($product->id, $compares)]);
+            } else {
+                $compares[] = $product->id;
+                $msg = "Product added to compare";
+            }
+            \Cookie::queue('compares', json_encode($compares), 2000);
+        } else {
+            $msg = "Product added to compare";
+            \Cookie::queue('compares', "[$product->id]", 2000);
+        }
+
+        if (\request()->ajax()) {
+            return success(null, $msg);
+        } else {
+            return redirect()->back()->with(['message' => $msg]);
+        }
+    }
 
     public function ProductFavToggle(Product $product)
     {
@@ -169,7 +239,7 @@ class ClientController extends Controller
         }
 
         if (\request()->ajax()) {
-           return success($fav, $message);
+            return success($fav, $message);
         } else {
             return redirect()->back()->with(['message' => $message]);
         }

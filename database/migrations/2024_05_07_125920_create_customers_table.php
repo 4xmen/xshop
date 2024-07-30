@@ -25,6 +25,7 @@ return new class extends Migration
             $table->boolean('colleague')->default(false);
             $table->text('description')->default(null)->nullable();
             $table->bigInteger('credit')->default(0);
+            $table->json('card')->default(null)->nullable();
             $table->rememberToken();
             $table->timestamps();
             $table->softDeletes();

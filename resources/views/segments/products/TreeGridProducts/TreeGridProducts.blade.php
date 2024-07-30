@@ -33,7 +33,7 @@
                                             {{$product->getPrice()}}
                                         </div>
 
-                                        <a href="" class="btn btn-primary btn-sm w-100">
+                                        <a href="{{ route('client.product-card-toggle',$product->slug) }}" class="btn btn-primary btn-sm w-100 add-to-card">
                                             <i class="ri-shopping-cart-2-line"></i>
                                             <span>
                                                 Add to card

@@ -368,7 +368,9 @@ Route::name('client.')->group(function (){
     Route::get('attach/download/{attachment}', [\App\Http\Controllers\ClientController::class,'attachDl'])->name('attach-dl');
     Route::get('/post/{post}', [\App\Http\Controllers\ClientController::class,'post'])->name('post');
 
-    Route::get('product/fav/toggle/{product}', [\App\Http\Controllers\ClientController::class, 'ProductFavToggle'])->name('client.product-fav-toggle');
+    Route::get('product/fav/toggle/{product}', [\App\Http\Controllers\ClientController::class, 'ProductFavToggle'])->name('product-fav-toggle');
+    Route::get('product/compare/toggle/{product}', [\App\Http\Controllers\ClientController::class, 'productCompareToggle'])->name('product-compare-toggle');
+    Route::get('card/toggle/{product}', [\App\Http\Controllers\ClientController::class, 'productCardToggle'])->name('product-card-toggle');
 
     Route::post('/comment/submit', [\App\Http\Controllers\ClientController::class,'submitComment'])->name('comment.submit');
 })->middleware([\App\Http\Middleware\VisitorCounter::class]);
