@@ -56,6 +56,11 @@ class Product extends Model implements HasMedia
 
     public function registerMediaConversions(?Media $media = null): void
     {
+
+        $optimize = getSetting('optimize');
+        if ($optimize == false){
+            $optimize = 'webp';
+        }
         $ti = imageSizeConvertValidate('product_image');
         $t = imageSizeConvertValidate('product_thumb');
 
@@ -66,7 +71,7 @@ class Product extends Model implements HasMedia
             ->optimize()
             ->sharpen(10)
             ->nonQueued()
-            ->format(getSetting('optimize'));
+            ->format($optimize);
 
         $mc2 = $this->addMediaConversion('product-image')
             ->width($ti[0])
@@ -75,7 +80,7 @@ class Product extends Model implements HasMedia
             ->optimize()
             ->sharpen(10)
             ->nonQueued()
-            ->format(getSetting('optimize'));
+            ->format($optimize);
 
         if (getSetting('watermark')) {
             $mc->watermark(public_path('upload/images/logo.png'),
