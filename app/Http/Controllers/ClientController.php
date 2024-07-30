@@ -8,6 +8,7 @@ use App\Models\Customer;
 use App\Models\Gallery;
 use App\Models\Group;
 use App\Models\Post;
+use App\Models\Product;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Spatie\Tags\Tag;
@@ -55,8 +56,18 @@ class ClientController extends Controller
         $area = 'posts-list';
         $title = __("Posts list");
         $subtitle = '';
-        $posts = Post::where('status', 1)->orderByDesc('id')->paginate($this->paginate);
+        $posts = Post::where('status', 1)
+            ->orderByDesc('id')->paginate($this->paginate);
         return view('client.default-list', compact('area', 'posts', 'title', 'subtitle'));
+    }
+    public function products()
+    {
+        $area = 'products-list';
+        $title = __("Products list");
+        $subtitle = '';
+        $products = Product::where('status', 1)
+            ->orderByDesc('id')->paginate($this->paginate);
+        return view('client.default-list', compact('area', 'products', 'title', 'subtitle'));
     }
 
     public function galleries()
@@ -64,7 +75,8 @@ class ClientController extends Controller
         $area = 'galleries-list';
         $title = __("Galleries list");
         $subtitle = '';
-        $galleries = Gallery::where('status', 1)->orderByDesc('id')->paginate($this->paginate);
+        $galleries = Gallery::where('status', 1)
+            ->orderByDesc('id')->paginate($this->paginate);
         return view('client.default-list', compact('area', 'galleries', 'title', 'subtitle'));
     }
 

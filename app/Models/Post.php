@@ -39,6 +39,11 @@ class Post extends Model implements HasMedia
 
     public function registerMediaConversions(?Media $media = null): void
     {
+
+        $optimize = getSetting('optimize');
+        if ($optimize == false){
+            $optimize = 'webp';
+        }
         $t = explode('x', config('app.media.post_thumb'));
 
         $t = imageSizeConvertValidate('post_thumb');
@@ -50,7 +55,7 @@ class Post extends Model implements HasMedia
             ->optimize()
             ->sharpen(10)
             ->nonQueued()
-            ->format(getSetting('optimize'));
+            ->format($optimize);
 
         if (getSetting('watermark')){
             $mc->watermark(public_path('upload/images/logo.png'),

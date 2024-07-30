@@ -118,7 +118,7 @@ class AreaSeeder extends Seeder
                 'name' => 'products-list',
                 'valid_segments' => json_encode(
                     ["top", "header", "footer", "menu",
-                        "parallax", "other", "products_page", "ads"]
+                        "parallax", "other", "products_page", "ads","products"]
                 ),
                 'max' => 6,
                 'preview' => 'client.products',
