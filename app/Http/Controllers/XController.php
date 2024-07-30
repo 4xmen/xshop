@@ -38,7 +38,7 @@ abstract class XController extends Controller
     ];
 
 
-    public function save($user, $request)
+    public function save($item, $request)
     {
 
     }

@@ -137,6 +137,19 @@ return [
         'prefix' => env('PANEL_PREFIX','dashboard'),
         'page_count' => env('PANEL_PAGE_COUNT',30),
     ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | currency
+    |--------------------------------------------------------------------------
+    | default currency data
+     */
+
+    'currency' => [
+        'symbol' => env('CURRENCY_SYMBOL','$'),
+        'factor' => env('CURRENCY_FACTOR',1),
+        'code'=> env('CURRENCY_CODE','USD'),
+    ],
     /*
     |--------------------------------------------------------------------------
     | Media

@@ -148,4 +148,30 @@ class ClientController extends Controller
             return response()->download($file);
         }
     }
+
+
+    public function ProductFavToggle(Product $product)
+    {
+        if (!auth('customer')->check()) {
+            return errors([
+                __("You need to login first"),
+            ], 403, __("You need to login first"));
+        }
+
+        if (auth('customer')->user()->favorites()->where('product_id', $product->id)->count() == 0) {
+            auth('customer')->user()->favorites()->attach($product->id);
+            $message = __('Product added to favorites');
+            $fav = '1';
+        } else {
+            auth('customer')->user()->favorites()->detach($product->id);
+            $message = __('Product removed from favorites');
+            $fav = '0';
+        }
+
+        if (\request()->ajax()) {
+           return success($fav, $message);
+        } else {
+            return redirect()->back()->with(['message' => $message]);
+        }
+    }
 }

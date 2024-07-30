@@ -29,3 +29,5 @@
         @include($preloader->getBlade())
     @endif
 </div>
+<div id="app">
+

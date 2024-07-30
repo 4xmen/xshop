@@ -118,8 +118,10 @@ class ProductController extends XController
             }
             $product->quantities()->whereIn('id',$toRemoveQ)->delete();
 
-            $product->stock_quantity = $product->quantities()->sum('count');
-            $product->price = $product->quantities()->min('price');
+            if ($product->quantities()->count() > 0){
+                $product->stock_quantity = $product->quantities()->sum('count');
+                $product->price = $product->quantities()->min('price');
+            }
             $product->save();
         }
 

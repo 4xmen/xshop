@@ -870,7 +870,7 @@ function success($data = null, $message = null, $meta = [], $og = [], $twitter =
 
     $defaultTwitter = [
         'card' => 'summary_large_image',
-        'site' => '@yourTwitterHandle',
+        'site' => getSetting('social.twitter'),
         'title' => null,
         'description' => null,
         'image' => null,
@@ -904,6 +904,11 @@ function errors($errors, $status = 422, $message = null, $data = null)
     ], $status);
 }
 
+/**
+ * make human readable
+ * @param $text
+ * @return string
+ */
 function readable($text)
 {
   return ucfirst(trim(str_replace(['-','_'],' ',$text)));

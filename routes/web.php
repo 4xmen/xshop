@@ -366,8 +366,9 @@ Route::name('client.')->group(function (){
     Route::get('/gallery/{gallery}', [\App\Http\Controllers\ClientController::class,'gallery'])->name('gallery');
     Route::get('/search', [\App\Http\Controllers\ClientController::class,'search'])->name('search');
     Route::get('attach/download/{attachment}', [\App\Http\Controllers\ClientController::class,'attachDl'])->name('attach-dl');
-    Route::get('/{post}', [\App\Http\Controllers\ClientController::class,'post'])->name('post');
+    Route::get('/post/{post}', [\App\Http\Controllers\ClientController::class,'post'])->name('post');
 
+    Route::get('product/fav/toggle/{product}', [\App\Http\Controllers\ClientController::class, 'ProductFavToggle'])->name('client.product-fav-toggle');
 
     Route::post('/comment/submit', [\App\Http\Controllers\ClientController::class,'submitComment'])->name('comment.submit');
 })->middleware([\App\Http\Middleware\VisitorCounter::class]);
@@ -389,3 +390,9 @@ Route::get('test',function (){
 })->name('test');
 
 
+Route::get('whoami',function (){
+    if (!auth('customer')->check()){
+        return 'You are nothing';
+    }
+    return \Auth::guard('customer')->user();
+})->name('whoami');

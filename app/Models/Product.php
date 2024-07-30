@@ -58,7 +58,7 @@ class Product extends Model implements HasMedia
     {
 
         $optimize = getSetting('optimize');
-        if ($optimize == false){
+        if ($optimize == false) {
             $optimize = 'webp';
         }
         $ti = imageSizeConvertValidate('product_image');
@@ -141,7 +141,8 @@ class Product extends Model implements HasMedia
 
     public function activeDiscounts()
     {
-        return $this->hasMany(Discount::class, 'product_id', 'id')->where(function ($query) {
+        return $this->hasMany(Discount::class, 'product_id', 'id')
+            ->where(function ($query) {
             $query->where('expire', '>=', date('Y-m-d'))
                 ->orWhereNull('expire');
         });
@@ -157,14 +158,6 @@ class Product extends Model implements HasMedia
         return $this->discounts()->where('expire', '>', date('Y-m-d'))->count() > 0;
     }
 
-    public function isFav()
-    {
-        if (auth('customer')->check()) {
-            return \auth('customer')->user()->products()->where('product_id', $this->id)->exists();
-        } else {
-            return false;
-        }
-    }
 
     public function imgUrl()
     {
@@ -183,6 +176,7 @@ class Product extends Model implements HasMedia
             return asset('assets/upload/logo.svg');
         }
     }
+
     public function originalOptimizedImageUrl()
     {
         if ($this->getMedia()->count() > 0) {
@@ -245,9 +239,9 @@ class Product extends Model implements HasMedia
                     } else {
                         $result[$key]['human_value'] = '';
                         foreach ($value as $k => $v) {
-                            $result[$key]['human_value'] = $result[$key]['data']->datas[$v].', ';
+                            $result[$key]['human_value'] = $result[$key]['data']->datas[$v] . ', ';
                         }
-                        $result[$key]['human_value'] = trim($result[$key]['human_value'],' ,');
+                        $result[$key]['human_value'] = trim($result[$key]['human_value'], ' ,');
                     }
                     break;
                 default:
@@ -278,7 +272,54 @@ class Product extends Model implements HasMedia
     }
 
 
-    public function getPrice(){
-        return number_format($this->price);
+    public function getPrice()
+    {
+        $price = 0;
+        if ($this->quantities()->count() == 0) {
+            $price = $this->price;
+        } else {
+            $price = $this->quantities()->min('price');
+        }
+
+        if ($this->hasDiscount()) {
+            $d = $this->activeDiscounts()->first();
+            if ($d->type == 'PRICE') {
+                $price -= $d->amount;
+            }else{
+                $price =  ( (100 - $d->amount) * $price ) / 100;
+            }
+        }
+
+        if ($price == 0 || $price == '' || $price == null) {
+            return __("Call us!");
+        }
+
+        return number_format($price) . ' ' . config('app.currency.symbol');
+    }
+    public function oldPrice()
+    {
+        $price = 0;
+        if ($this->quantities()->count() == 0) {
+            $price = $this->price;
+        } else {
+            $price = $this->quantities()->min('price');
+        }
+
+        if ($price == 0 || $price == '' || $price == null) {
+            return __("Call us!");
+        }
+
+        return number_format($price) . ' ' . config('app.currency.symbol');
+    }
+
+    public function isFav(){
+        if (!auth('customer')->check()) {
+            return -1;
+        }
+        if (\auth('customer')->user()->products()->where('product_id', $this->id)->exists()) {
+            return 1;
+        }else{
+            return 0;
+        }
     }
 }
