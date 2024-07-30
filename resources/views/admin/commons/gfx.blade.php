@@ -8,7 +8,7 @@
         @include('components.err')
         <gfxer
             :items='@json(\App\Models\Gfx::all('key','label','value'))'
-            :previews='@json($prviews)'
+            :previews='@json($previews)'
         ></gfxer>
         <button
             data-link="{{getRoute('update')}}"

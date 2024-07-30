@@ -39,7 +39,21 @@ php artisan serv
 ```
 
 > [!TIP]
-> Default admin email is : `admin@example.com` and default password is: `password`
+> Default admin email is : `developer@example.com` (developer) or `admin@example.com` (admin) and default password is: `password`
+
+
+## image seeding 
+
+- Download & prepare images 
+```bash
+php artisan seeding:prepare
+ ```
+- Seeding image for models: [Group, Category, Post, Products] 
+```bash
+pa seeding:image Product digital
+```
+> First parameter is Model, Second is image seeder directory available [bag, clothe, digital, sport, posts, makeup]
+> You can create your directory and put your image into new directory then use image seeder
 
 ## Requirement
 

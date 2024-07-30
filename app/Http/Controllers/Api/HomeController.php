@@ -1,20 +1,17 @@
 <?php
 
-namespace App\Http\Controllers\Api\Web;
+namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\AdvResource;
 use App\Http\Resources\CategoryResource;
 use App\Http\Resources\PostResource;
-use App\Http\Resources\ProductResource;
 use App\Http\Resources\SliderResource;
 use App\Models\Adv;
 use App\Models\Category;
 use App\Models\Menu;
 use App\Models\Post;
-use App\Models\Product;
 use App\Models\Slider;
-use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {

@@ -7,11 +7,12 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
-    use HasFactory, Notifiable, HasRoles, SoftDeletes;
+    use HasFactory, Notifiable, HasRoles, SoftDeletes, HasApiTokens;
 
     static $roles = ['DEVELOPER', 'ADMIN', 'USER', 'SUSPENDED'];
 
@@ -58,6 +59,7 @@ class User extends Authenticatable
     {
         return $this->hasMany(Post::class);
     }
+
     public function postsPercent()
     {
         if (Post::count() == 0) {
@@ -65,10 +67,12 @@ class User extends Authenticatable
         }
         return $this->posts()->count() * 100 / Post::count();
     }
+
     public function products()
     {
         return $this->hasMany(Product::class);
     }
+
     public function productsPercent()
     {
 
@@ -77,10 +81,12 @@ class User extends Authenticatable
         }
         return $this->products()->count() * 100 / Product::count();
     }
+
     public function tickets()
     {
         return $this->hasMany(Ticket::class);
     }
+
     public function ticketsPercent()
     {
         if (Ticket::count() == 0) {
@@ -88,9 +94,10 @@ class User extends Authenticatable
         }
         return $this->tickets()->count() * 100 / Ticket::count();
     }
+
     public function comments()
     {
-        return $this->morphMany(Comment::class,'commentator');
+        return $this->morphMany(Comment::class, 'commentator');
     }
 
     public function commentsPercent()
@@ -106,36 +113,42 @@ class User extends Authenticatable
         return $this->hasMany(AdminLog::class, 'user_id', 'id');
     }
 
-    public function accesses(){
+    public function accesses()
+    {
         return $this->hasMany(Access::class);
     }
-    public function hasAnyAccess($name){
-        if ($this->hasRole('SUSPENDED')){
-            return  false;
+
+    public function hasAnyAccess($name)
+    {
+        if ($this->hasRole('SUSPENDED')) {
+            return false;
         }
         if ($this->hasRole('admin') || $this->hasRole('developer')) {
-            return  true;
+            return true;
         }
-        return $this->accesses()->where('route','LIKE','%.'.$name.'.%')->count() > 0;
-    }
-    public function hasAnyAccesses($array){
-        if ($this->hasRole('SUSPENDED')){
-            return  false;
-        }
-        if ($this->hasRole('admin') || $this->hasRole('developer')) {
-            return  true;
-        }
-       foreach ($array as $access){
-           if ($this->hasAnyAccess($access)){
-               return true;
-           }
-       }
+        return $this->accesses()->where('route', 'LIKE', '%.' . $name . '.%')->count() > 0;
     }
 
-    public function hasAccess($route){
-        if ($this->hasRole('SUSPENDED')){
-            return  false;
+    public function hasAnyAccesses($array)
+    {
+        if ($this->hasRole('SUSPENDED')) {
+            return false;
         }
-        return $this->accesses()->where('route',$route)->count() > 0;
+        if ($this->hasRole('admin') || $this->hasRole('developer')) {
+            return true;
+        }
+        foreach ($array as $access) {
+            if ($this->hasAnyAccess($access)) {
+                return true;
+            }
+        }
+    }
+
+    public function hasAccess($route)
+    {
+        if ($this->hasRole('SUSPENDED')) {
+            return false;
+        }
+        return $this->accesses()->where('route', $route)->count() > 0;
     }
 }

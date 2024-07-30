@@ -6,19 +6,24 @@ use App\Http\Controllers\Controller;
 use App\Models\Area;
 use App\Models\Gfx;
 use Illuminate\Http\Request;
+use mysql_xdevapi\Exception;
 
 class GfxController extends Controller
 {
     //
     public function index()
     {
-        $prviews = Area::whereNotNull('preview')
+        $previews = Area::whereNotNull('preview')
             ->pluck('preview', 'name')->toArray();
 
-        array_walk($prviews, function ($value, $key) use (&$prviews) {
-            $prviews[$key] = route($value);
+        array_walk($previews, function ($value, $key) use (&$previews) {
+            try {
+                $previews[$key] = route($value);
+            }catch (Exception $exception){
+
+            }
         });
-        return view('admin.commons.gfx',compact('prviews'));
+        return view('admin.commons.gfx',compact('previews'));
     }
 
     public function update(Request $request)

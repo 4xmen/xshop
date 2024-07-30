@@ -45,7 +45,7 @@ class SeedingImage extends Command
                     if ($item->media()->count() == 0){
                         $name = $images[0]->getFilename();
                         $tempName = explode('.', $name);
-                        $item->name = ucfirst(str_replace('-', ' ', $tempName[0])) . ' model ' . $item->id;
+                        $item->name = readable($tempName[0]) . ' model ' . $item->id;
                     }
                     $item->addMedia($images[0]->getRealPath())
                         ->preservingOriginal() //middle method
