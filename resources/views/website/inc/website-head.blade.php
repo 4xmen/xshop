@@ -30,4 +30,7 @@
     @endif
 </div>
 <div id="app">
-
+@foreach(getParts('floats') as $part)
+    @php($p = $part->getBladeWithData())
+    @include($p['blade'],['data' => $p['data']])
+@endforeach

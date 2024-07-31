@@ -5,24 +5,23 @@ namespace Resources\Views\Segments;
 use App\Models\Part;
 use App\Models\Setting;
 
-class CompareProducts
+class SimpleGoTop
 {
     public static function onAdd(Part $part = null)
     {
-
         $setting = new Setting();
         $setting->section = 'theme';
-        $setting->key = $part->area->name . '_' . $part->part.'_color';
-        $setting->value = '#ffffff';
-        $setting->type = 'COLOR';
-        $setting->data = json_encode(['name' => 'compare-bg']);
+        $setting->key = $part->area->name . '_' . $part->part.'_icon';
+        $setting->value = 'ri-arrow-up-line';
         $setting->size = 12;
-        $setting->title =  $part->area->name . ' ' . $part->part .' main color';
+        $setting->type = 'ICON';
+//        $setting->data = json_encode(['xmin' => 2, 'xmax' => 6]);
+        $setting->title =  $part->area->name . ' ' . $part->part. ' icon ';
         $setting->save();
     }
     public static function onRemove(Part $part = null)
     {
-        Setting::where('key',$part->area->name . '_' . $part->part.'_color')->first()?->delete();
+        Setting::where('key',$part->area->name . '_' . $part->part.'_icon')->first()?->delete();
 
     }
     public static function onMount(Part $part = null)
