@@ -10,8 +10,10 @@ use App\Models\Gallery;
 use App\Models\Group;
 use App\Models\Post;
 use App\Models\Product;
+use App\Models\Quantity;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Plank\Metable\Meta;
 use Spatie\Tags\Tag;
 
 class ClientController extends Controller
@@ -179,6 +181,67 @@ class ClientController extends Controller
         } else {
             $query = $query->orderByDesc('id');
         }
+
+
+        if ($request->has('meta')) {
+            foreach ($category->props()->where('searchable', 1)->get() as $prop) {
+                if (isset($request->input('meta')[$prop->name]) && $request->input('meta')[$prop->name] != '' &&  $request->input('meta')[$prop->name] != '[]') {
+                    switch ($prop->type) {
+                        case 'checkbox':
+                            if ($prop->priceable){
+                                $id = Quantity::where('count', '>', 0)
+                                    ->where('data', 'LIKE', '%"'.$prop->name.'":%')
+                                    ->pluck('product_id')->toArray();
+                                $query->whereIn('id', $id);
+                            }else{
+
+                                $query->whereHasMeta($prop->name);
+                            }
+                            break;
+                        case 'number':
+                        case 'select':
+                        case 'color':
+                            if ($prop->priceable){
+                                $id = Quantity::where('count', '>', 0)
+                                    ->where('data', 'LIKE', '%"'.$prop->name.'":"' . $request->meta[$prop->name] . '"%')
+                                    ->pluck('product_id')->toArray();
+
+                                $query->whereIn('id', $id);
+                            }else{
+                                $query->whereMeta($prop->name, $request->input('meta')[$prop->name]);
+                            }
+                            break;
+                        case 'text':
+                            $query->whereMeta($prop->name, 'LIKE', '%' . $request->input('meta')[$prop->name] . '%');
+                            break;
+                        case 'multi':
+                        case 'singlemulti':
+                        if ($prop->priceable){
+                            $q = Quantity::where('count', '>', 0);
+                            $metas = json_decode($request->meta[$prop->name], true);
+                            $q->where(function ($query) use ($metas) {
+                                foreach ($metas as $meta) {
+                                    $query->orWhere('data', 'LIKE', '%' . $meta . '%');
+                                }
+                            });
+                            $query->whereIn('id',$q->pluck('product_id')->toArray());
+                        }else{
+                            $q = Meta::where('key',$prop->name)->where('metable_type',Product::class);
+                            $metas = json_decode($request->meta[$prop->name], true);
+                            $q->where(function ($query) use ($metas) {
+                                foreach ($metas as $meta) {
+                                    $query->orWhere('value', 'LIKE', '%' . $meta . '%');
+                                }
+                            });
+
+                            $query->whereIn('id',$q->pluck('metable_id')->toArray());
+                        }
+
+                    }
+                }
+            }
+        }
+
 
         $products = $query->paginate($this->paginate);
         return view('client.category', compact('area', 'products', 'title', 'subtitle', 'category'));

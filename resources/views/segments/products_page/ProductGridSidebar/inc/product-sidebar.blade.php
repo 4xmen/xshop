@@ -27,7 +27,13 @@
             {{__("Filter")}}
         </h4>
         <div class="side-data">
-            <meta-filter></meta-filter>
+            <meta-filter
+                props-api-link="{{route('v1.category.prop','')}}/"
+                @if(isset($category))
+                    category="{{$category->id}}"
+                @endif
+            >
+            </meta-filter>
         </div>
     </div>
 

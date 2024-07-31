@@ -9,6 +9,7 @@
         width: 100%;
         position: relative;
         overflow: hidden;
+        border-radius: var(--xshop-border-radius);
         img{
             position: absolute;
             height: 300px;
