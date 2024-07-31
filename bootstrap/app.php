@@ -13,6 +13,10 @@ return Application::configure(basePath: dirname(__DIR__))
     )
     ->withMiddleware(function (Middleware $middleware) {
         //
+        $middleware->use([
+            \App\Http\Middleware\IgnoreFirstPage::class,
+        ]);
+
     })
     ->withExceptions(function (Exceptions $exceptions) {
         //

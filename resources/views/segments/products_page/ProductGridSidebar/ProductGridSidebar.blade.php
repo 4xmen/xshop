@@ -1,4 +1,4 @@
-<section class='ProductGridSidebar content'>
+<section class='ProductGridSidebar content' id="product-list-view">
     <div class="{{gfx()['container']}}">
         <h1>
             {{$title}}
@@ -48,7 +48,7 @@
                         </div>
                     @endforeach
                 </div>
-                {{$products->links()}}
+                {{$products->withQueryString()->links()}}
 
             </div>
             @if(getSetting($data->area->name.'_'.$data->part.'_invert'))

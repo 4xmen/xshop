@@ -356,7 +356,8 @@ Route::prefix(config('app.panel.prefix'))->name('admin.')->group(
 
 Route::get('theme/variable.css',[\App\Http\Controllers\ThemeController::class,'cssVariables'])->name('theme.variable.css');
 
-Route::name('client.')->group(function (){
+Route::middleware([\App\Http\Middleware\VisitorCounter::class])
+    ->name('client.')->group(function (){
     // index
     Route::get('/', [\App\Http\Controllers\ClientController::class,'welcome'])->name('welcome');
     Route::get('/posts', [\App\Http\Controllers\ClientController::class,'posts'])->name('posts');
@@ -375,7 +376,7 @@ Route::name('client.')->group(function (){
     Route::get('card/toggle/{product}', [\App\Http\Controllers\ClientController::class, 'productCardToggle'])->name('product-card-toggle');
 
     Route::post('/comment/submit', [\App\Http\Controllers\ClientController::class,'submitComment'])->name('comment.submit');
-})->middleware([\App\Http\Middleware\VisitorCounter::class]);
+});
 
 // to developer test
 Route::get('login/as/{mobile}',function ($mobile){

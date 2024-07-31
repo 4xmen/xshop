@@ -112,3 +112,8 @@ ul.pagination {
 
     }
 }
+
+.form-check-input:checked{
+    background-color: var(--xshop-primary);
+    border-right-color: var(--xshop-secondary);
+}
