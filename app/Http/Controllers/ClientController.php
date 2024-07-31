@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Attachment;
+use App\Models\Category;
 use App\Models\Comment;
 use App\Models\Customer;
 use App\Models\Gallery;
@@ -142,6 +143,14 @@ class ClientController extends Controller
         $subtitle = $group->subtitle;
         $posts = $group->posts()->orderByDesc('id')->paginate($this->paginate);
         return view('client.group', compact('area', 'posts', 'title', 'subtitle', 'group'));
+    }
+    public function category(Category $category)
+    {
+        $area = 'category';
+        $title = $category->name;
+        $subtitle = $category->subtitle;
+        $products = $category->products()->orderByDesc('id')->paginate($this->paginate);
+        return view('client.category', compact('area', 'products', 'title', 'subtitle', 'category'));
     }
 
     public function attachDl(Attachment $attachment)

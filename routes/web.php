@@ -127,6 +127,7 @@ Route::prefix(config('app.panel.prefix'))->name('admin.')->group(
                         Route::get('create', [\App\Http\Controllers\Admin\CategoryController::class, 'create'])->name('create');
                         Route::post('store', [\App\Http\Controllers\Admin\CategoryController::class, 'store'])->name('store');
                         Route::get('edit/{item}', [\App\Http\Controllers\Admin\CategoryController::class, 'edit'])->name('edit');
+                        Route::get('show/{item}', [\App\Http\Controllers\Admin\CategoryController::class, 'show'])->name('show');
                         Route::post('update/{item}', [\App\Http\Controllers\Admin\CategoryController::class, 'update'])->name('update');
                         Route::get('delete/{item}', [\App\Http\Controllers\Admin\CategoryController::class, 'destroy'])->name('destroy');
                         Route::get('restore/{item}', [\App\Http\Controllers\Admin\CategoryController::class, 'restore'])->name('restore');
@@ -363,6 +364,7 @@ Route::name('client.')->group(function (){
     Route::get('/products', [\App\Http\Controllers\ClientController::class,'products'])->name('products');
     Route::get('/tag/{post}', [\App\Http\Controllers\ClientController::class,'tag'])->name('tag'); // wip
     Route::get('/group/{group}', [\App\Http\Controllers\ClientController::class,'group'])->name('group');
+    Route::get('/category/{category}', [\App\Http\Controllers\ClientController::class,'category'])->name('category');
     Route::get('/gallery/{gallery}', [\App\Http\Controllers\ClientController::class,'gallery'])->name('gallery');
     Route::get('/search', [\App\Http\Controllers\ClientController::class,'search'])->name('search');
     Route::get('attach/download/{attachment}', [\App\Http\Controllers\ClientController::class,'attachDl'])->name('attach-dl');
