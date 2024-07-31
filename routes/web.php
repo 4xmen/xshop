@@ -361,6 +361,7 @@ Route::middleware([\App\Http\Middleware\VisitorCounter::class])
     // index
     Route::get('/', [\App\Http\Controllers\ClientController::class,'welcome'])->name('welcome');
     Route::get('/posts', [\App\Http\Controllers\ClientController::class,'posts'])->name('posts');
+    Route::get('/compare', [\App\Http\Controllers\ClientController::class,'compare'])->name('compare');
     Route::get('/galleries', [\App\Http\Controllers\ClientController::class,'galleries'])->name('galleries');
     Route::get('/products', [\App\Http\Controllers\ClientController::class,'products'])->name('products');
     Route::get('/tag/{post}', [\App\Http\Controllers\ClientController::class,'tag'])->name('tag'); // wip

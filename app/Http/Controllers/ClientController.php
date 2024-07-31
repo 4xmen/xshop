@@ -206,6 +206,8 @@ class ClientController extends Controller
                                     ->where('data', 'LIKE', '%"'.$prop->name.'":"' . $request->meta[$prop->name] . '"%')
                                     ->pluck('product_id')->toArray();
 
+                                $id = array_merge($id,$query->whereMeta($prop->name, $request->input('meta')[$prop->name])->pluck('id')->toArray());
+                                $id = array_unique($id);
                                 $query->whereIn('id', $id);
                             }else{
                                 $query->whereMeta($prop->name, $request->input('meta')[$prop->name]);
@@ -347,4 +349,17 @@ class ClientController extends Controller
             return redirect()->back()->with(['message' => $message]);
         }
     }
+
+
+
+    public function compare()
+    {
+        $area = 'compare';
+        $title = __("Compare products");
+        $subtitle = '';
+        $ids = json_decode(\Cookie::get('compares'), true);
+        $products = Product::whereIn('id',$ids)->where('status',1)->get();
+        return view('client.default-list', compact('area', 'products', 'title', 'subtitle'));
+    }
+
 }
