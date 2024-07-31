@@ -232,13 +232,18 @@ class Product extends Model implements HasMedia
                     $result[$key]['human_value'] = "<div style='background:  $value' class='color-bullet'> &nbsp; </div>";
                     break;
                 case 'checkbox':
-                    $result[$key]['human_value'] = $value ? '✅' : '❌';
+                    $result[$key]['human_value'] = $value ? '<i class="ri-checkbox-circle-line"></i>' : '<i class="ri-close-circle-line"></i>';
                     break;
-                case 'multi':
                 case 'select':
                 case 'singlemulti':
                     if (!is_array($value)) {
-                        $result[$key]['human_value'] = $result[$key]['data']->datas[$value];
+                        if (isset( $result[$key]['data']->datas[$value])){
+
+                            $result[$key]['human_value'] =
+                                $result[$key]['data']->datas[$value];
+                        }else{
+                            $result[$key]['human_value'] = '-';
+                        }
                     } else {
                         $result[$key]['human_value'] = '';
                         foreach ($value as $k => $v) {
@@ -249,10 +254,13 @@ class Product extends Model implements HasMedia
                     break;
                 default:
                     if (is_array($value)) {
-                        $result[$key]['human_value'] = implode(', ', $value);
+                        $result[$key]['human_value'] = '<span class="meta-tag">'.implode('</span> <span class="meta-tag">', $value).'</span>';
                     } else {
-
-                        $result[$key]['human_value'] = $value;
+                        if ($value == '' || $value == null) {
+                            $result[$key]['human_value'] = '-';
+                        }else{
+                            $result[$key]['human_value'] = $value;
+                        }
                     }
             }
 
