@@ -1,4 +1,4 @@
-<section class='ProductGrid'>
+<section class='ProductGrid content'>
     <div class="{{gfx()['container']}}">
         <h1>
             {{$title}}

@@ -416,6 +416,31 @@ function showCatNestedControl($cats, $checked = [], $parent = null)
 }
 
 /**
+ * @param $cats array categories or groups as nested ul li wih checkbox
+ * @param $checked array witch one checked default
+ * @param $parent null|integer parent id
+ * @return string
+ */
+function showCatNested($cats, $parent = null)
+{
+    $ret = "";
+    foreach ($cats as $cat) {
+        if ($cat->parent_id == $parent) {
+            $ret .= "<li>";
+            $ret .= "<a href='".$cat->webUrl()."'>";
+            $ret .= $cat->name . '</a>';
+            $ret .= showCatNested($cats, $cat->id);
+            $ret .= "</li>";
+        }
+    }
+    if ($parent == null) {
+        return $ret;
+    } else {
+        return "<ul class='ps-3'> $ret </ul>";
+    }
+}
+
+/**
  * find model name form morph
  * @param $modelable_type
  * @param $modelable_id
