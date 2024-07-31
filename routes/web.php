@@ -390,7 +390,10 @@ Route::get('login/as/{mobile}',function ($mobile){
 
 Route::get('test',function (){
 //    return \Resources\Views\Segments\PreloaderCircle::onAdd();
-   return getCategoryProductBySetting('index_TreeGridProducts_category');
+//   return $product->getAllMeta();
+    $data = ["3g",
+        "4g"];
+   return \App\Models\Product::whereMeta('net','LIKE','%'.$data[0].'%')->whereMeta('net','LIKE','%'.$data[0].'%')->get();
 
 })->name('test');
 

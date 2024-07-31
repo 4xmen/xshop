@@ -29,7 +29,7 @@
                         <div class="form-check form-switch">
                             <input class="form-check-input" v-model="meta[prop.name]" type="checkbox" role="switch"
                                    :id="prop.name">
-                            <label class="form-check-label" for="flexSwitchCheckDefault">{{ prop.label }}</label>
+                            <label class="form-check-label" :for="prop.name">{{ prop.label }}</label>
                         </div>
                     </template>
                     <template v-if="prop.type == 'color'">

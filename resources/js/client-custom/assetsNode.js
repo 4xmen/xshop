@@ -12,7 +12,7 @@ const $toast = useToast({
 });
 
 
-import MetaFilter from './../client-vue/meta-filter.vue';
+import MetaFilter from '../client-vue/MetaFilter.vue';
 app.component('meta-filter', MetaFilter);
 
 app.use(ToastPlugin);
