@@ -77,8 +77,7 @@ class Category extends Model
 
     public function webUrl()
     {
-        return '#';// WIP
-        return route('');
+        return route('client.category',$this->slug);
     }
 
     public function products()
