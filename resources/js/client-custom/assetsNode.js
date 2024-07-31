@@ -11,6 +11,10 @@ const $toast = useToast({
     duration: 10000,
 });
 
+
+import MetaFilter from './../client-vue/meta-filter.vue';
+app.component('meta-filter', MetaFilter);
+
 app.use(ToastPlugin);
 app.use(store);
 app.mount('#app');

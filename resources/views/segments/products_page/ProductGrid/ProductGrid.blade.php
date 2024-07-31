@@ -1,4 +1,4 @@
-<section class='ProductGrid content'>
+<section class='ProductGrid content' id="product-list-view">
     <div class="{{gfx()['container']}}">
         <h1>
             {{$title}}
@@ -40,6 +40,6 @@
                 </div>
             @endforeach
         </div>
-        {{$products->links()}}
+        {{$products->withQueryString()->links()}}
     </div>
 </section>

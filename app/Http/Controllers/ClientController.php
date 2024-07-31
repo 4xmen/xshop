@@ -141,15 +141,46 @@ class ClientController extends Controller
         $area = 'group';
         $title = $group->name;
         $subtitle = $group->subtitle;
-        $posts = $group->posts()->orderByDesc('id')->paginate($this->paginate);
+        $posts = $group->posts()->where('status', 1)->orderByDesc('id')->paginate($this->paginate);
         return view('client.group', compact('area', 'posts', 'title', 'subtitle', 'group'));
     }
-    public function category(Category $category)
+
+    public function category(Category $category, Request $request)
     {
         $area = 'category';
         $title = $category->name;
         $subtitle = $category->subtitle;
-        $products = $category->products()->orderByDesc('id')->paginate($this->paginate);
+        $query = $category->products()->where('status', 1);
+
+        if ($request->has('only')) {
+            $query->where('stock_quantity', '>', 0);
+        }
+        if ($request->has('sort') && $request->input('sort') != '') {
+            switch ($request->input('sort')) {
+                case 'oldest':
+                    $query = $query->orderBy('id');
+                    break;
+                case 'cheap':
+                    $query = $query->where('price', '<>', 0)->orderBy('price');
+                    break;
+                case 'expensive':
+                    $query = $query->orderByDesc('price');
+                    break;
+                case 'fav':
+                    $query = $query->orderByDesc('view');
+                    break;
+                case 'sale':
+                    $query = $query->orderByDesc('sell');
+                    break;
+                default:
+                    $query = $query->orderByDesc('id');
+
+            }
+        } else {
+            $query = $query->orderByDesc('id');
+        }
+
+        $products = $query->paginate($this->paginate);
         return view('client.category', compact('area', 'products', 'title', 'subtitle', 'category'));
     }
 
@@ -168,8 +199,8 @@ class ClientController extends Controller
 
         $quantity = \request()->input('quantity', null);
         if (\Cookie::has('card')) {
-            $cards = json_decode(\Cookie::get('card'),true);
-            $qs = json_decode(\Cookie::get('q'),true);
+            $cards = json_decode(\Cookie::get('card'), true);
+            $qs = json_decode(\Cookie::get('q'), true);
             if (in_array($product->id, $cards)) {
                 $msg = "Product removed from card";
                 $i = array_search($product->id, $cards);
@@ -208,7 +239,7 @@ class ClientController extends Controller
     public function productCompareToggle(Product $product)
     {
         if (\Cookie::has('compares')) {
-            $compares = json_decode(\Cookie::get('compares'),true);
+            $compares = json_decode(\Cookie::get('compares'), true);
             if (in_array($product->id, $compares)) {
                 $msg = "Product removed from compare";
                 unset($compares[array_search($product->id, $compares)]);

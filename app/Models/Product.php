@@ -19,6 +19,9 @@ class Product extends Model implements HasMedia
 {
     use HasFactory, SoftDeletes, InteractsWithMedia, HasTranslations, HasTags, Metable;
 
+    public static $stock_status = ['IN_STOCK', 'OUT_STOCK', 'BACK_ORDER'];
+
+    public $translatable = ['name', 'excerpt', 'description', 'table'];
     protected $casts = [
         'qz' => 'array',
         'qidz' => 'array'
@@ -50,9 +53,6 @@ class Product extends Model implements HasMedia
         return $this->quantities()->pluck('id')->toArray();
     }
 
-    public static $stock_status = ['IN_STOCK', 'OUT_STOCK', 'BACK_ORDER'];
-
-    public $translatable = ['name', 'excerpt', 'description', 'table'];
 
     public function registerMediaConversions(?Media $media = null): void
     {
@@ -155,6 +155,9 @@ class Product extends Model implements HasMedia
 
     function hasDiscount()
     {
+        if (!$this->isAvailable()){
+            return false;
+        }
         return $this->discounts()->where('expire', '>', date('Y-m-d'))->count() > 0;
     }
 
@@ -281,6 +284,10 @@ class Product extends Model implements HasMedia
             $price = $this->quantities()->min('price');
         }
 
+        if (!$this->isAvailable()){
+            return  __('Unavailable');
+        }
+
         if ($this->hasDiscount()) {
             $d = $this->activeDiscounts()->first();
             if ($d->type == 'PRICE') {
@@ -321,5 +328,16 @@ class Product extends Model implements HasMedia
         }else{
             return 0;
         }
+    }
+
+    public function isAvailable(){
+        if ($this->stock_quantity == 0){
+            return  false;
+        }
+
+        if ($this->stock_status != 'IN_STOCK'){
+            return  false;
+        }
+        return  true;
     }
 }

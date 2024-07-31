@@ -22,4 +22,13 @@
             </ul>
         </div>
     </div>
+    <div class="side-item">
+        <h4>
+            {{__("Filter")}}
+        </h4>
+        <div class="side-data">
+            <meta-filter></meta-filter>
+        </div>
+    </div>
+
 </aside>
