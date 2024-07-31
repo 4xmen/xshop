@@ -19,7 +19,11 @@
 }
 
 *{
-    font-family: 'Vazirmatn' , Sans-Serif;
+    font-family: 'Vazirmatn' , sans-serif;
+}
+
+html {
+    scroll-behavior: smooth;
 }
 
 body{

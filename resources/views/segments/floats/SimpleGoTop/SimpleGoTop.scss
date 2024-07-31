@@ -1,0 +1,24 @@
+#SimpleGoTop {
+    position: fixed;
+    bottom: 1rem;
+    inset-inline-start: -100px;
+    z-index: 999;
+    background: var(--xshop-primary);
+    width: 50px;
+    border-radius: var(--xshop-border-radius);
+    text-align: center;
+    opacity: .5;
+    transition: 400ms;
+    i{
+        color: var(--xshop-diff);
+        font-size: 35px;
+    }
+
+    &:hover{
+        opacity: 1;
+    }
+
+    &.show{
+        inset-inline-start: 1rem;
+    }
+}
