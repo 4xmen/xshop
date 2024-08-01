@@ -1,0 +1,27 @@
+#LoginBigBg {
+   height: 90vh;
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+
+
+    #login-form{
+        max-width: 90%;
+        width: 450px;
+    }
+    #login-content{
+
+        text-align: start;
+        padding: 1rem;
+        background: #ffffff99;
+        backdrop-filter: blur(4px);
+        border-radius: var(--xshop-border-radius);
+    }
+
+    .not-send{
+        display: none;
+    }
+}

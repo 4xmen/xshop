@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->ipAddress('ip');
             $table->string('action');
-            $table->morphs('loggable');
+            $table->nullableMorphs('loggable');
             $table->timestamps();
         });
     }
