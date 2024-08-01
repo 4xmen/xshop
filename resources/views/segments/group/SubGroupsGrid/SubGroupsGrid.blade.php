@@ -1,8 +1,8 @@
 <section class='SubGroupsGrid content'>
     <div class="{{gfx()['container']}}">
         @if($group->children()->count() > 0)
-            <div class="px-4">
-                <h3>
+            <div>
+                <h3 class="text-center">
                     {{__("Sub groups")}}
                 </h3>
                 <div class="row">

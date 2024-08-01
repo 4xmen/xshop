@@ -4,6 +4,7 @@
             {{$title}}
         </h1>
         <h2>
+            &nbsp;
             {{$subtitle}}
         </h2>
     </div>

@@ -1,8 +1,8 @@
 <section class='SubCategoriesGrid content'>
     <div class="{{gfx()['container']}}">
         @if($category->children()->count() > 0)
-            <div class="px-4">
-                <h3>
+            <div>
+                <h3 class="text-center">
                     {{__("Sub categories")}}
                 </h3>
                 <div class="row">
