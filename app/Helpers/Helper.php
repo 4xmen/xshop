@@ -427,7 +427,7 @@ function showCatNested($cats, $parent = null)
     foreach ($cats as $cat) {
         if ($cat->parent_id == $parent) {
             $ret .= "<li>";
-            $ret .= "<a href='".$cat->webUrl()."'>";
+            $ret .= "<a href='" . $cat->webUrl() . "'>";
             $ret .= $cat->name . '</a>';
             $ret .= showCatNested($cats, $cat->id);
             $ret .= "</li>";
@@ -849,6 +849,7 @@ function getCategoryProductBySetting($key, $limit = 10, $order = 'id', $dir = "D
     return Category::where('id', getSetting($key) ?? 1)->first()
         ->products()->where('status', 1)->orderBy($order, $dir)->limit($limit)->get();
 }
+
 /**
  * get group's posts by setting key
  * @param $key
@@ -936,5 +937,41 @@ function errors($errors, $status = 422, $message = null, $data = null)
  */
 function readable($text)
 {
-  return ucfirst(trim(str_replace(['-','_'],' ',$text)));
+    return ucfirst(trim(str_replace(['-', '_'], ' ', $text)));
+}
+
+
+/**
+ * register guest logs
+ * @param $action
+ * @param $type
+ * @param $id
+ * @return void
+ */
+function guestLog($action, $type = null, $id = null)
+{
+    $gl = new \App\Models\GuestLog();
+    $gl->action = $action;
+    $gl->ip = request()->ip();
+    $gl->loggable_type = $type;
+    $gl->loggable_id = $id;
+    $gl->save();
+}
+
+/**
+ * is user try more than allowed or not
+ * @param $action
+ * @param $max
+ * @param $minutes
+ * @return bool
+ */
+function isGuestMaxAttemptTry($action, $max = 5, $minutes = 60)
+{
+    if (\App\Models\GuestLog::where('ip', request()->ip())
+            ->where('action', $action)
+            ->where('created_at', '<' ,time() - ($minutes * 60) )->count() >= $max) {
+        return true;
+    } else {
+        return false;
+    }
 }

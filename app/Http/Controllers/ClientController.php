@@ -185,15 +185,15 @@ class ClientController extends Controller
 
         if ($request->has('meta')) {
             foreach ($category->props()->where('searchable', 1)->get() as $prop) {
-                if (isset($request->input('meta')[$prop->name]) && $request->input('meta')[$prop->name] != '' &&  $request->input('meta')[$prop->name] != '[]') {
+                if (isset($request->input('meta')[$prop->name]) && $request->input('meta')[$prop->name] != '' && $request->input('meta')[$prop->name] != '[]') {
                     switch ($prop->type) {
                         case 'checkbox':
-                            if ($prop->priceable){
+                            if ($prop->priceable) {
                                 $id = Quantity::where('count', '>', 0)
-                                    ->where('data', 'LIKE', '%"'.$prop->name.'":%')
+                                    ->where('data', 'LIKE', '%"' . $prop->name . '":%')
                                     ->pluck('product_id')->toArray();
                                 $query->whereIn('id', $id);
-                            }else{
+                            } else {
 
                                 $query->whereHasMeta($prop->name);
                             }
@@ -201,15 +201,15 @@ class ClientController extends Controller
                         case 'number':
                         case 'select':
                         case 'color':
-                            if ($prop->priceable){
+                            if ($prop->priceable) {
                                 $id = Quantity::where('count', '>', 0)
-                                    ->where('data', 'LIKE', '%"'.$prop->name.'":"' . $request->meta[$prop->name] . '"%')
+                                    ->where('data', 'LIKE', '%"' . $prop->name . '":"' . $request->meta[$prop->name] . '"%')
                                     ->pluck('product_id')->toArray();
 
-                                $id = array_merge($id,$query->whereMeta($prop->name, $request->input('meta')[$prop->name])->pluck('id')->toArray());
+                                $id = array_merge($id, $query->whereMeta($prop->name, $request->input('meta')[$prop->name])->pluck('id')->toArray());
                                 $id = array_unique($id);
                                 $query->whereIn('id', $id);
-                            }else{
+                            } else {
                                 $query->whereMeta($prop->name, $request->input('meta')[$prop->name]);
                             }
                             break;
@@ -218,26 +218,26 @@ class ClientController extends Controller
                             break;
                         case 'multi':
                         case 'singlemulti':
-                        if ($prop->priceable){
-                            $q = Quantity::where('count', '>', 0);
-                            $metas = json_decode($request->meta[$prop->name], true);
-                            $q->where(function ($query) use ($metas) {
-                                foreach ($metas as $meta) {
-                                    $query->orWhere('data', 'LIKE', '%' . $meta . '%');
-                                }
-                            });
-                            $query->whereIn('id',$q->pluck('product_id')->toArray());
-                        }else{
-                            $q = Meta::where('key',$prop->name)->where('metable_type',Product::class);
-                            $metas = json_decode($request->meta[$prop->name], true);
-                            $q->where(function ($query) use ($metas) {
-                                foreach ($metas as $meta) {
-                                    $query->orWhere('value', 'LIKE', '%' . $meta . '%');
-                                }
-                            });
+                            if ($prop->priceable) {
+                                $q = Quantity::where('count', '>', 0);
+                                $metas = json_decode($request->meta[$prop->name], true);
+                                $q->where(function ($query) use ($metas) {
+                                    foreach ($metas as $meta) {
+                                        $query->orWhere('data', 'LIKE', '%' . $meta . '%');
+                                    }
+                                });
+                                $query->whereIn('id', $q->pluck('product_id')->toArray());
+                            } else {
+                                $q = Meta::where('key', $prop->name)->where('metable_type', Product::class);
+                                $metas = json_decode($request->meta[$prop->name], true);
+                                $q->where(function ($query) use ($metas) {
+                                    foreach ($metas as $meta) {
+                                        $query->orWhere('value', 'LIKE', '%' . $meta . '%');
+                                    }
+                                });
 
-                            $query->whereIn('id',$q->pluck('metable_id')->toArray());
-                        }
+                                $query->whereIn('id', $q->pluck('metable_id')->toArray());
+                            }
 
                     }
                 }
@@ -351,15 +351,134 @@ class ClientController extends Controller
     }
 
 
-
     public function compare()
     {
         $area = 'compare';
         $title = __("Compare products");
         $subtitle = '';
         $ids = json_decode(\Cookie::get('compares'), true);
-        $products = Product::whereIn('id',$ids)->where('status',1)->get();
+        $products = Product::whereIn('id', $ids)->where('status', 1)->get();
         return view('client.default-list', compact('area', 'products', 'title', 'subtitle'));
+    }
+
+
+    public function signOut()
+    {
+        auth('customer')->logout();
+        return redirect()->route('client.sign-in')->with(['message' => __("Signed out successfully")]);
+    }
+
+    public function signIn()
+    {
+        $area = 'login';
+        $title = __("sign in");
+        $subtitle = 'Sign in as customer';
+        return view('client.default-list', compact('area', 'title', 'subtitle'));
+    }
+
+    public function signUp()
+    {
+
+    }
+
+    public function singInDo(Request $request)
+    {
+        $max = 3;
+        $request->validate([
+            'email' => 'required|string|email|max:255',
+            'password' => 'required|string|min:6',
+        ]);
+
+        if (isGuestMaxAttemptTry('login', $max)) {
+            return redirect()->back()->withErrors([__('You try more than :COUNT attempts, Try it later', ["COUNT" => $max])]);
+        }
+
+        guestLog('login');
+        $customer = Customer::where('email', $request->input('email'));
+        if ($customer->count() == 0) {
+            return redirect()->back()->withErrors([__('Email or password is incorrect')]);
+        }
+
+        $customer = $customer->first();
+
+        if (\Hash::check($request->input('password'), $customer->password)) {
+            auth('customer')->login($customer);
+            return redirect()->route('client.profile')->with(['message' => __('Signed in successfully')]);
+        } else {
+            return redirect()->back()->withErrors([__('Email or password is incorrect'), __('If you forget your password call us')]);
+        }
+    }
+
+    public function profile()
+    {
+        return auth('customer')->user();
+    }
+
+    public function sendSms(Request $request)
+    {
+
+        if (isGuestMaxAttemptTry('sms', 1, 2)) {
+            return [
+                'OK' => false,
+                'message' => __('You try attempts, Try it a few minutes'),
+                'error' => __('You try attempts, Try it a few minutes'),
+            ];
+        }
+        guestLog('sms');
+        $customer = Customer::where('mobile', $request->input('tel'));
+        $code = rand(11111, 99999);
+        if ($customer->count() == 0) {
+            $customer = new Customer();
+            $customer->mobile = $request->input('tel');
+            $customer->code = $code;
+            $customer->save();
+        } else {
+            $customer = $customer->first();
+            $customer->code = $code;
+            $customer->save();
+        }
+        // WIP send sms
+
+        return [
+            'OK' => true,
+            'message' => __('Auth code send successfully'),
+        ];
+    }
+
+    public function checkAuth(Request $request)
+    {
+        $max = 3;
+        $request->validate([
+            'tel' => 'required|string|min:6',
+            'code' => 'required|string|min:5',
+        ]);
+
+        if (isGuestMaxAttemptTry('login', $max)) {
+            return redirect()->back()->withErrors([__('You try more than :COUNT attempts, Try it later', ["COUNT" => $max])]);
+        }
+
+        guestLog('login');
+
+        $customer = Customer::where('mobile', $request->input('tel'))
+            ->where('code', $request->input('code'))->first();
+
+        if ($customer == null) {
+            return [
+                'OK' => false,
+                'message' => __('Auth code is invalid'),
+                'error' => __('Auth code is invalid'),
+            ];
+        }
+        $customer->code = null;
+        $customer->save();
+
+        auth('customer')->login($customer);
+
+        return [
+            'OK' => true,
+            'message' => __('You are logged in successfully'),
+        ];
+
     }
 
 }

@@ -361,6 +361,13 @@ Route::middleware([\App\Http\Middleware\VisitorCounter::class])
     // index
     Route::get('/', [\App\Http\Controllers\ClientController::class,'welcome'])->name('welcome');
     Route::get('/posts', [\App\Http\Controllers\ClientController::class,'posts'])->name('posts');
+    Route::get('/customer/sign-out', [\App\Http\Controllers\ClientController::class,'signOut'])->name('sign-out');
+    Route::post('/customer/sign-in/do', [\App\Http\Controllers\ClientController::class,'singInDo'])->name('sign-in-do');
+    Route::get('/customer/sign-in', [\App\Http\Controllers\ClientController::class,'signIn'])->name('sign-in');
+    Route::get('/customer/sign-up', [\App\Http\Controllers\ClientController::class,'signUp'])->name('sign-up');
+    Route::get('/customer/send/auth-code', [\App\Http\Controllers\ClientController::class,'sendSms'])->name('send-sms');
+    Route::get('/customer/check/auth-code', [\App\Http\Controllers\ClientController::class,'checkAuth'])->name('check-auth');
+    Route::get('/customer/profile', [\App\Http\Controllers\ClientController::class,'profile'])->name('profile');
     Route::get('/compare', [\App\Http\Controllers\ClientController::class,'compare'])->name('compare');
     Route::get('/galleries', [\App\Http\Controllers\ClientController::class,'galleries'])->name('galleries');
     Route::get('/products', [\App\Http\Controllers\ClientController::class,'products'])->name('products');
