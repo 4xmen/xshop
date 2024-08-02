@@ -5,6 +5,7 @@ function isValidMobile(p) {
     return regex.test(p);
 }
 
+
 document.addEventListener('DOMContentLoaded', function () {
     document.querySelector('#send-auth-code')?.addEventListener('click', async function () {
         let url = this.getAttribute('data-route');

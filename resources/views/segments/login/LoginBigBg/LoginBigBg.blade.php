@@ -1,4 +1,4 @@
-<section id='LoginBigBg'
+<section id='LoginBigBg' class="content"
          style="background-image: url('{{asset('upload/images/'.$data->area->name.'.'.$data->part.'.jpg')}}')">
     <form @if(!config('app.sign.sms')) action="{{route('client.sign-in-do')}}" @endif id="login-form" method="post">
         @csrf
