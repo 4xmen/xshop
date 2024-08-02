@@ -13,6 +13,7 @@ use App\Models\Product;
 use App\Models\Quantity;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Plank\Metable\Meta;
 use Spatie\Tags\Tag;
 
@@ -147,6 +148,14 @@ class ClientController extends Controller
         return view('client.group', compact('area', 'posts', 'title', 'subtitle', 'group'));
     }
 
+    public function product(Product $product)
+    {
+        $area = 'product';
+        $title = $product->name;
+        $subtitle = $product->excerpt; // WIP SEO
+        return view('client.default-list', compact('area', 'product', 'title', 'subtitle'));
+    }
+
     public function category(Category $category, Request $request)
     {
         $area = 'category';
@@ -267,10 +276,22 @@ class ClientController extends Controller
             $cards = json_decode(\Cookie::get('card'), true);
             $qs = json_decode(\Cookie::get('q'), true);
             if (in_array($product->id, $cards)) {
-                $msg = "Product removed from card";
-                $i = array_search($product->id, $cards);
-                unset($cards[$i]);
-                unset($qs[$i]);
+                $found = false;
+                foreach ($cards as $i => $card) {
+                    if ($card == $product->id && $qs[$i] == $quantity) {
+                        $found = true;
+                        break;
+                    }
+                }
+                if ($found) {
+                    $msg = "Product removed from card";
+                    unset($cards[$i]);
+                    unset($qs[$i]);
+                }else{
+                    $cards[] = $product->id;
+                    $qs[] = $quantity;
+                    $msg = "Product added to card";
+                }
             } else {
                 $cards[] = $product->id;
                 $qs[] = $quantity;
@@ -427,6 +448,8 @@ class ClientController extends Controller
         guestLog('sms');
         $customer = Customer::where('mobile', $request->input('tel'));
         $code = rand(11111, 99999);
+
+        Log::info('auth code: '.$code );
         if ($customer->count() == 0) {
             $customer = new Customer();
             $customer->mobile = $request->input('tel');

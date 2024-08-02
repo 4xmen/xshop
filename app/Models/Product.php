@@ -158,7 +158,11 @@ class Product extends Model implements HasMedia
         if (!$this->isAvailable()){
             return false;
         }
-        return $this->discounts()->where('expire', '>', date('Y-m-d'))->count() > 0;
+        return $this->discounts()
+                ->where(function ($query) {
+                    $query->where('expire', '>=', date('Y-m-d'))
+                        ->orWhereNull('expire');
+                })->count() > 0;
     }
 
 
@@ -278,8 +282,7 @@ class Product extends Model implements HasMedia
 
     public function webUrl()
     {
-        return '#';// WIP
-        return route('');
+        return route('client.product',$this->slug);
     }
 
 

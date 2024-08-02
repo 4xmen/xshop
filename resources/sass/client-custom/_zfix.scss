@@ -44,7 +44,7 @@ a, a:visited {
 
     &:hover {
         border-color: var(--xshop-secondary);
-        color: var(--xshop-diff) !important;
+        color: var(--xshop-diff2) !important;
         background: var(--xshop-secondary);;
     }
 }
@@ -52,7 +52,7 @@ a, a:visited {
 .btn-secondary {
     background: var(--xshop-secondary);
     border-color: var(--xshop-secondary);
-    color: var(--xshop-diff) !important;
+    color: var(--xshop-diff2) !important;
 
     &:hover {
         border-color: var(--xshop-primary);
@@ -99,7 +99,7 @@ ul.pagination {
 
             &:hover{
                 background: var(--xshop-secondary);
-                color: var(--xshop-diff);
+                color: var(--xshop-diff2);
             }
         }
     }
@@ -116,4 +116,24 @@ ul.pagination {
 .form-check-input:checked{
     background-color: var(--xshop-primary);
     border-right-color: var(--xshop-secondary);
+}
+
+.modal.lightbox{
+    backdrop-filter: blur(7px);
+    .ratio{
+        background: #33333355 !important;
+        border-radius: var(--xshop-border-radius);
+        overflow: hidden;
+    }
+}
+
+
+.custom-tooltip {
+    --bs-tooltip-bg: var(--xshop-primary);
+    --bs-tooltip-color: var(--xshop-diff);
+}
+
+
+.accordion-button:not(.collapsed){
+    background: transparent;
 }

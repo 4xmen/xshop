@@ -1,3 +1,5 @@
+import bootstrap from 'bootstrap/dist/js/bootstrap.bundle.min.js';
+
 window.addEventListener('load', function () {
     const API_COOKIE_NAME = 'last_api_call';
     const COOKIE_EXPIRY_MINUTES = 59;
@@ -46,4 +48,17 @@ window.addEventListener('load', function () {
     } else {
         console.log('Data was sent recently. Skipping this time.');
     }
+
+
+    // bootstrap fix start
+    const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
+    const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
+
+    // add table class autho
+    document.querySelectorAll('.content table')?.forEach(function (el) {
+        el.classList.add('table')
+    });
+
+    // bootstrap fix end
+
 });

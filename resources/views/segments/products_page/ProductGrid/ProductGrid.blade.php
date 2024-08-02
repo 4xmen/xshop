@@ -7,11 +7,15 @@
             @foreach($products as $product)
                 <div class="col-md-4 p-2">
                     <div class="product-item">
-                        <a class="fav-btn" data-slug="{{$product->slug}}" data-is-fav="{{$product->isFav()}}">
+                        <a class="fav-btn" data-slug="{{$product->slug}}" data-is-fav="{{$product->isFav()}}"
+                           data-bs-custom-class="custom-tooltip"
+                           data-bs-toggle="tooltip" data-bs-placement="auto" title="{{__("Add to / Remove from favorites")}}">
                             <i class="ri-heart-line"></i>
                             <i class="ri-heart-fill"></i>
                         </a>
-                        <a class="compare-btn" data-slug="{{$product->slug}}">
+                        <a class="compare-btn" data-slug="{{$product->slug}}"
+                           data-bs-custom-class="custom-tooltip"
+                           data-bs-toggle="tooltip" data-bs-placement="auto" title="{{__("Add to/ Remove from compare list")}}">
                             <i class="ri-scales-3-line"></i>
                         </a>
                         <a href="{{$product->webUrl()}}">

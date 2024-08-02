@@ -28,7 +28,7 @@
                     <div class="col-md-6">
                         {{__("Tags")}}:
                         @foreach($post->tags as $tag)
-                            <a href="{{route('client.tag',$tag->slug)}}" class="tag me-2">
+                            <a href="{{tagUrl($tag->slug)}}" class="tag me-2">
                                 <i class="ri-price-tag-line"></i>
                                 {{$tag->name}}
                             </a>

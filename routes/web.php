@@ -373,6 +373,7 @@ Route::middleware([\App\Http\Middleware\VisitorCounter::class])
     Route::get('/products', [\App\Http\Controllers\ClientController::class,'products'])->name('products');
     Route::get('/tag/{post}', [\App\Http\Controllers\ClientController::class,'tag'])->name('tag'); // wip
     Route::get('/group/{group}', [\App\Http\Controllers\ClientController::class,'group'])->name('group');
+    Route::get('/product/{product}', [\App\Http\Controllers\ClientController::class,'product'])->name('product');
     Route::get('/category/{category}', [\App\Http\Controllers\ClientController::class,'category'])->name('category');
     Route::get('/gallery/{gallery}', [\App\Http\Controllers\ClientController::class,'gallery'])->name('gallery');
     Route::get('/search', [\App\Http\Controllers\ClientController::class,'search'])->name('search');
@@ -399,10 +400,10 @@ Route::get('login/as/{mobile}',function ($mobile){
 Route::get('test',function (){
 //    return \Resources\Views\Segments\PreloaderCircle::onAdd();
 //   return $product->getAllMeta();
-    $data = ["3g",
-        "4g"];
-   return \App\Models\Product::whereMeta('net','LIKE','%'.$data[0].'%')->whereMeta('net','LIKE','%'.$data[0].'%')->get();
+    $cards = json_decode(\Cookie::get('card'), true);
+    $qs = json_decode(\Cookie::get('q'), true);
 
+    return [$cards,$qs];
 })->name('test');
 
 

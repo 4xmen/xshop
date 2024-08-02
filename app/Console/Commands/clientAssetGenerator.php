@@ -33,6 +33,7 @@ class clientAssetGenerator extends Command
         $vars['xshop-background'] = $gfxes['background'] ?? '#000000';
         $vars['xshop-primary'] = $gfxes['primary'] ?? '#6e0000';
         $vars['xshop-diff'] =  getGrayscaleTextColor($gfxes['primary']) ?? '#6e0000';
+        $vars['xshop-diff2'] =  getGrayscaleTextColor($gfxes['secondary']) ?? '#6e0000';
         $vars['xshop-secondary'] = $gfxes['secondary'] ?? '#ff0000';
         $vars['xshop-text'] = $gfxes['text'] ?? '#111111';
         $vars['xshop-border-radius'] = $gfxes['border-radius'] ?? '7px';
