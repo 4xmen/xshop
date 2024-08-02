@@ -55,7 +55,11 @@ class DiscountController extends XController
         $discount->title = $request->title;
         $discount->body = $request->body;
         $discount->amount = $request->amount;
-        $discount->expire = date('Y-m-d H:i:s',floor($request->expire));
+        if ($request->has('expire') && $request->expire != ''){
+            $discount->expire = date('Y-m-d H:i:s',floor($request->expire));
+        }else{
+            $discount->expire = null;
+        }
         $discount->code = $request->code;
         $discount->type = $request->type;
         $discount->save();
