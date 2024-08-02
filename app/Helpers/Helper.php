@@ -975,3 +975,39 @@ function isGuestMaxAttemptTry($action, $max = 5, $minutes = 60)
         return false;
     }
 }
+
+/**
+ * home url to best experience for multi lang shops
+ * @return string
+ */
+function homeUrl(){
+    return \route('client.welcome');
+}
+/**
+ * tag url to best experience for multi lang shops
+ * @return string
+ */
+function tagUrl($slug){
+    return route('client.tag',$slug);
+}
+
+function usableProp($props)
+{
+    $result = [];
+
+    foreach ($props as $prop) {
+        $tmp = [];
+        foreach (json_decode($prop->options) as $item) {
+            $tmp[$item->value] = $item->title;
+        }
+        $result[$prop->name]['data'] = $tmp;
+        $result[$prop->name]['icon'] = $prop->icon;
+        $result[$prop->name]['unit'] = $prop->unit;
+        $result[$prop->name]['searchable'] = $prop->searchable;
+        $result[$prop->name]['priceable'] = $prop->priceable;
+        $result[$prop->name]['type'] = $prop->type;
+        $result[$prop->name]['label'] = $prop->label;
+    }
+
+    return $result;
+}

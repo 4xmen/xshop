@@ -208,7 +208,7 @@
                                                     @case('expire')
                                                     @case('created_at')
                                                     @case('updated_at')
-                                                        {{$item->$col->ldate("Y-m-d H:i")}}
+                                                        {{$item->$col?->ldate("Y-m-d H:i")??'-'}}
                                                         @break
                                                     @case('icon')
                                                         <i class="{{$item->$col}}"></i>

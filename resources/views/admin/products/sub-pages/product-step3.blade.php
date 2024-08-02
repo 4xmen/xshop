@@ -102,7 +102,7 @@
                     {{$dis->code}}
                 </td>
                 <td>
-                    {{$dis->expire->ldate('Y-m-d H:i:s')}}
+                    {{$dis->expire?->ldate('Y-m-d H:i:s')??'-'}}
                 </td>
                 <td>
                     <a href="{{ route('admin.discount.destroy',$dis->id) }}" class="btn btn-danger" data-id="{{$dis->id}}">

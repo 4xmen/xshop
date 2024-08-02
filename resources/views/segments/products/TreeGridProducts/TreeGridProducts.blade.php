@@ -1,11 +1,4 @@
-<section class='TreeGridProducts'
-         style="---three-main-bg-color: {{getSetting($data->area->name.'_'.$data->part.'_color')}};
-        --gx1: {{getSetting($data->area->name.'_'.$data->part.'_gradx1')}};
-        --gx2: {{getSetting($data->area->name.'_'.$data->part.'_gradx2')}};
-        --gy1: {{getSetting($data->area->name.'_'.$data->part.'_grady1')}};
-        --gy2: {{getSetting($data->area->name.'_'.$data->part.'_grady2')}};
-        "
->
+<section class='TreeGridProducts'>
     <div class="{{gfx()['container']}}">
 
         <div class="tree-grid">
@@ -36,7 +29,7 @@
                                         <a href="{{ route('client.product-card-toggle',$product->slug) }}" class="btn btn-primary btn-sm w-100 add-to-card">
                                             <i class="ri-shopping-cart-2-line"></i>
                                             <span>
-                                                Add to card
+                                                {{__("Add to card")}}
                                             </span>
                                         </a>
                                     </div>

@@ -47,7 +47,7 @@ class PropSeeder extends Seeder
             'label' =>  __('Internal storage'),
             'name'=>'hdd',
             'type'=>'select',
-            'options' => '[{"title":"16 Gig","value":"16"},{"title":"32 Gig","value":"32"},{"title":"64 gig","value":"64"},{"title":"128 Gig","value":"128"},{"title":"256 G","value":"256"}]',
+            'options' => '[{"title":"16 Gig","value":"16"},{"title":"32 Gig","value":"32"},{"title":"64 gig","value":"64"},{"title":"128 Gig","value":"128"},{"title":"256 Gig","value":"256"}]',
             'searchable'=> 1,
             'priceable' => 1,
             'icon' => 'ri-hard-drive-3-line',
