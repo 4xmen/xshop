@@ -1,0 +1,31 @@
+#LoginPatternBg {
+    background: linear-gradient(180deg, var(--login-bg-color-1) 0%, var(--login-bg-color-2) 100%);
+    //background-size: cover;
+    //background-position: center;
+    #login-container{
+        height: 90vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        background-position: center;
+    }
+
+
+    #login-form{
+        max-width: 90%;
+        width: 450px;
+    }
+    #login-content{
+
+        text-align: start;
+        padding: 1rem;
+        background: #ffffff99;
+        backdrop-filter: blur(4px);
+        border-radius: var(--xshop-border-radius);
+    }
+
+    .not-send{
+        display: none;
+    }
+}

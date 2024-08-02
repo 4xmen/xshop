@@ -23,6 +23,7 @@ class LoginBigBg
     }
     public static function onRemove(Part $part = null)
     {
+        Setting::where('key',$part->area->name . '_' . $part->part.'_jpg')->first()?->delete();
 
     }
     public static function onMount(Part $part = null)

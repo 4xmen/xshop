@@ -184,16 +184,16 @@ class AreaSeeder extends Seeder
 //                'preview' => 'client.groups',
 //                'icon' => 'ri-book-shelf-line',
 //            ],
-            [
-                'name' => 'card',
-                'valid_segments' => json_encode(
-                    ["top", "header", "footer", "menu",
-                        "parallax", "other", "card", "ads"]
-                ),
-                'max' => 6,
-                'preview' => 'client.card',
-                'icon' => 'ri-shopping-cart-2-line',
-            ],
+//            [
+//                'name' => 'card',
+//                'valid_segments' => json_encode(
+//                    ["top", "header", "footer", "menu",
+//                        "parallax", "other", "card", "ads"]
+//                ),
+//                'max' => 6,
+//                'preview' => 'client.card',
+//                'icon' => 'ri-shopping-cart-2-line',
+//            ],
             [
                 'name' => 'login',
                 'valid_segments' => json_encode(
