@@ -20,10 +20,12 @@
         </nav>
         <div class="row">
             <div class="col-lg-5">
-                <a href="{{$product->originalImageUrl()}}" id="aria-main-img" class="light-box"
-                   data-gallery="aria-products">
-                    <img src="{{$product->originalImageUrl()}}" alt="{{$product->name}}">
-                </a>
+                <div id="preview">
+                    <a href="{{$product->originalImageUrl()}}" id="aria-main-img" class="light-box"
+                       data-gallery="aria-products">
+                        <img src="{{$product->originalImageUrl()}}" alt="{{$product->name}}">
+                    </a>
+                </div>
                 <div id="aria-img-slider">
                     @foreach($product->getMedia() as $media)
                         <div class="item">
@@ -71,14 +73,14 @@
                 <div class="mt-4">&nbsp;</div>
                 @if($product->quantities()->count()>0)
                     <quantities-add-to-card
-                    :qz='@json($product->quantities)'
-                    :props='@json(usableProp($product->category->props))'
-                    currency="{{config('app.currency.symbol')}}"
-                    card-link="{{ route('client.product-card-toggle',$product->slug) }}"
+                        :qz='@json($product->quantities)'
+                        :props='@json(usableProp($product->category->props))'
+                        currency="{{config('app.currency.symbol')}}"
+                        card-link="{{ route('client.product-card-toggle',$product->slug) }}"
 
-                    @if($product->hasDiscount())
-                        :discount='@json($product->activeDiscounts()->first())'
-                    @endif
+                        @if($product->hasDiscount())
+                            :discount='@json($product->activeDiscounts()->first())'
+                        @endif
                     ></quantities-add-to-card>
                 @else
                     <a href="{{ route('client.product-card-toggle',$product->slug) }}"
@@ -132,7 +134,8 @@
         <div class="accordion mt-4" id="product-detail">
             <div class="accordion-item">
                 <h2 class="accordion-header">
-                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#desc" aria-expanded="true"
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#desc"
+                            aria-expanded="true"
                             aria-controls="desc">
                         {{__("Description")}}
                     </button>
@@ -145,23 +148,25 @@
             </div>
             @if($product->table != null || trim($product->table) != '')
 
-            <div class="accordion-item">
-                <h2 class="accordion-header">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#table"
-                            aria-expanded="false" aria-controls="table">
-                        {{__("Product table")}}
-                    </button>
-                </h2>
-                <div id="table" class="accordion-collapse collapse" data-bs-parent="#product-detail">
-                    <div class="accordion-body">
-                        {!! $product->table !!}
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#table"
+                                aria-expanded="false" aria-controls="table">
+                            {{__("Product table")}}
+                        </button>
+                    </h2>
+                    <div id="table" class="accordion-collapse collapse" data-bs-parent="#product-detail">
+                        <div class="accordion-body">
+                            {!! $product->table !!}
+                        </div>
                     </div>
                 </div>
-            </div>
             @endif
             <div class="accordion-item">
                 <h2 class="accordion-header">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#info" aria-expanded="false" aria-controls="info">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#info" aria-expanded="false" aria-controls="info">
                         {{__("Information")}}
                     </button>
                 </h2>
@@ -198,16 +203,16 @@
         </h3>
         <div id="rel-products">
             @foreach($product->category->products()->where('status',1)->limit(10)->get() as $p)
-            <div class="item">
-                <div class="aria-product-list">
-                    <a href="{{$p->imgUrl()}}">
-                        <img src="{{$p->imgUrl()}}"  alt="{{$p->name}}">
-                        <h5>
-                            {{$p->name}}
-                        </h5>
-                    </a>
+                <div class="item">
+                    <div class="aria-product-list">
+                        <a href="{{$p->imgUrl()}}">
+                            <img src="{{$p->imgUrl()}}" alt="{{$p->name}}">
+                            <h5>
+                                {{$p->name}}
+                            </h5>
+                        </a>
+                    </div>
                 </div>
-            </div>
             @endforeach
         </div>
     </div>

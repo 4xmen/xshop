@@ -99,6 +99,9 @@ export default {
     methods: {
         select(i) {
             document.querySelector('#price').innerText = commafy(this.qz[i].price.toString()) + ' ' + this.currency;
+            let index = this.qz[i].image;
+            document.querySelector('#preview a').setAttribute('href',document.querySelector(`#hidden-images a:nth-child(${index+1})`).getAttribute('href'));
+            document.querySelector('#preview img').setAttribute('src',document.querySelector(`#hidden-images a:nth-child(${index+1}) img`).getAttribute('src'));
             this.selected = i;
         },
         async add2card() {

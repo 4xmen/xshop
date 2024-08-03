@@ -4,6 +4,8 @@ import {tns} from "tiny-slider/src/tiny-slider";
 var ariaImgSlider, ariaRelativeSlider;
 document.addEventListener('DOMContentLoaded',function () {
 
+
+
     for (const el of document.querySelectorAll('.light-box')) {
         el.addEventListener('click', Lightbox.initialize);
     }
