@@ -22,10 +22,10 @@ class Clip extends Model
     public function imgUrl()
     {
         if ($this->cover == null) {
-            return asset('assets/upload/logo.svg');;
+            return asset('assets/upload/logo.svg');
         }
 
-        return \Storage::url('clips/optimized-' . $this->cover);
+        return \Storage::url('cover/optimized-' . $this->cover);
     }
     public function imgOriginalUrl()
     {
@@ -55,8 +55,7 @@ class Clip extends Model
     }
 
     public function webUrl(){
-        return  '#';// WIP
-        return route('');
+        return route('client.clip',$this->slug);
     }
 
 

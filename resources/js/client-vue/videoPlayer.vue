@@ -1,6 +1,6 @@
 <template>
     <div class="mp4-player">
-        <video ref="p" :src="link" class="video"></video>
+        <video ref="p" :src="link" class="video" :poster="cover"></video>
         <div class="seek-container">
             <div ref="seekbar" class="seekbar" @click="seek">
                 <div class="progress-seek" :style="progressPercent"></div>
@@ -61,17 +61,21 @@ export default {
     props: {
         asset: {
             required: true
+        },
+        cover:{
+            default: null,
         }
     },
     mounted() {
-        // window.addEventListener('load',()=>{
+        window.addEventListener('load',()=>{
         setTimeout(() => {
             this.link = this.asset;
+            document.querySelector('#video-preview-botz').style.display = 'none';
         }, 500);
         setInterval(() => {
             this.updatePlayer();
         }, 300);
-        // });
+        });
     },
     computed: {
 
@@ -148,6 +152,7 @@ export default {
     border: 1px solid var(--xshop-primary);
     padding: 1rem;
     border-radius: var(--xshop-border-radius);
+    overflow: hidden;
 }
 
 

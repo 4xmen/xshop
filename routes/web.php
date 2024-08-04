@@ -370,11 +370,13 @@ Route::middleware([\App\Http\Middleware\VisitorCounter::class])
     Route::get('/customer/profile', [\App\Http\Controllers\ClientController::class,'profile'])->name('profile');
     Route::get('/compare', [\App\Http\Controllers\ClientController::class,'compare'])->name('compare');
     Route::get('/galleries', [\App\Http\Controllers\ClientController::class,'galleries'])->name('galleries');
+    Route::get('/videos', [\App\Http\Controllers\ClientController::class,'clips'])->name('clips');
     Route::get('/products', [\App\Http\Controllers\ClientController::class,'products'])->name('products');
     Route::get('/attachments', [\App\Http\Controllers\ClientController::class,'attachments'])->name('attachments');
     Route::get('/attachment/{attachment}', [\App\Http\Controllers\ClientController::class,'attachment'])->name('attachment');
-    Route::get('/tag/{post}', [\App\Http\Controllers\ClientController::class,'tag'])->name('tag'); // wip
+    Route::get('/tag/{slug}', [\App\Http\Controllers\ClientController::class,'tag'])->name('tag'); // wip
     Route::get('/product/{product}', [\App\Http\Controllers\ClientController::class,'product'])->name('product');
+    Route::get('/video/{clip}', [\App\Http\Controllers\ClientController::class,'clip'])->name('clip');
     Route::get('/category/{category}', [\App\Http\Controllers\ClientController::class,'category'])->name('category');
     Route::get('/gallery/{gallery}', [\App\Http\Controllers\ClientController::class,'gallery'])->name('gallery');
     Route::get('/search', [\App\Http\Controllers\ClientController::class,'search'])->name('search');
