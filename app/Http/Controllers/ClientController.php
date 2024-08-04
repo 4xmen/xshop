@@ -86,6 +86,23 @@ class ClientController extends Controller
         return view('client.default-list', compact('area', 'galleries', 'title', 'subtitle'));
     }
 
+    public function attachments()
+    {
+        $area = 'attachments-list';
+        $title = __("Attachments list");
+        $subtitle = '';
+        $attachs = Attachment::where('is_fillable', 1)
+            ->orderByDesc('id')->paginate($this->paginate);
+        return view('client.default-list', compact('area', 'attachs', 'title', 'subtitle'));
+    }
+    public function attachment(Attachment $attachment)
+    {
+        $area = 'attachment';
+        $title = $attachment->title;
+        $subtitle = $attachment->subtitle;
+        return view('client.default-list', compact('area', 'attachment', 'title', 'subtitle'));
+    }
+
     public function tag($slug)
     {
 

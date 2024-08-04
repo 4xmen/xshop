@@ -22,7 +22,8 @@
                                 </a>
                                 <a class="compare-btn" data-slug="{{$product->slug}}"
                                    data-bs-custom-class="custom-tooltip"
-                                   data-bs-toggle="tooltip" data-bs-placement="auto" title="{{__("Add to/ Remove from compare list")}}">
+                                   data-bs-toggle="tooltip" data-bs-placement="auto"
+                                   title="{{__("Add to/ Remove from compare list")}}">
                                     <i class="ri-scales-3-line"></i>
                                 </a>
                                 <a href="{{$product->webUrl()}}">
