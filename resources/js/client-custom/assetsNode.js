@@ -12,8 +12,15 @@ const $toast = useToast({
 
 import MetaFilter from '../client-vue/MetaFilter.vue';
 app.component('meta-filter', MetaFilter);
-import QunatotiesAddToCard from "../client-vue/QuantitiesAddToCard.vue";
-app.component('quantities-add-to-card', QunatotiesAddToCard);
+
+import QuantitiesAddToCard from "../client-vue/QuantitiesAddToCard.vue";
+app.component('quantities-add-to-card', QuantitiesAddToCard);
+
+import videoPlayer from "../client-vue/videoPlayer.vue";
+app.component('mp4player', videoPlayer);
+
+import mp3player from "../client-vue/mp3player.vue";
+app.component('mp3player', mp3player);
 
 app.use(ToastPlugin);
 app.use(store);
