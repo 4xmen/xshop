@@ -64,14 +64,14 @@ export default {
         }
     },
     mounted() {
-        // window.addEventListener('load',()=>{
+        window.addEventListener('load',()=>{
         setTimeout(() => {
             this.link = this.asset;
         }, 500);
         setInterval(() => {
             this.updatePlayer();
         }, 300);
-        // });
+        });
     },
     computed: {
 

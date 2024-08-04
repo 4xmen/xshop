@@ -88,6 +88,9 @@ class ClipController extends XController
                     config('app.media.watermark_size'), Unit::Percent, Fit::Contain,
                     config('app.media.watermark_opacity'));
             }
+            if (!file_exists(storage_path() . '/app/public/cover')){
+                mkdir(storage_path() . '/app/public/cover/');
+            }
             $i->save(storage_path() . '/app/public/cover/optimized-'. $clip->$key);
         }
 

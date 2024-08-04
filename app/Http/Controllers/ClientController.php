@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Attachment;
 use App\Models\Category;
+use App\Models\Clip;
 use App\Models\Comment;
 use App\Models\Customer;
 use App\Models\Gallery;
@@ -42,6 +43,18 @@ class ClientController extends Controller
         $subtitle = $post->subtitle;
         $post->increment('view');
         return view('client.post', compact('area', 'post', 'title', 'subtitle'));
+    }
+
+    public function clip(Clip $clip)
+    {
+
+        if ($clip->status = 0 && !auth()->check()) {
+            return abort(403);
+        }
+        $area = 'clip';
+        $title = $clip->title;
+        $subtitle = '';
+        return view('client.default-list', compact('area', 'clip', 'title', 'subtitle'));
     }
 
     public function gallery(Gallery $gallery)
@@ -84,6 +97,15 @@ class ClientController extends Controller
         $galleries = Gallery::where('status', 1)
             ->orderByDesc('id')->paginate($this->paginate);
         return view('client.default-list', compact('area', 'galleries', 'title', 'subtitle'));
+    }
+    public function clips()
+    {
+        $area = 'clips-list';
+        $title = __("Video clips list");
+        $subtitle = '';
+        $clips = Clip::where('status', 1)
+            ->orderByDesc('id')->paginate($this->paginate);
+        return view('client.default-list', compact('area', 'clips', 'title', 'subtitle'));
     }
 
     public function attachments()
@@ -167,6 +189,9 @@ class ClientController extends Controller
 
     public function product(Product $product)
     {
+        if ($product->status = 0 && !auth()->check()) {
+            return abort(403);
+        }
         $area = 'product';
         $title = $product->name;
         $subtitle = $product->excerpt; // WIP SEO
