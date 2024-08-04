@@ -7,49 +7,53 @@ document.addEventListener('DOMContentLoaded',function () {
     for (const el of document.querySelectorAll('.light-box')) {
         el.addEventListener('click', Lightbox.initialize);
     }
-    karenImgSlider = tns({
-        container: '#karen-img-slider',
-        items: 3,
-        autoplay: true,
-        autoplayButton: false,
-        // nextButton: false,
-        controls: false,
-        autoplayHoverPause: true,
-        mouseDrag: true,
-        gutter: 5,
-        slideBy: 1,
-        autoplayTimeout: 5000,
-        // speed:10000,
-    });
-    karenRelativeSlider = tns({
-        container: '#rel-products',
-        items: 3,
-        autoplay: true,
-        autoplayButton: false,
-        // nextButton: false,
-        controls: false,
-        autoplayHoverPause: true,
-        mouseDrag: true,
-        gutter: 5,
-        slideBy: 1,
-        autoplayTimeout: 5000,
-        responsive:{
-            560:{
-                items: 1,
-            },
-            768:{
-                items: 2,
-            },
-            1000:{
-                items: 4,
-            },
-            1400:{
-                items: 5,
-            },
+    try {
+        karenImgSlider = tns({
+            container: '#karen-img-slider',
+            items: 3,
+            autoplay: true,
+            autoplayButton: false,
+            // nextButton: false,
+            controls: false,
+            autoplayHoverPause: true,
+            mouseDrag: true,
+            gutter: 5,
+            slideBy: 1,
+            autoplayTimeout: 5000,
+            // speed:10000,
+        });
+        karenRelativeSlider = tns({
+            container: '#rel-products',
+            items: 3,
+            autoplay: true,
+            autoplayButton: false,
+            // nextButton: false,
+            controls: false,
+            autoplayHoverPause: true,
+            mouseDrag: true,
+            gutter: 5,
+            slideBy: 1,
+            autoplayTimeout: 5000,
+            responsive:{
+                560:{
+                    items: 1,
+                },
+                768:{
+                    items: 2,
+                },
+                1000:{
+                    items: 4,
+                },
+                1400:{
+                    items: 5,
+                },
 
-        }
-        // speed:10000,
-    });
+            }
+            // speed:10000,
+        });
+    } catch {
+    }
+
 
     document.querySelectorAll('#karen-img-slider a')?.forEach(function (el) {
         el.addEventListener('click',function (e) {
@@ -66,9 +70,13 @@ document.addEventListener('DOMContentLoaded',function () {
     const underline = document.querySelector('.underline');
 
     function updateUnderline() {
-        const activeTab = document.querySelector('.navtab.active');
-        underline.style.width = `${activeTab.offsetWidth}px`;
-        underline.style.left = `${activeTab.offsetLeft}px`;
+        try {
+            const activeTab = document.querySelector('.navtab.active');
+            underline.style.width = `${activeTab.offsetWidth}px`;
+            underline.style.left = `${activeTab.offsetLeft}px`;
+        } catch {
+        }
+
     }
 
     tabs.forEach(tab => {

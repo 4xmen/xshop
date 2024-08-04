@@ -1,0 +1,51 @@
+.DenaAttachList {
+    padding: 2rem 0;
+
+    h1 {
+        font-weight: 400;
+        font-size: 27px;
+        padding: .5rem 0;
+    }
+
+    .dena-item {
+        position: relative;
+        border: 1px solid var(--xshop-primary);
+        box-shadow: var(--xshop-shadow);
+        border-radius: var(--xshop-border-radius);
+        padding: 1rem;
+        margin-bottom: .5rem;
+
+        h3{
+            font-size: 23px;
+            font-weight: 400;
+        }
+
+        p{
+            margin-bottom: 0;
+        }
+
+
+        .dena-tag {
+            position: absolute;
+            inset-inline-end: 10px;
+            top: 10px;
+            background: var(--xshop-primary);
+            color: var(--xshop-diff);
+            padding: .3rem;
+            width: 65px;
+            text-align: center;
+            border-radius: var(--xshop-border-radius);
+        }
+        .dena-size {
+            position: absolute;
+            inset-inline-end: 10px;
+            bottom: 10px;
+            background: var(--xshop-secondary);
+            color: var(--xshop-diff2);
+            padding: .3rem;
+            width: 120px;
+            text-align: center;
+            border-radius: var(--xshop-border-radius);
+        }
+    }
+}

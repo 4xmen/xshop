@@ -371,8 +371,9 @@ Route::middleware([\App\Http\Middleware\VisitorCounter::class])
     Route::get('/compare', [\App\Http\Controllers\ClientController::class,'compare'])->name('compare');
     Route::get('/galleries', [\App\Http\Controllers\ClientController::class,'galleries'])->name('galleries');
     Route::get('/products', [\App\Http\Controllers\ClientController::class,'products'])->name('products');
+    Route::get('/attachments', [\App\Http\Controllers\ClientController::class,'attachments'])->name('attachments');
+    Route::get('/attachment/{attachment}', [\App\Http\Controllers\ClientController::class,'attachment'])->name('attachment');
     Route::get('/tag/{post}', [\App\Http\Controllers\ClientController::class,'tag'])->name('tag'); // wip
-    Route::get('/group/{group}', [\App\Http\Controllers\ClientController::class,'group'])->name('group');
     Route::get('/product/{product}', [\App\Http\Controllers\ClientController::class,'product'])->name('product');
     Route::get('/category/{category}', [\App\Http\Controllers\ClientController::class,'category'])->name('category');
     Route::get('/gallery/{gallery}', [\App\Http\Controllers\ClientController::class,'gallery'])->name('gallery');

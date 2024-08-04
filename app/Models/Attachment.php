@@ -65,8 +65,7 @@ class Attachment extends Model
 
     public function webUrl()
     {
-        return '#';// WIP
-        return route('');
+        return route('client.attachment',$this->slug);
     }
 
 }
