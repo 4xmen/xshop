@@ -1,0 +1,27 @@
+.AutoPlayClips {
+    padding: 2rem 0;
+
+    h1 {
+        font-size: 27px;
+        font-weight: 400;
+    }
+
+    .autoplay-clip-list {
+        display: flex;
+        column-gap: .5rem;
+    }
+
+    .autoplay-clip-item {
+        transition: 700ms;
+        flex: 1;
+        video,img {
+            width: 100%;
+            border-radius: var(--xshop-border-radius);
+            height: 300px;
+            object-fit: cover;
+        }
+        &:hover{
+            flex-grow: 2;
+        }
+    }
+}
