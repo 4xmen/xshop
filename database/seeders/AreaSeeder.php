@@ -38,7 +38,7 @@ class AreaSeeder extends Seeder
                 'valid_segments' => json_encode(
                     ["top", "slider", "header", "footer", "menu",
                         "parallax", "other", "posts", "products"
-                        , "groups", "categories", "category", "group", "index", "ads", "galleries"]
+                        , "groups", "categories", "index", "ads", "galleries", "clips"]
                 ),
                 'max' => 10,
                 'preview' => 'client.welcome',
@@ -48,7 +48,7 @@ class AreaSeeder extends Seeder
                 'name' => 'post',
                 'valid_segments' => json_encode(
                     ["top", "header", "footer", "menu",
-                        "parallax", "other", "post", "comments", "ads" , "attachments"]
+                        "parallax", "other", "post", "comments", "ads", "attachments"]
                 ),
                 'max' => 6,
                 'preview' => 'client.post',
@@ -118,7 +118,7 @@ class AreaSeeder extends Seeder
                 'name' => 'products-list',
                 'valid_segments' => json_encode(
                     ["top", "header", "footer", "menu",
-                        "parallax", "other", "products_page", "ads","products"]
+                        "parallax", "other", "products_page", "ads", "products"]
                 ),
                 'max' => 6,
                 'preview' => 'client.products',
