@@ -375,7 +375,9 @@ Route::middleware([\App\Http\Middleware\VisitorCounter::class])
     Route::get('/card/discount/{code}', [\App\Http\Controllers\CardController::class,'discount'])->name('card.discount');
     Route::get('/card', [\App\Http\Controllers\CardController::class,'index'])->name('card');
     Route::get('/cardClear',[\App\Http\Controllers\CardController::class,'clearing'])->name('card.clear');
-    Route::get('/profile', [\App\Http\Controllers\ClientController::class,'profile'])->name('profile');
+    Route::get('/profile', [\App\Http\Controllers\CustomerController::class,'profile'])->name('profile');
+    Route::post('/profile/save', [\App\Http\Controllers\CustomerController::class,'save'])->name('profile.save');
+    Route::get('/invoice/{invoice}', [\App\Http\Controllers\CustomerController::class,'invoice'])->name('invoice');
     Route::get('/products', [\App\Http\Controllers\ClientController::class,'products'])->name('products');
     Route::get('/attachments', [\App\Http\Controllers\ClientController::class,'attachments'])->name('attachments');
     Route::get('/attachment/{attachment}', [\App\Http\Controllers\ClientController::class,'attachment'])->name('attachment');

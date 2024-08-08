@@ -78,3 +78,13 @@ body{
     height: 25px;
     border: 1px solid gray;
 }
+
+#tabs-content{
+    .tab{
+        display: none;
+
+        &.active{
+            display: block;
+        }
+    }
+}

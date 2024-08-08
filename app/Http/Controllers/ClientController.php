@@ -422,11 +422,6 @@ class ClientController extends Controller
         }
     }
 
-    public function profile()
-    {
-        return auth('customer')->user();
-    }
-
     public function sendSms(Request $request)
     {
 

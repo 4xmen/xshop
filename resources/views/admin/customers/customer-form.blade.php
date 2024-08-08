@@ -77,7 +77,7 @@
                                 {{__('Credit')}}
                             </label>
                             <currency-input :xvalue="{{old('credit',$item->credit??0)}}"
-                                            name="credit" xid="credit"
+                                            xname="credit" xid="credit"
                                             @error('credit') :err="true" @enderror>
                             </currency-input>
                         </div>
