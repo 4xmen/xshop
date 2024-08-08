@@ -1,0 +1,93 @@
+#AvisaCustomer {
+    padding: 2rem 0;
+    .avisa-avatar {
+        height: 128px;
+        width: 128px;
+        display: block;
+        border-radius: 50%;
+        object-fit: cover;
+        margin: auto;
+    }
+
+    #avisa-tabs {
+        list-style: none;
+        padding: 1rem 0;
+        margin: 1rem 0;
+        border-radius: var(--xshop-border-radius);
+
+        background: var(--xshop-primary);
+
+        li {
+            a {
+                padding: .5rem 1rem;
+                color: var(--xshop-diff);
+                display: block;
+                font-size: 20px;
+                transition: 500ms;
+
+                &.active, &:hover {
+                    background: var(--xshop-secondary);
+                    color: var(--xshop-diff2);
+                }
+            }
+
+            i{
+                margin: 0 1rem;
+            }
+
+        }
+    }
+
+    .avisa-grid{
+        .grid-item{
+            overflow: hidden;
+            height: 200px;
+            border-radius: var(--xshop-border-radius);
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            i{
+                position: absolute;
+                transform: rotateZ(-17deg);
+                inset-inline-start: 7%;
+                top: -10%;
+                font-size: 75px;
+                opacity: .3;
+            }
+
+            h3{
+                position: absolute;
+                left: 0;
+                right: 0;
+                bottom: .2rem;
+                text-align: center;
+                opacity: .7;
+            }
+        }
+
+        &:nth-child(1){
+            .grid-item{
+                background: rgba(248, 170, 0, 0.63);
+            }
+        }
+        &:nth-child(2){
+            .grid-item{
+                background: rgba(184, 11, 109, 0.63);
+            }
+        }
+        &:nth-child(3){
+            .grid-item{
+                background: rgba(11, 184, 123, 0.63);
+            }
+        }
+        &:nth-child(4){
+            .grid-item{
+                background: rgba(11, 112, 184, 0.63);
+            }
+        }
+    }
+
+
+}

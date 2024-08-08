@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('credits', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('amount');
+            $table->bigInteger('amount');
             $table->unsignedBigInteger('customer_id');
-            $table->unsignedBigInteger('invoice_id');
+            $table->unsignedBigInteger('invoice_id')->nullable();
             $table->text('data')->nullable()->default(null);
             $table->softDeletes();
             $table->timestamps();

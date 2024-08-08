@@ -123,12 +123,19 @@ class CardController extends Controller
 
         $inv->total_price = $total;
         $inv->save();
-        return  [$inv,$inv->orders];
+        // clear shopping card
+        // self::clear();
+        return [$inv, $inv->orders];
     }
 
 
     public static function clear()
     {
+        if (auth('customer')->check()){
+            $customer = auth('customer')->user();
+            $customer->card = null;
+            $customer->save();
+        }
         \Cookie::expire('card');
         \Cookie::expire('q');
         return true;

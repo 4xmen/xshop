@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Controllers\XController;
 use App\Http\Requests\CustomerSaveRequest;
 use App\Models\Access;
+use App\Models\Credit;
 use App\Models\Customer;
 use Illuminate\Http\Request;
 use App\Helper;
@@ -50,11 +51,18 @@ class CustomerController extends XController
     {
 
         $customer->name = $request->input('name');
-        $customer->address = $request->input('address');
-        $customer->state = $request->input('state');
-        $customer->credit = $request->input('credit')??0 ;
-        $customer->city = $request->input('city');
-        $customer->postal_code = $request->input('postal_code');
+        if ($customer->credit != $request->input('credit')){
+            $diff =  $request->input('credit') - $customer->credit;
+            $customer->credit = $request->input('credit')??0 ;
+            $cr = new Credit();
+            $cr->customer_id = $customer->id;
+            $cr->amount = $diff;
+            $cr->data = json_encode([
+                'user_id' => auth()->user()->id,
+                'message' => __("Increase / decrease by Admin"),
+            ]);
+            $cr->save();
+        }
         if ($request->has('email')) {
             $customer->email = $request->input('email');
         }
