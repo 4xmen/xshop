@@ -39,6 +39,7 @@ class DatabaseSeeder extends Seeder
                 PartSeeder::class,
                 InvoiceSeeder::class,
                 VisitorSeeder::class,
+                TransportSeeder::class,
                 MenuSeeder::class,
             ]
         );

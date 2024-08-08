@@ -7,6 +7,7 @@ use App\Models\Category;
 use App\Models\Area;
 use App\Models\Part;
 use App\Models\Menu;
+use App\Models\Product;
 use Illuminate\Support\Facades\Route;
 
 
@@ -969,7 +970,7 @@ function isGuestMaxAttemptTry($action, $max = 5, $minutes = 60)
 {
     if (\App\Models\GuestLog::where('ip', request()->ip())
             ->where('action', $action)
-            ->where('created_at', '<' ,time() - ($minutes * 60) )->count() >= $max) {
+            ->where('created_at', '<', time() - ($minutes * 60))->count() >= $max) {
         return true;
     } else {
         return false;
@@ -980,15 +981,18 @@ function isGuestMaxAttemptTry($action, $max = 5, $minutes = 60)
  * home url to best experience for multi lang shops
  * @return string
  */
-function homeUrl(){
+function homeUrl()
+{
     return \route('client.welcome');
 }
+
 /**
  * tag url to best experience for multi lang shops
  * @return string
  */
-function tagUrl($slug){
-    return route('client.tag',$slug);
+function tagUrl($slug)
+{
+    return route('client.tag', $slug);
 }
 
 function usableProp($props)
@@ -1010,4 +1014,51 @@ function usableProp($props)
     }
 
     return $result;
+}
+
+
+/**
+ * shopping card items
+ * @return array|\Illuminate\Http\Resources\Json\AnonymousResourceCollection
+ */
+function cardItems()
+{
+    if (cardCount() == 0) {
+        return [];
+    }
+    $products = Product::whereIn('id', json_decode(\Cookie::get('card'), true))
+        ->where('status', 1)
+        ->get();
+
+    return \App\Http\Resources\ProductCardCollection::collection($products);
+}
+
+/**
+ * shopping card items count
+ * @return int
+ */
+function cardCount()
+{
+    if (!\Cookie::has('card')) {
+        return 0;
+    }
+    return count(json_decode(\Cookie::get('card'), true));
+}
+
+/**
+ * transports json
+ * @return \Illuminate\Http\Resources\Json\AnonymousResourceCollection
+ */
+function transports()
+{
+    return \App\Http\Resources\TransportCollection::collection(\App\Models\Transport::all());
+}
+
+function defTrannsport()
+{
+    if (\App\Models\Transport::where('is_default',1)->count() == 0){
+        return null;
+    }
+
+    return \App\Models\Transport::where('is_default',1)->first()->id;
 }

@@ -1,0 +1,15 @@
+.NsCard {
+    padding: 2rem 0;
+
+    .ri-checkbox-circle-line{
+        color: green;
+    }
+    .ri-close-circle-line{
+        color: red;
+    }
+    .ri-checkbox-circle-line, .ri-close-circle-line{
+        font-size: 20px;
+        position: relative;
+        top: -6px;
+    }
+}

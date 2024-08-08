@@ -51,7 +51,7 @@ class AreaSeeder extends Seeder
                         "parallax", "other", "post", "comments", "ads", "attachments"]
                 ),
                 'max' => 6,
-                'preview' => 'client.post',
+                'preview' => null,
                 'icon' => 'ri-file-text-line',
             ],
             [
@@ -71,7 +71,7 @@ class AreaSeeder extends Seeder
                         "parallax", "other", "clip", "comments", "ads", "attachments"]
                 ),
                 'max' => 6,
-                'preview' => 'client.clip',
+                'preview' =>  null,
                 'icon' => 'ri-video-line',
             ],
             [
@@ -91,7 +91,7 @@ class AreaSeeder extends Seeder
                         "parallax", "other", "gallery", "comments", "ads", "attachments"]
                 ),
                 'max' => 6,
-                'preview' => 'client.gallery',
+                'preview' =>  null,
                 'icon' => 'ri-image-line',
             ],
             [
@@ -111,7 +111,7 @@ class AreaSeeder extends Seeder
                         "parallax", "other", "product", "comments", "ads", "attachments"]
                 ),
                 'max' => 6,
-                'preview' => 'client.product',
+                'preview' =>  null,
                 'icon' => 'ri-vip-diamond-line',
             ],
             [
@@ -131,7 +131,7 @@ class AreaSeeder extends Seeder
                         "parallax", "other", "attachment", "comments", "ads"]
                 ),
                 'max' => 6,
-                'preview' => 'client.attachment',
+                'preview' =>  null,
                 'icon' => 'ri-attachment-line',
             ],
             [
@@ -151,7 +151,7 @@ class AreaSeeder extends Seeder
                         "parallax", "other", "category", "ads", "products_page", "attachments"]
                 ),
                 'max' => 6,
-                'preview' => 'client.attachment',
+                'preview' => null,
                 'icon' => 'ri-book-3-line',
             ],
 //            [
@@ -171,7 +171,7 @@ class AreaSeeder extends Seeder
                         "parallax", "other", "group", "ads", 'posts_page', "attachments"]
                 ),
                 'max' => 6,
-                'preview' => 'client.group',
+                'preview' =>  null,
                 'icon' => 'ri-book-shelf-line',
             ],
 //            [

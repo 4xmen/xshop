@@ -89,6 +89,8 @@ class ClientController extends Controller
         return view('client.default-list', compact('area', 'products', 'title', 'subtitle'));
     }
 
+
+
     public function galleries()
     {
         $area = 'galleries-list';
@@ -310,59 +312,7 @@ class ClientController extends Controller
     }
 
 
-    public function productCardToggle(Product $product)
-    {
 
-        $quantity = \request()->input('quantity', null);
-        if (\Cookie::has('card')) {
-            $cards = json_decode(\Cookie::get('card'), true);
-            $qs = json_decode(\Cookie::get('q'), true);
-            if (in_array($product->id, $cards)) {
-                $found = false;
-                foreach ($cards as $i => $card) {
-                    if ($card == $product->id && $qs[$i] == $quantity) {
-                        $found = true;
-                        break;
-                    }
-                }
-                if ($found) {
-                    $msg = "Product removed from card";
-                    unset($cards[$i]);
-                    unset($qs[$i]);
-                }else{
-                    $cards[] = $product->id;
-                    $qs[] = $quantity;
-                    $msg = "Product added to card";
-                }
-            } else {
-                $cards[] = $product->id;
-                $qs[] = $quantity;
-                $msg = "Product added to card";
-            }
-            $count = count($cards);
-            \Cookie::queue('card', json_encode($cards), 2000);
-            \Cookie::queue('q', json_encode($qs), 2000);
-        } else {
-            $count = 1;
-            $msg = "Product added to card";
-            \Cookie::queue('card', "[$product->id]", 2000);
-            \Cookie::queue('q', "[$quantity]", 2000);
-            $qs = [$quantity];
-            $cards = [$product->id];
-        }
-
-        if ($count > 0 && auth('customer')->check()) {
-            $customer = auth('customer')->user();
-            $customer->card = json_encode(['cards' => $cards, 'quantities' => $qs]);
-            $customer->save();
-        }
-
-        if (\request()->ajax()) {
-            return success(['count' => $count], $msg);
-        } else {
-            return redirect()->back()->with(['message' => $msg]);
-        }
-    }
 
     public function productCompareToggle(Product $product)
     {
@@ -545,5 +495,7 @@ class ClientController extends Controller
         ];
 
     }
+
+
 
 }
