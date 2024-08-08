@@ -78,7 +78,8 @@
                                 <input type="number" :id="prop.name" v-model="q.data[prop.name]" class="form-control">
                             </template>
                             <template v-if="prop.type == 'checkbox'">
-                                <div class="form-check form-switch">
+                                <br>
+                                <div class="form-check form-switch mt-2">
                                     <input class="form-check-input" v-model="q.data[prop.name]" type="checkbox"
                                            role="switch"
                                            :id="prop.name">

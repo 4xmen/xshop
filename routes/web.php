@@ -371,6 +371,11 @@ Route::middleware([\App\Http\Middleware\VisitorCounter::class])
     Route::get('/compare', [\App\Http\Controllers\ClientController::class,'compare'])->name('compare');
     Route::get('/galleries', [\App\Http\Controllers\ClientController::class,'galleries'])->name('galleries');
     Route::get('/videos', [\App\Http\Controllers\ClientController::class,'clips'])->name('clips');
+    Route::post('/card/check', [\App\Http\Controllers\CardController::class,'check'])->name('card.check');
+    Route::get('/card/discount/{code}', [\App\Http\Controllers\CardController::class,'discount'])->name('card.discount');
+    Route::get('/card', [\App\Http\Controllers\CardController::class,'index'])->name('card');
+    Route::get('/cardClear',[\App\Http\Controllers\CardController::class,'clearing'])->name('card.clear');
+    Route::get('/profile', [\App\Http\Controllers\ClientController::class,'profile'])->name('profile');
     Route::get('/products', [\App\Http\Controllers\ClientController::class,'products'])->name('products');
     Route::get('/attachments', [\App\Http\Controllers\ClientController::class,'attachments'])->name('attachments');
     Route::get('/attachment/{attachment}', [\App\Http\Controllers\ClientController::class,'attachment'])->name('attachment');
@@ -385,7 +390,7 @@ Route::middleware([\App\Http\Middleware\VisitorCounter::class])
 
     Route::get('product/fav/toggle/{product}', [\App\Http\Controllers\ClientController::class, 'ProductFavToggle'])->name('product-fav-toggle');
     Route::get('product/compare/toggle/{product}', [\App\Http\Controllers\ClientController::class, 'productCompareToggle'])->name('product-compare-toggle');
-    Route::get('card/toggle/{product}', [\App\Http\Controllers\ClientController::class, 'productCardToggle'])->name('product-card-toggle');
+    Route::get('card/toggle/{product}', [\App\Http\Controllers\CardController::class, 'productCardToggle'])->name('product-card-toggle');
 
     Route::post('/comment/submit', [\App\Http\Controllers\ClientController::class,'submitComment'])->name('comment.submit');
 });
@@ -403,11 +408,11 @@ Route::get('login/as/{mobile}',function ($mobile){
 Route::get('test',function (){
 //    return \Resources\Views\Segments\PreloaderCircle::onAdd();
 //   return $product->getAllMeta();
-    $cards = json_decode(\Cookie::get('card'), true);
-    $qs = json_decode(\Cookie::get('q'), true);
-
-    return [$cards,$qs];
+//    return \App\Models\Quantity::whereId(1)->first()->meta;
+    return [json_decode(\Cookie::get('card')),json_decode(\Cookie::get('q'))];
 })->name('test');
+
+
 
 
 Route::get('whoami',function (){

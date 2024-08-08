@@ -1,4 +1,5 @@
 window.addEventListener('load', function () {
+
     const favUrl = document.querySelector('#api-fav-toggle').value;
     const compUrl = document.querySelector('#api-compare-toggle').value;
     document.querySelectorAll('.fav-btn')?.forEach(function (el) {

@@ -5,4 +5,5 @@ window.addEventListener('load',function () {
           el.setAttribute('action',url);
       })
   },1220);
+
 })
