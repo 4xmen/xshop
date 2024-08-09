@@ -6,6 +6,7 @@ use App\Models\Category;
 use App\Models\Group;
 use App\Models\Post;
 use App\Models\Product;
+use App\Models\Slider;
 use Illuminate\Console\Command;
 use Spatie\Image\Enums\AlignPosition;
 use Spatie\Image\Enums\Fit;
@@ -47,6 +48,7 @@ class SeedingImage extends Command
                         $tempName = explode('.', $name);
                         $item->name = readable($tempName[0]) . ' model ' . $item->id;
                     }
+                    $item->status = 1;
                     $item->addMedia($images[0]->getRealPath())
                         ->preservingOriginal() //middle method
                         ->toMediaCollection(); //finishing method
@@ -99,15 +101,32 @@ class SeedingImage extends Command
                     $item->save();
                 }
                 break;
+            case 'Slider':
+                foreach (Slider::all() as $item) {
+                    $this->info('Slider: ' . $item->name . ' adding image...');
+                    shuffle($images);
+                    if (!\File::exists(storage_path().'/app/public/sliders/')){
+                        mkdir(storage_path().'/app/public/sliders/', 0755, true);
+                    }
+                    \File::copy($images[0]->getRealPath(),storage_path().'/app/public/sliders/' . $images[0]->getFilename());
+                    $item->image = $images[0]->getFilename();
+                    $i = Image::load($images[0]->getRealPath())
+                        ->optimize()
+                        ->format('webp');
+                    $i->save(storage_path() . '/app/public/sliders/optimized-'. $item->image);
+                    $item->status = 1;
+                    $item->save();
+                }
+                break;
             case 'Post':
                 foreach (Post::all() as $item) {
                     $this->info('post: ' . $item->id . ' adding image...');
                     shuffle($images);
-                    $name = $images[0]->getFilename();
                     $item->addMedia($images[0]->getRealPath())
                         ->preservingOriginal() //middle method
                         ->toMediaCollection(); //finishing method
                     $item->save();
+                    $item->status = 1;
                 }
                 break;
             default:

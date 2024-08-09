@@ -26,13 +26,13 @@ class GfxSeeder extends Seeder
                 'key'=>'primary',
                 'label'=>'Primary color',
                 'system'=>'1',
-                'value'=> '#6e0000'
+                'value'=> '#03b2b5'
             ],
             [
                 'key'=>'secondary',
                 'label'=>'Secondary color',
                 'system'=>'1',
-                'value'=> '#ff0000'
+                'value'=> '#0064c2'
             ],
             [
                 'key'=>'text',
