@@ -49,7 +49,7 @@
                 <div class="item-list mb-3 py-3">
                     <div class="grid-equal text-center p-1">
                         <span>
-                             {{__("Totol")}}
+                             {{__("Total")}}
                         </span>
                         <span>
                             ({{$items->total()}})
