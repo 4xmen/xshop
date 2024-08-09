@@ -72,7 +72,7 @@ class clientAssetGenerator extends Command
 
         }
         // add parts scss & js
-        foreach (Part::all() as $part) {
+        foreach (Part::distinct()->get() as $part) {
             $variables .= '@import "../views/segments/' . $part->segment . '/'
                 . $part->part . '/' . $part->part . '";' . PHP_EOL;
             $js .= 'import "../views/segments/' . $part->segment . '/'
