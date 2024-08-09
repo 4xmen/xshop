@@ -48,7 +48,7 @@ php artisan serv
 ```bash
 php artisan seeding:prepare
  ```
-- Seeding image for models: [Group, Category, Post, Products] 
+- Seeding image for models: [Group, Category, Post, Product, Slider] 
 ```bash
 pa seeding:image Product digital
 ```

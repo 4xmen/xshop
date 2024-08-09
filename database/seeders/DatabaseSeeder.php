@@ -41,6 +41,7 @@ class DatabaseSeeder extends Seeder
                 VisitorSeeder::class,
                 TransportSeeder::class,
                 MenuSeeder::class,
+                SliderSeeder::class,
             ]
         );
     }

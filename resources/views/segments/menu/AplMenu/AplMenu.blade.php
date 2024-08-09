@@ -89,6 +89,11 @@
         <li class="icon-menu">
             <a href="#">
                 <i class="ri-shopping-bag-2-line"></i>
+                <span class="badge bg-danger card-count">
+                    @if(cardCount() > 0)
+                        {{cardCount()}}
+                    @endif
+                </span>
             </a>
         </li>
         <li id="toggler-menu" class="icon-menu">

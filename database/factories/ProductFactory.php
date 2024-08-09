@@ -26,6 +26,9 @@ class ProductFactory extends Factory
             'user_id' => 1,
             'category_id' => $rand,
             'description' => $this->faker->realText(600),
+            'stock_quantity' => rand(1,7),
+            'price' => rand(1,100),
+            'sku' => $this->faker->unique()->ean8(),
         ];
     }
 }
