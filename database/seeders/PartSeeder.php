@@ -39,31 +39,38 @@ class PartSeeder extends Seeder
         $part->save();
 
         $part = new Part();
+        $part->segment = 'products';
+        $part->part = 'LatestProducts';
+        $part->area_id = Area::where('name', 'index')->first()->id;
+        $part->sort = 2;
+        $part->save();
+
+        $part = new Part();
         $part->segment = 'posts';
         $part->part = 'PostsIconSimple';
         $part->area_id = Area::where('name', 'index')->first()->id;
-        $part->sort = 2;
+        $part->sort = 3;
         $part->save();
 
         $part = new Part();
         $part->segment = 'index';
         $part->part = 'CounterGrid';
         $part->area_id = Area::where('name', 'index')->first()->id;
-        $part->sort = 3;
+        $part->sort = 4;
         $part->save();
 
         $part = new Part();
         $part->segment = 'categories';
         $part->part = 'CategoriesFavImageLinks';
         $part->area_id = Area::where('name', 'index')->first()->id;
-        $part->sort = 4;
+        $part->sort = 5;
         $part->save();
 
         $part = new Part();
         $part->segment = 'posts';
         $part->part = 'PostIndexImage';
         $part->area_id = Area::where('name', 'index')->first()->id;
-        $part->sort = 5;
+        $part->sort = 6;
         $part->save();
 
 
@@ -71,7 +78,7 @@ class PartSeeder extends Seeder
         $part->segment = 'footer';
         $part->part = 'WaveFooter';
         $part->area_id = Area::where('name', 'index')->first()->id;
-        $part->sort = 6;
+        $part->sort = 7;
         $part->save();
 
 
