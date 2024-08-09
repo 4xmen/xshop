@@ -23,13 +23,13 @@
         <div id="address-modal" v-if="modal" @click.self="modal = false">
             <div class="card">
                 <div class="card-header">
-                    Address editor <!--  WIP Translate -->
+                    {{ translate['addr-editor'] }}
                 </div>
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md-6">
                             <label for="st">
-                                State:   <!--  WIP Translate -->
+                                {{ translate['state'] }} :
                             </label>
                             <select @change="updateState" class="form-control" v-model="state_id" id="st">
                                 <option :data-lat="s.lat" :data-lng="s.lng" :value="s.id" v-for="s in states">
@@ -39,7 +39,7 @@
                         </div>
                         <div class="col-md-6">
                             <label for="st">
-                                City:   <!--  WIP Translate -->
+                                {{ translate['city'] }}:
                             </label>
                             <select @change="updateCity" class="form-control" v-model="city_id" id="st">
                                 <option :value="c.id" v-for="c in cities"> {{ c.name }}</option>
@@ -49,12 +49,12 @@
                             <div ref="mapContainer" :style="'height: 300px;'+mapStyle"></div>
                         </div>
                         <div class="col-12">
-                            <textarea rows="2" class="form-control" placeholder="Address" v-model="address"></textarea>
-                            <!--  WIP Translate -->
+                            <textarea rows="2" class="form-control" :placeholder="translate['address']"
+                                      v-model="address"></textarea>
                         </div>
                         <div class="col-12">
                             <label for="zip">
-                                Postcode:   <!--  WIP Translate -->
+                                {{ translate['post-code'] }}:
                             </label>
                             <input type="text" class="form-control" v-model="zip">
                         </div>
@@ -128,6 +128,9 @@ export default {
         darkMode: {
             type: Boolean,
             default: false,
+        },
+        translate: {
+            default: {},
         }
     },
     async mounted() {
@@ -238,7 +241,7 @@ export default {
                     $toast.success(r.data.message);
                     this.updateList();
                 }
-            } catch(e) {
+            } catch (e) {
                 $toast.error('err!' + e.message);
             }
         },
@@ -257,7 +260,7 @@ export default {
                 this.zoom = 16;
                 setTimeout(() => {
                     this.changeMapCenter(this.lat, this.lng);
-                    this.marker = L.marker({lat:this.lat, lng: this.lng}).addTo(this.map);
+                    this.marker = L.marker({lat: this.lat, lng: this.lng}).addTo(this.map);
                 }, 100);
             }
 

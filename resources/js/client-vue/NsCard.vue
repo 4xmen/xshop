@@ -5,26 +5,27 @@
                 <div class="circle" @click="changeIndex(0)">
                     <i class="ri-vip-diamond-line"></i>
                 </div>
-                Shopping card
+                {{ translate['shopping-card'] }}
             </li>
             <li :class="index > 0 ?'active':''">
                 <div class="circle" @click="changeIndex(1)">
                     <i class="ri-truck-line"></i>
                 </div>
-                Transport
+
+                {{ translate['transport'] }}
             </li>
             <li :class="index > 1 ?'active':''">
                 <div class="circle" @click="changeIndex(2)">
                     <i class="ri-bank-card-2-line"></i>
                 </div>
-                Payment & discount
+                {{ translate['discount-pay'] }}
             </li>
         </ul>
         <div class="row">
             <div class="col-lg-3">
                 <aside>
                     <h6 class="text-center">
-                        Totol price:
+                        {{ translate['total-price'] }}:
                     </h6>
                     <h2 class="text-center" v-if="index == 0">
                         {{ priceing(total) }}
@@ -51,19 +52,19 @@
                                 #
                             </th>
                             <th>
-                                Image
+                                {{ translate['image'] }}
                             </th>
                             <th>
-                                Name
+                                {{ translate['name'] }}
                             </th>
                             <th class="text-center" style="width: 400px">
-                                Quantity
+                                {{ translate['quantity'] }}
                             </th>
                             <th>
-                                Price
+                                {{ translate['price'] }}
                             </th>
                             <th>
-                                Count
+                                {{ translate['count'] }}
                             </th>
                             <th>
                                 -
@@ -119,7 +120,7 @@
                         <tfoot>
                         <tr>
                             <th colspan="4">
-                                Total
+                                {{ translate['total-price'] }}
                             </th>
                             <th colspan="4">
                                 {{ priceing(total) }}
@@ -132,7 +133,7 @@
                 <div :class="'tab' + (index == 1?'':' hide')">
                     <div>
                         <h5>
-                            Sent to:
+                            {{ translate['sent-to'] }}:
                         </h5>
                         <div v-for="(adr,j) in addresses" class="addr">
                             <div class="form-check">
@@ -145,7 +146,7 @@
                         </div>
                         <div v-if="transports.length > 0">
                             <h5 class="mt-3">
-                                Transport:
+                                {{ translate['transport'] }}::
                             </h5>
                             <div v-for="(trs,j) in transports" class="addr">
                                 <span class="float-end p-2 badge bg-primary m-2">
@@ -172,13 +173,14 @@
 
                     <!-- WIP translate & discount check  -->
                     <h5 class="mt-1">
-                        Check discount
+                        {{ translate['check-dis'] }}:
                     </h5>
                     <div class="input-group mb-3">
                         <span class="input-group-text"><i class="ri-percent-line"></i></span>
-                        <input type="text" class="form-control text-center" placeholder="Discount code" :readonly="discount != null" v-model="code">
+                        <input type="text" class="form-control text-center" placeholder="Discount code"
+                               :readonly="discount != null" v-model="code">
                         <button type="button" class="input-group-text btn btn-primary" @click="discountCheck">
-                            Check
+                            {{ translate['check'] }}
                         </button>
                     </div>
                     <div v-if="discount_id != null">
@@ -189,16 +191,16 @@
                     </div>
 
                     <h4>
-                        Extra description
+                        {{ translate['extra-desc'] }}
                     </h4>
-                    <textarea rows="4" class="form-control" name="desc" placeholder="Your message for this order..."></textarea>
+                    <textarea rows="4" class="form-control" name="desc" :placeholder="translate['your-msg']"></textarea>
                     <hr>
                     <button v-if="canPay" class="btn btn-outline-primary w-100 btn-lg">
                         <i class="ri-bank-card-2-line"></i>
-                        Pay now
+                        {{ translate['pay-now'] }}
                     </button>
                     <div v-else class="alert alert-danger">
-                        Please, Login or complete information to pay
+                        {{ translate['plz'] }}
                     </div>
                 </div>
             </div>
@@ -279,6 +281,9 @@ export default {
         },
         defTransport: {
             default: null,
+        },
+        translate: {
+            default: {},
         }
     },
     mounted() {
@@ -353,10 +358,10 @@ export default {
             }
 
 
-            if (this.discount != null){
-                if (this.discount.type == 'PERCENT'){
-                    sum = (( 100 - this.discount.amount ) * sum ) / 100;
-                }else{
+            if (this.discount != null) {
+                if (this.discount.type == 'PERCENT') {
+                    sum = ((100 - this.discount.amount) * sum) / 100;
+                } else {
                     sum -= this.discount.amount;
                 }
             }

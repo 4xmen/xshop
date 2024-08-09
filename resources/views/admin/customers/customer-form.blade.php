@@ -37,6 +37,13 @@
                         state-link="{{route('v1.state.index')}}"
                         cities-link="{{route('v1.state.show','')}}"
                         :dark-mode="true"
+                        :translate='{{vueTranslate([
+            'addr-editor' => __('Address editor'),
+            'state' => __('State'),
+            'city' => __('City'),
+            'address' => __('Address'),
+            'post-code' => __('Post code'),
+            ])}}'
                     ></address-input>
                 </div>
             @endif
