@@ -36,12 +36,12 @@ class DatabaseSeeder extends Seeder
                 SettingSeeder::class,
                 GfxSeeder::class,
                 AreaSeeder::class,
-                PartSeeder::class,
                 InvoiceSeeder::class,
                 VisitorSeeder::class,
                 TransportSeeder::class,
                 MenuSeeder::class,
                 SliderSeeder::class,
+                PartSeeder::class,
             ]
         );
     }
