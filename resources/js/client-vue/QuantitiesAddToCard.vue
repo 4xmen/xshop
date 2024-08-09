@@ -41,8 +41,7 @@
         <a
             class="btn btn-outline-primary btn-lg" @click="add2card">
             <i class="ri-shopping-bag-3-line"></i>
-            Add to card
-            <!--  WIP translate-->
+            {{ translate['add-to-card'] }}
         </a>
     </div>
 </template>
@@ -91,6 +90,9 @@ export default {
         discount: {
             default: null,
         },
+        translate: {
+            default: {},
+        }
     },
     mounted() {
 
@@ -100,8 +102,8 @@ export default {
         select(i) {
             document.querySelector('#price').innerText = commafy(this.qz[i].price.toString()) + ' ' + this.currency;
             let index = this.qz[i].image;
-            document.querySelector('#preview a').setAttribute('href',document.querySelector(`#hidden-images a:nth-child(${index+1})`).getAttribute('href'));
-            document.querySelector('#preview img').setAttribute('src',document.querySelector(`#hidden-images a:nth-child(${index+1}) img`).getAttribute('src'));
+            document.querySelector('#preview a').setAttribute('href', document.querySelector(`#hidden-images a:nth-child(${index + 1})`).getAttribute('href'));
+            document.querySelector('#preview img').setAttribute('src', document.querySelector(`#hidden-images a:nth-child(${index + 1}) img`).getAttribute('src'));
             this.selected = i;
         },
         async add2card() {

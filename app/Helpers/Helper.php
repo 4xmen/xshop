@@ -1062,3 +1062,8 @@ function defTrannsport()
 
     return \App\Models\Transport::where('is_default',1)->first()->id;
 }
+
+
+function vueTranslate($array){
+    return json_encode($array);
+}

@@ -23,6 +23,24 @@
             :transports='@json(transports())'
             :def-transport="{{defTrannsport()}}"
             :can-pay="{{!auth('customer')->check() || auth('customer')->user()->mobile == null ||  auth('customer')->user()->mobile == '' || auth('customer')->user()->addresses()->count() == 0?'false':'true'}}"
+            :translate='{{vueTranslate([
+            'shopping-card' => __('Shopping card'),
+            'transport' => __('Transport'),
+            'discount-pay' => __('Payment & discount'),
+            'total-price' => __('Total price'),
+            'image' => __('Image'),
+            'name' => __('Name'),
+            'quantity' => __('Quantity'),
+            'price' => __('Price'),
+            'count' => __('Count'),
+            'sent-to' => __('Sent to'),
+            'check-dis' => __('Check discount'),
+            'check' => __('Check'),
+            'extra-desc' => __('Extra description'),
+            'your-msg' => __('Your message for this order...'),
+            'pay-now' => __('Pay now'),
+            'plz' => __('Please, Login or complete information to pay'),
+            ])}}'
             >
                 <br>
                 @if(!auth('customer')->check())
