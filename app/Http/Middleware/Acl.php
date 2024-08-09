@@ -28,7 +28,7 @@ class Acl
                 if (!in_array($requestPath[1], $this->excepts) &&
                     isset($requestPath[2]) &&
                     !auth()->user()->hasAccess($route->action['as'])) {
-                    return abort(403, __("You dont't have acccess this action"));
+                    return abort(403, __("You don't have access this action"));
                 }
                 // check delete or destroy with bulk action
                 if (isset($requestPath[2]) && $requestPath[2] == 'bulk' && $request->input('bulk') == 'delete') {
@@ -36,7 +36,7 @@ class Acl
                     if (!auth()->user()->hasAccess(implode('.', $requestPath))) {
                         $requestPath[2] = 'destroy';
                         if (!auth()->user()->hasAccess(implode('.', $requestPath))) {
-                            return abort(403, __("You dont't have acccess this action"));
+                            return abort(403, __("You don't have access this action"));
                         }
                     }
                 }
