@@ -544,4 +544,8 @@ class ClientController extends Controller
     }
 
 
+    public function sitemap(){
+        header('content-type: text/xml');
+        return view('website.sitemap');
+    }
 }
