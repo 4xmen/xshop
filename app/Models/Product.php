@@ -315,6 +315,21 @@ class Product extends Model implements HasMedia
 
         return number_format($price) . ' ' . config('app.currency.symbol');
     }
+    public function oldPricePure()
+    {
+        $price = 0;
+        if ($this->quantities()->count() == 0) {
+            $price = $this->price;
+        } else {
+            $price = $this->quantities()->min('price');
+        }
+
+        if ($price == 0 || $price == '' || $price == null) {
+            return __("Call us!");
+        }
+
+        return $price;
+    }
     public function oldPrice()
     {
         $price = 0;
@@ -409,5 +424,14 @@ RESULT;
 
         return $template;
 
+    }
+
+
+    public function tagsList(){
+        if ($this->tags()->count() == 0){
+            return getSetting('keyword');
+        }else{
+            return  implode(',',$this->tags()->pluck('name')->toArray());
+        }
     }
 }
