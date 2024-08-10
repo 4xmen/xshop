@@ -398,6 +398,9 @@ Route::middleware([\App\Http\Middleware\VisitorCounter::class])
     Route::post('/comment/submit', [\App\Http\Controllers\ClientController::class,'submitComment'])->name('comment.submit');
 });
 
+
+Route::get('/sitemap.xml',[\App\Http\Controllers\ClientController::class,'sitemap'])->name('sitemap');
+
 // to developer test
 Route::get('login/as/{mobile}',function ($mobile){
     if (auth()->check() && auth()->user()->hasRole('developer') ){
