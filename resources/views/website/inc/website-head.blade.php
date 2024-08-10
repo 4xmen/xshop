@@ -17,7 +17,9 @@
     @yield('custom-head')
 
 {{--    WIP rtl or ltr--}}
-
+    @if(isset($breadcrumb))
+{!! markUpBreadcrumbList($breadcrumb) !!}
+    @endif
 </head>
 <body @yield('body-attr')>
 
