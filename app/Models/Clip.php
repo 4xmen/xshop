@@ -69,4 +69,41 @@ class Clip extends Model
         return $this->morphMany(Comment::class, 'commentable')->where('status', 1);
     }
 
+    public function markup(){
+
+        $app = config('app.name');
+        $logo = asset('upload/images/logo.png');
+        $desc = str_replace('"','',strip_tags($this->body));
+        $count = $this->comments()->count() ;
+        return <<<RESULT
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "VideoObject",
+  "name": "{$this->title}",
+  "description": "{$desc}",
+  "thumbnailUrl": "{$this->imgUrl()}",
+  "uploadDate": "{$this->updated_at}",
+  "contentUrl": "{$this->fileUrl()}",
+  "embedUrl": "{$this->webUrl()}",
+  "interactionStatistic": {
+    "@type": "InteractionCounter",
+    "interactionType": "http://schema.org/PlayAction",
+    "userInteractionCount": {$count}
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "$app",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "$logo"
+    }
+  }
+}
+</script>
+RESULT;
+
+    }
+
 }
