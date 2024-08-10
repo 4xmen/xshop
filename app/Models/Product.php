@@ -377,6 +377,11 @@ class Product extends Model implements HasMedia
     "priceCurrency": "$currency",
     "price": "{{$this->price}}"
   },
+   "interactionStatistic": {
+    "@type": "InteractionCounter",
+    "interactionType": "http://schema.org/PlayAction",
+    "userInteractionCount": {$this->view}
+  },
   "aggregateRating": {
     "@type": "AggregateRating",
     "ratingValue": "{$this->average_rating}",
@@ -387,6 +392,22 @@ class Product extends Model implements HasMedia
 }
 </script>
 RESULT;
+
+    }
+
+    public function seoDesc()
+    {
+        $template = getSetting('product_description');
+        if ($template == null || $template == ''){
+            $template = __('%name% sale in our shop by %price% %category.name%');
+        }
+        $template = str_replace('%name%', $this->name,$template);
+        $template = str_replace('%price%', $this->getPrice() ,$template);
+        $template = str_replace('%excerpt%', $this->excerpt,$template);
+        $template = str_replace('%stock_quantity%', $this->stock_quantity,$template);
+        $template = str_replace('%category.name%', $this->category->name,$template);
+
+        return $template;
 
     }
 }

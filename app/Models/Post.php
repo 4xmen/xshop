@@ -171,6 +171,11 @@ class Post extends Model implements HasMedia
       "url": "$logo"
     }
   },
+   "interactionStatistic": {
+    "@type": "InteractionCounter",
+    "interactionType": "http://schema.org/PlayAction",
+    "userInteractionCount": {$this->view}
+  },
   "datePublished": "{$this->created_at}",
   "dateModified": "{$this->updated_at}"
 }

@@ -118,6 +118,11 @@ class SettingSeeder extends Seeder
                     'key' => 'site_image',
                     'type' => 'FILE',
                 ],
+                [
+                    'title' => __("%name% sale in our shop by %price% %category.name%"),
+                    'key' => 'product_description',
+                    'type' => 'text',
+                ],
             ],
             'Media' => [
                 [

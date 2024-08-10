@@ -17,14 +17,48 @@
     @yield('custom-head')
 
 {{--    WIP rtl or ltr--}}
+
+{{--    seo  --}}
+    <meta property="og:site_name" content="{{config('app.name')}}" />
+    <meta property="og:locale" content="{{config('app.locale')}}">
     @if(isset($breadcrumb))
 {!! markUpBreadcrumbList($breadcrumb) !!}
     @endif
     @if(isset($post))
 {!! $post->markup() !!}
+        <meta property="og:title" content="{{$post->title}}" />
+        <meta property="og:description" content="{{$post->subtitle}}" />
+        <meta property="og:image" content="{{$post->imgUrl()}}" />
+        <meta property="og:url" content="{{$post->webUrl()}}" />
+        <meta property="og:type" content="article" />
     @endif
     @if(isset($product))
 {!! $product->markup() !!}
+        <meta property="og:title" content="{{$product->name}}"/>
+        <meta property="og:description" content="{{$product->seoDesc()}}"/>
+        <meta property="og:image" content="{{$product->imgUrl()}}"/>
+        <meta property="og:url" content="{{$product->webUrl()}}"/>
+    @endif
+    @if(isset($clip))
+{!! $clip->markup() !!}
+        <meta property="og:title" content="{{$clip->title}}" />
+        <meta property="og:description" content="{{Str::limit(strip_tags($clip->body),12)}}" />
+        <meta property="og:type" content="video.other" />
+        <meta property="og:url" content="{{$clip->webUrl()}}" />
+        <meta property="og:image" content="{{$clip->imgUrl()}}" />
+        <meta property="og:video" content="{{$clip->fileUrl()}}" />
+        <meta property="og:video:type" content="video/mp4" />
+{{--        <meta property="og:video:width" content="1280" />--}}
+{{--        <meta property="og:video:height" content="720" />--}}
+
+    @endif
+    @if(isset($gallery))
+        <meta property="og:title" content="{{$gallery->title}}">
+        <meta property="og:description" content="{{Str::limit(strip_tags($gallery->body),12)}}" />
+        <meta property="og:image" content="{{$gallery->imgUrl()}}">
+        <meta property="og:image:alt" content="{{$gallery->slug}}">
+        <meta property="og:url" content="{{$gallery->webUrl()}}">
+        <meta property="og:type" content="website">
     @endif
 </head>
 <body @yield('body-attr')>
