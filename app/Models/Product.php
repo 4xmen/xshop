@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Http\Resources\CommentMarkupCollection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -350,5 +351,42 @@ class Product extends Model implements HasMedia
             return  false;
         }
         return  true;
+    }
+
+    public function markup(){
+
+
+        $currency = config('app.currency.code');
+        $reviews = CommentMarkupCollection::collection($this->approvedComments)->toJson();
+        return <<<RESULT
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org/",
+  "@type": "Product",
+  "name": "name",
+  "image": "{$this->name}",
+  "description": "{$this->excerpt}",
+  "brand": {
+    "@type": "Brand",
+    "name": "{$this->category->name}"
+  },
+  "sku": "{$this->sku}",
+  "offers": {
+    "@type": "Offer",
+    "url": "{$this->webUrl()}",
+    "priceCurrency": "$currency",
+    "price": "{{$this->price}}"
+  },
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "{$this->average_rating}",
+    "ratingCount": "{$this->rating_count}",
+    "reviewCount": "{$this->approvedComments()->count()}"
+  },
+  "review": $reviews
+}
+</script>
+RESULT;
+
     }
 }

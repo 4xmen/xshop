@@ -133,4 +133,49 @@ class Post extends Model implements HasMedia
     public function webUrl(){
         return route('client.post',$this->slug);
     }
+
+
+    public function markup(){
+        $type = 'BlogPosting';
+        if (strpos(strtolower(implode(',',$this->groups()->pluck('name')->toArray())),__('article')) !== false){
+            $type = 'Article';
+        }
+        if (strpos(strtolower(implode(',',$this->groups()->pluck('name')->toArray())),__('news')) !== false){
+            $type = 'NewsArticle';
+        }
+
+        $app = config('app.name');
+        $logo = asset('upload/images/logo.png');
+        $author = $this->author->name??$app;
+        return <<<RESULT
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "$type",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "{$this->webUrl()}"
+  },
+  "headline": "{$this->title}",
+  "description": "{$this->subtitle}",
+  "image": "{$this->imgUrl()}",
+  "author": {
+    "@type": "Person",
+    "name": "$author"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "$app",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "$logo"
+    }
+  },
+  "datePublished": "{$this->created_at}",
+  "dateModified": "{$this->updated_at}"
+}
+</script>
+RESULT;
+
+    }
 }
