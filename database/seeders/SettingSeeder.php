@@ -119,9 +119,16 @@ class SettingSeeder extends Seeder
                     'type' => 'FILE',
                 ],
                 [
-                    'title' => __("%name% sale in our shop by %price% %category.name%"),
+                    'title' => __("Product description template"),
+                    'value' => __("%name% sale in our shop by %price% %category.name%"),
                     'key' => 'product_description',
                     'type' => 'text',
+                ],
+                [
+                    'title' => __("Guarantee"),
+                    'key' => 'guarantee',
+                    'type' => 'text',
+                    'value' => '',
                 ],
             ],
             'Media' => [

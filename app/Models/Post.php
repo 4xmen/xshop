@@ -183,4 +183,12 @@ class Post extends Model implements HasMedia
 RESULT;
 
     }
+
+    public function tagsList(){
+        if ($this->tags()->count() == 0){
+            return getSetting('keyword');
+        }else{
+            return  implode(',',$this->tags()->pluck('name')->toArray());
+        }
+    }
 }
