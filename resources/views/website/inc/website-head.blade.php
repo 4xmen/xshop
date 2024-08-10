@@ -20,6 +20,12 @@
     @if(isset($breadcrumb))
 {!! markUpBreadcrumbList($breadcrumb) !!}
     @endif
+    @if(isset($post))
+{!! $post->markup() !!}
+    @endif
+    @if(isset($product))
+{!! $product->markup() !!}
+    @endif
 </head>
 <body @yield('body-attr')>
 
