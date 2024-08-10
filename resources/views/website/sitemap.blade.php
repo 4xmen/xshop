@@ -1,5 +1,4 @@
-<? xml version = "1.0" encoding = "utf-8" ?>
-<? xml - stylesheet type = "text/xsl" href = "http://4xmen.ir/wp-content/plugins/google-sitemap-plugin/sitemap.xsl" ?>
+<?xml version="1.0" encoding="utf-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
     @if(\App\Models\Product::count() > 0)
