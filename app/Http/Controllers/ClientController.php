@@ -42,7 +42,12 @@ class ClientController extends Controller
         $title = $post->title;
         $subtitle = $post->subtitle;
         $post->increment('view');
-        return view('client.post', compact('area', 'post', 'title', 'subtitle'));
+        $breadcrumb = [
+            __('Posts') => postsUrl(),
+            $post->mainGroup->name => $post->mainGroup->webUrl(),
+            $post->title => null,
+        ];
+        return view('client.post', compact('area', 'post', 'title', 'subtitle', 'breadcrumb'));
     }
 
     public function clip(Clip $clip)
@@ -54,7 +59,11 @@ class ClientController extends Controller
         $area = 'clip';
         $title = $clip->title;
         $subtitle = '';
-        return view('client.default-list', compact('area', 'clip', 'title', 'subtitle'));
+        $breadcrumb = [
+            __('Video clips') => clipsUrl(),
+            $clip->title => null,
+        ];
+        return view('client.default-list', compact('area', 'clip', 'title', 'subtitle', 'breadcrumb'));
     }
 
     public function gallery(Gallery $gallery)
@@ -66,7 +75,11 @@ class ClientController extends Controller
         $title = $gallery->title;
         $subtitle = \Str::limit(strip_tags($gallery->description), 15);
         $gallery->increment('view');
-        return view('client.gallery', compact('area', 'gallery', 'title', 'subtitle'));
+        $breadcrumb = [
+            __('Galleries') => gallariesUrl(),
+            $gallery->title => null,
+        ];
+        return view('client.gallery', compact('area', 'gallery', 'title', 'subtitle', 'breadcrumb'));
     }
 
     public function posts()
@@ -90,7 +103,6 @@ class ClientController extends Controller
     }
 
 
-
     public function galleries()
     {
         $area = 'galleries-list';
@@ -100,6 +112,7 @@ class ClientController extends Controller
             ->orderByDesc('id')->paginate($this->paginate);
         return view('client.default-list', compact('area', 'galleries', 'title', 'subtitle'));
     }
+
     public function clips()
     {
         $area = 'clips-list';
@@ -119,12 +132,17 @@ class ClientController extends Controller
             ->orderByDesc('id')->paginate($this->paginate);
         return view('client.default-list', compact('area', 'attachs', 'title', 'subtitle'));
     }
+
     public function attachment(Attachment $attachment)
     {
         $area = 'attachment';
         $title = $attachment->title;
         $subtitle = $attachment->subtitle;
-        return view('client.default-list', compact('area', 'attachment', 'title', 'subtitle'));
+        $breadcrumb = [
+            __('Attachments') => attachmentsUrl(),
+            $attachment->title => null,
+        ];
+        return view('client.default-list', compact('area', 'attachment', 'title', 'subtitle', 'breadcrumb'));
     }
 
     public function tag($slug)
@@ -186,7 +204,21 @@ class ClientController extends Controller
         $title = $group->name;
         $subtitle = $group->subtitle;
         $posts = $group->posts()->where('status', 1)->orderByDesc('id')->paginate($this->paginate);
-        return view('client.group', compact('area', 'posts', 'title', 'subtitle', 'group'));
+
+        if ($group->parent_id == null) {
+            $breadcrumb = [
+                __('Posts') => postsUrl(),
+                $group->name => null,
+            ];
+        } else {
+            $breadcrumb = [
+                __('Posts') => postsUrl(),
+                $group->parent->name => $group->parent->webUrl(),
+                $group->name => null,
+            ];
+
+        }
+        return view('client.group', compact('area', 'posts', 'title', 'subtitle', 'group', 'breadcrumb'));
     }
 
     public function product(Product $product)
@@ -197,7 +229,15 @@ class ClientController extends Controller
         $area = 'product';
         $title = $product->name;
         $subtitle = $product->excerpt; // WIP SEO
-        return view('client.default-list', compact('area', 'product', 'title', 'subtitle'));
+        $breadcrumb = [
+            __('Products') => productsUrl(),
+            $product->category->name => $product->category->webUrl(),
+        ];
+        if ($product->category->parent_id != null) {
+            $breadcrumb[$product->category->parent->name] = $product->category->parent->webUrl();
+        }
+        $breadcrumb[$product->name] = null;
+        return view('client.default-list', compact('area', 'product', 'title', 'subtitle', 'breadcrumb'));
     }
 
     public function category(Category $category, Request $request)
@@ -299,7 +339,21 @@ class ClientController extends Controller
 
 
         $products = $query->paginate($this->paginate);
-        return view('client.category', compact('area', 'products', 'title', 'subtitle', 'category'));
+
+        if ($category->parent_id == null) {
+            $breadcrumb = [
+                __('Products') => productsUrl(),
+                $category->name => null,
+            ];
+        } else {
+            $breadcrumb = [
+                __('Products') => productsUrl(),
+                $category->parent->name => $category->parent->webUrl(),
+                $category->name => null,
+            ];
+
+        }
+        return view('client.category', compact('area', 'products', 'title', 'subtitle', 'category', 'breadcrumb'));
     }
 
     public function attachDl(Attachment $attachment)
@@ -310,8 +364,6 @@ class ClientController extends Controller
             return response()->download($file);
         }
     }
-
-
 
 
     public function productCompareToggle(Product $product)
@@ -436,7 +488,7 @@ class ClientController extends Controller
         $customer = Customer::where('mobile', $request->input('tel'));
         $code = rand(11111, 99999);
 
-        Log::info('auth code: '.$code );
+        Log::info('auth code: ' . $code);
         if ($customer->count() == 0) {
             $customer = new Customer();
             $customer->mobile = $request->input('tel');
@@ -490,7 +542,6 @@ class ClientController extends Controller
         ];
 
     }
-
 
 
 }

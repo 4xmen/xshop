@@ -48,7 +48,7 @@
             @endforeach
         </div>
         <div class="p-4 text-center mt-2">
-            <a href="{{route('client.products')}}" class="btn btn-secondary">
+            <a href="{{productsUrl()}}" class="btn btn-secondary">
                 {{__("All products")}}
             </a>
         </div>

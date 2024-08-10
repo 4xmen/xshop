@@ -987,6 +987,47 @@ function homeUrl()
 }
 
 /**
+ * posts url to best experience for multi lang shops
+ * @return string
+ */
+function postsUrl()
+{
+    return \route('client.posts');
+}
+/**
+ * products url to best experience for multi lang shops
+ * @return string
+ */
+function productsUrl()
+{
+    return \route('client.products');
+}
+/**
+ * clips url to best experience for multi lang shops
+ * @return string
+ */
+function clipsUrl()
+{
+    return \route('client.clips');
+}
+/**
+ * galleries url to best experience for multi lang shops
+ * @return string
+ */
+function gallariesUrl()
+{
+    return \route('client.galleries');
+}
+/**
+ * attachments url to best experience for multi lang shops
+ * @return string
+ */
+function attachmentsUrl()
+{
+    return \route('client.attachments');
+}
+
+/**
  * tag url to best experience for multi lang shops
  * @return string
  */
@@ -1054,6 +1095,10 @@ function transports()
     return \App\Http\Resources\TransportCollection::collection(\App\Models\Transport::all());
 }
 
+/**
+ * default transport
+ * @return int|mixed|null
+ */
 function defTrannsport()
 {
     if (\App\Models\Transport::where('is_default',1)->count() == 0){
@@ -1064,6 +1109,51 @@ function defTrannsport()
 }
 
 
+/**
+ * make translate json to use vue components
+ * @param $array
+ * @return false|string
+ */
 function vueTranslate($array){
     return json_encode($array);
+}
+
+/**
+ * markup json Breadcrumb maker
+ * @param $items
+ * @return string
+ */
+function markUpBreadcrumbList($items)
+{
+
+    $json = [];
+    $i = 0;
+    foreach ($items as $index => $item) {
+
+        $i++;
+        $json[] = [
+            "@type" => "ListItem",
+            "position" => $i,
+            "name" => $index,
+        ];
+        if ($item != '' || $item != null) {
+            $json[$i-1]['item'] = $item;
+        }
+    }
+
+
+    $json = json_encode($json);
+
+    return <<<RESULT
+
+    <script type="application/ld+json">
+        {
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          "itemListElement": $json
+        }
+    </script>
+RESULT;
+
+
 }
