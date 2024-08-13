@@ -22,6 +22,23 @@ use Spatie\Tags\Tag;
 class ClientController extends Controller
 {
 
+    public function __construct()
+    {
+
+        $this->middleware(function ($request, $next) {
+
+            if ($request->attributes->get('set_lang') != true){
+                app()->setLocale(config('app.locale'));
+                \Session::remove('locate');
+            }elseif (\Session::has('locate')) {
+                app()->setLocale(\Session::get('locate'));
+            }
+
+            return $next($request);
+        });
+
+    }
+
     public $paginate = 12;
 
     //
@@ -207,8 +224,10 @@ class ClientController extends Controller
 
     }
 
-    public function group(Group $group)
+    public function group($slug)
     {
+
+        $group = Group::where('slug',$slug)->firstOrFail();
         $area = 'group';
         $title = $group->name;
         $subtitle = $group->subtitle;
@@ -596,10 +615,10 @@ class ClientController extends Controller
         $args = [];
         foreach ($routes as $i => $route) {
             if ($route[0] == '{'){
-                $args[] = $segments[$i];
+                $args[] = $segments[$i+1];
             }
         }
-//        dd($segments);
+        $args[]= $request;
         return $this->$method(...$args);
     }
 

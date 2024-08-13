@@ -428,9 +428,9 @@ Route::get('whoami', function () {
 Route::any('{lang}/{any}', [ClientController::class, 'lang'])
     ->where('any', '.*')
     ->where('lang','[A-Za-z]{2}')
-    ->middleware([\App\Http\Middleware\LangControl::class]);
+    ->middleware([\App\Http\Middleware\LangControl::class,\App\Http\Middleware\VisitorCounter::class]);
 Route::any('{lang}', [ClientController::class, 'langIndex'])
     ->where('lang','[A-Za-z]{2}')
-    ->middleware([\App\Http\Middleware\LangControl::class]);
+    ->middleware([\App\Http\Middleware\LangControl::class,\App\Http\Middleware\VisitorCounter::class]);
 
 

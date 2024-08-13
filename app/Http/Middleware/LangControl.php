@@ -20,6 +20,10 @@ class LangControl
         $segments = $request->segments();
         if (strlen($segments[0]) == 2 && preg_match('/[A-Za-z]/', $segments[0])) {
             app()->setLocale($segments[0]);
+
+            $request->attributes->set('set_lang', true);
+            \Session::put('locate',app()->getLocale());
+            \Session::save();
         } else {
             app()->setLocale(config('app.locale'));
         }
@@ -30,7 +34,6 @@ class LangControl
         $newPath = '/' . implode('/', $segments);
         $newUrl = $request->root() . $newPath . ($request->getQueryString() ? '?'.$request->getQueryString() : '');
 
-        $request->server->set('REQUEST_URI', $newPath);
         $request->initialize(
             $request->query->all(),
             $request->request->all(),
@@ -39,6 +42,8 @@ class LangControl
             $request->files->all(),
             $request->server->all()
         );
+
+
 
         return $next($request);
     }
