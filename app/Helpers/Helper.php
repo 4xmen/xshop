@@ -1166,7 +1166,7 @@ RESULT;
  */
 function fixUrlLang($url)
 {
-    if (app()->getLocale() != config('app.xlang.main')){
+    if ( config('app.xlang.active') && app()->getLocale() != config('app.xlang.main')){
         $welcome = \route('client.welcome');
         return str_replace($welcome,$welcome .'/'.app()->getLocale(),$url);
     }

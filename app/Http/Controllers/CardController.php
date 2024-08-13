@@ -12,6 +12,18 @@ use Illuminate\Http\Request;
 
 class CardController extends Controller
 {
+
+    public function __construct()
+    {
+
+        $this->middleware(function ($request, $next) {
+            if (\Session::has('locate')) {
+                app()->setLocale(\Session::get('locate'));
+            }
+            return $next($request);
+        });
+    }
+
     public function productCardToggle(Product $product)
     {
 
