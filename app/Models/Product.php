@@ -283,7 +283,7 @@ class Product extends Model implements HasMedia
 
     public function webUrl()
     {
-        return route('client.product',$this->slug);
+        return fixUrlLang(route('client.product',$this->slug));
     }
 
 

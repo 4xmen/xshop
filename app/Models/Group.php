@@ -84,7 +84,7 @@ class Group extends Model
 
     public function webUrl()
     {
-        return route('client.group',$this->slug);
+        return fixUrlLang(route('client.group',$this->slug));
     }
 
     public function published($limit = 10, $order = 'id', $dir = 'DESC')

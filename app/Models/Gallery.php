@@ -71,7 +71,7 @@ class Gallery extends Model implements HasMedia
     }
 
     public function webUrl(){
-        return route('client.gallery',$this->slug);
+        return fixUrlLang(route('client.gallery',$this->slug));
     }
 
 
