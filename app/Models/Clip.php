@@ -55,7 +55,7 @@ class Clip extends Model
     }
 
     public function webUrl(){
-        return route('client.clip',$this->slug);
+        return fixUrlLang(route('client.clip',$this->slug));
     }
 
 

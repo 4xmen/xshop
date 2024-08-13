@@ -77,7 +77,7 @@ class Category extends Model
 
     public function webUrl()
     {
-        return route('client.category',$this->slug);
+        return fixUrlLang(route('client.category',$this->slug));
     }
 
     public function products()

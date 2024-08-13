@@ -15,6 +15,7 @@ use App\Models\Quantity;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Route;
 use Plank\Metable\Meta;
 use Spatie\Tags\Tag;
 
@@ -32,8 +33,10 @@ class ClientController extends Controller
         return view('client.welcome', compact('area', 'title', 'subtitle'));
     }
 
-    public function post(Post $post)
+    public function post($slug)
     {
+
+        $post = Post::where('slug', $slug)->firstOrFail();
 
         if ($post->status = 0 && !auth()->check()) {
             return abort(403);
@@ -50,8 +53,10 @@ class ClientController extends Controller
         return view('client.post', compact('area', 'post', 'title', 'subtitle', 'breadcrumb'));
     }
 
-    public function clip(Clip $clip)
+    public function clip($slug)
     {
+
+        $clip = Clip::where('slug', $slug)->firstOrFail();
 
         if ($clip->status = 0 && !auth()->check()) {
             return abort(403);
@@ -66,8 +71,10 @@ class ClientController extends Controller
         return view('client.default-list', compact('area', 'clip', 'title', 'subtitle', 'breadcrumb'));
     }
 
-    public function gallery(Gallery $gallery)
+    public function gallery($slug)
     {
+
+        $gallery = Gallery::where('slug', $slug)->firstOrFail();
         if ($gallery->status = 0 && !auth()->check()) {
             return abort(403);
         }
@@ -133,8 +140,10 @@ class ClientController extends Controller
         return view('client.default-list', compact('area', 'attachs', 'title', 'subtitle'));
     }
 
-    public function attachment(Attachment $attachment)
+    public function attachment($slug)
     {
+
+        $attachment = Attachment::where('slug', $slug)->firstOrFail();
         $area = 'attachment';
         $title = $attachment->title;
         $subtitle = $attachment->subtitle;
@@ -221,8 +230,10 @@ class ClientController extends Controller
         return view('client.group', compact('area', 'posts', 'title', 'subtitle', 'group', 'breadcrumb'));
     }
 
-    public function product(Product $product)
+    public function product($slug)
     {
+
+        $product = Product::where('slug', $slug)->firstOrFail();
         if ($product->status = 0 && !auth()->check()) {
             return abort(403);
         }
@@ -240,8 +251,9 @@ class ClientController extends Controller
         return view('client.default-list', compact('area', 'product', 'title', 'subtitle', 'breadcrumb'));
     }
 
-    public function category(Category $category, Request $request)
+    public function category($slug, Request $request)
     {
+        $category = Category::where('slug', $slug)->firstOrFail();
         $area = 'category';
         $title = $category->name;
         $subtitle = $category->subtitle;
@@ -356,8 +368,9 @@ class ClientController extends Controller
         return view('client.category', compact('area', 'products', 'title', 'subtitle', 'category', 'breadcrumb'));
     }
 
-    public function attachDl(Attachment $attachment)
+    public function attachDl($slug)
     {
+        $attachment = Attachment::where('slug', $slug)->firstOrFail();
         $attachment->increment('downloads');
         $file = (storage_path() . '/app/public/attachments/' . $attachment->file);
         if (file_exists($file)) {
@@ -366,8 +379,10 @@ class ClientController extends Controller
     }
 
 
-    public function productCompareToggle(Product $product)
+    public function productCompareToggle($slug)
     {
+
+        $product = Product::where('slug', $slug)->firstOrFail();
         if (\Cookie::has('compares')) {
             $compares = json_decode(\Cookie::get('compares'), true);
             if (in_array($product->id, $compares)) {
@@ -390,8 +405,10 @@ class ClientController extends Controller
         }
     }
 
-    public function ProductFavToggle(Product $product)
+    public function ProductFavToggle($slug)
     {
+        $product = Product::where('slug', $slug)->firstOrFail();
+
         if (!auth('customer')->check()) {
             return errors([
                 __("You need to login first"),
@@ -544,8 +561,50 @@ class ClientController extends Controller
     }
 
 
-    public function sitemap(){
+    public function sitemap()
+    {
         header('content-type: text/xml');
         return view('website.sitemap');
+    }
+
+    public function lang(Request $request)
+    {
+
+        $uri = '/' . $request->path();
+        // Iterate through all the defined routes
+        $r = null;
+        $n = '';
+        foreach (Route::getRoutes() as $route) {
+
+            // Just check client routes
+            if (substr($route->getName(), 0, 7) != 'client.' || $route->getName() == 'client.welcome') {
+                continue;
+            }
+
+            $uri2 = str_replace('/', '\\/', $route->uri());
+            $uri2 = preg_replace('/\{[a-z]*\}/m', '.*', $uri2);
+            // Check if the route matches the given URI
+            if (preg_match('/' . $uri2 . '/', $uri)) {
+                $r = $route->action['controller'];
+                $n = $route->uri();
+                break;
+            }
+        }
+        $method = explode('@', $r)[1];
+        $segments = $request->segments();
+        $routes = explode('/',$n);
+        $args = [];
+        foreach ($routes as $i => $route) {
+            if ($route[0] == '{'){
+                $args[] = $segments[$i];
+            }
+        }
+//        dd($segments);
+        return $this->$method(...$args);
+    }
+
+    public function langIndex()
+    {
+        return $this->welcome();
     }
 }

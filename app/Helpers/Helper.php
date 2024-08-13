@@ -983,7 +983,7 @@ function isGuestMaxAttemptTry($action, $max = 5, $minutes = 60)
  */
 function homeUrl()
 {
-    return \route('client.welcome');
+    return fixUrlLang(\route('client.welcome'));
 }
 
 /**
@@ -992,7 +992,7 @@ function homeUrl()
  */
 function postsUrl()
 {
-    return \route('client.posts');
+    return fixUrlLang(\route('client.posts'));
 }
 /**
  * products url to best experience for multi lang shops
@@ -1000,7 +1000,7 @@ function postsUrl()
  */
 function productsUrl()
 {
-    return \route('client.products');
+    return fixUrlLang(\route('client.products'));
 }
 /**
  * clips url to best experience for multi lang shops
@@ -1008,7 +1008,7 @@ function productsUrl()
  */
 function clipsUrl()
 {
-    return \route('client.clips');
+    return fixUrlLang(\route('client.clips'));
 }
 /**
  * galleries url to best experience for multi lang shops
@@ -1016,7 +1016,7 @@ function clipsUrl()
  */
 function gallariesUrl()
 {
-    return \route('client.galleries');
+    return fixUrlLang(\route('client.galleries'));
 }
 /**
  * attachments url to best experience for multi lang shops
@@ -1024,7 +1024,7 @@ function gallariesUrl()
  */
 function attachmentsUrl()
 {
-    return \route('client.attachments');
+    return fixUrlLang(\route('client.attachments'));
 }
 
 /**
@@ -1033,7 +1033,7 @@ function attachmentsUrl()
  */
 function tagUrl($slug)
 {
-    return route('client.tag', $slug);
+    return fixUrlLang(route('client.tag', $slug));
 }
 
 function usableProp($props)
@@ -1156,4 +1156,19 @@ function markUpBreadcrumbList($items)
 RESULT;
 
 
+}
+
+
+/**
+ * fix url for multilang shops
+ * @param $url
+ * @return array|mixed|string|string[]
+ */
+function fixUrlLang($url)
+{
+    if (app()->getLocale() != config('app.xlang.main')){
+        $welcome = \route('client.welcome');
+        return str_replace($welcome,$welcome .'/'.app()->getLocale(),$url);
+    }
+    return $url;
 }

@@ -11,7 +11,11 @@
         @yield('title')
     </title>
 
+    @if(langIsRTL(config('app.locale')))
+    <link rel="stylesheet" href="{{asset('assets/vendor/bootstrap/dist/css/bootstrap.rtl.min.css')}}">
+    @else
     <link rel="stylesheet" href="{{asset('assets/vendor/bootstrap/dist/css/bootstrap.min.css')}}">
+    @endif
 
     <link rel="stylesheet" href="{{ route('theme.variable.css') }}">
     @vite(['resources/sass/client.scss', 'resources/js/client.js'])

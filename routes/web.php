@@ -2,8 +2,7 @@
 
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
-
-
+use App\Http\Controllers\ClientController;
 
 
 Auth::routes(['register' => false]);
@@ -17,13 +16,13 @@ Route::prefix(config('app.panel.prefix'))->name('admin.')->group(
             function () {
 
 
-                Route::get('/',[\App\Http\Controllers\HomeController::class,'index'])->name('dash');
+                Route::get('/', [\App\Http\Controllers\HomeController::class, 'index'])->name('dash');
 
-                Route::post('ckeditor/upload', [\App\Http\Controllers\Admin\CkeditorController::class,'upload'])->name('ckeditor.upload');
-                Route::get('adminlogs', [\App\Http\Controllers\Admin\AdminLogController::class,'index'])->name('adminlog.index');
-                Route::get('adminlogs/{user}', [\App\Http\Controllers\Admin\AdminLogController::class,'log'])->name('adminlog.show');
-                Route::post('images/store/{gallery}', [\App\Http\Controllers\Admin\ImageController::class,'store'])->name('image.store');
-                Route::get('images/destroy/{image}', [\App\Http\Controllers\Admin\ImageController::class,'destroy'])->name('image.destroy');
+                Route::post('ckeditor/upload', [\App\Http\Controllers\Admin\CkeditorController::class, 'upload'])->name('ckeditor.upload');
+                Route::get('adminlogs', [\App\Http\Controllers\Admin\AdminLogController::class, 'index'])->name('adminlog.index');
+                Route::get('adminlogs/{user}', [\App\Http\Controllers\Admin\AdminLogController::class, 'log'])->name('adminlog.show');
+                Route::post('images/store/{gallery}', [\App\Http\Controllers\Admin\ImageController::class, 'store'])->name('image.store');
+                Route::get('images/destroy/{image}', [\App\Http\Controllers\Admin\ImageController::class, 'destroy'])->name('image.destroy');
 
 
                 Route::prefix('users')->name('user.')->group(
@@ -354,76 +353,84 @@ Route::prefix(config('app.panel.prefix'))->name('admin.')->group(
 
     });
 
-Route::get('theme/variable.css',[\App\Http\Controllers\ThemeController::class,'cssVariables'])->name('theme.variable.css');
+Route::get('theme/variable.css', [\App\Http\Controllers\ThemeController::class, 'cssVariables'])->name('theme.variable.css');
 
 Route::middleware([\App\Http\Middleware\VisitorCounter::class])
-    ->name('client.')->group(function (){
-    // index
-    Route::get('/', [\App\Http\Controllers\ClientController::class,'welcome'])->name('welcome');
-    Route::get('/posts', [\App\Http\Controllers\ClientController::class,'posts'])->name('posts');
-    Route::get('/customer/sign-out', [\App\Http\Controllers\ClientController::class,'signOut'])->name('sign-out');
-    Route::post('/customer/sign-in/do', [\App\Http\Controllers\ClientController::class,'singInDo'])->name('sign-in-do');
-    Route::get('/customer/sign-in', [\App\Http\Controllers\ClientController::class,'signIn'])->name('sign-in');
-    Route::get('/customer/sign-up', [\App\Http\Controllers\ClientController::class,'signUp'])->name('sign-up');
-    Route::get('/customer/send/auth-code', [\App\Http\Controllers\ClientController::class,'sendSms'])->name('send-sms');
-    Route::get('/customer/check/auth-code', [\App\Http\Controllers\ClientController::class,'checkAuth'])->name('check-auth');
-    Route::get('/customer/profile', [\App\Http\Controllers\ClientController::class,'profile'])->name('profile');
-    Route::get('/compare', [\App\Http\Controllers\ClientController::class,'compare'])->name('compare');
-    Route::get('/galleries', [\App\Http\Controllers\ClientController::class,'galleries'])->name('galleries');
-    Route::get('/videos', [\App\Http\Controllers\ClientController::class,'clips'])->name('clips');
-    Route::post('/card/check', [\App\Http\Controllers\CardController::class,'check'])->name('card.check');
-    Route::get('/card/discount/{code}', [\App\Http\Controllers\CardController::class,'discount'])->name('card.discount');
-    Route::get('/card', [\App\Http\Controllers\CardController::class,'index'])->name('card');
-    Route::get('/cardClear',[\App\Http\Controllers\CardController::class,'clearing'])->name('card.clear');
-    Route::get('/profile', [\App\Http\Controllers\CustomerController::class,'profile'])->name('profile');
-    Route::post('/profile/save', [\App\Http\Controllers\CustomerController::class,'save'])->name('profile.save');
-    Route::get('/invoice/{invoice}', [\App\Http\Controllers\CustomerController::class,'invoice'])->name('invoice');
-    Route::get('/products', [\App\Http\Controllers\ClientController::class,'products'])->name('products');
-    Route::get('/attachments', [\App\Http\Controllers\ClientController::class,'attachments'])->name('attachments');
-    Route::get('/attachment/{attachment}', [\App\Http\Controllers\ClientController::class,'attachment'])->name('attachment');
-    Route::get('/tag/{slug}', [\App\Http\Controllers\ClientController::class,'tag'])->name('tag'); // wip
-    Route::get('/group/{slug}', [\App\Http\Controllers\ClientController::class,'group'])->name('group'); // wip
-    Route::get('/product/{product}', [\App\Http\Controllers\ClientController::class,'product'])->name('product');
-    Route::get('/video/{clip}', [\App\Http\Controllers\ClientController::class,'clip'])->name('clip');
-    Route::get('/category/{category}', [\App\Http\Controllers\ClientController::class,'category'])->name('category');
-    Route::get('/gallery/{gallery}', [\App\Http\Controllers\ClientController::class,'gallery'])->name('gallery');
-    Route::get('/search', [\App\Http\Controllers\ClientController::class,'search'])->name('search');
-    Route::get('attach/download/{attachment}', [\App\Http\Controllers\ClientController::class,'attachDl'])->name('attach-dl');
-    Route::get('/post/{post}', [\App\Http\Controllers\ClientController::class,'post'])->name('post');
+    ->name('client.')->group(function () {
+        // index
+        Route::get('/', [ClientController::class, 'welcome'])->name('welcome');
+        Route::get('/posts', [ClientController::class, 'posts'])->name('posts');
+        Route::get('/customer/sign-out', [ClientController::class, 'signOut'])->name('sign-out');
+        Route::post('/customer/sign-in/do', [ClientController::class, 'singInDo'])->name('sign-in-do');
+        Route::get('/customer/sign-in', [ClientController::class, 'signIn'])->name('sign-in');
+        Route::get('/customer/sign-up', [ClientController::class, 'signUp'])->name('sign-up');
+        Route::get('/customer/send/auth-code', [ClientController::class, 'sendSms'])->name('send-sms');
+        Route::get('/customer/check/auth-code', [ClientController::class, 'checkAuth'])->name('check-auth');
+        Route::get('/customer/profile', [ClientController::class, 'profile'])->name('profile');
+        Route::get('/compare', [ClientController::class, 'compare'])->name('compare');
+        Route::get('/galleries', [ClientController::class, 'galleries'])->name('galleries');
+        Route::get('/videos', [ClientController::class, 'clips'])->name('clips');
+        Route::post('/card/check', [\App\Http\Controllers\CardController::class, 'check'])->name('card.check');
+        Route::get('/card/discount/{code}', [\App\Http\Controllers\CardController::class, 'discount'])->name('card.discount');
+        Route::get('/card', [\App\Http\Controllers\CardController::class, 'index'])->name('card');
+        Route::get('/cardClear', [\App\Http\Controllers\CardController::class, 'clearing'])->name('card.clear');
+        Route::get('/profile', [\App\Http\Controllers\CustomerController::class, 'profile'])->name('profile');
+        Route::post('/profile/save', [\App\Http\Controllers\CustomerController::class, 'save'])->name('profile.save');
+        Route::get('/invoice/{invoice}', [\App\Http\Controllers\CustomerController::class, 'invoice'])->name('invoice');
+        Route::get('/products', [ClientController::class, 'products'])->name('products');
+        Route::get('/attachments', [ClientController::class, 'attachments'])->name('attachments');
+        Route::get('/attachment/{attachment}', [ClientController::class, 'attachment'])->name('attachment');
+        Route::get('/tag/{slug}', [ClientController::class, 'tag'])->name('tag'); // wip
+        Route::get('/group/{slug}', [ClientController::class, 'group'])->name('group'); // wip
+        Route::get('/product/{product}', [ClientController::class, 'product'])->name('product');
+        Route::get('/video/{clip}', [ClientController::class, 'clip'])->name('clip');
+        Route::get('/category/{category}', [ClientController::class, 'category'])->name('category');
+        Route::get('/gallery/{gallery}', [ClientController::class, 'gallery'])->name('gallery');
+        Route::get('/search', [ClientController::class, 'search'])->name('search');
+        Route::get('attach/download/{attachment}', [ClientController::class, 'attachDl'])->name('attach-dl');
+            Route::get('/post/{post}', [ClientController::class, 'post'])->name('post');
 
-    Route::get('product/fav/toggle/{product}', [\App\Http\Controllers\ClientController::class, 'ProductFavToggle'])->name('product-fav-toggle');
-    Route::get('product/compare/toggle/{product}', [\App\Http\Controllers\ClientController::class, 'productCompareToggle'])->name('product-compare-toggle');
-    Route::get('card/toggle/{product}', [\App\Http\Controllers\CardController::class, 'productCardToggle'])->name('product-card-toggle');
+        Route::get('product/fav/toggle/{product}', [ClientController::class, 'ProductFavToggle'])->name('product-fav-toggle');
+        Route::get('product/compare/toggle/{product}', [ClientController::class, 'productCompareToggle'])->name('product-compare-toggle');
+        Route::get('card/toggle/{product}', [\App\Http\Controllers\CardController::class, 'productCardToggle'])->name('product-card-toggle');
 
-    Route::post('/comment/submit', [\App\Http\Controllers\ClientController::class,'submitComment'])->name('comment.submit');
-});
+        Route::post('/comment/submit', [ClientController::class, 'submitComment'])->name('comment.submit');
+    });
 
 
-Route::get('/sitemap.xml',[\App\Http\Controllers\ClientController::class,'sitemap'])->name('sitemap');
+Route::get('/sitemap.xml', [ClientController::class, 'sitemap'])->name('sitemap');
 
 // to developer test
-Route::get('login/as/{mobile}',function ($mobile){
-    if (auth()->check() && auth()->user()->hasRole('developer') ){
+Route::get('login/as/{mobile}', function ($mobile) {
+    if (auth()->check() && auth()->user()->hasRole('developer')) {
         return \Auth::guard('customer')
-            ->loginUsingId(\App\Models\Customer::where('mobile',$mobile)->first()->id);
-    } else{
+            ->loginUsingId(\App\Models\Customer::where('mobile', $mobile)->first()->id);
+    } else {
         return abort(403);
     }
 })->name('login.as');
 
-Route::get('test',function (){
+Route::get('test', function () {
 //    return \Resources\Views\Segments\PreloaderCircle::onAdd();
 //   return $product->getAllMeta();
 //    return \App\Models\Quantity::whereId(1)->first()->meta;
-    return [json_decode(\Cookie::get('card')),json_decode(\Cookie::get('q'))];
+    return [json_decode(\Cookie::get('card')), json_decode(\Cookie::get('q'))];
 })->name('test');
 
 
-
-
-Route::get('whoami',function (){
-    if (!auth('customer')->check()){
+Route::get('whoami', function () {
+    if (!auth('customer')->check()) {
         return 'You are nothing';
     }
     return \Auth::guard('customer')->user();
 })->name('whoami');
+
+Route::any('{lang}/{any}', [ClientController::class, 'lang'])
+    ->where('any', '.*')
+    ->where('lang','[A-Za-z]{2}')
+    ->middleware([\App\Http\Middleware\LangControl::class]);
+Route::any('{lang}', [ClientController::class, 'langIndex'])
+    ->where('lang','[A-Za-z]{2}')
+    ->middleware([\App\Http\Middleware\LangControl::class]);
+
+
