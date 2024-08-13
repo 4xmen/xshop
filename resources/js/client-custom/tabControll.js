@@ -13,4 +13,8 @@ document.addEventListener('DOMContentLoaded', function () {
             });
         });
     }
+
+    if(window.location.hash) {
+       document.querySelector(`.tab-control [href="${window.location.hash}"]`)?.click();
+    }
 });

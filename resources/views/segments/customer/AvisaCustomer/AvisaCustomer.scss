@@ -1,5 +1,6 @@
 #AvisaCustomer {
     padding: 2rem 0;
+
     .avisa-avatar {
         height: 128px;
         width: 128px;
@@ -24,6 +25,9 @@
                 display: block;
                 font-size: 20px;
                 transition: 500ms;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+                overflow-x: hidden;
 
                 &.active, &:hover {
                     background: var(--xshop-secondary);

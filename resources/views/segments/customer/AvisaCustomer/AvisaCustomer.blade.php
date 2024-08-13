@@ -60,6 +60,12 @@
                         </a>
                     </li>
                     <li>
+                        <a href="#favs">
+                            <i class="ri-hearts-line"></i>
+                            {{__("Favorites")}}
+                        </a>
+                    </li>
+                    <li>
                         <a href="{{route('client.sign-out')}}">
                             <i class="ri-logout-box-line"></i>
                             {{__("Sign-out")}}
@@ -332,6 +338,9 @@
                     {{-- WIP submit new ticket --}}
                 </div>
                 <div class="tab" id="addresses">
+                    {{-- WIP submit new ticket --}}
+                </div>
+                <div class="tab" id="favs">
                     {{-- WIP submit new ticket --}}
                 </div>
             </div>
