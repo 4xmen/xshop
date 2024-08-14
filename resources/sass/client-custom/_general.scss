@@ -18,26 +18,26 @@
     background: var(--xshop-secondary);
 }
 
-*{
-    font-family: 'Vazirmatn' , sans-serif;
+* {
+    font-family: 'Vazirmatn', sans-serif;
 }
 
 html {
     scroll-behavior: smooth;
 }
 
-body{
+body {
     background: var(--xshop-background);
     color: var(--xshop-text);
     overflow-x: hidden;
 }
 
 
-#website-preloader{
+#website-preloader {
     transition: 500ms;
 }
 
-.color-bullet{
+.color-bullet {
     width: 25px;
     height: 25px;
     margin: auto;
@@ -45,7 +45,7 @@ body{
 }
 
 
-#do-edit{
+#do-edit {
     position: fixed;
     inset-inline-start: 0;
     top: 5%;
@@ -56,35 +56,74 @@ body{
     width: 50px;
     opacity: .4;
     transition: 1s;
-    &:hover{
+
+    &:hover {
         opacity: 1;
     }
-    i{
+
+    i {
         font-size: 25px;
     }
 }
 
-[id^="hidden-img"]{
+[id^="hidden-img"] {
     display: none;
 }
-#hidden-images{
+
+#hidden-images {
     display: none;
 }
 
 
-.color-bullet{
+.color-bullet {
     border-radius: 50%;
     width: 25px;
     height: 25px;
     border: 1px solid gray;
 }
 
-#tabs-content{
-    .tab{
+#tabs-content {
+    .tab {
         display: none;
 
-        &.active{
+        &.active {
             display: block;
         }
+    }
+}
+
+
+#ticket-content {
+    padding: 2rem;
+
+    h1 {
+        font-size: 24px;
+    }
+
+    .overflow-hidden {
+        margin-bottom: 1rem;
+    }
+
+    .t-answer, .t-message {
+        width: 45%;
+        padding: 1rem;
+        border-radius: var(--xshop-border-radius);
+
+        .t-time {
+            opacity: .5;
+            display: block;
+            text-align: end;
+            margin-top: 7px;
+        }
+    }
+
+    .t-message {
+        background: var(--xshop-primary);
+        color: var(--xshop-diff);
+    }
+
+    .t-answer {
+        background: var(--xshop-secondary);
+        color: var(--xshop-diff2);
     }
 }

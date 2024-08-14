@@ -6,6 +6,7 @@ use App\Models\Address;
 use App\Models\Customer;
 use App\Models\Invoice;
 use App\Models\Product;
+use App\Models\Ticket;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rules\In;
 
@@ -165,6 +166,42 @@ class CustomerController extends Controller
         $address = $this->addressSave($address, $request);
         return ['OK' => true,'message' => __("Address added successfully"), 'list'=> auth('customer')->user()->addresses];
 
+    }
+
+    public function submitTicket(Request $request){
+        $request->validate([
+           'title' => ['required', 'string', 'max:255'],
+           'body' => ['required', 'string'],
+        ]);
+
+        $ticket = new Ticket();
+        $ticket->title = $request->title;
+        $ticket->body = trim($request->body);
+        $ticket->customer_id = auth('customer')->user()->id;
+        $ticket->save();
+        return redirect()->route('client.profile')->with('message', __('Ticket added successfully'));
+    }
+
+    public function showTicket(Ticket $ticket){
+        return view('client.ticket',compact('ticket'));
+    }
+
+
+    public function ticketAnswer(Ticket $ticket, Request $request){
+
+        $request->validate([
+            'body' => ['required', 'string'],
+        ]);
+
+        $ticket->status = "PENDING";
+        $ticket->save();
+
+        $nticket = new Ticket();
+        $nticket->parent_id = $ticket->id;
+        $nticket->body = trim($request->body);
+        $nticket->customer_id = auth('customer')->user()->id;
+        $nticket->save();
+        return redirect(route('client.profile').'#tickets')->with('message', __('Ticket answered successfully'));
     }
 
 
