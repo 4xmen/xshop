@@ -1,6 +1,12 @@
 <div class="setting-field col-md-{{$setting->size}}">
     <label for="{{$setting->key}}">
         {{$setting->title}}
+        @if(config('app.xlang.active') && isset($setting->translatable) &&
+($setting['type'] == 'LONGTEXT' || $setting['type'] == 'TEXT' || $setting['type'] == 'EDITOR'))
+            <a href="{{route('admin.lang.model',[$setting->id, get_class($setting)])}}{{$setting['type'] == 'EDITOR'?'?editor=1':''}}">
+                <i class="ri-translate"></i>
+            </a>
+        @endif
 
         {{--        // WIP translate--}}
     </label>
