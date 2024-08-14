@@ -60,7 +60,7 @@ class CardController extends Controller
             $count = 1;
             $msg = "Product added to card";
             \Cookie::queue('card', "[$product->id]", 2000);
-            \Cookie::queue('q', "[$quantity]", 2000);
+            \Cookie::queue('q', "[null]", 2000);
             $qs = [$quantity];
             $cards = [$product->id];
         }
@@ -182,6 +182,34 @@ class CardController extends Controller
                 'data' => $discount,
                 'human' => $human,
             ];
+        }
+    }
+
+
+
+    public function productCompareToggle($slug)
+    {
+
+        $product = Product::where('slug', $slug)->firstOrFail();
+        if (\Cookie::has('compares')) {
+            $compares = json_decode(\Cookie::get('compares'), true);
+            if (in_array($product->id, $compares)) {
+                $msg = __("Product removed from compare");
+                unset($compares[array_search($product->id, $compares)]);
+            } else {
+                $compares[] = $product->id;
+                $msg = __( "Product added to compare");
+            }
+            \Cookie::queue('compares', json_encode($compares), 2000);
+        } else {
+            $msg = "Product added to compare";
+            \Cookie::queue('compares', "[$product->id]", 2000);
+        }
+
+        if (\request()->ajax()) {
+            return success(null, $msg);
+        } else {
+            return redirect()->back()->with(['message' => $msg]);
         }
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Invoice;
+use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rules\In;
 
@@ -62,5 +63,35 @@ class CustomerController extends Controller
     {
         return $invoice;
     }
+
+
+    public function ProductFavToggle($slug)
+    {
+        $product = Product::where('slug', $slug)->firstOrFail();
+
+        if (!auth('customer')->check()) {
+            return errors([
+                __("You need to login first"),
+            ], 403, __("You need to login first"));
+        }
+
+        if (auth('customer')->user()->favorites()->where('product_id', $product->id)->count() == 0) {
+            auth('customer')->user()->favorites()->attach($product->id);
+            $message = __('Product added to favorites');
+            $fav = '1';
+        } else {
+            auth('customer')->user()->favorites()->detach($product->id);
+            $message = __('Product removed from favorites');
+            $fav = '0';
+        }
+
+        if (\request()->ajax()) {
+            return success($fav, $message);
+        } else {
+            return redirect()->back()->with(['message' => $message]);
+        }
+    }
+
+
 
 }

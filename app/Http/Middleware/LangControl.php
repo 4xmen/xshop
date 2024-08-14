@@ -27,22 +27,22 @@ class LangControl
         } else {
             app()->setLocale(config('app.locale'));
         }
-        array_shift($segments);
-        $url = \request()->path();
-        $url = str_replace(app()->getLocale(), '', $url);
-        // Modify the request
-        $newPath = '/' . implode('/', $segments);
-        $newUrl = $request->root() . $newPath . ($request->getQueryString() ? '?'.$request->getQueryString() : '');
-
-        $request->initialize(
-            $request->query->all(),
-            $request->request->all(),
-            $request->attributes->all(),
-            $request->cookies->all(),
-            $request->files->all(),
-            $request->server->all()
-        );
-
+//        array_shift($segments);
+//        $url = \request()->path();
+//        $url = str_replace(app()->getLocale(), '', $url);
+//        // Modify the request
+//        $newPath = '/' . implode('/', $segments);
+//        $newUrl = $request->root() . $newPath . ($request->getQueryString() ? '?'.$request->getQueryString() : '');
+//
+//        $request->initialize(
+//            $request->query->all(),
+//            $request->request->all(),
+//            $request->attributes->all(),
+//            $request->cookies->all(),
+//            $request->files->all(),
+//            $request->server->all()
+//        );
+//
 
 
         return $next($request);
