@@ -390,8 +390,8 @@ Route::middleware([\App\Http\Middleware\VisitorCounter::class])
         Route::get('attach/download/{attachment}', [ClientController::class, 'attachDl'])->name('attach-dl');
             Route::get('/post/{post}', [ClientController::class, 'post'])->name('post');
 
-        Route::get('product/fav/toggle/{product}', [ClientController::class, 'ProductFavToggle'])->name('product-fav-toggle');
-        Route::get('product/compare/toggle/{product}', [ClientController::class, 'productCompareToggle'])->name('product-compare-toggle');
+        Route::get('product/fav/toggle/{product}', [\App\Http\Controllers\CustomerController::class, 'ProductFavToggle'])->name('product-fav-toggle');
+        Route::get('product/compare/toggle/{product}', [\App\Http\Controllers\CardController::class, 'productCompareToggle'])->name('product-compare-toggle');
         Route::get('card/toggle/{product}', [\App\Http\Controllers\CardController::class, 'productCardToggle'])->name('product-card-toggle');
 
         Route::post('/comment/submit', [ClientController::class, 'submitComment'])->name('comment.submit');
