@@ -66,6 +66,10 @@ Route::prefix(config('app.panel.prefix'))->name('admin.')->group(
                         Route::post('bulk', [\App\Http\Controllers\Admin\DiscountController::class, "bulk"])->name('bulk');
                         Route::get('trashed', [\App\Http\Controllers\Admin\DiscountController::class, "trashed"])->name('trashed');
                     });
+                Route::prefix('tags')->name('tag.')->group(
+                    function () {
+                        Route::get('', [\App\Http\Controllers\Admin\TagController::class, 'index'])->name('index');
+                    });
                 Route::prefix('tickets')->name('ticket.')->group(
                     function () {
                         Route::get('', [\App\Http\Controllers\Admin\TicketController::class, 'index'])->name('index');

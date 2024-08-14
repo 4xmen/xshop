@@ -28,6 +28,7 @@ use Illuminate\Http\Request;
 use App\Helper;
 use Illuminate\Support\Facades\Artisan;
 use Spatie\Image\Image as SpatieImage;
+use Spatie\Tags\Tag;
 use function App\Helpers\hasCreateRoute;
 
 
@@ -53,6 +54,7 @@ class XLangController extends XController
         State::class,
         City::class,
         Transport::class,
+        Tag::class,
     ];
 
 

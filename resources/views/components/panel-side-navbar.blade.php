@@ -140,6 +140,14 @@
                             </a>
                         </li>
                     @endif
+                    @if(  auth()->user()->hasAnyAccess( 'tags' ))
+                        <li>
+                            <a href="{{route('admin.tag.index')}}">
+                                <i class="ri-price-tag-3-line"></i>
+                                {{__("Attachments")}}
+                            </a>
+                        </li>
+                    @endif
                 </ul>
             </li>
         @endif
