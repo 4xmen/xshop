@@ -22,6 +22,9 @@ app.component('mp4player', videoPlayer);
 import mp3player from "../client-vue/mp3player.vue";
 app.component('mp3player', mp3player);
 
+import addressInput from "../client-vue/AddressInput.vue";
+app.component('address-input', addressInput);
+
 import NsCard from "../client-vue/NsCard.vue";
 app.component('ns-card', NsCard);
 

@@ -375,6 +375,10 @@ Route::middleware([\App\Http\Middleware\VisitorCounter::class])
         Route::get('/card', [\App\Http\Controllers\CardController::class, 'index'])->name('card');
         Route::get('/cardClear', [\App\Http\Controllers\CardController::class, 'clearing'])->name('card.clear');
         Route::get('/profile', [\App\Http\Controllers\CustomerController::class, 'profile'])->name('profile');
+        Route::get('/addresses', [\App\Http\Controllers\CustomerController::class, 'addresses'])->name('addresses');
+        Route::post('/address/store', [\App\Http\Controllers\CustomerController::class, 'addressStore'])->name('address.store');
+        Route::post('/address/update/{address}', [\App\Http\Controllers\CustomerController::class, 'addressUpdate'])->name('address.update');
+        Route::get('/address/destroy/{address}', [\App\Http\Controllers\CustomerController::class, 'addressDestroy'])->name('address.destroy');
         Route::post('/profile/save', [\App\Http\Controllers\CustomerController::class, 'save'])->name('profile.save');
         Route::get('/invoice/{invoice}', [\App\Http\Controllers\CustomerController::class, 'invoice'])->name('invoice');
         Route::get('/products', [ClientController::class, 'products'])->name('products');

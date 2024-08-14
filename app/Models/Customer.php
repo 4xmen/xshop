@@ -49,4 +49,9 @@ class Customer extends Authenticatable
         return $this->belongsToMany(Product::class,'customer_product');
     }
 
+    public function comments(){
+        return $this->morphMany(Comment::class, 'commentator');
+    }
+
+
 }

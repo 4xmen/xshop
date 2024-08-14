@@ -16,7 +16,7 @@
                                 {{$post->title}}
                             </h4>
                             <span>
-                                {{$post->created_at->ldate('Y/m/d l')}}
+                                {{$post->created_at->ldate('Y-m-d l')}}
                             </span>
                         </div>
                     </div>

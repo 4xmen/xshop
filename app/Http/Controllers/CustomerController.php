@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Address;
+use App\Models\Customer;
 use App\Models\Invoice;
 use App\Models\Product;
 use Illuminate\Http\Request;
@@ -9,6 +11,18 @@ use Illuminate\Validation\Rules\In;
 
 class CustomerController extends Controller
 {
+
+    public function addressSave(Address $address, Request $request)
+    {
+        $address->address = $request->input('address');
+        $address->lat = $request->input('lat');
+        $address->lng = $request->input('lng');
+        $address->state_id = $request->input('state_id')??null;
+        $address->city_id = $request->input('city_id')??null;
+        $address->zip = $request->input('zip');
+        $address->save();
+        return $address;
+    }
     //
     public function __construct()
     {
@@ -92,6 +106,66 @@ class CustomerController extends Controller
         }
     }
 
+
+    public function addresses(){
+        return auth('customer')->user()->addresses;
+    }
+
+
+    public function addressUpdate(Request $request,  $item)
+    {
+
+        $item = Address::where('id', $item)->firstOrFail();
+        if ($item->customer_id != auth('customer')->user()->id) {
+            return abort(403);
+        }
+        //
+        $request->validate([
+            'address' => ['required', 'string', 'min:10'],
+            'zip' => ['required', 'string', 'min:5'],
+            'state_id' => ['required', 'exists:states,id'],
+            'city_id' => ['required', 'exists:cities,id'],
+            'lat' => ['nullable'],
+            'lng' => ['nullable'],
+        ]);
+        $this->addressSave($item, $request);
+        return ['OK' => true, "message" => __("address updated")];
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function addressDestroy(Address $item)
+    {
+        //
+        if ($item->customer_id != auth('customer')->id()) {
+            return abort(403);
+        }
+        $add = $item->address ;
+
+        $item->delete();
+        return ['OK' => true, "message" => __(":ADDRESS removed",['ADDRESS' => $add])];
+    }
+
+    public function addressStore(Request $request)
+    {
+        //
+
+        $request->validate([
+            'address' => ['required', 'string', 'min:10'],
+            'zip' => ['required', 'string', 'min:5'],
+            'state_id' => ['required', 'exists:states,id'],
+            'city_id' => ['required', 'exists:cities,id'],
+            'lat' => ['nullable'],
+            'lng' => ['nullable'],
+        ]);
+
+        $address = new Address();
+        $address->customer_id = auth('customer')->user()->id;
+        $address = $this->addressSave($address, $request);
+        return ['OK' => true,'message' => __("Address added successfully"), 'list'=> auth('customer')->user()->addresses];
+
+    }
 
 
 }

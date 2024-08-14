@@ -43,7 +43,7 @@
                     </li>
                     <li>
                         <a href="#tickets">
-                            <i class="ri-inbox-2-line"></i>
+                            <i class="ri-customer-service-fill"></i>
                             {{__("Tickets")}}
                         </a>
                     </li>
@@ -105,7 +105,7 @@
                         </div>
                         <div class="avisa-grid col-lg-3 col-md-6">
                             <div class="grid-item">
-                                <i class="ri-message-3-line"></i>
+                                <i class="ri-customer-service-2-line"></i>
                                 <h2>
                                     {{number_format(auth('customer')->user()->tickets()->count())}}
                                 </h2>
@@ -122,6 +122,28 @@
                                 </h2>
                                 <h3>
                                     {{__("Addresses")}}
+                                </h3>
+                            </div>
+                        </div>
+                        <div class="avisa-grid col-md-6">
+                            <div class="grid-item">
+                                <i class="ri-message-3-line"></i>
+                                <h2>
+                                    {{number_format(auth('customer')->user()->comments()->count())}}
+                                </h2>
+                                <h3>
+                                    {{__("Comments")}}
+                                </h3>
+                            </div>
+                        </div>
+                        <div class="avisa-grid col-md-6">
+                            <div class="grid-item">
+                                <i class="ri-hearts-line"></i>
+                                <h2>
+                                    {{number_format(auth('customer')->user()->favorites()->count())}}
+                                </h2>
+                                <h3>
+                                    {{__("Favorites")}}
                                 </h3>
                             </div>
                         </div>
@@ -332,16 +354,73 @@
                 </div>
                 <div class="tab" id="comments">
 
-                    {{-- WIP comments--}}
+                    @if(auth('customer')->user()->comments()->count() == 0)
+                        <div class="alert alert-info">
+                            {{__("You don't have any comments, We are so pleased to hear your look-out")}}
+                        </div>
+                    @else
+                        @foreach(auth('customer')->user()->comments as $comment)
+                            <div class="avisa-comment">
+                                <h3>
+                                    {{$comment->commentable->title}}
+                                    {{$comment->commentable->name}}
+                                </h3>
+                                <span class="comment-date float-end">
+                                    {{$comment->created_at->ldate('Y-m-d')}}
+                                </span>
+                                <p>
+                                    {{$comment->body}}
+                                </p>
+                            </div>
+                        @endforeach
+                    @endif
                 </div>
                 <div class="tab" id="submit-ticket">
                     {{-- WIP submit new ticket --}}
                 </div>
                 <div class="tab" id="addresses">
-                    {{-- WIP submit new ticket --}}
+                    <address-input
+                        list-link="{{route('client.addresses')}}"
+                        add-link="{{route('client.address.store')}}"
+                        update-link="{{route('client.address.update','')}}"
+                        rem-link="{{route('client.address.destroy','')}}"
+                        state-link="{{route('v1.state.index')}}"
+                        cities-link="{{route('v1.state.show','')}}"
+                        :dark-mode="false"
+                        :translate='{{vueTranslate([
+            'addr-editor' => __('Address editor'),
+            'state' => __('State'),
+            'city' => __('City'),
+            'address' => __('Address'),
+            'post-code' => __('Post code'),
+            ])}}'
+                    ></address-input>
                 </div>
                 <div class="tab" id="favs">
-                    {{-- WIP submit new ticket --}}
+                    @foreach(auth('customer')->user()->favorites as $fav)
+
+                        <div class="product-item">
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <img src="{{$fav->imgUrl()}}" class="img-fluid" alt="{{$fav->name}}">
+                                </div>
+                                <div class="col-md-10">
+                                    <h4>
+                                        {{$fav->name}}
+                                    </h4>
+                                    <p class="text-muted">
+                                        {{$fav->excerpt}}
+                                    </p>
+                                    <a class="fav-btn float-end mx-2" data-slug="{{$fav->slug}}" data-is-fav="{{$fav->isFav()}}"
+                                       data-bs-custom-class="custom-tooltip"
+                                       data-bs-toggle="tooltip" data-bs-placement="top" title="{{__("Add to / Remove from favorites")}}">
+                                        <i class="ri-heart-line"></i>
+                                        <i class="ri-heart-fill"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
                 </div>
             </div>
         </div>
