@@ -48,7 +48,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="#tickets">
+                        <a href="#submit-ticket">
                             <i class="ri-mail-add-line"></i>
                             {{__("Submit new ticket")}}
                         </a>
@@ -349,8 +349,41 @@
 
                 </div>
                 <div class="tab" id="tickets">
-
-                    {{-- WIP tikets--}}
+                    <table class="table table-striped">
+                        <tr>
+                            <td>
+                                #
+                            </td>
+                            <th>
+                                {{__("Title")}}
+                            </th>
+                            <th>
+                                {{__("Status")}}
+                            </th>
+                            <th class="text-center">
+                                -
+                            </th>
+                        </tr>
+                        @foreach(auth('customer')->user()->main_tickets()->orderByDesc('id')->get() as $i =>  $ticket)
+                            <tr>
+                                <td>
+                                    {{$i+1}}
+                                </td>
+                                <td>
+                                    {{$ticket->title}}
+                                </td>
+                                <td>
+                                    {{__($ticket->status)}}
+                                </td>
+                                <td class="text-center">
+                                    <a href="{{ route('client.ticket.show',$ticket->id) }}" class="btn btn-outline-primary btn-sm">
+                                        <i class="ri-eye-line"></i>
+                                        {{__("View")}}
+                                    </a>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </table>
                 </div>
                 <div class="tab" id="comments">
 
@@ -376,7 +409,28 @@
                     @endif
                 </div>
                 <div class="tab" id="submit-ticket">
-                    {{-- WIP submit new ticket --}}
+                    <form action="{{ route('client.ticket.submit') }}" method="post">
+                        @csrf
+                        <div class="form-group">
+                            <label for="title">
+                                {{__("Title")}}
+                            </label>
+                            <input type="text" id="title" name="title" value="{{old('title')}}" placeholder="{{__("Title")}}"
+                                   class="form-control">
+                        </div>
+                        <div class="form-group mt-3">
+                            <label for="body">
+                                {{__("Description Text")}}
+                            </label>
+                            <textarea rows="7" name="body" class="form-control" placeholder="{{__("Your message ...")}}">{{old('body')}}</textarea>
+                        </div>
+                        <div class="mt-3">
+                            <button class="btn btn-outline-primary w-100">
+                                <i class="ri-send-plane-2-line"></i>
+                                {{__("Send ticket")}}
+                            </button>
+                        </div>
+                    </form>
                 </div>
                 <div class="tab" id="addresses">
                     <address-input

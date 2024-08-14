@@ -380,6 +380,9 @@ Route::middleware([\App\Http\Middleware\VisitorCounter::class])
         Route::post('/address/update/{address}', [\App\Http\Controllers\CustomerController::class, 'addressUpdate'])->name('address.update');
         Route::get('/address/destroy/{address}', [\App\Http\Controllers\CustomerController::class, 'addressDestroy'])->name('address.destroy');
         Route::post('/profile/save', [\App\Http\Controllers\CustomerController::class, 'save'])->name('profile.save');
+        Route::post('/ticket/submit', [\App\Http\Controllers\CustomerController::class, 'submitTicket'])->name('ticket.submit');
+        Route::post('/ticket/answer/{ticket}', [\App\Http\Controllers\CustomerController::class, 'ticketAnswer'])->name('ticket.answer');
+        Route::get('/ticket/{ticket}', [\App\Http\Controllers\CustomerController::class, 'showTicket'])->name('ticket.show');
         Route::get('/invoice/{invoice}', [\App\Http\Controllers\CustomerController::class, 'invoice'])->name('invoice');
         Route::get('/products', [ClientController::class, 'products'])->name('products');
         Route::get('/attachments', [ClientController::class, 'attachments'])->name('attachments');
