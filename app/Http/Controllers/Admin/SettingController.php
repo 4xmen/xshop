@@ -79,6 +79,11 @@ class SettingController extends Controller
             if ($set != null && !$request->hasFile($key)) {
 
                 $set->value = validateSettingRequest($set,$val);
+                // need to test
+                if (config('app.xlang.active') && config('app.xlang.main') != 'en' && (
+                    $set->type != 'TEXT' && $set->type != 'EDITOR' && $set->type != 'LONGTEXT')){
+                    $set->setTranslation('value','en' , $val);
+                }
                 $set->save();
             }
         }

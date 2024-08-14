@@ -58,11 +58,11 @@
                         <div class="row">
                             <div class="col-md-10">
 
-                                @if( $tr == 'body' || $tr == 'desc' || $tr == 'description' || $tr == 'excerpt' || $tr == 'table')
+                                @if( $tr == 'body' || $tr == 'desc' || $tr == 'description' || $tr == 'excerpt' || $tr == 'table' || request()->has('editor'))
 
                                     <textarea
                                         @if(langIsRTL($lang->tag)) dir="rtl" @else dir="ltr" @endif
-                                    class="form-control @if($tr == 'body' || $tr == 'desc' || $tr == 'description' || $tr == 'table' ) ckeditorx @endif"
+                                    class="form-control @if($tr == 'body' || $tr == 'desc' || $tr == 'description' || $tr == 'table' || request()->has('editor')) ckeditorx @endif"
                                         rows="4" id="{{$lang->tag}}{{$tr}}"
                                         name="data[{{$lang->tag}}][{{$tr}}]">{{gettype($model->getTranslation($tr,$lang->tag)) == 'string' ? $model->getTranslation($tr,$lang->tag):'' }}</textarea>
                                 @else
