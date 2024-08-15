@@ -1,0 +1,124 @@
+#DeebaMenu {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 999;
+    width: 100%;
+    transition: 500ms;
+    background: #11111100;
+    backdrop-filter: blur(0);
+
+
+    ul {
+        display: flex;
+        justify-content: space-between;
+        list-style: none;
+        text-align: center;
+        overflow: hidden;
+
+
+        li {
+            transition: 500ms;
+            flex: 1;
+
+            a {
+                padding: 1rem;
+                display: block;
+
+                color:var(--xshop-primary);
+
+                &:hover {
+                    background: var(--xshop-secondary);
+                    color: var(--xshop-diff2);
+                }
+            }
+        }
+
+    }
+
+    #deeba-logo-main {
+        flex-grow: 2;
+        transition: 500ms;
+
+
+        a {
+            background: transparent;
+        }
+
+        img {
+            height: 100px;
+        }
+    }
+
+    #deeba-toggle,.fixed-center{
+        display: none;
+    }
+
+    &.active{
+
+        ul{
+            height: 3.5rem;
+            padding: 0;
+            margin: 0;
+        }
+        background: #11111133;
+        position: fixed;
+        backdrop-filter: blur(7px);
+        #deeba-logo-main img{
+            height: 1em;
+        }
+    }
+
+    #deeba-sided{
+        opacity: .9;
+        padding: 0;
+        position: fixed;
+        inset-inline-end:  -300px;
+        top: 3.5rem;
+        bottom: 0;
+        overflow-y: auto;
+        height: calc(100vh - 3.5rem);
+        width: 270px;
+        z-index: 999;
+        background: var(--xshop-secondary);
+        display: block;
+
+        li{
+            display: block;
+            a{
+                color: var(--xshop-diff2);
+                transition: 300ms;
+                &:hover{
+                    background: var(--xshop-primary);
+                    color: var(--xshop-diff);
+                }
+            }
+
+        }
+
+    }
+}
+
+/*-1024px width*/
+@media (max-width: 1024px) {
+    #DeebaMenu{
+        li{
+            display: none;
+        }
+
+        #deeba-toggle,.fixed-center{
+            display: block;
+            cursor: pointer;
+        }
+        //.fixed-center{
+        //    visibility: hidden;
+        //}
+        #deeba-logo-main{
+            display: block;
+            flex-grow: 8;
+        }
+        .show{
+            inset-inline-end: 0 !important;
+        }
+    }
+}

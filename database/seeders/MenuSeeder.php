@@ -29,7 +29,6 @@ class MenuSeeder extends Seeder
                'menuable_id' => 1,
                'menuable_type' => Group::class,
                'user_id' => 1,
-               'kind'=>'direct',
            ],
            [
                'title' => "Contact",

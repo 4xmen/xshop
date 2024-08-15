@@ -1,7 +1,7 @@
 {
     "name": "xmen/xshop",
     "type": "project",
-    "description": "The skeleton application for the Laravel framework.",
+    "description": "Very customizable and easy to use shopping system, open source project based on laravel",
     "keywords": ["xshop", "e-shop", "laravel","laravel-shop","open-source-shop"],
     "license": "GPL-3.0-or-later",
     "require": {
