@@ -281,7 +281,7 @@ class XLangController extends XController
         if (!in_array($model, $this->allowedModels)) {
             return abort(404);
         }
-        $langs = Xlang::where('is_default', 0)->get();
+//        $langs = Xlang::where('is_default', 0)->get();
         $model = ($model)::where('id', $id)->firstOrFail();
 //        $model = Product::whereId('id',$id)->first();
         foreach ($request->input('data') as $lang => $items) {
@@ -291,6 +291,7 @@ class XLangController extends XController
                 }
             }
         }
+
 
         $model->save();
         return redirect()->back()->with(['message' => __('Translate updated')]);
