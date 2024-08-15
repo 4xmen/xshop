@@ -7,6 +7,10 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="theme-color" content="{{gfx()['primary']}}"/>
     <meta name="robots" content="follow,index">
+
+    <meta name="generator" content="xShop; version={{config('app.version')}}">
+    {{--  Please don't modify or remove generator --}}
+
     <title>
         @yield('title')
     </title>

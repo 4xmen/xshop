@@ -7,16 +7,9 @@
         </li>
         @foreach(getMenuBySetting($data->area->name.'_'.$data->part.'_menu')->items as $item)
             <li>
-                @if($item->meta == null)
-                <a href="{{$item->dest->webUrl()}}">
+                <a href="{{$item->webUrl()}}">
                     {{$item->title}}
                 </a>
-                @else
-                <a href="{{$item->meta}}">
-                    {{$item->title}}
-                </a>
-                @endif
-
             </li>
         @endforeach
         <li class="float-end">

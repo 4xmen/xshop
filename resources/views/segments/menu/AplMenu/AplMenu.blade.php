@@ -10,7 +10,7 @@
         @foreach(getMenuBySetting($data->area->name.'_'.$data->part.'_menu')->items as $item)
             <li>
                 @if($item->meta == null)
-                    <a href="{{$item->dest->webUrl()}}">
+                    <a href="{{$item->webUrl()}}">
                         {{$item->title}}
                     </a>
                     @switch($item->menuable_type)
@@ -73,7 +73,7 @@
 
                     @endswitch
                 @else
-                    <a href="{{$item->meta}}">
+                    <a href="{{$item->webUrl()}}">
                         {{$item->title}}
                     </a>
                 @endif
