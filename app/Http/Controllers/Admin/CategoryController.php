@@ -57,7 +57,9 @@ class CategoryController extends XController
         $category->name = $request->input('name');
         $category->subtitle = $request->input('subtitle');
         $category->description = $request->input('description');
-        $category->parent_id = $request->input('parent_id');
+        if ($category->parent_id != ''){
+            $category->parent_id = $request->input('parent_id',null);
+        }
         $category->slug = $this->getSlug($category);
         if ($request->has('image')) {
             $category->image = $this->storeFile('image', $category, 'categories');
