@@ -436,6 +436,9 @@ Route::get('whoami', function () {
     return \Auth::guard('customer')->user();
 })->name('whoami');
 
+//Route::get('/payment/redirect/bank/{invoice}/{gateway}', \App\Http\Controllers\Payment\GatewayRedirectController::class)->name('redirect.bank');
+Route::any('/payment/check/{invoice_hash}/{gateway}', \App\Http\Controllers\Payment\GatewayVerifyController::class)->name('pay.check');
+
 Route::any('{lang}/{any}', [ClientController::class, 'lang'])
     ->where('any', '.*')
     ->where('lang','[A-Za-z]{2}')
