@@ -24,6 +24,14 @@ class AppServiceProvider extends ServiceProvider
         $this->commands([
             TranslatorCommand::class,
         ]);
+        foreach (config('xshop.payment.gateways') as $gateway){
+            /** @var \App\Contracts\Payment $gateway */
+            $gateway::registerService();
+        }
+
+        \Route::bind('gateway', function ($gatewayName) {
+            return app("$gatewayName-gateway");
+        });
     }
 
     /**
