@@ -5,10 +5,20 @@
     {{$post->title}} - {{config('app.name')}}
 @endsection
 @section('content')
-    <main>
+    @if(\App\Models\Area::where('name',$area)->first()->use_default)
+        @foreach(getParts('default_header') as $part)
+            @php($p = $part->getBladeWithData())
+            @include($p['blade'],['data' => $p['data']])
+        @endforeach
+    @endif
     @foreach(getParts($area) as $part)
-        @php($p = $part->getBladeWithData($post))
+        @php($p = $part->getBladeWithData())
         @include($p['blade'],['data' => $p['data']])
     @endforeach
-    </main>
+    @if(\App\Models\Area::where('name',$area)->first()->use_default)
+        @foreach(getParts('default_footer') as $part)
+            @php($p = $part->getBladeWithData())
+            @include($p['blade'],['data' => $p['data']])
+        @endforeach
+    @endif
 @endsection
