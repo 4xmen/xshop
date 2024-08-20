@@ -51,7 +51,7 @@ class CustomerController extends XController
     {
 
         $customer->name = $request->input('name');
-        if ($customer->credit != $request->input('credit')){
+        if ($customer->credit != $request->input('credit') && $customer->id != null){
             $diff =  $request->input('credit') - $customer->credit;
             $customer->credit = $request->input('credit')??0 ;
             $cr = new Credit();
