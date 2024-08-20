@@ -1,27 +1,29 @@
 <section class='SimplePostListSideBar content'>
     <div class="{{gfx()['container']}}">
         <div class="row pinned-posts">
-            @foreach(\App\Models\Post::where('status',1)->where('is_pinned',1)->limit(2)->get() as $post)
-                <div class="col-md-6 p-1">
-                    <div class="post-item">
-                        <div class="corner">
-                            {{$post->mainGroup->name}}
-                        </div>
-                        <a href="{{$post->webUrl()}}">
-                            <img src="{{$post->orgUrl()}}" alt="{{$post->title}}"
-                                 title="{{implode(',',$post->tags->pluck('name')->toArray()??'')}}">
-                        </a>
-                        <div class="detail">
-                            <h4>
-                                {{$post->title}}
-                            </h4>
-                            <span>
+            @if(\App\Models\Post::where('status',1)->where('is_pinned',1)->count() < 0 )
+                @foreach(\App\Models\Post::where('status',1)->where('is_pinned',1)->limit(2)->get() as $post)
+                    <div class="col-md-6 p-1">
+                        <div class="post-item">
+                            <div class="corner">
+                                {{$post->mainGroup->name}}
+                            </div>
+                            <a href="{{$post->webUrl()}}">
+                                <img src="{{$post->orgUrl()}}" alt="{{$post->title}}"
+                                     title="{{implode(',',$post->tags->pluck('name')->toArray()??'')}}">
+                            </a>
+                            <div class="detail">
+                                <h4>
+                                    {{$post->title}}
+                                </h4>
+                                <span>
                                 {{$post->created_at->ldate('Y/m/d l')}}
                             </span>
+                            </div>
                         </div>
                     </div>
-                </div>
-            @endforeach
+                @endforeach
+            @endif
         </div>
         <hr>
         <div class="row">

@@ -1,5 +1,10 @@
 #ParallaxSlider {
 
+    .tns-inner{
+        direction: ltr;
+    }
+
+
     #ParallaxSliderTns > div{
         position: relative;
         overflow: hidden;

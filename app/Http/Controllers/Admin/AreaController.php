@@ -20,6 +20,8 @@ class AreaController extends Controller
     public function desgin(Area $area)
     {
 
+
+
         $valids = [];
         foreach ($area->segment as $seg) {
             if (File::exists(resource_path() . '/views/segments/' . $seg)) {
@@ -79,6 +81,11 @@ class AreaController extends Controller
         \Artisan::call('client');
 
         logAdmin(__METHOD__, __CLASS__, $area->id);
+
+        if ($request->has('use_default')){
+            $area->use_default = 1;
+            $area->save();
+        }
 
 
         return redirect()->back()->with(['message' => __('area :NAME of website updated', ['NAME' => $area->name])]);

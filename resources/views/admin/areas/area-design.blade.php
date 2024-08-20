@@ -14,6 +14,16 @@
                 {{__("Design :AREA",['AREA' => $area->name])}} <i class="{{$area->icon}}"></i>
             </h1>
 
+            @if(strpos($area->name,'default') !== 0  )
+
+            <div class="form-group p-3">
+
+                <div class="form-check form-switch">
+                    <input value="1" class="form-check-input  @error('use_default') is-invalid @enderror" name="use_default" @if( isset($area) && $area->use_default) checked @endif type="checkbox" id="use_default">
+                    <label class="form-check-label" for="use_default"> {{__('Use default')}}</label>
+                </div>
+            </div>
+            @endif
             <area-designer
                 image-link="{{route('admin.area.image',['',''])}}"
                 :parts='@json($area->parts()->orderBy('sort')->get())'
