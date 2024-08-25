@@ -41,6 +41,9 @@ jobs:
       - name: Npm install
         run: npm install
       - name: client build
+        env:
+          DB_CONNECTION: sqlite
+          DB_DATABASE: database/database.sqlite
         run: php artisan client
       - name: npm build
         run: npm run build
