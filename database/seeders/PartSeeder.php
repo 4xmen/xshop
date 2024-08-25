@@ -87,7 +87,7 @@ class PartSeeder extends Seeder
         $part = new Part();
         $part->segment = 'menu';
         $part->part = 'AplMenu';
-        $part->area_id = Area::where('name', 'index')->first()->id;
+        $part->area_id = Area::where('name', 'default_header')->first()->id;
         $part->sort = 0;
         $part->save();
 

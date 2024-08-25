@@ -1,12 +1,12 @@
 <section class='PostIndexImage'>
     <div class="{{gfx()['container']}}">
         <h1>
-            <a href="{{getGroupBySetting($data->area->name.'_'.$data->part.'_group')->webUrl()}}">
-                {{getGroupBySetting($data->area->name.'_'.$data->part.'_group')->name}}
+            <a href="{{getGroupBySetting($data->area->name.'_'.$data->part.'_group')?->webUrl()}}">
+                {{getGroupBySetting($data->area->name.'_'.$data->part.'_group')?->name}}
             </a>
         </h1>
         <p class="text-muted">
-            {{getGroupBySetting($data->area->name.'_'.$data->part.'_group')->description}}
+            {{getGroupBySetting($data->area->name.'_'.$data->part.'_group')?->description}}
         </p>
         <div class="row">
             @foreach( getGroupPostsBySetting($data->area->name.'_'.$data->part.'_group',4) as $post )
@@ -28,7 +28,7 @@
             @endforeach
         </div>
         <div class="py-5 text-center">
-            <a href="{{getGroupBySetting($data->area->name.'_'.$data->part.'_group')->webUrl()}}" class="btn btn-outline-primary">
+            <a href="{{getGroupBySetting($data->area->name.'_'.$data->part.'_group')?->webUrl()}}" class="btn btn-outline-primary">
                 {{getSetting($data->area->name.'_'.$data->part.'_btn')}}
             </a>
         </div>
