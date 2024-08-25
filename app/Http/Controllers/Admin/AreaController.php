@@ -20,8 +20,6 @@ class AreaController extends Controller
     public function desgin(Area $area)
     {
 
-
-
         $valids = [];
         foreach ($area->segment as $seg) {
             if (File::exists(resource_path() . '/views/segments/' . $seg)) {
