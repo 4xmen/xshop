@@ -20,7 +20,7 @@
 
 ## Access to xShop/v1
 > [!WARNING]  
-> xShop/v1 available here: <a href="https://github.com/a1Gard/xshop.v1">https://github.com/a1Gard/xshop.v1</a>
+> xShop/v1 available here: <a href="https://github.com/4xmen/xshop.v1">https://github.com/4xmen/xshop.v1</a>
 
 
 ## Installation
