@@ -12,8 +12,8 @@ class DenaAttachList
         $setting = new Setting();
         $setting->section = 'theme';
         $setting->key = $part->area->name . '_' . $part->part.'_title';
-        $setting->value = __("Website attachments list");
-        $setting->type = 'text';
+        $setting->value = __("Website attachments list").' [ pdf, docx, zip, png, jpg, svg, mp4, rar, mp3 ]';
+        $setting->type = 'TEXT';
         $setting->size = 6;
         $setting->title =  $part->area->name . ' ' . $part->part;
         $setting->save();
