@@ -16,6 +16,9 @@ jobs:
         with:
           php-version: '8.2'
       - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '18'
       - name: Copy .env
         run: php -r "file_exists('.env') || copy('.env.example', '.env');"
       - name: remove composer lock
@@ -35,6 +38,12 @@ jobs:
           DB_CONNECTION: sqlite
           DB_DATABASE: database/database.sqlite
         run: php artisan migrate --seed
+      - name: Npm install
+        run: npm install
+      - name: client build
+        run: php artisan client
+      - name: npm build
+        run: npm run build
       - name: Execute tests (Unit and Feature tests) via PHPUnit
         env:
           DB_CONNECTION: sqlite
