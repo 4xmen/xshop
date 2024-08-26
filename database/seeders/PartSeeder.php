@@ -83,13 +83,30 @@ class PartSeeder extends Seeder
 
 
         // -------------------------------------------------------------
+        // default header and footer
+        $part = new Part();
+        $part->segment = 'menu';
+        $part->part = 'AplMenu';
+        $part->area_id = Area::where('name', 'default_header')->first()->id;
+        $part->sort = 0;
+        $part->save();
+
 
         $part = new Part();
         $part->segment = 'header';
         $part->part = 'SimpleHeader';
-        $part->area_id = Area::where('name', 'card')->first()->id;
+        $part->area_id = Area::where('name', 'default_header')->first()->id;
         $part->sort = 0;
         $part->save();
+
+        $part = new Part();
+        $part->segment = 'footer';
+        $part->part = 'WaveFooter';
+        $part->area_id = Area::where('name', 'default_footer')->first()->id;
+        $part->sort = 2;
+        $part->save();
+
+        // -------------------------------------------------------------
 
         $part = new Part();
         $part->segment = 'card';
@@ -98,21 +115,10 @@ class PartSeeder extends Seeder
         $part->sort = 1;
         $part->save();
 
-        $part = new Part();
-        $part->segment = 'footer';
-        $part->part = 'WaveFooter';
-        $part->area_id = Area::where('name', 'card')->first()->id;
-        $part->sort = 2;
-        $part->save();
-
         // -------------------------------------------------------------
 
-        $part = new Part();
-        $part->segment = 'header';
-        $part->part = 'SimpleHeader';
-        $part->area_id = Area::where('name', 'products-list')->first()->id;
-        $part->sort = 0;
-        $part->save();
+
+
 
         $part = new Part();
         $part->segment = 'products_page';
@@ -121,23 +127,12 @@ class PartSeeder extends Seeder
         $part->sort = 1;
         $part->save();
 
-        $part = new Part();
-        $part->segment = 'footer';
-        $part->part = 'WaveFooter';
-        $part->area_id = Area::where('name', 'products-list')->first()->id;
-        $part->sort = 2;
-        $part->save();
+
 
 
         // -------------------------------------------------------------
 
 
-        $part = new Part();
-        $part->segment = 'header';
-        $part->part = 'SimpleHeader';
-        $part->area_id = Area::where('name', 'product')->first()->id;
-        $part->sort = 0;
-        $part->save();
 
         $part = new Part();
         $part->segment = 'product';
@@ -146,23 +141,11 @@ class PartSeeder extends Seeder
         $part->sort = 1;
         $part->save();
 
-        $part = new Part();
-        $part->segment = 'footer';
-        $part->part = 'WaveFooter';
-        $part->area_id = Area::where('name', 'product')->first()->id;
-        $part->sort = 2;
-        $part->save();
 
 
         // -------------------------------------------------------------
 
 
-        $part = new Part();
-        $part->segment = 'header';
-        $part->part = 'SimpleHeader';
-        $part->area_id = Area::where('name', 'posts-list')->first()->id;
-        $part->sort = 0;
-        $part->save();
 
         $part = new Part();
         $part->segment = 'posts_page';
@@ -171,22 +154,12 @@ class PartSeeder extends Seeder
         $part->sort = 1;
         $part->save();
 
-        $part = new Part();
-        $part->segment = 'footer';
-        $part->part = 'WaveFooter';
-        $part->area_id = Area::where('name', 'posts-list')->first()->id;
-        $part->sort = 2;
-        $part->save();
+
 
         // -------------------------------------------------------------
 
 
-        $part = new Part();
-        $part->segment = 'header';
-        $part->part = 'SimpleHeader';
-        $part->area_id = Area::where('name', 'post')->first()->id;
-        $part->sort = 0;
-        $part->save();
+
 
         $part = new Part();
         $part->segment = 'post';
@@ -195,11 +168,93 @@ class PartSeeder extends Seeder
         $part->sort = 1;
         $part->save();
 
+
+
+        // -------------------------------------------------------------
+
+
         $part = new Part();
-        $part->segment = 'footer';
-        $part->part = 'WaveFooter';
-        $part->area_id = Area::where('name', 'post')->first()->id;
-        $part->sort = 2;
+        $part->segment = 'clips_page';
+        $part->part = 'ClipListGrid';
+        $part->area_id = Area::where('name', 'clips-list')->first()->id;
+        $part->sort = 1;
+        $part->save();
+
+        // -------------------------------------------------------------
+
+        $part = new Part();
+        $part->segment = 'clip';
+        $part->part = 'DorClip';
+        $part->area_id = Area::where('name', 'clip')->first()->id;
+        $part->sort = 1;
+        $part->save();
+
+        // -------------------------------------------------------------
+
+        $part = new Part();
+        $part->segment = 'galleries_page';
+        $part->part = 'GalleriesList';
+        $part->area_id = Area::where('name', 'galleries-list')->first()->id;
+        $part->sort = 1;
+        $part->save();
+
+
+
+        // -------------------------------------------------------------
+
+        $part = new Part();
+        $part->segment = 'gallery';
+        $part->part = 'GallaryGrid';
+        $part->area_id = Area::where('name', 'gallery')->first()->id;
+        $part->sort = 1;
+        $part->save();
+
+
+
+        // -------------------------------------------------------------
+
+        $part = new Part();
+        $part->segment = 'compare';
+        $part->part = 'CompareProducts';
+        $part->area_id = Area::where('name', 'compare')->first()->id;
+        $part->sort = 1;
+        $part->save();
+
+
+        // -------------------------------------------------------------
+
+        $part = new Part();
+        $part->segment = 'login';
+        $part->part = 'LoginPatternBg';
+        $part->area_id = Area::where('name', 'login')->first()->id;
+        $part->sort = 1;
+        $part->save();
+
+        // -------------------------------------------------------------
+
+        $part = new Part();
+        $part->segment = 'customer';
+        $part->part = 'AvisaCustomer';
+        $part->area_id = Area::where('name', 'customer')->first()->id;
+        $part->sort = 1;
+        $part->save();
+
+        // -------------------------------------------------------------
+
+        $part = new Part();
+        $part->segment = 'attachments_page';
+        $part->part = 'DenaAttachList';
+        $part->area_id = Area::where('name', 'attachments-list')->first()->id;
+        $part->sort = 1;
+        $part->save();
+
+        // -------------------------------------------------------------
+
+        $part = new Part();
+        $part->segment = 'attachment';
+        $part->part = 'AttachmentWithPreview';
+        $part->area_id = Area::where('name', 'attachment')->first()->id;
+        $part->sort = 1;
         $part->save();
 
 

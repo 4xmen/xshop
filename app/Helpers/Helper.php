@@ -816,25 +816,48 @@ function getGroupBySetting($key)
 }
 
 /**
- * get group by setting key
+ * get menu by setting key
  * @param $key
  * @return Menu
  */
 function getMenuBySetting($key)
 {
+    if (Menu::count() == 0) {
+        return [];
+    }
     return Menu::where('id', getSetting($key) ?? 1)->first();
+}
+
+/**
+ * get menu's items by setting key
+ * @param $key
+ * @return array
+ */
+function getMenuBySettingItems($key)
+{
+    if (Menu::count() == 0) {
+        return [];
+    }
+    $r = Menu::where('id', getSetting($key) ?? 1)->first();
+    if ($r == null) {
+        $r = Menu::first();
+    }
+    return $r->items;
 }
 
 /**
  * get group's posts by setting key
  * @param $key
  * @param integer $limit
- * @return \App\Models\Post[]|\Illuminate\Database\Eloquent\Collection|\LaravelIdea\Helper\App\Models\_IH_Post_C
+ * @return \App\Models\Post[]|\Illuminate\Database\Eloquent\Collection|\LaravelIdea\Helper\App\Models\_IH_Post_C|array
  */
 function getGroupPostsBySetting($key, $limit = 10, $order = 'id', $dir = "DESC")
 {
-    return Group::where('id', getSetting($key) ?? 1)->first()
-        ->posts()->where('status', 1)->orderBy($order, $dir)->limit($limit)->get();
+    $g = Group::where('id', getSetting($key) ?? 1)->first();
+    if ($g == null) {
+        return [];
+    }
+    return $g->posts()->where('status', 1)->orderBy($order, $dir)->limit($limit)->get();
 }
 
 /**
@@ -857,12 +880,15 @@ function getCategoryProductBySetting($key, $limit = 10, $order = 'id', $dir = "D
  * @param integer $limit
  * @param string $order
  * @param string $dir
- * @return \App\Models\Post[]|\Illuminate\Database\Eloquent\Collection|\LaravelIdea\Helper\App\Models\_IH_Post_C
+ * @return \App\Models\Post[]|\Illuminate\Database\Eloquent\Collection|\LaravelIdea\Helper\App\Models\_IH_Post_C | array
  */
 function getCategorySubCatsBySetting($key, $limit = 10, $order = 'id', $dir = "DESC")
 {
-    return Category::where('id', getSetting($key) ?? 1)->first()
-        ->children()->orderBy($order, $dir)->limit($limit)->get();
+    $c = Category::where('id', getSetting($key) ?? 1)->first();
+    if ($c == null) {
+        return  [];
+    }
+    return $c->children()->orderBy($order, $dir)->limit($limit)->get();
 }
 
 /**
@@ -994,6 +1020,7 @@ function postsUrl()
 {
     return fixUrlLang(\route('client.posts'));
 }
+
 /**
  * products url to best experience for multi lang shops
  * @return string
@@ -1002,6 +1029,7 @@ function productsUrl()
 {
     return fixUrlLang(\route('client.products'));
 }
+
 /**
  * clips url to best experience for multi lang shops
  * @return string
@@ -1010,6 +1038,7 @@ function clipsUrl()
 {
     return fixUrlLang(\route('client.clips'));
 }
+
 /**
  * galleries url to best experience for multi lang shops
  * @return string
@@ -1018,6 +1047,7 @@ function gallariesUrl()
 {
     return fixUrlLang(\route('client.galleries'));
 }
+
 /**
  * attachments url to best experience for multi lang shops
  * @return string
@@ -1101,11 +1131,11 @@ function transports()
  */
 function defTrannsport()
 {
-    if (\App\Models\Transport::where('is_default',1)->count() == 0){
+    if (\App\Models\Transport::where('is_default', 1)->count() == 0) {
         return null;
     }
 
-    return \App\Models\Transport::where('is_default',1)->first()->id;
+    return \App\Models\Transport::where('is_default', 1)->first()->id;
 }
 
 
@@ -1114,7 +1144,8 @@ function defTrannsport()
  * @param $array
  * @return false|string
  */
-function vueTranslate($array){
+function vueTranslate($array)
+{
     return json_encode($array);
 }
 
@@ -1137,7 +1168,7 @@ function markUpBreadcrumbList($items)
             "name" => $index,
         ];
         if ($item != '' || $item != null) {
-            $json[$i-1]['item'] = $item;
+            $json[$i - 1]['item'] = $item;
         }
     }
 
@@ -1166,9 +1197,9 @@ RESULT;
  */
 function fixUrlLang($url)
 {
-    if ( config('app.xlang.active') && app()->getLocale() != config('app.xlang.main')){
+    if (config('app.xlang.active') && app()->getLocale() != config('app.xlang.main')) {
         $welcome = \route('client.welcome');
-        return str_replace($welcome,$welcome .'/'.app()->getLocale(),$url);
+        return str_replace($welcome, $welcome . '/' . app()->getLocale(), $url);
     }
     return $url;
 }

@@ -56,7 +56,9 @@ class GroupController extends XController
         $group->name = $request->input('name');
         $group->subtitle = $request->input('subtitle');
         $group->description = $request->input('description');
-        $group->parent_id = $request->input('parent_id');
+        if ($group->parent_id != ''){
+            $group->parent_id = $request->input('parent_id',null);
+        }
         $group->slug = $this->getSlug($group);
         if ($request->has('image')){
             $group->image = $this->storeFile('image',$group, 'groups');
