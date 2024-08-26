@@ -24,6 +24,7 @@
         "sortablejs": "^1.15.2",
         "three": "0.150.0",
         "tiny-slider": "^2.9.4",
+        "vazir-xui": "^1.0.0",
         "vazirmatn": "^33.0.3",
         "vue-toast-notification": "^3.1.2",
         "vuex": "^4.0.2"
