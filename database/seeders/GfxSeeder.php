@@ -41,6 +41,12 @@ class GfxSeeder extends Seeder
                 'value'=> '#111111'
             ],
             [
+                'key'=>'dark',
+                'label'=>'Theme mode',
+                'system'=>'1',
+                'value'=> '0'
+            ],
+            [
                 'key'=>'border-radius',
                 'label'=>'Border radius',
                 'system'=>'1',

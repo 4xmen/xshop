@@ -17,6 +17,12 @@
                                 {{ titles[i] }}
                             </label>
                             <br>
+                            <template v-if="i == 'dark'">
+                               <select class="form-control" v-model="values[i]">
+                                   <option value="0"> Light mode </option>
+                                   <option value="1"> Dark mode </option>
+                               </select>
+                            </template>
                             <template v-if="i == 'border-radius'">
                                 <border-radios-input v-model="values[i]"></border-radios-input>
                             </template>
