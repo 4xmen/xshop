@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Contracts\Payment;
+use App\Models\Customer;
 use App\Models\Discount;
 use App\Models\Invoice;
 use App\Models\Order;
@@ -80,6 +82,7 @@ class CardController extends Controller
 
     public function index()
     {
+        auth('customer')->login(Customer::first());
         $area = 'card';
         $title = __("Shopping card");
         $subtitle = '';
@@ -97,27 +100,28 @@ class CardController extends Controller
         ]);
         $total = 0;
 //        return $request->all();
-        $inv = new Invoice();
-        $inv->customer_id = auth('customer')->user()->id;
-        $inv->count = array_sum($request->count);
-        $inv->address_id = $request->address_id;
-        $inv->desc = $request->desc;
+        $invoice = new Invoice();
+        $invoice->customer_id = auth('customer')->user()->id;
+        $invoice->count = array_sum($request->count);
+        $invoice->address_id = $request->address_id;
+        $invoice->desc = $request->desc;
+
         if ($request->has('transport_id')) {
             $request->transport_id = $request->input('transport_id');
             $t = Transport::find($request->input('transport_id'));
-            $inv->transport_price = $t->price;
+            $invoice->transport_price = $t->price;
             $total += $t->price;
         }
         if ($request->has('discount_id')) {
             $request->discount_id = $request->input('discount_id');
         }
 
-        $inv->save();
+        $invoice->save();
 
         foreach ($request->product_id as $i => $product) {
             $order = new Order();
             $order->product_id = $product;
-            $order->invoice_id = $inv->id;
+            $order->invoice_id = $invoice->id;
             $order->count = $request->count[$i];
             if ($request->quantity_id[$i] != '') {
                 $order->quantity_id = $request->quantity_id[$i];
@@ -133,17 +137,45 @@ class CardController extends Controller
             $order->save();
         }
 
-        $inv->total_price = $total;
-        $inv->save();
+        $invoice->total_price = $total;
+        $invoice->save();
         // clear shopping card
         // self::clear();
-        return [$inv, $inv->orders];
+        //prepare to redirect to bank gateway
+        $activeGateway = config('xshop.payment.active_gateway');
+        /** @var Payment $gateway */
+        $gateway = app($activeGateway . '-gateway');
+        logger()->info('pay controller', ["active_gateway" => $activeGateway, "invoice" => $invoice->toArray(),]);
+
+        if ($invoice->isCompleted()) {
+            return redirect()->back()->with('message', __('Invoice payed.'));
+        }
+
+        $callbackUrl = route('pay.check', ['invoice_hash' => $invoice->hash, 'gateway' => $gateway->getName()]);
+        $payment = null;
+        try {
+            $response = $gateway->request(($invoice->total_price - $invoice->credit_price), $callbackUrl);
+            $payment = $invoice->storePaymentRequest($response['order_id'], ($invoice->total_price - $invoice->credit_price), $response['token'] ?? null, null, $gateway->getName());
+            session(["payment_id" => $payment->id]);
+            \Session::save();
+
+            return $gateway->goToBank();
+        } catch (\Throwable $exception) {
+            $invoice->status = 'FAILED';
+            $invoice->save();
+            \Log::error("Payment REQUEST exception: " . $exception->getMessage());
+            \Log::warning($exception->getTraceAsString());
+            $result = false;
+            $message = __('error in payment. contact admin.');
+            return redirect()->back()->withErrors($message);
+        }
+
     }
 
 
     public static function clear()
     {
-        if (auth('customer')->check()){
+        if (auth('customer')->check()) {
             $customer = auth('customer')->user();
             $customer->card = null;
             $customer->save();
