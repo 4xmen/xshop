@@ -372,6 +372,8 @@ Route::middleware([\App\Http\Middleware\VisitorCounter::class])
         Route::get('/customer/check/auth-code', [ClientController::class, 'checkAuth'])->name('check-auth');
         Route::get('/customer/profile', [ClientController::class, 'profile'])->name('profile');
         Route::get('/compare', [ClientController::class, 'compare'])->name('compare');
+        Route::get('/contact-us', [ClientController::class, 'contact'])->name('contact');
+        Route::post('/contact-us/submit', [ClientController::class, 'sendContact'])->name('send-contact');
         Route::get('/galleries', [ClientController::class, 'galleries'])->name('galleries');
         Route::get('/videos', [ClientController::class, 'clips'])->name('clips');
         Route::post('/card/check', [\App\Http\Controllers\CardController::class, 'check'])->name('card.check');

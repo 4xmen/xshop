@@ -257,6 +257,15 @@ class PartSeeder extends Seeder
         $part->sort = 1;
         $part->save();
 
+        // -------------------------------------------------------------
+
+        $part = new Part();
+        $part->segment = 'contact';
+        $part->part = 'MeloContact';
+        $part->area_id = Area::where('name', 'contact-us')->first()->id;
+        $part->sort = 1;
+        $part->save();
+
 
     }
 }

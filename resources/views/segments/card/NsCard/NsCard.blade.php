@@ -6,7 +6,7 @@
                 {{__("There is nothing added to card!")}}
             </div>
         @else {{--  count 0--}}
-        <form method="post" class="safe-from" >
+        <form method="post" class="safe-form" >
 
             <input type="hidden" class="safe-url" data-url="{{route('client.card.check')}}">
             @csrf

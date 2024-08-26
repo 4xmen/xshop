@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ContactSubmitRequest;
 use App\Models\Attachment;
 use App\Models\Category;
 use App\Models\Clip;
 use App\Models\Comment;
+use App\Models\Contact;
 use App\Models\Customer;
 use App\Models\Gallery;
 use App\Models\Group;
@@ -410,6 +412,24 @@ class ClientController extends Controller
         $ids = json_decode(\Cookie::get('compares'), true);
         $products = Product::whereIn('id', $ids)->where('status', 1)->get();
         return view('client.default-list', compact('area', 'products', 'title', 'subtitle'));
+    }
+    public function contact()
+    {
+        $area = 'contact-us';
+        $title = __("Contact us");
+        $subtitle = '';
+        return view('client.default-list', compact('area',  'title', 'subtitle'));
+    }
+    public function sendContact(ContactSubmitRequest $request)
+    {
+        $con = new  Contact();
+        $con->name = $request->full_name;
+        $con->email = $request->email;
+        $con->mobile = $request->phone;
+        $con->subject = $request->subject;
+        $con->body = $request->bodya;
+        $con->save();
+        return redirect()->back()->with(['message' => __('Your message has been successfully sent.')]);
     }
 
 

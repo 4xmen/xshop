@@ -1,0 +1,39 @@
+.MeloContact {
+    padding: 2rem 0;
+    h1{
+        border-bottom: 1px solid var(--xshop-primary);
+    }
+    .pin-box{
+        background: var(--xshop-secondary);
+        border-radius: var(--xshop-border-radius);
+        min-height: 400px;
+        position: relative;
+        color: var(--xshop-diff2);
+
+        i.icon{
+            position: absolute;
+            inset-inline-end: -1%;
+            top: -10%;
+            font-size:128px;
+            opacity: .3;
+            transform: rotateZ(-17deg);
+        }
+
+        .social{
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 0;
+
+            a,a:visited{
+                color: var(--xshop-diff2);
+
+
+                i{
+                    font-size: 30px;
+                }
+            }
+        }
+    }
+
+}
