@@ -7,7 +7,7 @@
             </a>
         </li>
 
-        @foreach(getMenuBySetting($data->area->name.'_'.$data->part.'_menu')->items as $item)
+        @foreach(getMenuBySettingItems($data->area->name.'_'.$data->part.'_menu') as $item)
             <li>
                 @if($item->meta == null)
                     <a href="{{$item->webUrl()}}">

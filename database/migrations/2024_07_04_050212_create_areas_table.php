@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('icon')->nullable();
             $table->json('valid_segments');
             $table->string('preview')->nullable();
+            $table->boolean('use_default')->default(true);
             $table->timestamps();
         });
     }

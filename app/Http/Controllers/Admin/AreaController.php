@@ -80,6 +80,11 @@ class AreaController extends Controller
 
         logAdmin(__METHOD__, __CLASS__, $area->id);
 
+        if ($request->has('use_default')){
+            $area->use_default = 1;
+            $area->save();
+        }
+
 
         return redirect()->back()->with(['message' => __('area :NAME of website updated', ['NAME' => $area->name])]);
     }

@@ -1,12 +1,12 @@
 <section class='PostsIconSimple py-4'>
     <div class="{{gfx()['container']}}">
         <h1>
-            <a href="{{getGroupBySetting($data->area->name.'_'.$data->part)->webUrl()}}">
-                {{getGroupBySetting($data->area->name.'_'.$data->part)->name}}
+            <a href="{{getGroupBySetting($data->area->name.'_'.$data->part)?->webUrl()}}">
+                {{getGroupBySetting($data->area->name.'_'.$data->part)?->name}}
             </a>
         </h1>
         <p>
-           {{getGroupBySetting($data->area->name.'_'.$data->part)->description}}
+           {{getGroupBySetting($data->area->name.'_'.$data->part)?->description}}
         </p>
         <div class="row">
             @foreach(getGroupPostsBySetting($data->area->name.'_'.$data->part, getSetting($data->area->name.'_'.$data->part.'_limit')) as $post)
@@ -20,7 +20,7 @@
                    {{$post->subtitle}}
                 </p>
 
-                <a href="{{$post->webUrl()}}" class="btn btn-outline-primary w-100">
+                <a href="{{$post?->webUrl()}}" class="btn btn-outline-primary w-100">
                     {{__("Read more")}}
                 </a>
             </div>

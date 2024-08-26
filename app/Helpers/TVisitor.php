@@ -44,7 +44,7 @@ class TVisitor {
      */
     public static function DetectOS() {
         if (!isset($_SERVER['HTTP_USER_AGENT']))
-            return 'Unknown';
+            return null;
 
         $os_list = Visitor::$osList;
 
@@ -54,7 +54,7 @@ class TVisitor {
             }
         }
 
-        return 'Unknown';
+        return null;
     }
 
     /**
@@ -118,7 +118,7 @@ class TVisitor {
      */
     public static function DetectBrowser() {
         if (!isset($_SERVER['HTTP_USER_AGENT']))
-            return 'Unknown';
+            return null;
 
         $browser_list = Visitor::$browserList;
 
@@ -128,7 +128,7 @@ class TVisitor {
             }
         }
 
-        return 'Other';
+        return null;
     }
 
     /**

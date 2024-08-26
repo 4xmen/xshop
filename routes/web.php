@@ -357,7 +357,7 @@ Route::prefix(config('app.panel.prefix'))->name('admin.')->group(
 
     });
 
-Route::get('theme/variable.css', [\App\Http\Controllers\ThemeController::class, 'cssVariables'])->name('theme.variable.css');
+Route::get('/theme/variable', [\App\Http\Controllers\ThemeController::class, 'cssVariables'])->name('theme.variable.css');
 
 Route::middleware([\App\Http\Middleware\VisitorCounter::class])
     ->name('client.')->group(function () {

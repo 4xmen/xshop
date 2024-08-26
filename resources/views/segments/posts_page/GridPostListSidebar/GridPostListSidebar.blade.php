@@ -1,5 +1,6 @@
 <section class='GridPostListSidebar content'>
     <div class="{{gfx()['container']}}">
+        @if(\App\Models\Post::where('status',1)->where('is_pinned',1)->count() < 0 )
         <div class="row pinned-posts">
             @foreach(\App\Models\Post::where('status',1)->where('is_pinned',1)->limit(2)->get() as $post)
                 <div class="col-md-6 p-1">
@@ -24,6 +25,7 @@
             @endforeach
         </div>
         <hr>
+        @endif
         <div class="row">
             @if(!getSetting($data->area->name.'_'.$data->part.'_invert'))
                 <div class="col-lg-3 p-0">
