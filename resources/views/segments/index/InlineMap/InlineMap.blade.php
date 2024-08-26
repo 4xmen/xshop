@@ -1,4 +1,11 @@
 <section id='InlineMap'>
+    <div class="{{gfx()['container']}}">
+        <h5>
+            <a href="{{getSetting($data->area->name.'_'.$data->part.'_link')}}">
+                {{getSetting($data->area->name.'_'.$data->part.'_title')}}
+            </a>
+        </h5>
+    </div>
     <div id="mapContainer" @if(getSetting($data->area->name.'_'.$data->part.'_dark')) class="dark-mode" @endif>
 
     </div>

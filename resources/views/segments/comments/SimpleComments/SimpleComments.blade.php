@@ -10,7 +10,7 @@
             {{__("Post your comment")}}
         </h5>
         @include('components.err')
-        <form  id="comment-form" class="safe-from" method="post">
+        <form  id="comment-form" class="safe-form" method="post">
             <div class="safe-url" data-url="{{route('client.comment.submit')}}"></div>
             @csrf
 

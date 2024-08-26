@@ -45,7 +45,7 @@ class AreaSeeder extends Seeder
             [
                 'name' => 'default_footer',
                 'valid_segments' => json_encode(
-                    ["footer", "other", "ads" , "groups"]
+                    ["footer", "other", "ads", "groups"]
                 ),
                 'max' => 2,
                 'preview' => null,
@@ -229,7 +229,7 @@ class AreaSeeder extends Seeder
                         "parallax", "other", "register", "ads"]
                 ),
                 'max' => 6,
-                'preview' => 'client.register',
+                'preview' => 'client.sign-up',
                 'icon' => 'ri-user-add-line',
             ],
             [
@@ -261,6 +261,16 @@ class AreaSeeder extends Seeder
                 'preview' => null,
                 'icon' => 'ri-scales-3-line',
             ],
+            [
+                'name' => 'contact-us',
+                'valid_segments' => json_encode(
+                    ["top", "header", "footer", "menu",
+                        "parallax", "other", "contact", "ads", "index"]
+                ),
+                'max' => 4,
+                'preview' => null,
+                'icon' => 'ri-mail-open-line',
+            ],
         ];
 
         foreach ($areas as $area) {
@@ -270,7 +280,7 @@ class AreaSeeder extends Seeder
             $a->valid_segments = $area['valid_segments'];
             $a->icon = $area['icon'];
             $a->preview = $area['preview'];
-            if ($area['name'] == 'index'){
+            if ($area['name'] == 'index') {
                 $a->use_default = false;
             }
             $a->save();

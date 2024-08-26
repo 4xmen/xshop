@@ -18,6 +18,7 @@ class Area extends Model
 //        'categories_page',
         'category',
         'comments',
+        'contact',
         'clip',
         'clips',
         'clips_page',
