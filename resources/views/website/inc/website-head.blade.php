@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="{{config('app.locale')}}" @if(langIsRTL(config('app.locale'))) dir="rtl" @else dir="ltr" @endif >
+<html lang="{{config('app.locale')}}" @if(langIsRTL(config('app.locale'))) dir="rtl" @else dir="ltr" @endif @if(gfx()['dark'] == 1) data-bs-theme="dark" @endif >
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
