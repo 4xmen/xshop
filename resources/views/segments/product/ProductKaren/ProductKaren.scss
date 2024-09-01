@@ -160,13 +160,5 @@
         background: var(--xshop-primary);
         transition: left 0.3s ease, width 0.3s ease;
     }
-    .tab-content {
-        display: none;
-        padding: 1rem;
-        background: var(--karen-tab-bg-color,#ffffff);
-    }
-    .tab-content.active {
-        display: block;
-    }
 
 }

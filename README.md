@@ -50,7 +50,7 @@ php artisan seeding:prepare
  ```
 - Seeding image for models: [Group, Category, Post, Product, Slider] 
 ```bash
-pa seeding:image Product digital
+php artisan  seeding:image Product digital
 ```
 > First parameter is Model, Second is image seeder directory available [bag, clothe, digital, sport, posts, makeup]
 > You can create your directory and put your image into new directory then use image seeder

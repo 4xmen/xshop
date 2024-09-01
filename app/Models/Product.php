@@ -144,9 +144,9 @@ class Product extends Model implements HasMedia
     {
         return $this->hasMany(Discount::class, 'product_id', 'id')
             ->where(function ($query) {
-            $query->where('expire', '>=', date('Y-m-d'))
-                ->orWhereNull('expire');
-        });
+                $query->where('expire', '>=', date('Y-m-d'))
+                    ->orWhereNull('expire');
+            });
     }
 
     public function quesions()
@@ -156,7 +156,7 @@ class Product extends Model implements HasMedia
 
     function hasDiscount()
     {
-        if (!$this->isAvailable()){
+        if (!$this->isAvailable()) {
             return false;
         }
         return $this->discounts()
@@ -242,11 +242,11 @@ class Product extends Model implements HasMedia
                 case 'select':
                 case 'singlemulti':
                     if (!is_array($value)) {
-                        if (isset( $result[$key]['data']->datas[$value])){
+                        if (isset($result[$key]['data']->datas[$value])) {
 
                             $result[$key]['human_value'] =
                                 $result[$key]['data']->datas[$value];
-                        }else{
+                        } else {
                             $result[$key]['human_value'] = '-';
                         }
                     } else {
@@ -259,11 +259,11 @@ class Product extends Model implements HasMedia
                     break;
                 default:
                     if (is_array($value)) {
-                        $result[$key]['human_value'] = '<span class="meta-tag">'.implode('</span> <span class="meta-tag">', $value).'</span>';
+                        $result[$key]['human_value'] = '<span class="meta-tag">' . implode('</span> <span class="meta-tag">', $value) . '</span>';
                     } else {
                         if ($value == '' || $value == null) {
                             $result[$key]['human_value'] = '-';
-                        }else{
+                        } else {
                             $result[$key]['human_value'] = $value;
                         }
                     }
@@ -283,7 +283,7 @@ class Product extends Model implements HasMedia
 
     public function webUrl()
     {
-        return fixUrlLang(route('client.product',$this->slug));
+        return fixUrlLang(route('client.product', $this->slug));
     }
 
 
@@ -296,16 +296,16 @@ class Product extends Model implements HasMedia
             $price = $this->quantities()->min('price');
         }
 
-        if (!$this->isAvailable()){
-            return  __('Unavailable');
+        if (!$this->isAvailable()) {
+            return __('Unavailable');
         }
 
         if ($this->hasDiscount()) {
             $d = $this->activeDiscounts()->first();
             if ($d->type == 'PRICE') {
                 $price -= $d->amount;
-            }else{
-                $price =  ( (100 - $d->amount) * $price ) / 100;
+            } else {
+                $price = ((100 - $d->amount) * $price) / 100;
             }
         }
 
@@ -315,6 +315,7 @@ class Product extends Model implements HasMedia
 
         return number_format($price) . ' ' . config('app.currency.symbol');
     }
+
     public function oldPricePure()
     {
         $price = 0;
@@ -330,6 +331,7 @@ class Product extends Model implements HasMedia
 
         return $price;
     }
+
     public function oldPrice()
     {
         $price = 0;
@@ -346,29 +348,32 @@ class Product extends Model implements HasMedia
         return number_format($price) . ' ' . config('app.currency.symbol');
     }
 
-    public function isFav(){
+    public function isFav()
+    {
         if (!auth('customer')->check()) {
             return -1;
         }
         if (\auth('customer')->user()->products()->where('product_id', $this->id)->exists()) {
             return 1;
-        }else{
+        } else {
             return 0;
         }
     }
 
-    public function isAvailable(){
-        if ($this->stock_quantity == 0){
-            return  false;
+    public function isAvailable()
+    {
+        if ($this->stock_quantity == 0) {
+            return false;
         }
 
-        if ($this->stock_status != 'IN_STOCK'){
-            return  false;
+        if ($this->stock_status != 'IN_STOCK') {
+            return false;
         }
-        return  true;
+        return true;
     }
 
-    public function markup(){
+    public function markup()
+    {
 
 
         $currency = config('app.currency.code');
@@ -413,25 +418,26 @@ RESULT;
     public function seoDesc()
     {
         $template = getSetting('product_description');
-        if ($template == null || $template == ''){
+        if ($template == null || $template == '') {
             $template = __('%name% sale in our shop by %price% %category.name%');
         }
-        $template = str_replace('%name%', $this->name,$template);
-        $template = str_replace('%price%', $this->getPrice() ,$template);
-        $template = str_replace('%excerpt%', $this->excerpt,$template);
-        $template = str_replace('%stock_quantity%', $this->stock_quantity,$template);
-        $template = str_replace('%category.name%', $this->category->name,$template);
+        $template = str_replace('%name%', $this->name, $template);
+        $template = str_replace('%price%', $this->getPrice(), $template);
+        $template = str_replace('%excerpt%', $this->excerpt, $template);
+        $template = str_replace('%stock_quantity%', $this->stock_quantity, $template);
+        $template = str_replace('%category.name%', $this->category->name, $template);
 
         return $template;
 
     }
 
 
-    public function tagsList(){
-        if ($this->tags()->count() == 0){
+    public function tagsList()
+    {
+        if ($this->tags()->count() == 0) {
             return getSetting('keyword');
-        }else{
-            return  implode(',',$this->tags()->pluck('name')->toArray());
+        } else {
+            return implode(',', $this->tags()->pluck('name')->toArray());
         }
     }
 }
