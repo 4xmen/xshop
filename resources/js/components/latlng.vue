@@ -70,6 +70,14 @@ export default {
     },
     methods: {
         initMap() {
+            if (!import.meta.env.DEV){
+                L.Icon.Default.mergeOptions({
+                    iconRetinaUrl: "/assets/vendor/leaflet/marker-icon-2x.png",
+                    iconUrl: "/assets/vendor/leaflet/marker-icon.png",
+                    shadowUrl: "/assets/vendor/leaflet/marker-shadow.png"
+                });
+            }
+            
             this.map = L.map(this.$refs.mapContainer).setView([this.lat, this.lng], this.zoom);
 
             L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {

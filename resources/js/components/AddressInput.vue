@@ -274,6 +274,16 @@ export default {
 
         },
         initMap() {
+
+            if (!import.meta.env.DEV){
+                L.Icon.Default.mergeOptions({
+                    iconRetinaUrl: "/assets/vendor/leaflet/marker-icon-2x.png",
+                    iconUrl: "/assets/vendor/leaflet/marker-icon.png",
+                    shadowUrl: "/assets/vendor/leaflet/marker-shadow.png"
+                });
+            }
+
+
             this.map = L.map(this.$refs.mapContainer).setView([35.83266000, 50.99155000], 10);
 
             L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {

@@ -41,28 +41,28 @@ class Post extends Model implements HasMedia
     {
 
         $optimize = getSetting('optimize');
-        if ($optimize == false){
+        if ($optimize == false) {
             $optimize = 'webp';
         }
         $t = explode('x', config('app.media.post_thumb'));
 
         $t = imageSizeConvertValidate('post_thumb');
 
-        $mc  =  $this->addMediaConversion('post-image')
+        $mc = $this->addMediaConversion('post-image')
             ->width($t[0])
             ->height($t[1])
-            ->crop( $t[0], $t[1])
+            ->crop($t[0], $t[1])
             ->optimize()
             ->sharpen(10)
             ->nonQueued()
             ->format($optimize);
 
-        if (getSetting('watermark')){
+        if (getSetting('watermark')) {
             $mc->watermark(public_path('upload/images/logo.png'),
-                    AlignPosition::BottomLeft, 5, 5, Unit::Percent,
-                    config('app.media.watermark_size'), Unit::Percent,
-                    config('app.media.watermark_size'), Unit::Percent, Fit::Contain,
-                    config('app.media.watermark_opacity'));
+                AlignPosition::BottomLeft, 5, 5, Unit::Percent,
+                config('app.media.watermark_size'), Unit::Percent,
+                config('app.media.watermark_size'), Unit::Percent, Fit::Contain,
+                config('app.media.watermark_opacity'));
         }
 
     }
@@ -106,12 +106,14 @@ class Post extends Model implements HasMedia
         return $this->morphMany(Comment::class, 'commentable');
     }
 
-    public function mainGroup(){
-        return $this->belongsTo(Group::class,'group_id');
+    public function mainGroup()
+    {
+        return $this->belongsTo(Group::class, 'group_id');
     }
 
-    public function attachs(){
-        return $this->morphMany(Attachment::class,'attachable');
+    public function attachs()
+    {
+        return $this->morphMany(Attachment::class, 'attachable');
     }
 
 
@@ -130,23 +132,25 @@ class Post extends Model implements HasMedia
 //        ];
 //    }
 
-    public function webUrl(){
-        return fixUrlLang(route('client.post',$this->slug));
+    public function webUrl()
+    {
+        return fixUrlLang(route('client.post', $this->slug));
     }
 
 
-    public function markup(){
+    public function markup()
+    {
         $type = 'BlogPosting';
-        if (strpos(strtolower(implode(',',$this->groups()->pluck('name')->toArray())),__('article')) !== false){
+        if (strpos(strtolower(implode(',', $this->groups()->pluck('name')->toArray())), __('article')) !== false) {
             $type = 'Article';
         }
-        if (strpos(strtolower(implode(',',$this->groups()->pluck('name')->toArray())),__('news')) !== false){
+        if (strpos(strtolower(implode(',', $this->groups()->pluck('name')->toArray())), __('news')) !== false) {
             $type = 'NewsArticle';
         }
 
         $app = config('app.name');
         $logo = asset('upload/images/logo.png');
-        $author = $this->author->name??$app;
+        $author = $this->author->name ?? $app;
         return <<<RESULT
 <script type="application/ld+json">
 {
@@ -184,11 +188,12 @@ RESULT;
 
     }
 
-    public function tagsList(){
-        if ($this->tags()->count() == 0){
+    public function tagsList()
+    {
+        if ($this->tags()->count() == 0) {
             return getSetting('keyword');
-        }else{
-            return  implode(',',$this->tags()->pluck('name')->toArray());
+        } else {
+            return implode(',', $this->tags()->pluck('name')->toArray());
         }
     }
 }

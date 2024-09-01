@@ -29,10 +29,10 @@ class ClientController extends Controller
 
         $this->middleware(function ($request, $next) {
 
-            if ($request->attributes->get('set_lang') != true){
+            if ($request->attributes->get('set_lang') != true) {
                 app()->setLocale(config('app.locale'));
                 \Session::remove('locate');
-            }elseif (\Session::has('locate')) {
+            } elseif (\Session::has('locate')) {
                 app()->setLocale(\Session::get('locate'));
             }
 
@@ -177,7 +177,12 @@ class ClientController extends Controller
     {
 
         $tag = Tag::where('slug->' . config('app.locale'), 'like', $slug)->first();
-        return $tag;
+        $posts = Post::withAnyTags([$tag])->where('status', 1)->paginate(100);
+        $products = Product::withAnyTags([$tag])->where('status', 1)->paginate(100);
+        $clips = Clip::withAnyTags([$tag])->where('status', 1)->paginate(100);
+        $title = __('Tag') . ': ' . $tag->name;
+        $subtitle = '';
+        return view('client.tag', compact('tag', 'posts', 'products', 'clips', 'title', 'subtitle'));
     }
 
 
@@ -229,7 +234,7 @@ class ClientController extends Controller
     public function group($slug)
     {
 
-        $group = Group::where('slug',$slug)->firstOrFail();
+        $group = Group::where('slug', $slug)->firstOrFail();
         $area = 'group';
         $title = $group->name;
         $subtitle = $group->subtitle;
@@ -400,10 +405,6 @@ class ClientController extends Controller
     }
 
 
-
-
-
-
     public function compare()
     {
         $area = 'compare';
@@ -413,13 +414,15 @@ class ClientController extends Controller
         $products = Product::whereIn('id', $ids)->where('status', 1)->get();
         return view('client.default-list', compact('area', 'products', 'title', 'subtitle'));
     }
+
     public function contact()
     {
         $area = 'contact-us';
         $title = __("Contact us");
         $subtitle = '';
-        return view('client.default-list', compact('area',  'title', 'subtitle'));
+        return view('client.default-list', compact('area', 'title', 'subtitle'));
     }
+
     public function sendContact(ContactSubmitRequest $request)
     {
         $con = new  Contact();
@@ -581,14 +584,14 @@ class ClientController extends Controller
         }
         $method = explode('@', $r)[1];
         $segments = $request->segments();
-        $routes = explode('/',$n);
+        $routes = explode('/', $n);
         $args = [];
         foreach ($routes as $i => $route) {
-            if ($route[0] == '{'){
-                $args[] = $segments[$i+1];
+            if ($route[0] == '{') {
+                $args[] = $segments[$i + 1];
             }
         }
-        $args[]= $request;
+        $args[] = $request;
         return $this->$method(...$args);
     }
 

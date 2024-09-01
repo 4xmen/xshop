@@ -10,9 +10,9 @@ use Spatie\Translatable\HasTranslations;
 
 class Clip extends Model
 {
-    use HasFactory, SoftDeletes, HasTranslations,HasTags;
+    use HasFactory, SoftDeletes, HasTranslations, HasTags;
 
-    public $translatable = ['title','body'];
+    public $translatable = ['title', 'body'];
 
     public function getRouteKeyName()
     {
@@ -27,6 +27,7 @@ class Clip extends Model
 
         return \Storage::url('cover/optimized-' . $this->cover);
     }
+
     public function imgOriginalUrl()
     {
         if ($this->cover == null) {
@@ -50,12 +51,14 @@ class Clip extends Model
         return $this->belongsTo(\App\Models\User::class);
     }
 
-    public function attachs(){
-        return $this->morphMany(Attachment::class,'attachable');
+    public function attachs()
+    {
+        return $this->morphMany(Attachment::class, 'attachable');
     }
 
-    public function webUrl(){
-        return fixUrlLang(route('client.clip',$this->slug));
+    public function webUrl()
+    {
+        return fixUrlLang(route('client.clip', $this->slug));
     }
 
 
@@ -69,12 +72,13 @@ class Clip extends Model
         return $this->morphMany(Comment::class, 'commentable')->where('status', 1);
     }
 
-    public function markup(){
+    public function markup()
+    {
 
         $app = config('app.name');
         $logo = asset('upload/images/logo.png');
-        $desc = str_replace('"','',strip_tags($this->body));
-        $count = $this->comments()->count() ;
+        $desc = str_replace('"', '', strip_tags($this->body));
+        $count = $this->comments()->count();
         return <<<RESULT
 
 <script type="application/ld+json">
@@ -106,11 +110,12 @@ RESULT;
 
     }
 
-    public function tagsList(){
-        if ($this->tags()->count() == 0){
+    public function tagsList()
+    {
+        if ($this->tags()->count() == 0) {
             return getSetting('keyword');
-        }else{
-            return  implode(',',$this->tags()->pluck('name')->toArray());
+        } else {
+            return implode(',', $this->tags()->pluck('name')->toArray());
         }
     }
 

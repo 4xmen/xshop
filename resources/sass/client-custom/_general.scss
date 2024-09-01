@@ -127,3 +127,31 @@ body {
         color: var(--xshop-diff2);
     }
 }
+
+
+.tag-page{
+
+    min-height: 60vh;
+    .tab-control{
+        padding-left: 12px;
+        padding-right: 12px;
+    }
+    .tab-control a.active{
+        background: var(--xshop-primary);
+        color: var(--xshop-diff);
+    }
+    .tab-content{
+        background: transparent;
+    }
+}
+
+.tab-content {
+    display: none;
+    padding: 1rem;
+    background: var(--karen-tab-bg-color,#ffffff);
+
+    &.active {
+        display: block;
+
+    }
+}
