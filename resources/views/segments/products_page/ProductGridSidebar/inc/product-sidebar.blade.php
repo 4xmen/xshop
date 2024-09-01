@@ -3,9 +3,9 @@
         <h4>
             {{__("Search")}}
         </h4>
-        <form action="" class="side-data">
+        <form action="{{route('client.search')}}" class="side-data">
             <div class="input-group mb-3">
-                <input type="search" class="form-control" placeholder="{{__('Search')}}...">
+                <input type="search" name="q" class="form-control" placeholder="{{__('Search')}}...">
                 <button class="btn btn-outline-secondary" type="submit" id="button-addon2">
                     <i class="ri-search-2-line"></i>
                 </button>

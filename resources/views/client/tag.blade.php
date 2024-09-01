@@ -32,9 +32,15 @@
                     <ul class="list-group">
                         @foreach($posts as $post)
                             <li class="list-group-item">
-                                <a href="{{$post->webUrl()}}">
-                                    {{$post->title}}
-                                </a>
+                                <img src="{{$post->imgUrl()}}" class="float-start x64-img me-2" alt="">
+                                <h6>
+                                    <a href="{{$post->webUrl()}}">
+                                        {{$post->title}}
+                                    </a>
+                                </h6>
+                                <p class="text-muted">
+                                    {{$post->subtitle}}
+                                </p>
                             </li>
                         @endforeach
                     </ul>
@@ -49,9 +55,15 @@
                     <ul class="list-group">
                         @foreach($products as $product)
                             <li class="list-group-item">
-                                <a href="{{$product->webUrl()}}">
-                                    {{$product->name}}
-                                </a>
+                                <img src="{{$product->thumbUrl()}}" class="float-start x64-img me-2" alt="">
+                                <h6>
+                                    <a href="{{$product->webUrl()}}">
+                                        {{$product->name}}
+                                    </a>
+                                </h6>
+                                <p class="text-muted">
+                                    {{$product->excerpt}}
+                                </p>
                             </li>
                         @endforeach
                     </ul>
@@ -66,9 +78,15 @@
                     <ul class="list-group">
                         @foreach($clips as $clip)
                             <li class="list-group-item">
-                                <a href="{{$clip->webUrl()}}">
-                                    {{$clip->title}}
-                                </a>
+                                <img src="{{$clip->imgUrl()}}" class="float-start x64-img me-2" alt="">
+                                <h6>
+                                    <a href="{{$clip->webUrl()}}">
+                                        {{$clip->title}}
+                                    </a>
+                                </h6>
+                                <p class="text-muted">
+                                    {{Str::limit(strip_tags($clip->body))}}
+                                </p>
                             </li>
                         @endforeach
                     </ul>

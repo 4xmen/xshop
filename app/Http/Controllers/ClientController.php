@@ -228,7 +228,28 @@ class ClientController extends Controller
 
     public function search(Request $request)
     {
-
+        $q = trim($request->input('q'));
+        if (mb_strlen($q) < 3) {
+            return abort(403, __('Search word is too short'));
+        }
+        $q = '%'.$q.'%';
+        $posts = Post::where('status', 1)->where(function($query) use ($q) {
+            $query->where('title', 'LIKE', $q)
+                ->orWhere('subtitle', 'LIKE', $q)
+                ->orWhere('body', 'LIKE', $q);
+        })->paginate(100);
+        $products = Product::where('status', 1)->where(function($query) use ($q) {
+            $query->where('name', 'LIKE', $q)
+                ->orWhere('excerpt', 'LIKE', $q)
+                ->orWhere('description', 'LIKE', $q);
+        })->paginate(100);
+        $clips = Clip::where('status', 1)->where(function($query) use ($q) {
+            $query->where('title', 'LIKE', $q)
+                ->orWhere('body', 'LIKE', $q);
+        })->paginate(100);
+        $title = __('Search for') . ': ' .  $request->input('q');
+        $subtitle = '';
+        return view('client.tag', compact('posts', 'products', 'clips', 'title', 'subtitle'));
     }
 
     public function group($slug)
