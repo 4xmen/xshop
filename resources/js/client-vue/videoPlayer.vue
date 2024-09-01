@@ -27,6 +27,11 @@
             <button type="button" class="sp p-btn" @click="timeOffset(10)">
                 <i class="ri-speed-line"></i>
             </button>
+
+            <button type="button" class="sp p-btn" @click="fullScreen">
+                <i class="ri-fullscreen-line"></i>
+            </button>
+
             <div>
                 {{ fullTime }}
             </div>
@@ -36,7 +41,7 @@
 
 <script>
 export default {
-    name: "mp3-player",
+    name: "video-player",
     components: {},
     data: () => {
         return {
@@ -87,6 +92,9 @@ export default {
         }
     },
     methods: {
+        fullScreen(){
+           this.$refs.p.requestFullscreen();
+        },
         speedChange() {
             this.speed++;
             if (this.speed  === this.speeds.length){
