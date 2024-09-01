@@ -18,9 +18,6 @@
 - UI/UX is more specific
 - Developer Friendlier
 
-## Access to xShop/v1
-> [!WARNING]  
-> xShop/v1 available here: <a href="https://github.com/4xmen/xshop.v1">https://github.com/4xmen/xshop.v1</a>
 
 
 ## Installation
@@ -36,6 +33,12 @@ php artisan migrate:fresh --seed
 php artisan storage:link
 php artisan key:generate
 php artisan serv
+
+# to develop front-end
+
+npm install -g yarn
+yarn install
+yarn dev
 ```
 
 > [!TIP]
@@ -48,18 +51,20 @@ php artisan serv
 ```bash
 php artisan seeding:prepare
  ```
-- Seeding image for models: [Group, Category, Post, Product, Slider] 
+- nor copy your image folder to `database/seeders/images/` 
+- then: Seeding image for models: [Group, Category, Post, Product, Slider] 
 ```bash
-php artisan  seeding:image Product digital
+php artisan seeding:image Product digital
 ```
 > First parameter is Model, Second is image seeder directory available [bag, clothe, digital, sport, posts, makeup]
 > You can create your directory and put your image into new directory then use image seeder
 
 ## Requirement
 
-- php 8.3.9 [ `php-gd`, `sqlite3`, `php-soap` ]
-- mysql or mariadb
+- php 8.2.x or above [ `php-gd`, `sqlite3`, `php-soap`]
+- mysql or mariadb or sqlite
 - composer
+- recommends install imagemagick on server to more image performance
 
 ## Deploy guide
 
@@ -71,12 +76,20 @@ git clone  https://github.com/4xmen/xshop.git . # if this command not work make 
 cp .env.example .env
 nano .env # edit your config db, url, etc.
 composer install
-php artisan migrate
-php artisan db:seed --class=UserSeeder
-php artisan db:seed --class=SettingSeeder
-nano .env # make APP_DEBUG false, APP_ENV production
+php artisan migrate:fresh --seed
 php artisan storage:link
 php key:generate
+npm install 
+php artisan client
+npm run build
+```
+
+## Make your site optimize & production mode
+
+
+```bash
+nano .env # make APP_DEBUG false, APP_ENV production
+php artisan optimize
 composer install --optimize-autoloader --no-dev
 ```
 
@@ -106,7 +119,7 @@ php artisan  make:part PartName segmentName
 Optimize client assets, `scss`,`js`,`css`
 
 ```bash
-php artisan  client
+php artisan client
 ```
 
 ### theme parts file
@@ -128,6 +141,12 @@ php artisan  client
 ![4](https://raw.githubusercontent.com/A1Gard/xshop-installer-assets/master/screenshots/xshop-screenshot4.png)
 
 ![5](https://raw.githubusercontent.com/A1Gard/xshop-installer-assets/master/screenshots/xshop-screenshot5.jpg)
+
+
+
+## Access to xShop/v1
+> [!WARNING]  
+> xShop/v1 available here: <a href="https://github.com/4xmen/xshop.v1">https://github.com/4xmen/xshop.v1</a>
 
 
 <p align="center"> 
