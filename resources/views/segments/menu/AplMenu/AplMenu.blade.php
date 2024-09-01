@@ -82,7 +82,7 @@
         @endforeach
 
         <li class="icon-menu">
-            <a href="#">
+            <a data-bs-toggle="modal" data-bs-target="#apl-search">
                 <i class="ri-search-line"></i>
             </a>
         </li>
@@ -105,3 +105,30 @@
     <div id="reps-menu">
     </div>
 </nav>
+
+<!-- Modal -->
+<div class="modal fade" id="apl-search" tabindex="-1" aria-labelledby="apl-search" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="apl-search">
+                    {{__("Search")}}
+                </h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form action="{{route('client.search')}}" class="side-data">
+                    <div class="input-group mb-3">
+                        <input type="search" name="q" class="form-control" placeholder="{{__('Search')}}...">
+                        <button class="btn btn-outline-secondary" type="submit" id="button-addon2">
+                            <i class="ri-search-2-line"></i>
+                        </button>
+                    </div>
+                </form>
+            </div>
+{{--            <div class="modal-footer">--}}
+{{--                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>--}}
+{{--            </div>--}}
+        </div>
+    </div>
+</div>
