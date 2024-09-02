@@ -226,7 +226,7 @@
                                        class="btn btn-outline-primary btn-sm ">
                                         <i class="ri-eye-line"></i>
                                     </a>
-                                    @if($inv->status == 'PENDING')
+                                    @if($inv->status != 'COMPLETED' && $inv->created_at->timestamp <  (time() - 3600) )
                                         <a href="#" class="btn btn-outline-primary btn-sm ms-2">
                                             <i class="ri-secure-payment-line"></i>
                                             {{__("Pay now")}}

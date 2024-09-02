@@ -3,7 +3,7 @@
         <li class="icon-menu" id="logo-menu">
             <a href="{{url('/')}}">
                 <img src="{{asset('upload/images/logo.svg')}}" alt="">
-{{--                <i class="ri-apple-line "></i>--}}
+                {{--                <i class="ri-apple-line "></i>--}}
             </a>
         </li>
 
@@ -86,8 +86,8 @@
                 <i class="ri-search-line"></i>
             </a>
         </li>
-        <li class="icon-menu">
-            <a href="#">
+        <li>
+            <a href="{{route('client.card')}}">
                 <i class="ri-shopping-bag-2-line"></i>
                 <span class="badge bg-danger card-count">
                     @if(cardCount() > 0)
@@ -126,9 +126,9 @@
                     </div>
                 </form>
             </div>
-{{--            <div class="modal-footer">--}}
-{{--                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>--}}
-{{--            </div>--}}
+            {{--            <div class="modal-footer">--}}
+            {{--                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>--}}
+            {{--            </div>--}}
         </div>
     </div>
 </div>

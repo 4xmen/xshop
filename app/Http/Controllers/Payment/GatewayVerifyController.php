@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Payment;
 
 use App\Contracts\Payment;
+use App\Http\Controllers\CardController;
 use App\Models\Invoice;
 
 class GatewayVerifyController
@@ -31,6 +32,7 @@ class GatewayVerifyController
             return redirect()->route('client.card')->withErrors(__("error in payment.").$message);
         }
 
+        CardController::clear();
         return redirect()->route('client.profile')->with('message' , __("payment success"));
 
     }

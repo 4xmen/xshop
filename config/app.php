@@ -183,6 +183,12 @@ return [
         'main' => env('XLANG_MAIN','en'),
         'api_url' => env('XLANG_API_URL',''),
     ],
+    'xshop' =>[
+      'payment' => [
+          'gateway' =>  env('PAY_GATEWAY',''),
+          'merchant_id' => env('MERCHANT_ID',''),
+      ]
+    ],
 
 
 
