@@ -154,8 +154,8 @@ class CardController extends Controller
         $callbackUrl = route('pay.check', ['invoice_hash' => $invoice->hash, 'gateway' => $gateway->getName()]);
         $payment = null;
         try {
-            $response = $gateway->request(($invoice->total_price - $invoice->credit_price), $callbackUrl);
-            $payment = $invoice->storePaymentRequest($response['order_id'], ($invoice->total_price - $invoice->credit_price), $response['token'] ?? null, null, $gateway->getName());
+            $response = $gateway->request((($invoice->total_price - $invoice->credit_price) * config('app.currency.factor')), $callbackUrl);
+            $payment = $invoice->storePaymentRequest($response['order_id'], (($invoice->total_price - $invoice->credit_price) * config('app.currency.factor')), $response['token'] ?? null, null, $gateway->getName());
             session(["payment_id" => $payment->id]);
             \Session::save();
 
@@ -218,7 +218,6 @@ class CardController extends Controller
     }
 
 
-
     public function productCompareToggle($slug)
     {
 
@@ -230,7 +229,7 @@ class CardController extends Controller
                 unset($compares[array_search($product->id, $compares)]);
             } else {
                 $compares[] = $product->id;
-                $msg = __( "Product added to compare");
+                $msg = __("Product added to compare");
             }
             \Cookie::queue('compares', json_encode($compares), 2000);
         } else {

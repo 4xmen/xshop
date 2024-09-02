@@ -16,7 +16,7 @@ Route::prefix(config('app.panel.prefix'))->name('admin.')->group(
             function () {
 
 
-                Route::get('/', [\App\Http\Controllers\HomeController::class, 'index'])->name('dash');
+                Route::get('/', [\App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
                 Route::post('ckeditor/upload', [\App\Http\Controllers\Admin\CkeditorController::class, 'upload'])->name('ckeditor.upload');
                 Route::get('adminlogs', [\App\Http\Controllers\Admin\AdminLogController::class, 'index'])->name('adminlog.index');
@@ -416,8 +416,13 @@ Route::get('/sitemap.xml', [ClientController::class, 'sitemap'])->name('sitemap'
 // to developer test
 Route::get('login/as/{mobile}', function ($mobile) {
     if (auth()->check() && auth()->user()->hasRole('developer')) {
-        return \Auth::guard('customer')
-            ->loginUsingId(\App\Models\Customer::where('mobile', $mobile)->first()->id);
+        if ($mobile = 1){
+            return \Auth::guard('customer')
+                ->loginUsingId(\App\Models\Customer::inRandomOrder()->first()->id);
+        }else{
+            return \Auth::guard('customer')
+                ->loginUsingId(\App\Models\Customer::where('mobile', $mobile)->first()->id);
+        }
     } else {
         return abort(403);
     }

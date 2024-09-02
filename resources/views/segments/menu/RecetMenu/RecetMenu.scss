@@ -27,8 +27,16 @@
             &:first-child{
                 display: none;
             }
+
         }
     }
+        .card-link{
+            padding: 5px !important;
+            margin: 0;
+            i{
+                font-size: 25px;
+            }
+        }
 }
 
 /*-768px width*/

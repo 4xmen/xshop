@@ -7,7 +7,7 @@
             </a>
         </li>
         <li>
-            <a href="{{route('admin.dash')}}">
+            <a href="{{route('admin.home')}}">
                 <i class="ri-dashboard-3-line"></i>
                 {{__("Dashboard")}}
             </a>

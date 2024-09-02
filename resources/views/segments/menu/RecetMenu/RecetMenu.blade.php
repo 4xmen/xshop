@@ -13,11 +13,23 @@
             </li>
         @endforeach
         <li class="float-end">
-            @foreach(\App\Models\XLang::all() as $lang)
-                <a href="" class="d-inline-block px-1">
-                    {{$lang->emoji}}
-                </a>
-            @endforeach
+            <a href="{{ route('client.card') }}" class="d-inline-block px-1 card-link">
+                <i class="ri-shopping-bag-2-line"></i>
+                <span class="badge bg-danger card-count">
+                    @if(cardCount() > 0)
+                        {{cardCount()}}
+                    @endif
+                </span>
+            </a>
+            @if(config('app.xlang.active'))
+                @foreach(\App\Models\XLang::all() as $lang)
+                    @if($lang->tag != app()->getLocale())
+                        <a href="/{{$lang->tag}}" class="d-inline-block px-1">
+                            {{$lang->emoji}}
+                        </a>
+                    @endif
+                @endforeach
+            @endif
         </li>
     </ul>
 </nav>

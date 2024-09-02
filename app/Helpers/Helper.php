@@ -315,6 +315,7 @@ function sluger($name, $replace_char = '-')
  */
 function lastCrump()
 {
+
     $routes = explode('.', Route::currentRouteName());
     if (count($routes) != 3) {
         echo '<li >
