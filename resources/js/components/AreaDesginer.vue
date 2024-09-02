@@ -6,26 +6,48 @@
                 <span v-if="p !== 0" class="btn btn-secondary btn-sm float-end mx-1" @click="shiftArray(p,-1)">
                     <i class="ri-arrow-up-line"></i>
                 </span>
-                <span v-if="p != partsData.length - 1" class="btn btn-secondary btn-sm float-end mx-1" @click="shiftArray(p,1)">
+                <span v-if="p != partsData.length - 1" class="btn btn-secondary btn-sm float-end mx-1"
+                      @click="shiftArray(p,1)">
                     <i class="ri-arrow-down-line"></i>
                 </span>
             </div>
             <div class="part-body">
-                <div class="rw">
-                    <template v-for="(valid,i) in valids">
-                        <div @click="changePart(p,valid.segment,valid.part)"
-                             :class="``+(valid.data.name == part.part?'selected-part':'can-select')">
-                            <img class="img-fluid mt-2" :src="imageLink+'/'+valid.segment+'/'+valid.part"
-                                 alt="screeshot">
-                            {{ valid.part }} [v{{ valid.data.version }}]
+                <div class="row text-center">
+                    <div class="col">
+                        <button type="button" class="btn btn-secondary mt-4" @click="activeIndex = p">
+                            <i class="ri-edit-2-line"></i>
+                        </button>
+                    </div>
+                    <div class="col-6">
+                        <div class="text-center">
+                            <template v-for="(valid,i) in valids">
+                                <div v-if="valid.data.name == part.part">
+                                    <img class="img-fluid" :src="imageLink+'/'+valid.segment+'/'+valid.part"
+                                         alt="screeshot">
+                                </div>
+                            </template>
                         </div>
-                    </template>
+                    </div>
+                    <div class="col">
+                        <button type="button" class="btn btn-danger mt-4" @click="rem(p)">
+                            <i class="ri-close-line"></i>
+                        </button>
+                    </div>
                 </div>
-            </div>
-            <div class="card-footer">
-                <button type="button" class="btn btn-danger" @click="rem(p)">
-                    <i class="ri-close-line"></i>
-                </button>
+
+                <div v-if="p == activeIndex">
+                    <hr>
+                    <div class="rw">
+                        <template v-for="(valid,i) in valids">
+                            <div @click="changePart(p,valid.segment,valid.part)"
+                                 :class="``+(valid.data.name == part.part?'selected-part':'can-select')">
+                                <img class="img-fluid mt-2" :src="imageLink+'/'+valid.segment+'/'+valid.part"
+                                     alt="screeshot">
+                                {{ valid.part }} [v{{ valid.data.version }}]
+                            </div>
+                        </template>
+                    </div>
+                </div>
             </div>
             <input type="hidden" name="parts[]" :value="JSON.stringify(part)" class="form-control">
         </div>
@@ -46,6 +68,7 @@ export default {
         return {
             partsData: [],
             removed: [],
+            activeIndex: null,
         }
     },
     props: {
@@ -89,7 +112,7 @@ export default {
             this.partsData.splice(i, 1);
         },
         shiftArray(index, offset) {
-            console.log(index,offset);
+            console.log(index, offset);
             if (index < 0 || index >= this.partsData.length) {
                 return "Index out of bounds";
             }
@@ -125,9 +148,10 @@ export default {
     cursor: pointer;
 }
 
-.rw{
+.rw {
     column-count: 3;
-    div{
+
+    div {
         margin-bottom: 1rem;
     }
 }
