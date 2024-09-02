@@ -21,6 +21,16 @@
                     @endif
                 </span>
             </a>
+
+        @if(auth('customer')->check())
+                <a href="{{route('client.profile')}}"  class="d-inline-block px-1 card-link">
+                    <i class="ri-user-line"></i>
+                </a>
+        @else
+                <a href="{{route('client.sign-in')}}"  class="d-inline-block px-1 card-link">
+                    <i class="ri-user-line"></i>
+                </a>
+        @endif
             @if(config('app.xlang.active'))
                 @foreach(\App\Models\XLang::all() as $lang)
                     @if($lang->tag != app()->getLocale())

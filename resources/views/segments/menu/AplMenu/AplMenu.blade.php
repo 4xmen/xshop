@@ -86,7 +86,7 @@
                 <i class="ri-search-line"></i>
             </a>
         </li>
-        <li>
+        <li class="icon-menu">
             <a href="{{route('client.card')}}">
                 <i class="ri-shopping-bag-2-line"></i>
                 <span class="badge bg-danger card-count">
@@ -96,6 +96,19 @@
                 </span>
             </a>
         </li>
+        @if(auth('customer')->check())
+        <li class="icon-menu">
+            <a href="{{route('client.profile')}}">
+                <i class="ri-user-line"></i>
+            </a>
+        </li>
+        @else
+        <li class="icon-menu">
+            <a href="{{route('client.sign-in')}}">
+                <i class="ri-user-line"></i>
+            </a>
+        </li>
+        @endif
         <li id="toggler-menu" class="icon-menu">
             <a href="#">
                 <i class="ri-menu-line"></i>
