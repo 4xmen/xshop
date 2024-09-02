@@ -36,6 +36,7 @@
         margin: 0 auto;
 
         > li {
+            flex: 1;
             color: white;
             text-align: center;
             height: 47px;
@@ -98,6 +99,10 @@
                 display: block;
                 padding: .7rem 0;
             }
+
+            &.icon-menu{
+                flex-grow: .4;
+            }
         }
     }
 
@@ -150,4 +155,6 @@
     ~header{
         margin-top: 44px;
     }
+
+
 }

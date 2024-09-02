@@ -21,7 +21,7 @@
                 padding:  1rem;
                 color: black;
                 &:hover{
-                    color: var(--xshop-primary);
+                    color: var(--xshop-secondary);
                 }
             }
             &:first-child{
@@ -34,7 +34,7 @@
             padding: 5px !important;
             margin: 0;
             i{
-                font-size: 25px;
+                font-size: 22px;
             }
         }
 }
