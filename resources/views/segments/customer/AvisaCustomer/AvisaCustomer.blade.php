@@ -199,7 +199,7 @@
                                 -
                             </th>
                         </tr>
-                        @foreach(auth('customer')->user()->invoices as $inv)
+                        @foreach(auth('customer')->user()->invoices()->orderByDesc('id')->get() as $inv)
                             <tr>
                                 <td>
                                     {{$inv->hash}}
@@ -226,8 +226,8 @@
                                        class="btn btn-outline-primary btn-sm ">
                                         <i class="ri-eye-line"></i>
                                     </a>
-                                    @if($inv->status != 'COMPLETED' && $inv->created_at->timestamp >  (time() - 3600) )
-                                        <a href="#" class="btn btn-outline-primary btn-sm ms-2">
+                                    @if( in_array($inv->status, ['PENDING', 'CANCELED', 'FAILED'] ) && $inv->created_at->timestamp >  (time() - 3600) )
+                                        <a href="{{route('client.pay',$inv->hash)}}" class="btn btn-outline-primary btn-sm ms-2">
                                             <i class="ri-secure-payment-line"></i>
                                             {{__("Pay now")}}
                                         </a>
@@ -376,7 +376,8 @@
                                     {{__($ticket->status)}}
                                 </td>
                                 <td class="text-center">
-                                    <a href="{{ route('client.ticket.show',$ticket->id) }}" class="btn btn-outline-primary btn-sm">
+                                    <a href="{{ route('client.ticket.show',$ticket->id) }}"
+                                       class="btn btn-outline-primary btn-sm">
                                         <i class="ri-eye-line"></i>
                                         {{__("View")}}
                                     </a>
@@ -415,14 +416,16 @@
                             <label for="title">
                                 {{__("Title")}}
                             </label>
-                            <input type="text" id="title" name="title" value="{{old('title')}}" placeholder="{{__("Title")}}"
+                            <input type="text" id="title" name="title" value="{{old('title')}}"
+                                   placeholder="{{__("Title")}}"
                                    class="form-control">
                         </div>
                         <div class="form-group mt-3">
                             <label for="body">
                                 {{__("Description Text")}}
                             </label>
-                            <textarea rows="7" name="body" class="form-control" placeholder="{{__("Your message ...")}}">{{old('body')}}</textarea>
+                            <textarea rows="7" name="body" class="form-control"
+                                      placeholder="{{__("Your message ...")}}">{{old('body')}}</textarea>
                         </div>
                         <div class="mt-3">
                             <button class="btn btn-outline-primary w-100">
@@ -465,9 +468,11 @@
                                     <p class="text-muted">
                                         {{$fav->excerpt}}
                                     </p>
-                                    <a class="fav-btn float-end mx-2" data-slug="{{$fav->slug}}" data-is-fav="{{$fav->isFav()}}"
+                                    <a class="fav-btn float-end mx-2" data-slug="{{$fav->slug}}"
+                                       data-is-fav="{{$fav->isFav()}}"
                                        data-bs-custom-class="custom-tooltip"
-                                       data-bs-toggle="tooltip" data-bs-placement="top" title="{{__("Add to / Remove from favorites")}}">
+                                       data-bs-toggle="tooltip" data-bs-placement="top"
+                                       title="{{__("Add to / Remove from favorites")}}">
                                         <i class="ri-heart-line"></i>
                                         <i class="ri-heart-fill"></i>
                                     </a>

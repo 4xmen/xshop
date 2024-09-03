@@ -71,7 +71,7 @@
                         {{__("Need process orders")}}
                     </div>
                     <div class="card-body">
-                        <a href="#">
+                        <a href='{{route('admin.invoice.index')}}?filter%5Bstatus%5D=%5B"PAID"%5D'>
                             <i class="ri-shopping-bag-4-line"></i>
                             <h2>
                                 {{number_format(\App\Models\Invoice::where('status','PAID')->count())}}
@@ -86,7 +86,7 @@
                         {{__("Pending tickets")}}
                     </div>
                     <div class="card-body">
-                        <a href="{{route('admin.ticket.index')}}">
+                        <a href='{{route('admin.ticket.index')}}?filter%5Bstatus%5D=%5B"PENDING"%5D'>
                             <i class="ri-customer-service-2-line"></i>
                             <h2>
                                 {{number_format(\App\Models\Ticket::where('status','PENDING')->count())}}
