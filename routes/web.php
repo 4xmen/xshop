@@ -139,6 +139,20 @@ Route::prefix(config('app.panel.prefix'))->name('admin.')->group(
                         Route::post('sort/save', [\App\Http\Controllers\Admin\CategoryController::class, 'sortSave'])->name('sort-save');
                         Route::get('sort', [\App\Http\Controllers\Admin\CategoryController::class, 'sort'])->name('sort');
                     });
+                Route::prefix('invoices')->name('invoice.')->group(
+                    function () {
+                        Route::get('', [\App\Http\Controllers\Admin\InvoiceController::class, 'index'])->name('index');
+//                        Route::get('create', [\App\Http\Controllers\Admin\InvoiceController::class, 'create'])->name('create');
+//                        Route::post('store', [\App\Http\Controllers\Admin\InvoiceController::class, 'store'])->name('store');
+                        Route::get('edit/{item}', [\App\Http\Controllers\Admin\InvoiceController::class, 'edit'])->name('edit');
+                        Route::get('show/{item}', [\App\Http\Controllers\Admin\InvoiceController::class, 'show'])->name('show');
+                        Route::post('update/{item}', [\App\Http\Controllers\Admin\InvoiceController::class, 'update'])->name('update');
+                        Route::get('delete/{item}', [\App\Http\Controllers\Admin\InvoiceController::class, 'destroy'])->name('destroy');
+                        Route::get('restore/{item}', [\App\Http\Controllers\Admin\InvoiceController::class, 'restore'])->name('restore');
+                        Route::get('remove/ordere/{order}', [\App\Http\Controllers\Admin\InvoiceController::class, 'removeOrder'])->name('remove-order');
+                        Route::post('bulk', [\App\Http\Controllers\Admin\InvoiceController::class, "bulk"])->name('bulk');
+                        Route::get('trashed', [\App\Http\Controllers\Admin\InvoiceController::class, "trashed"])->name('trashed');
+                    });
 
                 Route::prefix('posts')->name('post.')->group(
                     function () {
@@ -401,7 +415,8 @@ Route::middleware([\App\Http\Middleware\VisitorCounter::class])
         Route::get('/gallery/{gallery}', [ClientController::class, 'gallery'])->name('gallery');
         Route::get('/search', [ClientController::class, 'search'])->name('search');
         Route::get('attach/download/{attachment}', [ClientController::class, 'attachDl'])->name('attach-dl');
-            Route::get('/post/{post}', [ClientController::class, 'post'])->name('post');
+        Route::get('/post/{post}', [ClientController::class, 'post'])->name('post');
+        Route::get('pay/{invoice}', [ClientController::class, 'pay'])->name('pay');
 
         Route::get('product/fav/toggle/{product}', [\App\Http\Controllers\CustomerController::class, 'ProductFavToggle'])->name('product-fav-toggle');
         Route::get('product/compare/toggle/{product}', [\App\Http\Controllers\CardController::class, 'productCompareToggle'])->name('product-compare-toggle');

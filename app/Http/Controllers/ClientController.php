@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Contracts\Payment;
 use App\Http\Requests\ContactSubmitRequest;
 use App\Models\Attachment;
 use App\Models\Category;
@@ -11,6 +12,7 @@ use App\Models\Contact;
 use App\Models\Customer;
 use App\Models\Gallery;
 use App\Models\Group;
+use App\Models\Invoice;
 use App\Models\Post;
 use App\Models\Product;
 use App\Models\Quantity;
@@ -619,5 +621,43 @@ class ClientController extends Controller
     public function langIndex()
     {
         return $this->welcome();
+    }
+
+
+    public function pay($hash){
+
+        $invoice = Invoice::where('hash', $hash)->first();
+//        dd($invoice->created_at->timestamp , (time() - 3600));
+
+        if (!in_array($invoice->status, ['PENDING', 'CANCELED', 'FAILED'] ) || $invoice->created_at->timestamp <  (time() - 3600) ){
+            return  redirect()->back()->withErrors(__('This payment method is not available.'));
+        }
+        $activeGateway = config('xshop.payment.active_gateway');
+        /** @var Payment $gateway */
+        $gateway = app($activeGateway . '-gateway');
+        logger()->info('pay controller', ["active_gateway" => $activeGateway, "invoice" => $invoice->toArray(),]);
+
+        if ($invoice->isCompleted()) {
+            return redirect()->back()->with('message', __('Invoice payed.'));
+        }
+
+        $callbackUrl = route('pay.check', ['invoice_hash' => $invoice->hash, 'gateway' => $gateway->getName()]);
+        $payment = null;
+        try {
+            $response = $gateway->request((($invoice->total_price - $invoice->credit_price) * config('app.currency.factor')), $callbackUrl);
+            $payment = $invoice->storePaymentRequest($response['order_id'], (($invoice->total_price - $invoice->credit_price) * config('app.currency.factor')), $response['token'] ?? null, null, $gateway->getName());
+            session(["payment_id" => $payment->id]);
+            \Session::save();
+
+            return $gateway->goToBank();
+        } catch (\Throwable $exception) {
+            $invoice->status = 'FAILED';
+            $invoice->save();
+            \Log::error("Payment REQUEST exception: " . $exception->getMessage());
+            \Log::warning($exception->getTraceAsString());
+            $result = false;
+            $message = __('error in payment. contact admin.');
+            return redirect()->back()->withErrors($message);
+        }
     }
 }

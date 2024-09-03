@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Ticket extends Model
 {
 //    use HasFactory;
-    public static  $ticket_statuses = [['PENDING','ANSWERED','CLOSED']];
+    public static  $ticket_statuses = ['PENDING','ANSWERED','CLOSED'];
 
 
     public function customer(){
