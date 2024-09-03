@@ -97,16 +97,23 @@ a.btn,a.action-btn,a.circle-btn{
     margin: auto;
     border-radius: 3px;
 }
-.status-0,.status-CLOSED {
+.status-0,.status-CLOSED,.status-FAILED,.status-PROCESSING {
     background: red;
 }
-.status-1,.status-ANSWERED{
+.status-1,.status-ANSWERED,.status-COMPLETED{
     background: lime;
 }
 .status-PENDING{
     background: gold;
 }
 
+.status-CANCELED{
+    background: orange;
+}
+
+.status-PAID{
+    background: white;
+}
 
 .image-x64{
     height: 64px;

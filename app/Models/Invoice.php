@@ -6,10 +6,11 @@ use App\Events\InvoiceFailed;
 use App\Events\InvoiceSucceed;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Invoice extends Model
 {
-    use HasFactory;
+    use HasFactory,SoftDeletes;
 
     const PENDING = 'PENDING';
     const PROCESSING = 'PROCESSING';
@@ -112,7 +113,7 @@ class Invoice extends Model
         $payment->status = "SUCCESS";
         $payment->save();
         /** @var \App\Models\Invoice $this */
-        $this->status = "COMPLETED";
+        $this->status = "PAID";
         $this->save();
         try {
             event(new InvoiceSucceed($this, $payment));

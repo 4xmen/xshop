@@ -13,20 +13,20 @@
                     <i class="ri-shopping-cart-line"></i>
                 </a>
                 <ul id="card">
+                    @if(  auth()->user()->hasAnyAccess( 'invoice' ))
+                        <li>
+                            <a href="{{ route('admin.invoice.index') }}">
+                                <i class="ri-file-list-3-fill"></i>
+                                {{__('Invoices')}}
+                            </a>
+                        </li>
+                    @endif
                     @if(  auth()->user()->hasAnyAccess( 'customer' ))
                         <li>
                             <a href="{{route('admin.customer.index')}}">
                                 <i class="ri-team-fill"></i>
 
                                 {{__('Customers')}}
-                            </a>
-                        </li>
-                    @endif
-                    @if(  auth()->user()->hasAnyAccess( 'invoice' ))
-                        <li>
-                            <a>
-                                <i class="ri-file-list-3-fill"></i>
-                                {{__('Invoices')}}
                             </a>
                         </li>
                     @endif
