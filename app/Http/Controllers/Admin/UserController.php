@@ -33,6 +33,14 @@ class UserController extends XController
 
     public function save($user, $request)
     {
+
+        if ($user->role == 'DEVELOPER' && !auth()->user()->hasRole('DEVELOPER')) {
+            abort(403);
+        }
+        if (!auth()->user()->hasRole('DEVELOPER') && $request->role == 'DEVELOPER') {
+            abort(403);
+        }
+
         $user->name = $request->input('name');
         $user->email = $request->input('email');
         if (trim($request->input('password')) != '') {
