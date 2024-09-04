@@ -39,3 +39,4 @@ import "../views/segments/attachments_page/DenaAttachList/DenaAttachList.js";
 import "../views/segments/attachment/AttachmentWithPreview/AttachmentWithPreview.js";
 import "../views/segments/contact/MeloContact/MeloContact.js";
 import "../views/segments/invoice/LianaInvoice/LianaInvoice.js";
+import "../views/segments/floats/FollowUsSocial/FollowUsSocial.js";
