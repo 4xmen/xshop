@@ -234,22 +234,22 @@ class ClientController extends Controller
         if (mb_strlen($q) < 3) {
             return abort(403, __('Search word is too short'));
         }
-        $q = '%'.$q.'%';
-        $posts = Post::where('status', 1)->where(function($query) use ($q) {
+        $q = '%' . $q . '%';
+        $posts = Post::where('status', 1)->where(function ($query) use ($q) {
             $query->where('title', 'LIKE', $q)
                 ->orWhere('subtitle', 'LIKE', $q)
                 ->orWhere('body', 'LIKE', $q);
         })->paginate(100);
-        $products = Product::where('status', 1)->where(function($query) use ($q) {
+        $products = Product::where('status', 1)->where(function ($query) use ($q) {
             $query->where('name', 'LIKE', $q)
                 ->orWhere('excerpt', 'LIKE', $q)
                 ->orWhere('description', 'LIKE', $q);
         })->paginate(100);
-        $clips = Clip::where('status', 1)->where(function($query) use ($q) {
+        $clips = Clip::where('status', 1)->where(function ($query) use ($q) {
             $query->where('title', 'LIKE', $q)
                 ->orWhere('body', 'LIKE', $q);
         })->paginate(100);
-        $title = __('Search for') . ': ' .  $request->input('q');
+        $title = __('Search for') . ': ' . $request->input('q');
         $subtitle = '';
         return view('client.tag', compact('posts', 'products', 'clips', 'title', 'subtitle'));
     }
@@ -469,7 +469,7 @@ class ClientController extends Controller
     {
         $area = 'login';
         $title = __("sign in");
-        $subtitle = 'Sign in as customer';
+        $subtitle = __('Sign in as customer');
         return view('client.default-list', compact('area', 'title', 'subtitle'));
     }
 
@@ -624,13 +624,14 @@ class ClientController extends Controller
     }
 
 
-    public function pay($hash){
+    public function pay($hash)
+    {
 
         $invoice = Invoice::where('hash', $hash)->first();
 //        dd($invoice->created_at->timestamp , (time() - 3600));
 
-        if (!in_array($invoice->status, ['PENDING', 'CANCELED', 'FAILED'] ) || $invoice->created_at->timestamp <  (time() - 3600) ){
-            return  redirect()->back()->withErrors(__('This payment method is not available.'));
+        if (!in_array($invoice->status, ['PENDING', 'CANCELED', 'FAILED']) || $invoice->created_at->timestamp < (time() - 3600)) {
+            return redirect()->back()->withErrors(__('This payment method is not available.'));
         }
         $activeGateway = config('xshop.payment.active_gateway');
         /** @var Payment $gateway */

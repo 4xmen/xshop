@@ -7,6 +7,8 @@ use App\Models\Customer;
 use App\Models\Invoice;
 use App\Models\Product;
 use App\Models\Ticket;
+use chillerlan\QRCode\QRCode;
+use chillerlan\QRCode\QROptions;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rules\In;
 
@@ -18,16 +20,16 @@ class CustomerController extends Controller
         $address->address = $request->input('address');
         $address->lat = $request->input('lat');
         $address->lng = $request->input('lng');
-        $address->state_id = $request->input('state_id')??null;
-        $address->city_id = $request->input('city_id')??null;
+        $address->state_id = $request->input('state_id') ?? null;
+        $address->city_id = $request->input('city_id') ?? null;
         $address->zip = $request->input('zip');
         $address->save();
         return $address;
     }
+
     //
     public function __construct()
     {
-
 
 
         $this->middleware(function ($request, $next) {
@@ -76,7 +78,22 @@ class CustomerController extends Controller
 
     public function invoice(Invoice $invoice)
     {
-        return $invoice;
+        if (!auth('customer')->check() || $invoice->customer_id != auth('customer')->id()) {
+            return redirect()->route('client.sign-in')->withErrors([__('You need to login to access this page')]);
+        }
+
+        $area = 'invoice';
+        $title = __("Invoice");
+        $subtitle = __("Invoice ID:") . ' ' . $invoice->hash;
+
+        $options = new QROptions([
+            'version'    => 5,
+            'outputType' => QRCode::OUTPUT_MARKUP_SVG,
+            'eccLevel'   => QRCode::ECC_L,
+//            'imageTransparent' => true,
+        ]);
+        $qr = new QRCode($options);
+        return view('client.invoice', compact('area', 'title', 'subtitle','invoice','qr'));
     }
 
 
@@ -108,12 +125,13 @@ class CustomerController extends Controller
     }
 
 
-    public function addresses(){
+    public function addresses()
+    {
         return auth('customer')->user()->addresses;
     }
 
 
-    public function addressUpdate(Request $request,  $item)
+    public function addressUpdate(Request $request, $item)
     {
 
         $item = Address::where('id', $item)->firstOrFail();
@@ -142,10 +160,10 @@ class CustomerController extends Controller
         if ($item->customer_id != auth('customer')->id()) {
             return abort(403);
         }
-        $add = $item->address ;
+        $add = $item->address;
 
         $item->delete();
-        return ['OK' => true, "message" => __(":ADDRESS removed",['ADDRESS' => $add])];
+        return ['OK' => true, "message" => __(":ADDRESS removed", ['ADDRESS' => $add])];
     }
 
     public function addressStore(Request $request)
@@ -164,14 +182,15 @@ class CustomerController extends Controller
         $address = new Address();
         $address->customer_id = auth('customer')->user()->id;
         $address = $this->addressSave($address, $request);
-        return ['OK' => true,'message' => __("Address added successfully"), 'list'=> auth('customer')->user()->addresses];
+        return ['OK' => true, 'message' => __("Address added successfully"), 'list' => auth('customer')->user()->addresses];
 
     }
 
-    public function submitTicket(Request $request){
+    public function submitTicket(Request $request)
+    {
         $request->validate([
-           'title' => ['required', 'string', 'max:255'],
-           'body' => ['required', 'string'],
+            'title' => ['required', 'string', 'max:255'],
+            'body' => ['required', 'string'],
         ]);
 
         $ticket = new Ticket();
@@ -182,12 +201,14 @@ class CustomerController extends Controller
         return redirect()->route('client.profile')->with('message', __('Ticket added successfully'));
     }
 
-    public function showTicket(Ticket $ticket){
-        return view('client.ticket',compact('ticket'));
+    public function showTicket(Ticket $ticket)
+    {
+        return view('client.ticket', compact('ticket'));
     }
 
 
-    public function ticketAnswer(Ticket $ticket, Request $request){
+    public function ticketAnswer(Ticket $ticket, Request $request)
+    {
 
         $request->validate([
             'body' => ['required', 'string'],
@@ -201,7 +222,7 @@ class CustomerController extends Controller
         $nticket->body = trim($request->body);
         $nticket->customer_id = auth('customer')->user()->id;
         $nticket->save();
-        return redirect(route('client.profile').'#tickets')->with('message', __('Ticket answered successfully'));
+        return redirect(route('client.profile') . '#tickets')->with('message', __('Ticket answered successfully'));
     }
 
 
