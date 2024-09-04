@@ -175,7 +175,7 @@
                         </li>
 
                     @endif
-                    @if(  auth()->user()->hasRole('DEVELOPER') )
+                    @if(  auth()->user()->hasRole('developer') )
                         <li>
                             <a href="{{route('admin.gfx.index')}}">
                                 <i class="ri-color-filter-line"></i>
@@ -183,7 +183,7 @@
                             </a>
                         </li>
                     @endif
-                    @if(  auth()->user()->hasRole('DEVELOPER') )
+                    @if(  auth()->user()->hasRole('developer'))
                         <li>
                             <a href="{{route('admin.area.index')}}">
                                 <i class="ri-paint-brush-line"></i>
