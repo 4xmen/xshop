@@ -180,6 +180,17 @@ class PartSeeder extends Seeder
         $part->sort = 1;
         $part->save();
 
+
+        // -------------------------------------------------------------
+
+
+        $part = new Part();
+        $part->segment = 'invoice';
+        $part->part = 'LianaInvoice';
+        $part->area_id = Area::where('name', 'invoice')->first()->id;
+        $part->sort = 1;
+        $part->save();
+
         // -------------------------------------------------------------
 
         $part = new Part();
