@@ -1,0 +1,31 @@
+#FollowUsSocial {
+    z-index: 99;
+    position: fixed;
+    inset-inline-start: -125px;
+    bottom: 10rem;
+    transform: rotateZ(90deg);
+    width: 300px;
+    text-shadow: 1px 1px 4px white;
+    span{
+        display: inline-block;
+        font-size: 27px;
+        padding: .5rem;
+        position:relative;
+        top: -2px;
+    }
+    a,a:visited{
+        font-size: 35px;
+        color: black;
+        padding: 0 2px;
+        transition: 600ms;
+        &:hover{
+            color: dodgerblue;
+            background: white;
+        }
+
+    }
+    i{
+        transform: rotateZ(-90deg);
+        display: inline-block;
+    }
+}
