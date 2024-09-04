@@ -110,11 +110,11 @@
                         <tr>
                             <th>
                                 <div
-                                        data-bs-toggle="tooltip"
-                                        data-bs-placement="top"
-                                        data-bs-custom-class="custom-tooltip"
-                                        data-bs-title="{{__("Check all")}}"
-                                        class="form-check form-switch mt-1 mx-2">
+                                    data-bs-toggle="tooltip"
+                                    data-bs-placement="top"
+                                    data-bs-custom-class="custom-tooltip"
+                                    data-bs-title="{{__("Check all")}}"
+                                    class="form-check form-switch mt-1 mx-2">
                                     <input class="form-check-input chkall"
                                            type="checkbox" role="switch">
                                 </div>
@@ -178,35 +178,56 @@
                                                         {{ $item->parent?->{$cols[0]}??'-' }}
                                                         @break
                                                     @case('status')
-                                                        <div class="model-status status-{{$item->status}} float-start" data-bs-toggle="tooltip"
+                                                        <div class="model-status status-{{$item->status}} float-start"
+                                                             data-bs-toggle="tooltip"
                                                              data-bs-placement="top"
                                                              data-bs-custom-class="custom-tooltip"
                                                              data-bs-title="{{$item->status}}"></div>
                                                         @break
                                                     @case('user_id')
-                                                        <a href="{{route('admin.user.edit',$item->user?->email)}}">
-                                                            {{ $item->user?->name??'-' }}
-                                                        </a>
+                                                        @if($item->user != null)
+                                                            <a href="{{route('admin.user.edit',$item->user?->email)}}">
+                                                                {{ $item->user?->name??'-' }}
+                                                            </a>
+                                                        @else
+                                                            {{__("Removed")}}
+                                                        @endif
                                                         @break
                                                     @case('customer_id')
-                                                        <a href="{{route('admin.customer.edit',$item->customer?->id)}}">
-                                                            {{ $item->customer?->name??'-' }}
-                                                        </a>
+                                                        @if($item->customer != null)
+                                                            <a href="{{route('admin.customer.edit',$item->customer?->id)}}">
+                                                                {{ $item->customer?->name??'-' }}
+                                                            </a>
+                                                        @else
+                                                            {{__("Removed")}}
+                                                        @endif
                                                         @break
                                                     @case('category_id')
-                                                        <a href="{{route('admin.category.edit',$item->category?->slug)}}">
-                                                            {{ $item->category?->name??'-' }}
-                                                        </a>
+                                                        @if($item->category != null)
+                                                            <a href="{{route('admin.category.edit',$item->category?->slug)}}">
+                                                                {{ $item->category?->name??'-' }}
+                                                            </a>
+                                                        @else
+                                                            {{__("Removed")}}
+                                                        @endif
                                                         @break
                                                     @case('state_id')
-                                                        <a href="{{route('admin.category.edit',$item->state?->id)}}">
-                                                            {{ $item->state?->name??'-' }}
-                                                        </a>
+                                                        @if($item->state != null)
+                                                            <a href="{{route('admin.state.edit',$item->state?->id)}}">
+                                                                {{ $item->state?->name??'-' }}
+                                                            </a>
+                                                        @else
+                                                            {{__("Removed")}}
+                                                        @endif
                                                         @break
                                                     @case('product_id')
-                                                        <a href="{{route('admin.product.edit',$item->product?->slug)}}">
-                                                            {{ $item->product?->name??'-' }}
-                                                        </a>
+                                                        @if($item->product != null)
+                                                            <a href="{{route('admin.product.edit',$item->product?->slug)}}">
+                                                                {{ $item->product?->name??'-' }}
+                                                            </a>
+                                                        @else
+                                                            {{__("Removed")}}
+                                                        @endif
                                                         @break
                                                     @case('expire')
                                                     @case('created_at')
@@ -260,15 +281,16 @@
                                                             </a>
                                                         </li>
                                                     @endforeach
-                                                        @if(config('app.xlang.active') && isset($item->translatable))
+                                                    @if(config('app.xlang.active') && isset($item->translatable))
                                                         <li>
-                                                            <a class="dropdown-item" href="{{route('admin.lang.model',[$item->id, get_class($item)])}}">
+                                                            <a class="dropdown-item"
+                                                               href="{{route('admin.lang.model',[$item->id, get_class($item)])}}">
                                                                 <i class="ri-translate"></i>
                                                                 &nbsp;
                                                                 {{__("Translate")}}
                                                             </a>
                                                         </li>
-                                                        @endif
+                                                    @endif
                                                 </ul>
                                             </div>
                                         @endif
@@ -333,12 +355,12 @@
                                 <div class="row">
                                     <div class="col-md-3 text-start">
                                         <div
-                                                id="toggle-select"
-                                                class="btn btn-outline-light mx-2"
-                                                data-bs-toggle="tooltip"
-                                                data-bs-placement="top"
-                                                data-bs-custom-class="custom-tooltip"
-                                                data-bs-title="{{__("Toggle selection")}}">
+                                            id="toggle-select"
+                                            class="btn btn-outline-light mx-2"
+                                            data-bs-toggle="tooltip"
+                                            data-bs-placement="top"
+                                            data-bs-custom-class="custom-tooltip"
+                                            data-bs-title="{{__("Toggle selection")}}">
                                             <i class="ri-toggle-line"></i>
                                         </div>
                                     </div>
