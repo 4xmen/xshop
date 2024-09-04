@@ -1,0 +1,31 @@
+.LianaInvoice {
+    .inv-footer{
+        border: 1px solid gray;
+        padding: 1rem;
+        border-radius: var(--xshop-border-radius);
+    }
+
+
+    .liana-logo{
+        height: 64px;
+        margin-top: 2rem;
+    }
+
+
+    .qr-code{
+        max-width: 150px;
+    }
+    @media print {
+        &{
+            font-size: 90%;
+        }
+        .qr-code{
+            max-width: 100%;
+        }
+        .liana-logo{
+            width: 64px;
+            margin-top: 0;
+        }
+    }
+}
+

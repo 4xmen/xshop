@@ -162,3 +162,11 @@ body {
     height: 64px;
     object-fit: cover;
 }
+
+
+
+@media print {
+    .no-print{
+        display: none;
+    }
+}

@@ -38,4 +38,4 @@ import "../views/segments/customer/AvisaCustomer/AvisaCustomer.js";
 import "../views/segments/attachments_page/DenaAttachList/DenaAttachList.js";
 import "../views/segments/attachment/AttachmentWithPreview/AttachmentWithPreview.js";
 import "../views/segments/contact/MeloContact/MeloContact.js";
-import "../views/segments/index/InlineMap/InlineMap.js";
+import "../views/segments/invoice/LianaInvoice/LianaInvoice.js";

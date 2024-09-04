@@ -24,7 +24,7 @@ class Invoice extends Model
 
     public static $invoiceStatus = ['PENDING', 'CANCELED', 'FAILED', 'PAID', 'PROCESSING', 'COMPLETED'];
 
-    public function getRouteKey()
+    public function getRouteKeyName()
     {
         return 'hash';
     }
@@ -145,6 +145,11 @@ class Invoice extends Model
         event(new InvoiceFailed($this, $payment));
 
         return $payment;
+    }
+
+    public function address()
+    {
+        return $this->belongsTo(Address::class);
     }
 
 }
