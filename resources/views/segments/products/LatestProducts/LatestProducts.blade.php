@@ -4,7 +4,7 @@
             {{__("Latest products")}}
         </h1>
         <div class="row">
-            @foreach(\App\Models\Product::where('status',1)->limit(4)->get() as $product)
+            @foreach(\App\Models\Product::where('status',1)->orderByDesc('id')->limit(4)->get() as $product)
                 <div class="col-lg-3 col-md-6">
                     <div class="product-item">
                         <a class="fav-btn" data-slug="{{$product->slug}}" data-is-fav="{{$product->isFav()}}"

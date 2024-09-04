@@ -179,6 +179,15 @@ class PartSeeder extends Seeder
         $part->area_id = Area::where('name', 'clips-list')->first()->id;
         $part->sort = 1;
         $part->save();
+        // -------------------------------------------------------------
+
+
+        $part = new Part();
+        $part->segment = 'posts_page';
+        $part->part = 'GridPostListSidebar';
+        $part->area_id = Area::where('name', 'group')->first()->id;
+        $part->sort = 1;
+        $part->save();
 
 
         // -------------------------------------------------------------
