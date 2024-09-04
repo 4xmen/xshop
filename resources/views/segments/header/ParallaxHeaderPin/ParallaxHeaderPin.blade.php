@@ -1,4 +1,4 @@
-<header class='ParallaxHeaderPin' style="background-image: url('{{$bg??asset('upload/images/'.$data->area->name.'.'.$data->part.'.jpg')}}')">
+<header class='ParallaxHeaderPin' style="background-image: url('{{$bg??asset('upload/images/'.$part->area->name . '.' . $part->part.'.jpg')}}')">
     <div class="{{gfx()['container']}}">
         <h1>
             {{$title}}
