@@ -4,7 +4,7 @@
     {{$title}} - {{config('app.name')}}
 @endsection
 @section('content')
-    @foreach(getParts('default_header') as $part)
+    @foreach(getParts('defaultHeader') as $part)
         @php($p = $part->getBladeWithData())
         @include($p['blade'],['data' => $p['data']])
     @endforeach
@@ -94,7 +94,7 @@
             </div>
         </div>
     </div>
-    @foreach(getParts('default_footer') as $part)
+    @foreach(getParts('defaultFooter') as $part)
         @php($p = $part->getBladeWithData())
         @include($p['blade'],['data' => $p['data']])
     @endforeach

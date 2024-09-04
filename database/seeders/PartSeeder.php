@@ -87,7 +87,7 @@ class PartSeeder extends Seeder
         $part = new Part();
         $part->segment = 'menu';
         $part->part = 'AplMenu';
-        $part->area_id = Area::where('name', 'default_header')->first()->id;
+        $part->area_id = Area::where('name', 'defaultHeader')->first()->id;
         $part->sort = 0;
         $part->save();
 
@@ -95,14 +95,14 @@ class PartSeeder extends Seeder
         $part = new Part();
         $part->segment = 'header';
         $part->part = 'SimpleHeader';
-        $part->area_id = Area::where('name', 'default_header')->first()->id;
+        $part->area_id = Area::where('name', 'defaultHeader')->first()->id;
         $part->sort = 0;
         $part->save();
 
         $part = new Part();
         $part->segment = 'footer';
         $part->part = 'WaveFooter';
-        $part->area_id = Area::where('name', 'default_footer')->first()->id;
+        $part->area_id = Area::where('name', 'defaultFooter')->first()->id;
         $part->sort = 2;
         $part->save();
 

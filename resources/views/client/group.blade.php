@@ -11,7 +11,7 @@ if ($group->bg != null){
 @section('content')
     <main>
         @if(\App\Models\Area::where('name',$area)->first()->use_default)
-            @foreach(getParts('default_header') as $part)
+            @foreach(getParts('defaultHeader') as $part)
                 @php($p = $part->getBladeWithData())
                 @include($p['blade'],['data' => $p['data']])
             @endforeach
@@ -21,7 +21,7 @@ if ($group->bg != null){
             @include($p['blade'],['data' => $p['data']])
         @endforeach
         @if(\App\Models\Area::where('name',$area)->first()->use_default)
-            @foreach(getParts('default_footer') as $part)
+            @foreach(getParts('defaultFooter') as $part)
                 @php($p = $part->getBladeWithData())
                 @include($p['blade'],['data' => $p['data']])
             @endforeach

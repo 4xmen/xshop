@@ -34,7 +34,7 @@ class AreaSeeder extends Seeder
                 'icon' => 'ri-ai-generate',
             ],
             [
-                'name' => 'default_header',
+                'name' => 'defaultHeader',
                 'valid_segments' => json_encode(
                     ["top", "header", "other", "ads", "menu"]
                 ),
@@ -43,7 +43,7 @@ class AreaSeeder extends Seeder
                 'icon' => 'ri-window-line',
             ],
             [
-                'name' => 'default_footer',
+                'name' => 'defaultFooter',
                 'valid_segments' => json_encode(
                     ["footer", "other", "ads", "groups"]
                 ),

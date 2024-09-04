@@ -20,7 +20,7 @@ class ParallaxHeader
         $setting->title =  $part->area->name . ' ' . $part->part.' default image';
         $setting->save();
 
-        File::copy(__DIR__.'/../../default-assets/bg.jpg',public_path('upload/images/').$part->area->name . '.' . $part->part.'.jpg');
+        File::copy(__DIR__.'/../../default-assets/bg.jpg',public_path('upload/images/').$part->area->name . '_' . $part->part.'.jpg');
     }
     public static function onRemove(Part $part = null)
     {
