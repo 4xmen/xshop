@@ -1,0 +1,41 @@
+.SimpleFooter {
+
+    overflow: hidden;
+    padding-top: 7rem;
+    background: #282c34;
+    color: white;
+
+    .footer {
+
+        .social{
+            list-style: none;
+            i{
+                font-size: 35px;
+            }
+        }
+
+        color: var(--xshop-diff);
+
+
+        a,a:visited{
+            color: var(--xshop-diff);
+        }
+        z-index: 1;
+        --footer-background: var(--xshop-primary);
+        display: grid;
+        position: relative;
+        grid-area: footer;
+        min-height: 12rem;
+
+
+        .content {
+            padding: 6rem 1rem 2rem;
+            background: var(--xshop-primary);
+            z-index: 2;
+        }
+    }
+
+    h3{
+        font-size: 27px;
+    }
+}
