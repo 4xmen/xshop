@@ -1,10 +1,10 @@
 import {tns} from "tiny-slider/src/tiny-slider";
 
-var parallaxSlider ;
+var parallaxSlider;
 
 document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('#ParallaxSliderTns')?.forEach(function (el) {
-        if (el.classList.contains('.tns-slider')){
+        if (el.classList.contains('.tns-slider')) {
             console.log('ignore');
             return 'ignore';
         }
@@ -56,13 +56,18 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-// Apply parallax on scroll and resize
-    window.addEventListener('scroll', applyParallax);
-    window.addEventListener('resize', applyParallax);
+    try {
 
-// Initial application
-    applyParallax();
+        // Apply parallax on scroll and resize
+        window.addEventListener('scroll', applyParallax);
+        window.addEventListener('resize', applyParallax);
 
-// Reapply parallax when tiny-slider changes slides
-    parallaxSlider.events.on('transitionEnd', applyParallax);
+        // Initial application
+        applyParallax();
+
+        // Reapply parallax when tiny-slider changes slides
+        parallaxSlider.events.on('transitionEnd', applyParallax);
+
+    } catch {
+    }
 });
