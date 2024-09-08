@@ -605,6 +605,9 @@ class ClientController extends Controller
                 break;
             }
         }
+        if (count( explode('@', $r)) == 1){
+            return abort(404);
+        }
         $method = explode('@', $r)[1];
         $segments = $request->segments();
         $routes = explode('/', $n);
