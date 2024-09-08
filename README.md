@@ -20,7 +20,7 @@
 
 
 
-## Installation
+## Installation [ Development mode ]
 
 > [!IMPORTANT]  
 > Create new database and rename `.env.example` to `.env` then update you `.env` configs so run this commands:
@@ -28,6 +28,7 @@
 ```bash
 git clone https://github.com/4xmen/xshop.git
 cd xshop
+cp .env.example .env
 composer install
 php artisan migrate:fresh --seed
 php artisan storage:link
