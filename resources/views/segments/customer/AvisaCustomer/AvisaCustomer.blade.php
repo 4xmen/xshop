@@ -272,7 +272,7 @@
                                     <label for="mobile">
                                         {{__('Mobile')}}
                                     </label>
-                                    <input name="mobile" type="text" @if(config('app.sign.sms'))  readonly
+                                    <input name="mobile" type="text" @if(config('app.sms.sign'))  readonly
                                            @endif  class="form-control @error('mobile') is-invalid @enderror"
                                            placeholder="{{__('Mobile')}}"
                                            value="{{old('mobile',auth('customer')->user()->mobile??null)}}"

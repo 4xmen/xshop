@@ -115,6 +115,20 @@ class Invoice extends Model
         /** @var \App\Models\Invoice $this */
         $this->status = "PAID";
         $this->save();
+        if (config('app.sms.driver') == 'Kavenegar'){
+            $args = [
+                'receptor' => $this->customer->mobile,
+                'template' => trim(getSetting('order')),
+                'token10' => $this->customer->name,
+                'token' => $this->hash,
+                'token2' => number_format($this->total_price)
+            ];
+        }else{
+            $args = array_merge($this->toArray(),$this->customer->toArray());
+        }
+
+        sendingSMS(getSetting('order'),$this->customer->mobile,$args);
+
         try {
             event(new InvoiceSucceed($this, $payment));
         }catch (\Throwable $exception){

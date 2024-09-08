@@ -2,7 +2,7 @@
 >
     <div id="login-container"
          style="background-image: url('{{asset('upload/images/'.$data->area->name.'.'.$data->part.'.jpg')}}')">
-        <form @if(!config('app.sign.sms')) action="{{route('client.sign-in-do')}}" @endif id="login-form" method="post">
+        <form @if(!config('app.sms.sign')) action="{{route('client.sign-in-do')}}" @endif id="login-form" method="post">
             @csrf
             <h3>
                 {{$subtitle}}
@@ -11,7 +11,7 @@
                 @include('components.err')
             </div>
             <div id="login-content">
-                @if(!config('app.sign.sms'))
+                @if(!config('app.sms.sign'))
                     <label>
                         {{__("Email")}}
                     </label>
