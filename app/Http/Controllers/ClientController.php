@@ -520,6 +520,20 @@ class ClientController extends Controller
         $customer = Customer::where('mobile', $request->input('tel'));
         $code = rand(11111, 99999);
 
+        if (config('app.sms.driver') == 'Kavenegar'){
+            $args = [
+                'receptor' => $request->input('tel'),
+                'template' => trim(getSetting('sign')),
+                'token' => $code
+            ];
+        }else{
+            $args = [
+                'code' => $code,
+            ];
+        }
+
+        sendingSMS(getSetting('sign'),$request->input('tel'),$args);
+
         Log::info('auth code: ' . $code);
         if ($customer->count() == 0) {
             $customer = new Customer();

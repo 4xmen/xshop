@@ -52,6 +52,22 @@ class InvoiceController extends XController
     public function save($invoice, $request)
     {
 
+        if($invoice->tracking_code != $request->get('tracking_code') && strlen(trim($request->tracking_code)) == 24){
+            if (config('app.sms.driver') == 'Kavenegar'){
+                $args = [
+                    'receptor' => $invoice->customer->mobile,
+                    'template' => trim(getSetting('sent')),
+                    'token' => trim($request->tracking_code)
+                ];
+            }else{
+                $args = [
+                    'code' => trim($request->tracking_code),
+                ];
+            }
+
+            sendingSMS(getSetting('sent'),$invoice->customer->mobile,$args);
+        }
+
         $invoice->transport_id = $request->input('transport_id', null);
         $invoice->address_id = $request->input('address_id', null);
         $invoice->tracking_code = $request->tracking_code;

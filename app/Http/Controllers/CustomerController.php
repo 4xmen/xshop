@@ -68,7 +68,7 @@ class CustomerController extends Controller
         $customer = auth('customer')->user();
         $customer->name = $request->name;
         $customer->email = $request->email;
-        $customer->mobile = $request->mobile;
+//        $customer->mobile = $request->mobile;
         if ($request->has('password') && trim($request->input('password')) != '') {
             $customer->password = bcrypt($request->password);
         }

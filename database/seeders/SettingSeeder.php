@@ -95,6 +95,26 @@ class SettingSeeder extends Seeder
                 ],
 
             ],
+            'SMS' => [
+                [
+                    'title' => __("Sign-in authentication"),
+                    'key' => 'sign',
+                    'type' => 'LONGTEXT',
+                    'value' => 'sign',
+                ],
+                [
+                    'title' => __("Order confirmation"),
+                    'key' => 'order',
+                    'type' => 'LONGTEXT',
+                    'value' => 'order',
+                ],
+                [
+                    'title' => __("Sent message"),
+                    'key' => 'sent',
+                    'type' => 'LONGTEXT',
+                    'value' => 'sent',
+                ],
+            ],
             'SEO' => [
                 [
                     'title' => __("Common keyword"),
@@ -200,11 +220,11 @@ class SettingSeeder extends Seeder
                 $setting->title = $set['title'];
                 $setting->section = $section;
                 $setting->key = $set['key'];
-                $setting->value = $set['value']??null;
-                $setting->type = $set['type']??'TEXT';
-                $setting->ltr = $set['ltr']??false;
+                $setting->value = $set['value'] ?? null;
+                $setting->type = $set['type'] ?? 'TEXT';
+                $setting->ltr = $set['ltr'] ?? false;
                 $setting->is_basic = true;
-                $setting->size = $set['size']??12;;
+                $setting->size = $set['size'] ?? 12;;
                 $setting->save();
             }
         }

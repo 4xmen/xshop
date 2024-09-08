@@ -159,9 +159,14 @@ return [
     |
      */
 
-    'sign' => [
-        'sms' => env('SIGN_SMS',false),
-        'driver' => env('SIGN_DRIVER',''),
+    'sms' => [
+        'sign' => env('SMS_SING',false),
+        'driver' => env('SMS_DRIVER','direct'),
+        'username' => env('SMS_USERNAME',''),
+        'password' => env('SMS_PASSWORD',''),
+        'number' => env('SMS_NUMBER',''),
+        'url' => env('SMS_URL',''),
+        'token' => env('SMS_TOKEN',''),
     ],
     /*
     |--------------------------------------------------------------------------

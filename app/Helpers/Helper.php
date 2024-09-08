@@ -9,6 +9,7 @@ use App\Models\Part;
 use App\Models\Menu;
 use App\Models\Product;
 use Illuminate\Support\Facades\Route;
+use GuzzleHttp\Client;
 
 
 /**
@@ -887,7 +888,7 @@ function getCategorySubCatsBySetting($key, $limit = 10, $order = 'id', $dir = "D
 {
     $c = Category::where('id', getSetting($key) ?? 1)->first();
     if ($c == null) {
-        return  [];
+        return [];
     }
     return $c->children()->orderBy($order, $dir)->limit($limit)->get();
 }
@@ -1203,4 +1204,70 @@ function fixUrlLang($url)
         return str_replace($welcome, $welcome . '/' . app()->getLocale(), $url);
     }
     return $url;
+}
+
+
+/**
+ * Send SMS
+ * @param $text
+ * @param $number
+ * @param $args
+ * @return bool
+ * @throws \GuzzleHttp\Exception\GuzzleException
+ */
+function sendingSMS($text, $number, $args)
+{
+
+    if (config('app.sms.url') == '' || config('app.sms.url') == null) {
+        return false;
+    }
+    if (config('app.sms.driver') == 'Kavenegar') {
+        $url = str_replace('TOKEN', config('app.sms.token'), config('app.sms.url')) . '?' . http_build_query($args);
+        $response = Http::get($url);
+        $r = json_decode($response->body(), true);
+        if ($r['return']['status'] != 200) {
+            \Illuminate\Support\Facades\Log::error($r);
+            return false;
+        }
+        return true;
+
+    }
+    $url = config('app.sms.url');
+
+    foreach ($args as $k => $arg) {
+        $text = str_replace('%' . $k, $arg, $text);
+    }
+    $fields = [
+        'user' => config('app.sms.url'),
+        'password' => config('app.sms.password'),
+        'to' => $number,
+        'from' => config('app.sms.number'),
+        'text' => $text,
+        'isflash' => 'false',
+    ];
+
+// Create a new Guzzle client
+    $client = new Client();
+
+    try {
+        // Send a POST request
+        $response = $client->post($url, [
+            'form_params' => $fields,
+            'headers' => [
+                'Content-Type' => 'application/x-www-form-urlencoded',
+                'Cache-Control' => 'no-cache',
+            ],
+        ]);
+
+        // Get the response body as a string
+        $result = $response->getBody()->getContents();
+    } catch (\Exception $e) {
+        // Handle exception
+        // You can log the error or return an error response here
+        Log::error($e->getMessage());
+        return false;
+    }
+
+    return true;
+
 }
