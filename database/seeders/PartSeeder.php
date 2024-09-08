@@ -141,6 +141,17 @@ class PartSeeder extends Seeder
         $part->sort = 1;
         $part->save();
 
+        // -------------------------------------------------------------
+
+
+
+        $part = new Part();
+        $part->segment = 'products_page';
+        $part->part = 'ProductGridSidebar';
+        $part->area_id = Area::where('name', 'category')->first()->id;
+        $part->sort = 1;
+        $part->save();
+
 
 
         // -------------------------------------------------------------
