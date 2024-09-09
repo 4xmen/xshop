@@ -33,6 +33,10 @@ body {
 }
 
 
+section {
+    max-width: 100%;
+}
+
 #website-preloader {
     transition: 500ms;
 }
@@ -129,18 +133,21 @@ body {
 }
 
 
-.tag-page{
+.tag-page {
 
     min-height: 60vh;
-    .tab-control{
+
+    .tab-control {
         padding-left: 12px;
         padding-right: 12px;
     }
-    .tab-control a.active{
+
+    .tab-control a.active {
         background: var(--xshop-primary);
         color: var(--xshop-diff);
     }
-    .tab-content{
+
+    .tab-content {
         background: transparent;
     }
 }
@@ -148,7 +155,7 @@ body {
 .tab-content {
     display: none;
     padding: 1rem;
-    background: var(--karen-tab-bg-color,#ffffff);
+    background: var(--karen-tab-bg-color, #ffffff);
 
     &.active {
         display: block;
@@ -157,16 +164,15 @@ body {
 }
 
 
-.x64-img{
+.x64-img {
     width: 64px;
     height: 64px;
     object-fit: cover;
 }
 
 
-
 @media print {
-    .no-print{
+    .no-print {
         display: none;
     }
 }
