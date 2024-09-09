@@ -23,6 +23,10 @@ class ThemeController extends Controller
             }
         }
         $response .= '}';
+
+        if (langIsRTL(app()->getLocale())) {
+            $response .= ' .slider-content, .tns-outer .item{ direction: rtl; }';
+        }
         return response($response)->header('Content-Type', 'text/css; charset=utf-8');
     }
 }

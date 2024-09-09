@@ -11,7 +11,7 @@
 
                         <div class="section-main">
                             @foreach(getCategoryProductBySetting($part->area->name . '_' . $part->part.'_category') as $product)
-                                <div class="item">
+                                <div class="item slider-content">
                                     <div class="tree-product-box">
                                         <a href="{{$product->webUrl()}}">
                                             <img src="{{$product->imgUrl()}}" alt="{{$product->name}}">
@@ -46,7 +46,7 @@
 
                 <div class="section-second">
                     @foreach(getCategoryProductBySetting($part->area->name . '_' . $part->part.'_categoryx') as $product)
-                        <div class="item  text-center">
+                        <div class="item  text-center slider-content">
                                 <a href="{{$product->webUrl()}}">
                                     <img src="{{$product->imgUrl()}}" class="img-fluid" alt="{{$product->name}}">
                                 </a>
@@ -61,7 +61,7 @@
 
                 <div class="section-third">
                     @foreach(getCategoryProductBySetting($part->area->name . '_' . $part->part.'_categoryy') as $product)
-                        <div class="item  text-center">
+                        <div class="item  text-center slider-content">
                             <a href="{{$product->webUrl()}}">
                                 <img src="{{$product->imgUrl()}}" class="img-fluid" alt="{{$product->name}}">
                             </a>

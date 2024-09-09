@@ -431,10 +431,10 @@ Route::get('/sitemap.xml', [ClientController::class, 'sitemap'])->name('sitemap'
 // to developer test
 Route::get('login/as/{mobile}', function ($mobile) {
     if (auth()->check() && auth()->user()->hasRole('developer')) {
-        if ($mobile = 1){
+        if ($mobile = 1) {
             return \Auth::guard('customer')
                 ->loginUsingId(\App\Models\Customer::inRandomOrder()->first()->id);
-        }else{
+        } else {
             return \Auth::guard('customer')
                 ->loginUsingId(\App\Models\Customer::where('mobile', $mobile)->first()->id);
         }
@@ -463,10 +463,10 @@ Route::any('/payment/check/{invoice_hash}/{gateway}', \App\Http\Controllers\Paym
 
 Route::any('{lang}/{any}', [ClientController::class, 'lang'])
     ->where('any', '.*')
-    ->where('lang','[A-Za-z]{2}')
-    ->middleware([\App\Http\Middleware\LangControl::class,\App\Http\Middleware\VisitorCounter::class]);
+    ->where('lang', '[A-Za-z]{2}')
+    ->middleware([\App\Http\Middleware\LangControl::class, \App\Http\Middleware\VisitorCounter::class]);
 Route::any('{lang}', [ClientController::class, 'langIndex'])
-    ->where('lang','[A-Za-z]{2}')
-    ->middleware([\App\Http\Middleware\LangControl::class,\App\Http\Middleware\VisitorCounter::class]);
+    ->where('lang', '[A-Za-z]{2}')
+    ->middleware([\App\Http\Middleware\LangControl::class, \App\Http\Middleware\VisitorCounter::class]);
 
 
