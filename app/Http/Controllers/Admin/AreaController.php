@@ -82,8 +82,10 @@ class AreaController extends Controller
 
         if ($request->has('use_default')){
             $area->use_default = 1;
-            $area->save();
+        }else{
+            $area->use_default = 0;
         }
+        $area->save();
 
 
         return redirect()->back()->with(['message' => __('area :NAME of website updated', ['NAME' => $area->name])]);
