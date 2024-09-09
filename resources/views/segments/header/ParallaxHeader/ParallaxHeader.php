@@ -16,11 +16,11 @@ class ParallaxHeader
         $setting->key = $part->area->name . '_' . $part->part.'_jpg';
         $setting->value = null;
         $setting->type = 'FILE';
-        $setting->size = 6;
+        $setting->size = 12;
         $setting->title =  $part->area->name . ' ' . $part->part.' default image';
         $setting->save();
 
-        File::copy(__DIR__.'/../../default-assets/bg.jpg',public_path('upload/images/').$part->area->name . '_' . $part->part.'.jpg');
+        File::copy(__DIR__.'/../../default-assets/bg.jpg',public_path('upload/images/').$part->area->name . '.' . $part->part.'.jpg');
     }
     public static function onRemove(Part $part = null)
     {
