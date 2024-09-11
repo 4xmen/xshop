@@ -1,0 +1,55 @@
+.AuthorSlider {
+    padding: 3rem 0;
+    background: var(--author-slider-color);
+    color: var(--xshop-diff);
+
+    #slider-author-container{
+        position: relative;
+        .item{
+            position: relative;
+        }
+
+        .sld-btn{
+            position: absolute;
+            top: 47%;
+            cursor: pointer;
+            i{
+                font-size: 35px;
+            }
+        }
+
+        #auth-nxt{
+            right: -45px;
+        }
+        #auth-prv{
+            left: -45px;
+        }
+
+    }
+    .author-slide{
+
+        img{
+            width: 400px;
+            height: 600px;
+            object-fit: cover;
+            border-radius: var(--xshop-border-radius);
+        }
+
+        .contents{
+            background: var(--author-slider-color2);
+            width: 65%;
+            inset-inline-end: 350px;
+            padding: 2rem;
+
+
+
+            position: absolute;
+            top: 35%;
+            border-radius: var(--xshop-border-radius);
+            h3,p{
+                color: var(--xshop-diff) !important;
+                margin-bottom: 1rem;
+            }
+        }
+    }
+}
