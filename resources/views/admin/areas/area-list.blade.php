@@ -1,10 +1,14 @@
-
 @extends('layouts.app')
 
 @section('title')
     {{__("Area design")}}
 @endsection
 @section('content')
+    @if(config('app.demo'))
+        <div class="alert alert-warning">
+            {{__("Theme loaded every :M minutes in demo version", ['M' => 5])}}
+        </div>
+    @endif
     <div class="row">
         @foreach($areas as $area)
             <div class="col-md-4">

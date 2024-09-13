@@ -42,9 +42,11 @@ class UserController extends XController
         }
 
         $user->name = $request->input('name');
-        $user->email = $request->input('email');
-        if (trim($request->input('password')) != '') {
-            $user->password = bcrypt($request->input('password'));
+        if (!config('app.demo')) {
+            $user->email = $request->input('email');
+            if (trim($request->input('password')) != '') {
+                $user->password = bcrypt($request->input('password'));
+            }
         }
         $user->mobile = $request->input('mobile');
         $user->role = $request->input('role');
@@ -105,9 +107,9 @@ class UserController extends XController
                 }
             }
         }
-        unset($routes['home'], $routes['user'], $routes['ckeditor'],$routes['area'],$routes['lang'],$routes['gfx']);
+        unset($routes['home'], $routes['user'], $routes['ckeditor'], $routes['area'], $routes['lang'], $routes['gfx']);
         //
-        return view($this->formView, compact('item','routes'));
+        return view($this->formView, compact('item', 'routes'));
     }
 
     public function bulk(Request $request)

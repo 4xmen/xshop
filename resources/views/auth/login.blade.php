@@ -5,6 +5,13 @@
 @section('content')
 
     <div class="forms">
+        @if(config('app.demo'))
+            <div class="alert alert-warning mb-5">
+                {{__("DEMO VERSION")}}
+                <hr>
+                {{__("Default admin email is :E1 (developer) or :E2 (admin) and default password is: :P",["E1" => '`developer@example.com`','E2' => '`admin@example.com`','P' => '`password`' ])}}
+            </div>
+        @endif
 
         <div class="card" id="raw-form">
             <div class="card-header">
