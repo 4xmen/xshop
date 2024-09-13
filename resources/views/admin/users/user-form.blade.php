@@ -24,6 +24,11 @@
                     <li>
                         {{__("E-mail is unique each users")}}
                     </li>
+                    @if(config('app.demo'))
+                    <li>
+                        {{__("You can't change email or password in demo version")}}
+                    </li>
+                    @endif
                 </ul>
             </div>
 
