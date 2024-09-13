@@ -46,7 +46,7 @@ class Item extends Model
             }
             return $this->meta;
         }else{
-            $this->dest()->webUrl();
+            return $this->dest->webUrl();
         }
     }
 }

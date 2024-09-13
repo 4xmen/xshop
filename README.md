@@ -131,6 +131,10 @@ php artisan client
 - PartName.js: your theme part javascript
 - screenshot.png: screenshot preview of theme part
 
+## Demo
+
+> Online demo available here: <a href="https://xshop.xstack.ir/login">https://xshop.xstack.ir/</a>
+
 ### Screenshots
 
 ![1](https://raw.githubusercontent.com/A1Gard/xshop-installer-assets/master/screenshots/xshop-screenshot1.png)
