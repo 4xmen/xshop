@@ -1271,3 +1271,98 @@ function sendingSMS($text, $number, $args)
     return true;
 
 }
+
+/**
+ * table of content generator
+ * @param $html
+ * @return array
+ */
+function generateTOC($html) {
+    // Load HTML into a DOMDocument for parsing
+    $doc = new DOMDocument();
+    @$doc->loadHTML(mb_convert_encoding($html, 'HTML-ENTITIES', 'UTF-8'));
+
+    $toc = '';
+    $tocItems = [];
+    $lastH2 = '';
+    $lastH3 = '';
+    $idCounter = 0;
+
+    // Fetch all headings in the document
+    $headings = $doc->getElementsByTagName('*');
+
+    foreach ($headings as $heading) {
+        if (in_array($heading->nodeName, ['h2', 'h3'])) {
+            // Generate a unique ID for each heading
+            $id = generateHeadingID($heading->nodeValue, $idCounter);
+            $idCounter++;
+            $heading->setAttribute('id', $id);
+
+            if ($heading->nodeName === 'h2') {
+                $tocItems[] = [
+                    'title' => $heading->nodeValue,
+                    'id' => $id,
+                    'children' => []
+                ];
+                $lastH2 = $heading->nodeValue; // Update last H2 title
+                $lastH3 = ''; // Reset last H3
+            } elseif ($heading->nodeName === 'h3') {
+                if ($lastH2) {
+                    // Create a new child entry for the last H2
+                    $tocItems[count($tocItems) - 1]['children'][] = [
+                        'title' => $heading->nodeValue,
+                        'id' => $id,
+                    ];
+                    $lastH3 = $heading->nodeValue; // Update last H3 title
+                }
+            }
+        }
+    }
+
+    // Create the TOC HTML
+    $toc .= buildTOC($tocItems);
+
+    // Return the modified HTML and the TOC
+    return [$toc, $doc->saveHTML()];
+}
+
+/**
+ * generate heading ID for table of content
+ * @param $text
+ * @param $counter
+ * @return string
+ */
+function generateHeadingID($text, $counter) {
+    // Convert to lowercase and replace non-alphanumeric characters with dashes
+    $id = strtolower(preg_replace('/[^a-zA-Z0-9]+/', '-', $text));
+
+    // Remove leading and trailing dashes
+    $id = trim($id, '-');
+
+    // Ensure the ID is not empty
+    if (empty($id)) {
+        $id = 'heading';
+    }
+
+    // Add the counter to ensure uniqueness
+    $id .= '-' . $counter;
+
+    return $id;
+}
+
+// The buildTOC function remains unchanged
+function buildTOC($items) {
+    $html = '<ul>';
+    foreach ($items as $item) {
+        $html .= '<li>';
+        $html .= '<a href="#' . $item['id'] . '">' . $item['title'] . '</a>';
+
+        if (!empty($item['children'])) {
+            $html .= buildTOC($item['children']);
+        }
+
+        $html .= '</li>';
+    }
+    $html .= '</ul>';
+    return $html;
+}

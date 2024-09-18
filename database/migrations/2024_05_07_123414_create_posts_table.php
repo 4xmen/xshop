@@ -26,6 +26,7 @@ return new class extends Migration
             $table->unsignedInteger('like')->default(0);
             $table->unsignedInteger('dislike')->default(0);
             $table->string('icon', 128)->nullable();
+            $table->boolean('table_of_contents')->default(0);
             $table->softDeletes();
             $table->timestamps();
 

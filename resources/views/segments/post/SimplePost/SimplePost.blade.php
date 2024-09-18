@@ -37,7 +37,13 @@
                 @endif
             </div>
             <hr>
-            {!! $post->body !!}
+            @if($post->table_of_contents)
+                {!! $post->tableOfContents() !!}
+                {!! $post->bodyContent() !!}
+            @else
+
+                {!! $post->body !!}
+            @endif
 
         </div>
     </div>

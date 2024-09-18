@@ -103,12 +103,22 @@
                                    placeholder="{{__('Title')}}" value="{{old('title',$item->title??null)}}"/>
                         </div>
                     </div>
-                    <div class="col-md-12 mt-3">
+                    <div class="col-md-9 mt-3">
                         <label for="slug">
                             {{__('Slug')}}
                         </label>
                         <input name="slug" type="text" class="form-control @error('slug') is-invalid @enderror"
                                placeholder="{{__('Slug')}}" value="{{old('slug',$item->slug??null)}}"/>
+                    </div>
+                    <div class="col-3 mt-4">
+                        <div class="form-group mt-4">
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" name="table_of_contents"  @if (old('table_of_contents',$item->table_of_contents??0) != 0)
+                                    checked
+                                       @endif type="checkbox" id="table_of_contents">
+                                <label class="form-check-label" for="table_of_contents">{{__('Table of contents')}}</label>
+                            </div>
+                        </div>
                     </div>
                     <div class="col-md-12 mt-3">
                         <div class="form-group">

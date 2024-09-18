@@ -196,4 +196,14 @@ RESULT;
             return implode(',', $this->tags()->pluck('name')->toArray());
         }
     }
+
+    public function tableOfContents(){
+        list($toc, $modifiedHtml) = generateTOC($this->body);
+        return $toc;
+    }
+
+    public function bodyContent(){
+        list($toc, $modifiedHtml) = generateTOC($this->body);
+        return $modifiedHtml;
+    }
 }
