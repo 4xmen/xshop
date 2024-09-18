@@ -6,6 +6,7 @@
     "license": "GPL-3.0-or-later",
     "require": {
         "php": "^8.2",
+        "ext-dom": "*",
         "carlos-meneses/laravel-mpdf": "^2.1",
         "chillerlan/php-qrcode": "^5.0",
         "dpsoft/mellat": "^1.1",
