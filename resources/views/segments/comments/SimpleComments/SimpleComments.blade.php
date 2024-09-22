@@ -3,7 +3,7 @@
         <h5>
             {{__("Comments")}}
         </h5>
-        @foreach($data['comments'] as $comment)
+        @foreach($data['comments']??[] as $comment)
             @include('segments.post.SimplePost.inc.comment-detail',$comment)
         @endforeach
         <h5>
