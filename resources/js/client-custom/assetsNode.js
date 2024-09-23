@@ -28,6 +28,9 @@ app.component('address-input', addressInput);
 import NsCard from "../client-vue/NsCard.vue";
 app.component('ns-card', NsCard);
 
+import RateInput from "../client-vue/RateInput.vue";
+app.component('rate-input', RateInput);
+
 
 app.use(ToastPlugin);
 app.use(store);
