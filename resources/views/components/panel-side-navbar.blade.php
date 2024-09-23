@@ -6,7 +6,7 @@
                 <i class="ri-home-smile-fill"></i>
             </a>
         </li>
-        @if(  auth()->user()->hasAnyAccesses(['customer','invoice','discount']) )
+        @if(  auth()->user()->hasAnyAccesses(['customer','invoice','discount','rate']) )
             <li data-bs-toggle="tooltip" data-bs-placement="auto" data-bs-custom-class="custom-tooltip"
                 data-bs-title="{{__("Shopping card")}}">
                 <a href="#card">
@@ -35,6 +35,14 @@
                             <a href="{{route('admin.discount.index')}}">
                                 <i class="ri-percent-fill"></i>
                                 {{__('Discounts')}}
+                            </a>
+                        </li>
+                    @endif
+                    @if(  auth()->user()->hasAnyAccess( 'rate' ))
+                        <li>
+                            <a href="{{ route('admin.rate.index') }}">
+                                <i class="ri-star-half-line"></i>
+                                {{__('Rate')}}
                             </a>
                         </li>
                     @endif

@@ -8,6 +8,7 @@ use App\Models\Area;
 use App\Models\Part;
 use App\Models\Menu;
 use App\Models\Product;
+use App\Models\Rate;
 use Illuminate\Support\Facades\Route;
 use GuzzleHttp\Client;
 
@@ -1365,4 +1366,31 @@ function buildTOC($items) {
     }
     $html .= '</ul>';
     return $html;
+}
+
+
+/**
+ * detect last rate of customer
+ * @param $type
+ * @param $id
+ * @param $evaluation
+ * @return int|mixed
+ */
+function detectRateCustomer($type,$id,$evaluation)
+{
+    if (!auth('customer')->check()){
+        return 0;
+    }
+    $rate = Rate::where('rater_id',auth('customer')->id())
+    ->where('rater_type', \App\Models\Customer::class)
+    ->where('rateable_type',$type)
+    ->where('rateable_id',$id)
+    ->where('evaluation_id',$evaluation);
+
+    if ($rate->count() == 0){
+        return  0;
+    }else{
+        return  $rate->first()->rate;
+    }
+
 }

@@ -20,6 +20,7 @@ Route::prefix(config('app.panel.prefix'))->name('admin.')->group(
 
                 Route::post('ckeditor/upload', [\App\Http\Controllers\Admin\CkeditorController::class, 'upload'])->name('ckeditor.upload');
                 Route::get('adminlogs', [\App\Http\Controllers\Admin\AdminLogController::class, 'index'])->name('adminlog.index');
+                Route::get('rates', [\App\Http\Controllers\Admin\RateController::class, 'index'])->name('rate.index');
                 Route::get('adminlogs/{user}', [\App\Http\Controllers\Admin\AdminLogController::class, 'log'])->name('adminlog.show');
                 Route::post('images/store/{gallery}', [\App\Http\Controllers\Admin\ImageController::class, 'store'])->name('image.store');
                 Route::get('images/destroy/{image}', [\App\Http\Controllers\Admin\ImageController::class, 'destroy'])->name('image.destroy');

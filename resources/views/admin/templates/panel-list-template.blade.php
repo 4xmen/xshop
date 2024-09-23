@@ -229,6 +229,15 @@
                                                             {{__("Removed")}}
                                                         @endif
                                                         @break
+                                                    @case('evaluation_id')
+                                                        @if($item->evaluation != null)
+                                                            <a href="{{route('admin.evaluation.edit',$item->evaluation_id)}}">
+                                                                {{ $item->evaluation?->title??'-' }}
+                                                            </a>
+                                                        @else
+                                                            {{__("Removed")}}
+                                                        @endif
+                                                        @break
                                                     @case('expire')
                                                     @case('created_at')
                                                     @case('updated_at')
@@ -244,6 +253,8 @@
                                                             @endif
                                                         @elseif(gettype($item->$col) == 'integer')
                                                             {{number_format($item->$col)}}
+                                                        @elseif(strpos($col,'_type'))
+                                                            {{str_replace('App\\Models\\', '' , $item->$col)}}
                                                         @else
                                                             {{$item->$col}}
                                                         @endif
