@@ -16,6 +16,7 @@ use App\Models\Invoice;
 use App\Models\Post;
 use App\Models\Product;
 use App\Models\Quantity;
+use App\Models\Rate;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
@@ -520,19 +521,19 @@ class ClientController extends Controller
         $customer = Customer::where('mobile', $request->input('tel'));
         $code = rand(11111, 99999);
 
-        if (config('app.sms.driver') == 'Kavenegar'){
+        if (config('app.sms.driver') == 'Kavenegar') {
             $args = [
                 'receptor' => $request->input('tel'),
                 'template' => trim(getSetting('sign')),
                 'token' => $code
             ];
-        }else{
+        } else {
             $args = [
                 'code' => $code,
             ];
         }
 
-        sendingSMS(getSetting('sign'),$request->input('tel'),$args);
+        sendingSMS(getSetting('sign'), $request->input('tel'), $args);
 
         Log::info('auth code: ' . $code);
         if ($customer->count() == 0) {
@@ -619,7 +620,7 @@ class ClientController extends Controller
                 break;
             }
         }
-        if (count( explode('@', $r)) == 1){
+        if (count(explode('@', $r)) == 1) {
             return abort(404);
         }
         $method = explode('@', $r)[1];
@@ -677,5 +678,53 @@ class ClientController extends Controller
             $message = __('error in payment. contact admin.');
             return redirect()->back()->withErrors($message);
         }
+    }
+
+    public function rate(Request $request)
+    {
+        $request->validate([
+            'rate.*' => ['required', 'integer'],
+            'rateable_id' => ['required', 'integer'],
+            'rateable_type' => ['required', 'string'],
+        ]);
+
+//        return $request->all();
+
+        $changed = false;
+        foreach ($request->rate as $k => $rt) {
+
+
+            $r = Rate::where('rateable_type', $request->rateable_type)
+                ->where('rateable_id', $request->rateable_id)
+                ->where('rater_type', Customer::class)
+                ->where('rater_id', auth('customer')->id())
+                ->where('evaluation_id', $k);
+            if ($r->count() != 0) {
+                $rate = $r->first();
+                $changed = true;
+            } else {
+                $rate = new Rate();
+            }
+            if ($rt != 0) {
+                $rate->rater_type = Customer::class;
+                $rate->rater_id = auth('customer')->id();
+                $rate->rateable_type = $request->rateable_type;
+                $rate->rateable_id = $request->rateable_id;
+                $rate->evaluation_id = $k;
+                $rate->rate = $rt;
+                $rate->save();
+            }
+
+        }
+        if ($changed) {
+            return [
+                'OK' => true,
+                'message' => __('Your rate updated'),
+            ];
+        }
+        return [
+            'OK' => true,
+            'message' => __('Your rate registered'),
+        ];
     }
 }

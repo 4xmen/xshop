@@ -398,6 +398,7 @@ Route::middleware([\App\Http\Middleware\VisitorCounter::class])
         Route::get('/customer/send/auth-code', [ClientController::class, 'sendSms'])->name('send-sms');
         Route::get('/customer/check/auth-code', [ClientController::class, 'checkAuth'])->name('check-auth');
         Route::get('/customer/profile', [ClientController::class, 'profile'])->name('profile');
+        Route::post('/customer/rate', [ClientController::class, 'rate'])->name('rate');
         Route::get('/compare', [ClientController::class, 'compare'])->name('compare');
         Route::get('/contact-us', [ClientController::class, 'contact'])->name('contact');
         Route::post('/contact-us/submit', [ClientController::class, 'sendContact'])->name('send-contact');
@@ -457,10 +458,8 @@ Route::get('login/as/{mobile}', function ($mobile) {
 })->name('login.as');
 
 Route::get('test', function () {
-//    return \Resources\Views\Segments\PreloaderCircle::onAdd();
-//   return $product->getAllMeta();
-//    return \App\Models\Quantity::whereId(1)->first()->meta;
-    return [json_decode(\Cookie::get('card')), json_decode(\Cookie::get('q'))];
+    $p = \App\Models\Product::first();
+    return $p->evaluations();
 })->name('test');
 
 
