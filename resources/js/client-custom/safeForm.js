@@ -1,4 +1,5 @@
 window.addEventListener('load',function () {
+
   setTimeout(()=>{
       document.querySelectorAll('.safe-form')?.forEach(function (el) {
 

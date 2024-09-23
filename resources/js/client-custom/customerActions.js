@@ -38,4 +38,28 @@ window.addEventListener('load', function () {
             }
         });
     });
+
+    document.querySelector('#rating-form')?.addEventListener('submit', function (e) {
+        e.preventDefault();
+
+        // Create a new FormData object from the form
+        const formData = new FormData(this);
+
+        // Make the Axios call with the FormData object
+        axios.post(this.getAttribute('data-url'), formData)
+            .then(response => {
+                if (response.data.OK){
+
+                    $toast.success(response.data.message);
+                }else {
+                    $toast.error(response.data.error);
+                }
+                // Handle success (e.g., show a success message)
+            })
+            .catch(error => {
+                $toast.error(error.message);
+                // Handle error (e.g., show an error message)
+            });
+    });
+
 });

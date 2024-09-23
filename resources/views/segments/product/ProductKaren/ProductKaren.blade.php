@@ -1,6 +1,7 @@
 <section id='ProductKaren' class="content">
 
     <div class="{{gfx()['container']}}">
+        @include('components.err')
         <div class="row">
             <div class="col-lg-5">
                 <div id="preview">
@@ -142,6 +143,11 @@
             <div class="navtab" data-target="info">
                 {{__("Information")}}
             </div>
+            @if(auth('customer')->check())
+                <div class="navtab" data-target="rate">
+                    {{__("Rate")}}
+                </div>
+            @endif
             <div class="underline"></div>
         </div>
         <div id="desc" class="tab-content active">
@@ -149,6 +155,20 @@
         </div>
         <div id="table" class="tab-content">
             {!! $product->table !!}
+        </div>
+        <div id="rate" class="tab-content">
+            <form id="rating-form" method="post" data-url="{{route('client.rate')}}">
+                @csrf
+                <input type="hidden" name="rateable_id" value="{{$product->id}}">
+                <input type="hidden" name="rateable_type" value="{{\App\Models\Product::class}}">
+                @foreach($product->evaluations() as $e)
+                    <rate-input xtitle="{{$e->title}}" xname="rate[{{ $e->id }}]"></rate-input>
+                    <hr>
+                @endforeach
+                    <button class="btn btn-primary w-100">
+                        <i class="ri-send-plane-line"></i>
+                    </button>
+            </form>
         </div>
         <div id="info" class="tab-content">
             <table class="table table-striped table-bordered table-striped">
