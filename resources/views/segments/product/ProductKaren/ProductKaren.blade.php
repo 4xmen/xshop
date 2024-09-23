@@ -162,7 +162,7 @@
                 <input type="hidden" name="rateable_id" value="{{$product->id}}">
                 <input type="hidden" name="rateable_type" value="{{\App\Models\Product::class}}">
                 @foreach($product->evaluations() as $e)
-                    <rate-input xtitle="{{$e->title}}" xname="rate[{{ $e->id }}]"></rate-input>
+                    <rate-input xtitle="{{$e->title}}" xname="rate[{{ $e->id }}]" :xvalue="{{detectRateCustomer(\App\Models\Product::class,$product->id,$e->id)}}"></rate-input>
                     <hr>
                 @endforeach
                     <button class="btn btn-primary w-100">
