@@ -166,4 +166,17 @@ class Invoice extends Model
         return $this->belongsTo(Address::class);
     }
 
+    public function evaluations(){
+
+        return Evaluation::where(function ($query) {
+            $query->whereNull('evaluationable_type')
+                ->whereNull('evaluationable_id');
+        })->orWhere(function ($query) {
+            $query->where('evaluationable_type', Invoice::class)
+                ->whereNull('evaluationable_id');
+        })->orWhere(function ($query ) {
+            $query->where('evaluationable_type', Invoice::class)
+                ->where('evaluationable_id',$this->id);
+        })->get();
+    }
 }

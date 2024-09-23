@@ -206,4 +206,22 @@ RESULT;
         list($toc, $modifiedHtml) = generateTOC($this->body);
         return $modifiedHtml;
     }
+
+
+    public function evaluations(){
+
+        return Evaluation::where(function ($query) {
+            $query->whereNull('evaluationable_type')
+                ->whereNull('evaluationable_id');
+        })->orWhere(function ($query) {
+            $query->where('evaluationable_type', Post::class)
+                ->whereNull('evaluationable_id');
+        })->orWhere(function ($query ) {
+            $query->where('evaluationable_type', Post::class)
+                ->where('evaluationable_id',$this->id);
+        })->orWhere(function ($query ) {
+            $query->where('evaluationable_type', Group::class)
+                ->where('evaluationable_id',$this->group_id);
+        })->get();
+    }
 }

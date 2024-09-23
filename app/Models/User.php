@@ -151,4 +151,19 @@ class User extends Authenticatable
         }
         return $this->accesses()->where('route', $route)->count() > 0;
     }
+
+
+    public function evaluations(){
+
+        return Evaluation::where(function ($query) {
+            $query->whereNull('evaluationable_type')
+                ->whereNull('evaluationable_id');
+        })->orWhere(function ($query) {
+            $query->where('evaluationable_type', User::class)
+                ->whereNull('evaluationable_id');
+        })->orWhere(function ($query ) {
+            $query->where('evaluationable_type', User::class)
+                ->where('evaluationable_id',$this->id);
+        })->get();
+    }
 }

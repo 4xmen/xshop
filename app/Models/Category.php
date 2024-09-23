@@ -95,4 +95,17 @@ class Category extends Model
             ]);
     }
 
+    public function evaluations(){
+
+        return Evaluation::where(function ($query) {
+            $query->whereNull('evaluationable_type')
+                ->whereNull('evaluationable_id');
+        })->orWhere(function ($query) {
+            $query->where('evaluationable_type', Category::class)
+                ->whereNull('evaluationable_id');
+        })->orWhere(function ($query ) {
+            $query->where('evaluationable_type', Category::class)
+                ->where('evaluationable_id',$this->id);
+        })->get();
+    }
 }
