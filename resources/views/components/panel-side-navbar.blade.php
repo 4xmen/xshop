@@ -42,7 +42,7 @@
             </li>
         @endif
 
-        @if(  auth()->user()->hasAnyAccesses(['product','category','prop','transport']) )
+        @if(  auth()->user()->hasAnyAccesses(['product','category','prop','transport','evaluation']) )
             <li data-bs-toggle="tooltip" data-bs-placement="auto" data-bs-custom-class="custom-tooltip"
                 data-bs-title="{{__("Catalog")}}">
                 <a href="#catalog">
@@ -78,6 +78,14 @@
                             <a href="{{ route('admin.transport.index') }}">
                                 <i class="ri-truck-fill"></i>
                                 {{__('Transports')}}
+                            </a>
+                        </li>
+                    @endif
+                    @if(  auth()->user()->hasAnyAccess( 'evaluation' ))
+                        <li>
+                            <a href="{{ route('admin.evaluation.index') }}">
+                                <i class="ri-star-half-line"></i>
+                                {{__('Evaluations')}}
                             </a>
                         </li>
                     @endif
