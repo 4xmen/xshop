@@ -24,4 +24,19 @@ class Ticket extends Model
     public function subTickets(){
         return $this->hasMany(Ticket::class,'parent_id','id')->orderBy('id');
     }
+
+
+    public function evaluations(){
+
+        return Evaluation::where(function ($query) {
+            $query->whereNull('evaluationable_type')
+                ->whereNull('evaluationable_id');
+        })->orWhere(function ($query) {
+            $query->where('evaluationable_type', Ticket::class)
+                ->whereNull('evaluationable_id');
+        })->orWhere(function ($query ) {
+            $query->where('evaluationable_type', Ticket::class)
+                ->where('evaluationable_id',$this->id);
+        })->get();
+    }
 }

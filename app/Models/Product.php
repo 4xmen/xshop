@@ -440,4 +440,22 @@ RESULT;
             return implode(',', $this->tags()->pluck('name')->toArray());
         }
     }
+
+
+    public function evaluations(){
+
+        return Evaluation::where(function ($query) {
+            $query->whereNull('evaluationable_type')
+                ->whereNull('evaluationable_id');
+        })->orWhere(function ($query) {
+            $query->where('evaluationable_type', Product::class)
+                ->whereNull('evaluationable_id');
+        })->orWhere(function ($query ) {
+            $query->where('evaluationable_type', Product::class)
+                ->where('evaluationable_id',$this->id);
+        })->orWhere(function ($query ) {
+            $query->where('evaluationable_type', Category::class)
+                ->where('evaluationable_id',$this->category_id);
+        })->get();
+    }
 }

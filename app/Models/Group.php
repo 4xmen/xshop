@@ -92,4 +92,18 @@ class Group extends Model
         return $this->posts()->where('status', 1)
             ->orderBy($order, $dir)->limit($limit)->get(['title', 'slug', 'icon']);
     }
+
+    public function evaluations(){
+
+        return Evaluation::where(function ($query) {
+            $query->whereNull('evaluationable_type')
+                ->whereNull('evaluationable_id');
+        })->orWhere(function ($query) {
+            $query->where('evaluationable_type', Group::class)
+                ->whereNull('evaluationable_id');
+        })->orWhere(function ($query ) {
+            $query->where('evaluationable_type', Group::class)
+                ->where('evaluationable_id',$this->id);
+        })->get();
+    }
 }

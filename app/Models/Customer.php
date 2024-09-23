@@ -54,4 +54,19 @@ class Customer extends Authenticatable
     }
 
 
+    public function evaluations(){
+
+        return Evaluation::where(function ($query) {
+            $query->whereNull('evaluationable_type')
+                ->whereNull('evaluationable_id');
+        })->orWhere(function ($query) {
+            $query->where('evaluationable_type', Customer::class)
+                ->whereNull('evaluationable_id');
+        })->orWhere(function ($query ) {
+            $query->where('evaluationable_type', Customer::class)
+                ->where('evaluationable_id',$this->id);
+        })->get();
+    }
+
+
 }
