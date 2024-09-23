@@ -66,6 +66,19 @@ Route::prefix(config('app.panel.prefix'))->name('admin.')->group(
                         Route::post('bulk', [\App\Http\Controllers\Admin\DiscountController::class, "bulk"])->name('bulk');
                         Route::get('trashed', [\App\Http\Controllers\Admin\DiscountController::class, "trashed"])->name('trashed');
                     });
+                Route::prefix('evaluations')->name('evaluation.')->group(
+                    function () {
+                        Route::get('', [\App\Http\Controllers\Admin\EvaluationController::class, 'index'])->name('index');
+                        Route::get('create', [\App\Http\Controllers\Admin\EvaluationController::class, 'create'])->name('create');
+                        Route::post('store', [\App\Http\Controllers\Admin\EvaluationController::class, 'store'])->name('store');
+                        Route::get('edit/{item}', [\App\Http\Controllers\Admin\EvaluationController::class, 'edit'])->name('edit');
+                        Route::post('update/{item}', [\App\Http\Controllers\Admin\EvaluationController::class, 'update'])->name('update');
+                        Route::get('delete/{item}', [\App\Http\Controllers\Admin\EvaluationController::class, 'destroy'])->name('destroy');
+                        Route::get('restore/{item}', [\App\Http\Controllers\Admin\EvaluationController::class, 'restore'])->name('restore');
+                        Route::post('bulk', [\App\Http\Controllers\Admin\EvaluationController::class, "bulk"])->name('bulk');
+                        Route::get('trashed', [\App\Http\Controllers\Admin\EvaluationController::class, "trashed"])->name('trashed');
+                    });
+
                 Route::prefix('tags')->name('tag.')->group(
                     function () {
                         Route::get('', [\App\Http\Controllers\Admin\TagController::class, 'index'])->name('index');

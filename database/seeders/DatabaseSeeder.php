@@ -42,6 +42,7 @@ class DatabaseSeeder extends Seeder
                 MenuSeeder::class,
                 SliderSeeder::class,
                 PartSeeder::class,
+                EvaluationSeeder::class,
             ]
         );
     }
