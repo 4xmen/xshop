@@ -78,6 +78,34 @@
                 <div class="mt-lg-5 mb-lg-5"> &nbsp;</div>
                 <div class="mt-lg-5 mb-lg-5"> &nbsp;</div>
                 @include('components.err')
+                @if(cardCount() > 0)
+                    <div class="alert alert-info mt-4">
+                        <a href="{{ route('client.card') }}" class="btn btn-primary float-end">
+                            {{__("Continue")}}
+                        </a>
+                        <h5 class="alert-heading">
+                            {{__("System notification")}}
+                        </h5>
+                        {{__("You have some products in your shopping card.")}}
+                        <br>
+                    </div>
+                @endif
+                @if( auth('customer')->user()->name == null || trim(auth('customer')->user()->name) == '')
+                    <div class="alert alert-danger mt-4">
+                        <h5 class="alert-heading">
+                            {{__("System notification")}}
+                        </h5>
+                        {{__("Your information is insufficient, Please complete your information")}}
+                    </div>
+                @endif
+                @if(  auth('customer')->user()->addresses()->count() == 0)
+                    <div class="alert alert-danger mt-4">
+                        <h5 class="alert-heading">
+                            {{__("System notification")}}
+                        </h5>
+                        {{__("You need at least one address to order, Please add address")}}
+                    </div>
+                @endif
                 <div class="tab active" id="summary">
                     <div class="row">
                         <div class="avisa-grid col-lg-3 col-md-6">
@@ -148,34 +176,6 @@
                             </div>
                         </div>
                     </div>
-                    @if(cardCount() > 0)
-                        <div class="alert alert-info mt-4">
-                            <a href="{{ route('client.card') }}" class="btn btn-primary float-end">
-                                {{__("Continue")}}
-                            </a>
-                            <h5 class="alert-heading">
-                                {{__("System notification")}}
-                            </h5>
-                            {{__("You have some products in your shopping card.")}}
-                            <br>
-                        </div>
-                    @endif
-                    @if( auth('customer')->user()->name == null || trim(auth('customer')->user()->name) == '')
-                        <div class="alert alert-danger mt-4">
-                            <h5 class="alert-heading">
-                                {{__("System notification")}}
-                            </h5>
-                            {{__("Your information is insufficient, Please complete your information")}}
-                        </div>
-                    @endif
-                    @if(  auth('customer')->user()->addresses()->count() == 0)
-                        <div class="alert alert-danger mt-4">
-                            <h5 class="alert-heading">
-                                {{__("System notification")}}
-                            </h5>
-                            {{__("You need at least one address to order, Please add address")}}
-                        </div>
-                    @endif
                 </div>
                 <div class="tab" id="invoices">
                     <table class="table table-striped text-center">

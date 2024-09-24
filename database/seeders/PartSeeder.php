@@ -264,6 +264,15 @@ class PartSeeder extends Seeder
         // -------------------------------------------------------------
 
         $part = new Part();
+        $part->segment = 'register';
+        $part->part = 'SimpleRegister';
+        $part->area_id = Area::where('name', 'register')->first()->id;
+        $part->sort = 1;
+        $part->save();
+
+        // -------------------------------------------------------------
+
+        $part = new Part();
         $part->segment = 'customer';
         $part->part = 'AvisaCustomer';
         $part->area_id = Area::where('name', 'customer')->first()->id;

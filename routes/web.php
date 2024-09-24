@@ -20,6 +20,7 @@ Route::prefix(config('app.panel.prefix'))->name('admin.')->group(
 
                 Route::post('ckeditor/upload', [\App\Http\Controllers\Admin\CkeditorController::class, 'upload'])->name('ckeditor.upload');
                 Route::get('adminlogs', [\App\Http\Controllers\Admin\AdminLogController::class, 'index'])->name('adminlog.index');
+                Route::get('guestlog', [\App\Http\Controllers\Admin\GuestLogController::class, 'index'])->name('guestlog.index');
                 Route::get('rates', [\App\Http\Controllers\Admin\RateController::class, 'index'])->name('rate.index');
                 Route::get('adminlogs/{user}', [\App\Http\Controllers\Admin\AdminLogController::class, 'log'])->name('adminlog.show');
                 Route::post('images/store/{gallery}', [\App\Http\Controllers\Admin\ImageController::class, 'store'])->name('image.store');
@@ -396,6 +397,7 @@ Route::middleware([\App\Http\Middleware\VisitorCounter::class])
         Route::post('/customer/sign-in/do', [ClientController::class, 'singInDo'])->name('sign-in-do');
         Route::get('/customer/sign-in', [ClientController::class, 'signIn'])->name('sign-in');
         Route::get('/customer/sign-up', [ClientController::class, 'signUp'])->name('sign-up');
+        Route::post('/customer/sign-up/now', [ClientController::class, 'signUpNow'])->name('sign-up-now');
         Route::get('/customer/send/auth-code', [ClientController::class, 'sendSms'])->name('send-sms');
         Route::get('/customer/check/auth-code', [ClientController::class, 'checkAuth'])->name('check-auth');
         Route::get('/customer/profile', [ClientController::class, 'profile'])->name('profile');

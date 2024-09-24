@@ -6,7 +6,9 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="theme-color" content="{{gfx()['primary']}}"/>
-    <meta name="robots" content="follow,index">
+    @if(! config('app.demo'))
+        <meta name="robots" content="follow,index">
+    @endif
 
     <meta name="generator" content="xShop; version={{config('app.version')}}">
     {{--  Please don't modify or remove generator --}}
@@ -15,7 +17,7 @@
         @yield('title')
     </title>
 
-    @if(langIsRTL(config('app.locale')))
+    @if(langIsRTL(app()->getLocale()))
     <link rel="stylesheet" href="{{asset('assets/vendor/bootstrap/dist/css/bootstrap.rtl.min.css')}}">
     @else
     <link rel="stylesheet" href="{{asset('assets/vendor/bootstrap/dist/css/bootstrap.min.css')}}">
@@ -30,7 +32,7 @@
 
 {{--    seo  --}}
     <meta property="og:site_name" content="{{config('app.name')}}" />
-    <meta property="og:locale" content="{{config('app.locale')}}">
+    <meta property="og:locale" content="{{app()->getLocale()}}">
     @if(isset($breadcrumb))
 {!! markUpBreadcrumbList($breadcrumb) !!}
     @endif

@@ -1,0 +1,16 @@
+.SimpleRegister {
+    // scss
+
+    min-height: 64vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    #email-register{
+        margin: auto;
+        max-width: 450px;
+        background: var(--xshop-primary);
+        color: var(--xshop-diff);
+        padding: 1rem;
+        border-radius: var(--xshop-border-radius);
+    }
+}

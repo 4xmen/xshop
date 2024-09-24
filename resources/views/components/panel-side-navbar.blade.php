@@ -301,7 +301,7 @@
                     @endif
                     @if(  auth()->user()->hasAnyAccess( 'guestlog' ))
                         <li>
-                            <a href="">
+                            <a href="{{route('admin.guestlog.index')}}">
                                 <i class="ri-list-check-3"></i>
                                 {{__('Logs of guests')}}
                             </a>
