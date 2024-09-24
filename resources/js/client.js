@@ -14,7 +14,7 @@ import "./client-custom/windowLoader.js";
 import "../views/segments/preloader/PreloaderCircle/PreloaderCircle.js";
 import "../views/segments/menu/RecetMenu/RecetMenu.js";
 import "../views/segments/slider/SliderSimple/SliderSimple.js";
-import "../views/segments/posts/PostsSlider/PostsSlider.js";
+import "../views/segments/products/LatestProducts/LatestProducts.js";
 import "../views/segments/posts/PostsIconSimple/PostsIconSimple.js";
 import "../views/segments/index/CounterGrid/CounterGrid.js";
 import "../views/segments/categories/CategoriesFavImageLinks/CategoriesFavImageLinks.js";
