@@ -9,6 +9,7 @@ use App\Models\Access;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Helper;
+use Spatie\Image\Image;
 use function App\Helpers\hasCreateRoute;
 
 class UserController extends XController
@@ -34,6 +35,7 @@ class UserController extends XController
     public function save($user, $request)
     {
 
+//        dd($request->all());
         if ($user->role == 'DEVELOPER' && !auth()->user()->hasRole('developer')) {
             abort(403);
         }
@@ -69,6 +71,25 @@ class UserController extends XController
                 }
             }
 
+        }
+
+        if ($request->hasFile('avatar')) {
+            $name = time() . '.' . request()->avatar->getClientOriginalExtension();
+            $user->avatar = $name;
+            $request->file('avatar')->storeAs('public/users', $name);
+            $format = $request->file('avatar')->guessExtension();
+            $format = 'webp';
+            $key = 'avatar';
+
+            $i = Image::load($request->file($key)->getPathname())
+                ->optimize()
+                ->width(500)
+                ->height(500)
+                ->crop(500, 500)
+//                ->nonQueued()
+                ->format($format);
+            $i->save(storage_path() . '/app/public/users/'. $user->avatar);
+            $user->save();
         }
         return $user;
 
