@@ -235,6 +235,7 @@ class ClientController extends Controller
     {
 
 
+
         if (isGuestMaxAttemptTry('search', 5, 1)) {
             return  abort(403);
         }
@@ -736,7 +737,18 @@ class ClientController extends Controller
             'rateable_type' => ['required', 'string'],
         ]);
 
-//        return $request->all();
+
+        //        return $request->all();
+
+        if (isGuestMaxAttemptTry('rate', 5, 10)) {
+            return [
+                'OK' => false,
+                'message' => __('You try attempts, Try it a few minutes'),
+                'error' => __('You try attempts, Try it a few minutes'),
+            ];
+        }
+
+        guestLog('rate');
 
         $changed = false;
         foreach ($request->rate as $k => $rt) {
