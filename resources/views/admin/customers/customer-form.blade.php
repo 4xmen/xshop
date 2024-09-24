@@ -26,6 +26,14 @@
             @if(isset($item))
                 <div class="item-list mb-3">
                     <h3 class="p-3">
+                        <i class="ri-user-3-line"></i>
+                        {{__("Avatar")}}
+                    </h3>
+                    <img src="{{$item->avatar()}}" class="img-fluid mb-3" alt="" data-open-file="#avatar-input">
+                    <input type="file" name="avatar" id="avatar-input"  accept="image/jpeg">
+                </div>
+                <div class="item-list mb-3">
+                    <h3 class="p-3">
                         <i class="ri-user-location-line"></i>
                         {{__("Addresses")}}
                     </h3>
@@ -89,6 +97,44 @@
                             </currency-input>
                         </div>
                     </div>
+                    <div class="col-md-3 mt-3">
+                        <div class="form-group">
+                            <label for="dp">
+                                {{__('Date of born')}}
+                            </label>
+                            <vue-datetime-picker-input
+                                :xmax="{{strtotime('yesterday')}}"
+                                xid="dp" xname="dob" xshow="pdate" xtitle="{{__("Date of born")}}" def-tab="0"
+                                @if(isset($item)) :xvalue="{{strtotime($item->dob)}}" @endif
+                                :timepicker="false"
+                            ></vue-datetime-picker-input>
+                        </div>
+                    </div>
+                    <div class="col-md-3 mt-3">
+                        <label for="height">
+                            {{__('Height')}}
+                        </label>
+                        <input name="height" type="text" class="form-control @error('height') is-invalid @enderror"
+                               placeholder="{{__('Height')}}" value="{{old('height',$item->height??null)}}"
+                               minlength="2"/>
+                    </div>
+                    <div class="col-md-3 mt-3">
+                        <label for="weight">
+                            {{__('Weight')}}
+                        </label>
+                        <input name="weight" type="text" class="form-control @error('weight') is-invalid @enderror"
+                               placeholder="{{__('Weight')}}" value="{{old('weight',$item->weight??null)}}"
+                               minlength="2"/>
+                    </div>
+                    <div class="col-md-3 mt-3">
+                        <label for="sex">
+                            {{__('Sex')}}
+                        </label>
+                        <select name="sex" id="sex" class="form-control">
+                            <option value="MALE"> {{__("Male")}} </option>
+                            <option value="FEMALE" @if(isset($item) && $item->sex == 'FEMALE') selected @endif> {{__("Female")}} </option>
+                        </select>
+                    </div>
                     <div class="col-md-4 mt-3">
                         <div class="form-group">
                             <label for="mobile">
@@ -96,7 +142,7 @@
                             </label>
                             <input name="mobile" type="text" class="form-control @error('mobile') is-invalid @enderror"
                                    placeholder="{{__('Mobile')}}" value="{{old('mobile',$item->mobile??null)}}"
-                                   min-length="10"/>
+                                   minlength="10"/>
                         </div>
                     </div>
                     <div class="col-md-3 mt-3">
@@ -128,7 +174,7 @@
                                    type="checkbox" id="colleague" name="colleague"
                                    @if (isset($item) && $item->colleague)
                                        checked
-                                   @endif>
+                                @endif>
                             <label class="form-check-label" for="colleague">{{__("Colleague")}}</label>
                         </div>
                     </div>

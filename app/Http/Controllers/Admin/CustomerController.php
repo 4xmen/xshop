@@ -10,6 +10,7 @@ use App\Models\Credit;
 use App\Models\Customer;
 use Illuminate\Http\Request;
 use App\Helper;
+use Spatie\Image\Image;
 use function App\Helpers\hasCreateRoute;
 
 class CustomerController extends XController
@@ -50,6 +51,8 @@ class CustomerController extends XController
     public function save($customer, $request)
     {
 
+//        dd($request->all());
+
         $customer->name = $request->input('name');
         if ($customer->credit != $request->input('credit') && $customer->id != null){
             $diff =  $request->input('credit') - $customer->credit;
@@ -67,11 +70,43 @@ class CustomerController extends XController
             $customer->email = $request->input('email');
         }
         $customer->mobile = $request->input('mobile');
+        $customer->sex = $request->input('sex');
+        if ($request->has('height') && trim($request->input('height')) != '') {
+            $customer->height = $request->input('height',null);
+        }
+        if ($request->has('weight') && trim($request->input('weight')) != '') {
+            $customer->weight = $request->input('weight', null);
+        }
         $customer->description = $request->input('description');
 
         if (trim($request->input('password')) != '') {
             $customer->password = bcrypt($request->input('password'));
         }
+
+        if ($request->has('dob') && $request->dob != ''){
+            $customer->dob = date('Y-m-d',floor($request->dob));
+        }else{
+            $customer->dob = null;
+        }
+
+        if ($request->hasFile('avatar')) {
+            $name = time() . '.' . request()->avatar->getClientOriginalExtension();
+            $customer->avatar = $name;
+            $request->file('avatar')->storeAs('public/customers', $name);
+            $format = $request->file('avatar')->guessExtension();
+            $format = 'webp';
+            $key = 'avatar';
+
+            $i = Image::load($request->file($key)->getPathname())
+                ->optimize()
+                ->width(500)
+                ->height(500)
+                ->crop(500, 500)
+//                ->nonQueued()
+                ->format($format);
+            $i->save(storage_path() . '/app/public/customers/'. $customer->avatar);
+        }
+
         $customer->colleague = $request->has('colleague');
         $customer->save();
         return $customer;
