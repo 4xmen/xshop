@@ -25,6 +25,10 @@ return new class extends Migration
             $table->boolean('colleague')->default(false);
             $table->text('description')->default(null)->nullable();
             $table->bigInteger('credit')->default(0);
+            $table->enum('sex',['MALE','FEMALE'])->nullable()->default(null);
+            $table->integer('height')->nullable()->default(null);
+            $table->decimal('weight')->nullable()->default(null);
+            $table->string('avatar')->nullable()->default(null);
             $table->json('card')->default(null)->nullable();
             $table->rememberToken();
             $table->timestamps();

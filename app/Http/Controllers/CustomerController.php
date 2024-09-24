@@ -11,6 +11,10 @@ use chillerlan\QRCode\QRCode;
 use chillerlan\QRCode\QROptions;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rules\In;
+use Spatie\Image\Enums\AlignPosition;
+use Spatie\Image\Enums\Fit;
+use Spatie\Image\Enums\Unit;
+use Spatie\Image\Image;
 
 class CustomerController extends Controller
 {
@@ -62,15 +66,58 @@ class CustomerController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255'],
             'mobile' => ['required', 'string', 'max:255'],
+            'height' => ['nullable', 'numeric'],
+            'weight' => ['nullable', 'numeric'],
             'password' => ['nullable', 'string', 'min:8', 'confirmed'],
+            'sex' => ['required', 'in:MALE,FEMALE'],
+            'dob' => ['nullable', 'date'],
+            'avatar' => ['nullable', 'image', 'mimes:jpeg','max:2048'],
         ]);
+//        dd($request->all());
 
         $customer = auth('customer')->user();
         $customer->name = $request->name;
         $customer->email = $request->email;
+        $customer->sex = $request->input('sex');
+        if ($request->has('height') && trim($request->input('height')) != '') {
+            $customer->height = $request->input('height', null);
+        }
+        if ($request->has('weight') && trim($request->input('weight')) != '') {
+            $customer->weight = $request->input('weight', null);
+        }
+        $customer->description = $request->input('description');
+
+        if (trim($request->input('password')) != '') {
+            $customer->password = bcrypt($request->input('password'));
+        }
+
+        if ($request->has('dob') && $request->dob != '') {
+            $customer->dob = date('Y-m-d', floor($request->dob));
+        } else {
+            $customer->dob = null;
+        }
+
 //        $customer->mobile = $request->mobile;
         if ($request->has('password') && trim($request->input('password')) != '') {
             $customer->password = bcrypt($request->password);
+        }
+
+        if ($request->hasFile('avatar')) {
+            $name = time() . '.' . request()->avatar->getClientOriginalExtension();
+            $customer->avatar = $name;
+            $request->file('avatar')->storeAs('public/customers', $name);
+            $format = $request->file('avatar')->guessExtension();
+            $format = 'webp';
+            $key = 'avatar';
+
+            $i = Image::load($request->file($key)->getPathname())
+                ->optimize()
+                ->width(500)
+                ->height(500)
+                ->crop(500, 500)
+//                ->nonQueued()
+                ->format($format);
+            $i->save(storage_path() . '/app/public/customers/'. $customer->avatar);
         }
         $customer->save();
         return redirect()->route('client.profile')->with('message', __('Profile updated successfully'));
@@ -87,13 +134,13 @@ class CustomerController extends Controller
         $subtitle = __("Invoice ID:") . ' ' . $invoice->hash;
 
         $options = new QROptions([
-            'version'    => 5,
+            'version' => 5,
             'outputType' => QRCode::OUTPUT_MARKUP_SVG,
-            'eccLevel'   => QRCode::ECC_L,
+            'eccLevel' => QRCode::ECC_L,
 //            'imageTransparent' => true,
         ]);
         $qr = new QRCode($options);
-        return view('client.invoice', compact('area', 'title', 'subtitle','invoice','qr'));
+        return view('client.invoice', compact('area', 'title', 'subtitle', 'invoice', 'qr'));
     }
 
 

@@ -69,4 +69,14 @@ class Customer extends Authenticatable
     }
 
 
+    public function avatar(){
+        if ($this->avatar == null || trim($this->avatar) == ''){
+            return asset('assets/default/unknown.svg');
+        }
+
+
+        return \Storage::url('customers/' . $this->avatar);
+    }
+
+
 }

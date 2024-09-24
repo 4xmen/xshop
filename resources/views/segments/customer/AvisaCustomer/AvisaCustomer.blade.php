@@ -2,7 +2,7 @@
     <div class="{{gfx()['container']}}">
         <div class="row">
             <div class="col-lg-3">
-                <img src="{{asset('assets/default/unknown.svg')}}" alt="[avatar]" class="avisa-avatar">
+                <img src="{{auth('customer')->user()->avatar()}}"  alt="[avatar]" class="avisa-avatar" onclick="document.querySelector('#avatar').click();">
                 <div class="text-center ">
                     {{__("Welcome back")}}
                     <br>
@@ -227,7 +227,8 @@
                                         <i class="ri-eye-line"></i>
                                     </a>
                                     @if( in_array($inv->status, ['PENDING', 'CANCELED', 'FAILED'] ) && $inv->created_at->timestamp >  (time() - 3600) )
-                                        <a href="{{route('client.pay',$inv->hash)}}" class="btn btn-outline-primary btn-sm ms-2">
+                                        <a href="{{route('client.pay',$inv->hash)}}"
+                                           class="btn btn-outline-primary btn-sm ms-2">
                                             <i class="ri-secure-payment-line"></i>
                                             {{__("Pay now")}}
                                         </a>
@@ -242,7 +243,7 @@
                     <div class="alert alert-info">
                         {{__("If you want to change the password, choose both the same. Otherwise, leave the password field blank.")}}
                     </div>
-                    <form action="{{route('client.profile.save')}}" method="post">
+                    <form action="{{route('client.profile.save')}}" method="post" enctype="multipart/form-data">
                         @csrf
                         <div class="row">
                             <div class="col-md-4 mt-3">
@@ -279,7 +280,50 @@
                                            min-length="10"/>
                                 </div>
                             </div>
-                            <div class="col-md-6 mt-3">
+                            <div class="col-md-3 mt-3">
+                                <div class="form-group">
+                                    <label for="dp">
+                                        {{__('Date of born')}}
+                                    </label>
+                                    <vue-datetime-picker-input
+                                        :xmax="{{strtotime('yesterday')}}"
+                                        xid="dp" xname="dob" xshow="pdate" xtitle="{{__("Date of born")}}" def-tab="0"
+                                        :xvalue="{{strtotime(auth('customer')->user()->dob)}}"
+                                        :timepicker="false"
+                                    ></vue-datetime-picker-input>
+                                </div>
+                            </div>
+                            <div class="col-md-3 mt-3">
+                                <label for="height">
+                                    {{__('Height')}}
+                                </label>
+                                <input name="height" type="text"
+                                       class="form-control @error('height') is-invalid @enderror"
+                                       placeholder="{{__('Height')}}"
+                                       value="{{old('height',auth('customer')->user()->height??null)}}"
+                                       minlength="2"/>
+                            </div>
+                            <div class="col-md-3 mt-3">
+                                <label for="weight">
+                                    {{__('Weight')}}
+                                </label>
+                                <input name="weight" type="text"
+                                       class="form-control @error('weight') is-invalid @enderror"
+                                       placeholder="{{__('Weight')}}"
+                                       value="{{old('weight',auth('customer')->user()->weight??null)}}"
+                                       minlength="2"/>
+                            </div>
+                            <div class="col-md-3 mt-3">
+                                <label for="sex">
+                                    {{__('Sex')}}
+                                </label>
+                                <select name="sex" id="sex" class="form-control">
+                                    <option value="MALE"> {{__("Male")}} </option>
+                                    <option value="FEMALE"
+                                            @if(auth('customer')->user()->sex == 'FEMALE') selected @endif> {{__("Female")}} </option>
+                                </select>
+                            </div>
+                            <div class="col-md-4 mt-3">
                                 <div class="form-group">
                                     <label for="password">
                                         {{__('Password')}}
@@ -289,7 +333,7 @@
                                            placeholder="{{__('Password')}}" value="{{old('password',''??null)}}"/>
                                 </div>
                             </div>
-                            <div class="col-md-6 mt-3">
+                            <div class="col-md-4 mt-3">
                                 <div class="form-group">
                                     <label for="password_confirmation">
                                         {{__('password repeat')}}
@@ -298,6 +342,14 @@
                                            class="form-control @error('password_confirmation') is-invalid @enderror"
                                            placeholder="{{__('password repeat')}}"
                                            value="{{old('password_confirmation',$item->password_confirmation??null)}}"/>
+                                </div>
+                            </div>
+                            <div class="col-md-4 mt-3">
+                                <div class="form-group">
+                                    <label>
+                                        {{__("Avatar")}}
+                                    </label>
+                                    <input type="file" name="avatar" class="form-control" id="avatar"  accept="image/jpeg">
                                 </div>
                             </div>
                             <div class="col-md-12">

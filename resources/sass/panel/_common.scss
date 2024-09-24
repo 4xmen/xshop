@@ -166,6 +166,10 @@ a.btn,a.action-btn,a.circle-btn{
     }
 }
 
+#avatar-input{
+    display: none;
+}
+
 
 .ol-sortable {
     padding-right: 1rem;
@@ -330,3 +334,4 @@ a.btn,a.action-btn,a.circle-btn{
         transform: rotate(360deg);
     }
 }
+

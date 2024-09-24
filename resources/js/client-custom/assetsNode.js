@@ -32,6 +32,10 @@ import RateInput from "../client-vue/RateInput.vue";
 app.component('rate-input', RateInput);
 
 
+import vdp from "../client-vue/vueDateTimePickerClient.vue";
+app.component('vue-datetime-picker-input', vdp);
+
+
 app.use(ToastPlugin);
 app.use(store);
 app.mount('#app');

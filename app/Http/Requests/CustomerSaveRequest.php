@@ -27,6 +27,11 @@ class CustomerSaveRequest extends FormRequest
             'email' => ['required', 'string', 'email', 'max:255', 'unique:customers,email,'.$this->id],
             'password' => ['nullable', 'string', 'min:6', 'confirmed'],
             'mobile'=> ['required', 'string', 'min:10'],
+            'height' => ['nullable', 'numeric'],
+            'weight' => ['nullable', 'numeric'],
+            'sex' => ['required', 'in:MALE,FEMALE'],
+            'dob' => ['nullable', 'date'],
+            'avatar' => ['nullable', 'image', 'mimes:jpeg','max:2048'],
         ];
     }
 }
