@@ -6,7 +6,13 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-
+    <meta name="description" content="xShop control panel - {{config('app.name')}}">
+    <meta name="generator" content="xShop; version={{config('app.version')}}">
+    {{--  open graph  --}}
+    <meta property="og:site_name" content="{{config('app.name')}}" />
+    <meta property="og:locale" content="{{config('app.locale')}}">
+    <meta property="og:title" content="{{config('app.name')}}" />
+    <meta property="og:image" content="{{asset('upload/images/logo.svg')}}" />
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">

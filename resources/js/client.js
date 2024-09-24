@@ -37,6 +37,7 @@ import "../views/segments/galleries_page/GalleriesList/GalleriesList.js";
 import "../views/segments/gallery/GallaryGrid/GallaryGrid.js";
 import "../views/segments/compare/CompareProducts/CompareProducts.js";
 import "../views/segments/login/LoginPatternBg/LoginPatternBg.js";
+import "../views/segments/register/SimpleRegister/SimpleRegister.js";
 import "../views/segments/customer/AvisaCustomer/AvisaCustomer.js";
 import "../views/segments/attachments_page/DenaAttachList/DenaAttachList.js";
 import "../views/segments/attachment/AttachmentWithPreview/AttachmentWithPreview.js";

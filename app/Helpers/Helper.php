@@ -999,7 +999,7 @@ function isGuestMaxAttemptTry($action, $max = 5, $minutes = 60)
 {
     if (\App\Models\GuestLog::where('ip', request()->ip())
             ->where('action', $action)
-            ->where('created_at', '<', time() - ($minutes * 60))->count() >= $max) {
+            ->where('created_at', '>', time() - ($minutes * 60))->count() >= $max) {
         return true;
     } else {
         return false;

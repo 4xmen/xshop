@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Contracts\Payment;
 use App\Http\Requests\ContactSubmitRequest;
+use App\Mail\AuthMail;
 use App\Models\Attachment;
 use App\Models\Category;
 use App\Models\Clip;
@@ -20,6 +21,7 @@ use App\Models\Rate;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 use Plank\Metable\Meta;
 use Spatie\Tags\Tag;
@@ -231,6 +233,14 @@ class ClientController extends Controller
 
     public function search(Request $request)
     {
+
+
+        if (isGuestMaxAttemptTry('search', 5, 1)) {
+            return  abort(403);
+        }
+
+        guestLog('search');
+
         $q = trim($request->input('q'));
         if (mb_strlen($q) < 3) {
             return abort(403, __('Search word is too short'));
@@ -476,7 +486,45 @@ class ClientController extends Controller
 
     public function signUp()
     {
+        if (config('app.sms.sign')){
+            return  abort(403);
+        }
+        $area = 'register';
+        $title = __("sign up");
+        $subtitle = __('Sign up as customer');
+        return view('client.default-list', compact('area', 'title', 'subtitle'));
+    }
+    public function signUpNow(Request $request)
+    {
+        if (config('app.sms.sign')){
+            return  abort(403);
+        }
 
+        $request->validate([
+            'email' => ['required','email']
+        ]);
+
+        if (isGuestMaxAttemptTry('email', 1, 5)) {
+           return  redirect()->back()->withErrors( __('You try attempts, Try it a few minutes'));
+        }
+
+        guestLog('email');
+
+        $passwd = generateUniqueID(12);
+        Mail::to($request->input('email'))->send(new AuthMail($passwd));
+        $c = Customer::where('email', $request->email);
+        if ($c->count() > 0) {
+            $customer = $c->first();
+            $msg = __('Your account password has been changed successfully.');
+        }else{
+            $customer = new Customer();
+            $customer->email = $request->email;
+            $msg = __('Your account has been created successfully.');
+        }
+        $customer->password = bcrypt($passwd);
+        $customer->save();
+
+        return  redirect()->back()->with(['message' => $msg]);
     }
 
     public function singInDo(Request $request)
