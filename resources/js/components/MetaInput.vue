@@ -49,6 +49,12 @@
                         <searchable-multi-select :items="prop.optionList" value-field="value"
                                                  v-model="meta[prop.name]"></searchable-multi-select>
                     </template>
+                    <template v-if="prop.type == 'date'">
+                        <vue-date-time-picker v-model="meta[prop.name]"></vue-date-time-picker>
+                    </template>
+                    <template v-if="prop.type == 'time'">
+                        <vue-time-picker v-model="meta[prop.name]" :am-pm="false"></vue-time-picker>
+                    </template>
                 </div>
             </div>
         </div>
@@ -105,6 +111,12 @@
                                 <searchable-multi-select xname="" :items="prop.optionList" value-field="value"
                                                          v-model="q.data[prop.name]"></searchable-multi-select>
                             </template>
+                            <template v-if="prop.type == 'date'">
+                                <vue-date-time-picker v-model="q.data[prop.name]"></vue-date-time-picker>
+                            </template>
+                            <template v-if="prop.type == 'time'">
+                                <vue-time-picker v-model="q.data[prop.name]" :am-pm="false"></vue-time-picker>
+                            </template>
                         </div>
                     </div>
                 </template>
@@ -148,6 +160,8 @@
 import {mapState} from "vuex";
 import searchableMultiSelect from "./SearchableMultiSelect.vue";
 import CurrencyInput from "./CurrencyInput.vue";
+import VueDateTimePicker from "./vueDateTimePicker.vue";
+import vueTimePicker from "./vueTimePicker.vue";
 
 function arraysEqual(arr1, arr2) {
     if (arr1.length !== arr2.length) {
@@ -163,7 +177,9 @@ export default {
     name: "meta-input",
     components: {
         searchableMultiSelect,
-        CurrencyInput
+        CurrencyInput,
+        VueDateTimePicker,
+        vueTimePicker,
     },
     data: () => {
         return {
