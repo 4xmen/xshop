@@ -68,6 +68,6 @@ class CategoryController extends Controller
 
     public function props( $id){
         $category = Category::whereId($id)->firstOrFail();
-        return PropCollection::collection($category->props);
+        return PropCollection::collection($category->props()->orderBy('sort')->get());
     }
 }
