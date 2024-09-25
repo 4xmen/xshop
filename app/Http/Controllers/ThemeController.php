@@ -21,6 +21,9 @@ class ThemeController extends Controller
                 }
                 $response .= ';';
             }
+            if (langIsRTL(app()->getLocale())) {
+                $response .= 'font-feature-settings: "ss01";';
+            }
         }
         $response .= '}';
 

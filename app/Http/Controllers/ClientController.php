@@ -525,7 +525,7 @@ class ClientController extends Controller
         $customer->password = bcrypt($passwd);
         $customer->save();
 
-        return  redirect()->back()->with(['message' => $msg]);
+        return  redirect()->back()->with(['message' => $msg . __("Please check your email to find password, Don't forget check spam/junk too, If you find our email in spam folder, Please mark it `Not spam`")]);
     }
 
     public function singInDo(Request $request)

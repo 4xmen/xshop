@@ -8,12 +8,26 @@
             @endif
             <div class="col-lg-9 p-0">
                 <div class="py-2 px-4">
-                    <h1>
-                        {{$post->title}}
-                        <span class="float-end text-muted">
-                            Time spend: {{$post->spendTime()}}
-                        </span>
-                    </h1>
+                    <span class="float-end text-muted">
+                        {{__("Time spend")}}: {{$post->spendTime()}}
+                    </span>
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item">
+                                <a href="{{homeUrl()}}">
+                                    {{config('app.name')}}
+                                </a>
+                            </li>
+                            <li class="breadcrumb-item">
+                                <a href="{{$post->mainGroup->webUrl()}}">
+                                    {{$post->mainGroup->name}}
+                                </a>
+                            </li>
+                            <li class="breadcrumb-item active" aria-current="page">
+                                {{$post->title}}
+                            </li>
+                        </ol>
+                    </nav>
                     <img src="{{$post->orgUrl()}}" alt="" class="img-fluid">
                     <p class="text-muted my-3">
                         {{$post->subtitle}}
