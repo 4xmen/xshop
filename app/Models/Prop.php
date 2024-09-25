@@ -20,7 +20,7 @@ class Prop extends Model
         'datas'
     ];
 
-    public static $prop_types = ['text', 'number', 'checkbox', 'color', 'select', 'multi', 'singlemulti'];
+    public static $prop_types = ['text', 'number', 'checkbox', 'color', 'select', 'multi', 'singlemulti', 'date', 'time'];
 
     public function categories()
     {
@@ -36,6 +36,7 @@ class Prop extends Model
 
         return $result;
     }
+
     public function getDatasAttribute()
     {
         $result = [];
