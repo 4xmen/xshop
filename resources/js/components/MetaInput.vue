@@ -247,12 +247,12 @@ export default {
     methods: {
 
         showModal(i){
-            console.log('ii',i);
+            // console.log('ii',i);
             this.qOnEdit = i;
             this.modal = true;
         },
         changeImgIndex(i){
-            console.log('jjj',i);
+            // console.log('jjj',i);
           this.quantities[this.qOnEdit].image = i;
         },
         remQ(i){
@@ -309,7 +309,7 @@ export default {
     },
     watch: {
         category_id: function (old,n) {
-            console.log(old,n,'x');
+            // console.log(old,n,'x');
             // if (this.lastCat != this.category_id){
             //     this.lastCat = this.category_id;
                 this.updateProps();

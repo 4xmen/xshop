@@ -1,5 +1,5 @@
 <template>
-    <div class="time-picker">
+    <div class="time-picker" >
         <div class="input-group mb-3">
             <div class="input-group-prepend" id="vue-search-btn" @click="modalShow">
                 <span class="input-group-text" id="basic-addon1">
@@ -16,6 +16,7 @@
                 <div class="col"
                      @touchstart="startDrag('minute', $event)"
                      @mousedown="startDrag('minute', $event)"
+                     @wheel="handleScroll('minute',$event)"
                 >
                     <div>
                         <ul :style="mTop">
@@ -28,6 +29,7 @@
                 <div class="col"
                      @touchstart="startDrag('hour', $event)"
                      @mousedown="startDrag('hour', $event)"
+                     @wheel="handleScroll('hour',$event)"
                 >
                     <div>
                         <ul :style="hTop">
@@ -40,6 +42,7 @@
                 <div class="col" v-if="amPm"
                      @touchstart="startDrag('ampm', $event)"
                      @mousedown="startDrag('ampm', $event)"
+                     @wheel="handleScroll('ampm',$event)"
                 >
                     <div>
                         <ul :style="amTop" @click="ap = Math.abs(ap - 1)">
@@ -135,6 +138,49 @@ export default {
         }
     },
     methods: {
+        handleScroll(column,e){
+            e.preventDefault();
+            let change = -1;
+            if (e.deltaY > 0){
+                change = 1;
+            }
+            this.changeHandle(column,change);
+
+        },
+        changeHandle(column, change){
+            if (column == 'ampm'){
+                if (change == 1) {
+                    this.ap = 1;
+                } else if (change == -1) {
+                    this.ap = 0;
+                }
+            }else if (column === 'minute') {
+                this.m += change;
+                if (this.m < 0) {
+                    this.m = 0;
+                }
+                if (this.m > 59) {
+                    this.m = 59;
+                }
+            } else if (column === 'hour') {
+                this.h += change;
+                if (this.amPm) {
+                    if (this.h < 1) {
+                        this.h = 1;
+                    }
+                    if (this.h > this.maxHour) {
+                        this.h = this.maxHour;
+                    }
+                } else {
+                    if (this.h < 0) {
+                        this.h = 0;
+                    }
+                    if (this.h > this.maxHour - 1) {
+                        this.h = this.maxHour - 1;
+                    }
+                }
+            }
+        },
         modalShow() {
             this.modal = true;
             document.addEventListener('click', this.handleModal);
@@ -189,39 +235,7 @@ export default {
             let change = Math.round(deltaY / this.tolerance);
             // console.log(change,currentY);
 
-            if (column === 'minute') {
-                this.m += change;
-                if (this.m < 0) {
-                    this.m = 0;
-                }
-                if (this.m > 59) {
-                    this.m = 59;
-                }
-            } else if (column === 'hour') {
-                this.h += change;
-                if (this.amPm) {
-                    if (this.h < 1) {
-                        this.h = 1;
-                    }
-                    if (this.h > this.maxHour) {
-                        this.h = this.maxHour;
-                    }
-                } else {
-                    if (this.h < 0) {
-                        this.h = 0;
-                    }
-                    if (this.h > this.maxHour - 1) {
-                        this.h = this.maxHour - 1;
-                    }
-                }
-            } else if (column === 'ampm' && this.amPm) {
-                if (change == 1) {
-                    this.ap = 1;
-                } else if (change == -1) {
-
-                    this.ap = 0;
-                }
-            }
+            this.changeHandle(column,change);
 
             if (change != 0) {
                 this.startY = currentY;
@@ -263,6 +277,8 @@ export default {
             x = this.xvalue;
         }
         this.calc(x);
+
+        // window.addEventListener('scroll', this.handleScroll);
     }
 };
 </script>
