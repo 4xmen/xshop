@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('bg', 2048)->nullable();
             $table->integer('sort')->default(0);
             $table->unsignedInteger('parent_id')->nullable()->default(null)->index();
+            $table->json('theme')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

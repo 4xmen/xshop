@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('image',2048)->nullable()->default(null);
             $table->string('bg',2048)->nullable()->default(null);
             $table->unsignedInteger('parent_id')->nullable()->default(null)->index();
+            $table->json('theme')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

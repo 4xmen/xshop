@@ -47,7 +47,7 @@
                     </template>
                     <template v-if="prop.type == 'multi'">
                         <searchable-multi-select :items="prop.optionList" value-field="value"
-                                                 v-model="meta[prop.name]"></searchable-multi-select>
+                                                 v-model="meta[prop.name]"></searchable-multi-select>   
                     </template>
                     <template v-if="prop.type == 'date'">
                         <vue-date-time-picker v-model="meta[prop.name]"></vue-date-time-picker>
