@@ -28,6 +28,7 @@ class GroupSaveRequest extends FormRequest
             'bg' => ['nullable', 'file', 'mimes:jpg,svg,png'],
             'description' => ['nullable', 'string',],
             'parent_id' => ['nullable', 'exists:groups,id'],
+            'canonical' => ['nullable', 'url', 'min:5', 'max:128'],
         ];
     }
 }

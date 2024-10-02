@@ -36,6 +36,7 @@ return new class extends Migration
             $table->unsignedBigInteger('sell')->default(0);
             $table->unsignedTinyInteger('image_index')->default(0);
             $table->json('theme')->nullable();
+            $table->text('canonical')->nullable();
             $table->string('promote')->nullable();
             $table->softDeletes();
             $table->timestamps();

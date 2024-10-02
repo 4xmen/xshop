@@ -61,6 +61,10 @@ class PostController extends XController
         $post->table_of_contents = $request->has('table_of_contents');
         $post->icon = $request->input('icon');
 
+        if ($request->has('canonical') && trim($request->input('canonical')) != ''){
+            $post->canonical = $request->input('canonical');
+        }
+
         if ($post->hash == null) {
             $post->hash = date('Ym') . str_pad(dechex(crc32($post->slug)), 8, '0', STR_PAD_LEFT);
         }

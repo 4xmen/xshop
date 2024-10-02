@@ -59,6 +59,9 @@ class GroupController extends XController
         if ($group->parent_id != ''){
             $group->parent_id = $request->input('parent_id',null);
         }
+        if ($request->has('canonical') && trim($request->input('canonical')) != ''){
+            $group->canonical = $request->input('canonical');
+        }
         $group->slug = $this->getSlug($group);
         if ($request->has('image')){
             $group->image = $this->storeFile('image',$group, 'groups');

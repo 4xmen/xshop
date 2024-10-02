@@ -30,6 +30,7 @@ class PostSaveRequest extends FormRequest
             'image' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif,svg', 'max:2048'],
             'icon' => ['nullable', 'string', 'min:3'],
             'group_id' => ['required', 'exists:groups,id'],
+            'canonical' => ['nullable', 'url', 'min:5', 'max:128'],
         ];
     }
 }

@@ -28,6 +28,7 @@ class CategorySaveRequest extends FormRequest
             'bg' => ['nullable', 'file', 'mimes:jpg,svg,png'],
             'description' => ['nullable', 'string',],
             'parent_id' => ['nullable', 'exists:categories,id'],
+            'canonical' => ['nullable', 'url', 'min:5', 'max:128'],
         ];
     }
 }

@@ -60,6 +60,9 @@ class CategoryController extends XController
         if ($category->parent_id != ''){
             $category->parent_id = $request->input('parent_id',null);
         }
+        if ($request->has('canonical') && trim($request->input('canonical')) != ''){
+            $category->canonical = $request->input('canonical');
+        }
         $category->slug = $this->getSlug($category);
         if ($request->has('image')) {
             $category->image = $this->storeFile('image', $category, 'categories');

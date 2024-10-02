@@ -45,6 +45,15 @@
 <div>
 
     <div class="form-group">
+        <label for="canonical" class="my-2">
+            {{__('Canonical')}}
+        </label>
+        <input type="text" id="canonical" name="canonical"
+               value="{{old('canonical',$item->canonical??null)}}"
+               placeholder="{{__('canonical')}}"
+               class="form-control">
+    </div>
+    <div class="form-group">
         <label for="table">
             {{__('Description Table')}}
         </label>

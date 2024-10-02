@@ -22,6 +22,7 @@ return new class extends Migration
             $table->integer('sort')->default(0);
             $table->unsignedInteger('parent_id')->nullable()->default(null)->index();
             $table->json('theme')->nullable();
+            $table->text('canonical')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

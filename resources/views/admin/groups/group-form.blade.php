@@ -49,6 +49,21 @@
                     </div>
                 </div>
             @endif
+            @if(isset($item))
+                <div class="item-list mb-3">
+                    <div class="p-3">
+                            <div class="form-group">
+                                <label for="canonical" class="my-2">
+                                    {{__('Canonical')}}
+                                </label>
+                                <input type="text" id="canonical" name="canonical"
+                                       value="{{old('canonical',$item->canonical??null)}}"
+                                       placeholder="{{__('canonical')}}"
+                                       class="form-control">
+                            </div>
+                    </div>
+                </div>
+            @endif
 
 
         </div>
