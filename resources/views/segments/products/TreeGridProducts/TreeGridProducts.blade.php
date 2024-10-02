@@ -5,12 +5,12 @@
             <div class="tree-grid-item">
                 <div>
                     <h1>
-                        {{getSetting($data->area->name.'_'.$data->part.'_title')}}
+                        {{getSetting($data->area_name.'_'.$data->part.'_title')}}
                     </h1>
                     <div class="w100 overflow-hidden">
 
                         <div class="section-main">
-                            @foreach(getCategoryProductBySetting($part->area->name . '_' . $part->part.'_category') as $product)
+                            @foreach(getCategoryProductBySetting($part->area_name . '_' . $part->part.'_category') as $product)
                                 <div class="item slider-content">
                                     <div class="tree-product-box">
                                         <a href="{{$product->webUrl()}}">
@@ -41,11 +41,11 @@
             </div>
             <div class="tree-grid-item">
                      <span class="badge bg-secondary discount">
-                              {{getSetting($data->area->name.'_'.$data->part.'_badgex')}}
+                              {{getSetting($data->area_name.'_'.$data->part.'_badgex')}}
                     </span>
 
                 <div class="section-second">
-                    @foreach(getCategoryProductBySetting($part->area->name . '_' . $part->part.'_categoryx') as $product)
+                    @foreach(getCategoryProductBySetting($part->area_name . '_' . $part->part.'_categoryx') as $product)
                         <div class="item  text-center slider-content">
                                 <a href="{{$product->webUrl()}}">
                                     <img src="{{$product->imgUrl()}}" class="img-fluid" alt="{{$product->name}}">
@@ -56,11 +56,11 @@
             </div>
             <div class="tree-grid-item">
                  <span class="badge bg-secondary discount">
-                                {{getSetting($data->area->name.'_'.$data->part.'_badgey')}}
+                                {{getSetting($data->area_name.'_'.$data->part.'_badgey')}}
                     </span>
 
                 <div class="section-third">
-                    @foreach(getCategoryProductBySetting($part->area->name . '_' . $part->part.'_categoryy') as $product)
+                    @foreach(getCategoryProductBySetting($part->area_name . '_' . $part->part.'_categoryy') as $product)
                         <div class="item  text-center slider-content">
                             <a href="{{$product->webUrl()}}">
                                 <img src="{{$product->imgUrl()}}" class="img-fluid" alt="{{$product->name}}">

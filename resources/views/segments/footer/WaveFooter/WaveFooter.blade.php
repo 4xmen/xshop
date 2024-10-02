@@ -1,8 +1,8 @@
 
 <footer class='WaveFooter'
-        style="--speed: {{getSetting($data->area->name.'_'.$data->part.'_speed')}}s;
-        --speed2: {{getSetting($data->area->name.'_'.$data->part.'_speed2')}}s;
-        --speed3: {{getSetting($data->area->name.'_'.$data->part.'_speed3')}}s">
+        style="--speed: {{getSetting($data->area_name.'_'.$data->part.'_speed')}}s;
+        --speed2: {{getSetting($data->area_name.'_'.$data->part.'_speed2')}}s;
+        --speed3: {{getSetting($data->area_name.'_'.$data->part.'_speed3')}}s">
     <svg
         xmlns="http://www.w3.org/2000/svg"
         xmlns:xlink="http://www.w3.org/1999/xlink"

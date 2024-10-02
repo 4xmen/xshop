@@ -25,8 +25,13 @@ class Part extends Model
         return ['blade' => 'segments.' . $this->segment . '.' . $this->part . '.' . $this->part, 'data' => $handle::onMount($this, $item)];
     }
 
-    public function area()
-    {
+
+    public function area(){
         return $this->belongsTo(Area::class);
     }
+    public function getAreaNameAttribute()
+    {
+        return $this->area_id ? $this->area->name : $this->custom;
+    }
+
 }

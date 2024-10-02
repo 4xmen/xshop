@@ -1,7 +1,7 @@
 <section class='AuthorSlider'>
     <div class="{{gfx()['container']}}">
         <h1>
-            {{getSetting($data->area->name.'_'.$data->part.'_title')}}
+            {{getSetting($data->area_name.'_'.$data->part.'_title')}}
         </h1>
         <div id="slider-author-container">
             <div id="auth-nxt" class="sld-btn">
@@ -11,7 +11,7 @@
                 <i class="ri-arrow-left-line"></i>
             </div>
             <div id="author-slider">
-                @foreach( getGroupPostsBySetting($data->area->name.'_'.$data->part.'_group',10) as $post )
+                @foreach( getGroupPostsBySetting($data->area_name.'_'.$data->part.'_group',10) as $post )
                     <div class="item slider-content">
                         <div class="author-slide">
 

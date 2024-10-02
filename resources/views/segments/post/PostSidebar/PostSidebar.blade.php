@@ -1,7 +1,7 @@
 <section class='PostSidebar content'>
     <div class="{{gfx()['container']}}">
         <dov class="row">
-            @if(!getSetting($data->area->name.'_'.$data->part.'_invert'))
+            @if(!getSetting($data->area_name.'_'.$data->part.'_invert'))
             <div class="col-lg-3 p-0">
                 @include('segments.post.PostSidebar.inc.sidebar')
             </div>
@@ -69,7 +69,7 @@
                 </div>
 
             </div>
-            @if(getSetting($data->area->name.'_'.$data->part.'_invert'))
+            @if(getSetting($data->area_name.'_'.$data->part.'_invert'))
                 <div class="col-lg-3 p-0">
                     @include('segments.post.PostSidebar.inc.sidebar')
                 </div>

@@ -1,8 +1,8 @@
-<section class='NoLinkImage @if(getSetting($data->area->name.'_'.$data->part.'_dark')) dark-mode @endif'>
+<section class='NoLinkImage @if(getSetting($data->area_name.'_'.$data->part.'_dark')) dark-mode @endif'>
     <div class="{{gfx()['container']}}">
         <div class="row">
 
-            @foreach( getGroupPostsBySetting($data->area->name.'_'.$data->part.'_group',5) as $post )
+            @foreach( getGroupPostsBySetting($data->area_name.'_'.$data->part.'_group',5) as $post )
                 <div class="col-lg-3 col-md-6">
                     <div class=" no-link-item mb-4">
 

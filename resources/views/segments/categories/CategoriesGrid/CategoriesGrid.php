@@ -13,40 +13,40 @@ class CategoriesGrid
 
         $setting = new Setting();
         $setting->section = 'theme';
-        $setting->key = $part->area->name . '_' . $part->part.'_title';
+        $setting->key = $part->area_name . '_' . $part->part.'_title';
         $setting->value =  Category::first()->name;
         $setting->size = 4;
         $setting->type = 'TEXT';
 //        $setting->data = json_encode(['xmin' => 2, 'xmax' => 90]);
-        $setting->title =  $part->area->name . ' ' . $part->part. ' title';
+        $setting->title =  $part->area_name . ' ' . $part->part. ' title';
         $setting->save();
 
         $setting = new Setting();
         $setting->section = 'theme';
-        $setting->key = $part->area->name . '_' . $part->part.'_limit';
+        $setting->key = $part->area_name . '_' . $part->part.'_limit';
         $setting->value = '4';
         $setting->size = 4;
         $setting->type = 'NUMBER';
         $setting->data = json_encode(['xmin' => 2, 'xmax' => 6]);
-        $setting->title =  $part->area->name . ' ' . $part->part. ' count';
+        $setting->title =  $part->area_name . ' ' . $part->part. ' count';
         $setting->save();
 
 
         $setting = new Setting();
         $setting->section = 'theme';
-        $setting->key = $part->area->name . '_' . $part->part.'_category';
+        $setting->key = $part->area_name . '_' . $part->part.'_category';
         $setting->value = Category::first()->id;
         $setting->size = 4;
         $setting->type = 'CATEGORY';
 //        $setting->data = json_encode(['xmin' => 2, 'xmax' => 90]);
-        $setting->title =  $part->area->name . ' ' . $part->part. ' category';
+        $setting->title =  $part->area_name . ' ' . $part->part. ' category';
         $setting->save();
     }
     public static function onRemove(Part $part = null)
     {
-        Setting::where('key',$part->area->name . '_' . $part->part.'_title')->first()?->delete();
-        Setting::where('key',$part->area->name . '_' . $part->part.'_limit')->first()?->delete();
-        Setting::where('key',$part->area->name . '_' . $part->part.'_category')->first()?->delete();
+        Setting::where('key',$part->area_name . '_' . $part->part.'_title')->first()?->delete();
+        Setting::where('key',$part->area_name . '_' . $part->part.'_limit')->first()?->delete();
+        Setting::where('key',$part->area_name . '_' . $part->part.'_category')->first()?->delete();
     }
     public static function onMount(Part $part = null)
     {

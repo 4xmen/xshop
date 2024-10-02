@@ -309,7 +309,7 @@ class ClientController extends Controller
             $breadcrumb[$product->category->parent->name] = $product->category->parent->webUrl();
         }
         $breadcrumb[$product->name] = null;
-        return view('client.default-list', compact('area', 'product', 'title', 'subtitle', 'breadcrumb'));
+        return view('client.product', compact('area', 'product', 'title', 'subtitle', 'breadcrumb'));
     }
 
     public function category($slug, Request $request)

@@ -5,7 +5,7 @@
 @endsection
 @section('content')
     <main>
-        @if(\App\Models\Area::where('name',$area)->first()->use_default)
+        @if(findArea($area)->use_default)
             @foreach(getParts('defaultHeader') as $part)
                 @php($p = $part->getBladeWithData())
                 @include($p['blade'],['data' => $p['data']])
@@ -15,7 +15,7 @@
             @php($p = $part->getBladeWithData())
             @include($p['blade'],['data' => $p['data']])
         @endforeach
-        @if(\App\Models\Area::where('name',$area)->first()->use_default)
+        @if(findArea($area)->use_default)
             @foreach(getParts('defaultFooter') as $part)
                 @php($p = $part->getBladeWithData())
                 @include($p['blade'],['data' => $p['data']])

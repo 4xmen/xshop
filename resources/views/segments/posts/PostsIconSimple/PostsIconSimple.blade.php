@@ -1,15 +1,15 @@
 <section class='PostsIconSimple py-4'>
     <div class="{{gfx()['container']}}">
         <h1>
-            <a href="{{getGroupBySetting($data->area->name.'_'.$data->part)?->webUrl()}}">
-                {{getGroupBySetting($data->area->name.'_'.$data->part)?->name}}
+            <a href="{{getGroupBySetting($data->area_name.'_'.$data->part)?->webUrl()}}">
+                {{getGroupBySetting($data->area_name.'_'.$data->part)?->name}}
             </a>
         </h1>
         <p>
-           {{getGroupBySetting($data->area->name.'_'.$data->part)?->description}}
+           {{getGroupBySetting($data->area_name.'_'.$data->part)?->description}}
         </p>
         <div class="row">
-            @foreach(getGroupPostsBySetting($data->area->name.'_'.$data->part, getSetting($data->area->name.'_'.$data->part.'_limit')) as $post)
+            @foreach(getGroupPostsBySetting($data->area_name.'_'.$data->part, getSetting($data->area_name.'_'.$data->part.'_limit')) as $post)
             <div class="col-md-4">
                 <i class="{{$post->icon}}"></i>
                 <h3>
