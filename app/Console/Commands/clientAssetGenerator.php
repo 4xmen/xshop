@@ -66,6 +66,7 @@ class clientAssetGenerator extends Command
         $files = File::allFiles(resource_path() . '/js/client-custom');
 
         foreach ($files as $file) {
+
             if ($file->getType() == 'file' && $file->getExtension() == 'js') {
                 $js .= 'import "./client-custom/' . $file->getBasename() . '";' . PHP_EOL;
             }
@@ -73,10 +74,14 @@ class clientAssetGenerator extends Command
         }
         // add parts scss & js
         foreach (Part::distinct()->get() as $part) {
-            $variables .= '@import "../views/segments/' . $part->segment . '/'
-                . $part->part . '/' . $part->part . '";' . PHP_EOL;
-            $js .= 'import "../views/segments/' . $part->segment . '/'
-                . $part->part . '/' . $part->part . '.js";' . PHP_EOL;
+            if (filesize(__DIR__.'/../../../resources/views/segments/' . $part->segment . '/' . $part->part .'/' . $part->part . '.scss' ) > 10) {
+                $variables .= '@import "../views/segments/' . $part->segment . '/'
+                    . $part->part . '/' . $part->part . '";' . PHP_EOL;
+            }
+            if (filesize(__DIR__.'/../../../resources/views/segments/' . $part->segment . '/' . $part->part .'/' . $part->part . '.js' ) > 10){
+                $js .= 'import "../views/segments/' . $part->segment . '/'
+                    . $part->part . '/' . $part->part . '.js";' . PHP_EOL;
+            }
         }
 
         // save scss
