@@ -1,5 +1,5 @@
 <section id='LoginBigBg' class="content"
-         style="background-image: url('{{asset('upload/images/'.$data->area->name.'.'.$data->part.'.jpg')}}')">
+         style="background-image: url('{{asset('upload/images/'.$data->area_name.'.'.$data->part.'.jpg')}}')">
     <form @if(!config('app.sms.sign')) action="{{route('client.sign-in-do')}}" @endif id="login-form" method="post">
         @csrf
         <h3>

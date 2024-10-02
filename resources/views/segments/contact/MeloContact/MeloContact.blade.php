@@ -2,21 +2,21 @@
     <div class="{{gfx()['container']}}">
 
         <h1 class="text-center fw-light mb-3">
-            {{getSetting($data->area->name.'_'.$data->part.'_title')}}
+            {{getSetting($data->area_name.'_'.$data->part.'_title')}}
         </h1>
         <div class="row">
             <div class="col-md-5">
                 <div class="pin-box p-3">
                     <i class="ri-mail-add-line icon"></i>
-                    @if(getGroupBySetting($data->area->name.'_'.$data->part)?->posts()->where('status',1)->where('is_pinned',1)->count() == 0)
+                    @if(getGroupBySetting($data->area_name.'_'.$data->part)?->posts()->where('status',1)->where('is_pinned',1)->count() == 0)
                         <h3 class="p-4 text-center">
-                            {{__("You must add a pinned post to :GROUP",['GROUP' => getGroupBySetting($data->area->name.'_'.$data->part)?->name])}}
+                            {{__("You must add a pinned post to :GROUP",['GROUP' => getGroupBySetting($data->area_name.'_'.$data->part)?->name])}}
                         </h3>
                     @else
                         <h3>
-                            {{getGroupBySetting($data->area->name.'_'.$data->part)?->posts()->where('status',1)->where('is_pinned',1)->first()->title}}
+                            {{getGroupBySetting($data->area_name.'_'.$data->part)?->posts()->where('status',1)->where('is_pinned',1)->first()->title}}
                         </h3>
-                        {!! getGroupBySetting($data->area->name.'_'.$data->part)?->posts()->where('status',1)->where('is_pinned',1)->first()->body!!}
+                        {!! getGroupBySetting($data->area_name.'_'.$data->part)?->posts()->where('status',1)->where('is_pinned',1)->first()->body!!}
 
                         <ul class="social text-center">
                             @foreach(getSettingsGroup('social_')??[] as $k => $social)
@@ -106,7 +106,7 @@
 
             @php($dir = langIsRTL(app()->getLocale() )?'rtl':'ltr' )
 
-            @foreach( getGroupBySetting($data->area->name.'_'.$data->part)?->posts()->where('status',1)
+            @foreach( getGroupBySetting($data->area_name.'_'.$data->part)?->posts()->where('status',1)
             ->where('is_pinned',0)->orderByDesc('id')->get() as $i => $post)
                 <div class="row mb-2" @if( ($i % 2) == 0) dir="rtl" @else dir="ltr" @endif>
                     <div class="col-md-2">

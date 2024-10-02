@@ -267,15 +267,15 @@
                             {{config('app.name')}}
                         </h3>
                         <p>
-                            {{getSetting($data->area->name.'_'.$data->part.'_text')}}
+                            {{getSetting($data->area_name.'_'.$data->part.'_text')}}
                         </p>
                     </div>
                     <div class="col-md-5">
                         <h3>
-                            {{getSetting($data->area->name.'_'.$data->part.'_title2')}}
+                            {{getSetting($data->area_name.'_'.$data->part.'_title2')}}
                         </h3>
                         <ul>
-                            @foreach( getGroupPostsBySetting($data->area->name.'_'.$data->part.'_group',5) as $post )
+                            @foreach( getGroupPostsBySetting($data->area_name.'_'.$data->part.'_group',5) as $post )
                             <li>
                                 <a href="{{$post->webUrl()}}">
                                     {{Str::limit($post->title,40)}}
@@ -285,7 +285,7 @@
                         </ul>
                     </div>
                     <div class="col-md-2">
-                        {!! getSetting($data->area->name.'_'.$data->part.'_last') !!}
+                        {!! getSetting($data->area_name.'_'.$data->part.'_last') !!}
                     </div>
                 </div>
             </div>

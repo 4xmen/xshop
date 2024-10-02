@@ -1,7 +1,7 @@
 <section class='AutoPlayClips'>
     <div class="{{gfx()['container']}}">
         <h1>
-            {{getSetting($data->area->name.'_'.$data->part.'_title')}}
+            {{getSetting($data->area_name.'_'.$data->part.'_title')}}
         </h1>
         <div class="autoplay-clip-list">
         @foreach(\App\Models\Clip::where('status',1)->get() as $clip)

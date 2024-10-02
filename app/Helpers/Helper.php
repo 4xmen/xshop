@@ -757,12 +757,19 @@ function hasPart($areaName)
 /**
  * get parts of area
  * @param $areaName
+ * @param null $custom  custom theme
  * @return Part[]|\Illuminate\Database\Eloquent\Collection|\LaravelIdea\Helper\App\Models\_IH_Part_C
  */
-function getParts($areaName)
+function getParts($areaName, $custom = null)
 {
-    $a = Area::where('name', $areaName)->first();
-    return $a->parts()->orderBy('sort')->get();
+    if ($custom != null) {
+
+        $customs = Part::where('custom', $custom)->orderBy('sort');
+        if ($customs->count() > 0) {
+            return $customs->get();
+        }
+    }
+    return Area::where('name', $areaName)->first()->parts()->orderBy('sort')->get();
 }
 
 
@@ -1278,7 +1285,8 @@ function sendingSMS($text, $number, $args)
  * @param $html
  * @return array
  */
-function generateTOC($html) {
+function generateTOC($html)
+{
     // Load HTML into a DOMDocument for parsing
     $doc = new DOMDocument();
     @$doc->loadHTML(mb_convert_encoding($html, 'HTML-ENTITIES', 'UTF-8'));
@@ -1333,7 +1341,8 @@ function generateTOC($html) {
  * @param $counter
  * @return string
  */
-function generateHeadingID($text, $counter) {
+function generateHeadingID($text, $counter)
+{
     // Convert to lowercase and replace non-alphanumeric characters with dashes
     $id = strtolower(preg_replace('/[^a-zA-Z0-9]+/', '-', $text));
 
@@ -1352,7 +1361,8 @@ function generateHeadingID($text, $counter) {
 }
 
 // The buildTOC function remains unchanged
-function buildTOC($items) {
+function buildTOC($items)
+{
     $html = '<ul>';
     foreach ($items as $item) {
         $html .= '<li>';
@@ -1376,21 +1386,35 @@ function buildTOC($items) {
  * @param $evaluation
  * @return int|mixed
  */
-function detectRateCustomer($type,$id,$evaluation)
+function detectRateCustomer($type, $id, $evaluation)
 {
-    if (!auth('customer')->check()){
+    if (!auth('customer')->check()) {
         return 0;
     }
-    $rate = Rate::where('rater_id',auth('customer')->id())
-    ->where('rater_type', \App\Models\Customer::class)
-    ->where('rateable_type',$type)
-    ->where('rateable_id',$id)
-    ->where('evaluation_id',$evaluation);
+    $rate = Rate::where('rater_id', auth('customer')->id())
+        ->where('rater_type', \App\Models\Customer::class)
+        ->where('rateable_type', $type)
+        ->where('rateable_id', $id)
+        ->where('evaluation_id', $evaluation);
 
-    if ($rate->count() == 0){
-        return  0;
-    }else{
-        return  $rate->first()->rate;
+    if ($rate->count() == 0) {
+        return 0;
+    } else {
+        return $rate->first()->rate;
     }
 
+}
+
+/**
+ * @param $name string area name
+ * @param $model \Illuminate\Database\Eloquent\Model $custom model
+ * @return Area|mixed
+ */
+function findArea($name,$model = null)
+{
+
+    if ($model != null && $model->theme != null){
+        return  json_decode($model->theme);
+    }
+    return \App\Models\Area::where('name', $name)->first();
 }

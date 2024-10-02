@@ -12,26 +12,26 @@ class MeloContact
     {
         $setting = new Setting();
         $setting->section = 'theme';
-        $setting->key = $part->area->name . '_' . $part->part;
+        $setting->key = $part->area_name . '_' . $part->part;
         $setting->value = Group::first()->id;
         $setting->type = 'GROUP';
         $setting->size = 6;
-        $setting->title =  $part->area->name . ' ' . $part->part;
+        $setting->title =  $part->area_name . ' ' . $part->part;
         $setting->save();
 
         $setting = new Setting();
         $setting->section = 'theme';
-        $setting->key = $part->area->name . '_' . $part->part.'_title';
+        $setting->key = $part->area_name . '_' . $part->part.'_title';
         $setting->value = __("Contact us");
         $setting->type = 'TEXT';
         $setting->size = 6;
-        $setting->title =  $part->area->name . ' ' . $part->part . ' title';
+        $setting->title =  $part->area_name . ' ' . $part->part . ' title';
         $setting->save();
     }
     public static function onRemove(Part $part = null)
     {
-        Setting::where('key',$part->area->name . '_' . $part->part)->first()?->delete();
-        Setting::where('key',$part->area->name . '_' . $part->part.'_title')->first()?->delete();
+        Setting::where('key',$part->area_name . '_' . $part->part)->first()?->delete();
+        Setting::where('key',$part->area_name . '_' . $part->part.'_title')->first()?->delete();
 
 
     }

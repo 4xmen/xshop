@@ -4,7 +4,7 @@
             {{$title}}
         </h1>
         <div class="row">
-            @if(!getSetting($data->area->name.'_'.$data->part.'_invert'))
+            @if(!getSetting($data->area_name.'_'.$data->part.'_invert'))
                 <div class="col-lg-3 p-lg-1 pt-lg-0">
                     @include('segments.products_page.ProductGridSidebar.inc.product-sidebar')
                 </div>
@@ -56,7 +56,7 @@
                 {{$products->withQueryString()->links()}}
 
             </div>
-            @if(getSetting($data->area->name.'_'.$data->part.'_invert'))
+            @if(getSetting($data->area_name.'_'.$data->part.'_invert'))
                 <div class="col-lg-3">
                     @include('segments.products_page.ProductGridSidebar.inc.product-sidebar')
                 </div>

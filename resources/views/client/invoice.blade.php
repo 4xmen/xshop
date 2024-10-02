@@ -6,7 +6,7 @@
 @section('content')
     <main>
         <div class="no-print">
-            @if(\App\Models\Area::where('name',$area)->first()->use_default)
+            @if(findArea($area)->use_default)
                 @foreach(getParts('defaultHeader') as $part)
                     @php($p = $part->getBladeWithData())
                     @include($p['blade'],['data' => $p['data']])
@@ -18,7 +18,7 @@
             @include($p['blade'],['data' => $p['data']])
         @endforeach
         <div class="no-print">
-            @if(\App\Models\Area::where('name',$area)->first()->use_default)
+            @if(findArea($area)->use_default)
                 @foreach(getParts('defaultFooter') as $part)
                     @php($p = $part->getBladeWithData())
                     @include($p['blade'],['data' => $p['data']])

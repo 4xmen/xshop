@@ -5,7 +5,7 @@
                 <i class="ri-menu-line"></i>
             </a>
         </li>
-        @foreach(getMenuBySettingItems($data->area->name.'_'.$data->part.'_menu') as $item)
+        @foreach(getMenuBySettingItems($data->area_name.'_'.$data->part.'_menu') as $item)
             <li>
                 <a href="{{$item->webUrl()}}">
                     {{$item->title}}

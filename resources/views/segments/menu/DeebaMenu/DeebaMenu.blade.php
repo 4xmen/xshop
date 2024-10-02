@@ -1,7 +1,7 @@
 <nav id='DeebaMenu'>
     <div class="{{gfx()['container']}}">
         <ul>
-            @php($items = getMenuBySetting($data->area->name.'_'.$data->part.'_menu')->items)
+            @php($items = getMenuBySetting($data->area_name.'_'.$data->part.'_menu')->items)
             @php($menuShow = false)
             @foreach($items as $i => $item)
                 {{-- find center --}}
@@ -28,7 +28,7 @@
         </ul>
     </div>
     <ul id="deeba-sided">
-        @foreach(getMenuBySetting($data->area->name.'_'.$data->part.'_menu')->items as $item)
+        @foreach(getMenuBySetting($data->area_name.'_'.$data->part.'_menu')->items as $item)
             <li>
                 <a href="{{$item->webUrl()}}">
                     {{$item->title}}

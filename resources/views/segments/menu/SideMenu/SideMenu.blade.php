@@ -9,7 +9,7 @@
         <i class="ri-menu-line"></i>
     </div>
     <ul>
-        @foreach(getMenuBySetting($data->area->name.'_'.$data->part.'_menu')->items as $item)
+        @foreach(getMenuBySetting($data->area_name.'_'.$data->part.'_menu')->items as $item)
             <li>
                 @if($item->meta == null)
                     <a href="{{$item->dest->webUrl()}}">
@@ -24,6 +24,6 @@
         @endforeach
     </ul>
     <div class="p-2" id="side-menu-content">
-        {!! getSetting($data->area->name.'_'.$data->part.'_text') !!}
+        {!! getSetting($data->area_name.'_'.$data->part.'_text') !!}
     </div>
 </nav>

@@ -352,10 +352,12 @@ Route::prefix(config('app.panel.prefix'))->name('admin.')->group(
                 Route::prefix('area')->name('area.')->group(
                     function () {
                         Route::get('index', [\App\Http\Controllers\Admin\AreaController::class, "index"])->name('index');
-                        Route::get('design/{area}', [\App\Http\Controllers\Admin\AreaController::class, "desgin"])->name('design');
+                        Route::get('design/{area}', [\App\Http\Controllers\Admin\AreaController::class, "design"])->name('design');
+                        Route::get('design/model/{area}/{model}/{id}', [\App\Http\Controllers\Admin\AreaController::class, "designModel"])->name('design.model');
                         Route::get('image/{segment}/{part}', [\App\Http\Controllers\Admin\AreaController::class, "image"])->name('image');
 //                        Route::post('store', [\App\Http\Controllers\Admin\SettingController::class, "store"])->name('store');
                         Route::post('update/{area}', [\App\Http\Controllers\Admin\AreaController::class, "update"])->name('update');
+                        Route::post('update/model/{model}/{id}', [\App\Http\Controllers\Admin\AreaController::class, "updateModel"])->name('update.model');
                         Route::get('sort/{area}', [\App\Http\Controllers\Admin\AreaController::class, "sort"])->name('sort');
                         Route::post('sort-save/{area}', [\App\Http\Controllers\Admin\AreaController::class, "sortSave"])->name('sort-save');
                     }

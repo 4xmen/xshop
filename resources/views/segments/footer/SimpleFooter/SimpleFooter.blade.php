@@ -4,9 +4,9 @@
             <div class="row">
                 <div class="col-md-4">
                     <h3>
-                        {{getSetting($data->area->name.'_'.$data->part.'_title1')}}
+                        {{getSetting($data->area_name.'_'.$data->part.'_title1')}}
                     </h3>
-                    @foreach( getGroupPostsBySetting($data->area->name.'_'.$data->part.'_group1',5) as $post )
+                    @foreach( getGroupPostsBySetting($data->area_name.'_'.$data->part.'_group1',5) as $post )
                         <li>
                             <a href="{{$post->webUrl()}}">
                                 {{Str::limit($post->title,40)}}
@@ -16,10 +16,10 @@
                 </div>
                 <div class="col-md-4">
                     <h3>
-                        {{getSetting($data->area->name.'_'.$data->part.'_title2')}}
+                        {{getSetting($data->area_name.'_'.$data->part.'_title2')}}
                     </h3>
                     <ul>
-                        @foreach( getGroupPostsBySetting($data->area->name.'_'.$data->part.'_group2',5) as $post )
+                        @foreach( getGroupPostsBySetting($data->area_name.'_'.$data->part.'_group2',5) as $post )
                             <li>
                                 <a href="{{$post->webUrl()}}">
                                     {{Str::limit($post->title,40)}}
@@ -29,7 +29,7 @@
                     </ul>
                 </div>
                 <div class="col-md-4">
-                    {!! getSetting($data->area->name.'_'.$data->part.'_last') !!}
+                    {!! getSetting($data->area_name.'_'.$data->part.'_last') !!}
                 </div>
             </div>
         </div>

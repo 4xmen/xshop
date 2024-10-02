@@ -4,7 +4,7 @@
             {{$title}}
         </h1>
         <p class="text-muted">
-            {{getSetting($data->area->name.'_'.$data->part.'_title')}}
+            {{getSetting($data->area_name.'_'.$data->part.'_title')}}
         </p>
 
         <div id="dena-list">

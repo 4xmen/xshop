@@ -1,9 +1,9 @@
-@php($productFav = getCategoryProductBySetting($data->area->name.'_'.$data->part,1) )
+@php($productFav = getCategoryProductBySetting($data->area_name.'_'.$data->part,1) )
 @if(count($productFav) > 0)
 <section class="FavProductWithMeta py-5">
     <div class="{{gfx()['container']}}">
         <h4 class="text-center text-muted">
-            {{getSetting($data->area->name.'_'.$data->part.'_title')}}
+            {{getSetting($data->area_name.'_'.$data->part.'_title')}}
         </h4>
         <h1 class="text-center my-2">
             {{$productFav[0]->name}}

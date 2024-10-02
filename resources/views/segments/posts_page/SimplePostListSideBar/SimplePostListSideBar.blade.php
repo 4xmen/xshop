@@ -27,7 +27,7 @@
         </div>
         <hr>
         <div class="row">
-            @if(!getSetting($data->area->name.'_'.$data->part.'_invert'))
+            @if(!getSetting($data->area_name.'_'.$data->part.'_invert'))
                 <div class="col-lg-3 p-0">
                     @include('segments.posts_page.SimplePostListSideBar.inc.sidebar')
                 </div>
@@ -53,7 +53,7 @@
                 @endforeach
                 {{$posts->links()}}
             </div>
-            @if(getSetting($data->area->name.'_'.$data->part.'_invert'))
+            @if(getSetting($data->area_name.'_'.$data->part.'_invert'))
                 <div class="col-lg-3 p-0">
                     @include('segments.posts_page.SimplePostListSideBar.inc.sidebar')
                 </div>
