@@ -45,6 +45,11 @@
         <meta property="og:type" content="article" />
         <meta name="description" content="{{Str::limit($post->subtitle,150)}}">
         <meta name="keywords" content="{{$post->tagsList()}}">
+
+        @if(\Illuminate\Support\Str::isUrl($post->canonical) )
+            <link rel="canonical" href="{{$post->canonical}}" />
+        @endif
+
     @elseif(isset($product))
 {!! $product->markup() !!}
         <meta property="og:title" content="{{$product->name}}"/>
@@ -69,6 +74,18 @@
         <meta name="availability" content="{{strtolower(str_replace('_','',$product->status))}}">
         <meta name="guarantee" content="{{getSetting('guarantee')}}">
 
+        @if(\Illuminate\Support\Str::isUrl($product->canonical) )
+            <link rel="canonical" href="{{$product->canonical}}" />
+        @endif
+
+    @elseif(isset($group))
+        @if(\Illuminate\Support\Str::isUrl($group->canonical) )
+            <link rel="canonical" href="{{$group->canonical}}" />
+        @endif
+    @elseif(isset($category))
+        @if(\Illuminate\Support\Str::isUrl($category->canonical) )
+            <link rel="canonical" href="{{$category->canonical}}" />
+        @endif
     @elseif(isset($clip))
 {!! $clip->markup() !!}
         <meta property="og:title" content="{{$clip->title}}" />

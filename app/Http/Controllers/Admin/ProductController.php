@@ -77,11 +77,16 @@ class ProductController extends XController
         $product->user_id = auth()->id();
         $product->status = $request->input('status');
         $tags = array_filter(explode(',,', $request->input('tags')));
+        if ($request->has('canonical') && trim($request->input('canonical')) != ''){
+            $product->canonical = $request->input('canonical');
+        }
+
         $product->save();
         $product->categories()->sync($request->input('cat'));
         if (count($tags) > 0){
             $product->syncTags($tags);
         }
+
         foreach ($product->getMedia() as $media) {
             in_array($media->id, request('medias', [])) ?: $media->delete();
         }

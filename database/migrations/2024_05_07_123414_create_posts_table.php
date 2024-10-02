@@ -28,6 +28,7 @@ return new class extends Migration
             $table->string('icon', 128)->nullable();
             $table->boolean('table_of_contents')->default(0);
             $table->json('theme')->nullable();
+            $table->text('canonical')->nullable();
             $table->string('promote')->nullable();
             $table->softDeletes();
             $table->timestamps();
