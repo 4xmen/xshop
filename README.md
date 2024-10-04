@@ -39,6 +39,7 @@ php artisan serv
 
 npm install -g yarn
 yarn install
+php artisan client
 yarn dev
 ```
 
