@@ -1,2 +1,6 @@
 User-agent: *
-Disallow:
+Disallow: /card
+Disallow: /compare
+Disallow: /*/card
+Disallow: /*/compare
+Sitemap: /sitemap.xml
