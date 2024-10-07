@@ -86,6 +86,9 @@
         @if(\Illuminate\Support\Str::isUrl($category->canonical) )
             <link rel="canonical" href="{{$category->canonical}}" />
         @endif
+        @if(request()->has('meta') || request()->has('sort'))
+            <link rel="canonical" href="{{$category->webUrl()}}" />
+        @endif
     @elseif(isset($clip))
 {!! $clip->markup() !!}
         <meta property="og:title" content="{{$clip->title}}" />
