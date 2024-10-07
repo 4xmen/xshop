@@ -10,7 +10,7 @@
                         </div>
                         <a href="{{$post->webUrl()}}">
                             <img src="{{$post->orgUrl()}}" alt="{{$post->title}}"
-                                 title="{{implode(',',$post->tags->pluck('name')->toArray()??'')}}">
+                                 title="{{implode(',',$post->tags->pluck('name')->toArray()??'')}}" loading="lazy">
                         </a>
                         <div class="detail">
                             <h4>
@@ -40,7 +40,7 @@
                                 <div class="corner">
                                     {{$post->mainGroup->name}}
                                 </div>
-                                <img src="{{$post->imgUrl()}}" alt="{{$post->title}}">
+                                <img src="{{$post->imgUrl()}}" alt="{{$post->title}}" loading="lazy">
                                 <h4>
                                     {{$post->title}}
                                 </h4>

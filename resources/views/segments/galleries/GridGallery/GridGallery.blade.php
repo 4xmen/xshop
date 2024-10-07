@@ -8,7 +8,7 @@
                 <div class="col-md p-1">
                     <a class="gallery-grid" href="{{$gallery->webUrl()}}">
 
-                        <img src="{{$gallery->imgUrl()}}" alt="{{$gallery->title}}">
+                        <img src="{{$gallery->imgUrl()}}" alt="{{$gallery->title}}" loading="lazy">
                         <h4>
                             <span>
                                 {{$gallery->title}}

@@ -206,7 +206,7 @@
                 <div class="item">
                     <div class="aria-product-list">
                         <a href="{{$p->imgUrl()}}">
-                            <img src="{{$p->imgUrl()}}" alt="{{$p->name}}">
+                            <img src="{{$p->imgUrl()}}" alt="{{$p->name}}" loading="lazy">
                             <h5>
                                 {{$p->name}}
                             </h5>

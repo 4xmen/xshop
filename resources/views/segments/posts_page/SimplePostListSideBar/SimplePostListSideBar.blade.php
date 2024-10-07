@@ -10,7 +10,7 @@
                             </div>
                             <a href="{{$post->webUrl()}}">
                                 <img src="{{$post->orgUrl()}}" alt="{{$post->title}}"
-                                     title="{{implode(',',$post->tags->pluck('name')->toArray()??'')}}">
+                                     title="{{implode(',',$post->tags->pluck('name')->toArray()??'')}}" loading="lazy">
                             </a>
                             <div class="detail">
                                 <h4>
@@ -35,7 +35,7 @@
             <div class="col-lg-9">
                 @foreach($posts as $post)
                     <div class="post-list-item">
-                        <img src="{{$post->imgUrl()}}" class="float-start me-4" alt="{{$post->title}}">
+                        <img src="{{$post->imgUrl()}}" class="float-start me-4" alt="{{$post->title}}" loading="lazy">
                         <h4>
                             {{$post->title}}
                         </h4>

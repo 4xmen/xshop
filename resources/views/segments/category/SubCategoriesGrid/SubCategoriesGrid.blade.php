@@ -9,7 +9,7 @@
                     @foreach($category->children as $subCat)
                         <div class="col-md">
                             <div class="sub-category">
-                                <img src="{{$subCat->imgUrl()}}" alt="{{$subCat->name}}" class="img-fluid">
+                                <img src="{{$subCat->imgUrl()}}" alt="{{$subCat->name}}" class="img-fluid" loading="lazy">
                                 <h4>
                                     {{$subCat->name}}
                                 </h4>

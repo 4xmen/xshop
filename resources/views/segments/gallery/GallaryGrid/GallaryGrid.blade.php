@@ -5,7 +5,7 @@
                 @foreach($gallery->images as $image)
                     <div class="col-lg-3 col-md-6 mb-4">
                         <a class="gallery-image light-box" data-toggle="lightbox" data-gallery="{{$gallery->slug}}" href="{{$image->imgOriginalUrl()}}">
-                            <img src="{{$image->imgurl()}}" class="img-fluid" alt="{{$image->title}}" title="{{$image->title}}">
+                            <img src="{{$image->imgurl()}}" class="img-fluid" alt="{{$image->title}}" title="{{$image->title}}" loading="lazy">
                         </a>
                     </div>
                 @endforeach

@@ -4,7 +4,7 @@
             {{$title}}
         </h1>
         <div id="video-preview-botz">
-            <video controls src="{{$clip->fileUrl()}}" poster="{{$clip->imgUrl()}}"></video>
+            <video controls src="{{$clip->fileUrl()}}" poster="{{$clip->imgUrl()}}" preload="none"></video>
         </div>
         <mp4player
             asset="{{$clip->fileUrl()}}" cover="{{$clip->imgUrl()}}"></mp4player>

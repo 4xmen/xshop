@@ -14,7 +14,7 @@
                                 <div class="item slider-content">
                                     <div class="tree-product-box">
                                         <a href="{{$product->webUrl()}}">
-                                            <img src="{{$product->imgUrl()}}" alt="{{$product->name}}">
+                                            <img src="{{$product->imgUrl()}}" alt="{{$product->name}}" loading="lazy">
                                         </a>
                                         <h4>
                                             <a href="{{$product->webUrl()}}">
@@ -48,7 +48,7 @@
                     @foreach(getCategoryProductBySetting($part->area_name . '_' . $part->part.'_categoryx') as $product)
                         <div class="item  text-center slider-content">
                                 <a href="{{$product->webUrl()}}">
-                                    <img src="{{$product->imgUrl()}}" class="img-fluid" alt="{{$product->name}}">
+                                    <img src="{{$product->imgUrl()}}" class="img-fluid" alt="{{$product->name}}" loading="lazy">
                                 </a>
                         </div>
                     @endforeach
@@ -63,7 +63,7 @@
                     @foreach(getCategoryProductBySetting($part->area_name . '_' . $part->part.'_categoryy') as $product)
                         <div class="item  text-center slider-content">
                             <a href="{{$product->webUrl()}}">
-                                <img src="{{$product->imgUrl()}}" class="img-fluid" alt="{{$product->name}}">
+                                <img src="{{$product->imgUrl()}}" class="img-fluid" alt="{{$product->name}}" loading="lazy">
                             </a>
                         </div>
                     @endforeach
