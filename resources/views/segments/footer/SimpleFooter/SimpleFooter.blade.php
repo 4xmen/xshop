@@ -3,9 +3,11 @@
         <div class="{{gfx()['container']}}">
             <div class="row">
                 <div class="col-md-4">
+
                     <h3>
                         {{getSetting($data->area_name.'_'.$data->part.'_title1')}}
                     </h3>
+                    <ul>
                     @foreach( getGroupPostsBySetting($data->area_name.'_'.$data->part.'_group1',5) as $post )
                         <li>
                             <a href="{{$post->webUrl()}}">
@@ -13,6 +15,7 @@
                             </a>
                         </li>
                     @endforeach
+                    </ul>
                 </div>
                 <div class="col-md-4">
                     <h3>
