@@ -9,7 +9,7 @@
                     <div class="cat-grid-item">
                         <a href="{{$category->webUrl()}}">
                             <img src="{{$category->imgUrl()}}" alt="{{$category->name}}"
-                                 title="{{$category->name}}">
+                                 title="{{$category->name}}" loading="lazy" >
                             <h3 class="py-3">
                                 {{$category->name}}
                             </h3>

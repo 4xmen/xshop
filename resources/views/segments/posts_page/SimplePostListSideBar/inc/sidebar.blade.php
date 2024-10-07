@@ -17,7 +17,7 @@
         @foreach(\App\Models\Post::where('status',1)->orderByDesc('id')->limit(5)->get() as $pst)
             <li>
                 <a href="{{$pst->webUrl()}}">
-                    <img src="{{$pst->imgUrl()}}" alt="{{$pst->title}}" class="float-start me-2">
+                    <img src="{{$pst->imgUrl()}}" alt="{{$pst->title}}" class="float-start me-2" loading="lazy">
                     <h6>
                         {{$pst->title}}
                     </h6>

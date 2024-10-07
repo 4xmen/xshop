@@ -27,7 +27,7 @@
                                     <i class="ri-scales-3-line"></i>
                                 </a>
                                 <a href="{{$product->webUrl()}}">
-                                    <img src="{{$product->imgUrl()}}" alt="{{$product->name}}">
+                                    <img src="{{$product->imgUrl()}}" alt="{{$product->name}}" loading="lazy">
                                     <h3>
                                         {{$product->name}}
                                     </h3>

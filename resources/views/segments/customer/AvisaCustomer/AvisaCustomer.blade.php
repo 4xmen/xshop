@@ -511,7 +511,7 @@
                         <div class="product-item">
                             <div class="row">
                                 <div class="col-md-2">
-                                    <img src="{{$fav->imgUrl()}}" class="img-fluid" alt="{{$fav->name}}">
+                                    <img src="{{$fav->imgUrl()}}" class="img-fluid" alt="{{$fav->name}}" loading="lazy">
                                 </div>
                                 <div class="col-md-10">
                                     <h4>

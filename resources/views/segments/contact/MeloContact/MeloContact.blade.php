@@ -110,7 +110,7 @@
             ->where('is_pinned',0)->orderByDesc('id')->get() as $i => $post)
                 <div class="row mb-2" @if( ($i % 2) == 0) dir="rtl" @else dir="ltr" @endif>
                     <div class="col-md-2">
-                        <img src="{{$post->imgUrl()}}" alt="{{$post->title}}" class="img-fluid">
+                        <img src="{{$post->imgUrl()}}" alt="{{$post->title}}" class="img-fluid" loading="lazy">
                     </div>
                     <div class="col-md" dir="{{$dir}}">
                         <h3>

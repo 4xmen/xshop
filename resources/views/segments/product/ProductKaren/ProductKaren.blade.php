@@ -7,7 +7,7 @@
                 <div id="preview">
                     <a href="{{$product->originalImageUrl()}}" id="karen-main-img" class="light-box"
                        data-gallery="karen-products">
-                        <img src="{{$product->originalImageUrl()}}" alt="{{$product->name}}">
+                        <img src="{{$product->originalImageUrl()}}" alt="{{$product->name}}" >
                     </a>
                 </div>
                 <div id="karen-img-slider">
@@ -202,7 +202,7 @@
                 <div class="item">
                     <div class="karen-product-list">
                         <a href="{{$p->imgUrl()}}">
-                            <img src="{{$p->imgUrl()}}"  alt="{{$p->name}}">
+                            <img src="{{$p->imgUrl()}}"  alt="{{$p->name}}" loading="lazy">
                             <h5>
                                 {{$p->name}}
                             </h5>

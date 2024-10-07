@@ -12,7 +12,7 @@
             @foreach( getGroupPostsBySetting($data->area_name.'_'.$data->part.'_group',4) as $post )
                 <div class="col-lg-3 col-md-6">
                     <div class="post-img-index">
-                        <img src="{{$post->imgUrl()}}" alt="{{$post->title}}" class="img-fluid">
+                        <img src="{{$post->imgUrl()}}" alt="{{$post->title}}" class="img-fluid" loading="lazy">
                         <h3>
                             {{$post->title}}
                         </h3>

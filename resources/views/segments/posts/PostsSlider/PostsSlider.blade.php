@@ -14,7 +14,7 @@
                     <div class="post-slider">
 
                         <a href="{{$post->webUrl()}}">
-                            <img src="{{$post->orgUrl()}}" alt=" {{$post->title}}">
+                            <img src="{{$post->orgUrl()}}" alt=" {{$post->title}}" loading="lazy">
                             <h3>
                                 {{$post->title}}
                             </h3>

@@ -16,7 +16,7 @@
                         <div class="author-slide">
 
                             <a href="{{$post->webUrl()}}">
-                                <img src="{{$post->orgUrl()}}" class="float-end" alt=" {{$post->title}}">
+                                <img src="{{$post->orgUrl()}}" class="float-end" alt=" {{$post->title}}" loading="lazy">
                                 <div class="contents">
 
                                     <h3>

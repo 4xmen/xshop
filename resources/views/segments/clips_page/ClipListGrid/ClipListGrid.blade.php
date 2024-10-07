@@ -10,7 +10,7 @@
 
                     <div class="clip-grid-item">
                         <a href="{{$clip->webUrl()}}">
-                            <img src="{{$clip->imgUrl()}}" alt="">
+                            <img src="{{$clip->imgUrl()}}" alt="" loading="lazy">
                             <h2>
                                 <span>
                                     {{$clip->title}}

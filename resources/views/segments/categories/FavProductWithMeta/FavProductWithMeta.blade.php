@@ -22,7 +22,7 @@
                 </div>
             @endforeach
             <div class="col-12">
-                <img src="{{$productFav[0]->originalOptimizedImageUrl()}}" class="img-fluid" alt=" {{$productFav[0]->name}}">
+                <img src="{{$productFav[0]->originalOptimizedImageUrl()}}" class="img-fluid" alt=" {{$productFav[0]->name}}" loading="lazy">
             </div>
         </div>
     </div>
