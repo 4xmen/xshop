@@ -14,6 +14,7 @@
         "dpsoft/pay.ir": "dev-master",
         "dpsoft/saderat": "^4.0",
         "dpsoft/zibal": "^2.0",
+        "fahlisaputra/laravel-minify": "^1.1",
         "laravel/framework": "^11.0",
         "laravel/sanctum": "^4.0",
         "laravel/tinker": "^2.9",
