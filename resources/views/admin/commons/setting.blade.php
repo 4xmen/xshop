@@ -37,7 +37,7 @@
                             <div class="section-group">
                                 @foreach(\App\Models\Setting::groupBy('section')->pluck('section')->toArray() as $sec)
                                     <a href="#{{$sec}}" class="section-group-item">
-                                        {{$sec}}
+                                        {{__(ucfirst($sec))}}
                                     </a>
                                 @endforeach
                             </div>

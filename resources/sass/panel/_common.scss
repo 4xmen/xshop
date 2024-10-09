@@ -338,6 +338,11 @@ a.btn,a.action-btn,a.circle-btn{
 .btn-light,a.btn-light{
     color: black !important;
 }
+
+.table-list td .btn{
+    margin-bottom: 5px;
+    margin-top: 5px;
+}
 /* -620px width */
 @media (max-width: 620px) {
     .table-list {
