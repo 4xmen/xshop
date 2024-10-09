@@ -323,7 +323,7 @@ function lastCrump()
         echo '<li >
         <a>
             <i class="ri-folder-chart-line" ></i>
-            ' . __(ucfirst($routes[count($routes) - 1])) . '
+            <span>' . __(ucfirst($routes[count($routes) - 1])) . '</span>
         </a>
     </li>';
         return;
@@ -337,7 +337,7 @@ function lastCrump()
         echo '<li >
         <a>
             <i class="ri-list-check" ></i>
-            ' . __(Str::plural(ucfirst($routes[count($routes) - 2]))) . '
+            <span>' . __(Str::plural(ucfirst($routes[count($routes) - 2]))) . '</span>
         </a>
     </li>';
     } else {
@@ -349,7 +349,7 @@ function lastCrump()
         echo '<li>
         <a href="' . $link . '">
             <i class="ri-list-check" ></i>
-            ' . __(ucfirst(Str::plural($routes[count($routes) - 2]))) . '
+            <span>' . __(ucfirst(Str::plural($routes[count($routes) - 2]))) . '</span>
         </a>
     </li>';
         switch ($route) {
@@ -386,7 +386,7 @@ function lastCrump()
         echo '<li>
             <a>
                 <i class="' . $icon . '" ></i>
-                ' . $title . '
+               <span> ' . $title . ' </span>
             </a>
         </li>';
     }

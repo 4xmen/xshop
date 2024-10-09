@@ -133,7 +133,6 @@
                             @endforeach
                             {{--                            @yield('table-head')--}}
                             <th>
-
                             </th>
                         </tr>
                         </thead>

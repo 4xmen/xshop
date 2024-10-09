@@ -338,3 +338,41 @@ a.btn,a.action-btn,a.circle-btn{
 .btn-light,a.btn-light{
     color: black !important;
 }
+/* -620px width */
+@media (max-width: 620px) {
+    .table-list {
+        position: relative; /* Ensure this is the direct container */
+        overflow: auto; /* Allow scrolling */
+    }
+
+    tr, td, th {
+        display: block;
+        width: 100% !important;
+        text-align: end;
+    }
+    td{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    td:last-child{
+        justify-content: center;
+    }
+
+    div.float-start, div.float-end {
+        float: none !important;
+    }
+
+    .dropdown{
+        min-width: 75%;
+        .btn{
+            width: 100%;
+        }
+    }
+
+    thead {
+        display: none;
+    }
+
+
+}
