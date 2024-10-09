@@ -1,4 +1,4 @@
-
+@cache('wave_footer'. cacheNumber(), 90)
 <footer class='WaveFooter'
         style="--speed: {{getSetting($data->area_name.'_'.$data->part.'_speed')}}s;
         --speed2: {{getSetting($data->area_name.'_'.$data->part.'_speed2')}}s;
@@ -46,3 +46,4 @@
             {{getSetting('copyright')}}        </div>
     </div>
 </footer>
+@endcache

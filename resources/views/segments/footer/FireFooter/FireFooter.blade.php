@@ -1,3 +1,4 @@
+@cache('wave_footer'. cacheNumber(), 90)
 <footer class='FireFooter'>
     <div class="footer">
         <div class="bubbles">
@@ -315,3 +316,4 @@
         </defs>
     </svg>
 </footer>
+@endcache

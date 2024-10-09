@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "09d427100f16e5c56fab40748b855feb",
+    "content-hash": "ef8964addedfac8764b7d88ec133cf16",
     "packages": [
         {
             "name": "brick/math",
@@ -4412,6 +4412,80 @@
                 "source": "https://github.com/WordPress/Requests"
             },
             "time": "2024-07-08T08:10:42+00:00"
+        },
+        {
+            "name": "ryangjchandler/blade-cache-directive",
+            "version": "v1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ryangjchandler/blade-cache-directive.git",
+                "reference": "00b950f3e14a06d58528293e237d58795abe7df3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ryangjchandler/blade-cache-directive/zipball/00b950f3e14a06d58528293e237d58795abe7df3",
+                "reference": "00b950f3e14a06d58528293e237d58795abe7df3",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/contracts": "^11.0",
+                "php": "^8.2",
+                "spatie/laravel-package-tools": "^1.16"
+            },
+            "require-dev": {
+                "brianium/paratest": "^7.4",
+                "nunomaduro/collision": "^8.0",
+                "orchestra/testbench": "^9.0",
+                "phpunit/phpunit": "^10.0",
+                "spatie/laravel-ray": "^1.9",
+                "vimeo/psalm": "^4.4|^5.22"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "RyanChandler\\BladeCacheDirective\\BladeCacheDirectiveServiceProvider"
+                    ],
+                    "aliases": {
+                        "BladeCacheDirective": "RyanChandler\\BladeCacheDirective\\BladeCacheDirectiveFacade"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "RyanChandler\\BladeCacheDirective\\": "src",
+                    "RyanChandler\\BladeCacheDirective\\Database\\Factories\\": "database/factories"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Ryan Chandler",
+                    "email": "support@ryangjchandler.co.uk",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Cache chunks of your Blade markup with ease.",
+            "homepage": "https://github.com/ryangjchandler/blade-cache-directive",
+            "keywords": [
+                "blade-cache-directive",
+                "laravel",
+                "ryangjchandler"
+            ],
+            "support": {
+                "issues": "https://github.com/ryangjchandler/blade-cache-directive/issues",
+                "source": "https://github.com/ryangjchandler/blade-cache-directive/tree/v1.0.0"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/ryangjchandler",
+                    "type": "github"
+                }
+            ],
+            "time": "2024-03-13T00:05:30+00:00"
         },
         {
             "name": "setasign/fpdi",

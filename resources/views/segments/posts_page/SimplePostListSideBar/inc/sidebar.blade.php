@@ -1,3 +1,4 @@
+@cache('post_sidebar1'. cacheNumber(), 90)
 <aside class="p-4">
     <h4>
         {{__("Search")}}
@@ -42,3 +43,4 @@
         @endforeach
     </ul>
 </aside>
+@endcache

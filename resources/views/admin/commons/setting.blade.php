@@ -19,6 +19,12 @@
                                 {{__("Recommends")}}
                             </li>
                         </ul>
+
+                        <div class="p-2">
+                            <a href="{{ route('admin.setting.cache-clear') }}" class="btn btn-secondary d-block">
+                                {{__("Clear caches")}}
+                            </a>
+                        </div>
                     </div>
 
                     <div class="item-list mb-3">
