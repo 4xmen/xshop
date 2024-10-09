@@ -3,13 +3,17 @@
         <li>
             <a href="{{url('/')}}" target="_blank">
                 <i class="ri-home-3-line"></i>
-                {{config('app.name')}}
+                <span>
+                    {{config('app.name')}}
+                </span>
             </a>
         </li>
         <li>
             <a href="{{route('admin.home')}}">
                 <i class="ri-dashboard-3-line"></i>
-                {{__("Dashboard")}}
+                <span>
+                    {{__("Dashboard")}}
+                </span>
             </a>
         </li>
         {{lastCrump()}}

@@ -30,6 +30,7 @@ import './panel/setting-section-controller.js';
 import './panel/sotable-controller.js';
 import './panel/prototypes.js';
 import './panel/panel-window-loader.js';
+import './panel/responsive-control.js';
 
 // chartjs.defaults.defaultFontFamily = "Vazir";
 // chartjs.defaults.defaultFontSize = 18;

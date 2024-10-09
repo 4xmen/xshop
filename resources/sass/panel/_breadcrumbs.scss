@@ -61,3 +61,28 @@ $pnl-brc-height: 50px;
     }
 
 }
+
+/*-500px width*/
+@media (max-width: 600px) {
+    #panel-breadcrumb{
+        display: block;
+        li{
+            text-align: end;
+        }
+
+        span{
+            display: none !important;
+        }
+        i{
+            margin: 0;
+            display: inline-block;
+        }
+        a{
+            justify-content: end !important;
+            padding-right: 0 !important;
+            padding-left: 0 !important;
+        }
+    }
+
+
+}
