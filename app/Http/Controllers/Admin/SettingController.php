@@ -9,6 +9,7 @@ use App\Models\Group;
 use App\Models\Menu;
 use App\Models\Setting;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Artisan;
 
 class SettingController extends Controller
 {
@@ -18,7 +19,7 @@ class SettingController extends Controller
     public function index()
     {
         //
-        $settings = Setting::where('active', 1)
+        $settings = Setting::where('active', true)
             ->orderBy('section')->get();  //ESH// just active setting`s show
         $cats = Category::all(['id','name']);
         $menus = Menu::all(['id','name']);
@@ -107,5 +108,16 @@ class SettingController extends Controller
     public function destroy(Setting $setting)
     {
         //
+    }
+
+    public function cacheClear(){
+        $f = Setting::where('key','cache_number')->first();
+        $f->value += 1;
+        $f->save();
+        Artisan::call('cache:clear');
+        Artisan::call('config:clear');
+        Artisan::call('view:clear');
+        Artisan::call('route:clear');
+        return redirect()->back()->with(['message' => __('Cache cleared')]);
     }
 }

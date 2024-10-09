@@ -93,6 +93,13 @@ class SettingSeeder extends Seeder
                     'type' => 'CHECKBOX',
                     'value' => 0,
                 ],
+                [
+                    'title' => __('Cache'),
+                    'key' => 'cache_number',
+                    'type' => 'TEXT',
+                    'value' => 0,
+                    'active' => false,
+                ],
 
             ],
             'SMS' => [
@@ -223,6 +230,7 @@ class SettingSeeder extends Seeder
                 $setting->value = $set['value'] ?? null;
                 $setting->type = $set['type'] ?? 'TEXT';
                 $setting->ltr = $set['ltr'] ?? false;
+                $setting->active = $set['active'] ?? true;
                 $setting->is_basic = true;
                 $setting->size = $set['size'] ?? 12;;
                 $setting->save();

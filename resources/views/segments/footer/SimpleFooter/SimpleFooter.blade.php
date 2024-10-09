@@ -1,3 +1,4 @@
+@cache('simple_footer'. cacheNumber(), 90)
 <section class='SimpleFooter'>
     <div class="content">
         <div class="{{gfx()['container']}}">
@@ -52,3 +53,4 @@
         </p>
     </div>
 </section>
+@endcache

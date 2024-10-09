@@ -1,4 +1,5 @@
 <aside class="mt-2">
+    @cache('product_sidebar'. cacheNumber(), 90)
     <div class="side-item">
         <h4>
             {{__("Search")}}
@@ -22,6 +23,7 @@
             </ul>
         </div>
     </div>
+    @endcache
     <div class="side-item">
         <h4>
             {{__("Filter")}}

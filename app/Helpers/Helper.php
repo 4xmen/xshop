@@ -1418,3 +1418,9 @@ function findArea($name,$model = null)
     }
     return \App\Models\Area::where('name', $name)->first();
 }
+
+
+function cacheNumber()
+{
+    return getSetting('cache_number');
+}

@@ -1,3 +1,4 @@
+@cache('parallax_footer'. cacheNumber(), 90)
 <footer class='ParallaxFooter' style="background-image: url('{{asset('upload/images/'.$data->area_name.'.'.$data->part.'.jpg')}}')">
     <div class="{{gfx()['container']}}">
         <div class="row">
@@ -44,3 +45,4 @@
         {{getSetting('copyright')}}
     </p>
 </footer>
+@endcache

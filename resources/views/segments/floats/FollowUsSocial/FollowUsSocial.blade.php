@@ -1,3 +1,4 @@
+@cache('follow_us'. cacheNumber(), 90)
 <section id='FollowUsSocial'>
     <span>
         {{__("Follow us")}}
@@ -8,3 +9,4 @@
         </a>
     @endforeach
 </section>
+@endcache
