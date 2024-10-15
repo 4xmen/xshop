@@ -642,39 +642,57 @@ class ClientController extends Controller
 
     public function sitemap()
     {
-        header('content-type: text/xml');
-        echo '<? xml version = "1.0" encoding = "utf-8" ?>'.PHP_EOL;
-        return view('website.sitemaps.sitemap');
+        $xmlContent = '<?xml version="1.0" encoding="utf-8" ?>' . PHP_EOL;
+        $xmlContent .= view('website.sitemaps.sitemap')->render(); // Render the view and append to XML content
+
+        // Return the XML response
+        return response($xmlContent, 200)
+            ->header('Content-Type', 'text/xml');
     }
     public function sitemapPosts()
     {
-        header('content-type: text/xml');
-        echo '<? xml version = "1.0" encoding = "utf-8" ?>'.PHP_EOL;
-        return view('website.sitemaps.sitemap-posts');
+        $xmlContent = '<?xml version="1.0" encoding="utf-8" ?>' . PHP_EOL;
+        $xmlContent .= view('website.sitemaps.sitemap-posts')->render(); // Render the view and append to XML content
+
+        // Return the XML response
+        return response($xmlContent, 200)
+            ->header('Content-Type', 'text/xml');
     }
     public function sitemapProducts()
     {
-        header('content-type: text/xml');
-        echo '<? xml version = "1.0" encoding = "utf-8" ?>'.PHP_EOL;
-        return view('website.sitemaps.sitemap-products');
+        $xmlContent = '<?xml version="1.0" encoding="utf-8" ?>' . PHP_EOL;
+        $xmlContent .= view('website.sitemaps.sitemap-products')->render(); // Render the view and append to XML content
+
+        // Return the XML response
+        return response($xmlContent, 200)
+            ->header('Content-Type', 'text/xml');
     }
     public function sitemapClips()
     {
-        header('content-type: text/xml');
-        echo '<? xml version = "1.0" encoding = "utf-8" ?>'.PHP_EOL;
-        return view('website.sitemaps.sitemap-clips');
+        $xmlContent = '<?xml version="1.0" encoding="utf-8" ?>' . PHP_EOL;
+        $xmlContent .= view('website.sitemaps.sitemap-clips')->render(); // Render the view and append to XML content
+
+        // Return the XML response
+        return response($xmlContent, 200)
+            ->header('Content-Type', 'text/xml');
     }
     public function sitemapGalleries()
     {
-        header('content-type: text/xml');
-        echo '<? xml version = "1.0" encoding = "utf-8" ?>'.PHP_EOL;
-        return view('website.sitemaps.sitemap-gallries');
+        $xmlContent = '<?xml version="1.0" encoding="utf-8" ?>' . PHP_EOL;
+        $xmlContent .= view('website.sitemaps.sitemap-gallries')->render(); // Render the view and append to XML content
+
+        // Return the XML response
+        return response($xmlContent, 200)
+            ->header('Content-Type', 'text/xml');
     }
     public function sitemapAttachments()
     {
-        header('content-type: text/xml');
-        echo '<? xml version = "1.0" encoding = "utf-8" ?>'.PHP_EOL;
-        return view('website.sitemaps.sitemap-attachments');
+        $xmlContent = '<?xml version="1.0" encoding="utf-8" ?>' . PHP_EOL;
+        $xmlContent .= view('website.sitemaps.sitemap-attachments')->render(); // Render the view and append to XML content
+
+        // Return the XML response
+        return response($xmlContent, 200)
+            ->header('Content-Type', 'text/xml');
     }
 
     public function lang(Request $request)
