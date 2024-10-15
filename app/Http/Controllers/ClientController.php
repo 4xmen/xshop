@@ -643,7 +643,38 @@ class ClientController extends Controller
     public function sitemap()
     {
         header('content-type: text/xml');
-        return view('website.sitemap');
+        echo '<? xml version = "1.0" encoding = "utf-8" ?>'.PHP_EOL;
+        return view('website.sitemaps.sitemap');
+    }
+    public function sitemapPosts()
+    {
+        header('content-type: text/xml');
+        echo '<? xml version = "1.0" encoding = "utf-8" ?>'.PHP_EOL;
+        return view('website.sitemaps.sitemap-posts');
+    }
+    public function sitemapProducts()
+    {
+        header('content-type: text/xml');
+        echo '<? xml version = "1.0" encoding = "utf-8" ?>'.PHP_EOL;
+        return view('website.sitemaps.sitemap-products');
+    }
+    public function sitemapClips()
+    {
+        header('content-type: text/xml');
+        echo '<? xml version = "1.0" encoding = "utf-8" ?>'.PHP_EOL;
+        return view('website.sitemaps.sitemap-clips');
+    }
+    public function sitemapGalleries()
+    {
+        header('content-type: text/xml');
+        echo '<? xml version = "1.0" encoding = "utf-8" ?>'.PHP_EOL;
+        return view('website.sitemaps.sitemap-gallries');
+    }
+    public function sitemapAttachments()
+    {
+        header('content-type: text/xml');
+        echo '<? xml version = "1.0" encoding = "utf-8" ?>'.PHP_EOL;
+        return view('website.sitemaps.sitemap-attachments');
     }
 
     public function lang(Request $request)
