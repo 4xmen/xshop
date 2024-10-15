@@ -6,10 +6,10 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="theme-color" content="{{gfx()['primary']}}"/>
-    @if(! config('app.demo'))
-        <meta name="robots" content="follow,index">
-    @else
+    @if(config('app.demo') || isset($noIndex))
         <meta name="robots" content="noindex">
+    @else
+        <meta name="robots" content="follow,index">
     @endif
 
     <meta name="generator" content="xShop; version={{config('app.version')}}">

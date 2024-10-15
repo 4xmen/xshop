@@ -234,8 +234,6 @@ class ClientController extends Controller
     public function search(Request $request)
     {
 
-
-
         if (isGuestMaxAttemptTry('search', 5, 1)) {
             return  abort(403);
         }
@@ -263,7 +261,8 @@ class ClientController extends Controller
         })->paginate(100);
         $title = __('Search for') . ': ' . $request->input('q');
         $subtitle = '';
-        return view('client.tag', compact('posts', 'products', 'clips', 'title', 'subtitle'));
+        $noIndex = true;
+        return view('client.tag', compact('posts', 'products', 'clips', 'title', 'subtitle','noIndex'));
     }
 
     public function group($slug)
@@ -642,8 +641,37 @@ class ClientController extends Controller
 
     public function sitemap()
     {
+
+        $latestGroup = \App\Models\Group::orderByDesc('updated_at')->first();
+        // Get the most recent Category
+        $latestCategory = \App\Models\Category::orderByDesc('updated_at')->first();
+
+        // Initialize a variable to hold the latest update time
+        $latestUpdate = null;
+
+        // Check if we have a latestGroup and latestCategory and compare their updated_at
+        if ($latestGroup) {
+            $latestUpdate = $latestGroup->updated_at;
+        }
+
+        if ($latestCategory) {
+            if (!$latestUpdate || $latestCategory->updated_at > $latestUpdate) {
+                $latestUpdate = $latestCategory->updated_at;
+            }
+        }
         $xmlContent = '<?xml version="1.0" encoding="utf-8" ?>' . PHP_EOL;
-        $xmlContent .= view('website.sitemaps.sitemap')->render(); // Render the view and append to XML content
+        $xmlContent .= view('website.sitemaps.sitemap',compact('latestUpdate'))->render(); // Render the view and append to XML content
+
+        // Return the XML response
+        return response($xmlContent, 200)
+            ->header('Content-Type', 'text/xml');
+    }
+    public function sitemapGroupCategory()
+    {
+
+
+        $xmlContent = '<?xml version="1.0" encoding="utf-8" ?>' . PHP_EOL;
+        $xmlContent .= view('website.sitemaps.sitemap-groups-category')->render(); // Render the view and append to XML content
 
         // Return the XML response
         return response($xmlContent, 200)
