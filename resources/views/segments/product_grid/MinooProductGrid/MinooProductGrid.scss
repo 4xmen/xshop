@@ -1,21 +1,22 @@
-.DefaultProductGrid {
-    border: 1px solid silver;
-    box-shadow: var(--xshop-shadow);
+.MinooProductGrid {
+
+    //border: 1px solid silver;
+    //box-shadow: var(--xshop-shadow);
     border-radius: var(--xshop-border-radius);
     position: relative;
     overflow: hidden;
 
-    img{
+    img {
         width: 100%;
     }
 
     h3 {
         margin-top: 1rem;
-        text-align: center;
+        text-align: start;
         font-size: 20px;
         font-weight: 300;
         color: var(--xshop-text);
-        height: 2.5em;
+        height: 1.3em;
         overflow: hidden;
     }
 
@@ -23,23 +24,23 @@
         display: grid;
         grid-auto-columns: minmax(0, 1fr);
         grid-auto-flow: column;
-        text-align: center;
+        text-align: start;
 
         span {
             display: block;
             padding: .5rem;
         }
 
-        .old-price{
+        .old-price {
             text-decoration: red line-through;
             color: gray;
         }
     }
 
     .fav-btn, .compare-btn {
-        position: absolute;
-        inset-inline-start: -12%;
-        top: 3%;
+        //position: absolute;
+        //inset-inline-start: -12%;
+        //top: 3%;
         width: 40px;
         height: 40px;
         background: #ffffff55;
@@ -47,7 +48,6 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        border-radius: 50%;
         z-index: 4;
         cursor: pointer;
         transition: .4s;
@@ -61,24 +61,44 @@
     .fav-btn {
         top: calc(3% + 50px);
 
-        &[data-is-fav="-1"]{
+        &[data-is-fav="-1"] {
             display: none;
         }
-        &[data-is-fav="1"]{
-            .ri-heart-line{
+
+        &[data-is-fav="1"] {
+            .ri-heart-line {
                 display: none;
             }
         }
-        &[data-is-fav="0"]{
-            .ri-heart-fill{
+
+        &[data-is-fav="0"] {
+            .ri-heart-fill {
                 display: none;
             }
+        }
+
+    }
+
+    .btns {
+        display: flex;
+        flex: 1;
+
+        .add-to-card {
+            flex-grow: 4;
         }
     }
 
+    .img-2 {
+        position: absolute;
+        left: 0;
+        right: 0;
+        opacity: 0;
+        transition: 500ms;
+    }
+
     &:hover {
-        .fav-btn, .compare-btn {
-            inset-inline-start: 3%;
+        .img-2 {
+            opacity: 1;
         }
     }
 }
