@@ -108,4 +108,8 @@ class Category extends Model
                 ->where('evaluationable_id',$this->id);
         })->get();
     }
+
+    public function parallelCategories($limit = 10){
+        return Category::where('parent_id' , $this->parent_id)->where('id','<>',$this->id)->limit($limit)->get();
+    }
 }
