@@ -170,6 +170,11 @@ section {
     object-fit: cover;
 }
 
+.old-price{
+    text-decoration: red line-through;
+    color: gray;
+}
+
 
 @media print {
     .no-print {

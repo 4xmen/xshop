@@ -1,4 +1,5 @@
-.DefaultProductGrid {
+.ShivaProductGrid {
+    // scss
     border: 1px solid silver;
     box-shadow: var(--xshop-shadow);
     border-radius: var(--xshop-border-radius);
@@ -7,6 +8,7 @@
 
     img{
         width: 100%;
+        transition: 500ms;
     }
 
     h3 {
@@ -20,22 +22,28 @@
     }
 
     .prices {
+        position: absolute;
+        width: 100%;
         display: grid;
         grid-auto-columns: minmax(0, 1fr);
         grid-auto-flow: column;
         text-align: center;
-
+        inset-inline-end: 0;
+        top: 0;
+        border-radius: var(--xshop-border-radius);
         span {
             display: block;
             padding: .5rem;
+            background: rgba(255, 255, 255, 0.76);
+            color: black;
         }
 
     }
 
     .fav-btn, .compare-btn {
         position: absolute;
-        inset-inline-start: -12%;
-        top: 3%;
+        inset-inline-end: -12%;
+        top: 60%;
         width: 40px;
         height: 40px;
         background: #ffffff55;
@@ -55,7 +63,7 @@
     }
 
     .fav-btn {
-        top: calc(3% + 50px);
+        top: calc(60% + 50px);
 
         &[data-is-fav="-1"]{
             display: none;
@@ -74,7 +82,10 @@
 
     &:hover {
         .fav-btn, .compare-btn {
-            inset-inline-start: 3%;
+            inset-inline-end: 3%;
+        }
+        img{
+            transform: scale(1.35) rotateZ(7deg);
         }
     }
 }
