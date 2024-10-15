@@ -8,6 +8,8 @@
     <meta name="theme-color" content="{{gfx()['primary']}}"/>
     @if(! config('app.demo'))
         <meta name="robots" content="follow,index">
+    @else
+        <meta name="robots" content="noindex">
     @endif
 
     <meta name="generator" content="xShop; version={{config('app.version')}}">

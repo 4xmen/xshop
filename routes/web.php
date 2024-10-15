@@ -447,6 +447,11 @@ Route::middleware([\App\Http\Middleware\VisitorCounter::class])
 
 
 Route::get('/sitemap.xml', [ClientController::class, 'sitemap'])->name('sitemap');
+Route::get('/sitemap/products.xml', [ClientController::class, 'sitemapProducts'])->name('sitemap.products');
+Route::get('/sitemap/posts.xml', [ClientController::class, 'sitemapPosts'])->name('sitemap.posts');
+Route::get('/sitemap/clips.xml', [ClientController::class, 'sitemapClips'])->name('sitemap.clips');
+Route::get('/sitemap/galleries.xml', [ClientController::class, 'sitemapGalleries'])->name('sitemap.galleries');
+Route::get('/sitemap/attachments.xml', [ClientController::class, 'sitemapAttachments'])->name('sitemap.attachments');
 
 // to developer test
 Route::get('login/as/{mobile}', function ($mobile) {
