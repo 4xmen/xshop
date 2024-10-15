@@ -46,6 +46,7 @@ class Area extends Model
         'preloader',
         'product',
         'products',
+        'product_grid',
         'products_page',
         'register',
         'questions',
@@ -60,15 +61,23 @@ class Area extends Model
 
     public function getSegmentAttribute()
     {
-        return json_decode($this->valid_segments,true);
+        return json_decode($this->valid_segments, true);
     }
 
 
-    public function getRouteKeyName(){
+    public function getRouteKeyName()
+    {
         return 'name';
     }
 
-    public function parts(){
+    public function parts()
+    {
         return $this->hasMany(Part::class);
+    }
+
+    public function defPart()
+    {
+        $p = $this->parts()->first();
+        return 'segments.' . $p->segment . '.' . $p->part . '.' . $p->part;
     }
 }
