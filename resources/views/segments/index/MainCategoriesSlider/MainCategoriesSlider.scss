@@ -1,0 +1,43 @@
+.MainCategoriesSlider {
+    // scss
+    h1{
+        font-size: 25px;
+        font-weight: 400;
+    }
+    padding: 3rem 0;
+    border-radius: var(--xshop-border-radius);
+    overflow: hidden;
+
+    .main-category{
+        overflow: hidden;
+        display: block;
+        width: 100%;
+
+        img{
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            position: relative;
+            z-index: 5;
+            transition: 500ms;
+        }
+
+        h4{
+            background: var(--xshop-primary);
+            color: var(--xshop-diff);
+            padding: 5px;
+            text-align: center;
+            font-weight: 200;
+            position: relative;
+            z-index: 7;
+            margin: 0;
+
+        }
+
+        &:hover{
+            img{
+                transform: scale(1.2);
+            }
+        }
+    }
+}
