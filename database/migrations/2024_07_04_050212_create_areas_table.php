@@ -19,6 +19,7 @@ return new class extends Migration
             $table->json('valid_segments');
             $table->string('preview')->nullable();
             $table->boolean('use_default')->default(true);
+            $table->integer('sort')->default(0);
             $table->timestamps();
         });
     }

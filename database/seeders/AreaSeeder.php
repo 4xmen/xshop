@@ -41,6 +41,7 @@ class AreaSeeder extends Seeder
                 'max' => 2,
                 'preview' => null,
                 'icon' => 'ri-window-line',
+                'sort' => 99
             ],
             [
                 'name' => 'defaultFooter',
@@ -50,6 +51,7 @@ class AreaSeeder extends Seeder
                 'max' => 2,
                 'preview' => null,
                 'icon' => 'ri-window-line rotate-180',
+                'sort' => 98
             ],
             [
                 'name' => 'index',
@@ -61,6 +63,7 @@ class AreaSeeder extends Seeder
                 'max' => 10,
                 'preview' => 'client.welcome',
                 'icon' => 'ri-home-smile-line',
+                'sort' => 97
             ],
             [
                 'name' => 'post',
@@ -271,12 +274,22 @@ class AreaSeeder extends Seeder
                 'preview' => null,
                 'icon' => 'ri-mail-open-line',
             ],
+            [
+                'name' => 'product-grid',
+                'valid_segments' => json_encode(
+                    ["product_grid"]
+                ),
+                'max' => 1,
+                'preview' => null,
+                'icon' => 'ri-layout-grid-line',
+            ],
         ];
 
         foreach ($areas as $area) {
             $a = new Area();
             $a->name = $area['name'];
             $a->max = $area['max'];
+            $a->sort = $area['sort']??0;
             $a->valid_segments = $area['valid_segments'];
             $a->icon = $area['icon'];
             $a->preview = $area['preview'];

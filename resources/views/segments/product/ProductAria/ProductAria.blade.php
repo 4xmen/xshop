@@ -201,18 +201,13 @@
         <h3 class="mt-4">
             {{__("Related products")}}
         </h3>
-        <div id="rel-products">
+        <div id="rel-products" class="mb-2">
             @foreach($product->category->products()->where('status',1)->limit(10)->get() as $p)
-                <div class="item">
-                    <div class="aria-product-list">
-                        <a href="{{$p->imgUrl()}}">
-                            <img src="{{$p->imgUrl()}}" alt="{{$p->name}}" loading="lazy">
-                            <h5>
-                                {{$p->name}}
-                            </h5>
-                        </a>
+                @foreach($product->category->products()->where('status',1)->limit(10)->get() as $p)
+                    <div class="item">
+                        @include(\App\Models\Area::where('name','product-grid')->first()->defPart(),['$product' => $p])
                     </div>
-                </div>
+                @endforeach
             @endforeach
         </div>
     </div>
