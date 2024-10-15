@@ -1,0 +1,50 @@
+.ParallelCategoriesGrid {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    .row{
+        [class^="col-md"]{
+            padding: 2px;
+        }
+    }
+    .parallel-category{
+        height: 300px;
+        width: 100%;
+        position: relative;
+        overflow: hidden;
+        border-radius: var(--xshop-border-radius);
+        img{
+            position: absolute;
+            height: 300px;
+            width: 100%;
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            object-fit: cover;
+            transition: 400ms;
+        }
+        h4{
+            z-index: 3;
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            text-align: center;
+            background: #ffffff33;
+            backdrop-filter: blur(4px);
+            margin: 0;
+            padding: 1rem;
+            transition: 400ms;
+        }
+
+        &:hover{
+            h4{
+                background: #ffffff88;
+            }
+
+            img{
+                transform: scale(1.3) rotateZ(15deg);
+            }
+        }
+    }
+}
