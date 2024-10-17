@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     document.querySelectorAll('.delete-confirm')?.forEach(function (el) {
         el.addEventListener('click', function (e) {
-            if (!confirm('Are you sure you want to delete this item?')) { // WIP Need to translate
+            if (!confirm(window.TR.deleteConfirm)) { // WIP Need to translate
                 e.preventDefault();
             }
         });

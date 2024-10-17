@@ -352,7 +352,7 @@ class ContentSEOAnalyzer {
                         <h4>${window.TR.avgParaStruc}</h4>
                         <div class="metric-value">
                             ${report.details.readability.paragraphCount} ${ window.TR.paragraphs}
-                            (avg ${report.details.readability.avgWordsPerParagraph} ${ window.TR.words})
+                            (${window.TR.avg} ${report.details.readability.avgWordsPerParagraph} ${ window.TR.words})
                         </div>
                     </div>
                 </div>
