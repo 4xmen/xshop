@@ -78,6 +78,7 @@
     "Answered": "پاسخ داده شده",
     "Approve": "تایید کردن",
     "Approved": "تایید شده",
+    "Are you sure you want to delete this item?": "آیا برای حذف این مورد مطمئن هستید؟",
     "Area design": "طراحی محیط",
     "Areas": "محیط‌ها   ",
     "As you wished created successfully": "همانطور که شما مایل بودید ایجاد شد",
@@ -581,6 +582,7 @@
     "area": "محیط",
     "area :NAME of website updated": "محیط :NAME وبسایت به روز شد",
     "article": "مقاله",
+    "avg": "معدل",
     "body": "متن",
     "canonical": "کنونیکال",
     "category": "دسته‌بندی",
@@ -617,7 +619,7 @@
     "news": "خبر",
     "not searchable": "غیرقابل جستجو",
     "one second ago": "یک ثانیه پیش",
-    "paragraphs": "بند‌ها",
+    "paragraphs": "بند",
     "parent_id": "والد",
     "password repeat": "تکرار گذرواژه",
     "payment success": "پرداخت موفق بود",
@@ -649,7 +651,7 @@
     "user_id": "کاربر",
     "view": "بازدید",
     "webp": "",
-    "words": "واژگان",
+    "words": "واژه",
     "xShop": "",
     "yesterday": "دیروز"
 }

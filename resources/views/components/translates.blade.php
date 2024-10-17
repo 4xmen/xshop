@@ -23,7 +23,9 @@
     window.TR.avgParaStruc = `{{__("Paragraph Structure")}}`;
     window.TR.SEOScore = `{{__("SEO Score")}}`;
     window.TR.words = `{{__("words")}}`;
+    window.TR.avg = `{{__("avg")}}`;
     window.TR.times = `{{__("times")}}`;
     window.TR.paragraphs = `{{__("paragraphs")}}`;
+    window.TR.deleteConfirm = `{{__("Are you sure you want to delete this item?")}}`;
 
 </script>
