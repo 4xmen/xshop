@@ -38,6 +38,7 @@ return new class extends Migration
             $table->json('theme')->nullable();
             $table->text('canonical')->nullable();
             $table->string('promote')->nullable();
+            $table->text('keyword')->nullable();
             $table->softDeletes();
             $table->timestamps();
 
