@@ -41,7 +41,7 @@ class LoginPatternBg
         $setting->title =  $part->area_name . ' ' . $part->part.' background pattern image';
         $setting->save();
 
-        File::copy(__DIR__.'/../../default-assets/pattern.png',public_path('upload/images/').$part->area_name . '.' . $part->part.'.jpg');
+        File::copy(__DIR__.'/../../default-assets/pattern.png',public_path('upload/images/').$part->area_name . '.' . $part->part.'.png');
     }
     public static function onRemove(Part $part = null)
     {
