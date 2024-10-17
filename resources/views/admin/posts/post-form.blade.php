@@ -152,12 +152,25 @@
                             <label for="body">
                                 {{__('Post Text')}}
                             </label>
-                            <textarea name="body" class="ckeditorx form-control @error('body') is-invalid @enderror"
+                            <textarea name="body" class="ckeditorx seo-analyze form-control @error('body') is-invalid @enderror"
                                       placeholder="{{__('Post Text')}}"
                                       rows="8">{{old('body',$item->body??null)}}</textarea>
                             {{--                                    @trix(\App\Post::class, 'body')--}}
 
 
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="form-group mt-3">
+                            <label for="title">
+                                {{__('Keyword')}} [{{__("SEO")}}]
+                            </label>
+                            <input name="keyword" type="text" id="keyword"
+                                   class="form-control @error('keyword') is-invalid @enderror"
+                                   placeholder="{{__('Keyword')}}" value="{{old('keyword',$item->keyword??null)}}"/>
+                        </div>
+
+                        <div id="seo-hint">
                         </div>
                     </div>
                     <div class="col-md-3 mt-3">

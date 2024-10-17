@@ -60,6 +60,7 @@ class PostController extends XController
         $post->is_pinned = $request->has('is_pin');
         $post->table_of_contents = $request->has('table_of_contents');
         $post->icon = $request->input('icon');
+        $post->keyword = $request->input('keyword');
 
         if ($request->has('canonical') && trim($request->input('canonical')) != ''){
             $post->canonical = $request->input('canonical');

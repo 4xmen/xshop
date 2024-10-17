@@ -57,6 +57,7 @@ class ProductController extends XController
         $product->table = $request->input('table');
         $product->description = $request->input('desc');
         $product->excerpt = $request->input('excerpt');
+        $product->keyword = $request->input('keyword');
         $product->stock_status = $request->input('stock_status');
         $product->price = $request->input('price',0);
         $product->buy_price = $request->input('buy_price',0);

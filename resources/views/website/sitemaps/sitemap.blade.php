@@ -1,4 +1,5 @@
 @cache('sitemap'. cacheNumber(),43200)
+{{--update every 12 hours--}}
 <sitemapindex xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 
               xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/siteindex.xsd"

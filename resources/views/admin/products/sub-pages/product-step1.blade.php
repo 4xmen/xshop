@@ -110,10 +110,22 @@
             <label for="description">
                 {{__('Description Text')}}
             </label>
-            <textarea name="desc" class="form-control ckeditorx @error('description') is-invalid @enderror"
+            <textarea name="desc" class="form-control ckeditorx seo-analyze @error('description') is-invalid @enderror"
                       placeholder="{{__('Description Text')}}"
                       id="description"
                       rows="8">{{old('description',$item->description??null)}}</textarea>
+        </div>
+        <div class="col-12">
+            <div class="form-group mt-3">
+                <label for="title">
+                    {{__('Keyword')}} [{{__("SEO")}}]
+                </label>
+                <input name="keyword" type="text" id="keyword"
+                       class="form-control @error('keyword') is-invalid @enderror"
+                       placeholder="{{__('Keyword')}}" value="{{old('keyword',$item->keyword??null)}}"/>
+            </div>
+            <div id="seo-hint">
+            </div>
         </div>
     </div>
 </div>
