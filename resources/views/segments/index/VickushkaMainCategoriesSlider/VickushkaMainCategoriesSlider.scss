@@ -1,0 +1,52 @@
+.VickushkaMainCategoriesSlider {
+    background: var(--vicka-bg-color);
+    // scss
+    padding-bottom: 4rem;
+    .container{
+        position: relative;
+        top: -4rem;
+    }
+
+    .v-main-category{
+        background: var(--xshop-secondary);
+        border-radius: var(--xshop-border-radius);
+        color: var(--xshop-diff2);
+        padding: 1rem 0;
+        margin-bottom: 3rem;
+        cursor: pointer;
+
+        img{
+            width: 35%;
+            margin: 0 auto -4rem;
+            display: block;
+            background: var(--xshop-primary);
+            border-radius: 50%;
+            color: var(--xshop-diff);
+            padding: 1rem;
+            position: relative;
+            top: -5rem;
+        }
+    }
+
+    #v-cats{
+        .v-item{
+            display: none;
+            margin: 2rem 0;
+
+            .v-sub-img{
+                width: 175px;
+                height: 175px;
+                object-fit: cover;
+                border-radius: 50%;
+                margin: 1rem 0;
+                border: 1px solid rgba(0, 0, 0, 0.1);
+            }
+        }
+        .v-item:first-child{
+            display: block;
+        }
+    }
+    h1,h2,h3,h4,h5{
+        font-weight: 200;
+    }
+}

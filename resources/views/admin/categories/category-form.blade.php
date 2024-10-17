@@ -24,6 +24,16 @@
                 </ul>
             </div>
 
+            <div class="item-list mb-3">
+                <h3 class="p-3">
+                    <i class="ri-remixicon-line"></i>
+                    {{__("Icon")}}
+                </h3>
+                <div class="p-1 text-center pb-4">
+                    <remix-icon-picker xname="icon" xvalue="{{old('icon',$item->icon??null)}}"></remix-icon-picker>
+                </div>
+            </div>
+
             @if(isset($item))
                 <div class="item-list mb-3">
                     <h3 class="p-3">
@@ -39,6 +49,17 @@
                         {{__('Background image')}}
                     </h3>
                     <img src="{{$item->bgUrl()}}" data-open-file="#bg" alt="{{$item->name}}" class="img-fluid mb-4">
+
+                </div>
+            @endif
+
+            @if(isset($item))
+                <div class="item-list mb-3">
+                    <h3 class="p-3">
+                        <i class="ri-image-2-line"></i>
+                        {{__('SVG image')}}
+                    </h3>
+                    <img src="{{$item->svgUrl()}}" alt="{{$item->name}}" data-open-file="#svg" class="img-fluid mb-4">
 
                 </div>
             @endif
@@ -107,7 +128,7 @@
                                        value="{{old('subtitle',$item->subtitle??null)}}"/>
                             </div>
                         </div>
-                        <div class="col-md-4 mt-3">
+                        <div class="col-md-3 mt-3">
                             <label for="parent">
                                 {{__('Group Parent')}}
                             </label>
@@ -124,7 +145,7 @@
                                 @endforeach
                             </select>
                         </div>
-                        <div class="col-md-4 mt-3">
+                        <div class="col-md-3 mt-3">
                             <div class="form-group">
                                 <label for="image">
                                     {{__('Feature image')}}
@@ -134,7 +155,16 @@
                                        placeholder="{{__('Feature image')}}"/>
                             </div>
                         </div>
-                        <div class="col-md-4 mt-3">
+                        <div class="col-md-3 mt-3">
+                            <div class="form-group">
+                                <label for="svg">
+                                    {{__('Svg image')}}
+                                </label>
+                                <input accept=".svg" name="svg" type="file"
+                                       class="form-control @error('svg') is-invalid @enderror" id="svg"/>
+                            </div>
+                        </div>
+                        <div class="col-md-3 mt-3">
                             <div class="form-group">
                                 <label for="bg">
                                     {{__('Background image')}}

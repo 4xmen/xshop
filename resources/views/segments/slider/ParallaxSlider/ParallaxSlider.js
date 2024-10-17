@@ -48,7 +48,11 @@ document.addEventListener('DOMContentLoaded', () => {
             const viewportCenter = windowHeight / 2;
 
             const distanceFromCenter = sliderCenter - viewportCenter;
-            const parallaxOffset = distanceFromCenter * -0.7; // Adjust this value to control parallax intensity
+            let parallaxOffset = distanceFromCenter * -.4; // Adjust this value to control parallax intensity
+
+            if (sliderRect.width < 1000){
+                parallaxOffset = distanceFromCenter * -.7; // Adjust this value to control parallax intensity
+            }
 
             const bgImage = slider.getAttribute('data-bg');
             slider.style.backgroundImage = `url('${bgImage}')`;

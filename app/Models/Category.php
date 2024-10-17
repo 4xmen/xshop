@@ -22,6 +22,14 @@ class Category extends Model
 
         return \Storage::url('categories/optimized-' . $this->image);
     }
+    public function svgUrl()
+    {
+        if ($this->svg == null) {
+            return asset('/assets/upload/logo.svg');
+        }
+
+        return \Storage::url('categories/' . $this->svg);
+    }
 
     public function imgOriginalUrl()
     {
