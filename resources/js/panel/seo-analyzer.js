@@ -99,28 +99,26 @@ class ContentSEOAnalyzer {
 
     // Adjust the readability analysis to be more accurate with the new sentence detection
     analyzeReadability() {
-        const sentences = this.getSentences();
-        const avgSentenceLength = sentences.length ?
-            this.wordCount / sentences.length : 0;
+        const avgSentenceLength = this.sentences.length ?
+            this.wordCount / this.sentences.length : 0;
 
-        // Calculate words per sentence more accurately
-        const sentenceLengths = sentences.map(sentence =>
-            sentence.split(/\s+/).filter(word => word.length > 0).length
-        );
+        const avgParagraphLength = this.paragraphs.length ?
+            this.wordCount / this.paragraphs.length : 0;
 
-        // More accurate complex sentence detection
-        const complexSentences = sentenceLengths.filter(length => length > 25).length;
-        const complexSentencePercentage = sentences.length ?
-            (complexSentences / sentences.length) * 100 : 0;
+        // Increased threshold for complex sentences
+        const complexSentences = this.sentences.filter(sentence =>
+            sentence.split(/\s+/).filter(word => word.length > 0).length > 25
+        ).length;
+
+        const complexSentencePercentage = this.sentences.length ?
+            (complexSentences / this.sentences.length) * 100 : 0;
 
         return {
             avgSentenceLength,
-            avgWordsPerSentence: avgSentenceLength,
-            sentenceCount: sentences.length,
+            avgParagraphLength,
             complexSentencePercentage,
-            sentenceLengthVariation: this.calculateVariation(sentenceLengths),
             totalParagraphs: this.paragraphs.length,
-            readabilityScore: this.calculateReadabilityScore(sentenceLengths)
+            totalSentences: this.sentences.length
         };
     }
 
@@ -229,7 +227,7 @@ class ContentSEOAnalyzer {
 
         // 1. Content Length (2 points)
         if (this.wordCount >= 300) score += 2;
-        else feedback.push('Content is too short. Aim for at least 300 words.');
+        else feedback.push(window.TR.contentShort);
 
         // 2. Keyword Usage (2 points)
         if (keywordAnalysis.density >= 0.5 && keywordAnalysis.density <= 2.5) score += 0.5;
@@ -237,11 +235,11 @@ class ContentSEOAnalyzer {
         if (keywordAnalysis.headingsWithKeyword > 0) score += 1;
         if (keywordAnalysis.count >= 2) score += 0;
 
-        if (keywordAnalysis.density < 0.5) feedback.push('Keyword density is too low');
-        if (keywordAnalysis.density > 3.5) feedback.push('Keyword density is too high');
-        if (keywordAnalysis.shortKeyword) feedback.push('Keyword is too short fix keyword to better analyze');
-        if (!keywordAnalysis.firstParagraphHasKeyword) feedback.push('Include keyword in the first paragraph');
-        if (keywordAnalysis.headingsWithKeyword === 0) feedback.push('Include keyword in at least one heading');
+        if (keywordAnalysis.density < 0.5) feedback.push(window.TR.destinyLow);
+        if (keywordAnalysis.density > 3.5) feedback.push(window.TR.destinyHigh);
+        if (keywordAnalysis.shortKeyword) feedback.push(window.TR.shortKeyword);
+        if (!keywordAnalysis.firstParagraphHasKeyword) feedback.push(window.TR.keywordFirstParagraph);
+        if (keywordAnalysis.headingsWithKeyword === 0) feedback.push(window.TR.keywordHeading);
 
         // 3. Readability (4 points)
         if (readabilityAnalysis.avgSentenceLength <= 30) score += 1;
@@ -249,10 +247,10 @@ class ContentSEOAnalyzer {
         if (readabilityAnalysis.complexSentencePercentage <= 25) score += 1;
         if (this.paragraphs.length >= 3) score += 1;
 
-        if (readabilityAnalysis.avgSentenceLength > 30) feedback.push('Sentences are too long');
-        if (readabilityAnalysis.avgParagraphLength > 150) feedback.push('Paragraphs are too long');
-        if (readabilityAnalysis.complexSentencePercentage > 25) feedback.push('Too many complex sentences');
-        if (this.paragraphs.length < 3) feedback.push('Add more paragraphs to improve structure');
+        if (readabilityAnalysis.avgSentenceLength > 30) feedback.push(window.TR.sentencesLong);
+        if (readabilityAnalysis.avgParagraphLength > 150) feedback.push(window.TR.paragraphsLong);
+        if (readabilityAnalysis.complexSentencePercentage > 25) feedback.push(window.TR.sentencesComplex);
+        if (this.paragraphs.length < 3) feedback.push(window.TR.paragraphAdd);
 
         // 4. Structure & Formatting (2 points)
         const hasHeadings = /<h[1-6][^>]*>/i.test(this.content);
@@ -261,9 +259,10 @@ class ContentSEOAnalyzer {
         if (hasHeadings) score += 1;
         if (hasLists) score += 1;
 
-        if (!hasHeadings) feedback.push('Add headings to structure your content');
-        if (!hasLists) feedback.push('Consider using lists to improve readability');
+        if (!hasHeadings) feedback.push(window.TR.headingAdd );
+        if (!hasLists) feedback.push(window.TR.useList);
 
+        console.log(readabilityAnalysis);
         return {
             score: Math.min(10, Math.round(score * 10) / 10),
             feedback,
@@ -289,9 +288,9 @@ class ContentSEOAnalyzer {
 
 // Function to determine score status
     getScoreStatus(score) {
-        if (score >= 7) return { class: 'good', text: 'Good' };
-        if (score >= 5) return { class: 'average', text: 'Needs Improvement' };
-        return { class: 'poor', text: 'Poor' };
+        if (score >= 7) return { class: 'good', text: window.TR.good };
+        if (score >= 5) return { class: 'average', text: window.TR.averageNeeed };
+        return { class: 'poor', text:  window.TR.poor   };
     }
 
 // Function to create and display the report
@@ -315,14 +314,14 @@ class ContentSEOAnalyzer {
                     </div>
                 </div>
                 <div class="seo-status">
-                    <h3>SEO Score: ${scoreStatus.text}</h3>
-                    <p>Based on content analysis and keyword optimization</p>
+                    <h3>${ window.TR.SEOScore}: ${scoreStatus.text}</h3>
+                    <p>${window.TR.basedOnKeyword}</p>
                 </div>
             </div>
 
             <div class="seo-details">
                 <div class="seo-feedback">
-                    <h4>Recommendations</h4>
+                    <h4>${window.TR.recommendations}</h4>
                     <ul>
                         ${report.feedback.map(item => `<li>${item}</li>`).join('')}
                     </ul>
@@ -330,30 +329,30 @@ class ContentSEOAnalyzer {
 
                 <div class="seo-metrics">
                     <div class="metric-card">
-                        <h4>Content Length</h4>
-                        <div class="metric-value">${report.details.wordCount} words</div>
+                        <h4>${window.TR.contentLength}</h4>
+                        <div class="metric-value">${report.details.wordCount} ${ window.TR.words}</div>
                     </div>
 
                     <div class="metric-card">
-                        <h4>Keyword Usage</h4>
+                        <h4>${window.TR.keywordUsage}</h4>
                         <div class="metric-value">
-                            ${report.details.keywordUsage.count} times
+                            ${report.details.keywordUsage.count} ${ window.TR.times}
                             (${report.details.keywordUsage.density})
                         </div>
                     </div>
 
                     <div class="metric-card">
-                        <h4>Average Sentence Length</h4>
+                        <h4>${window.TR.avgSenLen}</h4>
                         <div class="metric-value">
-                            ${report.details.readability.avgWordsPerSentence} words
+                            ${report.details.readability.avgWordsPerSentence} ${ window.TR.words}
                         </div>
                     </div>
 
                     <div class="metric-card">
-                        <h4>Paragraph Structure</h4>
+                        <h4>${window.TR.avgParaStruc}</h4>
                         <div class="metric-value">
-                            ${report.details.readability.paragraphCount} paragraphs
-                            (avg ${report.details.readability.avgWordsPerParagraph} words)
+                            ${report.details.readability.paragraphCount} ${ window.TR.paragraphs}
+                            (avg ${report.details.readability.avgWordsPerParagraph} ${ window.TR.words})
                         </div>
                     </div>
                 </div>
