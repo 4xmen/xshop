@@ -1,0 +1,17 @@
+.SpliterText {
+    // scss
+    padding: 1rem;
+    background: var(--xshop-background);
+    width: 700px;
+    max-width: 95%;
+    margin: -3.5rem auto;
+    height: 7rem;
+    border-radius: var(--xshop-border-radius);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    position: relative;
+    z-index: 7;
+
+}
+.SpliterText + section{
+    padding-top: 5rem;
+}
