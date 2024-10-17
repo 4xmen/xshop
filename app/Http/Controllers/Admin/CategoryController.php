@@ -56,6 +56,7 @@ class CategoryController extends XController
 
         $category->name = $request->input('name');
         $category->subtitle = $request->input('subtitle');
+        $category->icon = $request->input('icon');
         $category->description = $request->input('description');
         if ($category->parent_id != ''){
             $category->parent_id = $request->input('parent_id',null);
@@ -83,6 +84,7 @@ class CategoryController extends XController
                     config('app.media.watermark_opacity'));
             }
             $i->save(storage_path() . '/app/public/categories/optimized-'. $category->$key);
+
         }
         if ($request->has('bg')) {
             $category->bg = $this->storeFile('bg', $category, 'categories');
@@ -103,6 +105,10 @@ class CategoryController extends XController
                     config('app.media.watermark_opacity'));
             }
             $i->save(storage_path() . '/app/public/categories/optimized-'. $category->$key);
+        }
+
+        if ($request->has('svg')){
+            $category->svg = $this->storeFile('svg',$category, 'categories');
         }
         $category->save();
         return $category;

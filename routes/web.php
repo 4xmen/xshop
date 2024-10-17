@@ -396,6 +396,7 @@ Route::middleware([\App\Http\Middleware\VisitorCounter::class])
         // index
         Route::get('/', [ClientController::class, 'welcome'])->name('welcome');
         Route::get('/posts', [ClientController::class, 'posts'])->name('posts');
+        Route::get('/post/{post}', [ClientController::class, 'post'])->name('post');
         Route::get('/customer/sign-out', [ClientController::class, 'signOut'])->name('sign-out');
         Route::post('/customer/sign-in/do', [ClientController::class, 'singInDo'])->name('sign-in-do');
         Route::get('/customer/sign-in', [ClientController::class, 'signIn'])->name('sign-in');
@@ -435,7 +436,6 @@ Route::middleware([\App\Http\Middleware\VisitorCounter::class])
         Route::get('/gallery/{gallery}', [ClientController::class, 'gallery'])->name('gallery');
         Route::get('/search', [ClientController::class, 'search'])->name('search');
         Route::get('attach/download/{attachment}', [ClientController::class, 'attachDl'])->name('attach-dl');
-        Route::get('/post/{post}', [ClientController::class, 'post'])->name('post');
         Route::get('pay/{invoice}', [ClientController::class, 'pay'])->name('pay');
 
         Route::get('product/fav/toggle/{product}', [\App\Http\Controllers\CustomerController::class, 'ProductFavToggle'])->name('product-fav-toggle');

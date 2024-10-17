@@ -1419,8 +1419,24 @@ function findArea($name,$model = null)
     return \App\Models\Area::where('name', $name)->first();
 }
 
-
+/**
+ * cache number
+ * @return false|mixed|string|null
+ */
 function cacheNumber()
 {
     return getSetting('cache_number');
+}
+
+
+/**
+ * get website main categories
+ * @param $limit
+ * @param $orderBy
+ * @param $asc
+ * @return Category[]|\LaravelIdea\Helper\App\Models\_IH_Category_C
+ */
+function getMainCategory($limit=4,$orderBy = 'id', $asc = 'ASC')
+{
+    return \App\Models\Category::whereNull('parent_id')->limit($limit)->orderBy($orderBy,$asc)->get();
 }
