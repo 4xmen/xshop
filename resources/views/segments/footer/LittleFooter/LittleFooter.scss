@@ -1,0 +1,15 @@
+.LittleFooter {
+    // scss
+    padding: 1rem 0;
+
+    .col-md-4{
+        display: flex;
+        align-items: center;
+    }
+
+    .social{
+        i{
+            font-size: 30px;
+        }
+    }
+}
