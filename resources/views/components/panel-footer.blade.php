@@ -6,5 +6,6 @@
     var website_font = "{{gfx()['font']}}";
     window.routesList = @json(getAdminRoutes());
 </script>
+@include('components.translates')
 </body>
 </html>
