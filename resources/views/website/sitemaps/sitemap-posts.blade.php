@@ -21,7 +21,7 @@
             <loc>{{route('client.post',$item->slug)}}</loc>
             <lastmod>{{$item->updated_at->tz('UTC')->toAtomString()}}</lastmod>
             <changefreq>weekly</changefreq>
-            <priority>3</priority>
+            <priority>0.5</priority>
         </url>
     @endforeach
     @if(config('app.xlang.active'))
@@ -44,7 +44,7 @@
                         <loc>{{$item->webUrl()}}</loc>
                         <lastmod>{{$item->updated_at->tz('UTC')->toAtomString()}}</lastmod>
                         <changefreq>weekly</changefreq>
-                        <priority>3</priority>
+                        <priority>0.5</priority>
                     </url>
             @endforeach
         @endforeach
