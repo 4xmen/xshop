@@ -21,6 +21,7 @@
             </div>
             <div class="col-md-6 nata-bg"
                  style="background-image: url('{{$bg??asset('upload/images/'.$part->area_name . '.' . $part->part.'.webp')}}')">
+                <img src="{{asset('upload/images/'.$part->area_name . '.' . $part->part.'.webp')}}" alt="">
             </div>
         </div>
     </div>
