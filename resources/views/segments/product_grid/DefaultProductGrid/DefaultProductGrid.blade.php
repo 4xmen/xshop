@@ -1,4 +1,4 @@
-<div class="DefaultProductGrid">
+<div class="DefaultProductGrid xshop-product-item">
     <a class="fav-btn" data-slug="{{$product->slug}}" data-is-fav="{{$product->isFav()}}"
        data-bs-custom-class="custom-tooltip"
        data-bs-toggle="tooltip" data-bs-placement="auto" title="{{__("Add to / Remove from favorites")}}">
@@ -12,7 +12,7 @@
         <i class="ri-scales-3-line"></i>
     </a>
     <a href="{{$product->webUrl()}}">
-        <img src="{{$product->imgUrl()}}" alt="{{$product->name}}" loading="lazy">
+        <img src="{{$product->thumbUrl()}}" alt="{{$product->name}}" loading="lazy">
         <h3>
             {{$product->name}}
         </h3>

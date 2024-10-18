@@ -1,7 +1,7 @@
-<div class="MinooProductGrid">
+<div class="MinooProductGrid xshop-product-item">
     <a href="{{$product->webUrl()}}">
-        <img src="{{$product->imgUrl()}}" alt="{{$product->name}}" loading="lazy">
-        <img src="{{$product->imgUrl2()}}" class="img-2" alt="{{$product->name}}" loading="lazy">
+        <img src="{{$product->thumbUrl()}}" alt="{{$product->name}}" loading="lazy">
+        <img src="{{$product->thumbUrl2()}}" class="img-2" alt="{{$product->name}}" loading="lazy">
         <div class="">
             <div class="btns">
                 <a href="{{ route('client.product-card-toggle',$product->slug) }}"

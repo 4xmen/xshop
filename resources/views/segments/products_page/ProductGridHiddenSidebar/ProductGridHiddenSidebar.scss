@@ -1,0 +1,53 @@
+.ProductGridHiddenSidebar {
+
+
+
+    // scss
+    h1 {
+        font-size: 27px;
+        text-align: center;
+        background: var(--xshop-secondary);
+        color: var(--xshop-diff2);
+        margin: 1rem 0;
+        padding: .5rem;
+        font-weight: 200;
+        position: relative;
+
+        .btn {
+            position: absolute;
+            inset-inline-end: 0;
+            top: 0;
+            bottom: 0;
+            width: 75px;
+            i{
+                font-size: 25px;
+            }
+        }
+    }
+    #hidden-sidebar{
+        background: #ffffff44;
+        backdrop-filter: grayscale(1);
+        position: fixed;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        top: 0;
+        display: none;
+        z-index: 999;
+
+        aside{
+            width: 300px;
+            max-width: 95%;
+            background: var(--xshop-background);
+            position: absolute;
+            inset-inline-start: 0;
+            padding: 1rem;
+            box-sizing: border-box;
+            top: 0;
+            bottom: 0;
+            overflow-y: auto;
+            padding-top: 3rem;
+        }
+
+    }
+}
