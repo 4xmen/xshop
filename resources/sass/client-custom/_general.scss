@@ -29,7 +29,20 @@ html {
 body {
     background: var(--xshop-background);
     color: var(--xshop-text);
-    overflow-x: hidden;
+}
+
+html, body {
+    overscroll-behavior-x: none;
+    max-width: 100% !important;
+    overflow-x: hidden !important;
+    zoom: 0;
+    position: relative;
+}
+
+main{
+    -webkit-overflow-scrolling: touch;
+    overflow-x: hidden !important;
+    width: 100%;
 }
 
 
