@@ -1,0 +1,79 @@
+.MaryamCategoryProducts {
+    // scss
+    position: relative;
+    background: var(--maryam-bg-color);
+    color: var(--maryam-text-color);
+    padding: 3rem 0;
+
+    h1{
+        font-size: 27px;
+        text-align: center;
+        font-weight: 200;
+        position: relative;
+        padding: 1rem;
+
+        &:after,&:before{
+            content: ' ';
+            border-bottom: 1px solid var(--maryam-text-color);
+            position: absolute;
+            top: 47% ;
+            z-index: 2;
+            width: 15%;
+            opacity: .5;
+        }
+
+        &:before{
+            left: 0;
+        }
+        &:after{
+            right: 0;
+        }
+    }
+
+    &:after{
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(0deg, var(--maryam-bg-color) 35%, transparent 100%);
+        height: 50%;
+        content: ' ';
+        pointer-events: none;
+    }
+
+
+    .maryam-row{
+        column-count: 4;
+        .maryam-item{
+            display: block;
+            margin-bottom: 1rem;
+        }
+    }
+
+
+    /*-1000px width*/
+    @media (max-width: 1000px) {
+        .maryam-row {
+            column-count: 3 ;
+        }
+    }
+
+    /*-768px width*/
+    @media (max-width: 768px) {
+        .maryam-row {
+            column-count: 2 ;
+        }
+
+        &:after{
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(0deg, var(--maryam-bg-color) 35%, transparent 100%);
+            height: 25%;
+            content: ' ';
+            pointer-events: none;
+        }
+    }
+}
+

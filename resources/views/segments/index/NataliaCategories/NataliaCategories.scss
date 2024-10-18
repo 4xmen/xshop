@@ -9,8 +9,9 @@
         top: -3rem;
         padding-bottom: 5rem;
         margin-bottom: -3rem;
-        *{
-            opacity: 0;
+        img{
+            width: 75%;
+            display: none;
         }
 
     }
@@ -38,6 +39,19 @@
                     background: var(--xshop-secondary);
                     border-radius: 50%;
                 }
+            }
+        }
+    }
+
+    /*-768px width*/
+    @media (max-width: 768px) {
+        .nata-bg{
+            background-image: none !important;
+            padding-bottom: 0;
+
+            img{
+                display: block;
+                margin: auto;
             }
         }
     }
