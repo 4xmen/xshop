@@ -12,7 +12,7 @@
             <loc>{{route('client.attachments')}}</loc>
             <lastmod>{{\App\Models\Attachment::orderByDesc('updated_at')->first()->updated_at->tz('UTC')->toAtomString()}}</lastmod>
             <changefreq>weekly</changefreq>
-            <priority>2</priority>
+            <priority>0.7</priority>
         </url>
     @endif
     @foreach(\App\Models\Attachment::where('is_fillable',1)->orderBy('id')->get(['slug','updated_at']) as $item)
@@ -21,7 +21,7 @@
             <loc>{{route('client.attachment',$item->slug)}}</loc>
             <lastmod>{{$item->updated_at->tz('UTC')->toAtomString()}}</lastmod>
             <changefreq>weekly</changefreq>
-            <priority>3</priority>
+            <priority>0.5</priority>
         </url>
     @endforeach
     @if(config('app.xlang.active'))
@@ -34,7 +34,7 @@
                     <loc>{{route('client.attachments')}}/{{$lang}}</loc>
                     <lastmod>{{\App\Models\Attachment::orderByDesc('updated_at')->first()->updated_at->tz('UTC')->toAtomString()}}</lastmod>
                     <changefreq>weekly</changefreq>
-                    <priority>2</priority>
+                    <priority>0.7</priority>
                 </url>
             @endif
             @foreach(\App\Models\Attachment::where('is_fillable',1)->whereLocale('title',$lang)->orderBy('id')->get(['slug','updated_at','title']) as $item)
@@ -43,7 +43,7 @@
                         <loc>{{$item->webUrl()}}</loc>
                         <lastmod>{{$item->updated_at->tz('UTC')->toAtomString()}}</lastmod>
                         <changefreq>weekly</changefreq>
-                        <priority>3</priority>
+                        <priority>0.5</priority>
                     </url>
             @endforeach
         @endforeach

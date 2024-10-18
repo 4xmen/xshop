@@ -12,7 +12,7 @@
             <loc>{{route('client.group',$item->slug)}}</loc>
             <lastmod>{{$item->updated_at->tz('UTC')->toAtomString()}}</lastmod>
             <changefreq>weekly</changefreq>
-            <priority>3</priority>
+            <priority>0.5</priority>
         </url>
     @endforeach
     @foreach(\App\Models\Category::orderBy('id')->get(['slug','updated_at']) as $item)
@@ -21,7 +21,7 @@
             <loc>{{route('client.category',$item->slug)}}</loc>
             <lastmod>{{$item->updated_at->tz('UTC')->toAtomString()}}</lastmod>
             <changefreq>weekly</changefreq>
-            <priority>3</priority>
+            <priority>0.5</priority>
         </url>
     @endforeach
     @if(config('app.xlang.active'))
@@ -34,7 +34,7 @@
                         <loc>{{$item->webUrl()}}</loc>
                         <lastmod>{{$item->updated_at->tz('UTC')->toAtomString()}}</lastmod>
                         <changefreq>weekly</changefreq>
-                        <priority>3</priority>
+                        <priority>0.5</priority>
                     </url>
             @endforeach
             @foreach(\App\Models\Category::whereLocale('name',$lang)->orderBy('id')->get(['slug','updated_at','name']) as $item)
@@ -43,7 +43,7 @@
                         <loc>{{$item->webUrl()}}</loc>
                         <lastmod>{{$item->updated_at->tz('UTC')->toAtomString()}}</lastmod>
                         <changefreq>weekly</changefreq>
-                        <priority>3</priority>
+                        <priority>0.5</priority>
                     </url>
             @endforeach
         @endforeach
