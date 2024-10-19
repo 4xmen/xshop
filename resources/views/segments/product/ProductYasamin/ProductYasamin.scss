@@ -1,0 +1,42 @@
+#ProductYasamin {
+    // scss
+
+    h1{
+        font-size: 27px;
+        font-weight: 300;
+    }
+    #yac-images{
+        font-size: 0;
+
+
+        .item{
+            display: inline-block;
+
+            &:nth-child(3n+1) {
+                width: 100%;
+            }
+            &:nth-child(3n+2) ,&:nth-child(3n+3) {
+                width: 50%;
+            }
+            img{
+                width: 100%;
+                height: 45vh;
+                object-fit: cover;
+            }
+        }
+    }
+
+    .yac-product-data{
+        padding: 1rem 1.3rem;
+
+        .p-2{
+            padding: 0 !important;
+        }
+    }
+
+
+    #price, #old-price{
+        font-size: 27px;
+        font-size: 27px;
+    }
+}
