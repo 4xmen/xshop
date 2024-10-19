@@ -680,9 +680,10 @@ function getSetting($key)
 //        $a = new \stdClass();
         return '';
     }
-    if (config('app.xlang') && ($x->type == 'group' || $x->type == 'category')) {
-        $defLang = config('app.xlang_main');
-        return $x->getTranslations('value')[$defLang];
+
+    $txtType = ['TEXT','LONGTEXT','EDITOR'];
+    if (config('app.xlang') && !in_array($x->type, $txtType)) {
+        return $x->raw;
     }
     return $x->value;
 }

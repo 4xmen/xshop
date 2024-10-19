@@ -19,6 +19,7 @@ return new class extends Migration
             $table->boolean('active')->default(true);
             $table->string('key')->unique();
             $table->text('value')->nullable();
+            $table->text('raw')->nullable();
             $table->boolean('ltr')->default(false);
             $table->boolean('is_basic')->default(false);
             $table->boolean('size')->default('12');
