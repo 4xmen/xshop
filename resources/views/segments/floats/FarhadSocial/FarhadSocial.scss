@@ -1,0 +1,67 @@
+#FarhadSocial {
+    // scss
+    position: fixed;
+    z-index: 99;
+    inset-inline-start: 1rem;
+    bottom: 1rem;
+    i{
+        font-size: 37px;
+    }
+    #fari-btn{
+        background: var(--xshop-secondary);
+        color: var(--xshop-diff2);
+        width: 50px;
+        height: 50px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        position: absolute;
+        inset-inline-start: 0;
+        bottom: 0;
+        z-index: 98;
+    }
+    #fari-collapse{
+        a{
+            background: var(--xshop-primary);
+            color: var(--xshop-diff);
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            position: absolute;
+            inset-inline-start: 0;
+            bottom: 0;
+            z-index: 96;
+            transition: 500ms;
+            box-shadow: var(--xshop-shadow);
+        }
+    }
+    &:hover{
+        #fari-collapse{
+            a:nth-child(1){
+                bottom: 3.5rem;
+            }
+            a:nth-child(2){
+                bottom: 7rem;
+            }
+            a:nth-child(3){
+                bottom: 10.5rem;
+            }
+            a:nth-child(4){
+                bottom: 14rem;
+            }
+            a:nth-child(5){
+                bottom: 17.5rem;
+            }
+            a:nth-child(6){
+                bottom: 21rem;
+            }
+            a:nth-child(7){
+                bottom: 24.5rem;
+            }
+        }
+    }
+}
