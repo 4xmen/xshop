@@ -1,38 +1,28 @@
 <section id='ProductYasamin' >
     <div class="row">
-        <div class="col-md-7">
-            <div id="yac-images">
-                @foreach($product->getMedia() as $media)
-                    <div class="item">
-                        <a href="{{$media->getUrl('product-image')}}" class="light-box"
-                           data-gallery="yac-products">
-                            <img src="{{$media->getUrl('product-image')}}" alt="{{$product->name}}">
-                        </a>
-                    </div>
-                @endforeach
+        <div class="col-lg-5">
+            <div class="ps-2">
+                <nav aria-label="breadcrumb" class="pt-1 my-2">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item">
+                            <a href="{{homeUrl()}}">
+                                {{config('app.name')}}
+                            </a>
+                        </li>
+                        <li class="breadcrumb-item">
+                            <a href="{{$product->category->webUrl()}}">
+                                {{$product->category->name}}
+                            </a>
+                        </li>
+                        <li class="breadcrumb-item active" aria-current="page">
+                            {{$product->name}}
+                        </li>
+                    </ol>
+                </nav>
+                <h1>
+                    {{$product->name}}
+                </h1>
             </div>
-        </div>
-        <div class="col-md-5">
-            <nav aria-label="breadcrumb" class="pt-1 my-2">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item">
-                        <a href="{{homeUrl()}}">
-                            {{config('app.name')}}
-                        </a>
-                    </li>
-                    <li class="breadcrumb-item">
-                        <a href="{{$product->category->webUrl()}}">
-                            {{$product->category->name}}
-                        </a>
-                    </li>
-                    <li class="breadcrumb-item active" aria-current="page">
-                        {{$product->name}}
-                    </li>
-                </ol>
-            </nav>
-            <h1>
-                {{$product->name}}
-            </h1>
             <div class="yac-product-data">
                 <rate-input xtitle="{{__("Rate")}}" xname="" :xvalue="{{$product->rate}}"></rate-input>
             </div>
@@ -160,6 +150,18 @@
                     @endforeach
                 </div>
             @endif
+        </div>
+        <div class="col-lg-7">
+            <div id="yac-images">
+                @foreach($product->getMedia() as $media)
+                    <div class="item">
+                        <a href="{{$media->getUrl('product-image')}}" class="light-box"
+                           data-gallery="yac-products">
+                            <img src="{{$media->getUrl('product-image')}}" alt="{{$product->name}}">
+                        </a>
+                    </div>
+                @endforeach
+            </div>
         </div>
         <div class="container-fluid">
             <h3 class="mt-4">
