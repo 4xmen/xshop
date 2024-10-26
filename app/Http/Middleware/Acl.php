@@ -40,6 +40,9 @@ class Acl
                         }
                     }
                 }
+                if (auth()->user()->accesses()->count() == 0){
+                    return   redirect()->route('admin.logout')->with(['message' => "You don't have any access to login"]);
+                }
             }
         }
         return $next($request);
