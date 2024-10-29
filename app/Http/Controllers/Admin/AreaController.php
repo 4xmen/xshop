@@ -222,4 +222,26 @@ class AreaController extends Controller
         logAdmin(__METHOD__, __CLASS__, $p->area_id);
         return ['OK' => true, 'message' => __("As you wished sort saved")];
     }
+
+    public function build(){
+
+        $exitCode = \Artisan::call('build');
+
+        // Get the command output from cache
+        $output = cache()->get('build_command_output', 'No output available');
+
+//        return response()->json([
+//            'success' => $exitCode === 0,
+//            'exit_code' => $exitCode,
+//            'output' => $output
+//        ]);
+        logAdmin(__METHOD__, __CLASS__, null);
+        if ($exitCode == 0){
+            \Log::info($output);
+            return redirect()->back()->with(['message' => __('Assets build successfully')]);
+        }else{
+            \Log::error($output);
+            return redirect()->back()->with(['message' => __('Assets build failed')]);
+        }
+    }
 }
