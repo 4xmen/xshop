@@ -95,6 +95,20 @@ php artisan optimize
 composer install --optimize-autoloader --no-dev
 ```
 
+## Add cron job
+
+You must add crontab for your project:
+
+```bash
+crontab -e
+```
+
+Add this line:
+```bash
+* * * * * cd /home/[yourusername]/[your-public-html-project-root] && php artisan schedule:run >> /dev/null 2>&1
+```
+
+
 ## make xController
 
 Controller with log and semi-automatic CURD with logs  

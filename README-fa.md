@@ -50,7 +50,7 @@ yarn dev
 > اطلاعات ورود اولیه  : `developer@example.com` (به عنوان توسعه دهنده) یا `admin@example.com` (به عنوان مدیر) و
 > گذرواژه : `password`
 
-## افزودن تصاویر نممونه
+## افزودن تصاویر نمونه
 
 - دانلود و آماده‌سازی تصاویر
 
@@ -62,8 +62,9 @@ php artisan seeding:prepare
  ```
 </div> 
 
-- nor copy your image folder to `database/seeders/images/`
-- then: Seeding image for models: [Group, Category, Post, Product, Slider]
+
+- ویا تصاویر خود را با پوشه مورد نظر در این مسیر کپی کنید: `database/seeders/images/`
+- سپس یکی از مدل ها دلخواه را seed image کنید: [Group, Category, Post, Product, Slider]
 
 <div dir="ltr">
 
@@ -113,6 +114,27 @@ php artisan optimize
 composer install --optimize-autoloader --no-dev
 ```
 </div>
+
+## اضافه کردن cron job
+
+جهت اجرا کامل برنامه ها زمان‌دار فروشگاه باید یک دستور زیر رو بزنید:
+
+<div dir="ltr">
+
+```bash
+crontab -e
+```
+</div>
+
+و این خط رو اضافه کنید:
+
+<div dir="ltr">
+
+```bash
+* * * * * cd /home/[yourusername]/[your-public-html-project-root] && php artisan schedule:run >> /dev/null 2>&1
+```
+</div>
+
 
 ## ساختن xController
 
