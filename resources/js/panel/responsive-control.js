@@ -11,7 +11,7 @@ const responsiveControl = function () {
 
                 document.querySelectorAll('.table-list')?.forEach(function (table) {
 
-                    console.log(table);
+                    // console.log(table);
                     // Get all the header cells
                     const headers = Array.from(table.querySelectorAll('th')).map(th => th.textContent.trim());
 

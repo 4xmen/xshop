@@ -150,6 +150,7 @@ php artisan  make:part PartName segmentName
 
 ```bash
 php artisan client
+php artisan build
 ```
 </div>
 

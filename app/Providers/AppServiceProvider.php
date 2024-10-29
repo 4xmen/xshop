@@ -1,11 +1,11 @@
 <?php
 
 namespace App\Providers;
+use App\Console\Commands\AssetsBuild;
 use App\Helpers\TDate;
 use App\Http\Middleware\Acl;
 use App\Models\Area;
 use App\Models\Part;
-use App\Observers\AreaObsever;
 use App\Observers\PartObsever;
 use Carbon\Carbon;
 use Illuminate\Pagination\Paginator;
@@ -23,6 +23,7 @@ class AppServiceProvider extends ServiceProvider
         //
         $this->commands([
             TranslatorCommand::class,
+            AssetsBuild::class,
         ]);
         foreach (config('xshop.payment.gateways') as $gateway){
             /** @var \App\Contracts\Payment $gateway */

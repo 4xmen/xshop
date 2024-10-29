@@ -122,6 +122,7 @@ Optimize client assets, `scss`,`js`,`css`
 
 ```bash
 php artisan client
+php artisan build
 ```
 
 ### theme parts file
