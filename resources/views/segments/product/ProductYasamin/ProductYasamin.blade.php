@@ -49,25 +49,33 @@
                 @endif
             </div>
             <br>
-            @if($product->quantities()->count()>0)
-                <quantities-add-to-card
-                    :qz='@json($product->quantities)'
-                    :props='@json(usableProp($product->category->props))'
-                    currency="{{config('app.currency.symbol')}}"
-                    card-link="{{ route('client.product-card-toggle',$product->slug) }}"
-                    :translate='@json(['add-to-card' => __('Add to card')])'
-                    @if($product->hasDiscount())
-                        :discount='@json($product->activeDiscounts()->first())'
-                    @endif
-                ></quantities-add-to-card>
-            @else
-                <div class="text-center">
+            @if($product->stock_quantity == 'IN_STOCK')
+
+                @if($product->quantities()->count()>0)
+                    <quantities-add-to-card
+                        :qz='@json($product->quantities)'
+                        :props='@json(usableProp($product->category->props))'
+                        currency="{{config('app.currency.symbol')}}"
+                        card-link="{{ route('client.product-card-toggle',$product->slug) }}"
+                        :translate='@json(['add-to-card' => __('Add to card')])'
+                        @if($product->hasDiscount())
+                            :discount='@json($product->activeDiscounts()->first())'
+                        @endif
+                    ></quantities-add-to-card>
+                @else
                     <a href="{{ route('client.product-card-toggle',$product->slug) }}"
                        class="btn btn-outline-primary add-to-card btn-lg">
                         <i class="ri-shopping-bag-3-line"></i>
                         {{__("Add to card")}}
                     </a>
-                </div>
+                @endif
+
+            @else
+                <a
+                    class="btn btn-primary disabled">
+                    <i class="ri-shopping-bag-3-line"></i>
+                    {{__("Not available")}}
+                </a>
             @endif
             <h4>
                 {{__("Description")}}

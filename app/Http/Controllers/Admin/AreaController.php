@@ -225,6 +225,7 @@ class AreaController extends Controller
 
     public function build(){
 
+        $exitCode = \Artisan::call('client');
         $exitCode = \Artisan::call('build');
 
         // Get the command output from cache
