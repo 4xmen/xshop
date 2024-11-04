@@ -55,9 +55,17 @@ php artisan seeding:prepare
  ```
 - nor copy your image folder to `database/seeders/images/` 
 - then: Seeding image for models: [Group, Category, Post, Product, Slider] 
+
 ```bash
 php artisan seeding:image Product digital
 ```
+
+Or to seed all models:
+
+```bash
+php artisan seeding:all digital
+```
+
 > First parameter is Model, Second is image seeder directory available [bag, clothe, digital, sport, posts, makeup]
 > You can create your directory and put your image into new directory then use image seeder
 

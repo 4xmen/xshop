@@ -73,6 +73,15 @@ php artisan seeding:image Product digital
 ```
 </div>
 
+یا برای همه مدل‌ها یک‌جا از دستور زیر استفاده کنید:
+
+<div dir="ltr">
+
+```bash
+php artisan seeding:all digital
+```
+</div>
+
 > شما ابتدا باید مدل را نوشته و سپس فولدر مورد نظر برای تصاویر را وارد کنید[bag, clothe, digital, sport, posts, makeup]
 > همچنین می‌توانید یک پوشه درخواه پر از تصاویر jpg دلخواه را در آن پر کنید
 
