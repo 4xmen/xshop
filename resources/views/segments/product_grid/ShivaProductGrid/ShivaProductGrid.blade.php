@@ -27,11 +27,19 @@
             </span>
         </div>
         <div class="p-2">
-            <a href="{{ route('client.product-card-toggle',$product->slug) }}"
-               class="btn btn-outline-primary w-100 add-to-card">
-                <i class="ri-shopping-bag-3-line"></i>
-                {{__("Add to card")}}
-            </a>
+            @if($product->stock_quantity == 'IN_STOCK')
+                <a href="{{ route('client.product-card-toggle',$product->slug) }}"
+                   class="btn btn-primary add-to-card">
+                    <i class="ri-shopping-bag-3-line"></i>
+                    {{__("Add to card")}}
+                </a>
+            @else
+                <a
+                    class="btn btn-primary disabled">
+                    <i class="ri-shopping-bag-3-line"></i>
+                    {{__("Not available")}}
+                </a>
+            @endif
         </div>
     </a>
 </section>
