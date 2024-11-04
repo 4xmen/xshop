@@ -4,7 +4,7 @@
         <img src="{{$product->thumbUrl2()}}" class="img-2" alt="{{$product->name}}" loading="lazy">
         <div class="">
             <div class="btns">
-                @if($product->stock_quantity == 'IN_STOCK')
+                @if($product->stock_status == 'IN_STOCK')
                     <a href="{{ route('client.product-card-toggle',$product->slug) }}"
                        class="btn btn-primary add-to-card">
                         <i class="ri-shopping-bag-3-line"></i>

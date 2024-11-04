@@ -49,7 +49,7 @@
                 @endif
             </div>
             <br>
-            @if($product->stock_quantity == 'IN_STOCK')
+            @if($product->stock_status == 'IN_STOCK')
 
                 @if($product->quantities()->count()>0)
                     <quantities-add-to-card
