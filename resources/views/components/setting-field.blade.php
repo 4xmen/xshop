@@ -22,6 +22,26 @@
                       class="form-control"
                       rows="5">{{old($setting->key, $setting->value)}}</textarea>
             @break
+        @case('TIME')
+            <vue-time-picker :am-pm="false"
+                             xid="{{$setting->key}}"
+                             xname="{{$setting->key}}"
+                             :xvalue="{{$setting->value}}"
+                             xtitle="{{$setting->title}}"></vue-time-picker>
+            @break
+        @case('DATE')
+            <vue-datetime-picker-input
+                xid="{{$setting->key}}" xname="{{$setting->key}}"  @if(app()->getLocale() == 'fa')  xshow="pdate" @else xshow="date" @endif  xtitle="{{$setting->title}}" @if(app()->getLocale() != 'fa')  def-tab="1" @endif
+            :xvalue="{{$setting->value}}"
+            ></vue-datetime-picker-input>
+            @break
+        @case('DATETIME')
+            <vue-datetime-picker-input
+                xid="{{$setting->key}}" xname="{{$setting->key}}"  @if(app()->getLocale() == 'fa')  xshow="pdatetime" @else xshow="datetime" @endif  xtitle="{{$setting->title}}" @if(app()->getLocale() != 'fa')  def-tab="1" @endif
+            :xvalue="{{$setting->value}}"
+                :timepicker="true"
+            ></vue-datetime-picker-input>
+            @break
         @case('ICON')
             <remix-icon-picker xname="{{$setting->key}}" xvalue="{{old($setting->key, $setting->value)}}"></remix-icon-picker>
             @break

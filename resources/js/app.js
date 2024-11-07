@@ -118,6 +118,10 @@ app.component('lat-lng', Latlng);
 import MenuItemInput from "./components/MenuItemInput.vue";
 app.component('menu-item-input', MenuItemInput);
 
+
+import VueTimepicker from "./components/vueTimePicker.vue";
+app.component('vue-time-picker', VueTimepicker);
+
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue

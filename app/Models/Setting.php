@@ -13,7 +13,8 @@ class Setting extends Model
     public $translatable = ['value'];
 
     public static $settingTypes = ['TEXT', 'NUMBER', 'LONGTEXT', 'CODE', 'EDITOR',
-        'CATEGORY', 'GROUP', 'CHECKBOX', 'FILE', 'COLOR', 'SELECT', 'MENU', 'LOCATION', 'ICON'];
+        'CATEGORY', 'GROUP', 'CHECKBOX', 'FILE', 'COLOR', 'SELECT', 'MENU', 'LOCATION',
+        'ICON','DATE','DATETIME','TIME'];
 
     public function getData()
     {
