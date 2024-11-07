@@ -105,7 +105,7 @@
                         </label>
 {{--  WIP for lang change def tab--}}
                         <vue-datetime-picker-input :xmin="{{strtotime('yesterday')}}"
-                        xid="dp" xname="expire" xshow="date" xtitle="Expire date" def-tab="1"
+                        xid="dp" xname="expire" xtitle="Expire date"  @if(app()->getLocale() != 'fa')  def-tab="1" xshow="date"  @else xshow="pdate"  @endif
                         @if(isset($item)) :xvalue="{{strtotime($item->expire)}}" @endif
                         ></vue-datetime-picker-input>
                     </div>

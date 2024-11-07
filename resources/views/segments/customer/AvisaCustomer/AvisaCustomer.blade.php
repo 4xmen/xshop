@@ -287,7 +287,8 @@
                                     </label>
                                     <vue-datetime-picker-input
                                         :xmax="{{strtotime('yesterday')}}"
-                                        xid="dp" xname="dob" xshow="pdate" xtitle="{{__("Date of born")}}" def-tab="0"
+                                        xid="dp" xname="dob" xtitle="{{__("Date of born")}}"
+                                        @if(app()->getLocale() != 'fa')  def-tab="1" xshow="date"  @else xshow="pdate"  @endif
                                         :xvalue="{{strtotime(auth('customer')->user()->dob)}}"
                                         :timepicker="false"
                                     ></vue-datetime-picker-input>
