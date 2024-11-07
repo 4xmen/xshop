@@ -395,9 +395,9 @@ export default {
         // get input class
         getClass: function () {
             if (this.err == true || (typeof this.err == 'String' && this.err.trim() == '1')) {
-                return 'form-control is-invalid ' + this.customClass;
+                return 'form-control is-invalid text-center' + this.customClass;
             }
-            return 'form-control ' + this.customClass;
+            return 'form-control text-center ' + this.customClass;
         },
         /*
          * make array of this month days [gregorian]
