@@ -11,7 +11,7 @@
         @endforeach
     @endif
     @foreach(getParts($area,$post) as $part)
-        @php($p = $part->getBladeWithData())
+        @php($p = $part->getBladeWithData($post))
         @include($p['blade'],['data' => $p['data']])
     @endforeach
     @if(findArea($area,$post)->use_default)
