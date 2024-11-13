@@ -12,7 +12,7 @@
             @endforeach
         @endif
         @foreach(getParts($area) as $part)
-            @php($p = $part->getBladeWithData())
+            @php($p = $part->getBladeWithData($gallery))
             @include($p['blade'],['data' => $p['data']])
         @endforeach
         @if(findArea($area)->use_default)
