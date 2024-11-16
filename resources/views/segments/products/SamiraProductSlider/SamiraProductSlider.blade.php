@@ -28,6 +28,7 @@
 
                                 <a href="{{$product->webUrl()}}" class="btn btn-outline-light">
                                     {{__("View product")}}
+                                    &nbsp;
                                     <i class="ri-arrow-right-circle-fill float-end"></i>
                                 </a>
                             </div>
