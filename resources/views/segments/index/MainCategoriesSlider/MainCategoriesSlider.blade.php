@@ -4,7 +4,7 @@
             {{getSetting($data->area_name.'_'.$data->part.'_title')}}
         </h1>
         <div id="main-cats">
-            @foreach(\App\Models\Category::whereNull('parent_id')->limit(10)->get() as $category)
+            @foreach(getMainCategory(10) as $category)
                 <div class="item slider-content">
                     <a class="main-category" href="{{$category->webUrl()}}">
                         <img src="{{$category->imgUrl()}}" alt="{{$category->name}}" title="{{$category->name}}" >
