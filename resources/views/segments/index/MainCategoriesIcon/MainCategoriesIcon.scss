@@ -1,0 +1,51 @@
+.MainCategoriesIcon {
+    // scss
+    padding: 4rem;
+    background: var(--cat-icon-bg);
+    position: relative;
+    overflow: hidden;
+
+    h1 {
+        position: absolute;
+        left: 2rem;
+        top: 1rem;
+        transform: rotateZ(-90deg);
+        white-space: nowrap;
+        font-size: 22px;
+        text-align: center;
+        width: 0;
+    }
+
+    .cat-icon-box {
+        background: var(--cat-icon-box);
+        padding: 1rem;
+        border-radius: var(--xshop-border-radius);
+
+        .row {
+            margin: 1rem;
+        }
+
+        .l-box {
+            border-radius: var(--xshop-border-radius);
+            margin: 1rem;
+            background: var(--cat-icon-bg);
+            text-align: center;
+
+
+            img {
+                max-width: 70%;
+                margin: 1rem 0;
+            }
+
+        }
+    }
+
+    h4 {
+        padding: 1rem 0 0 0;
+        font-size: 20px;
+        font-weight: 300;
+        color: var(--cat-icon-text) !important;
+        text-align: center;
+    }
+
+}

@@ -2,6 +2,7 @@ import {tns} from "tiny-slider/src/tiny-slider";
 
 var samSlider ;
 
+
 document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('#samira-slider')?.forEach(function (el) {
         if (el.classList.contains('.tns-slider')){

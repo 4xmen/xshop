@@ -1437,7 +1437,7 @@ function cacheNumber()
  * @param $asc
  * @return Category[]|\LaravelIdea\Helper\App\Models\_IH_Category_C
  */
-function getMainCategory($limit=4,$orderBy = 'id', $asc = 'ASC')
+function getMainCategory($limit=4,$orderBy = 'sort', $asc = 'ASC')
 {
     return \App\Models\Category::whereNull('parent_id')->limit($limit)->orderBy($orderBy,$asc)->get();
 }

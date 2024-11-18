@@ -9,7 +9,7 @@
             </div>
             <div id="samira-slider">
 
-                @foreach(getCategoryProductBySetting($part->area_name . '_' . $part->part.'_category') as $product)
+                @foreach(getCategoryProductBySetting($part->area_name . '_' . $part->part.'_category',getSetting($part->area_name . '_' . $part->part.'_limit')) as $product)
                     <div class="item slider-content">
 
                         <div class="row">
