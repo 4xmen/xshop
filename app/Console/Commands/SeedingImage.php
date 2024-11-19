@@ -56,6 +56,8 @@ class SeedingImage extends Command
                 }
                 break;
             case 'Category':
+                $svgs = \File::files(__DIR__ . '/../../../database/seeders/images/svg');
+
                 foreach (Category::all() as $item) {
                     $this->info('Category: ' . $item->name . ' adding image...');
                     shuffle($images);
@@ -75,6 +77,9 @@ class SeedingImage extends Command
                         ->optimize()
                         ->format('webp');
                     $i->save(storage_path() . '/app/public/categories/optimized-'. $item->bg);
+                    shuffle($svgs);
+                    \File::copy($svgs[0]->getRealPath(),storage_path().'/app/public/categories/' . $svgs[0]->getFilename());
+                    $item->svg = $svgs[0]->getFilename();
                     $item->save();
                 }
                 break;
