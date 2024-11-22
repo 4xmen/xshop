@@ -37,12 +37,15 @@ php artisan serv
 
 # to develop front-end
 npm i
+php artisan client
+npm install @rollup/rollup-win32-x64-msvc # just for windows if the below line dose not work
 npm run dev
 
 # or with yarn
-npm install -g yarn
+
 yarn install
 php artisan client
+yarn add @rollup/rollup-win32-x64-msvc # just for windows if the below line dose not work
 yarn dev
 
 ```
