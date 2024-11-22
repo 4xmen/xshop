@@ -36,11 +36,15 @@ php artisan key:generate
 php artisan serv
 
 # to develop front-end
+npm i
+npm run dev
 
+# or with yarn
 npm install -g yarn
 yarn install
 php artisan client
 yarn dev
+
 ```
 
 > [!TIP]
