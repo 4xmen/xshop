@@ -29,11 +29,12 @@ class AreaController extends Controller
             if (File::exists(resource_path() . '/views/segments/' . $seg)) {
                 $dirs = File::directories(resource_path() . '/views/segments/' . $seg);
                 foreach ($dirs as $dir) {
-                    $temp = explode('/', $dir);
+                    $tmp = str_replace(DIRECTORY_SEPARATOR,'/',$dir);
+                    $temp = explode('/', $tmp);
                     $valids[] = [
                         'segment' => $temp[count($temp) - 2],
                         'part' => $temp[count($temp) - 1],
-                        'data' => json_decode(file_get_contents($dir . '/' . $temp[count($temp) - 1] . '.json'), true)
+                        'data' => json_decode(file_get_contents($dir . DIRECTORY_SEPARATOR. $temp[count($temp) - 1] . '.json'), true)
                     ];
                 }
             }
@@ -67,11 +68,12 @@ class AreaController extends Controller
             if (File::exists(resource_path() . '/views/segments/' . $seg)) {
                 $dirs = File::directories(resource_path() . '/views/segments/' . $seg);
                 foreach ($dirs as $dir) {
-                    $temp = explode('/', $dir);
+                    $tmp = str_replace(DIRECTORY_SEPARATOR,'/',$dir);
+                    $temp = explode('/', $tmp);
                     $valids[] = [
                         'segment' => $temp[count($temp) - 2],
                         'part' => $temp[count($temp) - 1],
-                        'data' => json_decode(file_get_contents($dir . '/' . $temp[count($temp) - 1] . '.json'), true)
+                        'data' => json_decode(file_get_contents($dir . DIRECTORY_SEPARATOR. $temp[count($temp) - 1] . '.json'), true)
                     ];
                 }
             }
