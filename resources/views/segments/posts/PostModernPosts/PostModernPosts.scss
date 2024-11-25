@@ -1,0 +1,21 @@
+.PostModernPosts {
+    // scss
+    h1{
+        font-size: 34px;
+        font-weight: 300;
+        text-align: center;
+    }
+    background: var(--post-modern-bg);
+    padding: 4rem 0;
+    .post-modern-post{
+
+    }
+    h4{
+        background: var(--post-modern-bg);
+        padding: 1rem;
+        margin-top: -3px;
+        text-align: center;
+        color: var(--post-modern-color);
+    }
+
+}
