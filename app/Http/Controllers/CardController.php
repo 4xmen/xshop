@@ -82,7 +82,7 @@ class CardController extends Controller
 
     public function index()
     {
-        auth('customer')->login(Customer::first());
+//        auth('customer')->login(Customer::first());
         $area = 'card';
         $title = __("Shopping card");
         $subtitle = '';
