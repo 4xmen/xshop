@@ -102,9 +102,9 @@ export default {
         select(i) {
             document.querySelector('#price').innerText = commafy(this.qz[i].price.toString()) + ' ' + this.currency;
             let index = this.qz[i].image;
+            this.selected = i;
             document.querySelector('#preview a').setAttribute('href', document.querySelector(`#hidden-images a:nth-child(${index + 1})`).getAttribute('href'));
             document.querySelector('#preview img').setAttribute('src', document.querySelector(`#hidden-images a:nth-child(${index + 1}) img`).getAttribute('src'));
-            this.selected = i;
         },
         async add2card() {
             if (this.selected == null) {
