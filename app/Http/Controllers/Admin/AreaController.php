@@ -247,4 +247,9 @@ class AreaController extends Controller
             return redirect()->back()->with(['message' => __('Assets build failed')]);
         }
     }
+
+    public function guide(){
+        $areas = Area::all();
+        return view('admin.areas.area-guide', compact('areas'));
+    }
 }
