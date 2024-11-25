@@ -68,8 +68,8 @@
                             -
                         @else
                             @foreach($order->quantity->meta as $m)
-                                <span>
-                                {{$m->human_value}}
+                            <span>
+                                {!! $m['human_value']??'-' !!}
                             </span>
                             @endforeach
                         @endif

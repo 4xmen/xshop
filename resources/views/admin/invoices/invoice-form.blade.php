@@ -189,9 +189,10 @@
                                 -
                             @else
                                 @foreach($order->quantity->meta as $m)
-                                    <span>
-                                    {{$m->human_value}}
-                                </span>
+                                    <div title="{{$m['label']}}" class="float-start p-2">
+                                        {{$m['label']}}:
+                                        {!! $m['human_value']??'-' !!}
+                                    </div>
                                 @endforeach
                             @endif
                         </td>
