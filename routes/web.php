@@ -362,6 +362,7 @@ Route::prefix(config('app.panel.prefix'))->name('admin.')->group(
                         Route::post('update/model/{model}/{id}', [\App\Http\Controllers\Admin\AreaController::class, "updateModel"])->name('update.model');
                         Route::get('sort/{area}', [\App\Http\Controllers\Admin\AreaController::class, "sort"])->name('sort');
                         Route::get('build', [\App\Http\Controllers\Admin\AreaController::class, "build"])->name('build');
+                        Route::get('guide', [\App\Http\Controllers\Admin\AreaController::class, "guide"])->name('guide');
                         Route::post('sort-save/{area}', [\App\Http\Controllers\Admin\AreaController::class, "sortSave"])->name('sort-save');
                     }
                 );

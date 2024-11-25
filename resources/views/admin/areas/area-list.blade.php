@@ -27,4 +27,14 @@
                 </a>
             </div>
     </div>
+
+    <a class="action-btn circle-btn"
+       data-bs-toggle="tooltip"
+       data-bs-placement="top"
+       data-bs-custom-class="custom-tooltip"
+       data-bs-title="{{__("Developer guide")}}"
+       href="{{getRoute('guide')}}"
+    >
+        <i class="ri-code-line"></i>
+    </a>
 @endsection
