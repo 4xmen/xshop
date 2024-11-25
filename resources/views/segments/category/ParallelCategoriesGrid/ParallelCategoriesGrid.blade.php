@@ -9,7 +9,10 @@
                     @foreach($category->parallelCategories() as $subCat)
                         <div class="col-md">
                             <div class="parallel-category">
-                                <img src="{{$subCat->imgUrl()}}" alt="{{$subCat->name}}" class="img-fluid" loading="lazy">
+                                <a href="{{$subCat->webUrl()}}">
+                                    <img src="{{$subCat->imgUrl()}}" alt="{{$subCat->name}}" class="img-fluid"
+                                         loading="lazy">
+                                </a>
                                 <h4>
                                     {{$subCat->name}}
                                 </h4>

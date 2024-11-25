@@ -10,6 +10,8 @@ use App\Models\Credit;
 use App\Models\Customer;
 use App\Models\Invoice;
 use App\Models\Order;
+use chillerlan\QRCode\QRCode;
+use chillerlan\QRCode\QROptions;
 use Illuminate\Http\Request;
 use App\Helper;
 use function App\Helpers\hasCreateRoute;
@@ -161,4 +163,22 @@ class InvoiceController extends XController
         return redirect()->back()->with('message', __('Order removed successfully'));
     }
     /*restore**/
+
+
+    public function show($hash){
+
+        $invoice = Invoice::where('hash', $hash)->firstOrFail();
+        $area = 'invoice';
+        $title = __("Invoice");
+        $subtitle = __("Invoice ID:") . ' ' . $invoice->hash;
+
+        $options = new QROptions([
+            'version' => 5,
+            'outputType' => QRCode::OUTPUT_MARKUP_SVG,
+            'eccLevel' => QRCode::ECC_L,
+//            'imageTransparent' => true,
+        ]);
+        $qr = new QRCode($options);
+        return view('client.invoice', compact('area', 'title', 'subtitle', 'invoice', 'qr'));
+    }
 }
