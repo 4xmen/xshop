@@ -66,7 +66,8 @@ class PostModernPosts
     public static function onMount(Part $part = null)
     {
         $data = file_get_contents(public_path('upload/images/').$part->area_name . '.' . $part->part.'.svg');
-        $data = str_replace('fill:#eeeeee','fill:'.getSetting($part->area_name.'_'.$part->part.'_bg'),$data);
+        $re = '/style\=\"fill\:(.*)\;stroke\-width\:0/m';
+        $data = preg_replace($re, 'style="fill:'.getSetting($part->area_name.'_'.$part->part.'_bg').';stroke-width:0',$data);
         file_put_contents(public_path('upload/images/').$part->area_name . '.' . $part->part.'.svg',$data);
         return $part;
     }
