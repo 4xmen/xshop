@@ -1,3 +1,5 @@
+
+
 import Lightbox from 'bs5-lightbox' ;
 import {tns} from "tiny-slider/src/tiny-slider";
 
@@ -7,7 +9,9 @@ document.addEventListener('DOMContentLoaded',function () {
     for (const el of document.querySelectorAll('.light-box')) {
         el.addEventListener('click', Lightbox.initialize);
     }
+    if (document.querySelector('#karen-img-slider') != null){
     try {
+
         karenImgSlider = tns({
             container: '#karen-img-slider',
             items: 3,
@@ -55,6 +59,7 @@ document.addEventListener('DOMContentLoaded',function () {
     }
 
 
+
     document.querySelectorAll('#karen-img-slider a')?.forEach(function (el) {
         el.addEventListener('click',function (e) {
             e.preventDefault();
@@ -97,5 +102,6 @@ document.addEventListener('DOMContentLoaded',function () {
 
     window.addEventListener('resize', updateUnderline);
     updateUnderline();
+    }
 
 });

@@ -12,7 +12,7 @@ class InlineMap
         $setting = new Setting();
         $setting->section = 'theme';
         $setting->key = $part->area_name . '_' . $part->part.'_loc';
-        $setting->value = '35.83266,50.99155,10';
+        $setting->value = '35.83266,50.99155,13';
         $setting->size = 12;
         $setting->type = 'LOCATION';
 //        $setting->data = json_encode(['xmin' => 2, 'xmax' => 90]);
