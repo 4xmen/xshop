@@ -56,7 +56,7 @@ class GroupController extends XController
         $group->name = $request->input('name');
         $group->subtitle = $request->input('subtitle');
         $group->description = $request->input('description');
-        if ($group->parent_id != ''){
+        if ($group->parent_id == ''){
             $group->parent_id = $request->input('parent_id',null);
         }
         if ($request->has('canonical') && trim($request->input('canonical')) != ''){
