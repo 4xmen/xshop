@@ -1,0 +1,225 @@
+.HomayonMenu {
+    // scss
+    position: relative;
+    z-index: 999;
+
+    transition: 400ms;
+
+    .homayon-top {
+        background: var(--homayon-bg);
+        height: 10rem;
+    }
+
+    .social {
+        i {
+            font-size: 25px;
+        }
+    }
+
+    .homayon-middle {
+        margin-top: -35px;
+        margin-bottom: -40px;
+        background: #ffffff;
+        padding: 1.15rem;
+        border-radius: 75px;
+
+        ul {
+            padding: 0;
+            margin: 0;
+            list-style: none;
+            display: flex;
+
+            li {
+                padding: 0 1rem;
+                color: var(--xshop-primary);
+                width: 55px;
+            }
+
+            a {
+                position: relative;
+
+                .badge {
+                    position: absolute;
+                    top: -10px;
+                    left: -15px;
+                }
+            }
+
+            i {
+                font-size: 25px;
+            }
+
+            #homa-toggle-menu {
+                display: none;
+            }
+        }
+    }
+
+    .homayon-logo {
+        text-align: center;
+        width: 365px;
+        height: 325px;
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        top: 9px;
+
+        .logo-container {
+            background: var(--homayon-bg);
+            margin: 40px auto;
+            border-radius: 50%;
+            width: 220px;
+            height: 220px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        img {
+            width: 128px;
+        }
+    }
+
+    .homayon-bottom {
+        margin-top: 40px;
+        margin-bottom: -105px;
+
+        nav {
+            padding: 0 2rem;
+        }
+
+        ul {
+            display: flex;
+            justify-content: space-between;
+            list-style: none;
+            text-align: center;
+            overflow: hidden;
+            background: var(--homayon-bg-menu);
+            border-bottom-right-radius: 35px;
+            border-bottom-left-radius: 35px;
+
+            li {
+                transition: 500ms;
+                flex: 1;
+
+                a {
+                    padding: .75rem;
+                    display: block;
+                }
+            }
+
+            .homayon-divider {
+                flex-grow: 3;
+            }
+        }
+
+        a {
+            color: var(--xshop-diff);
+            position: relative;
+
+            &:after {
+                transition: 700ms;
+                opacity: 0;
+                content: ' ';
+                background: var(--xshop-diff);
+                left: 1rem;
+                right: 1rem;
+                position: absolute;
+                top: 0;
+                bottom: 0;
+                transform: skew(35deg, 0deg);
+            }
+
+            &:hover {
+                &:after {
+                    content: ' ';
+                    background: var(--xshop-diff);
+                    opacity: .3;
+                    left: 1rem;
+                    right: 1rem;
+                    position: absolute;
+                    top: 0;
+                    bottom: 0;
+                    transform: skew(35deg, 0deg);
+                }
+            }
+        }
+    }
+
+    /*-875px width*/
+    @media (max-width: 875px) {
+        ul {
+            flex-direction: row-reverse;
+        }
+        #homa-toggle-menu {
+            display: block !important;
+        }
+
+        .homayon-bottom {
+            display: none;
+        }
+    }
+
+    &.fix {
+        position: fixed;
+        left: 0;
+        right: 0;
+        top: 0;
+        z-index: 999;
+
+        .homayon-top {
+            display: none;
+        }
+
+
+        .homayon-middle {
+            margin-top: 0;
+            border-radius: 0;
+        }
+
+        .homayon-logo {
+            top: -118px;
+        }
+
+        .logo-container {
+            background: transparent;
+
+            img {
+                width: 75px;
+                margin-top: 75px;
+            }
+        }
+
+
+        /*-875px width*/
+        @media (max-width: 875px) {
+            .homayon-logo {
+                background: none !important;
+                img{
+                    width: 40px;
+                    margin-top: 5px;
+                }
+            }
+        }
+    }
+    .homayon-resp-menu{
+        display: none;
+        position: fixed;
+        overflow-y: auto;
+        background: var(--homayon-bg);
+        top: 73px;
+        width: 200px;
+        bottom: 0;
+        z-index: 77;
+        inset-inline-end: 0;
+        ul{
+            padding-top: .5rem;
+            list-style: none;
+            a{
+                display: block;
+                padding: .5rem;
+            }
+        }
+    }
+
+}
