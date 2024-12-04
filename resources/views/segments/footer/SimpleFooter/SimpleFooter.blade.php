@@ -1,5 +1,5 @@
 @cache('simple_footer'. cacheNumber(), 90)
-<section class='SimpleFooter'>
+<section class='SimpleFooter  live-setting' data-live="{{$data->area_name.'_'.$data->part}}">
     <div class="content">
         <div class="{{gfx()['container']}}">
             <div class="row">

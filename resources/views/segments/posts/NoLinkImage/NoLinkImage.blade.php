@@ -1,4 +1,4 @@
-<section class='NoLinkImage @if(getSetting($data->area_name.'_'.$data->part.'_dark')) dark-mode @endif'>
+<section class='NoLinkImage @if(getSetting($data->area_name.'_'.$data->part.'_dark')) dark-mode @endif live-setting' data-live="{{$data->area_name.'_'.$data->part}}">
     <div class="{{gfx()['container']}}">
         <div class="row">
 

@@ -1,5 +1,5 @@
 @cache('wave_footer'. cacheNumber(), 90)
-<footer class='FireFooter'>
+<footer class='FireFooter  live-setting' data-live="{{$data->area_name.'_'.$data->part}}">
     <div class="footer">
         <div class="bubbles">
             <div class="bubble"

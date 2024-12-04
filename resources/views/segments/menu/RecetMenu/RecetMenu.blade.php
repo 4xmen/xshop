@@ -1,4 +1,4 @@
-<nav id='RecetMenu'>
+<nav id='RecetMenu' class=' live-setting' data-live="{{$data->area_name.'_'.$data->part}}">
     <ul>
         <li>
             <a href="#" id="rect-toggle">

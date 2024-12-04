@@ -1,4 +1,4 @@
-<section class='ProductGridSidebar content' id="product-list-view">
+<section class='ProductGridSidebar content live-setting' data-live="{{$data->area_name.'_'.$data->part}}" id="product-list-view">
     <div class="{{gfx()['container']}}">
         <h1>
             {{$title}}

@@ -1,4 +1,4 @@
-<section id='CounterGrid'>
+<section id='CounterGrid' class=' live-setting' data-live="{{$data->area_name.'_'.$data->part}}">
     <div class="{{gfx()['container']}}">
 
         <div class="row">

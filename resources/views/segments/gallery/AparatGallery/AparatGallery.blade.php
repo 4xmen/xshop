@@ -1,5 +1,5 @@
-<section id='AparatGallery'>
-    {{--    <div class="{{gfx()['container']}}">--}}
+<section id='AparatGallery' class=' live-setting' data-live="{{$data->area_name.'_'.$data->part}}">
+{{--    <div class="{{gfx()['container']}}">--}}
     <img src="{{$gallery->images[0]->imgOriginalUrl()}}" id="aparat-main-image" alt="">
     <div class="aparat-list">
         @if($gallery->images->count() > 0)

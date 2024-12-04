@@ -1,4 +1,4 @@
-<section id='CurveCategories'>
+<section id='CurveCategories' class=' live-setting' data-live="{{$data->area_name.'_'.$data->part}}">
 
 
     <div id="curve-cat-top">

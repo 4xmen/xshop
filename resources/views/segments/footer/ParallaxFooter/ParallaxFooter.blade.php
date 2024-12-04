@@ -1,5 +1,5 @@
 @cache('parallax_footer'. cacheNumber(), 90)
-<footer class='ParallaxFooter' style="background-image: url('{{asset('upload/images/'.$data->area_name.'.'.$data->part.'.jpg')}}')">
+<footer class='ParallaxFooter live-setting' data-live="{{$data->area_name.'_'.$data->part}}" style="background-image: url('{{asset('upload/images/'.$data->area_name.'.'.$data->part.'.jpg')}}')">
     <div class="{{gfx()['container']}}">
         <div class="row">
 

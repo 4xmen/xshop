@@ -1,5 +1,5 @@
 @cache('wave_footer'. cacheNumber(), 90)
-<footer class='WaveFooter'
+<footer class='WaveFooter live-setting' data-live="{{$data->area_name.'_'.$data->part}}"
         style="--speed: {{getSetting($data->area_name.'_'.$data->part.'_speed')}}s;
         --speed2: {{getSetting($data->area_name.'_'.$data->part.'_speed2')}}s;
         --speed3: {{getSetting($data->area_name.'_'.$data->part.'_speed3')}}s">

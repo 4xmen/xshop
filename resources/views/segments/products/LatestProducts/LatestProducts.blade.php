@@ -1,4 +1,4 @@
-<section class='LatestProducts'>
+<section class='LatestProducts live-setting' data-live="{{$data->area_name.'_'.$data->part}}">
     <div class="{{gfx()['container']}}">
         <h1>
             {{__("Latest products")}}

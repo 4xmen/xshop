@@ -194,3 +194,39 @@ section {
         display: none;
     }
 }
+
+#customizable{
+    position: absolute;
+    background: var(--xshop-primary);
+    border: var(--xshop-diff) 1px solid;
+    color: var(--xshop-diff);
+    top: -300px;
+    transition: 500ms;
+    right: 50px;
+    left: 50px;
+    text-align: center;
+    z-index: 99988;
+    padding: 1rem;
+    cursor: pointer;
+    border-radius: 7px;
+}
+
+#customize-modal{
+    z-index: 99999;
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    background: #ffffff33;
+    backdrop-filter: blur(14px);
+}
+
+#customize-modal iframe{
+    width: 90%;
+    height: 90vh;
+    border: silver 1px solid;
+    margin: 5vh auto;
+    border-radius: 7px;
+    display: block;
+}

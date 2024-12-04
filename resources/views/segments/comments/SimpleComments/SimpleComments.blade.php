@@ -1,4 +1,4 @@
-<section class='SimpleComments'>
+<section class='SimpleComments live-setting' data-live="{{$data->area_name.'_'.$data->part}}">
     <div class="{{gfx()['container']}}">
         <h5>
             {{__("Comments")}}

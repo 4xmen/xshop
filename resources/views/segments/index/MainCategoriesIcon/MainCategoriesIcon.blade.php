@@ -1,4 +1,4 @@
-<section class='MainCategoriesIcon'>
+<section class='MainCategoriesIcon live-setting' data-live="{{$data->area_name.'_'.$data->part}}">
     <div class="{{gfx()['container']}}">
         <h1 class="text-center">
             {{getSetting($part->area_name . '_' . $part->part.'_title')}}

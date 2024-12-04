@@ -1,4 +1,4 @@
-<section class='CompareProducts content'>
+<section class='CompareProducts content live-setting' data-live="{{$data->area_name.'_'.$data->part}}">
     <div class="{{gfx()['container']}}">
         <h1>
             {{$title}}

@@ -1,4 +1,4 @@
-<section id='ParallaxSlider'>
+<section id='ParallaxSlider' class=' live-setting' data-live="{{$data->area_name.'_'.$data->part}}">
     <div id="ParallaxSliderTns">
         @foreach(\App\Models\Slider::where('status',1)->get() as $slider)
             <div>

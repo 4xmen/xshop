@@ -1,4 +1,4 @@
-<section class='SubGroupsGrid content'>
+<section class='SubGroupsGrid content  live-setting' data-live="{{$data->area_name.'_'.$data->part}}">
     <div class="{{gfx()['container']}}">
         @if($group->children()->count() > 0)
             <div>

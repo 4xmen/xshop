@@ -1,4 +1,4 @@
-<section class='SimplePostListSideBar content'>
+<section class='SimplePostListSideBar content live-setting' data-live="{{$data->area_name.'_'.$data->part}}">
     <div class="{{gfx()['container']}}">
         <div class="row pinned-posts">
             @if(\App\Models\Post::where('status',1)->where('is_pinned',1)->count() < 0 )

@@ -1,4 +1,4 @@
-<section class='LongHeightPosts'
+<section class='LongHeightPosts  live-setting' data-live="{{$data->area_name.'_'.$data->part}}"
          style="background-image: url('{{asset('upload/images/'.$data->area_name.'.'.$data->part.'.jpg')}}')">
     <div class="{{gfx()['container']}}">
         <h1>

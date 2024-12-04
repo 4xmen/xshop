@@ -1,4 +1,4 @@
-<nav id="AplMenu">
+<nav id="AplMenu" class=' live-setting' data-live="{{$data->area_name.'_'.$data->part}}">
     <ul class="{{gfx()['container']}}">
         <li class="icon-menu" id="logo-menu">
             <a href="{{url('/')}}">

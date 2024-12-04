@@ -1,4 +1,4 @@
-<section id='InlineMap'>
+<section id='InlineMap' class=' live-setting' data-live="{{$data->area_name.'_'.$data->part}}">
     <div class="{{gfx()['container']}}">
         <h5>
             <a href="{{getSetting($data->area_name.'_'.$data->part.'_link')}}">

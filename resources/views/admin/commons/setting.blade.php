@@ -134,6 +134,21 @@
                         >
                             <i class="ri-save-2-line"></i>
                         </button>
+                        @if(config('app.env') == 'production')
+                            <button
+                                href="{{getRoute('sort')}}"
+                                class="action-btn circle-btn"
+                                data-bs-toggle="tooltip"
+                                data-bs-placement="top"
+                                data-bs-custom-class="custom-tooltip"
+                                data-bs-title="{{__("Save and build")}}"
+                                name="build"
+                                value="1"
+                                style="inset-inline-end: 1.2rem;inset-inline-start: auto;"
+                            >
+                                <i class="ri-hammer-line"></i>
+                            </button>
+                        @endif
                     </form>
                 </div>
                 <div class="mb-5">

@@ -1,4 +1,4 @@
-<section class='LittleFooter'>
+<section class='LittleFooter live-setting' data-live="{{$data->area_name.'_'.$data->part}}" >
     <div class="{{gfx()['container']}}">
         <div class="row">
             <div class="col-md-4">

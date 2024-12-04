@@ -99,6 +99,10 @@ class SettingController extends Controller
                 }
             }
         }
+
+        if ($request->has('build')){
+            Artisan::call('build');
+        }
         logAdmin(__METHOD__,__CLASS__,null);
         return redirect()->back()->with(['message' => __('Setting of website updated')]);
     }
@@ -120,5 +124,15 @@ class SettingController extends Controller
         Artisan::call('view:clear');
         Artisan::call('route:clear');
         return redirect()->back()->with(['message' => __('Cache cleared')]);
+    }
+
+    public function liveEdit($slug){
+        $settings = Setting::where('active', true)->where('key','LIKE',$slug.'%')
+            ->orderBy('section')->get();
+        $cats = Category::all(['id','name']);
+        $menus = Menu::all(['id','name']);
+        $groups = Group::all(['id','name']);
+        return view('admin.commons.live',
+            compact('settings', 'cats','groups','menus'));
     }
 }

@@ -1,4 +1,4 @@
-<section id='ProductYasamin' >
+<section id='ProductYasamin' class=' live-setting' data-live="{{$data->area_name.'_'.$data->part}}" >
     <div class="row">
         <div class="col-lg-5">
             <div class="ps-2">

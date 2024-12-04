@@ -1,4 +1,4 @@
-<section id='CategoriesFavImageLinks'>
+<section id='CategoriesFavImageLinks' class='live-setting' data-live="{{$data->area_name.'_'.$data->part}}">
 
     <div class="{{gfx()['container']}}">
         <h1>
