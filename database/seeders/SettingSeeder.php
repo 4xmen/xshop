@@ -201,14 +201,14 @@ class SettingSeeder extends Seeder
                     'title' => __('Product image size'),
                     'key' => 'product_thumb',
                     'type' => 'TEXT',
-                    'value' => '500x500',
+                    'value' => '900x900',
                     'size' => '6',
                 ],
                 [
                     'title' => __('Post thumbnail size'),
                     'key' => 'post_thumb',
                     'type' => 'TEXT',
-                    'value' => '500x500',
+                    'value' => '900x900',
                     'size' => '6',
                 ],
                 [

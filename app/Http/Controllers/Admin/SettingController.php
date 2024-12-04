@@ -10,6 +10,7 @@ use App\Models\Menu;
 use App\Models\Setting;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Artisan;
+use Spatie\Image\Image;
 
 class SettingController extends Controller
 {
@@ -91,11 +92,24 @@ class SettingController extends Controller
         }
         $files = $request->allFiles();
         if (isset($files['file'])) {
+            $format = getSetting('optimize');
             foreach ($files['file'] as $index => $file) {
+                if ( ($file->guessExtension() == 'jpg' || $file->guessExtension() == 'png') && ($index != 'site_image') ) {
+
+                    $i = Image::load($file->getRealPath())
+                        ->optimize()
+                        ->format($format);
+
+                    $file->move(public_path('upload/images/'), str_replace('_','.',$index) );//store('/images/'.,['disk' => 'public']);
+                    $optimizedFile = public_path('upload/images/optimized-'). str_replace('_','.',$index);
+                    $optimizedFile = str_replace(['jpg','png','gif'],'webp',$optimizedFile);
+                    $i->save($optimizedFile);
+                }else
                 if ($file->guessExtension() == 'mp4' || $file->guessExtension() == 'mp3'){
                     $file->move(public_path('upload/media/'), str_replace('_','.',$index) );//store('/images/'.,['disk' => 'public']);
                 }else{
-                    $file->move(public_path('upload/images/'), str_replace('_','.',$index) );//store('/images/'.,['disk' => 'public']);
+
+                    $file->move(public_path('upload/file/'), str_replace('_','.',$index) );//store('/images/'.,['disk' => 'public']);
                 }
             }
         }
