@@ -1,4 +1,4 @@
-<section class='OtherFooter mt-5'>
+<section class='OtherFooter mt-5 live-setting' data-live="{{$data->area_name.'_'.$data->part}}">
 
 
     <footer id="footer" class="footer-1">

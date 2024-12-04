@@ -1,4 +1,4 @@
-<section id='ProductKaren' class="content">
+<section id='ProductKaren' class='content live-setting' data-live="{{$data->area_name.'_'.$data->part}}">
 
     <div class="{{gfx()['container']}}">
         @include('components.err')

@@ -1,6 +1,6 @@
 @php($productFav = getCategoryProductBySetting($data->area_name.'_'.$data->part,1) )
 @if(count($productFav) > 0)
-<section class="FavProductWithMeta py-5">
+<section class="FavProductWithMeta py-5 live-setting" data-live="{{$data->area_name.'_'.$data->part}}" >
     <div class="{{gfx()['container']}}">
         <h4 class="text-center text-muted">
             {{getSetting($data->area_name.'_'.$data->part.'_title')}}

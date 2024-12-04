@@ -1,4 +1,4 @@
-<section class='PostsIconSimple py-4'>
+<section class='PostsIconSimple py-4 live-setting' data-live="{{$data->area_name.'_'.$data->part}}">
     <div class="{{gfx()['container']}}">
         <h1>
             <a href="{{getGroupBySetting($data->area_name.'_'.$data->part)?->webUrl()}}">

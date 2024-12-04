@@ -1,4 +1,4 @@
-<section class='ParallelCategoriesGrid'>
+<section class='ParallelCategoriesGrid live-setting' data-live="{{$data->area_name.'_'.$data->part}}">
     <div class="{{gfx()['container']}}">
         @if(count($category->parallelCategories()) > 0)
             <div>

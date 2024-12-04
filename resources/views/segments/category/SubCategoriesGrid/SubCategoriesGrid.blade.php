@@ -1,4 +1,4 @@
-<section class='SubCategoriesGrid content'>
+<section class='SubCategoriesGrid content live-setting' data-live="{{$data->area_name.'_'.$data->part}}">
     <div class="{{gfx()['container']}}">
         @if($category->children()->count() > 0)
             <div>

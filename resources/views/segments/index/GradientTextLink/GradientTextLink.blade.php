@@ -1,4 +1,4 @@
-<section class='GradientTextLink py-4'>
+<section class='GradientTextLink py-4  live-setting' data-live="{{$data->area_name.'_'.$data->part}}">
     <div class="{{gfx()['container']}} py-4 text-center">
         <h1>
             {{getSetting($data->area_name.'_'.$data->part.'_title')}}

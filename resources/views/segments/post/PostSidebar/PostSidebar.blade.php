@@ -1,4 +1,4 @@
-<section class='PostSidebar content'>
+<section class='PostSidebar content live-setting' data-live="{{$data->area_name.'_'.$data->part}}">
     <div class="{{gfx()['container']}}">
         <dov class="row">
             @if(!getSetting($data->area_name.'_'.$data->part.'_invert'))

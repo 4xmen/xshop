@@ -1,4 +1,4 @@
-<div class='TopSimple'>
+<div class='TopSimple live-setting' data-live="{{$data->area_name.'_'.$data->part}}" >
    <div class="{{gfx()['container']}}">
        <div class="row">
            <div class="col-md-3 pt-2 text-lg-start">

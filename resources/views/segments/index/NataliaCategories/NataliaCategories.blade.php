@@ -1,4 +1,4 @@
-<section class='NataliaCategories'>
+<section class='NataliaCategories  live-setting' data-live="{{$data->area_name.'_'.$data->part}}">
     <div class="{{gfx()['container']}}">
         <div class="row nata-content">
             <div class="col-md-6 pt-5 slider-content">

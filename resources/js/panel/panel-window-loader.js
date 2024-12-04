@@ -15,9 +15,13 @@ setTimeout(function () {
     }
 },5000);
 const forceLoad = function () {
-    const  preloader = document.querySelector('#panel-preloader');
-    preloader.style.height = 0;
-    setTimeout( () => {
-      preloader.style.display = 'none';
-    },500);
+    try {
+        const  preloader = document.querySelector('#panel-preloader');
+        preloader.style.height = 0;
+        setTimeout( () => {
+            preloader.style.display = 'none';
+        },500);
+    } catch {
+    }
+
 };

@@ -1,4 +1,4 @@
-<header class='HomayonMenu'>
+<header class='HomayonMenu live-setting' data-live="{{$data->area_name.'_'.$data->part}}" >
     <div class="homayon-logo"
          style="background-image: url('{{asset('upload/images/'.$data->area_name.'.'.$data->part.'.svg')}}')">
         <div class="logo-container">

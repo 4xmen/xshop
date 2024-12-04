@@ -342,6 +342,7 @@ Route::prefix(config('app.panel.prefix'))->name('admin.')->group(
                         Route::post('store', [\App\Http\Controllers\Admin\SettingController::class, "store"])->name('store');
                         Route::post('update', [\App\Http\Controllers\Admin\SettingController::class, "update"])->name('update');
                         Route::get('cache/clear', [\App\Http\Controllers\Admin\SettingController::class, "cacheClear"])->name('cache-clear');
+                        Route::get('live/{slug}', [\App\Http\Controllers\Admin\SettingController::class, "liveEdit"])->name('live');
                     }
                 );
                 Route::prefix('gfx')->name('gfx.')->group(

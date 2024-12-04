@@ -1,4 +1,4 @@
-<section id='LoginBigBg' class="content"
+<section id='LoginBigBg' class='content live-setting' data-live="{{$data->area_name.'_'.$data->part}}"
          style="background-image: url('{{asset('upload/images/'.$data->area_name.'.'.$data->part.'.jpg')}}')">
     <form @if(!config('app.sms.sign')) action="{{route('client.sign-in-do')}}" @endif id="login-form" method="post">
         @csrf

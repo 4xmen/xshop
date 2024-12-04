@@ -1,4 +1,4 @@
-<section class='PostIndexImage'>
+<section class='PostIndexImage live-setting' data-live="{{$data->area_name.'_'.$data->part}}">
     <div class="{{gfx()['container']}}">
         <h1>
             <a href="{{getGroupBySetting($data->area_name.'_'.$data->part.'_group')?->webUrl()}}">

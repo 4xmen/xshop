@@ -1,4 +1,4 @@
-<section class='SimpleRegister'>
+<section class='SimpleRegister live-setting' data-live="{{$data->area_name.'_'.$data->part}}">
     <div class="{{gfx()['container']}}">
         <form action="/blah" method="post" class="safe-form" id="email-register">
             @csrf

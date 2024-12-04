@@ -1,4 +1,4 @@
-<section class='ParallaxShort' style="background-image: url('{{asset('upload/images/'.$data->area_name.'.'.$data->part.'.jpg')}}')">
+<section class='ParallaxShort live-setting' data-live="{{$data->area_name.'_'.$data->part}}" style="background-image: url('{{asset('upload/images/'.$data->area_name.'.'.$data->part.'.jpg')}}')">
     <div class="{{gfx()['container']}} pt-5">
         <h1 class="pt-5">
             {{getSetting($data->area_name.'_'.$data->part.'_title')}}

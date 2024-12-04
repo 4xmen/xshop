@@ -1,4 +1,4 @@
-<section class='SimpleAttachmentList'>
+<section class='SimpleAttachmentList live-setting' data-live="{{$data->area_name.'_'.$data->part}}">
     <div class="{{gfx()['container']}}">
     @if(count($data['attachs']) > 0)
         <h2 class="my-3">

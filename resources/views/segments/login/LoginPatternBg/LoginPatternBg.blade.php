@@ -1,4 +1,4 @@
-<section id='LoginPatternBg' class="content"
+<section id='LoginPatternBg' class='content live-setting' data-live="{{$data->area_name.'_'.$data->part}}"
 >
     <div id="login-container"
          style="background-image: url('{{asset('upload/images/'.$data->area_name.'.'.$data->part.'.jpg')}}')">

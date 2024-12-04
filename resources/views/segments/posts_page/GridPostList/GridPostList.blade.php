@@ -1,4 +1,4 @@
-<section class='GridPostList content'>
+<section class='GridPostList content live-setting' data-live="{{$data->area_name.'_'.$data->part}}">
     <div class="{{gfx()['container']}}">
         @if(\App\Models\Post::where('status',1)->where('is_pinned',1)->count() < 0 )
         <div class="row pinned-posts">

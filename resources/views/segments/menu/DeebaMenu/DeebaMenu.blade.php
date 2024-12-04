@@ -1,4 +1,4 @@
-<nav id='DeebaMenu'>
+<nav id='DeebaMenu' class=' live-setting' data-live="{{$data->area_name.'_'.$data->part}}">
     <div class="{{gfx()['container']}}">
         <ul>
             @php($items = getMenuBySetting($data->area_name.'_'.$data->part.'_menu')->items)

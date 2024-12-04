@@ -1,4 +1,4 @@
-<section class='SimplePost content'>
+<section class='SimplePost content live-setting' data-live="{{$data->area_name.'_'.$data->part}}">
     <div class="{{gfx()['container']}}">
         <div class="p-2">
            <span class="float-end text-muted">

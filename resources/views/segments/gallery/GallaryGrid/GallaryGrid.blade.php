@@ -1,4 +1,4 @@
-<section class='GallaryGrid'>
+<section class='GallaryGrid  live-setting' data-live="{{$data->area_name.'_'.$data->part}}">
     <div class="{{gfx()['container']}}">
         <div class="row py-4">
             @if($gallery->images->count() > 0)

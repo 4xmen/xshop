@@ -1,4 +1,4 @@
-<section id='ProductAria' class="content">
+<section id='ProductAria' class='content live-setting' data-live="{{$data->area_name.'_'.$data->part}}">
 
     <div class="{{gfx()['container']}}">
         <nav aria-label="breadcrumb">
