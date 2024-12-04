@@ -129,10 +129,10 @@
                 @endif
                 <div class="col-md-5 text-center">
                     @if($ext == 'mp4')
-                        <video controls src="{{asset('upload/file/'.str_replace('_','.',$setting->key))}}?{{time()}}" class="img-fluid" style="max-height: 150px;max-width: 45%" ></video>
+                        <video controls src="{{asset('upload/media/'.str_replace('_','.',$setting->key))}}?{{time()}}"  style="max-height: 150px;max-width: 45%" ></video>
                         <br>
                     @elseif($ext == 'mp3')
-                        <audio controls src="{{asset('upload/file/'.str_replace('_','.',$setting->key))}}?{{time()}}" class="img-fluid" style="max-height: 150px;max-width: 45%" ></audio>
+                        <audio controls src="{{asset('upload/media/'.str_replace('_','.',$setting->key))}}?{{time()}}" class="img-fluid" style="max-height: 150px;max-width: 45%" ></audio>
                         <br>
                     @elseif(in_array($ext, ['svg','jpg','png','gif','webp'] ) )
                         <img src="{{asset('upload/images/'.str_replace('_','.',$setting->key))}}?{{time()}}"
