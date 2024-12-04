@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   id="Shahabjasemi"
+   width="364"
+   height="325"
+   viewBox="0 0 364 325"
+   version="1.1"
+   sodipodi:docname="Central_Curve_shadow2.svg"
+   inkscape:version="1.2.2 (b0a8486541, 2022-12-01)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:x="adobe:ns:meta/">
+  <sodipodi:namedview
+     id="namedview1367"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     showgrid="false"
+     inkscape:zoom="0.93338095"
+     inkscape:cx="7.4996174"
+     inkscape:cy="136.06449"
+     inkscape:window-width="1920"
+     inkscape:window-height="1020"
+     inkscape:window-x="0"
+     inkscape:window-y="32"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="Shahabjasemi" />
+  <metadata
+     id="metadata1335">
+<?xpacket begin="﻿" id="W5M0MpCehiHzreSzNTczkc9d"?>    <x:xmpmeta
+       x:xmptk="Adobe XMP Core 5.6-c142 79.160924, 2017/07/13-01:06:39        ">
+      <rdf:RDF>
+        <rdf:Description
+           rdf:about="" />
+      </rdf:RDF>
+    </x:xmpmeta>
+<?xpacket end="w"?>  </metadata>
+  <defs
+     id="defs1361">
+    <style
+       id="style1337">
+      .cls-1, .cls-2, .cls-3 {
+        fill: #fff;
+        fill-rule: evenodd;
+      }
+
+      .cls-1 {
+        filter: url(#filter);
+      }
+
+      .cls-2 {
+        filter: url(#filter-2);
+      }
+    </style>
+    <filter
+       id="filter"
+       x="770"
+       y="36"
+       width="364"
+       height="325"
+       filterUnits="userSpaceOnUse">
+      <feOffset
+         result="offset"
+         dy="10"
+         in="SourceAlpha"
+         id="feOffset1339" />
+      <feGaussianBlur
+         result="blur"
+         stdDeviation="5.477"
+         id="feGaussianBlur1341" />
+      <feFlood
+         result="flood"
+         flood-color="#346"
+         flood-opacity="0.12"
+         id="feFlood1343" />
+      <feComposite
+         result="composite"
+         operator="in"
+         in2="blur"
+         id="feComposite1345" />
+      <feBlend
+         result="blend"
+         in="SourceGraphic"
+         in2="composite"
+         id="feBlend1347" />
+    </filter>
+    <filter
+       id="filter-2"
+       x="786"
+       y="46"
+       width="332"
+       height="304"
+       filterUnits="userSpaceOnUse">
+      <feOffset
+         result="offset"
+         dy="10"
+         in="SourceAlpha"
+         id="feOffset1350" />
+      <feGaussianBlur
+         result="blur"
+         stdDeviation="4.472"
+         id="feGaussianBlur1352" />
+      <feFlood
+         result="flood"
+         flood-color="#346"
+         flood-opacity="0.1"
+         id="feFlood1354" />
+      <feComposite
+         result="composite"
+         operator="in"
+         in2="blur"
+         id="feComposite1356" />
+      <feBlend
+         result="blend"
+         in="SourceGraphic"
+         in2="composite"
+         id="feBlend1358" />
+    </filter>
+  </defs>
+  <g
+     id="g1489">
+    <path
+       id="Shadowholder"
+       class="cls-1"
+       d="M1104,226h-10.23c-14.83,2.746-12.32,11.245-22.77,26l-4,5,0.03-.521a133.028,133.028,0,0,1-228.063,0L839,257l-4-5c-10.444-14.745-19.925-23.246-34.735-26H799V152.927c0.83,0.035,1.659.073,2.5,0.073,22.052,0,20.53-8.69,33.5-27l0.928-1.16a133.042,133.042,0,0,1,234.142,0L1071,126c12.67,17.889,11.92,26.59,33,26.981V226Z"
+       transform="translate(-770 -36)" />
+    <path
+       id="Shadowfader"
+       class="cls-2"
+       d="M1090,217l-0.23,8c-14.83,2.746-9.32,11.245-19.77,26l-4,5,0.03-.521C1042.77,294.137,1001.41,320,953,320s-89.767-25.863-113.033-64.521L840,256l-4-5c-10.444-14.745-14.925-23.246-29.735-26L805,214V152.927c0.83,0.035,1.659.073,2.5,0.073,22.052,0,15.53-8.69,28.5-27l0.928-1.16C859.412,83.252,902.406,55,953,55s93.59,28.252,116.07,69.84L1070,126c12.67,17.889,6.92,26.59,28,26.981Z"
+       transform="translate(-770 -36)" />
+    <path
+       id="Central_Curve"
+       class="cls-3"
+       d="M1116,226h-10.23c-14.83,2.746-24.32,11.245-34.77,26l-4,5,0.03-.521a133.028,133.028,0,0,1-228.063,0L839,257l-4-5c-10.444-14.745-19.925-23.246-34.735-26H786V152.927c0.83,0.035,1.659.073,2.5,0.073,22.052,0,33.53-8.69,46.5-27l0.928-1.16a133.042,133.042,0,0,1,234.142,0L1071,126c12.67,17.889,23.92,26.59,45,26.981V226Z"
+       transform="translate(-770 -36)" />
+  </g>
+</svg>
