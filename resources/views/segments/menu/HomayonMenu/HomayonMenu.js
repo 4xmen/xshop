@@ -1,12 +1,16 @@
 const scrollBreakpoint = window.innerHeight * 0.2;
 let fixmenu = function () {
-    if (window.scrollY > scrollBreakpoint){
-        document.querySelector('.HomayonMenu').classList.add('fix');
-        document.querySelector('.HomayonMenu').querySelector('.homayon-middle').classList.remove('container');
-    }else{
-        document.querySelector('.HomayonMenu').classList.remove('fix')
-        document.querySelector('.HomayonMenu').querySelector('.homayon-middle').classList.add('container');
-    }
+  try {
+      if (window.scrollY > scrollBreakpoint){
+          document.querySelector('.HomayonMenu').classList.add('fix');
+          document.querySelector('.HomayonMenu').querySelector('.homayon-middle').classList.remove('container');
+      }else{
+          document.querySelector('.HomayonMenu').classList.remove('fix')
+          document.querySelector('.HomayonMenu').querySelector('.homayon-middle').classList.add('container');
+      }
+  } catch {
+  }
+
 }
 window.addEventListener('scroll',fixmenu);
 
