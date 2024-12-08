@@ -20,7 +20,7 @@
                             </p>
                         </div>
                     </div>
-                    <div class="form">
+                    <div class="form" data-bs-theme="light">
                         <form class="safe-form" method="post">
                             <input type="hidden" class="safe-url" data-url="{{route('client.send-contact')}}">
                             @csrf
