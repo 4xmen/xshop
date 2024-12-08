@@ -58,7 +58,9 @@ class CategoryController extends XController
         $category->subtitle = $request->input('subtitle');
         $category->icon = $request->input('icon');
         $category->description = $request->input('description');
-        if ($category->parent_id == ''){
+        if ($request->input('parent_id') == ''){
+            $category->parent_id = null;
+        }else{
             $category->parent_id = $request->input('parent_id',null);
         }
         if ($request->has('canonical') && trim($request->input('canonical')) != ''){
