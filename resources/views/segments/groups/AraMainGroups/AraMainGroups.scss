@@ -1,0 +1,84 @@
+.AraMainGroups {
+    // scss
+    padding: 3rem 0;
+
+    h1{
+        font-size: 27px;
+        margin-bottom: 1rem;
+        font-weight: 400;
+    }
+
+    .ara-row{
+        column-count: 3;
+    }
+
+    .ara-group{
+        overflow: hidden;
+        margin-bottom: 1rem;
+        position: relative;
+        border-radius: var(--xshop-border-radius);
+
+
+        img{
+            transition: 400ms;
+            border-radius: var(--xshop-border-radius);
+        }
+
+        .ara-data{
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 1rem;
+            color: white;
+            background: linear-gradient(0deg, rgb(30, 30, 30) 0%, rgba(0,212,255,0) 100%);
+            transition: 400ms;
+            z-index: 9;
+
+
+            &:before{
+                content: ' ';
+                width: 0;
+                bottom: 1rem;
+                inset-inline-start: 1rem;
+                height: 2px;
+                background: var(--xshop-primary);
+                z-index: 9;
+                position: absolute;
+                transition: 400ms;
+            }
+        }
+
+        &:hover{
+            img{
+                transform: scale(1.2);
+            }
+            .ara-data{
+                padding-top: 2rem;
+                &:before{
+                    width: 70%;
+                }
+            }
+        }
+    }
+
+    /*-1000px width*/
+    @media (max-width: 1000px) {
+        .ara-row{
+            column-count: 2 !important;
+        }
+    }
+}
+
+/*-600px width*/
+@media (max-width: 600px) {
+    .AraMainGroups{
+        h3{
+            font-size: 17px;
+            font-weight: 700;
+        }
+        p{
+            display: none;
+        }
+    }
+}
