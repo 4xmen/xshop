@@ -10,6 +10,18 @@
         display: flex;
         column-gap: .5rem;
     }
+    a{
+        display: block;
+        position: relative;
+        i{
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%,-50%);
+            font-size: 75px;
+            color: white;
+        }
+    }
 
     .autoplay-clip-item {
         transition: 700ms;
@@ -23,5 +35,14 @@
         &:hover{
             flex-grow: 2;
         }
+    }
+}
+
+
+/*-768px width*/
+@media (max-width: 768px) {
+    .autoplay-clip-list {
+        display: grid !important;
+        grid-template-columns: repeat(2,1fr) !important;
     }
 }

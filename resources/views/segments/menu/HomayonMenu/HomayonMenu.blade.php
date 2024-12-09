@@ -1,4 +1,4 @@
-<header class='HomayonMenu live-setting' data-live="{{$data->area_name.'_'.$data->part}}" >
+<header class='HomayonMenu live-setting' data-live="{{$data->area_name.'_'.$data->part}}">
     <div class="homayon-logo"
          style="background-image: url('{{asset('upload/images/'.$data->area_name.'.'.$data->part.'.svg')}}')">
         <div class="logo-container">
@@ -85,6 +85,28 @@
                             <a href="{{$item->webUrl()}}">
                                 {{$item->title}}
                             </a>
+                            @if($item->meta == null)
+
+                                @switch($item->menuable_type)
+                                    @case(\App\Models\Group::class)
+                                    @case(\App\Models\Category::class)
+                                        @if($item->dest->children()->count() > 0)
+                                            <ul class="sub-menu-item">
+                                                @foreach($item->dest->children as $itm)
+                                                    <li>
+                                                        <a href="{{$itm->webUrl()}}">
+                                                            {{$itm->name}}
+                                                        </a>
+                                                    </li>
+                                                @endforeach
+                                            </ul>
+                                            @break
+                                        @endif
+                                    @default
+
+                                @endswitch
+                            @endif
+
                         </li>
                     @endforeach
                 </ul>
@@ -92,7 +114,7 @@
         </div>
     </div>
     <nav class="homayon-resp-menu" style="display: none">
-        <ul >
+        <ul>
             @foreach(getMenuBySettingItems($data->area_name.'_'.$data->part.'_menu') as $item)
                 <li>
                     <a href="{{$item->webUrl()}}">
