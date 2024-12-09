@@ -7,6 +7,7 @@
         @foreach(\App\Models\Clip::where('status',1)->get() as $clip)
             <div class="autoplay-clip-item">
                 <a href="{{$clip->webUrl()}}">
+                    <i class="ri-play-circle-line"></i>
                     <video preload="none" src="{{$clip->fileUrl()}}" poster="{{$clip->imgUrl()}}" muted ></video>
                 </a>
 {{--                <img src="{{$clip->imgUrl()}}" alt="">--}}

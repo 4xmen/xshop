@@ -3,6 +3,7 @@ document.addEventListener('DOMContentLoaded', function () {
         el.addEventListener('mouseenter', function () {
             try {
                 this.querySelector('video').play();
+                this.querySelector('i').style.display = 'none';
             } catch {
             }
 
@@ -10,6 +11,7 @@ document.addEventListener('DOMContentLoaded', function () {
         el.addEventListener('mouseleave', function () {
             try {
                 this.querySelector('video').pause();
+                this.querySelector('i').style.display = 'block';
             } catch {
             }
         });

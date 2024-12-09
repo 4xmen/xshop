@@ -93,18 +93,71 @@
             justify-content: space-between;
             list-style: none;
             text-align: center;
-            overflow: hidden;
+            height: 48px;
+            //overflow: hidden;
             background: var(--homayon-bg-menu);
             border-bottom-right-radius: 35px;
             border-bottom-left-radius: 35px;
 
+
             li {
                 transition: 500ms;
                 flex: 1;
+                position: relative;
 
                 a {
                     padding: .75rem;
                     display: block;
+                }
+
+
+            }
+
+            .sub-menu-item{
+                opacity: 0;
+                pointer-events: none;
+                max-height: 0;
+                width: 0;
+                transition: 600ms;
+                height: auto;
+            }
+            li:hover {
+
+                .sub-menu-item {
+                    max-height: 50vh;
+                    opacity: .9;
+                    pointer-events: all;
+                    position: absolute;
+                    top: 100%;
+                    display: block;
+                    inset-inline-start: 0;
+                    width: 200px;
+                    text-align: start;
+                    padding: 0;
+                    box-shadow: var(--xshop-shadow);
+
+                    li {
+                        a {
+                            padding: 10px;
+
+                            &:hover {
+                                background: #ffffff33;
+                            }
+
+                            &:after {
+                                display: none;
+                            }
+                        }
+
+                        &:last-child {
+                            a {
+
+                                border-bottom-right-radius: 35px;
+                                border-bottom-left-radius: 35px;
+                            }
+                        }
+                    }
+
                 }
             }
 
@@ -195,14 +248,16 @@
         @media (max-width: 875px) {
             .homayon-logo {
                 background: none !important;
-                img{
+
+                img {
                     width: 40px;
                     margin-top: 5px;
                 }
             }
         }
     }
-    .homayon-resp-menu{
+
+    .homayon-resp-menu {
         display: none;
         position: fixed;
         overflow-y: auto;
@@ -212,10 +267,12 @@
         bottom: 0;
         z-index: 77;
         inset-inline-end: 0;
-        ul{
+
+        ul {
             padding-top: .5rem;
             list-style: none;
-            a{
+
+            a {
                 display: block;
                 padding: .5rem;
             }
