@@ -1441,3 +1441,18 @@ function getMainCategory($limit=4,$orderBy = 'sort', $asc = 'ASC')
 {
     return \App\Models\Category::whereNull('parent_id')->limit($limit)->orderBy($orderBy,$asc)->get();
 }
+
+
+/**
+ * get group's posts by setting key
+ * @param $key
+ * @param integer $limit
+ * @param string $order
+ * @param string $dir
+ * @return \App\Models\Post[]|\Illuminate\Database\Eloquent\Collection|\LaravelIdea\Helper\App\Models\_IH_Post_C
+ */
+function getSubGroupSetting($key, $limit = 10, $order = 'id', $dir = "DESC")
+{
+    return Group::where('id', getSetting($key) ?? 1)->first()
+        ->children()->orderBy($order, $dir)->limit($limit)->get();
+}
