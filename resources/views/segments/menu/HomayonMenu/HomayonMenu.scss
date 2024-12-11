@@ -208,6 +208,29 @@
             display: block !important;
         }
 
+        .logo-container{
+            width: 120px !important;
+            height: 120px !important;
+            margin: 25px 40px !important;
+            img{
+                width: 70px;
+            }
+        }
+
+        .homayon-logo{
+            width: 200px;
+            height: 175px;
+            background-size: 100%;
+            top: 70px;
+        }
+
+        .homayon-middle{
+            padding: .5rem;
+            ul li{
+                padding: 0 .3rem !important;
+                width: auto;
+            }
+        }
         .homayon-bottom {
             display: none;
         }
