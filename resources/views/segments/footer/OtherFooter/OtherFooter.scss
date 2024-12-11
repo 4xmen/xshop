@@ -1,15 +1,17 @@
 
 .OtherFooter {
 
-    #mapcContainer{
+    #mapcContainer {
         height: 340px;
         position: relative;
         z-index: 88;
-        &.dark-mode{
+
+        &.dark-mode {
             filter: invert(100%) hue-rotate(120deg) brightness(95%) contrast(90%);
         }
     }
-    .footer-logo{
+
+    .footer-logo {
         width: 100px;
     }
 
@@ -19,8 +21,10 @@
         background: var(--xshop-primary);
         color: #ffffff;
     }
+
     .channle {
         position: relative;
+
         &::after {
             position: absolute;
             content: "";
@@ -29,58 +33,69 @@
             top: 73%;
             margin-top: -1px;
             background: #ffffff14;
-            right: 73px;
+            inset-inline-end: 73px;
             margin-right: 64px;
         }
     }
+
     .form-control {
         &:focus {
-            color:  #495057;
+            color: #495057;
             background-color: #ffffff;
             outline: 0;
             -webkit-box-shadow: none;
             box-shadow: none !important;
         }
     }
+
     h4 {
         color: #ffffff;
     }
+
     p {
         color: #b3b3b3;
         font-weight: 300;
     }
+
     a {
         color: #ffffff;
     }
+
     .footer-copyright2 {
         border-top: 1px solid #fffdfd26;
     }
+
     footer {
         background: #282f36;
         position: relative;
-        text-align: right;
+        text-align: start;
+
         iframe {
             height: 240px;
         }
+
         .gallery {
             flex-basis: 30%;
         }
+
         .form {
             form {
                 margin-bottom: -70px;
                 transform: translateY(-160px);
-                background-color:  #ffffff;
+                background-color: #ffffff;
                 width: 473px;
-                text-align: right;
+                text-align: start;
                 height: fit-content;
                 padding: 15px;
                 border-radius: 8px;
                 box-shadow: 0 5px 15px rgba(0, 0, 0, 0.25);
                 position: relative;
                 z-index: 99;
+
                 div {
                     position: relative;
                     direction: rtl;
+
                     label {
                         display: flex;
                         font-size: 14px;
@@ -89,93 +104,115 @@
                         position: absolute;
                         color: #6c757d;
                         transition: 320ms;
-                        text-align: right;
+                        text-align: start;
                         transform: translateY(-18px);
                         padding: 0 8px;
                         background: #Fff;
                     }
+
                     label.active {
                         background-color: #ffffff;
                         width: fit-content;
-                        text-align: right;
+                        text-align: start;
                     }
+
                     input {
                         margin: 46px 0;
                         overflow: hidden;
-                        text-align: right;
+                        text-align: start;
                         background: rgba(255, 255, 255, 0.075);
                         padding: 24px 15px;
-                        color:  #aaa;
+                        color: #aaa;
                         font-size: 14px;
                         border-radius: 5px;
                         transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
                         transition-delay: 0.2s;
                         width: 100%;
                     }
+
                     textarea {
                         margin: 25px 0;
                         border: 1px solid #6c757d;
                         padding: 15px 15px;
                     }
                 }
+
                 * {
                     margin: 0;
                     padding: 0;
                 }
             }
         }
+
         .address {
             flex-basis: 30%;
+
             .address-box {
+                overflow: hidden;
                 background-color: rgba(0, 0, 0, 0.25);
                 padding: 14px 27px;
                 position: relative;
-                height: 277px;
+                min-height: 277px;
                 box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+
                 &:before {
                     content: "";
                     position: absolute;
-                    right: 0;
+                    inset-inline-end: 0;
                     width: 3px;
                     height: 80%;
                     top: 10%;
                     background-color: var(--xshop-primary);
                 }
+
                 span {
                     margin-left: 10px;
                 }
+
                 p {
                     font-size: 14px;
                     margin: 33px 0;
                 }
+
                 .icons {
                     display: flex;
                     align-items: center;
                     justify-content: space-between;
                     margin: 15px 0;
                 }
+
+                &.second:before {
+                    inset-inline-start: 0;
+                    inset-inline-end: auto;
+                }
             }
+
         }
     }
+
     @media (max-width: 968px) {
         footer {
             iframe {
                 height: auto;
             }
+
             .gallery {
                 order: 2;
                 margin: 15px 0;
             }
+
             .form {
 
                 width: 100%;
                 margin: 15px 0;
+
                 form {
                     transform: translateY(0);
                     width: 100%;
                     order: 0;
                 }
             }
+
             .address {
                 .address-box {
                     margin: 15px 0;

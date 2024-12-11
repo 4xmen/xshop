@@ -62,7 +62,7 @@
                         </form>
                     </div>
                     <div class="address mt-3" >
-                        <div class="address-box">
+                        <div class="address-box second">
                             <h4>
                                 {{getSetting($data->area_name.'_'.$data->part.'_title')}}
                             </h4>

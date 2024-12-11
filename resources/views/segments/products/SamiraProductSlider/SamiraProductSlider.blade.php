@@ -1,4 +1,4 @@
-<section id='SamiraProductSlider'>
+<section id='SamiraProductSlider' class='live-setting' data-live="{{$data->area_name.'_'.$data->part}}">
     <div class="{{gfx()['container']}}">
         <div id="samira-container">
             <div id="sam-nxt" class="sld-btn">

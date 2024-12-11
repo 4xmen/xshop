@@ -68,7 +68,7 @@ class SamiraProductSlider
     {
         Setting::where('key',$part->area_name . '_' . $part->part.'_title')->first()?->delete();
         Setting::where('key',$part->area_name . '_' . $part->part.'_category')->first()?->delete();
-        Setting::where('key',$part->area_name . '_' . $part->part.'bg')->first()?->delete();
+        Setting::where('key',$part->area_name . '_' . $part->part.'_bg')->first()?->delete();
         Setting::where('key',$part->area_name . '_' . $part->part.'_webp')->first()?->delete();
 
     }
