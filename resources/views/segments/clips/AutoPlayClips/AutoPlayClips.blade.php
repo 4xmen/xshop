@@ -4,7 +4,7 @@
             {{getSetting($data->area_name.'_'.$data->part.'_title')}}
         </h1>
         <div class="autoplay-clip-list">
-        @foreach(\App\Models\Clip::where('status',1)->get() as $clip)
+        @foreach(\App\Models\Clip::where('status',1)->orderByDesc('id')->limit(4)->get() as $clip)
             <div class="autoplay-clip-item">
                 <a href="{{$clip->webUrl()}}">
                     <i class="ri-play-circle-line"></i>
