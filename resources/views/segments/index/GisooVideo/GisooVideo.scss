@@ -1,5 +1,6 @@
 .GisooVideo {
     position: relative;
+    min-height: 60vh;
     &:before{
         position: absolute;
         content: ' ';
@@ -29,6 +30,18 @@
         position: relative;
         width: 100%;
         z-index: 60;
+        min-height: 60vh;
+        object-fit: cover;
+    }
+
+    /*-500px width*/
+    @media (max-width: 500px) {
+        &:before{
+            right: -45%;
+        }
+        &:after{
+            left: -45%;
+        }
     }
 
 }
