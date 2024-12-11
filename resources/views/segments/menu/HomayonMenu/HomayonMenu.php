@@ -39,7 +39,7 @@ class HomayonMenu
         $setting->value = '#dddddd';
         $setting->type = 'COLOR';
         $setting->data = json_encode(['name' => 'homayon-bg']);
-        $setting->size = 6;
+        $setting->size = 4;
         $setting->title =  $part->area_name . ' ' . $part->part .' background color';
         $setting->save();
 
@@ -49,8 +49,19 @@ class HomayonMenu
         $setting->value = gfx()['primary'];
         $setting->type = 'COLOR';
         $setting->data = json_encode(['name' => 'homayon-bg-menu']);
-        $setting->size = 6;
+        $setting->size = 4;
         $setting->title =  $part->area_name . ' ' . $part->part .' background color';
+        $setting->save();
+
+
+        $setting = new Setting();
+        $setting->section = 'theme';
+        $setting->key = $part->area_name . '_' . $part->part.'_btn';
+        $setting->value = 1;
+        $setting->size = 4;
+        $setting->type = 'CHECKBOX';
+//        $setting->data = json_encode(['xmin' => 2, 'xmax' => 90]);
+        $setting->title =  $part->area_name . ' ' . $part->part. ' shop btn';
         $setting->save();
 
 
@@ -66,6 +77,7 @@ class HomayonMenu
         Setting::where('key',$part->area_name . '_' . $part->part.'_bg')->first()?->delete();
         Setting::where('key',$part->area_name . '_' . $part->part.'_bg2')->first()?->delete();
         Setting::where('key',$part->area_name . '_' . $part->part.'_menu')->first()?->delete();
+        Setting::where('key',$part->area_name . '_' . $part->part.'_btn')->first()?->delete();
     }
     public static function onMount(Part $part = null)
     {
