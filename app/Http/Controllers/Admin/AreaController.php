@@ -40,7 +40,8 @@ class AreaController extends Controller
             }
         }
 
-        return view('admin.areas.area-design', compact('area', 'valids'));
+        return response()->view('admin.areas.area-design', compact('area', 'valids'))
+            ->header('Cache-Control','public, max-age=31536000, immutable');
     }
 
     public function designModel(Area $area, $model, $id)
