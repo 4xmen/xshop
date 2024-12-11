@@ -1,6 +1,6 @@
-#CurveCategories {
+#CurvePosts {
     position: relative;
-    background: var(--curve-slider-bg);
+    background: var(--curve-posts-slider-bg);
 
 
     h1{
@@ -10,7 +10,7 @@
         font-size: 30px;
         font-weight: 300;
     }
-    #curve-cat-top, #curve-cat-bottom {
+    #curve-post-top, #curve-post-bottom {
         height: 10rem;
         position: relative;
         background: transparent;
@@ -18,7 +18,7 @@
 
     }
 
-    #curve-cat-top {
+    #curve-post-top {
 
         margin-bottom: -4.5rem;
 
@@ -38,7 +38,7 @@
 
     }
 
-    #curve-cat-bottom {
+    #curve-post-bottom {
         margin-top: -2.5rem;
         z-index: 10;
 
@@ -55,10 +55,10 @@
         }
     }
 
-    #curve-slider-cat-container {
+    #curve-slider-post-container {
         height: 35vh;
 
-        #curve-slider-cat{
+        #curve-slider-post{
             //width: 100vw;
             //left: 0;
             //right: 0;
@@ -79,18 +79,18 @@
         }
 
         &:before {
-            background: linear-gradient(90deg, var(--curve-slider-bg) 20%, rgba(0, 0, 0, 0) 100%);
+            background: linear-gradient(90deg, var(--curve-posts-slider-bg) 20%, rgba(0, 0, 0, 0) 100%);
             left: 0;
         }
 
         &:after {
-            background: linear-gradient(-90deg, var(--curve-slider-bg) 20%, rgba(0, 0, 0, 0) 100%);
+            background: linear-gradient(-90deg, var(--curve-posts-slider-bg) 20%, rgba(0, 0, 0, 0) 100%);
             right: 0;
         }
 
 
         .sld-btn,.tns-nav{
-            z-index: 70;
+            z-index: 90;
             position: absolute;
             top: 75%;
             cursor: pointer;
@@ -99,11 +99,11 @@
             }
         }
 
-        #crc-nxt{
+        #crp-nxt{
             right:calc(50% - 120px);
             transform: translateX(-50%);
         }
-        #crc-prv{
+        #crp-prv{
             left:calc(50% - 120px);
             transform: translateX(50%);
         }
@@ -133,7 +133,7 @@
         }
     }
 
-    .curve-cat-item {
+    .curve-post-item {
         height: 35vh;
         position: relative;
         img {
@@ -167,5 +167,27 @@
 
     }
 
+    #curve-all-posts{
+        background: #ffffff;
+        color: black;
+        position: absolute;
+        right: 30%;
+        top: 175px;
+        z-index: 98;
+        width: 45px;
+        height: 45px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        opacity: .35;
+
+        &:hover{
+            opacity: 1;
+        }
+        i{
+            font-size: 30px;
+        }
+    }
 
 }
