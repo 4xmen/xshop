@@ -20,9 +20,13 @@
                     </ul>
                 </div>
                 <div class="col-6 text-end">
+                    @if(getSetting($data->area_name.'_'.$data->part.'_btn'))
                     <a href="{{route('client.products')}}" class="btn btn-primary mt-5">
                         {{getSetting($data->area_name.'_'.$data->part.'_title')}}
                     </a>
+                    @else
+                        &nbsp;
+                    @endif
                 </div>
             </div>
         </div>
