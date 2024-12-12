@@ -2,7 +2,7 @@
     <div class="homayon-logo"
          style="background-image: url('{{asset('upload/images/'.$data->area_name.'.'.$data->part.'.svg')}}')">
         <div class="logo-container">
-            <a href="{{route('/client.welcome')}}">
+            <a href="{{route('client.welcome')}}">
                 <img src="{{asset('upload/images/logo.png')}}" alt="logo">
             </a>
         </div>
