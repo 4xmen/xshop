@@ -7,6 +7,8 @@ use App\Http\Controllers\XController;
 use App\Http\Requests\GroupSaveRequest;
 use App\Models\Access;
 use App\Models\Group;
+use App\Models\Item;
+use App\Models\Setting;
 use Illuminate\Http\Request;
 use App\Helper;
 use Spatie\Image\Enums\AlignPosition;
@@ -162,6 +164,14 @@ class GroupController extends XController
 
     public function destroy(Group $item)
     {
+        if (Setting::where('type','GROUP')->where('raw',$item->id)->count() > 0){
+            $msg = __("You can't delete this item while using it in setting.");
+            return redirect()->back()->withErrors($msg);
+        }
+        if (Item::where('menuable_type',Group::class)->where('menuable_type',$item->id)->count() > 0){
+            $msg = __("You can't delete this item while using it in menu.");
+            return redirect()->back()->withErrors($msg);
+        }
         return parent::delete($item);
     }
 
