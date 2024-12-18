@@ -19,6 +19,11 @@
 - Developer Friendlier
 
 
+## Documentation
+
+- [ 📄 **Full document** 📄 ](https://4xmen.github.io/xshop/#/)
+- [🇮🇷 Persian read me](README-fa.md)
+
 
 ## Installation [ Development mode ]
 
