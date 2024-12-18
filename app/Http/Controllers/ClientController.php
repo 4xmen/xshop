@@ -868,4 +868,28 @@ class ClientController extends Controller
             'message' => __('Your rate registered'),
         ];
     }
+
+
+    public function postRss(){
+        // Fetch the latest posts from the database
+        $posts = Post::orderBy('created_at', 'desc')->take(10)->get(); // Adjust the number of posts as needed
+
+        $xmlContent = '<?xml version="1.0" encoding="UTF-8" ?>' . PHP_EOL;
+        $xmlContent .= view('website.rss.post',compact('posts'))->render(); // Render the view and append to XML content
+
+        // Return the XML response
+        return response($xmlContent, 200)
+            ->header('Content-Type', 'text/xml');
+    }
+    public function productRss(){
+        // Fetch the latest products from the database
+        $products = Product::orderBy('created_at', 'desc')->take(10)->get(); // Adjust the number of posts as needed
+
+        $xmlContent = '<?xml version="1.0" encoding="UTF-8" ?>' . PHP_EOL;
+        $xmlContent .= view('website.rss.product',compact('products'))->render(); // Render the view and append to XML content
+
+        // Return the XML response
+        return response($xmlContent, 200)
+            ->header('Content-Type', 'text/xml');
+    }
 }

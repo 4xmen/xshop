@@ -10,6 +10,8 @@
         <meta name="robots" content="noindex">
     @else
         <meta name="robots" content="follow,index">
+        <link rel="alternate" type="application/rss+xml" title="{{__("Post RSS Feed")}}" href="{{route('rss.post')}}" />
+        <link rel="alternate" type="application/rss+xml" title="{{__("Product RSS Feed")}}" href="{{route('rss.product')}}" />
     @endif
 
     <meta name="generator" content="xShop; version={{config('app.version')}}">

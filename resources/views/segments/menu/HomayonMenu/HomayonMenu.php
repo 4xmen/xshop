@@ -16,7 +16,7 @@ class HomayonMenu
         $setting->section = 'theme';
         $setting->key = $part->area_name . '_' . $part->part.'_title';
         $setting->value = __("Shop");
-        $setting->size = 6;
+        $setting->size = 4;
         $setting->type = 'TEXT';
 //        $setting->data = json_encode(['xmin' => 2, 'xmax' => 90]);
         $setting->title =  $part->area_name . ' ' . $part->part. ' title';
@@ -27,11 +27,22 @@ class HomayonMenu
         $setting->key = $part->area_name . '_' . $part->part.'_menu';
         $setting->value = Menu::first()->id;
         $setting->type = 'MENU';
-        $setting->size = 6;
+        $setting->size = 4;
         $setting->title =  $part->area_name . ' ' . $part->part .' menu';
         $setting->save();
 
 
+
+
+        $setting = new Setting();
+        $setting->section = 'theme';
+        $setting->key = $part->area_name . '_' . $part->part.'_color';
+        $setting->value = '#ffffff';
+        $setting->type = 'COLOR';
+        $setting->data = json_encode(['name' => 'homayon-color']);
+        $setting->size = 4;
+        $setting->title =  $part->area_name . ' ' . $part->part .' menu text color';
+        $setting->save();
 
         $setting = new Setting();
         $setting->section = 'theme';
@@ -74,6 +85,7 @@ class HomayonMenu
     {
 
         Setting::where('key',$part->area_name . '_' . $part->part.'_title')->first()?->delete();
+        Setting::where('key',$part->area_name . '_' . $part->part.'_color')->first()?->delete();
         Setting::where('key',$part->area_name . '_' . $part->part.'_bg')->first()?->delete();
         Setting::where('key',$part->area_name . '_' . $part->part.'_bg2')->first()?->delete();
         Setting::where('key',$part->area_name . '_' . $part->part.'_menu')->first()?->delete();
