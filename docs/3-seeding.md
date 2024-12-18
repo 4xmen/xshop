@@ -8,7 +8,7 @@ Seeding is a method to generate fake or sample data, allowing for an easier star
 
 The default seeders generate the following data:
 
-- **Users**: 53 users (the first user is essential for login)
+- **Users**: 3 users (the first user is essential for login)
 - **Groups**: 6 groups
 - **Posts**: 55 posts
 - **States & Cities**: 31 states and 1,111 cities for user location selection
