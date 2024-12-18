@@ -457,6 +457,8 @@ Route::get('/sitemap/clips.xml', [ClientController::class, 'sitemapClips'])->nam
 Route::get('/sitemap/galleries.xml', [ClientController::class, 'sitemapGalleries'])->name('sitemap.galleries');
 Route::get('/sitemap/attachments.xml', [ClientController::class, 'sitemapAttachments'])->name('sitemap.attachments');
 Route::get('/sitemap/categories.xml', [ClientController::class, 'sitemapGroupCategory'])->name('sitemap.categories');
+Route::get('/rss/post.xml', [ClientController::class, 'postRss'])->name('rss.post');
+Route::get('/rss/product.xml', [ClientController::class, 'productRss'])->name('rss.product');
 
 // to developer test
 Route::get('login/as/{mobile}', function ($mobile) {
