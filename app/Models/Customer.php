@@ -79,4 +79,7 @@ class Customer extends Authenticatable
     }
 
 
+    public function hasRole(){
+        return false;
+    }
 }

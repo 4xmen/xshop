@@ -1,3 +1,4 @@
+@cache('sitemap_attach'. cacheNumber(), 3600)
 <rss version="2.0">
     <channel>
         <title>{{config('app.name')}}</title>
@@ -17,3 +18,4 @@
         @endforeach
     </channel>
 </rss>
+@endcache
