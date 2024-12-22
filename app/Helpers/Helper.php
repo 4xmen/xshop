@@ -6,6 +6,7 @@ use App\Models\Group;
 use App\Models\Category;
 use App\Models\Area;
 use App\Models\Part;
+use App\Models\Post;
 use App\Models\Menu;
 use App\Models\Product;
 use App\Models\Rate;
@@ -899,6 +900,23 @@ function getProductsQueryBySetting($key, $limit = 10)
     }else{
         $q = Category::where('id', $data[0])->first()
             ->products()->where('status', 1);
+    }
+    return $q->orderBy($data[1], $data[2])->limit($limit)->get();
+}
+/**
+ * get posts by setting key
+ * @param $key
+ * @param integer $limit
+ * @return \App\Models\Post[]|\Illuminate\Database\Eloquent\Collection|\LaravelIdea\Helper\App\Models\_IH_Post_C
+ */
+function getPostsQueryBySetting($key, $limit = 10)
+{
+    $data = explode(',', getSetting($key) ?? '1,id,DESC');
+    if ($data[0] == 0) {
+        $q = Post::where('status', 1);
+    }else{
+        $q = Group::where('id', $data[0])->first()
+            ->posts()->where('status', 1);
     }
     return $q->orderBy($data[1], $data[2])->limit($limit)->get();
 }

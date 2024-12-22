@@ -5,11 +5,13 @@
         </h1>
 
     </div>
+
     <div id="posts-slider-container">
 
         <div id="posts-slider">
 
-            @foreach( getGroupPostsBySetting($data->area_name.'_'.$data->part.'_group',10) as $post )
+
+            @foreach( getPostsQueryBySetting($data->area_name.'_'.$data->part.'_query',10) as $post )
                 <div class="item slider-content">
                     <div class="post-slider">
 
@@ -23,5 +25,12 @@
                 </div>
             @endforeach
         </div>
+
+    </div>
+    <div id="pst-nxt" class="sld-btn">
+        <i class="ri-arrow-right-line"></i>
+    </div>
+    <div id="pst-prv" class="sld-btn">
+        <i class="ri-arrow-left-line"></i>
     </div>
 </section>

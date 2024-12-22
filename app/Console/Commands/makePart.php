@@ -77,7 +77,7 @@ class makePart extends Command
 }
 DOC;
 
-        file_put_contents($folderPath . '/' . $part . '.blade.php', "<section class='{$part}'></section>");
+        file_put_contents($folderPath . '/' . $part . '.blade.php',  str_replace('THEME_PART_NAME',$part,'<section class="THEME_PART_NAME live-setting" data-live="{{$data->area_name.\'_\'.$data->part}}" ></section>'));
         file_put_contents($folderPath . '/' . $part . '.js', '');
         file_put_contents($folderPath . '/' . $part . '.json', json_encode($detail,JSON_PRETTY_PRINT));
         file_put_contents($folderPath . '/' . ucfirst($part) . '.php', $handler);

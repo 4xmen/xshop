@@ -151,7 +151,7 @@
                     </span>
                     <searchable-select
                         @error($setting->key) :err="true" @enderror
-                    :items='@json($groups)'
+                    :items='@json($groupz)'
                         title-field="name"
                         value-field="id"
                         xlang="{{config('app.locale')}}"
