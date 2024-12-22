@@ -14,7 +14,7 @@ class Setting extends Model
 
     public static $settingTypes = ['TEXT', 'NUMBER', 'LONGTEXT', 'CODE', 'EDITOR',
         'CATEGORY', 'GROUP', 'CHECKBOX', 'FILE', 'COLOR', 'SELECT', 'MENU', 'LOCATION',
-        'ICON','DATE','DATETIME','TIME'];
+        'ICON','DATE','DATETIME','TIME','PRODUCT_QUERY','POST_QUERY'];
 
     public function getData()
     {
