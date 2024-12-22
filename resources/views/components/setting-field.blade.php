@@ -97,7 +97,7 @@
             @break
         @case('PRODUCT_QUERY')
             <div class="row">
-                @php($vals = explode(',',old($setting->key,$setting->value??null)))
+                @php($vals = explode(',',old($setting->key,$setting->value??'0,id,DESC')))
                 <div class="col-md">
 
                     <span>
@@ -143,7 +143,7 @@
             @break
         @case('POST_QUERY')
             <div class="row">
-                @php($vals = explode(',',old($setting->key,$setting->value??null)))
+                @php($vals = explode(',',old($setting->key,$setting->value??'0,id,DESC')))
                 <div class="col-md">
 
                     <span>
@@ -169,10 +169,7 @@
                     <select name="{{$setting->key}}[item]" id="{{$setting->key}}i" class="form-control">
                         <option value="id"> {{__("ID")}} </option>
                         <option value="view" @if($vals[1] == 'view') selected @endif> {{__("View")}} </option>
-                        <option value="sell" @if($vals[1] == 'sell') selected @endif> {{__("Sell")}} </option>
-                        <option value="average_rating" @if($vals[1] == 'average_rating') selected @endif> {{__("Rate")}} </option>
-                        <option value="price" @if($vals[1] == 'price') selected @endif> {{__("Price")}} </option>
-                        <option value="stock_quantity" @if($vals[1] == 'stock_quantity') selected @endif> {{__("Stock quantity")}} </option>
+                        <option value="like" @if($vals[1] == 'like') selected @endif> {{__("Like")}} </option>
                         <option value="updated_at" @if($vals[1] == 'updated_at') selected @endif> {{__("Update")}} </option>
                     </select>
                 </div>
