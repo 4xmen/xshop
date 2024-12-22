@@ -16,7 +16,7 @@
                                     {{ item[titleField] }}
                                 </template>
                                 <template v-else>
-                                    {{ item[titleField][xlang] }}
+                                    {{ item[titleField]?.[xlang] ?? item[titleField] }}
                                 </template>
                             </li>
                         </template>
@@ -39,7 +39,7 @@
                         {{ item[titleField] }}
                     </template>
                     <template v-else>
-                        {{ item[titleField][xlang] }}
+                        {{ item[titleField]?.[xlang] ?? item[titleField] }}
                     </template>
                 </option>
             </select>

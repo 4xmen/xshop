@@ -17,7 +17,7 @@
                                     {{ item[titleField] }}
                                 </template>
                                 <template v-else>
-                                    {{ item[titleField][xlang] }}
+                                    {{ item[titleField]?.[xlang] ?? item[titleField] }}
                                 </template>
 
                             </li>
@@ -39,7 +39,7 @@
                                     {{ item[titleField] }}
                         </template>
                         <template v-else>
-                            {{ item[titleField][xlang] }}
+                            {{ item[titleField]?.[xlang] ?? item[titleField] }}
                         </template>
                         <i class="ri-close-line" @click="rem(item[valueField])"></i>
                     </span>
