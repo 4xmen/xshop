@@ -1,0 +1,51 @@
+.ProductsSlider {
+    // scss
+    position: relative;
+
+    h1{
+        font-size: 30px;
+        font-weight: 300;
+        text-align: center;
+        margin-bottom: 1rem;
+    }
+
+    background: #00000011;
+    padding: 4rem 0 2rem;
+
+    .slider-content{
+        padding: 1rem .5rem;
+        margin-bottom: 2rem;
+
+        img{
+            height: 40vh;
+            object-fit: cover;
+        }
+    }
+
+    .tns-nav{
+        position: absolute;
+        display: flex !important;
+        width: 200px;
+        left: 50%;
+        height: 50px;
+        bottom: .5rem;
+        transform: translateX(-50%);
+
+        align-items: center;
+        justify-content: space-evenly;
+        button{
+            display: inline-block;
+            margin: 3px;
+            width: 10px;
+            height: 10px;
+            border-radius: var(--xshop-border-radius);
+            background: #ffffff;
+            border: 0;
+        }
+
+        .tns-nav-active{
+
+            background: var(--xshop-primary);
+        }
+    }
+}
