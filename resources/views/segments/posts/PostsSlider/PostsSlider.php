@@ -10,24 +10,27 @@ class PostsSlider
 {
     public static function onAdd(Part $part = null)
     {
+
+        $setting = new Setting();
+        $setting->section = 'theme';
+        $setting->key = $part->area_name . '_' . $part->part.'_query';
+        $setting->value = Group::first()->id.',id,DESC';
+        $setting->size = 6;
+        $setting->type = 'POST_QUERY';
+        $setting->title =  $part->area_name . ' ' . $part->part. ' query';
+        $setting->save();
+
+
         $setting = new Setting();
         $setting->section = 'theme';
         $setting->key = $part->area_name . '_' . $part->part.'_title';
         $setting->value = 'Lorem ipsum dolor sit amet';
         $setting->type = 'TEXT';
-        $setting->size = 12;
+        $setting->size = 6;
         $setting->title =  $part->area_name . ' ' . $part->part .' title';
         $setting->save();
 
-        $setting = new Setting();
-        $setting->section = 'theme';
-        $setting->key = $part->area_name . '_' . $part->part.'_group';
-        $setting->value = Group::first()->id;
-        $setting->size = 6;
-        $setting->type = 'GROUP';
-//        $setting->data = json_encode(['xmin' => 2, 'xmax' => 90]);
-        $setting->title =  $part->area_name . ' ' . $part->part. ' group';
-        $setting->save();
+
 
 
 
