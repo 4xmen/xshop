@@ -46,7 +46,7 @@ window.addEventListener('load', function () {
             console.error('Error sending data:', error);
         });
     } else {
-        console.log('Data was sent recently. Skipping this time.');
+        // console.log('Data was sent recently. Skipping this time.');
     }
 
 

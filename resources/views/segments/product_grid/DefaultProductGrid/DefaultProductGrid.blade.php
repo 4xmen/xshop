@@ -29,7 +29,7 @@
         <div class="p-2">
             @if($product->stock_status == 'IN_STOCK')
                 <a href="{{ route('client.product-card-toggle',$product->slug) }}"
-                   class="btn btn-primary add-to-card">
+                   class="btn btn-primary add-to-card w-100">
                     <i class="ri-shopping-bag-3-line"></i>
                     {{__("Add to card")}}
                 </a>
