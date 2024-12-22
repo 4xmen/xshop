@@ -872,17 +872,35 @@ function getGroupPostsBySetting($key, $limit = 10, $order = 'id', $dir = "DESC")
 }
 
 /**
- * get group's posts by setting key
+ * get category's products by setting key
  * @param $key
  * @param integer $limit
  * @param string $order
  * @param string $dir
- * @return \App\Models\Post[]|\Illuminate\Database\Eloquent\Collection|\LaravelIdea\Helper\App\Models\_IH_Post_C
+ * @return \App\Models\Category[]|\Illuminate\Database\Eloquent\Collection|\LaravelIdea\Helper\App\Models\_IH_Post_C
  */
 function getCategoryProductBySetting($key, $limit = 10, $order = 'id', $dir = "DESC")
 {
     return Category::where('id', getSetting($key) ?? 1)->first()
         ->products()->where('status', 1)->orderBy($order, $dir)->limit($limit)->get();
+}
+
+/**
+ * get  products by setting key
+ * @param $key
+ * @param integer $limit
+ * @return \App\Models\Product[]|\Illuminate\Database\Eloquent\Collection|\LaravelIdea\Helper\App\Models\_IH_Post_C
+ */
+function getProductsQueryBySetting($key, $limit = 10)
+{
+    $data = explode(',', getSetting($key) ?? '1,id,DESC');
+    if ($data[0] == 0) {
+        $q = Product::where('status', 1);
+    }else{
+        $q = Category::where('id', $data[0])->first()
+            ->products()->where('status', 1);
+    }
+    return $q->orderBy($data[1], $data[2])->limit($limit)->get();
 }
 
 /**
