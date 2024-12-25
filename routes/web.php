@@ -182,6 +182,8 @@ Route::prefix(config('app.panel.prefix'))->name('admin.')->group(
                         Route::get('restore/{item}', [\App\Http\Controllers\Admin\PostController::class, 'restore'])->name('restore');
                         Route::post('bulk', [\App\Http\Controllers\Admin\PostController::class, "bulk"])->name('bulk');
                         Route::get('trashed', [\App\Http\Controllers\Admin\PostController::class, "trashed"])->name('trashed');
+                        Route::get('group/edit/{id}', [\App\Http\Controllers\Admin\PostController::class, 'groupEdit'])->name('group-edit');
+                        Route::post('group/save/{item}', [\App\Http\Controllers\Admin\PostController::class, 'groupSave'])->name('group-save');
                     });
                 Route::prefix('attachments')->name('attachment.')->group(
                     function () {

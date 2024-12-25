@@ -10,6 +10,17 @@ document.addEventListener('DOMContentLoaded', function () {
 
         });
     });
+    document.querySelectorAll('.edit-group-btn')?.forEach(function (el) {
+        el.setAttribute('href', '#group-category');
+        el.addEventListener('click', function (e) {
+            e.preventDefault();
+            let id = this.closest('tr').querySelector('input.chkbox').getAttribute('value');
+            const url = document.querySelector('#group-edit-url').value + id;
+            document.querySelector('#iframe-modal iframe').setAttribute('src', url);
+            document.querySelector('#iframe-modal').style.display = 'block';
+
+        });
+    });
 
     document.querySelector('#iframe-modal')?.addEventListener('click', function (e) {
         if (e.target == this) {

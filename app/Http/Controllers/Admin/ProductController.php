@@ -226,6 +226,11 @@ class ProductController extends XController
         return view('admin.products.category-edit', compact('product', 'cats'));
     }
 
+    /**
+     * @param Product $item
+     * @param Request $request
+     * @return array|\Illuminate\Http\RedirectResponse
+     */
     public function categorySave(Product $item, Request $request)
     {
         $item->categories()->sync($request->input('cat'));
