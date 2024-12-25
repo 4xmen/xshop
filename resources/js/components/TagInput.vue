@@ -7,9 +7,18 @@
              </span>
             <input type="text" v-model="tag" :id="xid"
                    @keyup.enter.prevent="addTag"
+                   @keyup="checkAutoComplete"
+                   @keyup.down.prevent="incIndex"
+                   @keyup.up.prevent="decIndex"
                    @focus="disableSubmit"
                    @blur="enableSubmit" :placeholder="xtitle">
             <input :name="xname" type="hidden" :value="tags.join(splitter)">
+            <ul id="search-list" v-if="searchList.length > 0">
+                <li v-for="(word,i) in searchList" @click="selectTag(i)" :class="selectedIndex == i?'selected':''">
+                    <i class="ri-price-tag-3-line float-start mx-2" ></i>
+                    {{word}}
+                </li>
+            </ul>
         </div>
     </div>
 </template>
@@ -26,6 +35,8 @@ export default {
         return {
             tag: '',
             tags: [],
+            searchList:[],
+            selectedIndex: -1,
         }
     },
     emits: ['update:modelValue'],
@@ -58,6 +69,10 @@ export default {
             },
             type: Function,
         },
+        autoComplete:{
+            default: '',
+            type: String,
+        }
     },
     mounted() {
         if (this.modelValue != null) {
@@ -72,9 +87,18 @@ export default {
     computed: {},
     methods: {
         addTag(e) {
+            if (this.selectedIndex > -1 && (this.selectedIndex + 1) < this.searchList.length ){
+                this.tags.push(this.searchList[this.selectedIndex]) ;
+                this.tag = '';
+                this.searchList = [];
+                this.checkDuplicate();
+                this.$emit('update:modelValue', this.tags.join(this.splitter));
+                return;
+            }
             if (this.tag.trim()) { // Check if the input is not empty
                 this.tags.push(this.tag.trim()); // Add the trimmed tag
                 this.tag = ''; // Reset the input
+                this.checkDuplicate();
                 this.$emit('update:modelValue', this.tags.join(this.splitter));
             }
         },
@@ -89,6 +113,32 @@ export default {
         rem(tag){
             this.tags.splice(this.tags.indexOf(tag),1);
             this.$emit('update:modelValue', this.tags.join(this.splitter));
+        },
+        async checkAutoComplete(e){
+
+            if (this.autoComplete !== '' && this.tag.length > 2){
+              let resp = await axios.get(this.autoComplete + this.tag);
+                if (resp.data.OK == true){
+                    this.searchList = resp.data.data;
+                }
+            }
+
+        },
+        selectTag(i,e){
+            this.tags.push(this.searchList[i]) ;
+            this.tag = '';
+            this.searchList = [];
+            this.checkDuplicate();
+            this.$emit('update:modelValue', this.tags.join(this.splitter));
+        },
+        incIndex(){
+            this.selectedIndex++;
+        },
+        decIndex(){
+            this.selectedIndex--;
+        },
+        checkDuplicate(){
+            this.tags = [...new Set(this.tags)];
         }
     }
 }
@@ -125,5 +175,24 @@ export default {
 
 .tag-select i:hover {
     color: red;
+}
+
+#search-list{
+    padding: 0;
+    list-style: none;
+    li{
+        border-bottom: 1px solid silver;
+        padding: 4px;
+
+        &:last-child{
+            border-bottom: 0;
+        }
+
+        &.selected{
+            background: olive;
+        }
+    }
+    border: 1px solid grey;
+    border-radius: 6px;
 }
 </style>
