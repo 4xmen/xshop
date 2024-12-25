@@ -57,6 +57,7 @@
                                @if(isset($item))
                                xvalue="{{old('title',implode(',,',$item->tags->pluck('name')->toArray()??''))}}"
                                @endif
+                        auto-complete="{{route('v1.tag.search','')}}/"
                     ></tag-input>
 {{--                    <input type="text" name="tags" class="taggble" @if(isset($item))--}}
 {{--                        value="{{implode(',',$item->tag_names)}}"--}}
