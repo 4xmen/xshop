@@ -34,6 +34,8 @@ class PostController extends XController
             ['title' => "Detail", 'class' => 'btn-outline-light', 'icon' => 'ri-eye-line'],
         'destroy' =>
             ['title' => "Remove", 'class' => 'btn-outline-danger delete-confirm', 'icon' => 'ri-close-line'],
+        'group' =>
+            ['title' => "Edit group", 'class' => 'btn-outline-light edit-group-btn', 'icon' => 'ri-list-check-3'],
     ];
 
 
@@ -164,4 +166,33 @@ class PostController extends XController
         return parent::restoreing(Post::withTrashed()->where('id', $item)->first());
     }
     /*restore**/
+
+
+    /**
+     * @param $id Post's id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Foundation\Application|\Illuminate\View\View
+     */
+    public function groupEdit($id)
+    {
+
+        $post = Post::find($id);
+        $groups = Group::all(['id', 'name', 'parent_id']);
+        return view('admin.posts.group-edit', compact('post', 'groups'));
+    }
+
+    /**
+     * @param Post $item
+     * @param Request $request
+     * @return array|\Illuminate\Http\RedirectResponse
+     */
+    public function groupSave(Post $item, Request $request)
+    {
+        $item->groups()->sync($request->input('cat'));
+        logAdmin(__METHOD__, __CLASS__, $item->id);
+        if ($request->ajax()) {
+            return ['OK' => true, 'message' => __('Groups saved successfully')];
+        } else {
+            return redirect()->back()->with(['message' => __('Groups saved successfully')]);
+        }
+    }
 }
