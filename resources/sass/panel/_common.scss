@@ -474,3 +474,34 @@ a.btn,a.action-btn,a.circle-btn{
     }
 
 }
+
+.nested-ul{
+    list-style: none;
+    ul{
+        list-style: none;
+    }
+    input[type='checkbox']{
+        margin: 0 1rem;
+    }
+}
+
+
+#iframe-modal{
+    background: #00000011;
+    backdrop-filter: blur(10px);
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    z-index: 999;
+    padding-top: 5vh;
+    display: none;
+
+    iframe{
+        border: 0;
+        height: 90vh;
+        width: 100%;
+        border-radius: 1rem;
+    }
+}
