@@ -19,10 +19,10 @@ class ProductController extends XController
     // protected  $_MODEL_ = Product::class;
     // protected  $SAVE_REQUEST = ProductSaveRequest::class;
 
-    protected $cols = ['name','category_id','view','sell','status'];
-    protected $extra_cols = ['id','slug','image_index'];
+    protected $cols = ['name', 'category_id', 'view', 'sell', 'status'];
+    protected $extra_cols = ['id', 'slug', 'image_index'];
 
-    protected $searchable = ['name','slug','description','excerpt','sku','table'];
+    protected $searchable = ['name', 'slug', 'description', 'excerpt', 'sku', 'table'];
 
     protected $listView = 'admin.products.product-list';
     protected $formView = 'admin.products.product-form';
@@ -34,6 +34,8 @@ class ProductController extends XController
             ['title' => "Detail", 'class' => 'btn-outline-light', 'icon' => 'ri-eye-line'],
         'destroy' =>
             ['title' => "Remove", 'class' => 'btn-outline-danger delete-confirm', 'icon' => 'ri-close-line'],
+        'category' =>
+            ['title' => "Edit category", 'class' => 'btn-outline-light edit-category-btn', 'icon' => 'ri-list-check-3'],
     ];
 
 
@@ -52,18 +54,18 @@ class ProductController extends XController
 
 //        dd($request->all());
         $product->name = $request->input('name');
-        $product->slug = $this->getSlug($product,'slug','name');
+        $product->slug = $this->getSlug($product, 'slug', 'name');
 
         $product->table = $request->input('table');
         $product->description = $request->input('desc');
         $product->excerpt = $request->input('excerpt');
         $product->keyword = $request->input('keyword');
         $product->stock_status = $request->input('stock_status');
-        $product->price = $request->input('price',0);
-        $product->buy_price = $request->input('buy_price',0);
+        $product->price = $request->input('price', 0);
+        $product->buy_price = $request->input('buy_price', 0);
 
         if (!$request->has('quantity')) {
-            $product->price = $request->input('price',0);
+            $product->price = $request->input('price', 0);
             $product->stock_quantity = $request->input('stock_quantity');
         }
         $product->average_rating = $request->input('average_rating', 0);
@@ -74,17 +76,17 @@ class ProductController extends XController
         $product->virtual = $request->input('virtual', false);
         $product->downloadable = $request->input('downloadable', false);
         $product->category_id = $request->input('category_id');
-        $product->image_index = $request->input('index_image',0);
+        $product->image_index = $request->input('index_image', 0);
         $product->user_id = auth()->id();
         $product->status = $request->input('status');
         $tags = array_filter(explode(',,', $request->input('tags')));
-        if ($request->has('canonical') && trim($request->input('canonical')) != ''){
+        if ($request->has('canonical') && trim($request->input('canonical')) != '') {
             $product->canonical = $request->input('canonical');
         }
 
         $product->save();
         $product->categories()->sync($request->input('cat'));
-        if (count($tags) > 0){
+        if (count($tags) > 0) {
             $product->syncTags($tags);
         }
 
@@ -103,17 +105,17 @@ class ProductController extends XController
 
         if ($request->has('meta')) {
 //            dd($request->input('meta'));
-            $product->syncMeta(json_decode($request->get('meta','[]'),true));
+            $product->syncMeta(json_decode($request->get('meta', '[]'), true));
         }
         $toRemoveQ = $product->quantities()->pluck('id')->toArray();
-        if ($request->has('q')){
+        if ($request->has('q')) {
             $qz = json_decode($request->input('q'));
-            foreach ($qz as $qi){
-                if ($qi->id == null){
+            foreach ($qz as $qi) {
+                if ($qi->id == null) {
                     $q = new Quantity();
-                }else{
+                } else {
                     $q = Quantity::whereId($qi->id)->first();
-                    unset($toRemoveQ[array_search($q->id, $toRemoveQ) ]); // remove for to remove IDz
+                    unset($toRemoveQ[array_search($q->id, $toRemoveQ)]); // remove for to remove IDz
                 }
                 $q->image = $qi->image;
                 $q->count = $qi->count;
@@ -122,9 +124,9 @@ class ProductController extends XController
                 $q->data = json_encode($qi->data);
                 $q->save();
             }
-            $product->quantities()->whereIn('id',$toRemoveQ)->delete();
+            $product->quantities()->whereIn('id', $toRemoveQ)->delete();
 
-            if ($product->quantities()->count() > 0){
+            if ($product->quantities()->count() > 0) {
                 $product->stock_quantity = $product->quantities()->sum('count');
                 $product->price = $product->quantities()->min('price');
             }
@@ -143,8 +145,8 @@ class ProductController extends XController
     public function create()
     {
         //
-        $cats = Category::all(['id','name','parent_id']);
-        return view($this->formView,compact('cats'));
+        $cats = Category::all(['id', 'name', 'parent_id']);
+        return view($this->formView, compact('cats'));
     }
 
     /**
@@ -154,8 +156,8 @@ class ProductController extends XController
     {
         //
 
-        $cats = Category::all(['id','name','parent_id']);
-        return view($this->formView, compact('item','cats'));
+        $cats = Category::all(['id', 'name', 'parent_id']);
+        return view($this->formView, compact('item', 'cats'));
     }
 
     public function bulk(Request $request)
@@ -211,4 +213,27 @@ class ProductController extends XController
     }
 
     /*restore**/
+
+    /**
+     * @param $id Product's id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Foundation\Application|\Illuminate\View\View
+     */
+    public function categoryEdit($id)
+    {
+
+        $product = Product::find($id);
+        $cats = Category::all(['id', 'name', 'parent_id']);
+        return view('admin.products.category-edit', compact('product', 'cats'));
+    }
+
+    public function categorySave(Product $item, Request $request)
+    {
+        $item->categories()->sync($request->input('cat'));
+        logAdmin(__METHOD__, __CLASS__, $item->id);
+        if ($request->ajax()) {
+            return ['OK' => true, 'message' => __('Categories saved successfully')];
+        } else {
+            return redirect()->back()->with(['message' => __('Categories saved successfully')]);
+        }
+    }
 }

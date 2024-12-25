@@ -10,6 +10,12 @@
 @section('filter')
     {{--  Other filters --}}
     <h2>
+        <input type="hidden" id="category-edit-url" value="{{route('admin.product.category-edit','')}}/">
+        <div id="iframe-modal">
+            <div class="container">
+                <iframe href="#"></iframe>
+            </div>
+        </div>
         <i class="ri-book-3-line"></i>
         {{__("Category")}}:
     </h2>

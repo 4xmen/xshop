@@ -301,6 +301,9 @@ Route::prefix(config('app.panel.prefix'))->name('admin.')->group(
                         Route::get('restore/{item}', [\App\Http\Controllers\Admin\ProductController::class, 'restore'])->name('restore');
                         Route::post('bulk', [\App\Http\Controllers\Admin\ProductController::class, "bulk"])->name('bulk');
                         Route::get('trashed', [\App\Http\Controllers\Admin\ProductController::class, "trashed"])->name('trashed');
+                        Route::get('category/edit/{id}', [\App\Http\Controllers\Admin\ProductController::class, 'categoryEdit'])->name('category-edit');
+                        Route::post('category/save/{item}', [\App\Http\Controllers\Admin\ProductController::class, 'categorySave'])->name('category-save');
+
                     });
                 Route::prefix('props')->name('prop.')->group(
                     function () {
