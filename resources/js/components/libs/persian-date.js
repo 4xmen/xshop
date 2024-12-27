@@ -58,43 +58,41 @@ class PersianDate {
 
 
     /**
-     * from parsi date by mobin ghasem pour
+     * convert persian date to gregorian
      * @param {Array} indate
      * @returns {Array}
      */
     persian2Gregorian = function (indate) {
-        let jy = indate[0];
-        let jm = indate[1];
-        let jd = indate[2];
-        let gd;
-        let j_days_sum_month = [0, 0, 31, 62, 93, 124, 155, 186, 216, 246, 276, 306, 336, 365];
-        let g_days_in_month = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
-        let g_days_leap_month = [31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
-        gd = j_days_sum_month[parseInt(jm)] + parseInt(jd);
-        let gy = parseInt(jy) + 621;
-        if (gd > 286)
-            gy++;
-        if (this.isLeapYear(gy - 1) && 286 < gd)
-            gd--;
-        if (gd > 286)
-            gd -= 286;
-        else
-            gd += 79;
-        let gm;
-        if (this.isLeapYear(gy)) {
-            for (gm = 0; gd > g_days_leap_month[gm]; gm++) {
-                gd -= g_days_leap_month[gm];
-            }
-        } else {
-            for (gm = 0; gd > g_days_in_month[gm]; gm++)
-                gd -= g_days_in_month[gm];
+
+        let jy = parseInt(indate[0]);
+        let jm = parseInt(indate[1]);
+        let jd = parseInt(indate[2]);
+
+        var gy=(jy<=979)?621:1600;
+        jy-=(jy<=979)?0:979;
+        var days=(365*jy) +((parseInt(jy/33))*8) +(parseInt(((jy%33)+3)/4))
+            +78 +jd +((jm<7)?(jm-1)*31:((jm-7)*30)+186);
+        gy+=400*(parseInt(days/146097));
+        days%=146097;
+        if(days > 36524){
+            gy+=100*(parseInt(--days/36524));
+            days%=36524;
+            if(days >= 365)days++;
         }
-        gm++;
-        if (gm < 10)
-            gm = '0' + gm;
-        gd =  gd < 10 ? '0'+gd: gd;
-        return [gy, gm, gd];
-    };
+        gy+=4*(parseInt((days)/1461));
+        days%=1461;
+        gy+=parseInt((days-1)/365);
+        if(days > 365)days=(days-1)%365;
+        var gd=days+1;
+        var sal_a=[0,31,((gy%4==0 && gy%100!=0) || (gy%400==0))?29:28,31,30,31,30,31,31,30,31,30,31];
+        var gm
+        for(gm=0;gm<13;gm++){
+            var v=sal_a[gm];
+            if(gd <= v)break;
+            gd-=v;
+        }
+        return [gy,gm,gd];
+    }
 
 
     /**
