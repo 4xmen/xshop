@@ -96,11 +96,17 @@ class Category extends Model
 
     public function published($limit = 10, $order = 'id', $dir = 'DESC')
     {
-        return $this->products()->where('status', 1)
+        return  $this->products()->where('status', 1)
             ->orderBy($order, $dir)->limit($limit)->get([
-                DB::raw('name as "title"'),
-                'slug'
-            ]);
+                'name',
+                'slug',
+            ])->map(function ($item) {
+                // Change 'name' to 'title'
+                $item->title = $item->name; // Add title property
+                unset($item->name); // Remove the old name property
+                return $item; // Return the modified item
+            });
+
     }
 
     public function evaluations(){

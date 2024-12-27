@@ -60,6 +60,8 @@ class CategoryController extends XController
         $category->subtitle = $request->input('subtitle');
         $category->icon = $request->input('icon');
         $category->description = $request->input('description');
+        $category->hide = $request->has('hide');
+
         if ($request->input('parent_id') == ''){
             $category->parent_id = null;
         }else{

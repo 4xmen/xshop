@@ -84,6 +84,7 @@ class PostController extends XController
             $post->media()->delete();
             $post->addMedia($request->file('image'))
                 ->preservingOriginal() //middle method
+
                 ->toMediaCollection(); //finishing method
         }
 

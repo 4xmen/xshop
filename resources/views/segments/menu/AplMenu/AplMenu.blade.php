@@ -32,7 +32,7 @@
                                                     </li>
                                                 @endforeach
                                             @else
-                                                @foreach($item->dest->children as $itm)
+                                                @foreach($item->dest->children()->where('hide',false)->get() as $itm)
                                                     <li>
                                                         <a href="{{$itm->webUrl()}}">
                                                             {{$itm->name}}
@@ -51,7 +51,7 @@
 
                                                 <li>
                                                     <a href="{{$itm->webUrl()}}">
-                                                        {{\Illuminate\Support\Str::limit($itm->title,25)}}
+                                                        {{\Illuminate\Support\Str::limit(($itm->title),25)}}
                                                     </a>
                                                 </li>
                                             @endforeach

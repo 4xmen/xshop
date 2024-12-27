@@ -48,5 +48,11 @@ The `Group` model is designed to categorize content in your application. It allo
 - **Type:** Text (Nullable)
 - **Description:** This field is used for SEO (Search Engine Optimization) purposes. It helps in directing the search engine’s authority of a group to another page, enhancing the SEO power of that group. This is particularly useful for managing duplicate content.
 
+
+### 12. `hide`
+- **Type:** Boolean
+- **Description:** This field is used to hide the category in the site menu. Essentially, if this option is set to `false`, the group will be displayed as a submenu in the menu. However, 
+- if it is set to `true`, it will be hidden from display.  The default value is `false`.
+
 ---
 By utilizing this `Group` model, you can effectively organize your content in a way that is user-friendly and conducive to SEO, providing a better experience for your users.
