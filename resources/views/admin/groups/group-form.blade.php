@@ -95,7 +95,7 @@
                             <input name="slug" type="text" class="form-control @error('slug') is-invalid @enderror"
                                    placeholder="{{__('Group slug')}}" value="{{old('slug',$item->slug??null)}}"/>
                         </div>
-                        <div class="col-md-12 mt-3">
+                        <div class="col-md-9 mt-3">
                             <div class="form-group">
                                 <label for="subtitle">
                                     {{__('Subtitle')}}
@@ -106,6 +106,17 @@
                                        value="{{old('subtitle',$item->subtitle??null)}}"/>
                             </div>
                         </div>
+                        <div class="col-md-3 mt-4">
+                            <div class="form-group mt-4">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" name="hide"  @if (old('hide',$item->hide??0) != 0)
+                                        checked
+                                           @endif type="checkbox" id="hide">
+                                    <label class="form-check-label" for="hide">{{__('Hide in menu')}}</label>
+                                </div>
+                            </div>
+                        </div>
+
                         <div class="col-md-4 mt-3">
                             <label for="parent">
                                 {{__('Group Parent')}}

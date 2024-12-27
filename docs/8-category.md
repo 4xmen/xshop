@@ -56,5 +56,9 @@ The `Category` model is used to categorize products within your application. Thi
 - **Type:** Text (Nullable)
 - **Description:** This field is used for SEO (Search Engine Optimization) purposes. It helps in transferring the search engine authority of the category to another page, enhancing the SEO potential of that category. This is particularly useful for managing duplicate content.
 
+### 14. `hide`
+- **Type:** Boolean
+- **Description:** This field is used to hide the category in the site menu. Essentially, if this option is set to `false`, the category will be displayed as a submenu in the menu. However, if it is set to `true`, it will be hidden from display. The default value is `false`.
+
 ---
 By utilizing this `Category` model, you can effectively organize your product categories in a structured way, enhancing user experience and improving SEO, while offering flexibility with images and icons.

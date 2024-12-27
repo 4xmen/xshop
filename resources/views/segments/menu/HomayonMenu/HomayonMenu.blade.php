@@ -96,9 +96,9 @@
                                 @switch($item->menuable_type)
                                     @case(\App\Models\Group::class)
                                     @case(\App\Models\Category::class)
-                                        @if($item->dest->children()->count() > 0)
+                                        @if($item->dest->children()->where('hide',false)->count() > 0)
                                             <ul class="sub-menu-item">
-                                                @foreach($item->dest->children as $itm)
+                                                @foreach($item->dest->children()->where('hide',false)->get() as $itm)
                                                     <li>
                                                         <a href="{{$itm->webUrl()}}">
                                                             {{$itm->name}}
