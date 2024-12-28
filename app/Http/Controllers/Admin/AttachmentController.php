@@ -115,21 +115,31 @@ class AttachmentController extends XController
     {
         return parent::delete($item);
     }
-    public function deattach(Attachment $item)
+    public function detach(Attachment $item)
     {
         $item->attachable_id = null;
         $item->attachable_type = null;
         $item->save();
 
         logAdmin(__METHOD__,__CLASS__,$item->id);
+        if (request()->ajax()) {
+            return  ['OK' => true , 'message' => __('As you wished detached successfully')];
+        }
         return redirect()->back()
-            ->with(['message' => __('As you wished deattached successfully')]);
+            ->with(['message' => __('As you wished detached successfully')]);
     }
 
 
     public function update(Request $request, Attachment $item)
     {
         return $this->bringUp($request, $item);
+    }
+
+    public function attaching(Request $request){
+        $item = new Attachment();
+        $item = $this->save($item, $request);
+        logAdmin(__METHOD__,__CLASS__,$item->id);
+        return ['OK' => true,'data'=> $item,'message' => __('File uploaded successfully')];
     }
 
 

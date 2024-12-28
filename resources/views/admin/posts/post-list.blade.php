@@ -9,11 +9,6 @@
 @endsection
 @section('filter')
     <input type="hidden" id="group-edit-url" value="{{route('admin.post.group-edit','')}}/">
-    <div id="iframe-modal">
-        <div class="container">
-            <iframe href="#"></iframe>
-        </div>
-    </div>
     {{--  Other filters --}}
 
     {{__("Main group")}}
