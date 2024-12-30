@@ -13,7 +13,7 @@
         {{__("Role filter")}}:
     </h2>
     <searchable-multi-select
-        :items='{{arrayNormolizeVueCompatible(\App\Models\User::$roles, true)}}'
+        :items='{{arrayNormalizeVueCompatible(\App\Models\User::$roles, true)}}'
         title-field="name"
         value-field="name"
         xname="filter[role]"

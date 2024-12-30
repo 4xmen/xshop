@@ -13,7 +13,7 @@
         {{__("Status")}}:
     </h2>
     <searchable-multi-select
-        :items='{{arrayNormolizeVueCompatible(\App\Models\Ticket::$ticket_statuses, true)}}'
+        :items='{{arrayNormalizeVueCompatible(\App\Models\Ticket::$ticket_statuses, true)}}'
         title-field="name"
         value-field="name"
         xname="filter[status]"

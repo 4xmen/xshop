@@ -75,7 +75,7 @@
                                 {{__('Role')}}
                             </label>
                             <searchable-select
-                                :items='{{arrayNormolizeVueCompatible(\App\Models\User::$roles, true)}}'
+                                :items='{{arrayNormalizeVueCompatible(\App\Models\User::$roles, true)}}'
                                 title-field="name"
                                 value-field="name"
                                 xname="role"

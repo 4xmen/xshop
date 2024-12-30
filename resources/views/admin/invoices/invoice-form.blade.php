@@ -101,7 +101,7 @@
                                 {{__('Status')}}
                             </label>
                             <searchable-select
-                                :items='{{arrayNormolizeVueCompatible(\App\Models\Invoice::$invoiceStatus, true)}}'
+                                :items='{{arrayNormalizeVueCompatible(\App\Models\Invoice::$invoiceStatus, true)}}'
                                 title-field="name"
                                 value-field="name"
                                 xname="status"
