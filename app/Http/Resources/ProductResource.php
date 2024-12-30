@@ -37,7 +37,9 @@ class ProductResource extends JsonResource
             'average_rating' => floatval($this->average_rating),
             'view' => $this->view,
             'category' => $this->when($request->input('loadCategory', true), new CategoryResource($this->category)),
-            'image' => $this->imgUrl()
+            'categories' => CategoriesCollection::collection($this->categories),
+            'image' => $this->imgUrl(),
+            'images' => $this->getMedia(),
         ];
     }
 }

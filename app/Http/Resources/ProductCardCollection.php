@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Http\Resources\Json\ResourceCollection;
@@ -15,6 +16,9 @@ class ProductCardCollection extends JsonResource
      */
     public function toArray(Request $request): array
     {
+        /**
+         * @var $this Product
+         */
         return [
 
             'id'=> $this->id,

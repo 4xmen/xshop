@@ -20,7 +20,7 @@ class AdvResource extends JsonResource
          */
         return [
             'id' => $this->id,
-            'image' => $this->imgUrl,
+            'image' => $this->imgUrl(),
             'title' => $this->title,
             'link' => $this->link,
         ];
