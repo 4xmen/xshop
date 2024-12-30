@@ -23,7 +23,9 @@ class PostResource extends JsonResource
             'slug' => $this->slug,
             'subtitle' => $this->subtitle,
             'body' => $this->body,
-            'group' => $this->load('groups'),
+            'group' => GroupsCollection::make($this->mainGroup),
+            'groups'=> GroupsCollection::collection($this->groups),
+//            'group' => $this->load('groups'),
             'author' => $this->load('author'),
             'view' => $this->view,
             'is_pinned' => $this->is_pinned,
@@ -31,8 +33,9 @@ class PostResource extends JsonResource
             'like' => $this->like,
             'dislike' => $this->dislike,
             'icon' => $this->icon,
-            'created_at' => $this->created_at,
             'image' => $this->imgUrl(),
+            'created_at' => $this->created_at,
+            'updated_at' => $this->updated_at,
 
         ];
     }
