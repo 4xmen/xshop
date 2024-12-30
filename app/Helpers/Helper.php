@@ -199,7 +199,7 @@ function sortSuffix($col): string
  * @param $translate
  * @return false|string
  */
-function arrayNormolizeVueCompatible($array, $translate = false): false|string
+function arrayNormalizeVueCompatible($array, $translate = false): false|string
 {
     $result = [];
     foreach ($array as $index => $item) {
@@ -264,7 +264,7 @@ function gfx()
 
 
 /**
- * build query with excepts
+ * http build query with excepts
  * @param $except
  * @return string
  */
@@ -963,9 +963,9 @@ function success($data = null, $message = null, $meta = [], $og = [], $twitter =
     $defaultOg = [
         'url' => null,
         'type' => null,
-        'site_name' => env('APP_NAME'),
+        'site_name' => config('app.name'),
         'description' => null,
-        'locate' => 'fa_IR'
+        'locate' => config('app.locale')
     ];
 
     $defaultTwitter = [
@@ -977,7 +977,7 @@ function success($data = null, $message = null, $meta = [], $og = [], $twitter =
     ];
 
     return response()->json([
-        "success" => true,
+        "OK" => true,
         "message" => $message,
         "data" => $data,
         "meta" => array_merge($defaultMeta, $meta),
@@ -997,7 +997,7 @@ function success($data = null, $message = null, $meta = [], $og = [], $twitter =
 function errors($errors, $status = 422, $message = null, $data = null)
 {
     return response()->json([
-        "success" => false,
+        "OK" => false,
         "errors" => $errors,
         "message" => $message,
         "data" => $data,
@@ -1011,7 +1011,7 @@ function errors($errors, $status = 422, $message = null, $data = null)
  */
 function readable($text)
 {
-    return ucfirst(trim(str_replace(['-', '_'], ' ', $text)));
+    return ucfirst(trim(str_replace(['-', '_','.'], ' ', $text)));
 }
 
 
@@ -1113,7 +1113,12 @@ function tagUrl($slug)
     return fixUrlLang(route('client.tag', $slug));
 }
 
-function usableProp($props)
+
+/**
+ * @param $props
+ * @return array
+ */
+function usableProp($props): array
 {
     $result = [];
 
