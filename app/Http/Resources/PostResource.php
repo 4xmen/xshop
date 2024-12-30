@@ -32,6 +32,7 @@ class PostResource extends JsonResource
             'dislike' => $this->dislike,
             'icon' => $this->icon,
             'created_at' => $this->created_at,
+            'image' => $this->imgUrl(),
 
         ];
     }
