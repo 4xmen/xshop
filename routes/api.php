@@ -37,8 +37,8 @@ Route::prefix('v1')->name('v1.')->group(
         Route::get('state/{state}', [\App\Http\Controllers\Api\StateController::class, 'show'])->name('state.show');
         Route::get('categories', [\App\Http\Controllers\Api\CategoryController::class, 'index'])->name('category.index');
         Route::get('groups', [\App\Http\Controllers\Api\GroupController::class, 'index'])->name('group.index');
-        Route::get('category/{category}', [\App\Http\Controllers\Api\CategoryController::class, 'show'])->name('category.show');
-        Route::get('group/{group}', [\App\Http\Controllers\Api\GroupController::class, 'show'])->name('group.show');
+        Route::get('category/{category:slug}', [\App\Http\Controllers\Api\CategoryController::class, 'show'])->name('category.show');
+        Route::get('group/{group:slug}', [\App\Http\Controllers\Api\GroupController::class, 'show'])->name('group.show');
         Route::get('products', [\App\Http\Controllers\Api\ProductController::class, 'index'])->name('product.index');
         Route::get('category/props/{category}', [\App\Http\Controllers\Api\CategoryController::class, 'props'])->name('category.prop');
         Route::post('morph/search', [\App\Http\Controllers\Api\MorphController::class, 'search'])->name('morph.search');

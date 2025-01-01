@@ -1,0 +1,163 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "xShop API",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/api/v1": {},
+        "/api/v1/categories": {
+            "get": {
+                "summary": "Get list of categories",
+                "operationId": "52c3c8d702572c2b4347b0ecf7573e54",
+                "responses": {
+                    "200": {
+                        "description": "A list of categories"
+                    }
+                }
+            }
+        },
+        "/api/v1/category/{category}": {
+            "get": {
+                "summary": "Get category",
+                "operationId": "76dbdac414f00d4e4fe1e4be92166a85",
+                "parameters": [
+                    {
+                        "name": "category",
+                        "in": "path",
+                        "description": "Slug of one category",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "per_page",
+                        "in": "query",
+                        "description": "sub products per page",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "A category with datas"
+                    }
+                }
+            }
+        },
+        "/api/v1/groups": {
+            "get": {
+                "summary": "Get list of groups",
+                "operationId": "2714891154ddf29a81395feb023c1c88",
+                "responses": {
+                    "200": {
+                        "description": "A list of categories"
+                    }
+                }
+            }
+        },
+        "/api/v1/group/{group}": {
+            "get": {
+                "summary": "Get category",
+                "operationId": "e80ca23d059084d3b1a92295162b9103",
+                "parameters": [
+                    {
+                        "name": "group",
+                        "in": "path",
+                        "description": "Slug of one group",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "per_page",
+                        "in": "query",
+                        "description": "sub posts per page",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "A group with datas"
+                    }
+                }
+            }
+        },
+        "/api/v1/products": {
+            "get": {
+                "summary": "Get list of products",
+                "operationId": "072fd15d3be55577bb08c19d19f1e75c",
+                "parameters": [
+                    {
+                        "name": "sort",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "enum": [
+                                "new",
+                                "old",
+                                "most_view",
+                                "less_view",
+                                "most_buy",
+                                "less_buy"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "category",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "search",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "min_price",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "max_price",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "per_page",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "A list of products"
+                    }
+                }
+            }
+        }
+    }
+}
