@@ -10,19 +10,63 @@ use App\Models\Category;
 use App\Models\Prop;
 use Illuminate\Http\Request;
 
+/**
+ * @OA\Info(title="xShop API", version="1.0.0")
+ */
+/**
+ * @OA\PathItem(path="/api/v1")
+ */
 class CategoryController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * @OA\Get(
+     *     path="/api/v1/categories",
+     *     summary="Get list of categories",
+     *     @OA\Response(
+     *         response=200,
+     *         description="A list of categories"
+     *     )
+     * )
      */
     public function index()
     {
-        return CategoriesCollection::collection(Category::orderBy('sort', 'asc')->get());
+        return success(CategoriesCollection::collection(Category::orderBy('sort', 'asc')->get()));
     }
 
-    public function show(Category $category){
-        return new CategoryResource($category);
+
+    /**
+     * @OA\Get(
+     *     path="/api/v1/category/{category}",
+     *     summary="Get category",
+     *     @OA\Parameter(
+     *         description="Slug of one category",
+     *         name="category",
+     *         in="path",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="string"
+     *         ),
+     *     ),
+     *     @OA\Parameter(
+     *           description="sub products per page",
+     *           name="per_page",
+     *           in="query",
+     *           required=false,
+     *           @OA\Schema(
+     *               type="integer"
+     *           )
+     *       ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="A category with datas"
+     *     )
+     * )
+     */
+    public function show(Category $category)
+    {
+        return success(new CategoryResource($category));
     }
+
 
 
     public function props( $id){
