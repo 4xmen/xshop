@@ -28,7 +28,7 @@ class ProductController extends Controller
      *         required=false,
      *         @OA\Schema(
      *             type="string",
-     *             enum={"new", "old", "most_view", "less_view", "most_buy", "less_buy"}
+     *             enum={"new", "old", "most_view", "less_view", "most_buy", "less_buy","cheap","expensive"}
      *         )
      *     ),
      *     @OA\Parameter(
@@ -100,6 +100,10 @@ class ProductController extends Controller
                     $product = $product->orderByDesc('sell');
                 if ($request['sort'] === 'less_buy')
                     $product = $product->orderBy('sell');
+                if ($request['sort'] === 'cheap')
+                    $product = $product->orderBy('price');
+                if ($request['sort'] === 'expensive')
+                    $product = $product->orderByDesc('price');
             }
             if (isset($request['category']) && !is_null($request['category']))
                 $product = $product->where('category_id', Category::firstWhere('slug', $request['category'])->id);

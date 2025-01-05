@@ -107,7 +107,9 @@
                                 "most_view",
                                 "less_view",
                                 "most_buy",
-                                "less_buy"
+                                "less_buy",
+                                "cheap",
+                                "expensive"
                             ]
                         }
                     },
