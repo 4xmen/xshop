@@ -131,8 +131,19 @@ class PropController extends XController
     }
 
 
+    private function updateName($item, $request)
+    {
+        if ($item->name != $request->input('name') && $request->input('name') != ''){
+            foreach (Product::whereHasMeta($item->name)->get() as $product){
+                $product->setMeta($request->input('name'),$product->getMeta($item->name));
+                $product->removeMeta($item->name);
+            }
+        }
+    }
+
     public function update(Request $request, Prop $item)
     {
+        $this->updateName($item, $request);
         return $this->bringUp($request, $item);
     }
 
