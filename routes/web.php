@@ -298,7 +298,11 @@ Route::prefix(config('app.panel.prefix'))->name('admin.')->group(
                         Route::get('edit/{item}', [\App\Http\Controllers\Admin\PropController::class, 'edit'])->name('edit');
                         Route::post('update/{item}', [\App\Http\Controllers\Admin\PropController::class, 'update'])->name('update');
                         Route::get('delete/{item}', [\App\Http\Controllers\Admin\PropController::class, 'destroy'])->name('destroy');
+                        Route::get('restore/{item}', [\App\Http\Controllers\Admin\PropController::class, 'restore'])->name('restore');
+
                         Route::post('bulk', [\App\Http\Controllers\Admin\PropController::class, "bulk"])->name('bulk');
+                        Route::get('trashed', [\App\Http\Controllers\Admin\PropController::class, "trashed"])->name('trashed');
+
                         Route::post('sort/save', [\App\Http\Controllers\Admin\PropController::class, 'sortSave'])->name('sort-save');
                         Route::get('sort', [\App\Http\Controllers\Admin\PropController::class, 'sort'])->name('sort');
                     });
