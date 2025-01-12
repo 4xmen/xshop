@@ -7,6 +7,7 @@ use App\Http\Controllers\XController;
 use App\Http\Requests\PropSaveRequest;
 use App\Models\Access;
 use App\Models\Category;
+use App\Models\Product;
 use App\Models\Prop;
 use Illuminate\Http\Request;
 use App\Helper;
@@ -123,6 +124,9 @@ class PropController extends XController
 
     public function destroy(Prop $item)
     {
+        foreach (Product::whereHasMeta($item->name)->get() as $product){
+            $product->removeMeta($item->name);
+        }
         return parent::delete($item);
     }
 
