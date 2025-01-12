@@ -53,6 +53,7 @@
         list-style: none;
         li{
             a{
+                width: 100%;
                 display: flex;
                 padding: 7px ;
                 color: white;
@@ -60,6 +61,7 @@
                 border-radius: 5px;
                 align-items: center;
                 justify-self: center;
+
 
                 i{
                     font-size: 20px;
