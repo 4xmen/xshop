@@ -892,4 +892,9 @@ class ClientController extends Controller
         return response($xmlContent, 200)
             ->header('Content-Type', 'text/xml');
     }
+
+    public function underConstruction(){
+        $title = __('Under Construction') . ' - ' . config('app.name');
+        return view('client.under-construction', compact('title'));
+    }
 }

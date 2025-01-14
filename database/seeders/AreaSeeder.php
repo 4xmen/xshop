@@ -283,6 +283,15 @@ class AreaSeeder extends Seeder
                 'preview' => null,
                 'icon' => 'ri-layout-grid-line',
             ],
+            [
+                'name' => 'under-construction',
+                'valid_segments' => json_encode(
+                    ["under"]
+                ),
+                'max' => 1,
+                'preview' => null,
+                'icon' => 'ri-calendar-schedule-line',
+            ],
         ];
 
         foreach ($areas as $area) {

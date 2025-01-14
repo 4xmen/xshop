@@ -53,6 +53,7 @@ class Area extends Model
         'search',
         'slider',
         'top',
+        'under'
     ];
 
     protected $casts = [

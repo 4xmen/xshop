@@ -503,3 +503,4 @@ Route::any('{lang}', [ClientController::class, 'langIndex'])
     ->middleware([\App\Http\Middleware\LangControl::class, \App\Http\Middleware\VisitorCounter::class]);
 
 
+Route::any('under-construction',[ClientController::class,'underConstruction'])->name('client.under-construction');
