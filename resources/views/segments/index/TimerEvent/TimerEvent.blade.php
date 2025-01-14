@@ -19,10 +19,6 @@
                     </div>
                     <div class="pe-5">
                         {!! getSetting($data->area_name.'_'.$data->part.'_last') !!}
-
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cupiditate dignissimos dolores
-                        doloribus eaque expedita facilis ipsa itaque maiores minus nam neque, porro ratione sapiente
-                        sint unde ut vero voluptatibus voluptatum.
                     </div>
                 </div>
             </div>

@@ -39,6 +39,10 @@ class VisitorCounter
             $visitor->page = $request->route()->getName();
             $visitor->save();
         }
+
+        if (getSetting('under') == '1' && !auth()->check()) {
+            return redirect(route('client.under-construction'));
+        }
         return $next($request);
     }
 }
