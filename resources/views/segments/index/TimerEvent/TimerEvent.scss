@@ -1,0 +1,42 @@
+.TimerEvent {
+    // scss
+    [class^='col']{
+        position: relative;
+    }
+
+    #countdown{
+        position: absolute;
+        inset-inline-end: 1rem;
+        font-size: 25px;
+        width: 50px;
+        text-align: center;
+        top: 1rem;
+    }
+
+    #dcd,#hcd,#mcd,#scd{
+        position: relative;
+        margin-bottom: 2rem;
+        &:after{
+            font-size: 12px;
+            position: absolute;
+            top: 100%;
+            right: 0;
+            left: 0;
+        }
+    }
+    #dcd:after{
+        content: attr(data-text);
+    }
+    #hcd:after{
+        content: attr(data-text);
+
+    }
+    #mcd:after{
+        content: attr(data-text);
+
+    }
+    #scd:after{
+        content: attr(data-text);
+
+    }
+}
