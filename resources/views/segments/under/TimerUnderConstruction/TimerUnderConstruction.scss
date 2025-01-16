@@ -1,0 +1,102 @@
+.TimerUnderConstruction {
+    height: 100vh;
+    width: 100%;
+    background: rgb(254,255,0);
+    background: radial-gradient(circle, rgba(254,255,0,1) 0%, rgba(251,111,25,1) 100%);
+    text-align: center;
+    color: #000;
+    &:before,&:after{
+        background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMDAiIGhlaWdodD0iMTAwIiB2aWV3Qm94PSIwIDAgNTIuOTE3IDI2LjQ1OCI+PHBhdGggZD0iTS0uMTQzLS4wMTRoNTMuMTM4djI2LjYzMkgtLjE0M3oiIHN0eWxlPSJmaWxsOiNmYzA7ZmlsbC1vcGFjaXR5Oi45OTg5MzE7c3Ryb2tlLXdpZHRoOi4xMzU4OTYiLz48cGF0aCBkPSJNMTIuODA1LTIxLjI2M2gyNi45Mzd2NDMuMzQxSDEyLjgwNXoiIHN0eWxlPSJmaWxsOiMwMDA7ZmlsbC1vcGFjaXR5Oi45OTg5MzE7c3Ryb2tlLXdpZHRoOi4yMzg3MjMiIHRyYW5zZm9ybT0ibWF0cml4KC44NzA3NSAuNDkxNzIgLS4zOTQ2OCAuOTE4ODIgMCAwKSIvPjwvc3ZnPg==");
+        position: absolute;
+        left: 0;
+        right: 0;
+        height: 100px;
+        content: ' ';
+    }
+
+    &:before{
+        top: 0;
+    }
+
+    &:after{
+        bottom: 0;
+    }
+
+    h1,h2{
+        font-weight: 200;
+    }
+
+    .container{
+        padding-top: 130px;
+        padding-bottom: 130px;
+        position: relative;
+
+
+    }
+
+    img{
+        height: 30vh;
+    }
+
+    .social-list{
+        list-style: none;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        max-width: 500px;
+        margin: 1rem auto;
+        a{
+
+            color: black;
+
+            i{
+                font-size: 35px;
+            }
+        }
+    }
+
+    #udcd,#uhcd,#umcd,#uscd{
+        background: #ffffff44;
+        padding: 1rem;
+        backdrop-filter: blur(11px);
+        margin-bottom: 2rem;
+        font-size: 60px;
+        font-weight: 200;
+        width: 20%;
+        position: relative;
+        border-radius: 7px;
+
+
+
+        &:after{
+            font-size: 20px;
+            right: 0;
+            left: 0;
+            position: absolute;
+            bottom: -15px;
+            font-weight: 300;
+        }
+    }
+    #udcd:after{
+        content: attr(data-text);
+    }
+    #uhcd:after{
+        content: attr(data-text);
+
+    }
+    #umcd:after{
+        content: attr(data-text);
+
+    }
+    #uscd:after{
+        content: attr(data-text);
+
+    }
+
+    #under-countdown{
+        padding-top: 1rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-evenly;
+    }
+}

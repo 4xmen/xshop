@@ -1,4 +1,4 @@
-function startCountdown(unixTimestamp) {
+function startCountdownUnder(unixTimestamp) {
 
     function updateCountdown() {
         const now = Math.floor(Date.now() / 1000); // Current time in seconds
@@ -12,10 +12,10 @@ function startCountdown(unixTimestamp) {
             const hours = Math.floor((remainingTime / 3600) % 24);
             const days = Math.floor(remainingTime / 86400);
 
-            document.querySelector('#dcd').innerText = numFixer(days);
-            document.querySelector('#hcd').innerText = numFixer(hours);
-            document.querySelector('#mcd').innerText = numFixer(minutes);
-            document.querySelector('#scd').innerText = numFixer(seconds);
+            document.querySelector('#udcd').innerText = numFixer(days);
+            document.querySelector('#uhcd').innerText = numFixer(hours);
+            document.querySelector('#umcd').innerText = numFixer(minutes);
+            document.querySelector('#uscd').innerText = numFixer(seconds);
         }
     }
 
@@ -31,7 +31,7 @@ function numFixer(x) {
 }
 
 window.addEventListener('load', function () {
-    if  (document.querySelector('#count-down-time-timestamp') != null){
-    startCountdown(parseInt(document.querySelector('#count-down-time-timestamp').value));
+    if  (document.querySelector('#under-count-down-time-timestamp') != null){
+        startCountdownUnder(parseInt(document.querySelector('#under-count-down-time-timestamp').value));
     }
 });
