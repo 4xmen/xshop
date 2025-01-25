@@ -1,0 +1,48 @@
+.SinaTextBg {
+    // scss
+    height: 90vh;
+    background-size: cover;
+    background-position: center;
+
+    .sina-box{
+        margin-top: 20vh;
+        background: #ffffff99;
+        backdrop-filter: blur(7px);
+        padding: 3rem;
+        height: 50vh;
+        border-radius: var(--xshop-border-radius);
+        position: relative;
+        padding-bottom: 50px;
+        .txt{
+            height: 38vh;
+            overflow: hidden;
+        }
+
+        .btn{
+            position: absolute;
+            bottom: 1rem;
+            left: 50%;
+            transform: translateX(-50%);
+            min-width: 120px;
+        }
+        h1,h2,h3,h4{
+            font-weight: 400;
+            font-size: 20px;
+            text-transform: uppercase;
+            text-align: justify;
+        }
+        p{
+            text-align: justify;
+        }
+    }
+
+}
+
+/*-968px width*/
+@media (max-width: 968px) {
+   .sina-box{
+       h1,h2,h3,h4{
+           font-size: 20px !important;
+       }
+   }
+}
