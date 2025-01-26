@@ -36,7 +36,7 @@
                                             {{$product->name}}
                                         </h4>
                                         <p>
-                                            {{\Illuminate\Support\Str::limit(strip_tags($product->description))}}
+                                            {{\Illuminate\Support\Str::limit($product->excerpt)}}
                                         </p>
                                     </a>
                                 </div>
