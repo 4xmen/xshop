@@ -37,7 +37,7 @@
                 <div class="cat{{$cat->id}} tal-tab mb-4 @if($k == 0 ) active @endif" >
                     <div class="row">
 
-                        @foreach($cat->products()->limit(4)->get() as $product)
+                        @foreach($cat->products()->where('status',1)->orderByDesc('id')->limit(4)->get() as $product)
                             <div class="col-lg-3 col-md-6">
                                 <div class="tal-product">
                                     @include(\App\Models\Area::where('name','product-grid')->first()->defPart(),compact('product'))
