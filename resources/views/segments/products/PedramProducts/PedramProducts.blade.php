@@ -25,7 +25,7 @@
                     <div class="cat{{$cat->id}} pedi-tab mp-4 @if($k == 0 ) active @endif">
                         <div class="row">
 
-                            @foreach($cat->products()->limit(6)->get() as $product)
+                            @foreach($cat->products()->where('status',1)->orderByDesc('id')->limit(6)->get() as $product)
                                 <div class="col-lg-6">
                                     <a class="pedi-product" href="{{$product->webUrl()}}">
                                         <img src="{{$product->thumbUrl()}}" alt="{{$product->name}}" class="float-start">
