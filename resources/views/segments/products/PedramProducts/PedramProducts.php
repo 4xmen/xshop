@@ -60,7 +60,7 @@ class PedramProducts
         $setting->title =  $part->area_name . ' ' . $part->part.' Image';
         $setting->save();
 
-        File::copy(__DIR__.'/../../default-assets/coin-left.png',public_path('upload/images/').$part->area_name . '.' . $part->part.'.png');
+        File::copy(__DIR__.'/../../default-assets/coin-left.png',public_path('upload/images/').$part->area_name . '.' . $part->part.'1.png');
         $setting = new Setting();
         $setting->section = 'theme';
         $setting->key = $part->area_name . '_' . $part->part.'2_png';
@@ -70,7 +70,7 @@ class PedramProducts
         $setting->title =  $part->area_name . ' ' . $part->part.' Image';
         $setting->save();
 
-        File::copy(__DIR__.'/../../default-assets/gold-right.png',public_path('upload/images/').$part->area_name . '.' . $part->part.'.png');
+        File::copy(__DIR__.'/../../default-assets/gold-right.png',public_path('upload/images/').$part->area_name . '.' . $part->part.'2.png');
     }
     public static function onRemove(Part $part = null)
     {
