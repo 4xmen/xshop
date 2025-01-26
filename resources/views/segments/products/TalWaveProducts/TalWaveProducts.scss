@@ -1,0 +1,58 @@
+.TalWaveProducts {
+    margin-top: 1rem;
+    // scss
+    overflow-x: hidden;
+    .content{
+        background: var(--tal-bg-color);
+        color: var(--tal-text-color);
+    }
+
+    svg{
+        width: calc(176% + 1.3px);
+        height: 171px;
+        transform: rotateY(180deg) rotateZ(180deg);
+        display: block;
+        left: 50%;
+        position: relative;
+    }
+
+    h1{
+        text-align: center;
+        font-weight: 400;
+        font-size: 35px;
+    }
+
+    ul{
+        list-style: none;
+        padding-bottom: 2rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+
+        li{
+            cursor: pointer;
+            padding: .5rem;
+            border-bottom: 1px solid transparent;
+            &.active{
+                //text-shadow: 3px 3px 0px #000000;
+                border-bottom: 1px solid var(--tal-text-color);
+            }
+        }
+    }
+
+    .tal-tab{
+        display: none;
+
+        &.active{
+            display: block;
+        }
+
+        padding-bottom: 2rem;
+    }
+    .xshop-product-item{
+        color: var(--tal-bg-color);
+        background: var(--tal-text-color);
+        margin-bottom: 1rem;
+    }
+
+}
