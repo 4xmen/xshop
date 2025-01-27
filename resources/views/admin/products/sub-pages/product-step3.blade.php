@@ -191,6 +191,7 @@
         {{__("Attachments")}}
     </h3>
     <br>
+    @if(isset($item))
     <fast-attaching
         :attachments='@json($item->attachs)'
         xlang="{{config('app.locale')}}"
@@ -199,4 +200,5 @@
         model="{{get_class($item)}}"
         id="{{$item->id}}"
     ></fast-attaching>
+    @endif
 </div>
