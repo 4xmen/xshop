@@ -846,7 +846,7 @@ class ClientController extends Controller
             } else {
                 $rate = new Rate();
             }
-            if ($rt > 0 && $rt < 5) {
+            if ($rt > 0 && $rt <= 5) {
                 $rate->rater_type = Customer::class;
                 $rate->rater_id = auth('customer')->id();
                 $rate->rateable_type = $request->rateable_type;
