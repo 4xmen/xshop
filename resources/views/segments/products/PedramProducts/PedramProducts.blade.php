@@ -29,7 +29,7 @@
                                 <div class="col-lg-6">
                                     <a class="pedi-product" href="{{$product->webUrl()}}">
                                         <img src="{{$product->thumbUrl()}}" alt="{{$product->name}}" class="float-start">
-                                        <span>
+                                        <span class="price">
                                             {{$product->getPrice()}}
                                         </span>
                                         <h4>
