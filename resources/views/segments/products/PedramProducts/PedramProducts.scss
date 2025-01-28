@@ -88,6 +88,7 @@
             top: 1rem;
             position: absolute;
             font-size: 20px;
+            color: var(--xshop-secondary);
         }
 
         h4 {
@@ -124,4 +125,22 @@
             position: relative;
         }
     }
+
+}
+/*-600px width*/
+@media (max-width: 600px) {
+
+    .PedramProducts {
+        .price {
+            position: absolute;
+            bottom: 1rem;
+            inset-inline-end: 1rem;
+            top: auto !important;
+            background: var(--xshop-background);
+            padding: 4px 10px 0 ;
+            border: 1px solid var(--xshop-secondary);
+            border-radius: var(--xshop-border-radius);
+        }
+    }
+
 }
