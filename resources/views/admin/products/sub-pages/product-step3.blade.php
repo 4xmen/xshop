@@ -58,7 +58,7 @@
         <label for="table">
             {{__('Description Table')}}
         </label>
-        <textarea name="table" class="ckeditorx @error('description') is-invalid @enderror"
+        <textarea name="table" class="ckeditorx @error('table') is-invalid @enderror"
                   placeholder="{{__('Description Table')}}"
                   id="table"
                   rows="8">{{old('table',$item->table??null)}}</textarea>
