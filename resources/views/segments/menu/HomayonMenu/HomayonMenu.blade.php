@@ -103,6 +103,17 @@
                                                         <a href="{{$itm->webUrl()}}">
                                                             {{$itm->name}}
                                                         </a>
+                                                        @if($itm->children()->where('hide',false)->count() > 0)
+                                                            <ul class="sub-sub-item">
+                                                                @foreach($itm->children()->where('hide',false)->get() as $subItem)
+                                                                    <li>
+                                                                        <a href="{{$subItem->webUrl()}}">
+                                                                            {{$subItem->name}}
+                                                                        </a>
+                                                                    </li>
+                                                                @endforeach
+                                                            </ul>
+                                                        @endif
                                                     </li>
                                                 @endforeach
                                             </ul>

@@ -199,6 +199,37 @@
         }
     }
 
+    .sub-menu-item{
+
+        li{
+            position: relative;
+            .sub-sub-item{
+                width: 200px;
+                display: none;
+            }
+
+            &:hover{
+                .sub-sub-item{
+                    padding: 0;
+                    border-radius: 7px;
+                    position: absolute;
+                    display: block;
+                    inset-inline-start: 90%;
+                    top: 0;
+                    height: auto;
+                    li{
+                        border-radius: 7px;
+                        margin: 0;
+                        a{
+                            border-radius: 7px !important;
+                        }
+                    }
+
+                }
+            }
+        }
+    }
+
     /*-875px width*/
     @media (max-width: 875px) {
         ul {
