@@ -19,7 +19,7 @@
         </h4>
         <div class="side-data side-list">
             <ul class="ps-3">
-                {!! showCatNested(\App\Models\Category::all(['id','name','parent_id','slug'])) !!}
+                {!! showCatNested(\App\Models\Category::where('hide',0) ->get(['id','name','parent_id','slug'])) !!}
             </ul>
         </div>
     </div>
