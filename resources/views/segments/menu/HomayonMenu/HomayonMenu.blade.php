@@ -137,6 +137,28 @@
                     <a href="{{$item->webUrl()}}">
                         {{$item->title}}
                     </a>
+                    @if($item->dest && $item->dest->children()->where('hide',false)->count() > 0)
+                        <ul class="px-1 border-start border-white">
+                            @foreach($item->dest->children()->where('hide',false)->get() as $itm)
+                                <li>
+                                    <a href="{{$itm->webUrl()}}">
+                                        {{$itm->name}}
+                                    </a>
+                                    @if($itm->children()->where('hide',false)->count() > 0)
+                                        <ul class="px-1 border-start border-white">
+                                            @foreach($itm->children()->where('hide',false)->get() as $subItem)
+                                                <li>
+                                                    <a href="{{$subItem->webUrl()}}">
+                                                        {{$subItem->name}}
+                                                    </a>
+                                                </li>
+                                            @endforeach
+                                        </ul>
+                                    @endif
+                                </li>
+                            @endforeach
+                        </ul>
+                    @endif
                 </li>
             @endforeach
         </ul>
