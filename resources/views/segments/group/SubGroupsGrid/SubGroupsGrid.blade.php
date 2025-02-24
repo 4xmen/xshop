@@ -9,10 +9,12 @@
                     @foreach($group->children as $subGroup)
                         <div class="col-md">
                             <div class="sub-group">
-                                <img src="{{$subGroup->imgUrl()}}" alt="{{$subGroup->name}}" class="img-fluid" loading="lazy">
-                                <h4>
-                                    {{$subGroup->name}}
-                                </h4>
+                                <a href="{{$subGroup->webUrl()}}">
+                                    <img src="{{$subGroup->imgUrl()}}" alt="{{$subGroup->name}}" class="img-fluid" loading="lazy">
+                                    <h4>
+                                        {{$subGroup->name}}
+                                    </h4>
+                                </a>
                             </div>
                         </div>
                     @endforeach
