@@ -333,4 +333,22 @@
         }
     }
 
+    /* submenu expandable */
+    .homayon-resp-menu{
+        ul{
+            li{
+                ul{
+                    display: none;
+
+                    &.active{
+                        display: block;
+                    }
+                }
+            }
+        }
+
+        .ri-arrow-down-wide-line{
+            cursor: pointer;
+        }
+    }
 }
