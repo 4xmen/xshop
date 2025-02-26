@@ -1,0 +1,49 @@
+.AutoPlayAttachment {
+    // scss
+    padding: 2rem 0;
+
+    h1 {
+        font-size: 27px;
+        font-weight: 400;
+    }
+
+    .autoplay-clip-list {
+        display: flex;
+        column-gap: .5rem;
+    }
+    a{
+        display: block;
+        position: relative;
+        i{
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%,-50%);
+            font-size: 75px;
+            color: white;
+        }
+    }
+
+    .autoplay-clip-item-group {
+        transition: 700ms;
+        flex: 1;
+        video,img {
+            width: 100%;
+            border-radius: var(--xshop-border-radius);
+            height: 300px;
+            object-fit: cover;
+        }
+        &:hover{
+            flex-grow: 2;
+        }
+    }
+}
+
+
+/*-768px width*/
+@media (max-width: 768px) {
+    .autoplay-clip-list {
+        display: grid !important;
+        grid-template-columns: repeat(2,1fr) !important;
+    }
+}

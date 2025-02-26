@@ -26,5 +26,25 @@ const toggleSideMenu = function (e) {
 };
 document.addEventListener('DOMContentLoaded',function () {
     document.querySelector('#homa-toggle-menu')?.addEventListener('click',toggleSideMenu);
+
+    document.querySelectorAll('.homayon-resp-menu ul li ul')?.forEach(function (el) {
+        const span = document.createElement('span');
+        span.classList.add('ri-arrow-down-wide-line');
+        span.classList.add('float-end');
+        span.classList.add('m-2');
+        el.parentNode.prepend(span);
+
+        span.addEventListener('click',function (e) {
+            this.parentNode.querySelector(':scope > ul').classList.toggle('active');
+            if (this.classList.contains('ri-arrow-down-wide-line')){
+                span.classList.remove('ri-arrow-down-wide-line');
+                span.classList.add('ri-arrow-up-wide-line');
+            }else{
+                span.classList.remove('ri-arrow-up-wide-line');
+                span.classList.add('ri-arrow-down-wide-line');
+
+            }
+        });
+    });
 });
 
