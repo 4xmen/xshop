@@ -335,6 +335,8 @@
 
     /* submenu expandable */
     .homayon-resp-menu{
+        top: 0;
+        box-shadow: var(--xshop-shadow);
         ul{
             li{
                 ul{

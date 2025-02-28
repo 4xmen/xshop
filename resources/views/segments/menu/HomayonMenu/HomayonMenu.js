@@ -20,10 +20,21 @@ const toggleSideMenu = function (e) {
     e.preventDefault();
     if (document.querySelector('.homayon-resp-menu').style.display == 'none'){
         document.querySelector('.homayon-resp-menu').style.display = 'block';
+        setTimeout(function () {
+            document.addEventListener('click', handleDocumentClick);
+        },100);
     }else{
         document.querySelector('.homayon-resp-menu').style.display = 'none';
     }
 };
+
+function handleDocumentClick(e) {
+    const respMenu = document.querySelector('.homayon-resp-menu');
+    if (!respMenu.contains(e.target)) {
+        respMenu.style.display = 'none';
+        document.removeEventListener('click', handleDocumentClick);
+    }
+}
 document.addEventListener('DOMContentLoaded',function () {
     document.querySelector('#homa-toggle-menu')?.addEventListener('click',toggleSideMenu);
 
