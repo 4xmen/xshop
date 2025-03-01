@@ -7,10 +7,14 @@ use Illuminate\Http\Request;
 
 class ThemeController extends Controller
 {
+
     //
     public function cssVariables()
     {
         $response = 'main{';
+        if (langIsRTL(app()->getLocale())) {
+            $response .= 'font-feature-settings: "ss01";';
+        }
         foreach (Setting::where('section', 'Theme')->whereNotNull('data')
                      ->get(['value', 'data']) as $color) {
             $data = json_decode($color->data);
@@ -20,9 +24,6 @@ class ThemeController extends Controller
                     $response .= $data->suffix;
                 }
                 $response .= ';';
-            }
-            if (langIsRTL(app()->getLocale())) {
-                $response .= 'font-feature-settings: "ss01";';
             }
         }
         $response .= '}';
