@@ -31,27 +31,27 @@
                                 <label for="name">
                                     {{__("Name")}}
                                 </label>
-                                <input type="text" id="name" name="" value="" class="form-control">
+                                <input type="text" required minlength="4" id="name" name="full_name" value="" class="form-control">
                             </div>
                             <div class="form-group">
                                 <label for="name">
                                     {{__("Mobile")}}
                                 </label>
-                                <input type="text" id="phone" name="" value="" class="form-control">
+                                <input type="tel" id="phone" name="phone" value="" required class="form-control">
                             </div>
                             <input type="hidden" name="subject" value="{{__("Fast contact form")}}">
                             <div class="form-group">
                                 <label for="email">
                                     {{__("Email")}}
                                 </label>
-                                <input type="email" id="email" name="email" value=""
+                                <input type="email" required id="email" name="email" value=""
                                        class="form-control">
                             </div>
                             <div class="form-group">
                                 <label for="content">
                                     {{__("Your message...")}}
                                 </label>
-                                <textarea name="content" class="form-control"  id="content" rows="4" placeholder=""> </textarea>
+                                <textarea name="bodya" class="form-control"  id="content" rows="4" placeholder="" required minlength="10"> </textarea>
                             </div>
                             <div class="d-flex align-items-center justify-content-center">
                                 <button class="btn btn-dark border-0 submit-btn" >
