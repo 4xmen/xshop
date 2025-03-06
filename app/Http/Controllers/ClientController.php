@@ -470,7 +470,7 @@ class ClientController extends Controller
         $con->subject = $request->subject;
         $con->body = $request->bodya;
         $con->save();
-        return redirect()->back()->with(['message' => __('Your message has been successfully sent.')]);
+        return redirect()->route('client.contact')->with(['message' => __('Your message has been successfully sent.')]);
     }
 
 
