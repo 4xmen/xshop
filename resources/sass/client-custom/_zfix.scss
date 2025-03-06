@@ -150,3 +150,17 @@ ul.pagination {
 .btn-outline-light:hover{
     color: black !important;
 }
+
+.nested-list{
+    .ri-arrow-down-wide-line, .ri-arrow-up-wide-line{
+        cursor: pointer;
+    }
+    .nested-parent{
+        ul{
+            display: none;
+        }
+    }
+    .active{
+        display: block !important;
+    }
+}
