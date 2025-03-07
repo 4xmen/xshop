@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
             container: el,
             items: 1,
             // slideBy: 'page',
-            autoplay: false,
+            autoplay: true,
             autoplayButton: false,
             // nextButton: false,
             controls: false,

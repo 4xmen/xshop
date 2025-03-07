@@ -21,6 +21,9 @@ document.addEventListener('DOMContentLoaded', () => {
             slideBy: 1,
             autoplayTimeout: 5000,
             responsive: {
+                100:{
+                    items:1,
+                },
                 560: {
                     items: 1,
                 },
