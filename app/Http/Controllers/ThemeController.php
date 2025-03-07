@@ -31,6 +31,11 @@ class ThemeController extends Controller
         if (langIsRTL(app()->getLocale())) {
             $response .= ' .slider-content, .tns-outer .item{ direction: rtl; }';
         }
+        if (langIsRTL(app()->getLocale())) {
+            $response .= ' .main-dir{ direction: rtl; }';
+        }else{
+            $response .= ' .main-dir{ direction: ltr; }';
+        }
         return response($response)->header('Content-Type', 'text/css; charset=utf-8');
     }
 }
