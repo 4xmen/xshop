@@ -4,15 +4,15 @@
             <div>
                 <div class="parallax-slider" data-bg="{{$slider->imgUrl()}}"></div>
                 <div class="parallax-slide-item">
-                    <div class="main-content" @if(langIsRTL(config('app.locale'))) dir="rtl" @else dir="ltr" @endif>
+                    <div class="main-content main-dir" >
                         {!! $slider->body !!}
                         <br>
                         <p class="text-center">
-                            {{$slider->dataz['index_ParallaxSlider_subtitle']}}
+                            {{$slider->dataz[$data->area_name.'_'.$data->part.'_subtitle']}}
                             <br>
                             <a class="btn btn-outline-dark mt-5"
-                               href="{{fixUrlLang($slider->dataz['index_ParallaxSlider_link'])}}">
-                                {{$slider->dataz['index_ParallaxSlider_btn']}}
+                               href="{{fixUrlLang($slider->dataz[$data->area_name.'_'.$data->part.'_link'])}}">
+                                {{$slider->dataz[$data->area_name.'_'.$data->part.'_btn']}}
                             </a>
                         </p>
                     </div>
