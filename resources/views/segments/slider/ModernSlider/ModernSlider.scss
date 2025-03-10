@@ -1,0 +1,88 @@
+.ModernSlider {
+    // scss
+    .modern-slider {
+        height: 85vh;
+        background-size: cover;
+        position: relative;
+
+
+        &:before, &:after {
+            content: ' ';
+            position: absolute;
+            z-index: 1;
+            top: 30%;
+            inset-inline-end: 8%;
+            bottom: 0;
+            width: 500px;
+            height: 35%;
+            border-left: 3px solid;
+            border-bottom: 3px solid;
+            border-color: var(--xshop-primary);
+            transform: rotate(-15deg);
+            border-image-outset: 0;
+            border-image-repeat: stretch;
+            border-image-slice: 30;
+            border-image-width: 3px;
+            opacity: 0;
+            transition-duration: 700ms;
+            transition-delay: 550ms;
+            transition-timing-function: cubic-bezier(.25, .25, .75, .75);
+        }
+
+        &:after {
+
+            border-image-source: linear-gradient(to right, transparent 83%, var(--xshop-primary) 83%, var(--xshop-primary) 100%);
+        }
+
+        &:before {
+            border-image-source: linear-gradient(to left, transparent 83%, var(--xshop-secondary) 83%, var(--xshop-secondary) 100%);
+        }
+    }
+
+    .modern-slide-item {
+        transform: scale(0);
+        position: absolute;
+        inset-inline-end: 12%;
+        top: 40%;
+        width: 350px;
+        max-width: 80%;
+        transition-duration: 500ms;
+        transition-delay: 250ms;
+        transition-timing-function: cubic-bezier(.25, .25, .75, .75);
+        color: var(--modern-slider-color);
+
+
+    }
+
+    .tns-slide-active {
+        .modern-slide-item {
+            transform: scale(1);
+        }
+
+        .modern-slider {
+            &:before, &:after {
+                opacity: 1;
+            }
+        }
+    }
+}
+
+
+/*-1000px width*/
+@media (max-width: 1000px) {
+    #ModernSlider {
+
+        .modern-slider {
+            background-position: right center ;
+            background-size: auto 100% ;
+        }
+    }
+    .modern-slider {
+        &:before, &:after {
+            opacity: 1;
+            max-width: 95%;
+            top: 35% !important;
+            inset-inline-end: 6% !important;
+        }
+    }
+}
