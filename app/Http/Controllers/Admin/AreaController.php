@@ -100,7 +100,7 @@ class AreaController extends Controller
      */
     public function image($segment, $part)
     {
-        return response()->file(resource_path() . '/views/segments/' . $segment . '/' . $part . '/screenshot.png', ['Content-Type' => 'image/png']);
+        return response()->file(resource_path() . '/views/segments/' . $segment . '/' . $part . '/screenshot.webp', ['Content-Type' => 'image/png']);
     }
 
     public function update(Request $request, Area $area)
