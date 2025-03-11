@@ -36,7 +36,6 @@ function commafy(num) {
 
 const handleScroll = function() {
     const container = document.getElementById('CounterGrid');
-    console.log(isElementInViewport(container));
     if (container == null){
         return ;
     }
