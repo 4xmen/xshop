@@ -2695,7 +2695,6 @@ export default {
 }
 
 #icon-dropdown{
-    //display: block;
     min-height: 45px;
     padding-right: 2rem;
     padding-left: 2rem;

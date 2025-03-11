@@ -23,6 +23,8 @@
                 </div>
             </div>
             <table id="vue-cal-table">
+                <thead>
+
                 <tr>
                     <th @click="selectByWeekDay(0)">
                         {{ __("Saturday") }}
@@ -46,6 +48,10 @@
                         {{ __("Friday") }}
                     </th>
                 </tr>
+                </thead>
+                <tbody>
+
+
                 <tr v-for="(tr,i) in monthArray">
                     <td v-for="(td,j) in tr" @mouseenter="hover" @click="selecting(td)" :class="getClass(td)" :title="td.date+' '+td.pDate"
                         :data-timpstamp="td.unixTimeStamp">
@@ -55,6 +61,7 @@
                         </template>
                     </td>
                 </tr>
+                </tbody>
             </table>
             <input type="hidden" :value="JSON.stringify(selected)" :name="inputName">
         </div>

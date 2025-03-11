@@ -1,9 +1,18 @@
+@use "sass:color";
 // Fonts
-@import 'vazirmatn/Vazirmatn-font-face.css';
-@import "remixicon/fonts/remixicon.css";
-@import "vue-toast-notification/dist/theme-bootstrap.css";
+@use 'vazirmatn/Vazirmatn-font-face.css';
+@use "remixicon/fonts/remixicon.css";
+@use "vue-toast-notification/dist/theme-bootstrap.css";
 // Variables
-@import 'panel/variables';
+@use 'panel/variables';
+
+@use "panel/common";
+@use "panel/raw";
+@use "panel/fix";
+@use "panel/navbar";
+@use "panel/breadcrumbs";
+@use "panel/item-list";
+@use "panel/steps";
 
 // Bootstrap
 //@import 'bootstrap/scss/bootstrap';
@@ -53,7 +62,7 @@ a{
 
     >aside{
         background-image: url("../images/pattern.png");
-        background-color: lighten($body-bg,7);
+        background-color: color.adjust(variables.$body-bg, $lightness: 7%);
         position: relative;
     }
     &.sided{
@@ -65,10 +74,3 @@ a{
 }
 
 
-@import "panel/common";
-@import "panel/raw";
-@import "panel/fix";
-@import "panel/navbar";
-@import "panel/breadcrumbs";
-@import "panel/item-list";
-@import "panel/steps";

@@ -1,3 +1,5 @@
+@use "variables";
+@use "sass:color";
 .steps {
 
 
@@ -25,14 +27,14 @@
         top: 50%;
         inset-inline-start: 0;
         inset-inline-end: calc(100% - var(--progress));
-        border-bottom: 1px solid lighten($primary-color-panel,20);
+        border-bottom: 1px solid color.adjust(variables.$primary-color-panel, $lightness: 20%);
         transition: all 0.3s ease-in-out;
     }
 
     li {
         position: relative;
         z-index: 2;
-        background: $lighter-color;
+        background: variables.$lighter-color;
         cursor: pointer;
         border: 1px solid #ccc;
         border-radius: 50%;
@@ -47,8 +49,8 @@
         }
 
         &.active {
-            border-color: lighten($primary-color-panel,20);
-            background-color: $primary-color-panel;
+            border-color: color.adjust(variables.$primary-color-panel, $lightness: 20%);
+            background-color: variables.$primary-color-panel;
         }
     }
 }
@@ -86,11 +88,11 @@
     justify-content: center;
 
     &:hover {
-        border-color: $primary-color-panel;
+        border-color: variables.$primary-color-panel;
     }
 }
 #upload-drag-drop.active {
-    border-color: $primary-color-panel;
+    border-color: variables.$primary-color-panel;
 }
 
 .img-preview{
@@ -105,7 +107,7 @@
 
 
 .indexed{
-    background: $primary-color-panel;
+    background: variables.$primary-color-panel;
 }
 
 #upload-image-select{

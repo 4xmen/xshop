@@ -1,3 +1,5 @@
+@use "../../../../sass/client-custom/app_variables";
+
 .ClipListGrid {
     .container,.container-fluid{
         overflow: hidden;
@@ -33,7 +35,7 @@
             display: flex;
             position: absolute;
             z-index: 2;
-            background: rgba($xshop-diff, .7);
+            background: rgba(app_variables.$xshop-diff, .7);
             padding: 7px;
             bottom: 0;
             left: 0;

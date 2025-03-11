@@ -14,7 +14,8 @@
         "laravel-vite-plugin": "^1.0",
         "sass": "^1.56.1",
         "vite": "^5.0",
-        "vue": "^3.2.37"
+        "vue": "^3.2.37",
+        "path": "^0.12.7"
     },
     "dependencies": {
         "bs5-lightbox": "^1.8.3",

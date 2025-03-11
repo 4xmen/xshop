@@ -1,12 +1,14 @@
+@use "sass:color";
+@use "variables";
 body {
-    background: $body-bg;
+    background: variables.$body-bg;
 }
 
 .circle-btn {
     width: 75px;
     height: 75px;
     border-radius: 50%;
-    background: $secondary-color-panel;
+    background: variables.$secondary-color-panel;
     backdrop-filter: blur(4px);
     border: 0;
     box-shadow: 0px 3px 5px #11111177, inset 0 0 0 0 darkred;
@@ -56,7 +58,7 @@ a.btn, a.action-btn, a.circle-btn {
 }
 
 .general-form {
-    background: $lighter-color;
+    background: variables.$lighter-color;
     border-radius: 7px;
     margin-bottom: 4rem;
     position: relative;
@@ -155,11 +157,11 @@ a.btn, a.action-btn, a.circle-btn {
         color: white;
 
         &.active {
-            background: $primary-color-panel;
+            background: variables.$primary-color-panel;
         }
 
         &:hover {
-            background: rgba($primary-color-panel, .7);
+            background: rgba(variables.$primary-color-panel, .7);
         }
     }
 }
@@ -167,7 +169,7 @@ a.btn, a.action-btn, a.circle-btn {
 #setting-sections {
     section {
         display: none;
-        background: $lighter-color;
+        background: variables.$lighter-color;
         padding: 1rem;
 
         .setting-field {
@@ -206,10 +208,10 @@ a.btn, a.action-btn, a.circle-btn {
     height: 125px;
     text-align: center;
     display: block;
-    color: $text-muted;
+    color: variables.$text-muted;
 
     &:hover {
-        color: lighten($primary-color-panel, 10);
+        color:  color.adjust(variables.$primary-color-panel, $lightness: 7%);
     }
 
     i {
@@ -224,12 +226,12 @@ a.btn, a.action-btn, a.circle-btn {
 }
 
 .avatar-x64 {
-    background: $body-bg;
+    background: variables.$body-bg;
     width: 64px;
     height: 64px;
     border-radius: 50%;
     object-fit: cover;
-    border: 3px rgba($primary-color-panel, 127) solid;
+    border: 3px rgba(variables.$primary-color-panel, 127) solid;
 }
 
 .skewed-container {
@@ -253,7 +255,7 @@ a.btn, a.action-btn, a.circle-btn {
 
     .card-header {
         background: #ffffff22 !important;
-        color: $secondary-color-panel;
+        color: variables.$secondary-color-panel;
     }
 
     .card-body {
@@ -275,7 +277,7 @@ a.btn, a.action-btn, a.circle-btn {
 
     .card-header {
         background: #ffffff22 !important;
-        color: $secondary-color-panel;
+        color: variables.$secondary-color-panel;
     }
 
     .card-body {
@@ -319,7 +321,7 @@ a.btn, a.action-btn, a.circle-btn {
     display: flex;
     align-items: center;
     justify-content: center;
-    color: lighten($primary-color-panel, 15);
+    color:  color.adjust(variables.$primary-color-panel, $lightness: 15%);
 
     .loader {
         position: relative;
@@ -554,7 +556,7 @@ a.btn, a.action-btn, a.circle-btn {
     bottom: -50vh;
     left: 1rem;
     right: 1rem;
-    background: $lighter-color;
+    background: variables.$lighter-color;
     height: 40vh;
     border-radius: 7px 7px 0 0;
     border: 1px solid #aaaaaa55;

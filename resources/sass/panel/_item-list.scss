@@ -1,6 +1,8 @@
+@use "sass:color";
+@use "variables";
 .item-list {
     overflow: hidden;
-    background: $lighter-color;
+    background: variables.$lighter-color;
     //margin: 0 1rem;
     border-radius: 4px;
 
@@ -74,7 +76,7 @@
                 border-radius: 3px;
             }
              input:checked + label{
-                background: lighten($primary-color-panel,10);
+                background: color.adjust(variables.$primary-color-panel, $lightness: 10%)
             }
             input{
                 display: none;
