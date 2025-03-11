@@ -1,4 +1,4 @@
-<section class='TreeGridProducts'>
+<section class='TreeGridProducts live-setting' data-live="{{$data->area_name.'_'.$data->part}}">
     <div class="{{gfx()['container']}}">
 
         <div class="tree-grid">
