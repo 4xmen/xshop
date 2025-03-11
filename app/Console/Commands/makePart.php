@@ -82,7 +82,7 @@ DOC;
         file_put_contents($folderPath . '/' . $part . '.json', json_encode($detail,JSON_PRETTY_PRINT));
         file_put_contents($folderPath . '/' . ucfirst($part) . '.php', $handler);
         file_put_contents($folderPath . '/' . $part . '.scss', $scss);
-        File::copy(__DIR__.'/data/screen.png',$folderPath .'/screenshot.png');
+        File::copy(__DIR__.'/data/screen.webp',$folderPath .'/screenshot.webp');
 
 
 
