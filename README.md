@@ -17,6 +17,7 @@
 - Project size compression
 - UI/UX is more specific
 - Developer Friendlier
+- Custom theme design 
 
 
 ## Documentation
