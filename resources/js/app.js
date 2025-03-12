@@ -19,7 +19,7 @@ import ToastPlugin from 'vue-toast-notification';
 import {useToast} from 'vue-toast-notification';
 import store from "./components/libs/store.js";
 import chartjs from 'chart.js/auto';
-import './panel/raw.js';
+// import './panel/raw.js';
 import './panel/navbar.js';
 import './panel/list-checkboxs.js';
 import './panel/general-events.js';

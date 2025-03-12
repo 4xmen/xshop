@@ -9,6 +9,7 @@ export default defineConfig({
             input: [
                 'resources/sass/app.scss',
                 'resources/js/app.js',
+                'resources/js/panel/raw.js',
                 'resources/sass/client.scss',
                 'resources/js/client.js',
             ],
@@ -37,25 +38,6 @@ export default defineConfig({
         }
     },
     build: {
-        chunkSizeWarningLimit: 500, // adjust this value to your needs
-        rollupOptions: {
-            output: {
-                manualChunks: (id) => {
-                    if (id.includes('node_modules/tns')|| id.includes('node_modules/axios') || id.includes('node_modules/bootstrap')) {
-                        return 'vendor-tns-axios';
-                    } else if (id.includes('node_modules/@vue')  || id.includes('node_modules/vue') || id.includes('node_modules/vuex') || id.includes('node_modules/vue-toast-notification') ) {
-                        return 'vendor-vue';
-                    } else if (id.includes('node_modules/chart.js')) {
-                        return 'vendor-chart';
-                    } else if (id.includes('node_modules/three')) {
-                        return 'vendor-three';
-                    } else if (id.includes('node_modules')) {
-                        return 'vendor-others';
-                    }
-                    return 'app';
-                },
-
-            },
-        },
+        chunkSizeWarningLimit: 700,
     },
 });
