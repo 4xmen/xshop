@@ -5,6 +5,13 @@ window.addEventListener('load', function () {
 
     try {
 
+        if (document.querySelectorAll('.ckeditorx[name="description"]').length > 0){
+            let metaDescription = document.querySelector('meta[name="description"]');
+            if (metaDescription) {
+                metaDescription.remove();
+            }
+        }
+
         let keywordInput = document.querySelector('#keyword');
         let dirx = document.querySelector('#panel-dir').value;
         let editors = {};
