@@ -726,7 +726,9 @@ function nestedWithData($items, $parent_id = null)
         if ($item->parent_id == $parent_id) {
             $name = $item->name ?? $item->title ?? $item->id;
             $r .= "<li data-id='{$item->id}'> <span> <i class='ri-drag-move-2-line'></i> {$name}</span>" . PHP_EOL;
-            $r .= nestedWithData($items, $item->id);
+            if ($item->hasAttribute('parent_id')) {
+                $r .= nestedWithData($items, $item->id);
+            }
             $r .= PHP_EOL . ' </li>';
         }
     }
