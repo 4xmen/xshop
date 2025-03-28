@@ -1499,3 +1499,17 @@ function getSubGroupSetting($key, $limit = 10, $order = 'id', $dir = "DESC")
     return Group::where('id', getSetting($key) ?? 1)->first()
         ->children()->orderBy($order, $dir)->limit($limit)->get();
 }
+
+
+/**
+ * get website main categories
+ * @param $key
+ * @param $limit
+ * @param $orderBy
+ * @param $asc
+ * @return Category[]|\LaravelIdea\Helper\App\Models\_IH_Category_C
+ */
+function getCategoriesSet($key,$limit=4,$orderBy = 'sort', $asc = 'ASC')
+{
+    return \App\Models\Category::whereIn('id',json_decode(getSetting($key) ?? []))->where('hide',0)->limit($limit)->orderBy($orderBy,$asc)->get();
+}
