@@ -18,6 +18,13 @@
     background: var(--xshop-secondary);
 }
 
+
+::selection {
+    color: var(--xshop-diff);
+    background-color: var(--xshop-primary);
+}
+
+
 * {
     font-family: 'Vazirmatn', sans-serif;
 }
