@@ -91,7 +91,18 @@
                 xlang="{{config('app.locale')}}"
                 xid="{{$setting->key}}"
                 xname="{{$setting->key}}"
-                @error('category_id') :err="true" @enderror
+                :xvalue='{{old($setting->key,$setting->value??[])}}'
+                :close-on-Select="true"></searchable-multi-select>
+            @break
+        @case('GROUP_SET')
+            <searchable-multi-select
+                @error($setting->key) :err="true" @enderror
+            :items='@json($groups)'
+                title-field="name"
+                value-field="id"
+                xlang="{{config('app.locale')}}"
+                xid="{{$setting->key}}"
+                xname="{{$setting->key}}"
                 :xvalue='{{old($setting->key,$setting->value??[])}}'
                 :close-on-Select="true"></searchable-multi-select>
             @break
