@@ -1513,3 +1513,17 @@ function getCategoriesSet($key,$limit=4,$orderBy = 'sort', $asc = 'ASC')
 {
     return \App\Models\Category::whereIn('id',json_decode(getSetting($key) ?? []))->where('hide',0)->limit($limit)->orderBy($orderBy,$asc)->get();
 }
+
+
+/**
+ * get website main categories
+ * @param $key
+ * @param $limit
+ * @param $orderBy
+ * @param $asc
+ * @return Group[]|\LaravelIdea\Helper\App\Models\_IH_Group_C
+ */
+function getGroupsSet($key,$limit=4,$orderBy = 'sort', $asc = 'ASC')
+{
+    return \App\Models\Group::whereIn('id',json_decode(getSetting($key) ?? []))->where('hide',0)->limit($limit)->orderBy($orderBy,$asc)->get();
+}
