@@ -13,7 +13,7 @@ class AutoPlayClips
         $setting->section = 'theme';
         $setting->key = $part->area_name . '_' . $part->part.'_title';
         $setting->value = "Clips list";
-        $setting->type = 'text';
+        $setting->type = 'TEXT';
         $setting->size = 6;
         $setting->title =  $part->area_name . ' ' . $part->part;
         $setting->save();

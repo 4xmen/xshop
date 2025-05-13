@@ -14,7 +14,7 @@ class FavProductWithMeta
         $setting->section = 'theme';
         $setting->key = $part->area_name . '_' . $part->part.'_title';
         $setting->value = "Fav product";
-        $setting->type = 'text';
+        $setting->type = 'TEXT';
         $setting->size = 6;
         $setting->title =  $part->area_name . ' ' . $part->part;
         $setting->save();
