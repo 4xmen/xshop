@@ -39,6 +39,7 @@ class Visitor extends Model
         'UC Browser' => '(UCBrowser)',
         'Yandex Browser' => '(YaBrowser)',
         'Samsung Internet' => '(SamsungBrowser)',
+        'other' => 'other'
     ];
 
     public static $osList = [
