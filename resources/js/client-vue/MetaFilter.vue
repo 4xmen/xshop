@@ -10,32 +10,34 @@
                                name="only">
                         <label class="form-check-label" for="flexSwitchCheckDefault">
                             <!-- WIP translate -->
-                            Only available
+                            {{ translate['only'] }}
                         </label>
                     </div>
                 </li>
                 <li>
                     <label>
-                        Sort by
+                        {{ translate['sort-by'] }}
                     </label>
                     <select name="sort" v-model="sort" class="form-control">
                         <option value="">
-                            Newest
+                            {{ translate['newset'] }}
                         </option>
                         <option value="oldest">
-                            Oldest
+                            {{ translate['oldest'] }}
                         </option>
                         <option value="cheap">
-                            Cheaper
+                            {{ translate['cheaper'] }}
                         </option>
                         <option value="expensive">
-                            More expensive
+                            {{ translate['more-expensive'] }}
+
                         </option>
                         <option value="fav">
-                            Favorite
+                            {{ translate['favorite'] }}
+
                         </option>
                         <option value="sale">
-                            More sale
+                            {{ translate['more-sale'] }}
                         </option>
                     </select>
                 </li>
@@ -57,7 +59,7 @@
                         </template>
                         <template v-if="prop.type == 'color'">
                             <select :id="prop.name" class="form-control color" :name="`meta[${prop.name}]`">
-                                <option value=""> All</option>
+                                <option value="">  {{ translate['all'] }}</option>
                                 <option v-for="op in prop.optionList" :style="`background: ${op.value} ;`"
                                         :value="op.value"> {{ op.title }}
                                 </option>
@@ -65,7 +67,7 @@
                         </template>
                         <template v-if="prop.type == 'select'">
                             <select :id="prop.name" class="form-control color" :name="`meta[${prop.name}]`">
-                                <option value=""> All</option>
+                                <option value="">  {{ translate['all'] }}</option>
                                 <option v-for="op in prop.optionList" :value="op.value"> {{ op.title }}</option>
                             </select>
                         </template>
@@ -79,7 +81,7 @@
                 </template>
             </ul>
             <button type="submit" class="btn btn-outline-primary btn-sm w-100">
-                Apply filter
+                {{ translate['apply-filter'] }}
             </button>
         </form>
 
@@ -152,6 +154,9 @@ export default {
         propsApiLink: {
             required: true,
         },
+        translate: {
+            default: {},
+        }
     },
     async mounted() {
 

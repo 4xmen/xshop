@@ -9,7 +9,7 @@
                 </div>
                 <div class="card-body">
                     <div class="row p-0">
-                        <div class="col-md-11">
+                        <div class="col-md-10">
                             <div>
                                 <!-- WIP translate-->
                                 <label :for="`kind-${i}`">
@@ -66,6 +66,9 @@
                             <button type="button" class="btn btn-primary" @click="remItem(i)">
                                 <i class="ri-close-line"></i>
                             </button>
+                            <a class="btn btn-outline-light mx-2" :href="fixLink(item.id)" v-if="transLink !== ''">
+                                <i class="ri-translate"></i>
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -74,6 +77,8 @@
         <button type="button" class="btn btn-primary my-3" @click="addItem">
             <i class="ri-add-line"></i>
         </button>
+
+
         <input type="hidden" name="items" :value="JSON.stringify(this.currentItems)">
         <input type="hidden" name="removed" :value="JSON.stringify(this.removed)">
     </div>
@@ -111,6 +116,9 @@ export default {
         },
         menuId: {
             required: true,
+        },
+        transLink:{
+            default: '',
         }
     },
     mounted() {
@@ -144,6 +152,9 @@ export default {
                 this.removed.push(this.currentItems[i].id);
             }
             this.currentItems.splice(i, 1)
+        },
+        fixLink(id){
+            return this.transLink.split('xxx').join(id);
         }
 
     }

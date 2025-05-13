@@ -93,6 +93,7 @@
                     <menu-item-input
                         :morphs='@json(\App\Models\Menu::$mrohps)'
                         morph-search-link="{{route('v1.morph.search')}}"
+                        @if(config('app.xlang.active')) trans-link="{{route('admin.lang.model',['xxx',\App\Models\Item::class])}}" @endif
                         xlang="{{config('app.locale')}}"
                         :items='@json($item->items)'
                         menu-id="{{$item->id}}"

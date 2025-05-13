@@ -34,6 +34,18 @@
                 @if(isset($category))
                     category="{{$category->id}}"
                 @endif
+                :translate='{{vueTranslate([
+                    'only' => __('Only available'),
+                    'all' => __('All'),
+                    "sort-by" => __('Sort by'),
+                    "newset" => __('Newest'),
+                    "oldest" => __('Oldest'),
+                    'more-expensive' => __('More expensive'),
+                    'cheaper' => __('Cheaper'),
+                    'favorite' => __('Favorite'),
+                    'more-sale' => __('More sale'),
+                    'apply-filter' => __('Apply filter'),
+                ])}}'
             >
             </meta-filter>
         </div>
