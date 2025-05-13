@@ -431,7 +431,7 @@ function showCatNested($cats, $parent = null)
     $ret = "";
     foreach ($cats as $cat) {
         if ($cat->parent_id == $parent & !$cat->hide) {
-            $ret .= "<li>";
+            $ret .= "<li class='category-nested-{$cat->id}'>";
             $ret .= "<a href='" . $cat->webUrl() . "'>";
             $ret .= $cat->name . '</a>';
             $ret .= showCatNested($cats, $cat->id);
