@@ -1,0 +1,100 @@
+
+@keyframes rotate-z {
+    from {
+        transform: rotateZ(0deg);
+    }
+    to {
+        transform: rotateZ(360deg);
+    }
+}
+
+.DowntownSlider {
+    position: relative;
+    height: 90vh;
+
+
+    // scss
+    &:before{
+        height: 7rem;
+        content: ' ';
+        top: 0;
+        right: 0;
+        bottom: 0;
+        background: var(--downtown-bg);
+        z-index: 9;
+        position: absolute;
+        width: 100%;
+    }
+
+    .downtown-img{
+        position: relative;
+        overflow: hidden;
+        padding: 0;
+        img{
+            height: 90vh;
+            width: 100%;
+            object-fit: cover;
+            object-position: right;
+        }
+
+        &:after{
+            content: ' ';
+            background: var(--downtown-bg);
+            height: 3rem;
+            top: 5rem;
+            left: -4rem;
+            width: 100%;
+            z-index: 7;
+            position: absolute;
+            transform: rotateZ(-4deg);
+        }
+    }
+    .downtown-content{
+        background: var(--downtown-bg);
+        padding-right: 6rem;
+        padding-left: 6rem;
+        align-items: end;
+        display: flex;
+        position: relative;
+        padding-bottom: 10vh;
+
+        *{
+            color: var(--downtown-color);
+        }
+
+        svg{
+            width: 20vh;
+            height: 20vh;
+            position: absolute;
+            z-index: 9;
+            top: 17.5vh;
+            right: -10.5vh;
+            animation: rotate-z 15s linear infinite;
+        }
+
+        img{
+            width: 15vh;
+            height: 15vh;
+            border-radius: 50%;
+            object-fit: cover;
+            position: absolute;
+            right: -7.5vh;
+            top: 20vh;
+            border: 10px solid var(--downtown-bg);
+        }
+
+    }
+
+    /*-900px width*/
+    @media (max-width: 900px) {
+        .downtown-img{
+            &:after{
+                transform: rotateZ(-8deg);
+            }
+        }
+        .downtown-content{
+            padding-right: 1rem;
+            padding-left: 1rem;
+        }
+    }
+}
