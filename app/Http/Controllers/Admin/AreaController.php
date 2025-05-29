@@ -63,7 +63,9 @@ class AreaController extends Controller
             default:
                 return abort(404);
         }
-
+        if ($m == null){
+            return abort(404);
+        }
         $valids = [];
         foreach ($area->segment as $seg) {
             if (File::exists(resource_path() . '/views/segments/' . $seg)) {
@@ -190,7 +192,10 @@ class AreaController extends Controller
             }
         }
         foreach (json_decode($request->input('removed')) as $id) {
-            Part::where('id', $id)->first()->delete();
+            $i = Part::where('id', $id)->first();
+            if ($i != null) {
+                $i->delete();
+            }
         }
         \Artisan::call('client');
 

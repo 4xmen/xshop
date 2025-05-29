@@ -81,7 +81,7 @@
             <div id="step1">
                 <div class="card">
                     <div class="card-header">
-                        {{__("Basic data")}}
+                        {{__("Basic data")}} @if(isset($item)) <a href="{{route('admin.area.design.model',['product','Product',$item->id])}}" class="btn btn-secondary float-end"> <i class="ri-palette-line"></i> </a> @endif
                     </div>
                     <div class="card-body">
                         @include('admin.products.sub-pages.product-step1')

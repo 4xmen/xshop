@@ -11,10 +11,10 @@
                 @include($p['blade'],['data' => $p['data']])
             @endforeach
         @endif
-        @foreach(getParts($area,$product) as $part)
-            @php($p = $part->getBladeWithData($product))
-            @include($p['blade'],['data' => $p['data']])
-        @endforeach
+            @foreach(getParts($area,'$product'.$product->id) as $part)
+                @php($p = $part->getBladeWithData())
+                @include($p['blade'],['data' => $p['data']])
+            @endforeach
         @if(findArea($area,$product)->use_default)
             @foreach(getParts('defaultFooter') as $part)
                 @php($p = $part->getBladeWithData())
