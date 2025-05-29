@@ -116,10 +116,9 @@ class SettingController extends Controller
                 } else
                     if ($file->guessExtension() == 'mp4' || $file->guessExtension() == 'mp3') {
                         $file->move(public_path('upload/media/'), str_replace('_', '.', $index));//store('/images/'.,['disk' => 'public']);
-                    } elseif ($file->guessExtension() == 'webp') {
+                    } elseif ($file->guessExtension() == 'webp' || $file->guessExtension() == 'svg')  {
                         $file->move(public_path('upload/images/'), str_replace('_', '.', $index));//store('/images/'.,['disk' => 'public']);
                     } else  {
-
                         $file->move(public_path('upload/file/'), str_replace('_', '.', $index));//store('/images/'.,['disk' => 'public']);
                     }
             }
