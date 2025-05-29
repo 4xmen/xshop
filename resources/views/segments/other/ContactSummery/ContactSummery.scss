@@ -1,0 +1,38 @@
+.ContactSummery {
+    // scss
+    h1,h2{
+        font-size: 18pt;
+        margin-bottom: 1rem;
+    }
+
+    img{
+        border-radius: var(--xshop-border-radius);
+    }
+
+    li{
+        overflow: hidden;
+        padding: .5rem;
+    }
+    p{
+        text-align:justify;
+    }
+    i{
+        color: var(--xshop-primary);
+        font-size: 20px;
+        margin: 0 1rem;
+        position: relative;
+        top: -5px;
+    }
+    a{
+        color: var(--xshop-text);
+    }
+    .summery-detail{
+        position: relative;
+
+        .btn{
+            position: absolute;
+            inset-inline-end: 2rem;
+            bottom: 1rem;
+        }
+    }
+}
