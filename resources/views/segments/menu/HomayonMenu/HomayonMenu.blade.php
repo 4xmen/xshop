@@ -137,7 +137,7 @@
                     <a href="{{$item->webUrl()}}">
                         {{$item->title}}
                     </a>
-                    @if($item->dest && $item->dest->children()->where('hide',false)->count() > 0)
+                    @if($item->dest && $item->dest->children != null && $item->dest->children()->where('hide',false)->count() > 0)
                         <ul class="px-1 border-start border-white">
                             @foreach($item->dest->children()->where('hide',false)->get() as $itm)
                                 <li>
