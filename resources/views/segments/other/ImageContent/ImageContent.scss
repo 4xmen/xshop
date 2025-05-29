@@ -1,0 +1,11 @@
+.ImageContent {
+    // scss
+    background-size: cover;
+    background-position: center;
+    .container,.container-fluid{
+        height: 60vh;
+        padding: 10vh;
+        color: var(--image-content-color);
+    }
+
+}

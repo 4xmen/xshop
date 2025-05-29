@@ -4,6 +4,7 @@
     {{$post->title}} - {{config('app.name')}}
 @endsection
 @section('content')
+    <main>
     @if(findArea($area,$post)->use_default)
         @foreach(getParts('defaultHeader') as $part)
             @php($p = $part->getBladeWithData())
@@ -20,4 +21,5 @@
             @include($p['blade'],['data' => $p['data']])
         @endforeach
     @endif
+    </main>
 @endsection
