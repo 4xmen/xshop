@@ -1,0 +1,17 @@
+.SvgList {
+    // scss
+    text-align: center;
+    img{
+        width: 60%;
+        display: block;
+        margin: auto;
+        max-width: 128px;
+    }
+    h3{
+        font-size: 13pt;
+        margin: 1rem auto;
+    }
+    a{
+        color: var(--xshop-text);
+    }
+}
