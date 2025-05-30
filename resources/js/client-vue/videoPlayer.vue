@@ -235,4 +235,16 @@ export default {
     width: 100%;
     border-radius: var(--xshop-border-radius);
 }
+
+/*-450px width*/
+@media ( max-width: 450px ) {
+    .player-buttons {
+        display: grid;
+        grid-template-columns:  repeat(4,1fr);
+        gap: 10px;
+    }
+
+}
+
+
 </style>
