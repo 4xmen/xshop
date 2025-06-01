@@ -68,7 +68,9 @@ class ClientController extends Controller
         $area = 'post';
         $title = $post->title;
         $subtitle = $post->subtitle;
-        $post->increment('view');
+        $post->withoutTimestamps(function () use ($post) {
+            $post->increment('view');
+        });
         $breadcrumb = [
             __('Posts') => postsUrl(),
             $post->mainGroup->name => $post->mainGroup->webUrl(),
@@ -106,7 +108,9 @@ class ClientController extends Controller
         $area = 'gallery';
         $title = $gallery->title;
         $subtitle = \Str::limit(strip_tags($gallery->description), 15);
-        $gallery->increment('view');
+        $gallery->withoutTimestamps(function () use ($gallery) {
+            $gallery->increment('view');
+        });
         $breadcrumb = [
             __('Galleries') => gallariesUrl(),
             $gallery->title => null,
@@ -312,6 +316,9 @@ class ClientController extends Controller
             $breadcrumb[$product->category->parent->name] = $product->category->parent->webUrl();
         }
         $breadcrumb[$product->name] = null;
+        $product->withoutTimestamps(function () use ($product) {
+            $product->increment('view');
+        });
         return view('client.product', compact('area', 'product', 'title', 'subtitle', 'breadcrumb'));
     }
 
