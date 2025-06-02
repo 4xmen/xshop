@@ -420,6 +420,7 @@ Route::middleware([\App\Http\Middleware\VisitorCounter::class])
         Route::get('/videos', [ClientController::class, 'clips'])->name('clips');
         Route::post('/card/check', [\App\Http\Controllers\CardController::class, 'check'])->name('card.check');
         Route::get('/card/discount/{code}', [\App\Http\Controllers\CardController::class, 'discount'])->name('card.discount');
+        Route::get('/card/items', [\App\Http\Controllers\CardController::class, 'items'])->name('card.items');
         Route::get('/card', [\App\Http\Controllers\CardController::class, 'index'])->name('card');
         Route::get('/cardClear', [\App\Http\Controllers\CardController::class, 'clearing'])->name('card.clear');
         Route::get('/profile', [\App\Http\Controllers\CustomerController::class, 'profile'])->name('profile');

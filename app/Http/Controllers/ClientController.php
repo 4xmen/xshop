@@ -904,4 +904,8 @@ class ClientController extends Controller
         $title = __('Under Construction') . ' - ' . config('app.name');
         return view('client.under-construction', compact('title'));
     }
+
+    public function cardItems(){
+        
+    }
 }

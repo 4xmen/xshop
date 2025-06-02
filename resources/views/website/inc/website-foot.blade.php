@@ -12,6 +12,16 @@
 </a>
 <input type="hidden" id="live-url" value="{{route('admin.setting.live','')}}/">
 @endif
-
+<div id="live-card-modal">
+    <div id="live-card-container">
+        <a href="{{ route('client.card') }}" class="btn btn-outline-primary d-block">
+            <i class="ri-shopping-bag-2-line"></i>
+            {{__("Go to card")}}
+        </a>
+        <div id="live-card-list">
+            @include('components.card-items')
+        </div>
+    </div>
+</div>
 </body>
 </html>

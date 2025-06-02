@@ -26,6 +26,10 @@ class CardController extends Controller
         });
     }
 
+
+    public function items(){
+        return view('components.card-items');
+    }
     public function productCardToggle(Product $product)
     {
 
