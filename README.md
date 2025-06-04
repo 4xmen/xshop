@@ -1,3 +1,4 @@
+
 <div align="center">
     <img width="250" src="resources/images/xshop-logo.svg" alt="xShop logo">
 </div>
@@ -5,31 +6,29 @@
 # xShop/v2
 
 > [!NOTE]
-> xShop is an open source shop developed in laravel, very customizable!
+> xShop is an open-source shop developed in Laravel, highly customizable!
 
-## New Features:
+## New Features
 
-- Dashboard panel changes
-- Integration of Vue.js and laravel
+- Dashboard panel improvements
+- Integration of Vue.js and Laravel
 - Advanced charts
-- Better customizable with AI & languages
-- Fixed Technical issues
+- Better customization with AI & language support
+- Fixed technical issues
 - Project size compression
-- UI/UX is more specific
-- Developer Friendlier
-- Custom theme design 
-
+- More specific UI/UX
+- Developer-friendly
+- Custom theme design
 
 ## Documentation
 
-- [ 📄 **Full document** 📄 ](https://4xmen.github.io/xshop/#/)
-- [🇮🇷 Persian read me](README-fa.md)
+- [📄 **Full Documentation** 📄](https://4xmen.github.io/xshop/#/)
+- [🇮🇷 Persian README](README-fa.md)
 
-
-## Installation [ Development mode ]
+## Installation [Development Mode]
 
 > [!IMPORTANT]  
-> Create new database and rename `.env.example` to `.env` then update you `.env` configs so run this commands:
+> Create a new database and rename `.env.example` to `.env`, then update your `.env` configurations. Run the following commands:
 
 ```bash
 git clone https://github.com/4xmen/xshop.git
@@ -39,35 +38,34 @@ composer install
 php artisan migrate:fresh --seed
 php artisan storage:link
 php artisan key:generate
-php artisan serv
+php artisan serve
 
-# to develop front-end
+# To develop front-end
 npm i
 php artisan client
-npm install @rollup/rollup-win32-x64-msvc # just for windows if the below line dose not work
+npm install @rollup/rollup-win32-x64-msvc # Windows only, if the below line does not work
 npm run dev
 
-# or with yarn
+# Or with yarn
 
 yarn install
 php artisan client
-yarn add @rollup/rollup-win32-x64-msvc # just for windows if the below line dose not work
+yarn add @rollup/rollup-win32-x64-msvc # Windows only, if the below line does not work
 yarn dev
-
 ```
 
-> [!TIP]
-> Default admin email is : `developer@example.com` (developer) or `admin@example.com` (admin) and default password is: `password`
+> [!TIP]  
+> Default admin emails are: `developer@example.com` (developer) or `admin@example.com` (admin)  
+> Default password: `password`
 
+## Image Seeding
 
-## image seeding 
-
-- Download & prepare images 
+- Download and prepare images:  
 ```bash
 php artisan seeding:prepare
- ```
-- nor copy your image folder to `database/seeders/images/` 
-- then: Seeding image for models: [Group, Category, Post, Product, Slider] 
+```
+- Then copy your image folder to `database/seeders/images/`
+- Seed images for models: [Group, Category, Post, Product, Slider]  
 
 ```bash
 php artisan seeding:image Product digital
@@ -79,94 +77,93 @@ Or to seed all models:
 php artisan seeding:all digital
 ```
 
-> First parameter is Model, Second is image seeder directory available [bag, clothe, digital, sport, posts, makeup]
-> You can create your directory and put your image into new directory then use image seeder
+> The first parameter is the model name; the second is the image seeder directory. Available directories: `[bag, clothe, digital, sport, posts, makeup]`  
+> You can create your own directory, add images to it, and use it with the image seeder.
 
-## Requirement
+## Requirements
 
-- php 8.2.x or above [ `php-gd`, `sqlite3`, `php-soap`]
-- mysql or mariadb or sqlite
-- composer
-- recommends install imagemagick on server to more image performance
+- PHP 8.2.x or above with extensions: `php-gd`, `sqlite3`, `php-soap`
+- MySQL, MariaDB, or SQLite
+- Composer
+- Recommended: Install ImageMagick on the server for better image performance
 
-## Deploy guide
+## Deployment Guide
 
-We recommend deploy xShop on VPS, so create database and run this commands:
+We recommend deploying xShop on a VPS. Create a database and run the following commands:
 
 ```bash
-cd /home/[yourUsername]/[pathOfYourWebsitePublicHTML]
-git clone  https://github.com/4xmen/xshop.git . # if this command not work make empty this folder
+cd /home/[yourUsername]/[pathToYourWebsitePublicHTML]
+git clone https://github.com/4xmen/xshop.git .  # If this command doesn’t work, empty this folder first
 cp .env.example .env
-nano .env # edit your config db, url, etc.
+nano .env # Edit your DB config, URL, etc.
 composer install
 php artisan migrate:fresh --seed
 php artisan storage:link
-php key:generate
+php artisan key:generate
 npm install 
 php artisan client
 npm run build
 ```
 
-## Make your site optimize & production mode
-
+## Optimize for Production
 
 ```bash
-nano .env # make APP_DEBUG false, APP_ENV production
+nano .env # Set APP_DEBUG=false, APP_ENV=production
 php artisan optimize
 composer install --optimize-autoloader --no-dev
 ```
 
-## Add cron job
+## Add Cron Job
 
-You must add crontab for your project:
+Add a crontab entry for your project:
 
 ```bash
 crontab -e
 ```
 
 Add this line:
+
 ```bash
 * * * * * cd /home/[yourusername]/[your-public-html-project-root] && php artisan schedule:run >> /dev/null 2>&1
 ```
 
+## Create xController
 
-## make xController
-
-Controller with log and semi-automatic CURD with logs  
-User [`model`]
+Create a controller with logging and semi-automatic CRUD with logs.  
+Usage: [`model`]
 
 ```bash
 php artisan make:xcontroller User
 ```
 
-## make theme part
+## Create Theme Part
 
-Theme part usable in area
+Create a reusable theme part in a specific area.
 
-PartName [`theme aprt name`]
-
-segmentName [`group`, `category`, `preloader`, ...],
+Parameters:  
+PartName [`theme part name`]  
+segmentName [`group`, `category`, `preloader`, ...]
 
 ```bash
-php artisan  make:part PartName segmentName
+php artisan make:part PartName segmentName
 ```
 
-## client optimize
+## Client Optimization
 
-Optimize client assets, `scss`,`js`,`css`
+Optimize client assets: `scss`, `js`, `css`
 
 ```bash
 php artisan client
 php artisan build
 ```
 
-### theme parts file
+### Theme Parts Files
 
-- PartName.php: `onCreate`, `onRemove`, `onMount` actions of theme part
-- PartName.blade.php: your theme part blade code
-- PartName.scss: your theme part scss
-- PartName.js: your theme part javascript
-- screenshot.png: screenshot preview of theme part
+- `PartName.php`: Contains `onCreate`, `onRemove`, `onMount` actions for the theme part  
+- `PartName.blade.php`: Blade template for the theme part  
+- `PartName.scss`: SCSS styles for the theme part  
+- `PartName.js`: JavaScript for the theme part  
+- `screenshot.png`: Screenshot preview of the theme part
 
 ## Demo
 
@@ -184,13 +181,11 @@ php artisan build
 
 ![5](https://raw.githubusercontent.com/A1Gard/xshop-installer-assets/master/screenshots/xshop-screenshot5.jpg)
 
-
-
 ## Access to xShop/v1
-> [!WARNING]  
-> xShop/v1 available here: <a href="https://github.com/4xmen/xshop.v1">https://github.com/4xmen/xshop.v1</a>
 
+> [!WARNING]  
+> xShop/v1 is available here: <a href="https://github.com/4xmen/xshop.v1">https://github.com/4xmen/xshop.v1</a>
 
 <p align="center"> 
-    Developed With Love ! ❤️
+    Developed with ❤️!
 </p>
