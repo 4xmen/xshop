@@ -1,4 +1,14 @@
-#live-card-modal{
+@keyframes rotate-z {
+    from {
+        transform: rotateZ(0deg);
+    }
+    to {
+        transform: rotateZ(360deg);
+    }
+}
+
+
+#live-card-modal {
     display: none;
     position: fixed;
     top: 0;
@@ -9,7 +19,7 @@
     backdrop-filter: blur(7px);
     z-index: 9999;
 
-    #live-card-container{
+    #live-card-container {
         background: var(--xshop-background);
         width: 300px;
         padding: 1rem;
@@ -17,32 +27,78 @@
         overflow-y: auto;
         max-width: 85%;
 
-        #live-card-list{
+        #live-card-list {
             margin: 0;
             list-style: none;
             padding: 1rem 0;
 
-            li{
+            li {
                 border-radius: var(--xshop-border-radius);
                 border: 1px solid var(--xshop-text);
                 margin-bottom: .5rem;
-                .product-card-item{
+
+                .product-card-item {
                     padding: 5px;
                     display: grid;
                     grid-template-columns: 4fr 8fr;
                     grid-gap: 5px;
-                    img{
+
+                    img {
                         width: 100%;
                         height: 75px;
                         object-fit: cover;
-
+                        border-radius: var(--xshop-border-radius);
                     }
-                    h3{
+
+                    h3 {
                         font-size: 18px;
-                        margin: .5rem 0 ;
+                        margin: .5rem 0;
                     }
                 }
             }
         }
     }
 }
+
+#live-search-content {
+    display: none;
+    background: var(--xshop-background);
+    padding: 1rem ;
+    position: absolute;
+    z-index: 9999;
+    top: 50px;
+    left: 0;
+    border-radius: var(--xshop-border-radius);
+
+    li {
+        list-style: none;
+        border-radius: var(--xshop-border-radius);
+        border: 1px solid var(--xshop-text);
+        margin-bottom: .5rem;
+
+        .product-search-item {
+            padding: 5px;
+            display: grid;
+            grid-template-columns: 4fr 8fr;
+            grid-gap: 5px;
+
+            img {
+                width: 100%;
+                height: 75px;
+                object-fit: cover;
+                border-radius: var(--xshop-border-radius);
+            }
+
+            h3 {
+                font-size: 18px;
+                margin: .5rem 0;
+            }
+        }
+    }
+    #search-ajax-loader{
+        animation: rotate-z 1s linear infinite;
+        display: none;
+        font-size: 45px;
+    }
+}
+

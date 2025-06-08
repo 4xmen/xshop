@@ -442,6 +442,7 @@ Route::middleware([\App\Http\Middleware\VisitorCounter::class])
         Route::get('/video/{clip}', [ClientController::class, 'clip'])->name('clip');
         Route::get('/category/{category}', [ClientController::class, 'category'])->name('category');
         Route::get('/gallery/{gallery}', [ClientController::class, 'gallery'])->name('gallery');
+        Route::post('/search', [ClientController::class, 'ajaxSearch'])->name('search.ajax');
         Route::get('/search', [ClientController::class, 'search'])->name('search');
         Route::get('attach/download/{attachment}', [ClientController::class, 'attachDl'])->name('attach-dl');
         Route::get('pay/{invoice}', [ClientController::class, 'pay'])->name('pay');

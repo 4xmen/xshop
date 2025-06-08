@@ -1,6 +1,7 @@
-@foreach(\App\Models\Product::whereIn('id', json_decode(\Cookie::get('card'), true))
-        ->where('status', 1)
-        ->get() as $product)
+@if(isJson(\Cookie::get('card')))
+    @foreach(\App\Models\Product::whereIn('id', json_decode(\Cookie::get('card'), true))
+            ->where('status', 1)
+            ->get() as $product)
         <li>
             <div class="product-card-item">
                 <img src="{{$product->imgUrl()}}" alt="{{$product->name}}">
@@ -19,4 +20,5 @@
             </div>
 
         </li>
-@endforeach
+    @endforeach
+@endif

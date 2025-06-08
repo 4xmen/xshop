@@ -242,7 +242,7 @@ class ClientController extends Controller
     public function search(Request $request)
     {
 
-        if (isGuestMaxAttemptTry('search', 5, 1)) {
+        if (isGuestMaxAttemptTry('search', 10, 1)) {
             return  abort(403);
         }
 
@@ -273,7 +273,24 @@ class ClientController extends Controller
         return view('client.tag', compact('posts', 'products', 'clips', 'title', 'subtitle','noIndex'));
     }
 
-    public function group($slug)
+    public function ajaxSearch(Request $request)
+    {
+        $q = trim($request->input('q'));
+        if (mb_strlen($q) < 3) {
+            return  __('Search word is too short');
+        }
+        $q = '%' . $q . '%';
+        $products = Product::where('status', 1)->where(function ($query) use ($q) {
+            $query->where('name', 'LIKE', $q)
+                ->orWhere('excerpt', 'LIKE', $q)
+                ->orWhere('description', 'LIKE', $q);
+        })->paginate(5);
+
+
+        return view('components.search-items',compact('products'));
+    }
+
+        public function group($slug)
     {
 
         $group = Group::where('slug', $slug)->firstOrFail();
@@ -906,6 +923,6 @@ class ClientController extends Controller
     }
 
     public function cardItems(){
-        
+
     }
 }
