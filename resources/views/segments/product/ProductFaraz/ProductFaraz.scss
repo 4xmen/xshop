@@ -1,0 +1,144 @@
+@use "../../../../sass/client-custom/app_variables";
+@use "sass:color";
+.ProductFaraz {
+    // scss
+
+
+
+    .faraz-box {
+        background: var(--faraz-bg);
+        color: var(--faraz-color);
+        border-radius: var(--xshop-border-radius);
+        padding: 1rem;
+        display: block;
+
+        h3{
+            font-size: 20px;
+
+            span{
+                display: inline-block;
+                padding: .3rem;
+                border-bottom: 2px solid var(--xshop-secondary);
+            }
+
+        }
+    }
+
+    .faraz-main-image {
+        width: 150px;
+        margin: 0 1rem;
+        border-radius: var(--xshop-border-radius);
+        position: relative;
+        top: -3rem;
+    }
+
+    .faraz-rate{
+        background: rgba(255, 196, 0, 0.65);
+        border-radius: var(--xshop-border-radius);
+        padding: .4rem;
+        display: inline-block;
+        color: #000000;
+    }
+    .faraz-detail {
+        position: relative;
+
+        .faraz-list-item {
+            padding: .35rem 0;
+        }
+
+        .faraz-float-btn {
+            padding: 0;
+            margin: 0;
+            list-style: none;
+            position: absolute;
+            bottom: 1rem;
+            inset-inline-end: .5rem;
+            display: flex;
+
+            li{
+                margin: 0 .5rem;
+                background: #00000077;
+                border-radius: var(--xshop-border-radius);
+                a{
+                    display: block;
+                    width: 50px;
+                    padding: .5rem;
+                    text-align: center;
+                    color: white;
+
+                }
+
+            }
+        }
+    }
+
+    h1 {
+        font-size: 22px;
+    }
+
+    .a-little-bottom{
+        display: inline-block;
+        position: relative;
+        top: 2px;
+    }
+
+    .faraz-single-comment{
+        margin-bottom: 3px;
+        padding: 10px 1rem;
+        p{
+            padding: 1rem;
+            margin: 0;
+        }
+
+        .tag{
+            background: var(--xshop-secondary);
+            color: var(--xshop-diff);
+            border-radius: var(--xshop-border-radius);
+            display: inline-block;
+            padding: 2px 1rem;
+            opacity: .2;
+            transition: 470ms;
+        }
+        border: 1px solid rgba(app_variables.$xshop-text,.3);
+        border-radius: var(--xshop-border-radius);
+
+        &:hover{
+            .tag{
+                opacity: 1;
+            }
+        }
+
+        .comment-reply{
+            margin: -5px -.7rem;
+        }
+    }
+
+    #comment-form{
+        border-radius: var(--xshop-border-radius);
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+        background: #ffffff44;
+        padding: 1rem;
+    }
+
+    .comment-as{
+        font-weight: 700;
+        color: var(--xshop-primary);
+    }
+
+    .on-reply{
+        background: var(--xshop-secondary);
+        color: var(--xshop-diff);
+    }
+
+    .read-more{
+        max-height: 0;
+        overflow: hidden;
+        transition: 400ms;
+    }
+
+    #faraz-more{
+        display: block;
+        padding: 1rem 0;
+    }
+}
