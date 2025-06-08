@@ -1,3 +1,6 @@
+@use "../../../../sass/client-custom/app_variables";
+@use "sass:color";
+
 .SimpleComments {
     .simple-single-comment{
         margin-bottom: 3px;
@@ -16,7 +19,7 @@
             opacity: .2;
             transition: 470ms;
         }
-        border: 1px solid rgba($xshop-text,.3);
+        border: 1px solid rgba(app_variables.$xshop-text,.3);
         border-radius: var(--xshop-border-radius);
 
         &:hover{

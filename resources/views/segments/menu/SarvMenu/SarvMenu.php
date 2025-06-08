@@ -57,7 +57,7 @@ class SarvMenu
         $setting->key = $part->area_name . '_' . $part->part.'_color';
         $setting->value = '#dddddd';
         $setting->type = 'COLOR';
-        $setting->data = json_encode(['name' => 'sarv -color']);
+        $setting->data = json_encode(['name' => 'sarv-color']);
         $setting->size = 4;
         $setting->title =  $part->area_name . ' ' . $part->part .' menu text color';
         $setting->save();

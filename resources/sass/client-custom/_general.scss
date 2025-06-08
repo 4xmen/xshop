@@ -237,3 +237,23 @@ section {
     border-radius: 7px;
     display: block;
 }
+
+.fav-btn {
+
+    &[data-is-fav="-1"] {
+        display: none;
+    }
+
+    &[data-is-fav="1"] {
+        .ri-heart-line {
+            display: none;
+        }
+    }
+
+    &[data-is-fav="0"] {
+        .ri-heart-fill {
+            display: none;
+        }
+    }
+
+}

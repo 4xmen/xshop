@@ -59,21 +59,7 @@
     .fav-btn {
         top: calc(3% + 50px);
 
-        &[data-is-fav="-1"] {
-            display: none;
-        }
 
-        &[data-is-fav="1"] {
-            .ri-heart-line {
-                display: none;
-            }
-        }
-
-        &[data-is-fav="0"] {
-            .ri-heart-fill {
-                display: none;
-            }
-        }
 
     }
 
