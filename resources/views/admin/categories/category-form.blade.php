@@ -94,7 +94,7 @@
 
                 <h1>
                     @if(isset($item))
-                        {{__("Edit category")}} [{{$item->name}}]
+                        {{__("Edit category")}} [{{$item->name}}]  <a href="{{route('admin.area.design.model',['category','Category',$item->id])}}" class="btn btn-secondary"> <i class="ri-palette-line"></i> </a>
                     @else
                         {{__("Add new category")}}
                     @endif
