@@ -45,6 +45,11 @@
                             <i class="ri-eye-line"></i>
                             {{number_format($post->view)}}
                         </div>
+                        <div class="col-md">
+                            <a href="#share-modal" class="share-btn">
+                                <i class="ri-share-line"></i>
+                            </a>
+                        </div>
                         @if($post->tags()->count() > 0)
                             <div class="col-md-6">
                                 {{__("Tags")}}:

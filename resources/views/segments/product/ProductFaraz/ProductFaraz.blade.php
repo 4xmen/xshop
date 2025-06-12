@@ -82,7 +82,7 @@
                             </a>
                         </li>
                         <li>
-                            <a href="#" class="share-btn"
+                            <a href="#share-modal" class="share-btn"
                                data-bs-toggle="tooltip"
                                data-bs-placement="top"
                                data-bs-custom-class="custom-tooltip"

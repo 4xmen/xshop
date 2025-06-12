@@ -5,6 +5,7 @@
 @endsection
 @section('content')
     <main>
+        <input type="hidden" id="page-image" value="{{$product->imgUrl()}}">
         @if(findArea($area,$product)->use_default)
             @foreach(getParts('defaultHeader') as $part)
                 @php($p = $part->getBladeWithData())

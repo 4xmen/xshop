@@ -10,6 +10,7 @@
 @endphp
 @section('content')
     <main>
+        <input type="hidden" id="page-image" value="{{$group->imgUrl()}}">
         @if(findArea($area,$group)->use_default)
             @foreach(getParts('defaultHeader') as $part)
                 @php($p = $part->getBladeWithData())

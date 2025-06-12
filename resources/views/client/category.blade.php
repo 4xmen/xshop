@@ -10,6 +10,7 @@ if ($category->bg != null){
 @endphp
 @section('content')
     <main>
+        <input type="hidden" id="page-image" value="{{$category->imgUrl()}}">
         @if(findArea($area,$category)->use_default)
             @foreach(getParts('defaultHeader') as $part)
                 @php($p = $part->getBladeWithData())
