@@ -18,7 +18,7 @@
             @endforeach
         @endif
         @foreach(getParts($area,'group'.$group->id) as $part)
-            @php($p = $part->getBladeWithData())
+            @php($p = $part->getBladeWithData($group))
             @include($p['blade'],['data' => $p['data']])
         @endforeach
         @if(findArea($area,$group)->use_default)

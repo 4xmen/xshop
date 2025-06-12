@@ -17,8 +17,8 @@ if ($category->bg != null){
                 @include($p['blade'],['data' => $p['data']])
             @endforeach
         @endif
-        @foreach(getParts($area,$category) as $part)
-            @php($p = $part->getBladeWithData())
+        @foreach(getParts($area,'$category'.$category->id) as $part)
+            @php($p = $part->getBladeWithData($category))
             @include($p['blade'],['data' => $p['data']])
         @endforeach
         @if(findArea($area,$category)->use_default)
