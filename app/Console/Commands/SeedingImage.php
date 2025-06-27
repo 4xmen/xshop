@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Http\Controllers\Admin\ProductController;
 use App\Models\Category;
 use App\Models\Group;
 use App\Models\Post;
@@ -37,6 +38,7 @@ class SeedingImage extends Command
         if (!\File::exists(__DIR__ . '/../../../database/seeders/images/' . $this->argument('directory'))) {
             $this->error('Directory not found');
         }
+
         $images = \File::files(__DIR__ . '/../../../database/seeders/images/' . $this->argument('directory'));
         switch ($this->argument('model')) {
             case 'Product':
@@ -47,6 +49,7 @@ class SeedingImage extends Command
                         $name = $images[0]->getFilename();
                         $tempName = explode('.', $name);
                         $item->name = readable($tempName[0]) . ' model ' . $item->id;
+                        $item->slug = sluger($item->name);
                     }
                     $item->status = 1;
                     $item->addMedia($images[0]->getRealPath())
