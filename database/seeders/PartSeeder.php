@@ -133,6 +133,26 @@ class PartSeeder extends Seeder
         // -------------------------------------------------------------
 
 
+        $part = new Part();
+        $part->segment = 'creator';
+        $part->part = 'DefaultCreator';
+        $part->area_id = Area::where('name', 'creator')->first()->id;
+        $part->sort = 0;
+        $part->save();
+
+
+        $part = new Part();
+        $part->segment = 'products_page';
+        $part->part = 'ProductGridSidebar';
+        $part->area_id = Area::where('name', 'creator')->first()->id;
+        $part->sort = 1;
+        $part->save();
+
+
+
+        // -------------------------------------------------------------
+
+
 
         $part = new Part();
         $part->segment = 'product';

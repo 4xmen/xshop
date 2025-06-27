@@ -18,7 +18,6 @@ class CategorySeeder extends Seeder
             __("Mobile"),
             __("Tablet"),
             __("Desktop"),
-            __("Brands"),
         ];
 
         $subCats = [
@@ -29,13 +28,6 @@ class CategorySeeder extends Seeder
             3 => [
                 __("PC"),
                 __("Laptop"),
-            ],
-            4 => [
-              __("Apple"),
-              __("HP (Hewlett-Packard)"),
-              __("Nokia"),
-              __("Samsung"),
-              __("Sony"),
             ],
         ];
 

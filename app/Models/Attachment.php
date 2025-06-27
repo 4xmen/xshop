@@ -11,7 +11,7 @@ class Attachment extends Model
     use HasFactory,HasTranslations;
 
     public static $mrohps = [Product::class,Post::class,Group::class,
-        Category::class,Clip::class,Gallery::class];
+        Category::class,Clip::class,Gallery::class, Creator::class];
 
     public $translatable = ['title','subtitle','body'];
 
@@ -57,6 +57,8 @@ class Attachment extends Model
                 return Clip::whereId($this->attachable_id)->first();
             case Gallery::class:
                 return Gallery::whereId($this->attachable_id)->first();
+            case Creator::class:
+                return Creator::whereId($this->attachable_id)->first();
             default:
                 return null;
         }

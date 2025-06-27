@@ -10,6 +10,7 @@ use App\Models\Category;
 use App\Models\Clip;
 use App\Models\Comment;
 use App\Models\Contact;
+use App\Models\Creator;
 use App\Models\Customer;
 use App\Models\Gallery;
 use App\Models\Group;
@@ -95,7 +96,7 @@ class ClientController extends Controller
             $clip->title => null,
         ];
         $model = $clip;
-        return view('client.default-list', compact('area', 'clip', 'title', 'subtitle', 'breadcrumb','model'));
+        return view('client.default-list', compact('area', 'clip', 'title', 'subtitle', 'breadcrumb', 'model'));
     }
 
     public function gallery($slug)
@@ -181,7 +182,7 @@ class ClientController extends Controller
             $attachment->title => null,
         ];
         $model = $attachment;
-        return view('client.default-list', compact('area', 'attachment', 'title', 'subtitle', 'breadcrumb','model'));
+        return view('client.default-list', compact('area', 'attachment', 'title', 'subtitle', 'breadcrumb', 'model'));
     }
 
     public function tag($slug)
@@ -243,7 +244,7 @@ class ClientController extends Controller
     {
 
         if (isGuestMaxAttemptTry('search', 10, 1)) {
-            return  abort(403);
+            return abort(403);
         }
 
         guestLog('search');
@@ -270,14 +271,14 @@ class ClientController extends Controller
         $title = __('Search for') . ': ' . $request->input('q');
         $subtitle = '';
         $noIndex = true;
-        return view('client.tag', compact('posts', 'products', 'clips', 'title', 'subtitle','noIndex'));
+        return view('client.tag', compact('posts', 'products', 'clips', 'title', 'subtitle', 'noIndex'));
     }
 
     public function ajaxSearch(Request $request)
     {
         $q = trim($request->input('q'));
         if (mb_strlen($q) < 3) {
-            return  __('Search word is too short');
+            return __('Search word is too short');
         }
         $q = '%' . $q . '%';
         $products = Product::where('status', 1)->where(function ($query) use ($q) {
@@ -287,10 +288,10 @@ class ClientController extends Controller
         })->paginate(5);
 
 
-        return view('components.search-items',compact('products'));
+        return view('components.search-items', compact('products'));
     }
 
-        public function group($slug)
+    public function group($slug)
     {
 
         $group = Group::where('slug', $slug)->firstOrFail();
@@ -456,6 +457,34 @@ class ClientController extends Controller
         return view('client.category', compact('area', 'products', 'title', 'subtitle', 'category', 'breadcrumb'));
     }
 
+    public function creator($slug)
+    {
+        $creator = Creator::where('slug', $slug)->firstOrFail();
+        $area = 'creator';
+        $title = $creator->name;
+        $subtitle = $creator->subtitle;
+
+
+
+
+        $products = $creator->products()->where('status', 1)->paginate($this->paginate);
+
+        if ($creator->parent_id == null) {
+            $breadcrumb = [
+                __('Products') => productsUrl(),
+                $creator->name => null,
+            ];
+        } else {
+            $breadcrumb = [
+                __('Products') => productsUrl(),
+                $creator->parent->name => $creator->parent->webUrl(),
+                $creator->name => null,
+            ];
+
+        }
+        return view('client.creator', compact('area', 'products', 'title', 'subtitle', 'creator', 'breadcrumb'));
+    }
+
     public function attachDl($slug)
     {
         $attachment = Attachment::where('slug', $slug)->firstOrFail();
@@ -514,26 +543,27 @@ class ClientController extends Controller
 
     public function signUp()
     {
-        if (config('app.sms.sign')){
-            return  abort(403);
+        if (config('app.sms.sign')) {
+            return abort(403);
         }
         $area = 'register';
         $title = __("sign up");
         $subtitle = __('Sign up as customer');
         return view('client.default-list', compact('area', 'title', 'subtitle'));
     }
+
     public function signUpNow(Request $request)
     {
-        if (config('app.sms.sign')){
-            return  abort(403);
+        if (config('app.sms.sign')) {
+            return abort(403);
         }
 
         $request->validate([
-            'email' => ['required','email']
+            'email' => ['required', 'email']
         ]);
 
         if (isGuestMaxAttemptTry('email', 1, 5)) {
-           return  redirect()->back()->withErrors( __('You try attempts, Try it a few minutes'));
+            return redirect()->back()->withErrors(__('You try attempts, Try it a few minutes'));
         }
 
         guestLog('email');
@@ -544,7 +574,7 @@ class ClientController extends Controller
         if ($c->count() > 0) {
             $customer = $c->first();
             $msg = __('Your account password has been changed successfully.');
-        }else{
+        } else {
             $customer = new Customer();
             $customer->email = $request->email;
             $msg = __('Your account has been created successfully.');
@@ -552,7 +582,7 @@ class ClientController extends Controller
         $customer->password = bcrypt($passwd);
         $customer->save();
 
-        return  redirect()->back()->with(['message' => $msg . __("Please check your email to find password, Don't forget check spam/junk too, If you find our email in spam folder, Please mark it `Not spam`")]);
+        return redirect()->back()->with(['message' => $msg . __("Please check your email to find password, Don't forget check spam/junk too, If you find our email in spam folder, Please mark it `Not spam`")]);
     }
 
     public function singInDo(Request $request)
@@ -688,12 +718,13 @@ class ClientController extends Controller
             }
         }
         $xmlContent = '<?xml version="1.0" encoding="utf-8" ?>' . PHP_EOL;
-        $xmlContent .= view('website.sitemaps.sitemap',compact('latestUpdate'))->render(); // Render the view and append to XML content
+        $xmlContent .= view('website.sitemaps.sitemap', compact('latestUpdate'))->render(); // Render the view and append to XML content
 
         // Return the XML response
         return response($xmlContent, 200)
             ->header('Content-Type', 'text/xml');
     }
+
     public function sitemapGroupCategory()
     {
 
@@ -705,6 +736,7 @@ class ClientController extends Controller
         return response($xmlContent, 200)
             ->header('Content-Type', 'text/xml');
     }
+
     public function sitemapPosts()
     {
         $xmlContent = '<?xml version="1.0" encoding="utf-8" ?>' . PHP_EOL;
@@ -714,6 +746,7 @@ class ClientController extends Controller
         return response($xmlContent, 200)
             ->header('Content-Type', 'text/xml');
     }
+
     public function sitemapProducts()
     {
         $xmlContent = '<?xml version="1.0" encoding="utf-8" ?>' . PHP_EOL;
@@ -723,6 +756,7 @@ class ClientController extends Controller
         return response($xmlContent, 200)
             ->header('Content-Type', 'text/xml');
     }
+
     public function sitemapClips()
     {
         $xmlContent = '<?xml version="1.0" encoding="utf-8" ?>' . PHP_EOL;
@@ -732,6 +766,7 @@ class ClientController extends Controller
         return response($xmlContent, 200)
             ->header('Content-Type', 'text/xml');
     }
+
     public function sitemapGalleries()
     {
         $xmlContent = '<?xml version="1.0" encoding="utf-8" ?>' . PHP_EOL;
@@ -741,6 +776,7 @@ class ClientController extends Controller
         return response($xmlContent, 200)
             ->header('Content-Type', 'text/xml');
     }
+
     public function sitemapAttachments()
     {
         $xmlContent = '<?xml version="1.0" encoding="utf-8" ?>' . PHP_EOL;
@@ -894,35 +930,40 @@ class ClientController extends Controller
     }
 
 
-    public function postRss(){
+    public function postRss()
+    {
         // Fetch the latest posts from the database
         $posts = Post::orderBy('created_at', 'desc')->take(10)->get(); // Adjust the number of posts as needed
 
         $xmlContent = '<?xml version="1.0" encoding="UTF-8" ?>' . PHP_EOL;
-        $xmlContent .= view('website.rss.post',compact('posts'))->render(); // Render the view and append to XML content
+        $xmlContent .= view('website.rss.post', compact('posts'))->render(); // Render the view and append to XML content
 
         // Return the XML response
         return response($xmlContent, 200)
             ->header('Content-Type', 'text/xml');
     }
-    public function productRss(){
+
+    public function productRss()
+    {
         // Fetch the latest products from the database
         $products = Product::orderBy('created_at', 'desc')->take(10)->get(); // Adjust the number of posts as needed
 
         $xmlContent = '<?xml version="1.0" encoding="UTF-8" ?>' . PHP_EOL;
-        $xmlContent .= view('website.rss.product',compact('products'))->render(); // Render the view and append to XML content
+        $xmlContent .= view('website.rss.product', compact('products'))->render(); // Render the view and append to XML content
 
         // Return the XML response
         return response($xmlContent, 200)
             ->header('Content-Type', 'text/xml');
     }
 
-    public function underConstruction(){
+    public function underConstruction()
+    {
         $title = __('Under Construction') . ' - ' . config('app.name');
         return view('client.under-construction', compact('title'));
     }
 
-    public function cardItems(){
+    public function cardItems()
+    {
 
     }
 }

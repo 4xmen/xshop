@@ -207,6 +207,21 @@ Route::prefix(config('app.panel.prefix'))->name('admin.')->group(
                         Route::post('sort/save', [\App\Http\Controllers\Admin\GroupController::class, 'sortSave'])->name('sort-save');
                         Route::get('sort', [\App\Http\Controllers\Admin\GroupController::class, 'sort'])->name('sort');
                     });
+                Route::prefix('creator')->name('creator.')->group(
+                    function () {
+                        Route::get('', [\App\Http\Controllers\Admin\CreatorController::class, 'index'])->name('index');
+                        Route::get('create', [\App\Http\Controllers\Admin\CreatorController::class, 'create'])->name('create');
+                        Route::post('store', [\App\Http\Controllers\Admin\CreatorController::class, 'store'])->name('store');
+                        Route::get('edit/{item}', [\App\Http\Controllers\Admin\CreatorController::class, 'edit'])->name('edit');
+                        Route::post('update/{item}', [\App\Http\Controllers\Admin\CreatorController::class, 'update'])->name('update');
+                        Route::get('show/{item}', [\App\Http\Controllers\Admin\CreatorController::class, 'show'])->name('show');
+                        Route::get('delete/{item}', [\App\Http\Controllers\Admin\CreatorController::class, 'destroy'])->name('destroy');
+                        Route::get('restore/{item}', [\App\Http\Controllers\Admin\CreatorController::class, 'restore'])->name('restore');
+                        Route::post('bulk', [\App\Http\Controllers\Admin\CreatorController::class, "bulk"])->name('bulk');
+                        Route::get('trashed', [\App\Http\Controllers\Admin\CreatorController::class, "trashed"])->name('trashed');
+                        Route::post('sort/save', [\App\Http\Controllers\Admin\CreatorController::class, 'sortSave'])->name('sort-save');
+                        Route::get('sort', [\App\Http\Controllers\Admin\CreatorController::class, 'sort'])->name('sort');
+                    });
                 Route::prefix('invoices')->name('invoice.')->group(
                     function () {
                         Route::get('', [\App\Http\Controllers\Admin\InvoiceController::class, 'index'])->name('index');
@@ -438,6 +453,7 @@ Route::middleware([\App\Http\Middleware\VisitorCounter::class])
         Route::get('/attachment/{attachment}', [ClientController::class, 'attachment'])->name('attachment');
         Route::get('/tag/{slug}', [ClientController::class, 'tag'])->name('tag'); // wip
         Route::get('/group/{slug}', [ClientController::class, 'group'])->name('group'); // wip
+        Route::get('/creator/{slug}', [ClientController::class, 'creator'])->name('creator'); // wip
         Route::get('/product/{product}', [ClientController::class, 'product'])->name('product');
         Route::get('/video/{clip}', [ClientController::class, 'clip'])->name('clip');
         Route::get('/category/{category}', [ClientController::class, 'category'])->name('category');

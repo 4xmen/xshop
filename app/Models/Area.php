@@ -19,6 +19,7 @@ class Area extends Model
         'category',
         'comments',
         'contact',
+        'creator',
         'clip',
         'clips',
         'clips_page',

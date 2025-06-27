@@ -132,7 +132,7 @@ class GroupController extends XController
     public function edit(Group $item)
     {
         //
-        $cats = Group::all();
+        $cats = Group::where('id','<>',$item->id)->get();
         return view($this->formView, compact('item','cats'));
     }
 

@@ -138,7 +138,7 @@ class CategoryController extends XController
     public function edit(Category $item)
     {
         //
-        $cats = Category::all();
+        $cats = Category::where('id','<>',$item->id)->get();
         return view($this->formView, compact('item', 'cats'));
     }
 

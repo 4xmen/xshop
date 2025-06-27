@@ -175,6 +175,16 @@ class AreaSeeder extends Seeder
                 'preview' => null,
                 'icon' => 'ri-book-3-line',
             ],
+            [
+                'name' => 'creator',
+                'valid_segments' => json_encode(
+                    ["top", "header", "footer", "menu",
+                        "parallax", "other", "creator", "ads", "products_page", "attachments"]
+                ),
+                'max' => 6,
+                'preview' => null,
+                'icon' => 'ri-apple-line',
+            ],
 //            [
 //                'name' => 'categories-list',
 //                'valid_segments' => json_encode(

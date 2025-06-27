@@ -43,6 +43,7 @@ class DatabaseSeeder extends Seeder
                 SliderSeeder::class,
                 PartSeeder::class,
                 EvaluationSeeder::class,
+                CreatorSeeder::class,
             ]
         );
     }

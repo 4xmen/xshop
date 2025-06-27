@@ -50,7 +50,7 @@
             </li>
         @endif
 
-        @if(  auth()->user()->hasAnyAccesses(['product','category','prop','transport','evaluation']) )
+        @if(  auth()->user()->hasAnyAccesses(['product','category','prop','transport','creator','evaluation',]) )
             <li data-bs-toggle="tooltip" data-bs-placement="auto" data-bs-custom-class="custom-tooltip"
                 data-bs-title="{{__("Catalog")}}">
                 <a href="#catalog">
@@ -70,6 +70,14 @@
                             <a href="{{route('admin.category.index')}}">
                                 <i class="ri-box-3-fill"></i>
                                 {{__('Categories')}}
+                            </a>
+                        </li>
+                    @endif
+                    @if(  auth()->user()->hasAnyAccess( 'creator' ))
+                        <li>
+                            <a href="{{route('admin.creator.index')}}">
+                                <i class="ri-apple-fill"></i>
+                                {{__("Creators")}}
                             </a>
                         </li>
                     @endif

@@ -14,7 +14,7 @@ class ProductFaraz
         $setting = new Setting();
         $setting->section = 'theme';
         $setting->key = $part->area_name . '_' . $part->part.'_text';
-        $setting->value = __("<p> Lorem ipsum dolor sit amet, consectetur adipisicing elit. At eligendi itaque unde? </p>");
+        $setting->value = "<p> Lorem ipsum dolor sit amet, consectetur adipisicing elit. At eligendi itaque unde? </p>";
         $setting->size = 12;
         $setting->type = 'EDITOR';
         $setting->title =  $part->area_name . ' ' . $part->part. ' content';
