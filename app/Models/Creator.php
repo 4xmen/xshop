@@ -5,14 +5,73 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Ramsey\Collection\Collection;
 use Spatie\Translatable\HasTranslations;
 
 class Creator extends Model
 {
-    /** @use HasFactory<\Database\Factories\CreatorFactory> */
+
+
+
     use HasFactory, SoftDeletes, HasTranslations;
 
     public $translatable = ['name', 'subtitle', 'description'];
+    public $guarded = [];
+
+    public static function getLocale()
+    {
+        return app()->getLocale();
+    }
+
+
+
+    public static function findOrCreate(
+        string | array | ArrayAccess $values,
+        string | null $type = null,
+        string | null $locale = null,
+    ) {
+        $creators = collect($values)->map(function ($value) use ($type, $locale) {
+            if ($value instanceof self) {
+                return $value;
+            }
+
+            return static::findOrCreateFromString($value, $type, $locale);
+        });
+
+        return is_string($values) ? $creators->first() : $creators;
+    }
+
+
+    public static function findFromString(string $name, string $type = null, string $locale = null)
+    {
+        $locale = $locale ?? static::getLocale();
+
+        return static::query()
+//            ->where('type', $type)
+            ->where(function ($query) use ($name, $locale) {
+                $query->where("name->{$locale}", $name)
+                    ->orWhere("slug->{$locale}", $name);
+            })
+            ->first();
+    }
+
+
+    public static function findOrCreateFromString(string $name, string $type = null, string $locale = null)
+    {
+        $locale = $locale ?? static::getLocale();
+
+        $creator = static::findFromString($name, $type, $locale);
+
+        if (! $creator) {
+            $creator = static::create([
+                'name' => [$locale => $name],
+                'slug' => sluger($name),
+//                'type' => $type,
+            ]);
+        }
+
+        return $creator;
+    }
 
 
     public function children()

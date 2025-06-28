@@ -25,7 +25,7 @@
     </div>
 
 
-    <div class="col-lg-6 mt-3">
+    <div class="col-lg-4 mt-3">
         <div class="form-group">
             <label for="price">
                 {{__('Base price')}}
@@ -36,7 +36,8 @@
                             :xvalue="{{old('price',$item->price??null)}}"></currency-input>
         </div>
     </div>
-    <div class="col-lg-6 mt-3">
+
+    <div class="col-lg-4 mt-3">
         <div class="form-group">
             <label for="buy_price">
                 {{__('Purchase price')}}
@@ -44,6 +45,21 @@
 
             <currency-input xname="buy_price" xid="buy_price" @error('buy_price')
             :err="true" @enderror :xvalue="{{old('buy_price',$item->buy_price??0)}}"></currency-input>
+        </div>
+    </div>
+    <div class="col-lg-4 mt-3">
+        <div class="form-group">
+            <label for="price">
+                {{__('Creators')}}
+            </label>
+
+            <tag-input xname="creators" splitter=",,"
+                       xtitle="{{__("Creators, Press enter")}}"
+                       @if(isset($item))
+                           xvalue="{{old('creators',implode(',,',$item->creators()->pluck('name')->toArray()??''))}}"
+                       @endif
+                       auto-complete="{{route('v1.creator.search','')}}/"
+            ></tag-input>
         </div>
     </div>
     <div class="col-lg-4 mt-3">

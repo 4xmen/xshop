@@ -55,7 +55,7 @@
                     <tag-input xname="tags" splitter=",,"
                                xtitle="{{__("Tags, Press enter")}}"
                                @if(isset($item))
-                               xvalue="{{old('title',implode(',,',$item->tags->pluck('name')->toArray()??''))}}"
+                               xvalue="{{old('tags',implode(',,',$item->tags->pluck('name')->toArray()??''))}}"
                                @endif
                         auto-complete="{{route('v1.tag.search','')}}/"
                     ></tag-input>

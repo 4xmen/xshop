@@ -125,6 +125,11 @@ class Product extends Model implements HasMedia
         return $this->belongsTo(Category::class, 'category_id', 'id');
     }
 
+    public function creators()
+    {
+        return $this->belongsToMany(Creator::class, 'creator_product');
+    }
+
     public function getRouteKeyName()
     {
         return 'slug';

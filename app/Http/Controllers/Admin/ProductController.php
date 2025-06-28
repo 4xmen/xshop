@@ -7,6 +7,7 @@ use App\Http\Controllers\XController;
 use App\Http\Requests\ProductSaveRequest;
 use App\Models\Access;
 use App\Models\Category;
+use App\Models\Creator;
 use App\Models\Product;
 use App\Models\Quantity;
 use Illuminate\Http\Request;
@@ -80,6 +81,9 @@ class ProductController extends XController
         $product->user_id = auth()->id();
         $product->status = $request->input('status');
         $tags = array_filter(explode(',,', $request->input('tags')));
+        $creators = array_filter(explode(',,', $request->input('creators')));
+        $creators = collect(Creator::findOrCreate($creators));
+        $product->creators()->sync($creators);
         if ($request->has('canonical') && trim($request->input('canonical')) != '') {
             $product->canonical = $request->input('canonical');
         }
