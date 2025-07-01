@@ -4,7 +4,7 @@
     "description": "Very customizable and easy to use shopping system, open source project based on laravel",
     "keywords": ["xshop", "e-shop", "laravel","laravel-shop","open-source-shop"],
     "license": "GPL-3.0-or-later",
-    "version": "2.5.2",
+    "version": "2.6.0",
     "require": {
         "php": "^8.2",
         "ext-dom": "*",
