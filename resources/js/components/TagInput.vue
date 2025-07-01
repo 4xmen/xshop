@@ -26,7 +26,7 @@
 <script>
 
 const noSubmit = function (e) {
-  e.preventDefault();
+    e.preventDefault();
 };
 export default {
     name: "tag-input",
@@ -42,7 +42,11 @@ export default {
     emits: ['update:modelValue'],
     props: {
         xid:{
-          default: 'tags',
+            default: 'tags',
+        },
+        allowNew:{
+            default: true,
+            type: Boolean,
         },
         modelValue: {
             default: null,
@@ -72,6 +76,10 @@ export default {
         autoComplete:{
             default: '',
             type: String,
+        },
+        maxCount:{
+            default: -1,
+            type: Number,
         }
     },
     mounted() {
@@ -87,6 +95,10 @@ export default {
     computed: {},
     methods: {
         addTag(e) {
+            if (this.maxCount !== -1 && this.tags.length >= this.maxCount){
+                $toast.warning(`Max value count is : ${this.maxCount}`);
+                return false;
+            }
             if (this.selectedIndex > -1 && (this.selectedIndex + 1) < this.searchList.length ){
                 this.tags.push(this.searchList[this.selectedIndex]) ;
                 this.tag = '';
@@ -95,7 +107,7 @@ export default {
                 this.$emit('update:modelValue', this.tags.join(this.splitter));
                 return;
             }
-            if (this.tag.trim()) { // Check if the input is not empty
+            if (this.tag.trim() && this.allowNew) { // Check if the input is not empty
                 this.tags.push(this.tag.trim()); // Add the trimmed tag
                 this.tag = ''; // Reset the input
                 this.checkDuplicate();
@@ -117,7 +129,7 @@ export default {
         async checkAutoComplete(e){
 
             if (this.autoComplete !== '' && this.tag.length > 2){
-              let resp = await axios.get(this.autoComplete + this.tag);
+                let resp = await axios.get(this.autoComplete + this.tag);
                 if (resp.data.OK == true){
                     this.searchList = resp.data.data;
                 }
@@ -125,6 +137,10 @@ export default {
 
         },
         selectTag(i,e){
+            if (this.maxCount !== -1 && this.tags.length >= this.maxCount){
+                $toast.warning(`Max value count is : ${this.maxCount}`);
+                return false;
+            }
             this.tags.push(this.searchList[i]) ;
             this.tag = '';
             this.searchList = [];
