@@ -35,23 +35,29 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
 
-    document.querySelector('#sort-translate')?.addEventListener('click', function () {
-        // 1. Get the table body element
+    // Compare by Unicode code-point (ASCII subset)
+    function asciiCompare(a, b) {
+        const la = a.length, lb = b.length;
+        const minL = Math.min(la, lb);
+        for (let i = 0; i < minL; i++) {
+            // diff > 0 means a[i] > b[i]
+            const diff = a.charCodeAt(i) - b.charCodeAt(i);
+            if (diff) return diff;
+        }
+        // if all shared chars equal, shorter string comes first
+        return la - lb;
+    }
+
+    document.querySelector('#sort-translate')?.addEventListener('click', () => {
         const tbody = document.querySelector('#translate-table tbody');
-
-        // 2. Collect only the rows that should be sorted (e.g. those with class "tr-content")
         const rows = Array.from(tbody.querySelectorAll('tr.tr-content'));
-
-        // 3. Sort rows based on the value of the input in the first cell
-        rows.sort((a, b) => {
-            const textA = a.querySelector('td:last-child input').value.trim();
-            const textB = b.querySelector('td:last-child input').value.trim();
-            // localeCompare handles alphabetical order and case insensitivity
-            return textA.localeCompare(textB, undefined, {sensitivity: 'base'});
+        rows.sort((r1, r2) => {
+            const v1 = r1.querySelector('td:last-child input').value;
+            const v2 = r2.querySelector('td:last-child input').value;
+            return asciiCompare(v1, v2);
         });
-
-        // 4. Re-append the sorted rows back into the tbody
-        rows.forEach(row => tbody.appendChild(row));
+        // re-append in sorted order
+        rows.forEach(r => tbody.appendChild(r));
     });
 
     //  Update row data-content when any input changes
