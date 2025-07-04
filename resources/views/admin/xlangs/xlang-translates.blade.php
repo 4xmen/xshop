@@ -46,4 +46,33 @@
             </div>
         @endforeach
     </div>
+    <div class="item-list p-3">
+        <h5 class="text-center">
+            {{__("Batch title Translates")}}
+        </h5>
+        <form action="{{route('admin.lang.batch')}}" method="post" >
+            @csrf
+            <div class="row">
+                <div class="col-md">
+                    <select name="from" class="form-control">
+                        @foreach($langs as $lang)
+                            <option value="{{$lang->tag}}"> {{$lang->name}} </option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="col-md">
+                    <select name="to" class="form-control">
+                        @foreach($langs as $lang)
+                            <option value="{{$lang->tag}}"> {{$lang->name}} </option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="col-md">
+                    <button class="btn btn-primary ai-confirm">
+                        {{__("Batch title Translates")}}
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
 @endsection

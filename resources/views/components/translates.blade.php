@@ -27,6 +27,6 @@
     window.TR.times = `{{__("times")}}`;
     window.TR.paragraphs = `{{__("paragraphs")}}`;
     window.TR.deleteConfirm = `{{__("Are you sure you want to delete this item?")}}`;
-    window.TR.aiConfirm = `{{__("Please create a backup from translate, Do you have back up?")}}`;
+    window.TR.aiConfirm = `{{__("Could you please back up the translates (database/json files)? Do you already have a backup?")}}`;
 
 </script>

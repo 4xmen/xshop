@@ -11,7 +11,7 @@
     <div class="general-form mb-3">
 
         <h1>
-            {{__("Translate model")}}: {{($model->{$translates[0]})}}
+            {{__("Translate model")}}: {{strip_tags($model->{$translates[0]})}}
         </h1>
 
         <h4 class="lang-support p-3">

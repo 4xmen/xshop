@@ -10,7 +10,9 @@ use App\Models\Attachment;
 use App\Models\Category;
 use App\Models\City;
 use App\Models\Clip;
+use App\Models\Creator;
 use App\Models\Discount;
+use App\Models\Evaluation;
 use App\Models\Gallery;
 use App\Models\Group;
 use App\Models\Image;
@@ -347,6 +349,65 @@ class XLangController extends XController
             file_put_contents(TRANSLATE_FILE, $request->input('json'));
             return redirect()->back()->with(['message' => __("Translate updated")]);
         }
+    }
+
+    public function batch(Request $request)
+    {
+        if ($request->from == $request->to) {
+            return redirect()->back()->withErrors(__("You can't translate the same language!"));
+        }
+
+
+        $url = config('app.xlang.api_url') . '/text?form=' . $request->from . '&to=' . $request->to;
+        $client = new Client([
+            'headers' => ['Content-Type' => 'application/x-www-form-urlencoded']
+        ]);
+        $i = 0;
+
+        $i += $this->batchTranslate(Group::class, 'name', $client, $url, $request->to);
+        $i += $this->batchTranslate(Category::class, 'name', $client, $url, $request->to);
+        $i += $this->batchTranslate(Product::class, 'name', $client, $url, $request->to);
+        $i += $this->batchTranslate(Post::class, 'title', $client, $url, $request->to);
+        $i += $this->batchTranslate(Gallery::class, 'title', $client, $url, $request->to);
+        $i += $this->batchTranslate(Gallery::class, 'title', $client, $url, $request->to);
+        $i += $this->batchTranslate(Clip::class, 'title', $client, $url, $request->to);
+        $i += $this->batchTranslate(Image::class, 'title', $client, $url, $request->to);
+        $i += $this->batchTranslate(Evaluation::class, 'title', $client, $url, $request->to);
+        $i += $this->batchTranslate(Attachment::class, 'title', $client, $url, $request->to);
+        $i += $this->batchTranslate(Prop::class, 'label', $client, $url, $request->to);
+        $i += $this->batchTranslate(Transport::class, 'title', $client, $url, $request->to);
+        $i += $this->batchTranslate(Creator::class, 'name', $client, $url, $request->to);
+//        $i += $this->batchTranslate(Item::class, 'name', $client, $url, $request->to);
+
+
+        return redirect()->back()->with(['message' => $i . ' ' . __("Translated")]);
+    }
+
+    public function batchTranslate($model, $filed, $client, $url, $to)
+    {
+        $i = 0;
+        $q = $model::where($filed, 'not like', "%\"{$to}\":%");
+        if ($q->count() == 0) {
+            return 0;
+        }
+        $items = $q->get();
+        $titles = implode(' "BWD" ', $q->pluck($filed)->toArray());
+        $response = $client->post($url,
+            ['form_params' => ['body' => $titles]],
+        );
+        if ($response->getStatusCode() != 200) {
+            return 0;
+        }
+        $titles = explode(' "BWD" ', $response->getBody()->getContents());
+        foreach ($items as $item) {
+            if (isset($titles[$i])) {
+                $item->setTranslation($filed, $to,$titles[$i]);
+                $item->save();
+            }
+            $i++;
+        }
+
+        return $i;
     }
 
 }
