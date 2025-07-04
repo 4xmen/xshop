@@ -248,6 +248,8 @@ Route::prefix(config('app.panel.prefix'))->name('admin.')->group(
                         Route::post('bulk', [\App\Http\Controllers\Admin\XLangController::class, "bulk"])->name('bulk');
                         Route::get('/download/{tag}', [\App\Http\Controllers\Admin\XLangController::class, 'download'])->name('download');
                         Route::get('/ai/{tag}', [\App\Http\Controllers\Admin\XLangController::class, 'ai'])->name('ai');
+                        Route::get('/online/edit/{tag}', [\App\Http\Controllers\Admin\XLangController::class, 'onlineEdit'])->name('onlineEdit');
+                        Route::post('/save/edit/{tag}', [\App\Http\Controllers\Admin\XLangController::class, 'editSave'])->name('editSave');
                         Route::post('/upload/{tag}', [\App\Http\Controllers\Admin\XLangController::class, 'upload'])->name('upload');
                         Route::get('/model/translate/{id}/{model}', [\App\Http\Controllers\Admin\XLangController::class, 'translateModel'])->name('model');
                         Route::post('/model/translate/save/{id}/{model}', [\App\Http\Controllers\Admin\XLangController::class, 'translateModelSave'])->name('modelSave');

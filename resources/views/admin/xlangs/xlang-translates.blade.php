@@ -34,9 +34,13 @@
                             {{__("Upload file")}}
                         </button>
                     </form>
-                    <a  @if($lang->tag != 'en')   href="{{route('admin.lang.ai',$lang->tag)}}" @endif class="btn btn-outline-success w-100 mt-3 btn-sm ">
+                    <a  @if($lang->tag != 'en')   href="{{route('admin.lang.ai',$lang->tag)}}" @endif class=" ai-confirm btn btn-outline-success w-100 mt-3 btn-sm ">
                         <i class="ri-ai-generate"></i>
                         {{__("Translate with AI")}}
+                    </a>
+                    <a  @if($lang->tag != 'en')   href="{{route('admin.lang.onlineEdit',$lang->tag)}}" @endif class="btn btn-outline-secondary w-100 mt-3 btn-sm ">
+                        <i class="ri-code-line"></i>
+                        {{__("Online edit")}}
                     </a>
                 </div>
             </div>

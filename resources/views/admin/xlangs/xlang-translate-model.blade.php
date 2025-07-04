@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('title')
-    {{__("Translate model")}}: {{($model->{$translates[0]})}}
+    {{__("Translate model")}}: {{strip_tags($model->{$translates[0]})}}
     -
 @endsection
 @section('content')
@@ -33,7 +33,7 @@
                             {{$tr}}
                         </th>
                         <td>
-                            {{($model->{$tr})}}
+                            {{strip_tags($model->{$tr})}}
                         </td>
                     </tr>
                 @endforeach
@@ -64,7 +64,7 @@
                                         @if(langIsRTL($lang->tag)) dir="rtl" @else dir="ltr" @endif
                                     class="form-control @if($tr == 'body' || $tr == 'desc' || $tr == 'description' || $tr == 'table' || request()->has('editor')) ckeditorx @endif"
                                         rows="4" id="{{$lang->tag}}{{$tr}}"
-                                        name="data[{{$lang->tag}}][{{$tr}}]">{{gettype($model->getTranslation($tr,$lang->tag)) == 'string' ? $model->getTranslation($tr,$lang->tag):'' }}</textarea>
+                                        name="data[{{$lang->tag}}][{{$tr}}]">{{strip_tags(gettype($model->getTranslation($tr,$lang->tag)) == 'string' ? $model->getTranslation($tr,$lang->tag):'' )}}</textarea>
                                 @else
                                     <input @if(langIsRTL($lang->tag)) dir="rtl" @else dir="ltr" @endif type="text"
                                            id="{{$lang->tag}}{{$tr}}" name="data[{{$lang->tag}}][{{$tr}}]"
@@ -83,7 +83,7 @@
                 @endforeach
             </div>
         @endforeach
-        <button class="btn btn-outline-dark w-100 my-3">
+        <button class="btn btn-outline-success w-100">
             {{__("Save")}}
         </button>
     </form>

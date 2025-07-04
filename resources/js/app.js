@@ -33,6 +33,7 @@ import './panel/panel-window-loader.js';
 import './panel/responsive-control.js';
 import './panel/fast-edit.js';
 import './panel/fast-attachment.js';
+import './panel/online-edit.js';
 // import './panel/seo-analyzer.js';
 
 // chartjs.defaults.defaultFontFamily = "Vazir";

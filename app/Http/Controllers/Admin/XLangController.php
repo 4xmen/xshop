@@ -307,14 +307,14 @@ class XLangController extends XController
         $langs = Xlang::where('is_default', 0)->get();
         $model = ($model)::where('id', $id)->firstOrFail();
 //        $model = Product::whereId('id',$id)->first();
-        $url = config('app.xlang.api_url').'/text?form=' . config('app.xlang_main') . '&to=' . $tag;
+        $url = config('app.xlang.api_url') . '/text?form=' . config('app.xlang_main') . '&to=' . $tag;
 
         $client = new Client([
             'headers' => ['Content-Type' => 'application/x-www-form-urlencoded']
         ]);
 
         $response = $client->post($url,
-            ['form_params' => ['body' => $model->$field]],
+            ['form_params' => ['body' => strip_tags($model->$field)]],
         );
 //        file_put_contents(TRANSLATE_FILE, $response->getBody());
         if ($response->getStatusCode() != 200) {
@@ -325,6 +325,28 @@ class XLangController extends XController
         $model->save();
         return redirect()->back()->with(['message' => __('Translate updated')]);
 
+    }
+
+    public function onlineEdit($tag)
+    {
+        $lang = XLang::where('tag', $tag)->firstOrFail();
+        define("TRANSLATE_FILE", PREFIX_PATH . 'resources/lang/' . $tag . '.json');
+        $translates = json_decode(file_get_contents(TRANSLATE_FILE), true);
+
+        return view('admin.xlangs.xlang-online', compact('translates', 'lang'));
+    }
+
+    public function editSave($tag, Request $request)
+    {
+        $lang = XLang::where('tag', $tag)->firstOrFail();
+        define("TRANSLATE_FILE", PREFIX_PATH . 'resources/lang/' . $tag . '.json');
+        $last = file_get_contents(TRANSLATE_FILE);
+        if (strlen($request->input('json')) < (strlen($last) / 2)) {
+            return redirect()->back()->withErrors(__("Json file is too short!"));
+        } else {
+            file_put_contents(TRANSLATE_FILE, $request->input('json'));
+            return redirect()->back()->with(['message' => __("Translate updated")]);
+        }
     }
 
 }
