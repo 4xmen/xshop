@@ -27,10 +27,14 @@ window.addEventListener('load', function () {
                 filebrowserUploadMethod: 'form',
                 contentsLangDirection: finalDir,
                 skin: 'moono-dark',
+                removeButtons: 'Font',
+                // font_names:
+                //     'Arial/Arial, Helvetica, sans-serif;' +
+                //     'Georgia/Georgia, serif;'
             });
 
 
-            CKEDITOR.addCss('.cke_editable { background-color: ' + website_bg + '; color: ' + website_text_color + ' ; font-family: ' + website_font + ' }');
+            CKEDITOR.addCss('.cke_editable { background-color: ' + website_bg + '; color: ' + website_text_color + ' ; font-family: ' + website_font + '; font-weight: 500; } .cke_editable strong{ font-weight: 700} ');
             editors[el.getAttribute('name')].on('change', function (evt) {
                 const content = evt.editor.getData();
                 el.value = content;

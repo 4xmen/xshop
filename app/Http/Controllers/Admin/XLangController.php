@@ -385,20 +385,23 @@ class XLangController extends XController
 
     public function batchTranslate($model, $filed, $client, $url, $to)
     {
+        $separator =  ' "BWD" ' ;
         $i = 0;
-        $q = $model::where($filed, 'not like', "%\"{$to}\":%");
+        $q = $model::where($filed, 'not like', "%\"{$to}\":%")->limit(100);
         if ($q->count() == 0) {
             return 0;
         }
         $items = $q->get();
-        $titles = implode(' "BWD" ', $q->pluck($filed)->toArray());
+        $titles = implode($separator, $q->pluck($filed)->toArray());
         $response = $client->post($url,
             ['form_params' => ['body' => $titles]],
         );
         if ($response->getStatusCode() != 200) {
             return 0;
         }
-        $titles = explode(' "BWD" ', $response->getBody()->getContents());
+        $txt = $response->getBody()->getContents();
+        $txt = str_replace(['bwd','bWD','bWd','bwD','Bwd','BwD','BWd'], 'BWD', $txt);
+        $titles = explode(' "BWD" ', $txt);
         foreach ($items as $item) {
             if (isset($titles[$i])) {
                 $item->setTranslation($filed, $to,$titles[$i]);

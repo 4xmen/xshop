@@ -68,7 +68,7 @@ class GfxSeeder extends Seeder
                 'key'=>'font',
                 'label'=>'font',
                 'system'=>'1',
-                'value'=> 'Vazir'
+                'value'=> 'Vazirmatn'
             ],
 
         ];
