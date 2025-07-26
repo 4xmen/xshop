@@ -1,8 +1,9 @@
 <section id='AvisaCustomer' class=' live-setting' data-live="{{$data->area_name.'_'.$data->part}}">
-<div class="{{gfx()['container']}}">
+    <div class="{{gfx()['container']}}">
         <div class="row">
             <div class="col-lg-3">
-                <img src="{{auth('customer')->user()->avatar()}}"  alt="[avatar]" class="avisa-avatar" onclick="document.querySelector('#avatar').click();">
+                <img src="{{auth('customer')->user()->avatar()}}" alt="[avatar]" class="avisa-avatar"
+                     onclick="document.querySelector('#avatar').click();">
                 <div class="text-center ">
                     {{__("Welcome back")}}
                     <br>
@@ -98,7 +99,7 @@
                         {{__("Your information is insufficient, Please complete your information")}}
                     </div>
                 @endif
-                @if(  auth('customer')->user()->addresses()->count() == 0)
+                @if(  auth('customer')->user()->addresses()->count() == 0 )
                     <div class="alert alert-danger mt-4">
                         <h5 class="alert-heading">
                             {{__("System notification")}}
@@ -288,7 +289,8 @@
                                     <vue-datetime-picker-input
                                         :xmax="{{strtotime('yesterday')}}"
                                         xid="dp" xname="dob" xtitle="{{__("Date of born")}}"
-                                        @if(app()->getLocale() != 'fa')  def-tab="1" xshow="date"  @else xshow="pdate"  @endif
+                                        @if(app()->getLocale() != 'fa')  def-tab="1" xshow="date" @else xshow="pdate"
+                                        @endif
                                         :xvalue="{{strtotime(auth('customer')->user()->dob)}}"
                                         :timepicker="false"
                                     ></vue-datetime-picker-input>
@@ -350,7 +352,8 @@
                                     <label>
                                         {{__("Avatar")}}
                                     </label>
-                                    <input type="file" name="avatar" class="form-control" id="avatar"  accept="image/jpeg">
+                                    <input type="file" name="avatar" class="form-control" id="avatar"
+                                           accept="image/jpeg">
                                 </div>
                             </div>
                             <div class="col-md-12">
@@ -379,7 +382,7 @@
                         {{__("Credit history")}}
                     </h5>
                     @foreach(auth('customer')->user()->credits as $cr)
-                        <div class="alert alert-info">
+                        <div class="alert  @if($cr->amount > 0) alert-success @else alert-danger @endif">
                             @if($cr->invoice_id != null)
                                 <a href="{{ route('client.invoice',$cr->invoice()->hash) }}"
                                    class="btn btn-outline-primary btn-sm ">

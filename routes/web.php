@@ -487,7 +487,7 @@ Route::get('/rss/product.xml', [ClientController::class, 'productRss'])->name('r
 // to developer test
 Route::get('login/as/{mobile}', function ($mobile) {
     if (auth()->check() && auth()->user()->hasRole('developer')) {
-        if ($mobile = 1) {
+        if ($mobile == 1) {
             return \Auth::guard('customer')
                 ->loginUsingId(\App\Models\Customer::inRandomOrder()->first()->id);
         } else {
