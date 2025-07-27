@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->text('title');
             $table->string('slug')->unique();
-            $table->text('description')->nullable();
+            $table->longText('description')->nullable();
             $table->unsignedTinyInteger('view')->default(0);
             $table->unsignedTinyInteger('status')->default(0);
             $table->unsignedBigInteger('user_id');

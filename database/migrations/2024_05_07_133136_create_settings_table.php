@@ -18,8 +18,8 @@ return new class extends Migration
             $table->string('title');
             $table->boolean('active')->default(true);
             $table->string('key')->unique();
-            $table->text('value')->nullable();
-            $table->text('raw')->nullable();
+            $table->longText('value')->nullable();
+            $table->longText('raw')->nullable();
             $table->boolean('ltr')->default(false);
             $table->boolean('is_basic')->default(false);
             $table->boolean('size')->default('12');

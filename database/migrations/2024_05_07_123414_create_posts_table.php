@@ -16,7 +16,7 @@ return new class extends Migration
             $table->text('title');
             $table->string('slug')->unique();
             $table->text('subtitle');
-            $table->text('body');
+            $table->longText('body');
             $table->unsignedBigInteger('group_id');
             $table->unsignedBigInteger('user_id');
             $table->unsignedTinyInteger('status')->default(0);
