@@ -16,7 +16,7 @@ return new class extends Migration
             $table->text('title');
             $table->string('slug')->unique();
             $table->text('subtitle');
-            $table->text('body');
+            $table->longText('body');
             $table->string('file',2048)->nullable();
             $table->string('ext')->nullable();
             $table->unsignedBigInteger('downloads')->default(0)->comment('downloads count');

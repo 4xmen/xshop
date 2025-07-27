@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('clips', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
+            $table->text('title');
             $table->string('slug')->unique();
-            $table->text('body')->nullable();
+            $table->longText('body')->nullable();
             $table->string('file', 2048)->nullable();
             $table->string('cover', 2048)->nullable();
             $table->unsignedBigInteger('user_id');
