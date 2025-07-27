@@ -19,7 +19,7 @@ return new class extends Migration
             $table->boolean('required')->default(false);
             $table->boolean('searchable')->default(true);
             $table->string('type',60);
-            $table->text('unit')->nullable()->default('');
+            $table->text('unit')->nullable()->default(null);
             $table->unsignedInteger('sort')->default(null)->nullable();
             $table->longText('options')->nullable();
             $table->boolean('priceable')->default(false);

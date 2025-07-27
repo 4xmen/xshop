@@ -16,7 +16,11 @@ return new class extends Migration
             $table->unsignedBigInteger('area_id')->nullable();
             $table->string('segment');
             $table->string('part');
-            $table->json('data')->default('[]');
+            $table->json('data')->default(
+                config('database.default') === 'mysql'
+                    ? DB::raw('(JSON_ARRAY())')
+                    : '[]'
+            );
             $table->integer('sort')->default(0);
             $table->string('custom')->nullable();
             $table->timestamps();
