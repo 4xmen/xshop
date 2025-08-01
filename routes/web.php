@@ -447,6 +447,7 @@ Route::middleware([\App\Http\Middleware\VisitorCounter::class])
         Route::post('/address/update/{address}', [\App\Http\Controllers\CustomerController::class, 'addressUpdate'])->name('address.update');
         Route::get('/address/destroy/{address}', [\App\Http\Controllers\CustomerController::class, 'addressDestroy'])->name('address.destroy');
         Route::post('/profile/save', [\App\Http\Controllers\CustomerController::class, 'save'])->name('profile.save');
+        Route::post('/credit/inc', [\App\Http\Controllers\CustomerController::class, 'incCredit'])->name('credit.inc');
         Route::post('/ticket/submit', [\App\Http\Controllers\CustomerController::class, 'submitTicket'])->name('ticket.submit');
         Route::post('/ticket/answer/{ticket}', [\App\Http\Controllers\CustomerController::class, 'ticketAnswer'])->name('ticket.answer');
         Route::get('/ticket/{ticket}', [\App\Http\Controllers\CustomerController::class, 'showTicket'])->name('ticket.show');

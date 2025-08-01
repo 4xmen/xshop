@@ -378,6 +378,32 @@
 
                         </div>
                     </div>
+
+                    <form action="{{route('client.credit.inc')}}" method="post" class="card my-3">
+                        @csrf
+                        <h5 class="card-header">
+                            {{__("Increase credit")}}
+                        </h5>
+                        <div class="card-body">
+
+                            <div class="row">
+                                <div class="col-3 pt-2 text-end">
+                                    {{__("Amount")}}:
+                                </div>
+                                <div class="col-9">
+                                    <currency-input xname="amount" xid="amount"
+                                                    :xvalue="100000"></currency-input>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <button class="btn btn-outline-primary w-100">
+                                {{__("Pay now")}}
+                                <i class="ri-secure-payment-line"></i>
+                            </button>
+                        </div>
+                    </form>
+
                     <h5 class="my-3">
                         {{__("Credit history")}}
                     </h5>

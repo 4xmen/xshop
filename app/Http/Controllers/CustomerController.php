@@ -51,6 +51,9 @@ class CustomerController extends Controller
 
     }
 
+
+
+
     public function profile()
     {
         $area = 'customer';
@@ -272,5 +275,8 @@ class CustomerController extends Controller
         return redirect(route('client.profile') . '#tickets')->with('message', __('Ticket answered successfully'));
     }
 
+    public function incCredit(Request $request){
+        return $request->all();
+    }
 
 }
