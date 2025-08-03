@@ -36,9 +36,6 @@ class Customer extends Authenticatable
     public function products(){
         return $this->belongsToMany(Product::class,'customer_product');
     }
-    public function credits(){
-        return $this->hasMany(Credit::class);
-    }
 
     public function addresses(){
         return $this->hasMany(Address::class);
@@ -81,5 +78,25 @@ class Customer extends Authenticatable
 
     public function hasRole(){
         return false;
+    }
+
+    public function credits()
+    {
+        return $this->hasMany(Credit::class);
+    }
+
+    public function creditHistory()
+    {
+        return $this->hasMany(Credit::class)->orderBy('created_at', 'desc');
+    }
+
+    public function getFormattedCreditAttribute()
+    {
+        return number_format($this->credit);
+    }
+
+    public function hasSufficientCredit(int $amount): bool
+    {
+        return $this->credit >= $amount;
     }
 }

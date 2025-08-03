@@ -379,7 +379,7 @@
                         </div>
                     </div>
 
-                    <form action="{{route('client.credit.inc')}}" method="post" class="card my-3">
+                    <form action="{{route('client.credit.charge.process')}}" method="post" class="card my-3">
                         @csrf
                         <h5 class="card-header">
                             {{__("Increase credit")}}
@@ -407,7 +407,7 @@
                     <h5 class="my-3">
                         {{__("Credit history")}}
                     </h5>
-                    @foreach(auth('customer')->user()->credits as $cr)
+                    @foreach(auth('customer')->user()->creditHistory as $cr)
                         <div class="alert  @if($cr->amount > 0) alert-success @else alert-danger @endif">
                             @if($cr->invoice_id != null)
                                 <a href="{{ route('client.invoice',$cr->invoice()->hash) }}"

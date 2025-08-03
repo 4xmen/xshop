@@ -179,4 +179,57 @@ class Invoice extends Model
                 ->where('evaluationable_id',$this->id);
         })->get();
     }
+
+    public function canPayWithCredit(): bool
+    {
+        return $this->customer &&
+            $this->customer->hasSufficientCredit($this->total_price) &&
+            in_array($this->status, ['PENDING', 'FAILED']);
+    }
+
+    public function payWithCredit(): bool
+    {
+        if (!$this->canPayWithCredit()) {
+            return false;
+        }
+
+        $creditService = new \App\Services\CreditService();
+
+        try {
+            // Create credit payment transaction
+            $creditTransaction = $creditService->payWithCredit(
+                $this->customer,
+                $this->total_price,
+                $this,
+                __('Payment for invoice :hash', ['hash' => $this->hash])
+            );
+
+            // Create payment record
+            $payment = $this->storePaymentRequest(
+                'CREDIT_' . time(),
+                $this->total_price,
+                null,
+                'CASH',
+                'credit'
+            );
+
+            // Mark payment as successful
+            $this->storeSuccessPayment(
+                $payment->id,
+                'CREDIT_' . $creditTransaction->id
+            );
+
+            return true;
+        } catch (\Exception $e) {
+            \Log::error('Credit payment failed: ' . $e->getMessage());
+            return false;
+        }
+    }
+
+    public function isCriditIncrease()
+    {
+        return $this->meta and
+            isset($this->meta['type']) and
+            $this->meta['type'] === 'credit_charge';
+    }
 }
