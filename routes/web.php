@@ -437,6 +437,7 @@ Route::middleware([\App\Http\Middleware\VisitorCounter::class])
         Route::get('/galleries', [ClientController::class, 'galleries'])->name('galleries');
         Route::get('/videos', [ClientController::class, 'clips'])->name('clips');
         Route::post('/card/check', [\App\Http\Controllers\CardController::class, 'check'])->name('card.check');
+        Route::post('/card/credit/check', [\App\Http\Controllers\CardController::class, 'checkCredit'])->name('card.check.credit');
         Route::get('/card/discount/{code}', [\App\Http\Controllers\CardController::class, 'discount'])->name('card.discount');
         Route::get('/card/items', [\App\Http\Controllers\CardController::class, 'items'])->name('card.items');
         Route::get('/card', [\App\Http\Controllers\CardController::class, 'index'])->name('card');

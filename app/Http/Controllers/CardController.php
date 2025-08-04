@@ -10,6 +10,7 @@ use App\Models\Order;
 use App\Models\Product;
 use App\Models\Quantity;
 use App\Models\Transport;
+use App\Services\CreditService;
 use Illuminate\Http\Request;
 
 class CardController extends Controller
@@ -93,6 +94,71 @@ class CardController extends Controller
         return view('client.default-list', compact('area', 'title', 'subtitle'));
     }
 
+
+    public function checkCredit(Request $request){
+        $request->validate([
+            'product_id' => ['required', 'array'],
+            'count' => ['required', 'array'],
+            'address_id' => ['nullable', 'exists:addresses,id'],
+            'desc' => ['nullable', 'string']
+        ]);
+        $total = 0;
+//        return $request->all();
+        $invoice = new Invoice();
+        $invoice->customer_id = auth('customer')->user()->id;
+        $invoice->count = array_sum($request->count);
+//        $invoice->address_id = $request->address_id;
+        $invoice->address_id = null;
+        $invoice->desc = $request->desc;
+
+        if ($request->has('transport_id')) {
+            $request->transport_id = $request->input('transport_id');
+            $t = Transport::find($request->input('transport_id'));
+            $invoice->transport_price = $t->price;
+            $total += $t->price;
+        }
+        if ($request->has('discount_id')) {
+            $request->discount_id = $request->input('discount_id');
+        }
+
+        $invoice->save();
+
+        foreach ($request->product_id as $i => $product) {
+            $order = new Order();
+            $order->product_id = $product;
+            $order->invoice_id = $invoice->id;
+            $order->count = $request->count[$i];
+            if ($request->quantity_id[$i] != '') {
+                $order->quantity_id = $request->quantity_id[$i];
+                $q = Quantity::find($request->quantity_id[$i]);
+                $order->price_total = $q->price * $request->count[$i];
+                $order->data = $q->data;
+
+            } else {
+                $p = Product::find($request->product_id[$i]);
+                $order->price_total = $p->price * $request->count[$i];
+            }
+            $total += $order->price_total;
+            $order->save();
+        }
+
+        $invoice->total_price = $total;
+        $invoice->save();
+
+        if ($invoice->total_price > auth('customer')->user()->credit){
+            $invoice->status = 'FAILED';
+            $invoice->save();
+            return redirect()->back()->with(['message' => __("Please, charge your credit")]);
+        }else{
+
+            $crservice = new CreditService();
+            $customer = auth('customer')->user();
+            $crservice->payWithCredit($customer,$invoice->total_price,$invoice);
+            // empty card
+            self::clear();
+            return redirect()->route('client.profile')->with(['message' => __("Thank you for your purchase, your purchase was successful")]);
+        }
+    }
     public function check(Request $request)
     {
 

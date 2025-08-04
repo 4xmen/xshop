@@ -6,7 +6,8 @@
                 {{__("There is nothing added to card!")}}
             </div>
         @else {{--  count 0--}}
-        <form method="post" class="safe-form" >
+        <form method="post" class="safe-form" id="card-form">
+
 
             <input type="hidden" class="safe-url" data-url="{{route('client.card.check')}}">
             @csrf
@@ -14,12 +15,15 @@
             :items='@json(cardItems())'
             :qs='{{\Cookie::get("q")}}'
             symbol="{{config('app.currency.symbol')}}"
+            credit="{{auth('customer')->user()->credit}}"
             @if(auth('customer')->check())
                 :addresses='@json(auth('customer')->user()->addresses)'
             @endif
             card-link="{{route('client.product-card-toggle','')}}/"
             discount-link="{{route('client.card.discount','')}}/"
             product-link="{{route('client.product','')}}/"
+            credit-link="{{route('client.card.check.credit')}}"
+            credit-link="{{route('client.card.check.credit')}}"
             :transports='@json(transports())'
             :def-transport="{{defTrannsport()}}"
             :can-pay="{{!auth('customer')->check() || auth('customer')->user()->mobile == null ||  auth('customer')->user()->mobile == '' || auth('customer')->user()->addresses()->count() == 0?'false':'true'}}"
@@ -40,6 +44,7 @@
             'your-msg' => __('Your message for this order...'),
             'pay-now' => __('Pay now'),
             'plz' => __('Please, Login or complete information to pay'),
+            'cr' => __('I will pay this amount from my account credit')
             ])}}'
             >
                 <br>

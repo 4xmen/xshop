@@ -195,10 +195,21 @@
                     </h4>
                     <textarea rows="4" class="form-control" name="desc" :placeholder="translate['your-msg']"></textarea>
                     <hr>
-                    <button v-if="canPay" class="btn btn-outline-primary w-100 btn-lg">
-                        <i class="ri-bank-card-2-line"></i>
-                        {{ translate['pay-now'] }}
-                    </button>
+                    <template v-if="canPay">
+
+
+                        <div class="form-check form-switch mb-3" v-if="total < credit">
+                            <input class="form-check-input" type="checkbox" role="switch" id="switchCheckChecked" v-model="creditPay" >
+                            <label class="form-check-label" for="switchCheckChecked">
+                                {{translate['cr']}}.
+                            </label>
+                        </div>
+                        <button  class="btn btn-outline-primary w-100 btn-lg">
+                            <i class="ri-bank-card-2-line"></i>
+                            {{ translate['pay-now'] }}
+                        </button>
+
+                    </template>
                     <div v-else class="alert alert-danger">
                         {{ translate['plz'] }}
                     </div>
@@ -237,6 +248,7 @@ export default {
     components: {quantity, QPreview, QIndex},
     data: () => {
         return {
+            creditPay: false,
             countz: [], // counts
             qz: [], // qunatities
             itemz: [], // card items
@@ -248,13 +260,20 @@ export default {
             discount_id: null,
             discount_human: '',
             discount: null,
+            defaultAction: '',
         }
     },
     props: {
+        credit:{
+            default: 0,
+        },
         productLink: {
             required: true,
         },
         cardLink: {
+            required: true,
+        },
+        creditLink: {
             required: true,
         },
         discountLink: {
@@ -287,6 +306,7 @@ export default {
         }
     },
     mounted() {
+        this.defaultAction = document.querySelector('#card-form .safe-url').getAttribute('data-url');
         this.qz = this.qs;
         this.transport_index = this.defTransport;
         for (const item of this.items) {
@@ -408,6 +428,17 @@ export default {
             return commafy(p.toString()) + ' ' + this.symbol;
         }
     },
+    watch:{
+        creditPay(newVal){
+            if (newVal){
+                document.querySelector('#card-form .safe-url').setAttribute('data-url',this.creditLink);
+                document.querySelector('#card-form').setAttribute('action',this.creditLink);
+            }else{
+                document.querySelector('#card-form .safe-url').setAttribute('data-url',this.defaultAction);
+                document.querySelector('#card-form').setAttribute('action',this.defaultAction);
+            }
+        }
+    }
 }
 </script>
 

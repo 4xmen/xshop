@@ -68,7 +68,7 @@
                             -
                         @else
                             @foreach($order->quantity->meta as $m)
-                            <span>
+                                <span>
                                 {!! $m['human_value']??'-' !!}
                             </span>
                             @endforeach
@@ -102,13 +102,16 @@
             <p>
                 {{$invoice->desc}}
             </p>
-            <hr>
-            {{__("Address")}}:
-            {{$invoice->address->state->name}}, {{$invoice->address->city->name}}, {{$invoice->address->address}}
-            , {{$invoice->address->zip}}
-            @if(trim(getSetting($data->area_name.'_'.$data->part.'_desc')) != '')
+            @if($invoice->address != null)
+
                 <hr>
-                {!! getSetting($data->area_name.'_'.$data->part.'_desc') !!}
+                {{__("Address")}}:
+                {{$invoice->address->state->name}}, {{$invoice->address->city->name}}, {{$invoice->address->address}}
+                , {{$invoice->address->zip}}
+                @if(trim(getSetting($data->area_name.'_'.$data->part.'_desc')) != '')
+                    <hr>
+                    {!! getSetting($data->area_name.'_'.$data->part.'_desc') !!}
+                @endif
             @endif
         </div>
         <div class="no-print btn btn-primary mt-2 w-100" onclick="window.print()">

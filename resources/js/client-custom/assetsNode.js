@@ -32,6 +32,9 @@ import RateInput from "../client-vue/RateInput.vue";
 app.component('rate-input', RateInput);
 
 
+import CurrencyInput from '../components/CurrencyInput.vue';
+app.component('currency-input',CurrencyInput);
+
 import vdp from "../client-vue/vueDateTimePickerClient.vue";
 app.component('vue-datetime-picker-input', vdp);
 

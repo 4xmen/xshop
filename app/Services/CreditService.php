@@ -25,6 +25,9 @@ class CreditService
                 'status' => Credit::STATUS_COMPLETED,
                 'payment_id' => $payment?->id,
                 'description' => $description ?? __('Credit charge'),
+                'data' => json_encode([
+                    'message' => __('Credit charge')
+                ]),
                 'processed_at' => now()
             ]);
         });
@@ -40,6 +43,8 @@ class CreditService
             // Deduct from customer credit
             $customer->credit -= $amount;
             $customer->save();
+            $invoice->status = "COMPLETED";
+            $invoice->save();
 
             // Create credit transaction record
             return Credit::create([
@@ -48,6 +53,9 @@ class CreditService
                 'amount' => -$amount, // Negative for payment
                 'status' => Credit::STATUS_COMPLETED,
                 'invoice_id' => $invoice->id,
+                'data' => json_encode([
+                    'message' => __("Pay for invoice") . ' ' . $invoice->hash,
+                ]),
                 'description' => $description ?? __('Payment for invoice :hash', ['hash' => $invoice->hash]),
                 'processed_at' => now()
             ]);
@@ -68,6 +76,10 @@ class CreditService
                 'amount' => $amount,
                 'status' => Credit::STATUS_COMPLETED,
                 'description' => $description,
+                'data' => json_encode([
+                    'user_id' => auth()->user()->id,
+                    'message' => __("Increase / decrease by Admin"),
+                ]),
                 'processed_at' => now()
             ]);
         });
@@ -87,6 +99,9 @@ class CreditService
                 'status' => Credit::STATUS_COMPLETED,
                 'invoice_id' => $invoice?->id,
                 'description' => $description ?? __('Credit refund'),
+                'data' => json_encode([
+                    'message' => __('Credit refund'),
+                ]),
                 'processed_at' => now()
             ]);
         });

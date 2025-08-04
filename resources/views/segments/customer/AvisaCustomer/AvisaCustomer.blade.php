@@ -410,7 +410,7 @@
                     @foreach(auth('customer')->user()->creditHistory as $cr)
                         <div class="alert  @if($cr->amount > 0) alert-success @else alert-danger @endif">
                             @if($cr->invoice_id != null)
-                                <a href="{{ route('client.invoice',$cr->invoice()->hash) }}"
+                                <a href="{{ route('client.invoice',$cr->invoice->hash) }}"
                                    class="btn btn-outline-primary btn-sm ">
                                     <i class="ri-eye-line"></i>
                                 </a>
