@@ -15,7 +15,7 @@
             :items='@json(cardItems())'
             :qs='{{\Cookie::get("q")}}'
             symbol="{{config('app.currency.symbol')}}"
-            credit="{{auth('customer')->user()->credit}}"
+            credit="{{auth('customer')->user()->credit??'0'}}"
             @if(auth('customer')->check())
                 :addresses='@json(auth('customer')->user()->addresses)'
             @endif

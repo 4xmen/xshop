@@ -54,6 +54,35 @@
             ])}}'
                     ></address-input>
                 </div>
+                <div class="item-list mb-3">
+                    <h3 class="p-3">
+                        <i class="ri-message-3-line"></i>
+                        {{__("Credit history")}}
+                    </h3>
+                    <ul class="px-2">
+                        @foreach($item->credits as $cr)
+                            <li class=" @if($cr->amount > 0) text-info @else text-danger @endif">
+                                @if($cr->invoice_id != null)
+                                    <a href="{{ route('client.invoice',$cr->invoice->hash) }}"
+                                       class="btn btn-outline-primary btn-sm ">
+                                        <i class="ri-eye-line"></i>
+                                    </a>
+                                @endif
+                                [{{$cr->created_at->ldate('Y-m-d H:i')}}]
+                                <b class="ms-4">
+                                    {{number_format($cr->amount)}} {{config('app.currency.symbol')}}
+                                </b>
+                                @php($data = json_decode($cr->data))
+                                @if(isset($data->message))
+                                    <i class="ms-4">
+                                        {{$data->message}}
+                                    </i>
+                                @endif
+                                <hr>
+                            </li>
+                        @endforeach
+                    </ul>
+                </div>
             @endif
 
         </div>

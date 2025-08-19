@@ -299,7 +299,7 @@ section {
 .fav-btn {
 
     &[data-is-fav="-1"] {
-        display: none;
+        display: none !important;
     }
 
     &[data-is-fav="1"] {
