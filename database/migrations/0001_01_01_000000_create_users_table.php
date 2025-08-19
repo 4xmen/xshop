@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('mobile',20)->nullable();
             $table->string('avatar',1024)->nullable();
             $table->enum('role',\App\Models\User::$roles)->default('USER');
+            $table->boolean('darkmode')->default(true);
             $table->rememberToken();
             $table->timestamps();
             $table->softDeletes();

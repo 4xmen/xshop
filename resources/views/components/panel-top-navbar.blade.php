@@ -31,6 +31,10 @@
                 </li>
                 @endif
                 @else
+                <li class="nav-item" id="switch-theme">
+                    <i class="ri-sun-line theme-switch"></i>
+                    <i class="ri-moon-line  theme-switch"></i>
+                </li>
                 <li class="nav-item dropdown">
                     <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
                        data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>

@@ -182,4 +182,14 @@ class UserController extends XController
     {
         return parent::restoreing(User::withTrashed()->where('email', $item)->first());
     }
+
+    public function switchTheme(){
+        $user = auth()->user();
+        $user->darkmode = !$user->darkmode;
+        $user->save();
+        return [
+            'OK' => true,
+            'message' => __('Theme changed'),
+        ];
+    }
 }

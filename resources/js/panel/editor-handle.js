@@ -4,6 +4,8 @@ let timeOut = null;
 window.addEventListener('load', function () {
 
     try {
+        const html = document.querySelector('html');
+        const theme = html.getAttribute('data-bs-theme');
 
         if (document.querySelectorAll('.ckeditorx[name="description"]').length > 0){
             let metaDescription = document.querySelector('meta[name="description"]');
@@ -22,16 +24,23 @@ window.addEventListener('load', function () {
             if (currentDir != null) {
                 finalDir = currentDir;
             }
-            editors[el.getAttribute('name')] = CKEDITOR.replace(el.getAttribute('name'), {
+
+            let data = {
                 filebrowserUploadUrl: xupload,
                 filebrowserUploadMethod: 'form',
                 contentsLangDirection: finalDir,
-                skin: 'moono-dark',
+                // skin:,
                 removeButtons: 'Font',
                 // font_names:
                 //     'Arial/Arial, Helvetica, sans-serif;' +
                 //     'Georgia/Georgia, serif;'
-            });
+            };
+
+            if (theme == 'dark'){
+                data.skin =  'moono-dark';
+            }
+
+            editors[el.getAttribute('name')] = CKEDITOR.replace(el.getAttribute('name'), data );
 
 
             CKEDITOR.addCss('.cke_editable { background-color: ' + website_bg + '; color: ' + website_text_color + ' ; font-family: ' + website_font + '; font-weight: 500; } .cke_editable strong{ font-weight: 700} ');

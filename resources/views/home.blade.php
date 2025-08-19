@@ -193,6 +193,9 @@
                     },
                     legend: {
                         position: 'bottom',
+                        // labels: {
+                        //     fontColor: '#ff0000'
+                        // }
                     },
                     title: {
                         display: true,

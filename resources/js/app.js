@@ -40,8 +40,10 @@ import './panel/online-edit.js';
 // chartjs.defaults.defaultFontSize = 18;
 
 // chartjs.defaults.backgroundColor = '#0097ff';
+
 chartjs.defaults.borderColor = 'rgba(255,255,255,0.05)';
-chartjs.defaults.color = '#fff';
+
+chartjs.defaults.color = 'rgba(127,127,127,1)';
 chartjs.defaults.font.family = 'Vazir';
 // chartjs.defaults.font.size = '14';
 // chartjs.defaults.font.weight = '100';

@@ -25,6 +25,19 @@ window.addEventListener('load', function () {
             });
         });
 
+
+        document.querySelector('#switch-theme')?.addEventListener('click',function () {
+            const html = document.querySelector('html');
+            const theme = html.getAttribute('data-bs-theme');
+            if (theme == 'dark'){
+                html.setAttribute('data-bs-theme','light');
+            }else{
+                html.setAttribute('data-bs-theme','dark');
+            }
+
+            axios.get(switchThemeUrl);
+        })
+
     } catch (e) {
         console.log(e.message);
     }

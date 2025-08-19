@@ -1,0 +1,141 @@
+@use "variables";
+
+.theme-switch {
+    font-size: 20px;
+    margin: 0 1rem;
+    position: relative;
+    top: 3px;
+}
+
+[data-bs-theme="dark"] {
+    .theme-switch.ri-moon-line {
+        display: none;
+    }
+}
+
+[data-bs-theme="light"] {
+    .theme-switch.ri-sun-line {
+        display: none;
+    }
+
+    body {
+        background: #eeeeee;
+        color: #222222;
+    }
+
+    #panel-top-navbar {
+        background: #ffffff;
+    }
+
+    a, a:visited {
+        color: #000000;
+    }
+
+    .item-list {
+        background: #dedede;
+    }
+
+    #panel > aside {
+        background: #ffffff;
+
+        a {
+            color: #000000;
+        }
+
+    }
+
+    #sidebar-panel {
+        background: #555555;
+    }
+
+    #panel-breadcrumb {
+        background: #dedede;
+
+        ul li:before {
+            background: #dedede;
+
+        }
+
+        li:hover {
+            background: #ffffff;
+
+            & + :before {
+                background: #ffffff;
+            }
+        }
+
+
+    }
+
+    main .card {
+        background: #dedede;
+    }
+
+    .table-list {
+        tr td a b, tr th a b {
+            color: variables.$secondary-color-panel;
+        }
+
+        .btn-outline-light {
+            border-color: #000000;
+
+            &:hover {
+                i {
+                    color: #000000;
+                }
+            }
+
+        }
+
+        [checked] + label {
+            color: #ffffff;
+        }
+    }
+
+    .general-form, #attaching-form {
+        background: #dedede;
+    }
+
+    #seo-hint .seo-report {
+        background: #ffffff;
+
+        p, li {
+            color: black;
+        }
+    }
+
+    .steps li {
+        background: #ffffff;
+    }
+
+    .steps li.active {
+        background: variables.$primary-color-panel;
+        color: white;
+    }
+
+    #ss-selector, #ri-selector {
+        background: #cccccc !important;
+    }
+
+    #selected-icon {
+        background: #ffffff !important;
+    }
+
+    .section-group .section-group-item {
+        color: black;
+
+        &.active, &:hover {
+            color: white;
+        }
+    }
+
+
+    #setting-sections section{
+        background: #ffffff;
+    }
+}
+
+
+#switch-theme {
+    cursor: pointer;
+}

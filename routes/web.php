@@ -408,6 +408,7 @@ Route::prefix(config('app.panel.prefix'))->name('admin.')->group(
                         Route::get('restore/{item}', [\App\Http\Controllers\Admin\UserController::class, 'restore'])->name('restore');
                         Route::post('bulk', [\App\Http\Controllers\Admin\UserController::class, "bulk"])->name('bulk');
                         Route::get('trashed', [\App\Http\Controllers\Admin\UserController::class, "trashed"])->name('trashed');
+                        Route::get('switch/theme', [\App\Http\Controllers\Admin\UserController::class, "switchTheme"])->name('switch-theme');
                     });
 
             });

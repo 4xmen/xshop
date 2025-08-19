@@ -20,7 +20,7 @@
         data-bs-toggle="tooltip"
         data-bs-placement="top"
         data-bs-custom-class="custom-tooltip"
-        data-bs-title="{{__("Sort")}}"
+        data-bs-title="{{__("Languages list")}}"
         style="inset-inline-end: 1.2rem;inset-inline-start: auto;"
     >
         <i class="ri-translate-2"></i>

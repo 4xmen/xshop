@@ -47,6 +47,7 @@
 
 #sidebar-panel {
     overflow: hidden;
+    overflow-y: auto;
     background: rgba(0, 0, 0, .1);
     transition: .5s;
     ul{
