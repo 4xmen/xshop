@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('attachments', function (Blueprint $table) {
             $table->id();
             $table->text('title');
-            $table->string('slug')->unique();
+            $table->string('slug')->unique()->index();
             $table->text('subtitle');
             $table->longText('body');
             $table->string('file',2048)->nullable();

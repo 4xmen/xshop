@@ -21,7 +21,7 @@ return new class extends Migration
             $table->json('meta')->nullable();
             $table->unsignedBigInteger('discount_id')->nullable()->default(null);
             $table->text('desc')->nullable()->default(null);
-            $table->string('hash',32)->nullable()->default(null)->unique();
+            $table->string('hash',32)->nullable()->default(null)->unique()->index();
 
             $table->unsignedBigInteger('transport_id')->nullable()->default(null);
             $table->unsignedBigInteger('transport_price')->default(0);
