@@ -30,10 +30,10 @@ Route::prefix(config('app.panel.prefix'))->name('admin.')->group(
 
                 Route::prefix('addresses')->name('address.')->group(
                     function () {
-                        Route::get('customer/{item}', [\App\Http\Controllers\Admin\AddressController::class, 'customer'])->name('customer');
-                        Route::post('add/{item}', [\App\Http\Controllers\Admin\AddressController::class, 'store'])->name('store');
-                        Route::post('update/{item}', [\App\Http\Controllers\Admin\AddressController::class, 'update'])->name('update');
-                        Route::get('destroy/{item}', [\App\Http\Controllers\Admin\AddressController::class, 'destroy'])->name('destroy');
+                        Route::get('customer/{item?}', [\App\Http\Controllers\Admin\AddressController::class, 'customer'])->name('customer');
+                        Route::post('add/{item?}', [\App\Http\Controllers\Admin\AddressController::class, 'store'])->name('store');
+                        Route::post('update/{item?}', [\App\Http\Controllers\Admin\AddressController::class, 'update'])->name('update');
+                        Route::get('destroy/{item?}', [\App\Http\Controllers\Admin\AddressController::class, 'destroy'])->name('destroy');
                     });
                 Route::prefix('adv')->name('adv.')->group(
                     function () {
@@ -52,15 +52,15 @@ Route::prefix(config('app.panel.prefix'))->name('admin.')->group(
                     function () {
                         Route::get('index', [\App\Http\Controllers\Admin\AreaController::class, "index"])->name('index');
                         Route::get('design/{area}', [\App\Http\Controllers\Admin\AreaController::class, "design"])->name('design');
-                        Route::get('design/model/{area}/{model}/{id}', [\App\Http\Controllers\Admin\AreaController::class, "designModel"])->name('design.model');
-                        Route::get('image/{segment}/{part}', [\App\Http\Controllers\Admin\AreaController::class, "image"])->name('image');
+                        Route::get('design/model/{area?}/{model?}/{id?}', [\App\Http\Controllers\Admin\AreaController::class, "designModel"])->name('design.model');
+                        Route::get('image/{segment?}/{part?}', [\App\Http\Controllers\Admin\AreaController::class, "image"])->name('image');
 //                        Route::post('store', [\App\Http\Controllers\Admin\SettingController::class, "store"])->name('store');
                         Route::post('update/{area}', [\App\Http\Controllers\Admin\AreaController::class, "update"])->name('update');
-                        Route::post('update/model/{model}/{id}', [\App\Http\Controllers\Admin\AreaController::class, "updateModel"])->name('update.model');
-                        Route::get('sort/{area}', [\App\Http\Controllers\Admin\AreaController::class, "sort"])->name('sort');
+                        Route::post('update/model/{model?}/{id?}', [\App\Http\Controllers\Admin\AreaController::class, "updateModel"])->name('update.model');
+                        Route::get('sort/{area?}', [\App\Http\Controllers\Admin\AreaController::class, "sort"])->name('sort');
                         Route::get('build', [\App\Http\Controllers\Admin\AreaController::class, "build"])->name('build');
                         Route::get('guide', [\App\Http\Controllers\Admin\AreaController::class, "guide"])->name('guide');
-                        Route::post('sort-save/{area}', [\App\Http\Controllers\Admin\AreaController::class, "sortSave"])->name('sort-save');
+                        Route::post('sort-save/{area?}', [\App\Http\Controllers\Admin\AreaController::class, "sortSave"])->name('sort-save');
                     }
                 );
                 Route::prefix('attachments')->name('attachment.')->group(
@@ -72,7 +72,7 @@ Route::prefix(config('app.panel.prefix'))->name('admin.')->group(
                         Route::get('edit/{item}', [\App\Http\Controllers\Admin\AttachmentController::class, 'edit'])->name('edit');
                         Route::post('update/{item}', [\App\Http\Controllers\Admin\AttachmentController::class, 'update'])->name('update');
                         Route::get('delete/{item}', [\App\Http\Controllers\Admin\AttachmentController::class, 'destroy'])->name('destroy');
-                        Route::get('detach/{item}', [\App\Http\Controllers\Admin\AttachmentController::class, 'detach'])->name('detach');
+                        Route::get('detach/{item?}', [\App\Http\Controllers\Admin\AttachmentController::class, 'detach'])->name('detach');
                         Route::post('bulk', [\App\Http\Controllers\Admin\AttachmentController::class, "bulk"])->name('bulk');
                         Route::post('attaching', [\App\Http\Controllers\Admin\AttachmentController::class, "attaching"])->name('attaching');
                     });
@@ -286,8 +286,8 @@ Route::prefix(config('app.panel.prefix'))->name('admin.')->group(
                         Route::get('restore/{item}', [\App\Http\Controllers\Admin\PostController::class, 'restore'])->name('restore');
                         Route::post('bulk', [\App\Http\Controllers\Admin\PostController::class, "bulk"])->name('bulk');
                         Route::get('trashed', [\App\Http\Controllers\Admin\PostController::class, "trashed"])->name('trashed');
-                        Route::get('group/edit/{id}', [\App\Http\Controllers\Admin\PostController::class, 'groupEdit'])->name('group-edit');
-                        Route::post('group/save/{item}', [\App\Http\Controllers\Admin\PostController::class, 'groupSave'])->name('group-save');
+                        Route::get('group/edit/{id?}', [\App\Http\Controllers\Admin\PostController::class, 'groupEdit'])->name('group-edit');
+                        Route::post('group/save/{item?}', [\App\Http\Controllers\Admin\PostController::class, 'groupSave'])->name('group-save');
                     });
                 Route::prefix('products')->name('product.')->group(
                     function () {
@@ -296,14 +296,14 @@ Route::prefix(config('app.panel.prefix'))->name('admin.')->group(
                         Route::post('store', [\App\Http\Controllers\Admin\ProductController::class, 'store'])->name('store');
                         Route::get('show/{item}', [\App\Http\Controllers\Admin\ProductController::class, 'show'])->name('show');
                         Route::post('title/update', [\App\Http\Controllers\Admin\ProductController::class, 'updateTitle'])->name('title');
-                        Route::get('edit/{item}', [\App\Http\Controllers\Admin\ProductController::class, 'edit'])->name('edit');
-                        Route::post('update/{item}', [\App\Http\Controllers\Admin\ProductController::class, 'update'])->name('update');
+                        Route::get('edit/{item?}', [\App\Http\Controllers\Admin\ProductController::class, 'edit'])->name('edit');
+                        Route::post('update/{item?}', [\App\Http\Controllers\Admin\ProductController::class, 'update'])->name('update');
                         Route::get('delete/{item}', [\App\Http\Controllers\Admin\ProductController::class, 'destroy'])->name('destroy');
                         Route::get('restore/{item}', [\App\Http\Controllers\Admin\ProductController::class, 'restore'])->name('restore');
                         Route::post('bulk', [\App\Http\Controllers\Admin\ProductController::class, "bulk"])->name('bulk');
                         Route::get('trashed', [\App\Http\Controllers\Admin\ProductController::class, "trashed"])->name('trashed');
-                        Route::get('category/edit/{id}', [\App\Http\Controllers\Admin\ProductController::class, 'categoryEdit'])->name('category-edit');
-                        Route::post('category/save/{item}', [\App\Http\Controllers\Admin\ProductController::class, 'categorySave'])->name('category-save');
+                        Route::get('category/edit/{id?}', [\App\Http\Controllers\Admin\ProductController::class, 'categoryEdit'])->name('category-edit');
+                        Route::post('category/save/{item?}', [\App\Http\Controllers\Admin\ProductController::class, 'categorySave'])->name('category-save');
 
                     });
                 Route::prefix('props')->name('prop.')->group(
@@ -341,7 +341,7 @@ Route::prefix(config('app.panel.prefix'))->name('admin.')->group(
                         Route::post('store', [\App\Http\Controllers\Admin\SettingController::class, "store"])->name('store');
                         Route::post('update', [\App\Http\Controllers\Admin\SettingController::class, "update"])->name('update');
                         Route::get('cache/clear', [\App\Http\Controllers\Admin\SettingController::class, "cacheClear"])->name('cache-clear');
-                        Route::get('live/{slug}', [\App\Http\Controllers\Admin\SettingController::class, "liveEdit"])->name('live');
+                        Route::get('live/{slug?}', [\App\Http\Controllers\Admin\SettingController::class, "liveEdit"])->name('live');
                     }
                 );
                 Route::prefix('sliders')->name('slider.')->group(
@@ -422,7 +422,7 @@ Route::middleware([\App\Http\Middleware\VisitorCounter::class])
         // index
         Route::get('/', [ClientController::class, 'welcome'])->name('welcome');
         Route::get('/posts', [ClientController::class, 'posts'])->name('posts');
-        Route::get('/post/{post}', [ClientController::class, 'post'])->name('post');
+        Route::get('/post/{post?}', [ClientController::class, 'post'])->name('post');
         Route::get('/customer/sign-out', [ClientController::class, 'signOut'])->name('sign-out');
         Route::post('/customer/sign-in/do', [ClientController::class, 'singInDo'])->name('sign-in-do');
         Route::get('/customer/sign-in', [ClientController::class, 'signIn'])->name('sign-in');
@@ -439,39 +439,39 @@ Route::middleware([\App\Http\Middleware\VisitorCounter::class])
         Route::get('/videos', [ClientController::class, 'clips'])->name('clips');
         Route::post('/card/check', [\App\Http\Controllers\CardController::class, 'check'])->name('card.check');
         Route::post('/card/credit/check', [\App\Http\Controllers\CardController::class, 'checkCredit'])->name('card.check.credit');
-        Route::get('/card/discount/{code}', [\App\Http\Controllers\CardController::class, 'discount'])->name('card.discount');
+        Route::get('/card/discount/{code?}', [\App\Http\Controllers\CardController::class, 'discount'])->name('card.discount');
         Route::get('/card/items', [\App\Http\Controllers\CardController::class, 'items'])->name('card.items');
         Route::get('/card', [\App\Http\Controllers\CardController::class, 'index'])->name('card');
         Route::get('/cardClear', [\App\Http\Controllers\CardController::class, 'clearing'])->name('card.clear');
         Route::get('/profile', [\App\Http\Controllers\CustomerController::class, 'profile'])->name('profile');
         Route::get('/addresses', [\App\Http\Controllers\CustomerController::class, 'addresses'])->name('addresses');
         Route::post('/address/store', [\App\Http\Controllers\CustomerController::class, 'addressStore'])->name('address.store');
-        Route::post('/address/update/{address}', [\App\Http\Controllers\CustomerController::class, 'addressUpdate'])->name('address.update');
-        Route::get('/address/destroy/{address}', [\App\Http\Controllers\CustomerController::class, 'addressDestroy'])->name('address.destroy');
+        Route::post('/address/update/{address?}', [\App\Http\Controllers\CustomerController::class, 'addressUpdate'])->name('address.update');
+        Route::get('/address/destroy/{address?}', [\App\Http\Controllers\CustomerController::class, 'addressDestroy'])->name('address.destroy');
         Route::post('/profile/save', [\App\Http\Controllers\CustomerController::class, 'save'])->name('profile.save');
 //        Route::post('/credit/inc', [\App\Http\Controllers\CustomerController::class, 'incCredit'])->name('credit.inc');
         Route::post('/ticket/submit', [\App\Http\Controllers\CustomerController::class, 'submitTicket'])->name('ticket.submit');
-        Route::post('/ticket/answer/{ticket}', [\App\Http\Controllers\CustomerController::class, 'ticketAnswer'])->name('ticket.answer');
-        Route::get('/ticket/{ticket}', [\App\Http\Controllers\CustomerController::class, 'showTicket'])->name('ticket.show');
-        Route::get('/invoice/{invoice}', [\App\Http\Controllers\CustomerController::class, 'invoice'])->name('invoice');
+        Route::post('/ticket/answer/{ticket?}', [\App\Http\Controllers\CustomerController::class, 'ticketAnswer'])->name('ticket.answer');
+        Route::get('/ticket/{ticket?}', [\App\Http\Controllers\CustomerController::class, 'showTicket'])->name('ticket.show');
+        Route::get('/invoice/{invoice?}', [\App\Http\Controllers\CustomerController::class, 'invoice'])->name('invoice');
         Route::get('/products', [ClientController::class, 'products'])->name('products');
         Route::get('/attachments', [ClientController::class, 'attachments'])->name('attachments');
-        Route::get('/attachment/{attachment}', [ClientController::class, 'attachment'])->name('attachment');
-        Route::get('/tag/{slug}', [ClientController::class, 'tag'])->name('tag'); // wip
-        Route::get('/group/{slug}', [ClientController::class, 'group'])->name('group'); // wip
-        Route::get('/creator/{slug}', [ClientController::class, 'creator'])->name('creator'); // wip
-        Route::get('/product/{product}', [ClientController::class, 'product'])->name('product');
-        Route::get('/video/{clip}', [ClientController::class, 'clip'])->name('clip');
-        Route::get('/category/{category}', [ClientController::class, 'category'])->name('category');
-        Route::get('/gallery/{gallery}', [ClientController::class, 'gallery'])->name('gallery');
+        Route::get('/attachment/{attachment?}', [ClientController::class, 'attachment'])->name('attachment');
+        Route::get('/tag/{slug?}', [ClientController::class, 'tag'])->name('tag'); // wip
+        Route::get('/group/{slug?}', [ClientController::class, 'group'])->name('group'); // wip
+        Route::get('/creator/{slug?}', [ClientController::class, 'creator'])->name('creator'); // wip
+        Route::get('/product/{product?}', [ClientController::class, 'product'])->name('product');
+        Route::get('/video/{clip?}', [ClientController::class, 'clip'])->name('clip');
+        Route::get('/category/{category?}', [ClientController::class, 'category'])->name('category');
+        Route::get('/gallery/{gallery?}', [ClientController::class, 'gallery'])->name('gallery');
         Route::post('/search', [ClientController::class, 'ajaxSearch'])->name('search.ajax');
         Route::get('/search', [ClientController::class, 'search'])->name('search');
-        Route::get('attach/download/{attachment}', [ClientController::class, 'attachDl'])->name('attach-dl');
-        Route::get('pay/{invoice}', [ClientController::class, 'pay'])->name('pay');
+        Route::get('attach/download/{attachment?}', [ClientController::class, 'attachDl'])->name('attach-dl');
+        Route::get('pay/{invoice?}', [ClientController::class, 'pay'])->name('pay');
 
-        Route::get('product/fav/toggle/{product}', [\App\Http\Controllers\CustomerController::class, 'ProductFavToggle'])->name('product-fav-toggle');
-        Route::get('product/compare/toggle/{product}', [\App\Http\Controllers\CardController::class, 'productCompareToggle'])->name('product-compare-toggle');
-        Route::get('card/toggle/{product}', [\App\Http\Controllers\CardController::class, 'productCardToggle'])->name('product-card-toggle');
+        Route::get('product/fav/toggle/{product?}', [\App\Http\Controllers\CustomerController::class, 'ProductFavToggle'])->name('product-fav-toggle');
+        Route::get('product/compare/toggle/{product?}', [\App\Http\Controllers\CardController::class, 'productCompareToggle'])->name('product-compare-toggle');
+        Route::get('card/toggle/{product?}', [\App\Http\Controllers\CardController::class, 'productCardToggle'])->name('product-card-toggle');
 
         Route::post('/comment/submit', [ClientController::class, 'submitComment'])->name('comment.submit');
 
