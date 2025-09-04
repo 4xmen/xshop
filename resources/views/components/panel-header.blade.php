@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" @if(auth()->user()->darkmode)  data-bs-theme="dark" @else  data-bs-theme="light" @endif>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" @if(auth()->user()->darkmode??true)  data-bs-theme="dark" @else  data-bs-theme="light" @endif>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
