@@ -1,5 +1,6 @@
 .tns-outer {
     direction: ltr;
+
     .tns-nav, button {
         display: none;
     }
@@ -15,10 +16,7 @@
 }
 
 
-
-
-
-.tns-inner{
+.tns-inner {
     overflow: hidden;
 }
 
@@ -30,6 +28,20 @@ a, a:visited {
         color: var(--xshop-secondary);
     }
 }
+
+blockquote p,q p {
+    padding: 1rem;
+        background: rgba(118, 118, 118, 0.34);
+        border-radius: var(--xshop-border-radius);
+
+    &:before{
+        content: '“ ';
+    }
+    &:after{
+        content: '” ';
+    }
+}
+
 
 .btn {
     border-radius: var(--xshop-border-radius);
@@ -102,16 +114,17 @@ ul.pagination {
     justify-content: center;
     margin: 2rem 0;
 
-    .page-item{
-        .page-link{
+    .page-item {
+        .page-link {
             color: var(--xshop-primary);
 
-            &:hover{
+            &:hover {
                 background: var(--xshop-secondary);
                 color: var(--xshop-diff2);
             }
         }
     }
+
     .page-item.active {
         .page-link {
             background: var(--xshop-primary);
@@ -122,14 +135,15 @@ ul.pagination {
     }
 }
 
-.form-check-input:checked{
+.form-check-input:checked {
     background-color: var(--xshop-primary);
     border-right-color: var(--xshop-secondary);
 }
 
-.modal.lightbox{
+.modal.lightbox {
     backdrop-filter: blur(7px);
-    .ratio{
+
+    .ratio {
         background: #33333355 !important;
         border-radius: var(--xshop-border-radius);
         overflow: hidden;
@@ -143,24 +157,26 @@ ul.pagination {
 }
 
 
-.accordion-button:not(.collapsed){
+.accordion-button:not(.collapsed) {
     background: transparent;
 }
 
-.btn-outline-light:hover{
+.btn-outline-light:hover {
     color: black !important;
 }
 
-.nested-list{
-    .ri-arrow-down-wide-line, .ri-arrow-up-wide-line{
+.nested-list {
+    .ri-arrow-down-wide-line, .ri-arrow-up-wide-line {
         cursor: pointer;
     }
-    .nested-parent{
-        ul{
+
+    .nested-parent {
+        ul {
             display: none;
         }
     }
-    .active{
+
+    .active {
         display: block !important;
     }
 }
