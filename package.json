@@ -11,7 +11,7 @@
         "@vitejs/plugin-vue": "^6.0.1",
         "axios": "^1.6.4",
         "bootstrap": "^5.2.3",
-        "laravel-vite-plugin": "^1.0",
+        "laravel-vite-plugin": "^2.0.1",
         "path": "^0.12.7",
         "sass": "^1.56.1",
         "vite": "^7.1.3",
