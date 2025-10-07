@@ -21,6 +21,9 @@
                     <li>
                         {{__("If you want to only attach to other staff members and do not want to appear in the website attachment list, uncheck `fillable`")}}
                     </li>
+                    <li>
+                        {{__("The premium files can download by customer by payment, So premium is not fillable")}}
+                    </li>
                     @if(isset($item) && $item->file == null)
                         <li>
                             {{__("There is noting file to show!")}}
@@ -138,9 +141,12 @@
                             <input name="file" type="file" class="form-control @error('file') is-invalid @enderror"
                                    id="file" placeholder="{{__('File')}}"
                                    accept=".png,.jpg,.svg,.mp4,.pdf,.docx,.zip,.rar,.mp3"/>
+                            <span id="max-upload-file" class="form-text">
+                              {{__("The max upload size is:")}} {{number_format(getMaxUploadSize() / (1024*1024))}}mb
+                            </span>
                         </div>
                     </div>
-                    <div class="col-md-6 mt-3">
+                    <div class="col-md-3 mt-3">
                         <div class="my-1">&nbsp;</div>
                         <div class="form-check form-switch">
                             <input class="form-check-input   @error('is_fillable') is-invalid @enderror"
@@ -149,6 +155,18 @@
                                    value="1">
                             <label for="is_fillable">
                                 {{__('Is fillable')}}
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-md-3 mt-3">
+                        <div class="my-1">&nbsp;</div>
+                        <div class="form-check form-switch">
+                            <input class="form-check-input   @error('is_premium') is-invalid @enderror"
+                                   name="is_fillable" type="checkbox" id="is_premium"
+                                   @if(old('is_premium',$item->is_premium??null) == 1) checked="" @endif
+                                   value="1">
+                            <label for="is_premium">
+                                {{__('Is premium')}}
                             </label>
                         </div>
                     </div>

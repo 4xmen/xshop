@@ -23,6 +23,7 @@ return new class extends Migration
             $table->boolean('is_fillable')->default(true);
             $table->unsignedBigInteger('size')->default(0);
             $table->nullableMorphs('attachable');
+            $table->boolean('is_premium')->default(false);
             $table->timestamps();
         });
     }

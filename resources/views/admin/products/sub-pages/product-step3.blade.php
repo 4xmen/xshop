@@ -45,14 +45,39 @@
 
 <div>
 
-    <div class="form-group">
-        <label for="canonical" class="my-2">
-            {{__('Canonical')}}
-        </label>
-        <input type="text" id="canonical" name="canonical"
-               value="{{old('canonical',$item->canonical??null)}}"
-               placeholder="{{__('canonical')}}"
-               class="form-control">
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="form-group">
+                <label for="canonical" class="my-2">
+                    {{__('Canonical')}}
+                </label>
+                <input type="text" id="canonical" name="canonical"
+                       value="{{old('canonical',$item->canonical??null)}}"
+                       placeholder="{{__('canonical')}}"
+                       class="form-control">
+            </div>
+        </div>
+        <div class="col-lg-3  col-6 py-4">
+            <div class="form-check form-switch py-lg-4">
+                <input class="form-check-input" name="virtual"  type="checkbox"
+                       @if(old('virtual',$item->virtual??null)) checked @endif
+                       role="switch" value="1" id="virtual">
+                <label class="form-check-label" for="virtual">
+                    {{__("Virtual product")}}
+                </label>
+            </div>
+        </div>
+        <div class="col-lg-3 col-6 py-4 mb-2">
+            <div class="form-check form-switch pt-lg-4">
+                <input class="form-check-input" name="downloadable" value="1"  type="checkbox"
+                       @if(old('virtual',$item->downloadable??null)) checked @endif
+                       role="switch" id="downloadable">
+                <label class="form-check-label" for="downloadable">
+                    {{__("Downloadable product")}}
+                </label>
+            </div>
+        </div>
+
     </div>
     <div class="form-group">
         <label for="table">
@@ -197,6 +222,8 @@
         xlang="{{config('app.locale')}}"
         upload-url="{{route('admin.attachment.attaching')}}"
         detach-url="{{route('admin.attachment.detach','')}}/"
+        toggle-url="{{route('admin.attachment.toggle-premium','')}}/"
+        :can-premium="true"
         model="{{get_class($item)}}"
         id="{{$item->id}}"
     ></fast-attaching>

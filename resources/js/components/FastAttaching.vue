@@ -51,8 +51,19 @@
                         </template>
                     </div>
 
-                    <div class="col-md-4 pt-1">
-                        {{ attach.file }}
+                    <div :class="canPremium?'col-md-3 pt-1':'col-md-4 pt-1'">
+                        {{ attach.file.split('attachments/').join('') }}
+                    </div>
+                    <!-- WIP translate -->
+                    <div class="col-md-1 pt-1 position-relative" v-if="canPremium" title="toggle permium"
+                    >
+                        <div class="form-check form-switch">
+                            <input class="form-check-input" type="checkbox" role="switch" :id="'p'+attach.id"
+                                   @change="changePremium(attach)" :checked="attach.is_premium">
+                            <label class="form-check-label" :for="'p'+attach.id">
+                                <i :class="'ri-shield-keyhole-line ' + ( attach.is_premium?'lime': '')"></i>
+                            </label>
+                        </div>
                     </div>
                     <div class="col-md-1">
                         <div class="btn btn-secondary btn-sm w-100" data-bs-toggle="tooltip"
@@ -95,6 +106,14 @@ export default {
             type: String,
             default: 'http://127.0.0.1:8000/dashboard/attachments/attaching',
         },
+        canPremium: {
+            default: false,
+            type: Boolean,
+        },
+        toggleUrl: {
+            type: String,
+            default: 'http://127.0.0.1:8000/dashboard/attachments/permium/toggle/',
+        },
         detachUrl: {
             type: String,
             default: 'http://127.0.0.1:8000/dashboard/attachments/attaching',
@@ -123,7 +142,7 @@ export default {
                 if (response.data.OK) {
                     $toast.success(response.data.message);
                     this.attachments.splice(index, 1);
-                    if (document.querySelector('#attach-number') != null){
+                    if (document.querySelector('#attach-number') != null) {
                         document.querySelector('#attach-number').innerText = this.attachments.length;
                     }
                     this.$forceUpdate();
@@ -133,6 +152,28 @@ export default {
             } catch (e) {
                 $toast.error(e.message);
             }
+        },
+        async changePremium(attach, i) {
+            try {
+                let resp = await axios(this.toggleUrl + attach.slug);
+                if (resp.data.OK) {
+
+                    try {
+                        this.attachments[i].is_premium = !attach.is_premium;
+                        this.$forceUpdate();
+                    } catch (e) {
+                        console.log(e.message);
+                    }
+
+                    $toast.success(resp.data.message);
+                } else {
+
+                    $toast.success("Error !");
+                }
+            } catch (e) {
+                $toast.error(e.message);
+            }
+
         },
         async upload() {
             console.log('upload start');
@@ -175,7 +216,7 @@ export default {
 
                     this.$toast.success(response.data.message);
                     this.attachments.push(response.data.data); // Adjust based on your response
-                    if (document.querySelector('#attach-number') != null){
+                    if (document.querySelector('#attach-number') != null) {
                         document.querySelector('#attach-number').innerText = this.attachments.length;
                     }
                     this.title = '';
@@ -226,5 +267,16 @@ export default {
     inset-inline-start: 0;
     top: 0;
     bottom: 0;
+}
+
+.ri-shield-keyhole-line {
+    font-size: 24px;
+    position: absolute;
+    top: -3px;
+    display: inline-block;
+}
+
+.lime {
+    color: lime;
 }
 </style>
