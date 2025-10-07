@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\UserSaveRequest;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
@@ -216,14 +217,31 @@ abstract class XController extends Controller
      * @param $folder string save directory name
      * @return string|null
      */
-    public function storeFile($key, $model, $folder)
+    public function storeFile(string $key, $model, string $folder)
     {
-        if (\request()->hasFile($key)) {
-            $name = time() . '-' . request()->file($key)->getClientOriginalName() ;
-            request()->file($key)->storeAs('public/' . $folder, $name);
-            return $name;
+        // Check if a file was uploaded for the given key
+        if (! request()->hasFile($key)) {
+            return null;
         }
-        return null;
+
+        $file = request()->file($key);
+
+        // Create a unique filename
+        $name = time() . '-' . $file->getClientOriginalName();
+
+        // Choose the disk (public storage) and target folder
+        $disk   = Storage::disk('public'); // change to another disk if needed
+        $target = $folder;               // e.g. 'attachments'
+
+        // Ensure the target folder exists; create it if it doesn't
+        if (! $disk->exists($target)) {
+            $disk->makeDirectory($target);
+        }
+
+        // Store the file and get the relative path (e.g., "attachments/1661234567‑myfile.pdf")
+        $path = $disk->putFileAs($target, $file, $name);
+
+        return $path; // or return $name if you only need the filename
     }
 
     /**

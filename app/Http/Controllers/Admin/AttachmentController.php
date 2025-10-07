@@ -49,11 +49,13 @@ class AttachmentController extends XController
     public function save($attachment, $request)
     {
 
+
         $attachment->title = $request->input('title');
         $attachment->slug = $this->getSlug($attachment,'slug','title');
         $attachment->body = $request->input('body');
         $attachment->subtitle = $request->input('subtitle');
         $attachment->is_fillable = $request->has('is_fillable');
+        $attachment->is_premium = $request->has('is_premium');
         if ($request->has('file')){
             $attachment->file = $this->storeFile('file',$attachment, 'attachments');
             $attachment->size = $request->file('file')->getSize();
@@ -127,6 +129,18 @@ class AttachmentController extends XController
         }
         return redirect()->back()
             ->with(['message' => __('As you wished detached successfully')]);
+    }
+    public function togglePremium(Attachment $item)
+    {
+        $item->is_premium = ! $item->is_premium;
+        $item->save();
+
+        logAdmin(__METHOD__,__CLASS__,$item->id);
+        if (request()->ajax()) {
+            return  ['OK' => true , 'message' =>  __('As you wished toggle successfully')];
+        }
+        return redirect()->back()
+            ->with(['message' => __('As you wished toggle successfully')]);
     }
 
 

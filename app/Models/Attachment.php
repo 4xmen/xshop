@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage;
 use Spatie\Translatable\HasTranslations;
 
 class Attachment extends Model
@@ -26,7 +27,12 @@ class Attachment extends Model
             return asset('/assets/upload/logo.svg');
         }
 
-        return \Storage::url('attachments/' . $this->file);
+//        // For backward compatibility with local files
+//        if (str_starts_with($this->file, '/storage/')) {
+//            return $this->path;
+//        }
+        // For S3 files - match Img model implementation
+        return Storage::disk(config('filesystems.default'))->url($this->file);
     }
 
     public function tempUrl() // WIP

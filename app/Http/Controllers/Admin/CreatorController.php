@@ -9,6 +9,7 @@ use App\Models\Access;
 use App\Models\Creator;
 use Illuminate\Http\Request;
 use App\Helper;
+use Illuminate\Support\Facades\Storage;
 use Spatie\Image\Enums\AlignPosition;
 use Spatie\Image\Enums\Fit;
 use Spatie\Image\Enums\Unit;
@@ -52,6 +53,9 @@ class CreatorController extends XController
      */
     public function save($creator, $request)
     {
+        $disk = Storage::disk('public'); // change to another disk if needed
+        $target = 'creator';
+        $format = 'webp';
 
 
         $creator->name = $request->input('name');
@@ -68,17 +72,36 @@ class CreatorController extends XController
             $creator->canonical = $request->input('canonical');
         }
         $creator->slug = $this->getSlug($creator);
-        if ($request->has('image')){
-            $creator->image = $this->storeFile('image',$creator, 'creator');
+
+        if ($request->has('image')) {
+            $creator->image = $this->storeFile('image', $creator, $target);
             $key = 'image';
-            $format = $request->file($key)->guessExtension();
-            if (strtolower($format) == 'png'){
-                $format = 'webp';
+//            $format = $request->file($key)->guessExtension();
+//            if (strtolower($format) == 'png') {
+//                $format = 'webp';
+//            }
+
+            // Load the image temporarily to inspect its dimensions
+            $tmp = Image::load($request->file($key)->getPathname());
+
+            // Resize only if the width is greater than 200px
+            if ($tmp->getWidth() > config('app.media.optimized_max_width')) {
+                // Determine the target width (max of config('app.media.optimized_max_width') or the current width)
+                $scale =  config('app.media.optimized_max_width')  / $tmp->getWidth();
+                $newWidth = config('app.media.optimized_max_width');
+                $newHeight = $tmp->getHeight() * $scale  ;
+                $i = Image::load($request->file($key)->getPathname())
+                    ->optimize()
+                    // Resize while preserving aspect ratio (Fit::Contain prevents deformation)
+                    ->resize($newWidth, $newHeight)
+                    ->format($format);
+            } else {
+                // If width ≤ 200px, just process without resizing
+                $i = Image::load($request->file($key)->getPathname())
+                    ->optimize()
+                    ->format($format);
             }
-            $i = Image::load($request->file($key)->getPathname())
-                ->optimize()
-//                ->nonQueued()
-                ->format($format);
+
             if (getSetting('watermark2')) {
                 $i->watermark(public_path('upload/images/logo.png'),
                     AlignPosition::BottomLeft, 5, 5, Unit::Percent,
@@ -86,7 +109,19 @@ class CreatorController extends XController
                     config('app.media.watermark_size'), Unit::Percent, Fit::Contain,
                     config('app.media.watermark_opacity'));
             }
-            $i->save(storage_path() . '/app/public/creator/optimized-'. $creator->$key);
+            $temp = tempnam(sys_get_temp_dir(), 'TMP_');
+            $i->save($temp);
+
+
+            // Ensure the target folder exists; create it if it doesn't
+            if (!$disk->exists($target)) {
+                $disk->makeDirectory($target);
+            }
+
+            $name = 'optimized-' . trim($creator->$key,'/').'.webp';
+            // Store the file
+            $disk->putFileAs($target, $temp, $name);
+
         }
 
 

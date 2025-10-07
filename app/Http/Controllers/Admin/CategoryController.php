@@ -16,6 +16,7 @@ use Spatie\Image\Enums\Fit;
 use Spatie\Image\Enums\Unit;
 use Spatie\Image\Image;
 use function App\Helpers\hasCreateRoute;
+use Illuminate\Support\Facades\Storage;
 
 class CategoryController extends XController
 {
@@ -56,32 +57,54 @@ class CategoryController extends XController
     public function save($category, $request)
     {
 
+        $disk = Storage::disk('public'); // change to another disk if needed
+        $target = 'categories';
+        $format = 'webp';
+
         $category->name = $request->input('name');
         $category->subtitle = $request->input('subtitle');
         $category->icon = $request->input('icon');
         $category->description = $request->input('description');
         $category->hide = $request->has('hide');
 
-        if ($request->input('parent_id') == ''){
+        if ($request->input('parent_id') == '') {
             $category->parent_id = null;
-        }else{
-            $category->parent_id = $request->input('parent_id',null);
+        } else {
+            $category->parent_id = $request->input('parent_id', null);
         }
-        if ($request->has('canonical') && trim($request->input('canonical')) != ''){
+        if ($request->has('canonical') && trim($request->input('canonical')) != '') {
             $category->canonical = $request->input('canonical');
         }
         $category->slug = $this->getSlug($category);
         if ($request->has('image')) {
-            $category->image = $this->storeFile('image', $category, 'categories');
+            $category->image = $this->storeFile('image', $category, $target);
             $key = 'image';
-            $format = $request->file($key)->guessExtension();
-            if (strtolower($format) == 'png'){
-                $format = 'webp';
+//            $format = $request->file($key)->guessExtension();
+//            if (strtolower($format) == 'png') {
+//                $format = 'webp';
+//            }
+
+            // Load the image temporarily to inspect its dimensions
+            $tmp = Image::load($request->file($key)->getPathname());
+
+            // Resize only if the width is greater than 200px
+            if ($tmp->getWidth() > config('app.media.optimized_max_width')) {
+                // Determine the target width (max of config('app.media.optimized_max_width') or the current width)
+                $scale =  config('app.media.optimized_max_width')  / $tmp->getWidth();
+                $newWidth = config('app.media.optimized_max_width');
+                $newHeight = $tmp->getHeight() * $scale  ;
+                $i = Image::load($request->file($key)->getPathname())
+                    ->optimize()
+                    // Resize while preserving aspect ratio (Fit::Contain prevents deformation)
+                    ->resize($newWidth, $newHeight)
+                    ->format($format);
+            } else {
+                // If width ≤ 200px, just process without resizing
+                $i = Image::load($request->file($key)->getPathname())
+                    ->optimize()
+                    ->format($format);
             }
-            $i = Image::load($request->file($key)->getPathname())
-                ->optimize()
-//                ->nonQueued()
-                ->format($format);
+
             if (getSetting('watermark2')) {
                 $i->watermark(public_path('upload/images/logo.png'),
                     AlignPosition::BottomLeft, 5, 5, Unit::Percent,
@@ -89,20 +112,48 @@ class CategoryController extends XController
                     config('app.media.watermark_size'), Unit::Percent, Fit::Contain,
                     config('app.media.watermark_opacity'));
             }
-            $i->save(storage_path() . '/app/public/categories/optimized-'. $category->$key);
+            $temp = tempnam(sys_get_temp_dir(), 'TMP_');
+            $i->save($temp);
+
+
+            // Ensure the target folder exists; create it if it doesn't
+            if (!$disk->exists($target)) {
+                $disk->makeDirectory($target);
+            }
+
+            $name = 'optimized-' . trim($category->$key,'/').'.webp';
+            // Store the file
+            $disk->putFileAs($target, $temp, $name);
 
         }
         if ($request->has('bg')) {
-            $category->bg = $this->storeFile('bg', $category, 'categories');
+            $category->bg = $this->storeFile('bg', $category, $target);
             $key = 'bg';
-            $format = $request->file($key)->guessExtension();
-            if (strtolower($format) == 'png'){
-                $format = 'webp';
+//            $format = $request->file($key)->guessExtension();
+//            if (strtolower($format) == 'png') {
+//                $format = 'webp';
+//            }
+            // Load the image temporarily to inspect its dimensions
+            $tmp = Image::load($request->file($key)->getPathname());
+
+            // Resize only if the width is greater than 200px
+            if ($tmp->getWidth() > config('app.media.optimized_max_width')) {
+                // Determine the target width (max of config('app.media.optimized_max_width') or the current width)
+                $scale =  config('app.media.optimized_max_width')  / $tmp->getWidth();
+                $newWidth = config('app.media.optimized_max_width');
+                $newHeight = $tmp->getHeight() * $scale  ;
+                $i = Image::load($request->file($key)->getPathname())
+                    ->optimize()
+                    // Resize while preserving aspect ratio (Fit::Contain prevents deformation)
+                    ->resize($newWidth, $newHeight)
+                    ->format($format);
+            } else {
+                // If width ≤ 200px, just process without resizing
+                $i = Image::load($request->file($key)->getPathname())
+                    ->optimize()
+                    ->format($format);
             }
-            $i = Image::load($request->file($key)->getPathname())
-                ->optimize()
-//                ->nonQueued()
-                ->format($format);
+
             if (getSetting('watermark2')) {
                 $i->watermark(public_path('upload/images/logo.png'),
                     AlignPosition::BottomLeft, 5, 5, Unit::Percent,
@@ -110,11 +161,22 @@ class CategoryController extends XController
                     config('app.media.watermark_size'), Unit::Percent, Fit::Contain,
                     config('app.media.watermark_opacity'));
             }
-            $i->save(storage_path() . '/app/public/categories/optimized-'. $category->$key);
+            $temp = tempnam(sys_get_temp_dir(), 'TMP_');
+            $i->save($temp);
+
+
+            // Ensure the target folder exists; create it if it doesn't
+            if (!$disk->exists($target)) {
+                $disk->makeDirectory($target);
+            }
+
+            $name = 'optimized-' . trim($category->$key,'/').'.webp';
+            // Store the file
+            $disk->putFileAs($target, $temp, $name);
         }
 
-        if ($request->has('svg')){
-            $category->svg = $this->storeFile('svg',$category, 'categories');
+        if ($request->has('svg')) {
+            $category->svg = $this->storeFile('svg', $category, $target);
         }
         $category->save();
         return $category;
@@ -138,7 +200,7 @@ class CategoryController extends XController
     public function edit(Category $item)
     {
         //
-        $cats = Category::where('id','<>',$item->id)->get();
+        $cats = Category::where('id', '<>', $item->id)->get();
         return view($this->formView, compact('item', 'cats'));
     }
 
@@ -170,11 +232,11 @@ class CategoryController extends XController
 
     public function destroy(Category $item)
     {
-        if (Setting::where('type','CATEGORY')->where('raw',$item->id)->count() > 0){
+        if (Setting::where('type', 'CATEGORY')->where('raw', $item->id)->count() > 0) {
             $msg = __("You can't delete this item while using it in setting.");
             return redirect()->back()->withErrors($msg);
         }
-        if (Item::where('menuable_type',Category::class)->where('menuable_type',$item->id)->count() > 0){
+        if (Item::where('menuable_type', Category::class)->where('menuable_type', $item->id)->count() > 0) {
             $msg = __("You can't delete this item while using it in menu.");
             return redirect()->back()->withErrors($msg);
         }

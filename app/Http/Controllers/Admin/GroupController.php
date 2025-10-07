@@ -11,6 +11,7 @@ use App\Models\Item;
 use App\Models\Setting;
 use Illuminate\Http\Request;
 use App\Helper;
+use Illuminate\Support\Facades\Storage;
 use Spatie\Image\Enums\AlignPosition;
 use Spatie\Image\Enums\Fit;
 use Spatie\Image\Enums\Unit;
@@ -55,6 +56,10 @@ class GroupController extends XController
     public function save($group, $request)
     {
 
+        $disk = Storage::disk('public'); // change to another disk if needed
+        $target = 'groups';
+        $format = 'webp';
+
         $group->name = $request->input('name');
         $group->subtitle = $request->input('subtitle');
         $group->description = $request->input('description');
@@ -70,17 +75,35 @@ class GroupController extends XController
             $group->canonical = $request->input('canonical');
         }
         $group->slug = $this->getSlug($group);
-        if ($request->has('image')){
-            $group->image = $this->storeFile('image',$group, 'groups');
+        if ($request->has('image')) {
+            $group->image = $this->storeFile('image', $group, $target);
             $key = 'image';
-            $format = $request->file($key)->guessExtension();
-            if (strtolower($format) == 'png'){
-                $format = 'webp';
+//            $format = $request->file($key)->guessExtension();
+//            if (strtolower($format) == 'png') {
+//                $format = 'webp';
+//            }
+
+            // Load the image temporarily to inspect its dimensions
+            $tmp = Image::load($request->file($key)->getPathname());
+
+            // Resize only if the width is greater than 200px
+            if ($tmp->getWidth() > config('app.media.optimized_max_width')) {
+                // Determine the target width (max of config('app.media.optimized_max_width') or the current width)
+                $scale =  config('app.media.optimized_max_width')  / $tmp->getWidth();
+                $newWidth = config('app.media.optimized_max_width');
+                $newHeight = $tmp->getHeight() * $scale  ;
+                $i = Image::load($request->file($key)->getPathname())
+                    ->optimize()
+                    // Resize while preserving aspect ratio (Fit::Contain prevents deformation)
+                    ->resize($newWidth, $newHeight)
+                    ->format($format);
+            } else {
+                // If width ≤ 200px, just process without resizing
+                $i = Image::load($request->file($key)->getPathname())
+                    ->optimize()
+                    ->format($format);
             }
-            $i = Image::load($request->file($key)->getPathname())
-                ->optimize()
-//                ->nonQueued()
-                ->format($format);
+
             if (getSetting('watermark2')) {
                 $i->watermark(public_path('upload/images/logo.png'),
                     AlignPosition::BottomLeft, 5, 5, Unit::Percent,
@@ -88,19 +111,48 @@ class GroupController extends XController
                     config('app.media.watermark_size'), Unit::Percent, Fit::Contain,
                     config('app.media.watermark_opacity'));
             }
-            $i->save(storage_path() . '/app/public/groups/optimized-'. $group->$key);
+            $temp = tempnam(sys_get_temp_dir(), 'TMP_');
+            $i->save($temp);
+
+
+            // Ensure the target folder exists; create it if it doesn't
+            if (!$disk->exists($target)) {
+                $disk->makeDirectory($target);
+            }
+
+            $name = 'optimized-' . trim($group->$key,'/').'.webp';
+            // Store the file
+            $disk->putFileAs($target, $temp, $name);
+
         }
-        if ($request->has('bg')){
-            $group->bg = $this->storeFile('bg',$group, 'groups');
+        if ($request->has('bg')) {
+            $group->bg = $this->storeFile('bg', $group, $target);
             $key = 'bg';
-            $format = $request->file($key)->guessExtension();
-            if (strtolower($format) == 'png'){
-                $format = 'webp';
+//            $format = $request->file($key)->guessExtension();
+//            if (strtolower($format) == 'png') {
+//                $format = 'webp';
+//            }
+            // Load the image temporarily to inspect its dimensions
+            $tmp = Image::load($request->file($key)->getPathname());
+
+            // Resize only if the width is greater than 200px
+            if ($tmp->getWidth() > config('app.media.optimized_max_width')) {
+                // Determine the target width (max of config('app.media.optimized_max_width') or the current width)
+                $scale =  config('app.media.optimized_max_width')  / $tmp->getWidth();
+                $newWidth = config('app.media.optimized_max_width');
+                $newHeight = $tmp->getHeight() * $scale  ;
+                $i = Image::load($request->file($key)->getPathname())
+                    ->optimize()
+                    // Resize while preserving aspect ratio (Fit::Contain prevents deformation)
+                    ->resize($newWidth, $newHeight)
+                    ->format($format);
+            } else {
+                // If width ≤ 200px, just process without resizing
+                $i = Image::load($request->file($key)->getPathname())
+                    ->optimize()
+                    ->format($format);
             }
-            $i = Image::load($request->file($key)->getPathname())
-                ->optimize()
-//                ->nonQueued()
-                ->format($format);
+
             if (getSetting('watermark2')) {
                 $i->watermark(public_path('upload/images/logo.png'),
                     AlignPosition::BottomLeft, 5, 5, Unit::Percent,
@@ -108,7 +160,18 @@ class GroupController extends XController
                     config('app.media.watermark_size'), Unit::Percent, Fit::Contain,
                     config('app.media.watermark_opacity'));
             }
-            $i->save(storage_path() . '/app/public/groups/optimized-'. $group->$key);
+            $temp = tempnam(sys_get_temp_dir(), 'TMP_');
+            $i->save($temp);
+
+
+            // Ensure the target folder exists; create it if it doesn't
+            if (!$disk->exists($target)) {
+                $disk->makeDirectory($target);
+            }
+
+            $name = 'optimized-' . trim($group->$key,'/').'.webp';
+            // Store the file
+            $disk->putFileAs($target, $temp, $name);
         }
         $group->save();
         return $group;
