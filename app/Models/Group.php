@@ -47,7 +47,7 @@ class Group extends Model
             return asset('/assets/upload/logo.svg');
         }
 
-        return \Storage::url('groups/optimized-' . $this->image.'.webp');
+        return \Storage::url('optimized/' . $this->image.'.webp');
     }
 
     public function imgOriginalUrl()
@@ -65,7 +65,7 @@ class Group extends Model
             return asset('/assets/upload/logo.svg');
         }
 
-        return \Storage::url('groups/optimized-' . $this->bg.'.webp');
+        return \Storage::url('optimized/'  . $this->bg.'.webp');
     }
 
     public function bgOriginalUrl()

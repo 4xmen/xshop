@@ -20,7 +20,7 @@ class Category extends Model
             return asset('/assets/upload/logo.svg');
         }
 
-        return \Storage::url('categories/optimized-' . $this->image. '.webp');
+        return \Storage::url('optimized/' . $this->image. '.webp');
     }
     public function svgUrl()
     {
@@ -46,7 +46,7 @@ class Category extends Model
             return asset('/assets/upload/logo.svg');
         }
 
-        return \Storage::url('categories/optimized-' . $this->bg. '.webp');
+        return \Storage::url('optimized/' . $this->bg. '.webp');
     }
 
     public function bgOriginalUrl()

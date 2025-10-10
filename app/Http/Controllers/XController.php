@@ -7,6 +7,10 @@ use App\Http\Requests\UserSaveRequest;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
+use Spatie\Image\Enums\AlignPosition;
+use Spatie\Image\Enums\Fit;
+use Spatie\Image\Enums\Unit;
+use Spatie\Image\Image;
 
 abstract class XController extends Controller
 {
@@ -290,4 +294,50 @@ abstract class XController extends Controller
         return $slug;
     }
 
+
+    public function saveImage($model,$key,$dir,$format = 'webp'){
+
+        $dir = 'optimized/'.$dir;
+
+        $disk = Storage::disk('public'); // change to another disk if needed
+
+        // Load the image temporarily to inspect its dimensions
+        $tmp = Image::load(\request()->file($key)->getPathname());
+
+        if ($tmp->getWidth() > config('app.media.optimized_max_width')) {
+            // Determine the target width (max of config('app.media.optimized_max_width') or the current width)
+            $scale =  config('app.media.optimized_max_width')  / $tmp->getWidth();
+            $newWidth = config('app.media.optimized_max_width');
+            $newHeight = $tmp->getHeight() * $scale  ;
+            $i = Image::load(\request()->file($key)->getPathname())
+                ->optimize()
+                // Resize while preserving aspect ratio (Fit::Contain prevents deformation)
+                ->resize($newWidth, $newHeight)
+                ->format($format);
+        } else {
+            // If width ≤ 200px, just process without resizing
+            $i = Image::load(\request()->file($key)->getPathname())
+                ->optimize()
+                ->format($format);
+        }
+
+        if (getSetting('watermark2')) {
+            $i->watermark(public_path('upload/images/logo.png'),
+                AlignPosition::BottomLeft, 5, 5, Unit::Percent,
+                config('app.media.watermark_size'), Unit::Percent,
+                config('app.media.watermark_size'), Unit::Percent, Fit::Contain,
+                config('app.media.watermark_opacity'));
+        }
+        $temp = tempnam(sys_get_temp_dir(), 'TMP_');
+        $i->save($temp);
+
+        // Ensure the target folder exists; create it if it doesn't
+        if (!$disk->exists($dir)) {
+            $disk->makeDirectory($dir);
+        }
+
+        $name =  basename($model->$key) . '.' .$format;
+        // Store the file
+        $disk->putFileAs($dir, $temp, $name);
+    }
 }

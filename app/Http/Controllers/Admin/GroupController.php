@@ -24,10 +24,10 @@ class GroupController extends XController
     // protected  $_MODEL_ = Group::class;
     // protected  $SAVE_REQUEST = GroupSaveRequest::class;
 
-    protected $cols = ['name','subtitle','parent_id'];
-    protected $extra_cols = ['id','slug','image'];
+    protected $cols = ['name', 'subtitle', 'parent_id'];
+    protected $extra_cols = ['id', 'slug', 'image'];
 
-    protected $searchable = ['name','subtitle','description'];
+    protected $searchable = ['name', 'subtitle', 'description'];
 
     protected $listView = 'admin.groups.group-list';
     protected $formView = 'admin.groups.group-form';
@@ -56,73 +56,32 @@ class GroupController extends XController
     public function save($group, $request)
     {
 
-        $disk = Storage::disk('public'); // change to another disk if needed
         $target = 'groups';
-        $format = 'webp';
 
         $group->name = $request->input('name');
         $group->subtitle = $request->input('subtitle');
         $group->description = $request->input('description');
         $group->hide = $request->has('hide');
 
-        if ($request->input('parent_id') == ''){
+        if ($request->input('parent_id') == '') {
             $group->parent_id = null;
-        }else{
-            $group->parent_id = $request->input('parent_id',null);
+        } else {
+            $group->parent_id = $request->input('parent_id', null);
         }
 
-        if ($request->has('canonical') && trim($request->input('canonical')) != ''){
+        if ($request->has('canonical') && trim($request->input('canonical')) != '') {
             $group->canonical = $request->input('canonical');
         }
         $group->slug = $this->getSlug($group);
         if ($request->has('image')) {
             $group->image = $this->storeFile('image', $group, $target);
             $key = 'image';
+            $this->saveImage($group, $key, $target);
 //            $format = $request->file($key)->guessExtension();
 //            if (strtolower($format) == 'png') {
 //                $format = 'webp';
 //            }
 
-            // Load the image temporarily to inspect its dimensions
-            $tmp = Image::load($request->file($key)->getPathname());
-
-            // Resize only if the width is greater than 200px
-            if ($tmp->getWidth() > config('app.media.optimized_max_width')) {
-                // Determine the target width (max of config('app.media.optimized_max_width') or the current width)
-                $scale =  config('app.media.optimized_max_width')  / $tmp->getWidth();
-                $newWidth = config('app.media.optimized_max_width');
-                $newHeight = $tmp->getHeight() * $scale  ;
-                $i = Image::load($request->file($key)->getPathname())
-                    ->optimize()
-                    // Resize while preserving aspect ratio (Fit::Contain prevents deformation)
-                    ->resize($newWidth, $newHeight)
-                    ->format($format);
-            } else {
-                // If width ≤ 200px, just process without resizing
-                $i = Image::load($request->file($key)->getPathname())
-                    ->optimize()
-                    ->format($format);
-            }
-
-            if (getSetting('watermark2')) {
-                $i->watermark(public_path('upload/images/logo.png'),
-                    AlignPosition::BottomLeft, 5, 5, Unit::Percent,
-                    config('app.media.watermark_size'), Unit::Percent,
-                    config('app.media.watermark_size'), Unit::Percent, Fit::Contain,
-                    config('app.media.watermark_opacity'));
-            }
-            $temp = tempnam(sys_get_temp_dir(), 'TMP_');
-            $i->save($temp);
-
-
-            // Ensure the target folder exists; create it if it doesn't
-            if (!$disk->exists($target)) {
-                $disk->makeDirectory($target);
-            }
-
-            $name = 'optimized-' . trim($group->$key,'/').'.webp';
-            // Store the file
-            $disk->putFileAs($target, $temp, $name);
 
         }
         if ($request->has('bg')) {
@@ -132,46 +91,7 @@ class GroupController extends XController
 //            if (strtolower($format) == 'png') {
 //                $format = 'webp';
 //            }
-            // Load the image temporarily to inspect its dimensions
-            $tmp = Image::load($request->file($key)->getPathname());
-
-            // Resize only if the width is greater than 200px
-            if ($tmp->getWidth() > config('app.media.optimized_max_width')) {
-                // Determine the target width (max of config('app.media.optimized_max_width') or the current width)
-                $scale =  config('app.media.optimized_max_width')  / $tmp->getWidth();
-                $newWidth = config('app.media.optimized_max_width');
-                $newHeight = $tmp->getHeight() * $scale  ;
-                $i = Image::load($request->file($key)->getPathname())
-                    ->optimize()
-                    // Resize while preserving aspect ratio (Fit::Contain prevents deformation)
-                    ->resize($newWidth, $newHeight)
-                    ->format($format);
-            } else {
-                // If width ≤ 200px, just process without resizing
-                $i = Image::load($request->file($key)->getPathname())
-                    ->optimize()
-                    ->format($format);
-            }
-
-            if (getSetting('watermark2')) {
-                $i->watermark(public_path('upload/images/logo.png'),
-                    AlignPosition::BottomLeft, 5, 5, Unit::Percent,
-                    config('app.media.watermark_size'), Unit::Percent,
-                    config('app.media.watermark_size'), Unit::Percent, Fit::Contain,
-                    config('app.media.watermark_opacity'));
-            }
-            $temp = tempnam(sys_get_temp_dir(), 'TMP_');
-            $i->save($temp);
-
-
-            // Ensure the target folder exists; create it if it doesn't
-            if (!$disk->exists($target)) {
-                $disk->makeDirectory($target);
-            }
-
-            $name = 'optimized-' . trim($group->$key,'/').'.webp';
-            // Store the file
-            $disk->putFileAs($target, $temp, $name);
+            $this->saveImage($group, $key, $target);
         }
         $group->save();
         return $group;
@@ -186,7 +106,7 @@ class GroupController extends XController
     {
         //
         $cats = Group::all();
-        return view($this->formView,compact('cats'));
+        return view($this->formView, compact('cats'));
     }
 
     /**
@@ -195,8 +115,8 @@ class GroupController extends XController
     public function edit(Group $item)
     {
         //
-        $cats = Group::where('id','<>',$item->id)->get();
-        return view($this->formView, compact('item','cats'));
+        $cats = Group::where('id', '<>', $item->id)->get();
+        return view($this->formView, compact('item', 'cats'));
     }
 
     public function bulk(Request $request)
@@ -228,11 +148,11 @@ class GroupController extends XController
 
     public function destroy(Group $item)
     {
-        if (Setting::where('type','GROUP')->where('raw',$item->id)->count() > 0){
+        if (Setting::where('type', 'GROUP')->where('raw', $item->id)->count() > 0) {
             $msg = __("You can't delete this item while using it in setting.");
             return redirect()->back()->withErrors($msg);
         }
-        if (Item::where('menuable_type',Group::class)->where('menuable_type',$item->id)->count() > 0){
+        if (Item::where('menuable_type', Group::class)->where('menuable_type', $item->id)->count() > 0) {
             $msg = __("You can't delete this item while using it in menu.");
             return redirect()->back()->withErrors($msg);
         }
@@ -253,22 +173,24 @@ class GroupController extends XController
     /*restore**/
 
     /**sort*/
-    public function sort(){
+    public function sort()
+    {
         $items = Group::orderBy('sort')
-            ->get(['id','name','parent_id']);
-        return view('admin.commons.sort',compact('items'));
+            ->get(['id', 'name', 'parent_id']);
+        return view('admin.commons.sort', compact('items'));
     }
 
-    public function sortSave(Request $request){
+    public function sortSave(Request $request)
+    {
 //        return $request->items;
-        foreach ($request->items as $key => $item){
+        foreach ($request->items as $key => $item) {
             $i = Group::whereId($item['id'])->first();
             $i->sort = $key;
-            $i->parent_id = $item['parentId']??null;
+            $i->parent_id = $item['parentId'] ?? null;
             $i->save();
         }
-        logAdmin(__METHOD__,__CLASS__,null);
-        return ['OK' => true,'message' => __("As you wished sort saved")];
+        logAdmin(__METHOD__, __CLASS__, null);
+        return ['OK' => true, 'message' => __("As you wished sort saved")];
     }
     /*sort**/
 }

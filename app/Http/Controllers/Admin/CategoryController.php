@@ -57,9 +57,7 @@ class CategoryController extends XController
     public function save($category, $request)
     {
 
-        $disk = Storage::disk('public'); // change to another disk if needed
         $target = 'categories';
-        $format = 'webp';
 
         $category->name = $request->input('name');
         $category->subtitle = $request->input('subtitle');
@@ -84,47 +82,7 @@ class CategoryController extends XController
 //                $format = 'webp';
 //            }
 
-            // Load the image temporarily to inspect its dimensions
-            $tmp = Image::load($request->file($key)->getPathname());
-
-            // Resize only if the width is greater than 200px
-            if ($tmp->getWidth() > config('app.media.optimized_max_width')) {
-                // Determine the target width (max of config('app.media.optimized_max_width') or the current width)
-                $scale =  config('app.media.optimized_max_width')  / $tmp->getWidth();
-                $newWidth = config('app.media.optimized_max_width');
-                $newHeight = $tmp->getHeight() * $scale  ;
-                $i = Image::load($request->file($key)->getPathname())
-                    ->optimize()
-                    // Resize while preserving aspect ratio (Fit::Contain prevents deformation)
-                    ->resize($newWidth, $newHeight)
-                    ->format($format);
-            } else {
-                // If width ≤ 200px, just process without resizing
-                $i = Image::load($request->file($key)->getPathname())
-                    ->optimize()
-                    ->format($format);
-            }
-
-            if (getSetting('watermark2')) {
-                $i->watermark(public_path('upload/images/logo.png'),
-                    AlignPosition::BottomLeft, 5, 5, Unit::Percent,
-                    config('app.media.watermark_size'), Unit::Percent,
-                    config('app.media.watermark_size'), Unit::Percent, Fit::Contain,
-                    config('app.media.watermark_opacity'));
-            }
-            $temp = tempnam(sys_get_temp_dir(), 'TMP_');
-            $i->save($temp);
-
-
-            // Ensure the target folder exists; create it if it doesn't
-            if (!$disk->exists($target)) {
-                $disk->makeDirectory($target);
-            }
-
-            $name = 'optimized-' . trim($category->$key,'/').'.webp';
-            // Store the file
-            $disk->putFileAs($target, $temp, $name);
-
+            $this->saveImage($category, $key, $target);
         }
         if ($request->has('bg')) {
             $category->bg = $this->storeFile('bg', $category, $target);
@@ -133,46 +91,7 @@ class CategoryController extends XController
 //            if (strtolower($format) == 'png') {
 //                $format = 'webp';
 //            }
-            // Load the image temporarily to inspect its dimensions
-            $tmp = Image::load($request->file($key)->getPathname());
-
-            // Resize only if the width is greater than 200px
-            if ($tmp->getWidth() > config('app.media.optimized_max_width')) {
-                // Determine the target width (max of config('app.media.optimized_max_width') or the current width)
-                $scale =  config('app.media.optimized_max_width')  / $tmp->getWidth();
-                $newWidth = config('app.media.optimized_max_width');
-                $newHeight = $tmp->getHeight() * $scale  ;
-                $i = Image::load($request->file($key)->getPathname())
-                    ->optimize()
-                    // Resize while preserving aspect ratio (Fit::Contain prevents deformation)
-                    ->resize($newWidth, $newHeight)
-                    ->format($format);
-            } else {
-                // If width ≤ 200px, just process without resizing
-                $i = Image::load($request->file($key)->getPathname())
-                    ->optimize()
-                    ->format($format);
-            }
-
-            if (getSetting('watermark2')) {
-                $i->watermark(public_path('upload/images/logo.png'),
-                    AlignPosition::BottomLeft, 5, 5, Unit::Percent,
-                    config('app.media.watermark_size'), Unit::Percent,
-                    config('app.media.watermark_size'), Unit::Percent, Fit::Contain,
-                    config('app.media.watermark_opacity'));
-            }
-            $temp = tempnam(sys_get_temp_dir(), 'TMP_');
-            $i->save($temp);
-
-
-            // Ensure the target folder exists; create it if it doesn't
-            if (!$disk->exists($target)) {
-                $disk->makeDirectory($target);
-            }
-
-            $name = 'optimized-' . trim($category->$key,'/').'.webp';
-            // Store the file
-            $disk->putFileAs($target, $temp, $name);
+            $this->saveImage($category, $key, $target);
         }
 
         if ($request->has('svg')) {
