@@ -127,7 +127,7 @@ abstract class XController extends Controller
         if ($request->ajax()) {
             return ['OK' => true, "message" => __('As you wished created successfully'),
                 "id" => $item->id,
-                "data" => modelWithCustomAttrs($item) ,
+                "data" => modelWithCustomAttrs($item),
                 'url' => getRoute('edit', $item->{$item->getRouteKeyName()})];
         } else {
             return redirect(getRoute('edit', $item->{$item->getRouteKeyName()}))
@@ -143,7 +143,7 @@ abstract class XController extends Controller
         $x = new $this->_MODEL_();
         $m = $this->_MODEL_::where($x->getRouteKeyName(), $item)->first();
         //
-        if (method_exists($m,'webUrl')){
+        if (method_exists($m, 'webUrl')) {
             return redirect($m->webUrl());
         }
     }
@@ -162,7 +162,7 @@ abstract class XController extends Controller
 
         if ($request->ajax()) {
             return ['OK' => true,
-                "data" => modelWithCustomAttrs($item) ,
+                "data" => modelWithCustomAttrs($item),
                 "message" => __('As you wished updated successfully'), "id" => $item->id];
         } else {
             return redirect(getRoute('edit', $item->{$item->getRouteKeyName()}))
@@ -224,7 +224,7 @@ abstract class XController extends Controller
     public function storeFile(string $key, $model, string $folder)
     {
         // Check if a file was uploaded for the given key
-        if (! request()->hasFile($key)) {
+        if (!request()->hasFile($key)) {
             return null;
         }
 
@@ -234,11 +234,11 @@ abstract class XController extends Controller
         $name = time() . '-' . $file->getClientOriginalName();
 
         // Choose the disk (public storage) and target folder
-        $disk   = Storage::disk('public'); // change to another disk if needed
+        $disk = Storage::disk('public'); // change to another disk if needed
         $target = $folder;               // e.g. 'attachments'
 
         // Ensure the target folder exists; create it if it doesn't
-        if (! $disk->exists($target)) {
+        if (!$disk->exists($target)) {
             $disk->makeDirectory($target);
         }
 
@@ -262,7 +262,7 @@ abstract class XController extends Controller
             $slug = sluger(\request()->input($key, $model->$name));
         }
 
-        return $this->createUniqueSlug($slug,$model->id);
+        return $this->createUniqueSlug($slug, $model->id);
     }
 
 
@@ -272,22 +272,22 @@ abstract class XController extends Controller
      * @param $id integer|null
      * @return mixed|string
      */
-    public function createUniqueSlug($slug,$id = null)
+    public function createUniqueSlug($slug, $id = null)
     {
         $originalSlug = $slug;
         $counter = 1;
 
-        $q  = $this->_MODEL_::where('slug', $slug);
-        if ($id != null){
-            $q = $q->where('id','<>',$id);
+        $q = $this->_MODEL_::where('slug', $slug);
+        if ($id != null) {
+            $q = $q->where('id', '<>', $id);
         }
 
         while ($q->count() > 0) {
             $slug = $originalSlug . '-' . $counter;
             $counter++;
-            $q  = $this->_MODEL_::where('slug', $slug);
-            if ($id != null){
-                $q = $q->where('id','<>',$id);
+            $q = $this->_MODEL_::where('slug', $slug);
+            if ($id != null) {
+                $q = $q->where('id', '<>', $id);
             }
         }
 
@@ -295,28 +295,50 @@ abstract class XController extends Controller
     }
 
 
-    public function saveImage($model,$key,$dir,$format = 'webp'){
+    /**
+     * @param $model Model model to optimizing image
+     * @param $key string key of the model and file input
+     * @param $dir string where optimized image store
+     * @param $format string optimize format
+     * @return void
+     */
+    public function saveImage($model, $key, $dir, $format = 'webp')
+    {
+        $file = \request()->file($key)->getPathname();
+        self::saveOptimizedImage($model, $key, $dir, $file ,  $format);
+    }
 
-        $dir = 'optimized/'.$dir;
+    /**
+     * @param $model Model model to optimizing image
+     * @param $key string key of the model
+     * @param $dir string where optimized image store
+     * @param $file string file path to optimize
+     * @param $format string optimize format
+     * @return void
+     */
+    public static function saveOptimizedImage($model, $key, $dir,$file , $format = 'webp')
+    {
+        $dir = 'optimized/' . $dir;
+
 
         $disk = Storage::disk('public'); // change to another disk if needed
 
         // Load the image temporarily to inspect its dimensions
-        $tmp = Image::load(\request()->file($key)->getPathname());
+        $tmp = Image::load($file);
 
         if ($tmp->getWidth() > config('app.media.optimized_max_width')) {
             // Determine the target width (max of config('app.media.optimized_max_width') or the current width)
-            $scale =  config('app.media.optimized_max_width')  / $tmp->getWidth();
+            $scale = config('app.media.optimized_max_width') / $tmp->getWidth();
             $newWidth = config('app.media.optimized_max_width');
-            $newHeight = $tmp->getHeight() * $scale  ;
-            $i = Image::load(\request()->file($key)->getPathname())
+            $newHeight = $tmp->getHeight() * $scale;
+            $i = Image::load($file)
                 ->optimize()
                 // Resize while preserving aspect ratio (Fit::Contain prevents deformation)
                 ->resize($newWidth, $newHeight)
                 ->format($format);
         } else {
             // If width ≤ 200px, just process without resizing
-            $i = Image::load(\request()->file($key)->getPathname())
+            $i = Image::load($file)
                 ->optimize()
                 ->format($format);
         }
@@ -336,8 +358,9 @@ abstract class XController extends Controller
             $disk->makeDirectory($dir);
         }
 
-        $name =  basename($model->$key) . '.' .$format;
+        $name = basename($model->$key) . '.' . $format;
         // Store the file
         $disk->putFileAs($dir, $temp, $name);
+
     }
 }

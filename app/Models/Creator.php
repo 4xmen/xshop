@@ -90,7 +90,7 @@ class Creator extends Model
             return asset('/assets/upload/logo.svg');
         }
 
-        return \Storage::url('optimized/'  . $this->image.'.webp');
+        return \Storage::url('optimized/creator/'  . $this->image.'.webp');
     }
 
     public function imgOriginalUrl()

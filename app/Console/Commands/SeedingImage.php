@@ -3,7 +3,9 @@
 namespace App\Console\Commands;
 
 use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\XController;
 use App\Models\Category;
+use App\Models\Creator;
 use App\Models\Group;
 use App\Models\Post;
 use App\Models\Product;
@@ -37,6 +39,7 @@ class SeedingImage extends Command
     {
         if (!\File::exists(__DIR__ . '/../../../database/seeders/images/' . $this->argument('directory'))) {
             $this->error('Directory not found');
+            exit();
         }
 
         $images = \File::files(__DIR__ . '/../../../database/seeders/images/' . $this->argument('directory'));
@@ -69,17 +72,12 @@ class SeedingImage extends Command
                     }
                     \File::copy($images[0]->getRealPath(),storage_path().'/app/public/categories/' . $images[0]->getFilename());
                     $item->image = $images[0]->getFilename();
-                    $i = Image::load($images[0]->getRealPath())
-                        ->optimize()
-                        ->format('webp');
-                    $i->save(storage_path() . '/app/public/categories/optimized-'. $item->image);
+                    XController::saveOptimizedImage($item,'image','categories',$images[0]->getRealPath());
                     shuffle($images);
                     \File::copy($images[0]->getRealPath(),storage_path().'/app/public/categories/' . $images[0]->getFilename());
                     $item->bg = $images[0]->getFilename();
-                    $i = Image::load($images[0]->getRealPath())
-                        ->optimize()
-                        ->format('webp');
-                    $i->save(storage_path() . '/app/public/categories/optimized-'. $item->bg);
+
+                    XController::saveOptimizedImage($item,'bg','categories',$images[0]->getRealPath());
                     shuffle($svgs);
                     \File::copy($svgs[0]->getRealPath(),storage_path().'/app/public/categories/' . $svgs[0]->getFilename());
                     $item->svg = $svgs[0]->getFilename();
@@ -95,17 +93,24 @@ class SeedingImage extends Command
                     }
                     \File::copy($images[0]->getRealPath(),storage_path().'/app/public/groups/' . $images[0]->getFilename());
                     $item->image = $images[0]->getFilename();
-                    $i = Image::load($images[0]->getRealPath())
-                        ->optimize()
-                        ->format('webp');
-                    $i->save(storage_path() . '/app/public/groups/optimized-'. $item->image);
+                    XController::saveOptimizedImage($item,'image','groups',$images[0]->getRealPath());
                     shuffle($images);
                     \File::copy($images[0]->getRealPath(),storage_path().'/app/public/groups/' . $images[0]->getFilename());
                     $item->bg = $images[0]->getFilename();
-                    $i = Image::load($images[0]->getRealPath())
-                        ->optimize()
-                        ->format('webp');
-                    $i->save(storage_path() . '/app/public/groups/optimized-'. $item->bg);
+                    XController::saveOptimizedImage($item,'bg','groups',$images[0]->getRealPath());
+                    $item->save();
+                }
+                break;
+            case 'Creator':
+                foreach (Creator::all() as $item) {
+                    $this->info('Creator: ' . $item->name . ' adding image...');
+                    shuffle($images);
+                    if (!\File::exists(storage_path().'/app/public/creator/')){
+                        mkdir(storage_path().'/app/public/creator/', 0755, true);
+                    }
+                    \File::copy($images[0]->getRealPath(),storage_path().'/app/public/creator/' . $images[0]->getFilename());
+                    $item->image = $images[0]->getFilename();
+                    XController::saveOptimizedImage($item,'image','creator',$images[0]->getRealPath());
                     $item->save();
                 }
                 break;
