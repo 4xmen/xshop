@@ -293,7 +293,7 @@
                     @endif
                     @if(  auth()->user()->hasAnyAccess( 'report' ))
                         <li>
-                            <a href="">
+                            <a href="{{route('admin.report.index')}}">
                                 <i class="ri-bar-chart-2-line"></i>
                                 {{__("Reports")}}
                             </a>

@@ -20,10 +20,11 @@ class InvoiceSeeder extends Seeder
         foreach (Invoice::all() as $it){
             $total = 0;
             for ($i = 0; $i <= rand(1,4); $i++) {
+                $pro = Product::inRandomOrder()->first();
                 $order = new Order();
-                $order->product_id = Product::inRandomOrder()->first()->id;
+                $order->product_id = $pro->id;
                 $order->count = 1;
-                $order->price_total = rand(100,2000).'000';
+                $order->price_total = $pro->price;
                 $total = $order->price_total ;
                 $order->invoice_id = $it->id;
                 $order->created_at = $it->created_at;
@@ -34,6 +35,9 @@ class InvoiceSeeder extends Seeder
             $it->count = $it->orders()->count();
 
             $it->save();
+            if ($it->status != "PENDING" && $it->status != "CANCELLED" && $it->status != "FAILED"){
+                $it->customer->increment('total_purchases');
+            }
         }
     }
 }

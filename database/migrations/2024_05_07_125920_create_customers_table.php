@@ -25,6 +25,7 @@ return new class extends Migration
             $table->boolean('colleague')->default(false);
             $table->text('description')->default(null)->nullable();
             $table->bigInteger('credit')->default(0);
+            $table->bigInteger('total_purchases')->default(0)->comment('customer total purchases count');
             $table->enum('sex',['MALE','FEMALE'])->nullable()->default(null);
             $table->integer('height')->nullable()->default(null);
             $table->decimal('weight')->nullable()->default(null);

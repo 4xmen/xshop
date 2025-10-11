@@ -18,6 +18,7 @@ class ProductFactory extends Factory
     {
         $rand = rand(1,2);
         $title = ($rand == 1?'mobile':'Tablet').' ' . $this->faker->unique()->firstNameFemale;
+        $price = rand(50,100);
         return [
             //
             'name' => $title,
@@ -27,7 +28,8 @@ class ProductFactory extends Factory
             'category_id' => $rand,
             'description' => $this->faker->realText(600),
             'stock_quantity' => rand(1,7),
-            'price' => rand(1,100),
+            'price' => $price,
+            'buy_price' => $price - rand(1,10),
             'sku' => $this->faker->unique()->ean8(),
         ];
     }

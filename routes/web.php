@@ -63,6 +63,7 @@ Route::prefix(config('app.panel.prefix'))->name('admin.')->group(
                         Route::post('sort-save/{area?}', [\App\Http\Controllers\Admin\AreaController::class, "sortSave"])->name('sort-save');
                     }
                 );
+
                 Route::prefix('attachments')->name('attachment.')->group(
                     function () {
                         Route::get('', [\App\Http\Controllers\Admin\AttachmentController::class, 'index'])->name('index');
@@ -336,6 +337,20 @@ Route::prefix(config('app.panel.prefix'))->name('admin.')->group(
 //                        Route::get('restore/{item}', [\App\Http\Controllers\Admin\QuestionController::class, 'restore'])->name('restore');
                         Route::post('bulk', [\App\Http\Controllers\Admin\QuestionController::class, "bulk"])->name('bulk');
                     });
+
+                Route::prefix('reports')->name('report.')->group(
+                    function () {
+                        Route::get('', [\App\Http\Controllers\Admin\ReportController::class, "index"])->name('index');
+                        Route::get('/basket', [\App\Http\Controllers\Admin\ReportController::class, "basketReport"])->name('basket');
+                        Route::get('/inventory', [\App\Http\Controllers\Admin\ReportController::class, "inventoryReport"])->name('inventory');
+                        Route::get('/returns', [\App\Http\Controllers\Admin\ReportController::class, "returnsReport"])->name('returns');
+                        Route::get('/financial', [\App\Http\Controllers\Admin\ReportController::class, "financialReport"])->name('financial');
+                        Route::get('/forecast', [\App\Http\Controllers\Admin\ReportController::class, "forecastReport"])->name('forecast');
+
+                        Route::get('/period/sales', [\App\Http\Controllers\Admin\ReportController::class, "salesReport"])->name('period-sales');
+                        Route::get('/top/products', [\App\Http\Controllers\Admin\ReportController::class, "topProductsReport"])->name('top-products');
+                        Route::get('/customer/behavior', [\App\Http\Controllers\Admin\ReportController::class, "customerBehaviorReport"])->name('customer-behavior');
+                    });
                 Route::prefix('setting')->name('setting.')->group(
                     function () {
                         Route::get('index', [\App\Http\Controllers\Admin\SettingController::class, "index"])->name('index');
@@ -532,4 +547,4 @@ Route::any('{lang}', [ClientController::class, 'langIndex'])
     ->middleware([\App\Http\Middleware\LangControl::class, \App\Http\Middleware\VisitorCounter::class]);
 
 
-Route::any('under-construction',[ClientController::class,'underConstruction'])->name('client.under-construction');
+Route::any('under-construction', [ClientController::class, 'underConstruction'])->name('client.under-construction');
