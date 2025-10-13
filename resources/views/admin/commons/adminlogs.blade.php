@@ -68,6 +68,9 @@
                                     @case($col == 'action')
                                         {{ getAction($item->$col) }}
                                         @break
+                                    @case($col == 'created_at')
+                                        {{ $item->$col->ldate('Y/m/d H:i:s') }}
+                                        @break
                                     @default
                                         {{$item->$col}}
                                 @endswitch
