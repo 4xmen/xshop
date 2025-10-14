@@ -18,7 +18,7 @@ class AdminLogController extends XController
     // protected  $_MODEL_ = AdminLog::class;
     // protected  $SAVE_REQUEST = AdminLogSaveRequest::class;
 
-    protected $cols = ['action','user_id'];
+    protected $cols = ['action','user_id','created_at'];
     protected $extra_cols = ['id','loggable_type','loggable_id'];
 
     protected $searchable = ['action'];

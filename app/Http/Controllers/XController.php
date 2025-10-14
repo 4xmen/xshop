@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\UserSaveRequest;
 use App\Models\User;
@@ -95,6 +96,13 @@ abstract class XController extends Controller
                     }
                 });
             }
+        }
+
+        if (request()->filled('start_date')) {
+            $query->whereDate('created_at', '>=', date('Y-m-d H:i:s',\request()->input('start_date')));
+        }
+        if (request()->filled('end_date')) {
+            $query->whereDate('created_at', '<=', date('Y-m-d H:i:s',\request()->input('end_date')));
         }
         return $query;
     }
