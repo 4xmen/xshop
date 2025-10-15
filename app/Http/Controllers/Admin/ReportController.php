@@ -151,6 +151,7 @@ class ReportController extends Controller
             DB::raw('CASE
             WHEN total_purchases > 5 THEN "loyal"
             WHEN total_purchases = 1 THEN "new"
+            WHEN total_purchases = 0 THEN "new"
             ELSE "regular"
         END as segment'),
             // Use the already‑calculated total_purchases as a proxy for return rate

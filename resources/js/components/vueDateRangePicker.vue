@@ -484,7 +484,7 @@ export default {
         geDate() {
             const baseDate = this.current * 1000;
             let d = new Date(baseDate);
-            return [d.getFullYear(), d.getMonth(), d.getDate()];
+            return [d.getFullYear(), (d.getMonth() + 1), d.getDate()];
         },
         // persian date
         peDate() {
@@ -496,7 +496,7 @@ export default {
         vgeDate() {
             const baseDate = this.val * 1000;
             let d = new Date(baseDate);
-            return [d.getFullYear(), d.getMonth(), d.getDate()];
+            return [d.getFullYear(), (d.getMonth() + 1), d.getDate()];
         },
         // persian date by value
         vpeDate() {
@@ -664,8 +664,8 @@ export default {
             return {
                 day: this.pDate.make2number(dt.getDate()), // day
                 pDay: this.pDate.convertDate2Persian(dt)[2], // persian date
-                date: dt.getFullYear() + '-' + dt.getMonth() + '-' + dt.getDate(), // gregorian date
-                datetime: dt.getFullYear() + '-' + dt.getMonth() + '-' + dt.getDate() + ' ' + this.pDate.make2number(dt.getHours()) + ':' + this.pDate.make2number(dt.getMinutes()), // gregorian datetime
+                date: dt.getFullYear() + '-' + (dt.getMonth() + 1) + '-' + dt.getDate(), // gregorian date
+                datetime: dt.getFullYear() + '-' + (dt.getMonth() + 1) + '-' + dt.getDate() + ' ' + this.pDate.make2number(dt.getHours()) + ':' + this.pDate.make2number(dt.getMinutes()), // gregorian datetime
                 pdatetime: this.pDate.convertDate2Persian(dt).join('/') + ' ' + this.pDate.make2number(dt.getHours()) + ':' + this.pDate.make2number(dt.getMinutes()), // persian date
                 pdate: this.pDate.convertDate2Persian(dt).join('/'),  // persian date
                 hpdatetime: this.pDate.parseHindi(this.pDate.convertDate2Persian(dt).join('/') + ' ' + this.pDate.make2number(dt.getHours()) + ':' + this.pDate.make2number(dt.getMinutes())), // persian date hindi number
