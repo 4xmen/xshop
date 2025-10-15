@@ -99,4 +99,14 @@ class Customer extends Authenticatable
     {
         return $this->credit >= $amount;
     }
+
+    public function loyalty(){
+        if ($this->total_purchases < 2){
+            return 'new';
+        }
+        if ($this->total_purchases > 5){
+            return 'loyal';
+        }
+        return 'regular';
+    }
 }

@@ -91,7 +91,7 @@
                         </td>
                         <td>
                             <span class="customer-{{$item->segment}}">
-                                {{$item->segment}}
+                                {{__($item->segment)}}
                             </span>
                         </td>
                         <td>

@@ -91,6 +91,9 @@
                 <h1>
                     @if(isset($item))
                         {{__("Edit customer")}} [{{$item->name}}]
+                        <span class="customer-{{$item->loyalty()}}">
+                            {{$item->loyalty()}}
+                        </span>
                     @else
                         {{__("Add new customer")}}
                     @endif
