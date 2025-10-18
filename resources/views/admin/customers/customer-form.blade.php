@@ -29,7 +29,7 @@
                         <i class="ri-user-3-line"></i>
                         {{__("Avatar")}}
                     </h3>
-                    <img src="{{$item->avatar()}}" class="img-fluid mb-3" alt="" data-open-file="#avatar-input">
+                    <img src="{{$item->avatar()}}" class="img-fluid mb-3" alt="avatar" data-open-file="#avatar-input">
                     <input type="file" name="avatar" id="avatar-input"  accept="image/jpeg">
                 </div>
                 <div class="item-list mb-3">

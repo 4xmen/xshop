@@ -14,7 +14,7 @@
                 <div class="d-flex flex-md-row flex-column justify-content-between">
                     <div class="address mt-3">
                         <div class="address-box">
-                            <img src="{{asset('upload/images/logo.png')}}" class="footer-logo float-start m-4" alt="">
+                            <img src="{{asset('upload/images/logo.png')}}" class="footer-logo float-start m-4" alt="logo">
                             <p>
                                 {!! getSetting($data->area_name.'_'.$data->part.'_first') !!}
                             </p>

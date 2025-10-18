@@ -3,7 +3,7 @@
         @foreach(getCategoriesSet($data->area_name.'_'.$data->part.'_categories') as $category)
             <div class="solid-grid-item">
                 <a href="{{$category->webUrl()}}">
-                    <img src="{{$category->imgUrl()}}" alt="">
+                    <img src="{{$category->imgUrl()}}" alt="{{$category->name}}">
                 </a>
                 <h2>
                     {{$category->name}}

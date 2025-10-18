@@ -15,7 +15,7 @@
                 </ul>
             </div>
             <div class="col-md-4 text-center">
-                <img src="{{asset('upload/images/logo.png')}}" class="logo" alt="">
+                <img src="{{asset('upload/images/logo.png')}}" class="logo" alt="logo">
             </div>
             <div class="col-md-4 pt-2">
                 {!! getSetting($data->area_name.'_'.$data->part.'_text')!!}

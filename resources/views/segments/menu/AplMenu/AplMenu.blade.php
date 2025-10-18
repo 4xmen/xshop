@@ -2,7 +2,7 @@
     <ul class="{{gfx()['container']}}">
         <li class="icon-menu" id="logo-menu">
             <a href="{{url('/')}}">
-                <img src="{{asset('upload/images/logo.svg')}}" alt="">
+                <img src="{{asset('upload/images/logo.svg')}}" alt="logo">
                 {{--                <i class="ri-apple-line "></i>--}}
             </a>
         </li>

@@ -4,7 +4,7 @@
         <div class="row  mb-4">
             <div class="col-10">
                 <div class="overflow-hidden">
-                    <img src="{{asset('upload/images/logo.png')}}" class="float-end liana-logo" alt="">
+                    <img src="{{asset('upload/images/logo.png')}}" class="float-end liana-logo" alt="logo">
 
                     <h3 class="mt-3">
                         {{config('app.name')}}

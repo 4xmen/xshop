@@ -1,7 +1,7 @@
 <nav id='SideMenu' class=' live-setting' data-live="{{$data->area_name.'_'.$data->part}}">
 <div class="text-center py-3" id="side-menu-logo">
         <a href="{{url('/')}}">
-            <img src="{{asset('upload/images/logo.svg')}}" alt="">
+            <img src="{{asset('upload/images/logo.svg')}}" alt="logo">
             {{--                <i class="ri-apple-line "></i>--}}
         </a>
     </div>

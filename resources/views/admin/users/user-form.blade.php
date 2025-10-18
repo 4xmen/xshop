@@ -36,7 +36,7 @@
                     <i class="ri-user-3-line"></i>
                     {{__("Avatar")}}
                 </h3>
-                <img @if(isset($item)) src="{{$item->avatar()}}" @else src="{{asset('assets/default/unknown.svg')}}" @endif  class="img-fluid mb-3" alt="" data-open-file="#avatar-input">
+                <img @if(isset($item)) src="{{$item->avatar()}}" @else src="{{asset('assets/default/unknown.svg')}}" @endif  class="img-fluid mb-3" alt="avatar" data-open-file="#avatar-input">
                 <input type="file" name="avatar" id="avatar-input"  accept="image/jpeg">
             </div>
         </div>

@@ -21,7 +21,7 @@
                     </li>
                 </ol>
             </nav>
-            <img src="{{$post->orgUrl()}}" alt="" class="img-fluid" loading="lazy">
+            <img src="{{$post->orgUrl()}}" alt="{{$post->title}}" class="img-fluid" loading="lazy">
             <p class="text-muted my-3">
                 {{$post->subtitle}}
             </p>

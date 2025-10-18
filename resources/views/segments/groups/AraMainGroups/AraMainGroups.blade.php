@@ -11,7 +11,7 @@
                 <div class="ara-group">
                     <a href="{{$group->webUrl()}}">
 
-                        <img src="{{$group->imgUrl()}}" class="img-fluid" alt="">
+                        <img src="{{$group->imgUrl()}}" class="img-fluid" alt=" {{$group->name}}">
                         <div class="ara-data">
                             <h3>
                                 {{$group->name}}

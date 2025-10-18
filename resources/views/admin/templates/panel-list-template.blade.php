@@ -157,7 +157,7 @@
                                     @if(isset($item) && method_exists($item,'imgUrl'))
                                         <td>
                                             <a href="{{getRoute('edit',$item->{$item->getRouteKeyName()})}}">
-                                                <img src="{{$item->imgUrl()}}" class="image-x64" alt="">
+                                                <img src="{{$item->imgUrl()}}" class="image-x64" alt="image">
                                             </a>
                                         </td>
                                     @endif

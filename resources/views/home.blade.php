@@ -9,7 +9,7 @@
                     <div class="card-body">
                         <div class="row">
                             <div class="col-3 text-center">
-                                <img src="{{auth()->user()->avatar()}}" class="avatar-x64" alt="">
+                                <img src="{{auth()->user()->avatar()}}" class="avatar-x64" alt="avatar">
                             </div>
                             <div class="col-9 pt-1">
                                 {{__("Welcome back")}}

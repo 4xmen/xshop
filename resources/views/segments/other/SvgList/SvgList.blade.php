@@ -4,7 +4,7 @@
             @for($i = 1 ; $i <= 4; $i++)
                 <div class="col-lg-3 col-md-6 col-sm-6">
                     <a href="{{getSetting($data->area_name.'_'.$data->part.'_link'.$i)}}">
-                    <img src="{{asset('upload/images/'.$data->area_name.'.'.$data->part. $i.'.svg')}}" alt="">
+                    <img src="{{asset('upload/images/'.$data->area_name.'.'.$data->part. $i.'.svg')}}" alt="svg">
                     <h3>
                         {{getSetting($data->area_name.'_'.$data->part.'_title'.$i)}}
                     </h3>

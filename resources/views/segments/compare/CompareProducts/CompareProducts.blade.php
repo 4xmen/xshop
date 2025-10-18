@@ -8,7 +8,7 @@
                 <div class="col-md">
                     <div class="compare">
                         <div class="top">
-                            <img src="{{$product->originalImageUrl()}}" alt="" loading="lazy">
+                            <img src="{{$product->originalImageUrl()}}" alt="{{$product->name}}" loading="lazy">
                             <h2>
                                 {{$product->name}}
                             </h2>

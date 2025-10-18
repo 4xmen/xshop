@@ -32,7 +32,8 @@
                     <ul class="list-group">
                         @foreach($posts as $post)
                             <li class="list-group-item">
-                                <img src="{{$post->imgUrl()}}" class="float-start x64-img me-2" alt="">
+                                <img src="{{$post->imgUrl()}}" class="float-start x64-img me-2" alt="{{$post->title}}
+                                    </a>">
                                 <h6>
                                     <a href="{{$post->webUrl()}}">
                                         {{$post->title}}
@@ -55,7 +56,7 @@
                     <ul class="list-group">
                         @foreach($products as $product)
                             <li class="list-group-item">
-                                <img src="{{$product->thumbUrl()}}" class="float-start x64-img me-2" alt="">
+                                <img src="{{$product->thumbUrl()}}" class="float-start x64-img me-2" alt="{{$product->name}}">
                                 <h6>
                                     <a href="{{$product->webUrl()}}">
                                         {{$product->name}}
@@ -78,7 +79,7 @@
                     <ul class="list-group">
                         @foreach($clips as $clip)
                             <li class="list-group-item">
-                                <img src="{{$clip->imgUrl()}}" class="float-start x64-img me-2" alt="">
+                                <img src="{{$clip->imgUrl()}}" class="float-start x64-img me-2" alt=" {{$clip->title}}">
                                 <h6>
                                     <a href="{{$clip->webUrl()}}">
                                         {{$clip->title}}

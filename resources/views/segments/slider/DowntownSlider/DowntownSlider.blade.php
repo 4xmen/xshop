@@ -4,10 +4,10 @@
             <div class="item">
                 <div class="row">
                     <div class="col-6 downtown-img">
-                        <img src="{{$slider->imgUrl()}}" class="img-fluid" alt="">
+                        <img src="{{$slider->imgUrl()}}" class="img-fluid" alt="{{strip_tags($slider->body)}}">
                     </div>
                     <div class="col-6 downtown-content">
-                        <img src="{{$slider->imgUrl()}}" alt="">
+                        <img src="{{$slider->imgUrl()}}" alt="{{strip_tags($slider->body)}}">
                         <svg
                             width="145mm"
                             height="145mm"

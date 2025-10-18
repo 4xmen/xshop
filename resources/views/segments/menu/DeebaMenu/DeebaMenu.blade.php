@@ -9,7 +9,7 @@
                     @php($menuShow = true)
                     <li id="deeba-logo-main">
                         <a href="#">
-                            <img src="{{asset('upload/images/logo.png')}}" alt="">
+                            <img src="{{asset('upload/images/logo.png')}}" alt="logo">
                         </a>
                     </li>
                 @endif

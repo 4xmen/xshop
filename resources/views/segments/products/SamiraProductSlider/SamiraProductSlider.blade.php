@@ -18,8 +18,8 @@
                                 <a href="{{$product->webUrl()}}">
                                     <img src="{{$product->imgUrl()}}" alt="{{$product->name}}" loading="lazy">
                                 </a>
-                                <img src="{{asset('upload/images/index.SamiraProductSlider.webp')}}" alt="" class="bg">
-                                <img src="{{asset('upload/images/circle-3d-minify.svg')}}" alt="" class="circle">
+                                <img src="{{asset('upload/images/index.SamiraProductSlider.webp')}}" alt="{{$product->name}}" class="bg">
+                                <img src="{{asset('upload/images/circle-3d-minify.svg')}}" alt="{{$product->name}}" class="circle">
                             </div>
                             <div class="col-md-4">
                                 <h4 class="mb-4">

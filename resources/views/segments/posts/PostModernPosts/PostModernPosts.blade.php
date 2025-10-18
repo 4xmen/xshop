@@ -11,7 +11,7 @@
                     <a href="{{$post->webUrl()}}">
                         <div class="post-modern-post" style="background-image: url('{{$post->imgUrl()}}')">
                             <img src="{{asset('upload/images/'.$data->area_name.'.'.$data->part.'.svg')}}"
-                                 class="img-fluid" alt="">
+                                 class="img-fluid" alt="{{$post->title}}">
                         </div>
                         <h4>
                             {{$post->title}}

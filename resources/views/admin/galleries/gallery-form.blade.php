@@ -143,7 +143,7 @@
                                 <a href="{{route('admin.image.destroy',$img->id)}}" class="btn btn-danger delete-confirm rm-img ms-2">
                                     <i class="ri-delete-bin-6-line"></i>
                                 </a>
-                                <img src="{{$img->imgUrl()}}"  class="img-squire" alt="">
+                                <img src="{{$img->imgUrl()}}"  class="img-squire" alt="{{$img->title}}">
                                 <div class="row mt-2">
                                     <div class="col-md-10">
                                         <input type="text" class="form-control" name="titles[{{$img->id}}]"
