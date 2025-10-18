@@ -116,7 +116,7 @@
                         </a>
                     </p>
                     <div class="read-more">
-                        {!! $product->description !!}
+                         {!! fixShortCode($product->description) !!}
                     </div>
 
                     <h3 id="faraz-detail" class="mt-3">

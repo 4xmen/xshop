@@ -152,7 +152,7 @@
                 </h2>
                 <div id="desc" class="accordion-collapse collapse show" data-bs-parent="#product-detail">
                     <div class="accordion-body">
-                        {!! $product->description !!}
+                         {!! fixShortCode($product->description) !!}
                     </div>
                 </div>
             </div>

@@ -84,7 +84,7 @@
                 <div class="alert alert-info">
                     {{$product->excerpt}}
                 </div>
-                {!! $product->description !!}
+                 {!! fixShortCode($product->description) !!}
 
                 @if($product->table != null || trim($product->table) != '')
                     {!! $product->table !!}

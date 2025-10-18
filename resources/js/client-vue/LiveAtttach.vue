@@ -5,10 +5,10 @@
                 {{ attachment.title }}
             </div>
             <div class="card-body">
-                <div v-if="attachment.ext == 'mp4'">
+                <div v-if="attachment.ext == 'mp4' || attachment.ext == 'ogv' ">
                     <video-player :asset="attachment.url" :cover="cover"></video-player>
                 </div>
-                <div v-else-if="attachment.ext == 'mp3'">
+                <div v-else-if="attachment.ext == 'mp3' || attachment.ext == 'ogg'">
                     <mp3player :asset="attachment.url"></mp3player>
                 </div>
                 <div
@@ -20,7 +20,7 @@
 
                         <i class="ri-download-2-line"></i>
                         {{ attachment.title }}
-                        ( {{ attachment.size }} )
+                        ( {{ attachment.size }} ) [ {{attachment.ext}} ]
                     </a>
                 </div>
 

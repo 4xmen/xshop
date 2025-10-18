@@ -161,7 +161,7 @@
             <div class="underline"></div>
         </div>
         <div id="desc" class="tab-content active">
-            {!! $product->description !!}
+             {!! fixShortCode($product->description) !!}
         </div>
         <div id="table" class="tab-content">
             {!! $product->table !!}
