@@ -1,6 +1,7 @@
 <?php
 
 use App\Helpers;
+use App\Models\Attachment;
 use App\Models\Setting;
 use App\Models\Group;
 use App\Models\Category;
@@ -682,7 +683,7 @@ function getSetting($key)
         return '';
     }
 
-    $txtType = ['TEXT','LONGTEXT','EDITOR'];
+    $txtType = ['TEXT', 'LONGTEXT', 'EDITOR'];
     if (config('app.xlang') && !in_array($x->type, $txtType)) {
         return $x->raw;
     }
@@ -761,7 +762,7 @@ function hasPart($areaName)
 /**
  * get parts of area
  * @param $areaName
- * @param null $custom  custom theme
+ * @param null $custom custom theme
  * @return Part[]|\Illuminate\Database\Eloquent\Collection|\LaravelIdea\Helper\App\Models\_IH_Part_C
  */
 function getParts($areaName, $custom = null)
@@ -899,12 +900,13 @@ function getProductsQueryBySetting($key, $limit = 10)
     $data = explode(',', getSetting($key) ?? '1,id,DESC');
     if ($data[0] == 0) {
         $q = Product::where('status', 1);
-    }else{
+    } else {
         $q = Category::where('id', $data[0])->first()
             ->products()->where('status', 1);
     }
     return $q->orderBy($data[1], $data[2])->limit($limit)->get();
 }
+
 /**
  * get posts by setting key
  * @param $key
@@ -916,7 +918,7 @@ function getPostsQueryBySetting($key, $limit = 10)
     $data = explode(',', getSetting($key) ?? '1,id,DESC');
     if ($data[0] == 0) {
         $q = Post::where('status', 1);
-    }else{
+    } else {
         $q = Group::where('id', $data[0])->first()
             ->posts()->where('status', 1);
     }
@@ -1013,7 +1015,7 @@ function errors($errors, $status = 422, $message = null, $data = null)
  */
 function readable($text)
 {
-    return ucfirst(trim(str_replace(['-', '_','.'], ' ', $text)));
+    return ucfirst(trim(str_replace(['-', '_', '.'], ' ', $text)));
 }
 
 
@@ -1454,11 +1456,11 @@ function detectRateCustomer($type, $id, $evaluation)
  * @param $model \Illuminate\Database\Eloquent\Model $custom model
  * @return Area|mixed
  */
-function findArea($name,$model = null)
+function findArea($name, $model = null)
 {
 
-    if ($model != null && $model->theme != null){
-        return  json_decode($model->theme);
+    if ($model != null && $model->theme != null) {
+        return json_decode($model->theme);
     }
     return \App\Models\Area::where('name', $name)->first();
 }
@@ -1480,9 +1482,9 @@ function cacheNumber()
  * @param $asc
  * @return Category[]|\LaravelIdea\Helper\App\Models\_IH_Category_C
  */
-function getMainCategory($limit=4,$orderBy = 'sort', $asc = 'ASC')
+function getMainCategory($limit = 4, $orderBy = 'sort', $asc = 'ASC')
 {
-    return \App\Models\Category::whereNull('parent_id')->limit($limit)->orderBy($orderBy,$asc)->get();
+    return \App\Models\Category::whereNull('parent_id')->limit($limit)->orderBy($orderBy, $asc)->get();
 }
 
 
@@ -1509,9 +1511,9 @@ function getSubGroupSetting($key, $limit = 10, $order = 'id', $dir = "DESC")
  * @param $asc
  * @return Category[]|\LaravelIdea\Helper\App\Models\_IH_Category_C
  */
-function getCategoriesSet($key,$limit=4,$orderBy = 'sort', $asc = 'ASC')
+function getCategoriesSet($key, $limit = 4, $orderBy = 'sort', $asc = 'ASC')
 {
-    return \App\Models\Category::whereIn('id',json_decode(getSetting($key) ?? []))->where('hide',0)->limit($limit)->orderBy($orderBy,$asc)->get();
+    return \App\Models\Category::whereIn('id', json_decode(getSetting($key) ?? []))->where('hide', 0)->limit($limit)->orderBy($orderBy, $asc)->get();
 }
 
 
@@ -1523,7 +1525,57 @@ function getCategoriesSet($key,$limit=4,$orderBy = 'sort', $asc = 'ASC')
  * @param $asc
  * @return Group[]|\LaravelIdea\Helper\App\Models\_IH_Group_C
  */
-function getGroupsSet($key,$limit=4,$orderBy = 'sort', $asc = 'ASC')
+function getGroupsSet($key, $limit = 4, $orderBy = 'sort', $asc = 'ASC')
 {
-    return \App\Models\Group::whereIn('id',json_decode(getSetting($key) ?? []))->where('hide',0)->limit($limit)->orderBy($orderBy,$asc)->get();
+    return \App\Models\Group::whereIn('id', json_decode(getSetting($key) ?? []))->where('hide', 0)->limit($limit)->orderBy($orderBy, $asc)->get();
+}
+
+
+/**
+ * extract short code by key
+ * @param $key
+ * @param $txt
+ * @return array|string[]
+ */
+function extractShortCode($key, $txt) :array
+{
+    // regex to extract all ids in the text
+    $pattern = '/\[' . $key . ':(\d+)\]/';
+
+    // match all shortcodes
+    preg_match_all($pattern, $txt, $matches);
+
+    // return empty array if no matches found
+    if (empty($matches[1])) {
+        return [];
+    }
+
+    // return array of all ids
+    return $matches[1];
+}
+
+/**
+ * fixed all short codes
+ * @param $txt
+ * @return string
+ */
+function fixShortCode($txt) :string
+{
+    $ids = extractShortCode('ATTACHED', $txt);
+    $attachs = Attachment::whereIn('id', $ids)->get();
+    foreach ($attachs as $attach) {
+
+        $data['url'] = $attach->url();
+        $data['temp'] = $attach->tempUrl();
+        $data['ext'] = $attach->ext;
+        $data['title'] = $attach->title;
+        $data['size'] = formatFileSize($attach->size);
+        $data['subtitle'] = $attach->subtitle;
+
+        $vueCode = "<live-attach  xlang='" . config('app.locale') .
+            "' :attachment='" . json_encode($data) . "'></live-attach>";
+        $txt = str_replace('[ATTACHED:' . $attach->id . ']', $vueCode, $txt);
+    }
+
+    return $txt;
 }

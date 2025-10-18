@@ -38,6 +38,9 @@ app.component('currency-input',CurrencyInput);
 import vdp from "../client-vue/vueDateTimePickerClient.vue";
 app.component('vue-datetime-picker-input', vdp);
 
+import liveAt from "../client-vue/LiveAtttach.vue";
+app.component('live-attach', liveAt);
+
 
 app.use(ToastPlugin);
 app.use(store);

@@ -53,10 +53,10 @@
             <hr>
             @if($post->table_of_contents)
                 {!! $post->tableOfContents() !!}
-                {!! $post->bodyContent() !!}
+                {!! fixShortCode($post->bodyContent()) !!}
             @else
 
-                {!! $post->body !!}
+                {!! fixShortCode($post->body) !!}
             @endif
 
         </div>

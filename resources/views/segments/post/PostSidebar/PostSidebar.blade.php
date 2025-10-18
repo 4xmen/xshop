@@ -64,11 +64,11 @@
                     </div>
                     <hr>
                     @if($post->table_of_contents)
-                        {!! $post->tableOfContents() !!}
-                        {!! $post->bodyContent() !!}
+                    {!! $post->tableOfContents() !!}
+                    {!! fixShortCode($post->bodyContent()) !!}
                     @else
 
-                        {!! $post->body !!}
+                        {!! fixShortCode($post->body) !!}
                     @endif
 
                 </div>

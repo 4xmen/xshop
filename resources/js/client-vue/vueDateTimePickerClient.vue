@@ -488,7 +488,7 @@ export default {
         vgeDate() {
             const baseDate = this.val * 1000;
             let d = new Date(baseDate);
-            return [d.getFullYear(), d.getMonth(), d.getDate()];
+            return [d.getFullYear(), d.getMonth() + 1, d.getDate()];
         },
         // persian date by value
         vpeDate() {
@@ -640,8 +640,8 @@ export default {
             return {
                 day: this.pDate.make2number(dt.getDate()), // day
                 pDay: this.pDate.convertDate2Persian(dt)[2], // persian date
-                date: dt.getFullYear() + '-' + dt.getMonth() + '-' + dt.getDate(), // gregorian date
-                datetime: dt.getFullYear() + '-' + dt.getMonth() + '-' + dt.getDate() + ' ' + this.pDate.make2number(this.cTime[0]) + ':' + this.pDate.make2number(this.cTime[1]), // gregorian datetime
+                date: dt.getFullYear() + '-' + (dt.getMonth() + 1) + '-' + dt.getDate(), // gregorian date
+                datetime: dt.getFullYear() + '-' + (dt.getMonth() + 1) + '-' + dt.getDate() + ' ' + this.pDate.make2number(this.cTime[0]) + ':' + this.pDate.make2number(this.cTime[1]), // gregorian datetime
                 pdatetime: this.pDate.convertDate2Persian(dt).join('/') + ' ' + this.pDate.make2number(this.cTime[0]) + ':' + this.pDate.make2number(this.cTime[1]), // persian date
                 pdate: this.pDate.convertDate2Persian(dt).join('/'),  // persian date
                 hpdatetime: this.pDate.parseHindi(this.pDate.convertDate2Persian(dt).join('/') + ' ' + this.pDate.make2number(this.cTime[0]) + ':' + this.pDate.make2number(this.cTime[1])), // persian date hindi number
@@ -687,7 +687,7 @@ export default {
         isActive(obj) {
             let dt = new Date(this.val * 1000);
             let r = '';
-            if (dt.getFullYear() + '-' + dt.getMonth() + '-' + dt.getDate() == obj.date) {
+            if (dt.getFullYear() + '-' + (dt.getMonth() + 1) + '-' + dt.getDate() == obj.date) {
                 r = 'active-selected';
             }
             if (this.xmax != null && obj.unix > this.xmax) {

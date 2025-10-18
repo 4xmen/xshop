@@ -54,7 +54,16 @@
                                 </li>
                             </ul>
 
-
+                            <div class="input-group mb-3 copiable" >
+                                <span class="input-group-text">{{__("Short code")}}</span>
+                                <input type="text" class="form-control" value="[ATTACHED:{{$item->id}}]">
+                                <button type="button" class="input-group-text copy-btn" data-bs-toggle="tooltip"
+                                        data-bs-placement="top"
+                                        data-bs-custom-class="custom-tooltip"
+                                        data-bs-title="{{__("Copy")}}">
+                                    <i class="ri-file-copy-line"  ></i>
+                                </button>
+                            </div>
                             <a href="{{$item->url()}}" class="btn btn-dark w-100">
                                 <i class="ri-download-2-line"></i>
                                 {{__("Download")}}
