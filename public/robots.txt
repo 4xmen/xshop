@@ -1,6 +1,12 @@
 User-agent: *
 Disallow: /card
 Disallow: /compare
+Disallow: /login
+Disallow: /profile
+Disallow: /invoice/*
+Disallow: /profile/*
+Disallow: /customer/*
+Disallow: /product/fav/*
 Disallow: /*/card
 Disallow: /*/compare
 Sitemap: /sitemap.xml

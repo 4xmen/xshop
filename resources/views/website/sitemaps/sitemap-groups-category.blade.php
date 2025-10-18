@@ -24,6 +24,16 @@
             <priority>0.5</priority>
         </url>
     @endforeach
+    @foreach(\App\Models\Creator::orderBy('id')->get(['slug','updated_at']) as $item)
+
+        <url>
+            <loc>{{route('client.creator',$item->slug)}}</loc>
+            <lastmod>{{$item->updated_at->tz('UTC')->toAtomString()}}</lastmod>
+            <changefreq>weekly</changefreq>
+            <priority>0.5</priority>
+        </url>
+    @endforeach
+
     @if(config('app.xlang.active'))
         @foreach(\App\Models\XLang::where('is_default',0)->pluck('tag')->toArray() as $lang)
 
@@ -38,6 +48,15 @@
                     </url>
             @endforeach
             @foreach(\App\Models\Category::whereLocale('name',$lang)->orderBy('id')->get(['slug','updated_at','name']) as $item)
+
+                    <url>
+                        <loc>{{$item->webUrl()}}</loc>
+                        <lastmod>{{$item->updated_at->tz('UTC')->toAtomString()}}</lastmod>
+                        <changefreq>weekly</changefreq>
+                        <priority>0.5</priority>
+                    </url>
+            @endforeach
+            @foreach(\App\Models\Creator::whereLocale('name',$lang)->orderBy('id')->get(['slug','updated_at','name']) as $item)
 
                     <url>
                         <loc>{{$item->webUrl()}}</loc>

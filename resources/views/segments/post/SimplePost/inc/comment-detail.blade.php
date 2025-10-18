@@ -1,4 +1,4 @@
-<div class="simple-single-comment">
+<div class="simple-single-comment" data-nosnippet>
     <div class="row">
         <div class="col-3">
             @if($comment->commentator()['url'] == null)

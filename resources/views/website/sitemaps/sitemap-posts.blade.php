@@ -20,8 +20,13 @@
         <url>
             <loc>{{route('client.post',$item->slug)}}</loc>
             <lastmod>{{$item->updated_at->tz('UTC')->toAtomString()}}</lastmod>
-            <changefreq>weekly</changefreq>
-            <priority>0.5</priority>
+            @if ($item->updated_at->greaterThanOrEqualTo(now()->subYear()))
+                <changefreq>weekly</changefreq>
+                <priority>0.5</priority>
+            @else
+                <changefreq>never</changefreq>
+                <priority>0.1</priority>
+            @endif
         </url>
     @endforeach
     @if(config('app.xlang.active'))
@@ -34,7 +39,7 @@
                     <loc>{{route('client.posts')}}/{{$lang}}</loc>
                     <lastmod>{{\App\Models\Post::orderByDesc('updated_at')->first()->updated_at->tz('UTC')->toAtomString()}}</lastmod>
                     <changefreq>weekly</changefreq>
-                    <priority>1</priority>
+                    <priority>0.5</priority>
                 </url>
 
             @endif
@@ -43,8 +48,13 @@
                     <url>
                         <loc>{{$item->webUrl()}}</loc>
                         <lastmod>{{$item->updated_at->tz('UTC')->toAtomString()}}</lastmod>
+                        @if ($item->updated_at->greaterThanOrEqualTo(now()->subYear()))
                         <changefreq>weekly</changefreq>
                         <priority>0.5</priority>
+                        @else
+                            <changefreq>never</changefreq>
+                            <priority>0.1</priority>
+                        @endif
                     </url>
             @endforeach
         @endforeach

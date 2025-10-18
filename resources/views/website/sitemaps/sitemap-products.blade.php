@@ -13,6 +13,7 @@
             <lastmod>{{\App\Models\Product::orderByDesc('updated_at')->first()->updated_at->tz('UTC')->toAtomString()}}</lastmod>
             <changefreq>daily</changefreq>
             <priority>1</priority>
+
         </url>
     @endif
     @foreach(\App\Models\Product::where('status',1)->orderBy('id')->get(['slug','updated_at']) as $item)
@@ -20,8 +21,13 @@
         <url>
             <loc>{{route('client.product',$item->slug)}}</loc>
             <lastmod>{{$item->updated_at->tz('UTC')->toAtomString()}}</lastmod>
-            <changefreq>weekly</changefreq>
-            <priority>0.5</priority>
+            @if ($item->updated_at->greaterThanOrEqualTo(now()->subYear()))
+                <changefreq>daily</changefreq>
+                <priority>1</priority>
+            @else
+                <changefreq>never</changefreq>
+                <priority>0.1</priority>
+            @endif
         </url>
     @endforeach
     @if(config('app.xlang.active'))
@@ -42,8 +48,13 @@
                     <url>
                         <loc>{{$item->webUrl()}}</loc>
                         <lastmod>{{$item->updated_at->tz('UTC')->toAtomString()}}</lastmod>
-                        <changefreq>weekly</changefreq>
-                        <priority>0.5</priority>
+                        @if ($item->updated_at->greaterThanOrEqualTo(now()->subYear()))
+                            <changefreq>daily</changefreq>
+                            <priority>1</priority>
+                        @else
+                            <changefreq>never</changefreq>
+                            <priority>0.1</priority>
+                        @endif
                     </url>
             @endforeach
         @endforeach
