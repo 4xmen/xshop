@@ -8,7 +8,7 @@
             <div class="autoplay-clip-item">
                 <a href="{{$clip->webUrl()}}">
                     <i class="ri-play-circle-line"></i>
-                    <video preload="none" src="{{$clip->fileUrl()}}" poster="{{$clip->imgUrl()}}" muted ></video>
+                    <video playsinline fetchpriority="low" preload="none" src="{{$clip->fileUrl()}}" poster="{{$clip->imgUrl()}}" muted ></video>
                 </a>
 {{--                <img src="{{$clip->imgUrl()}}" alt="">--}}
             </div>

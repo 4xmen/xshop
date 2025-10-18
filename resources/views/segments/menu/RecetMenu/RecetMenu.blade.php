@@ -34,7 +34,7 @@
             @if(config('app.xlang.active'))
                 @foreach(\App\Models\XLang::all() as $lang)
                     @if($lang->tag != app()->getLocale())
-                        <a href="/{{$lang->tag}}" class="d-inline-block px-1">
+                        <a href="/{{$lang->tag}}" class="d-inline-block px-1"  hreflang="{{$lang->tag}}" >
                             {{$lang->emoji}}
                         </a>
                     @endif

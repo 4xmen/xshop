@@ -5,7 +5,7 @@
                 <div class="grid-clip-item">
                     <i class="ri-file-video-line"></i>
                     <a href="{{$clip->webUrl()}}">
-                        <img src="{{$clip->imgUrl()}}" alt="{{$clip->title}}">
+                        <img src="{{$clip->imgUrl()}}" loading="lazy" alt="{{$clip->title}}">
                         <h3>
                             {{$clip->title}}
                         </h3>

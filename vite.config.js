@@ -11,6 +11,7 @@ export default defineConfig({
                 'resources/js/app.js',
                 'resources/js/panel/raw.js',
                 'resources/sass/client.scss',
+                'resources/sass/client-fonts.scss',
                 'resources/js/client.js',
             ],
             refresh: true,

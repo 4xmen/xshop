@@ -33,17 +33,18 @@
     </title>
 
     @if(langIsRTL(app()->getLocale()))
-        <link rel="stylesheet" href="{{asset('assets/vendor/bootstrap/dist/css/bootstrap.rtl.min.css')}}">
+        <link rel="stylesheet" fetchpriority="high" href="{{asset('assets/vendor/bootstrap/dist/css/bootstrap.rtl.min.css')}}">
     @else
-        <link rel="stylesheet" href="{{asset('assets/vendor/bootstrap/dist/css/bootstrap.min.css')}}">
+        <link rel="stylesheet" fetchpriority="high" href="{{asset('assets/vendor/bootstrap/dist/css/bootstrap.min.css')}}">
     @endif
 
     <link rel="stylesheet" href="{{ route('theme.variable.css') }}">
-    @vite(['resources/sass/client.scss', 'resources/js/client.js'])
+    @vite(['resources/sass/client.scss',  'resources/js/client.js', 'resources/sass/client-fonts.scss'])
+
 
     @yield('custom-head')
 
-    {{--    WIP rtl or ltr--}}
+    {{--    WIP rtl or ltr  --}}
 
     {{--    seo  --}}
     <meta property="og:site_name" content="{{config('app.name')}}"/>
