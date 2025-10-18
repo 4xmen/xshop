@@ -39,7 +39,7 @@
             color: white;
 
             &:hover {
-                color: variables.$secondary-color-panel;
+                color: var(--panel-secondary);
             }
         }
     }
@@ -72,7 +72,7 @@
                 }
 
                 &:hover{
-                    background: darkred;
+                    background: var(--panel-secondary);
                 }
             }
 

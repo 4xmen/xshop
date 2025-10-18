@@ -140,13 +140,13 @@
 @section('js-content')
     <script>
 
-
         window.addEventListener('resize', function () {
             // window.vchart.resize(1,1);
             window.vchart.resize(null, 300);
         });
 
         window.addEventListener('load', function () {
+
 
             if (isPaintedChart) {
                 return;
@@ -168,15 +168,15 @@
                     datasets: [
                         {
                             label: "{{__('Visitors')}}",
-                            backgroundColor: 'rgba(128,0,255,0.1)',
-                            borderColor: 'rgba(140,0,255,0.6)',
+                            backgroundColor: secondaryColor + '33',
+                            borderColor: secondaryColor,
                             data: visits.subItem('count', 1),
                             fill: true,
                         },
                         {
                             label: "{{__('Visits')}}",
-                            backgroundColor: 'rgba(255,0,0,0.1)',
-                            borderColor: '#ff000099',
+                            backgroundColor: primaryColor + '33',
+                            borderColor: primaryColor,
                             data: visits.subItem('visits', 1),
                             fill: true,
                         },
@@ -212,13 +212,13 @@
 
                 // The data for our dataset
                 data: {
-                    labels: ['All visitors','Desktop', 'Mobile / Tablet',],
+                    labels: ['All visitors', 'Desktop', 'Mobile / Tablet',],
                     datasets: [
                         {
-                            label:"{{__('Devices')}}",
-                            data: [{{$all_visitor}},{{$all_visitor - $mobiles_count}}, {{$mobiles_count}}],
-                            backgroundColor: ['rgba(255,128,0,0.69)', 'rgba(255,0,54,0.56)','rgba(0,202,202,0.56)'],
-                            hoverBackgroundColor: ['rgba(255,128,0,0.9)', 'rgba(255,0,54,0.9)','rgba(0,202,202,0.9)'],
+                            label: "{{__('Devices')}}",
+                            data: [{{$all_visitor}}, {{$all_visitor - $mobiles_count}}, {{$mobiles_count}}],
+                            backgroundColor: ['rgba(255,128,0,0.69)', 'rgba(255,0,54,0.56)', 'rgba(0,202,202,0.56)'],
+                            hoverBackgroundColor: ['rgba(255,128,0,0.9)', 'rgba(255,0,54,0.9)', 'rgba(0,202,202,0.9)'],
                             borderWidth: 1,
                             borderColor: '#00000011'
 
@@ -256,15 +256,15 @@
                     datasets: [
                         {
                             label: "{{__('Orders')}}",
-                            backgroundColor: 'rgba(128,0,255,0.4)',
-                            borderColor: 'rgba(140,0,255,0.6)',
+                            backgroundColor: secondaryColor + '33',
+                            borderColor: secondaryColor,
                             data: @json($orders),
                             fill: true,
                         },
                         {
                             label: "{{__('Invoices')}}",
-                            backgroundColor: 'rgba(255,0,0,0.4)',
-                            borderColor: '#ff000099',
+                            backgroundColor: primaryColor,
+                            borderColor: primaryColor + '33',
                             data: @json($invoices),
                             fill: true,
                         },

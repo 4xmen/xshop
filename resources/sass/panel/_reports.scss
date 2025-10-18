@@ -18,7 +18,7 @@
     align-items: center;
     justify-content: flex-start;
     padding: 1.2rem 1.6rem;
-    background: variables.$lighter-color;
+    background:  var(--panel-lighter);
     border-radius: 0.6rem;
     text-decoration: none;
     font-weight: 400;
@@ -47,7 +47,7 @@
    ------------------------------------------------- */
 .report-btn:hover,
 .report-btn:focus {
-    //background: variables.$lighter-color;
+    //background:  var(--panel-lighter);
     opacity: 0.7;
     transform: translateY(-3px) scale(1.1);
 

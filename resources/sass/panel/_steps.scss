@@ -27,14 +27,14 @@
         top: 50%;
         inset-inline-start: 0;
         inset-inline-end: calc(100% - var(--progress));
-        border-bottom: 1px solid color.adjust(variables.$primary-color-panel, $lightness: 20%);
+        border-bottom: 1px solid var(--panel-primary);
         transition: all 0.3s ease-in-out;
     }
 
     li {
         position: relative;
         z-index: 2;
-        background: variables.$lighter-color;
+        background:  var(--panel-lighter);
         cursor: pointer;
         border: 1px solid #ccc;
         border-radius: 50%;
@@ -49,8 +49,8 @@
         }
 
         &.active {
-            border-color: color.adjust(variables.$primary-color-panel, $lightness: 20%);
-            background-color: variables.$primary-color-panel;
+            border-color: var(--panel-primary);
+            background-color: var(--panel-primary);
         }
     }
 }
@@ -88,11 +88,11 @@
     justify-content: center;
 
     &:hover {
-        border-color: variables.$primary-color-panel;
+        border-color: var(--panel-primary);
     }
 }
 #upload-drag-drop.active {
-    border-color: variables.$primary-color-panel;
+    border-color: var(--panel-primary);
 }
 
 .img-preview{
@@ -107,7 +107,7 @@
 
 
 .indexed{
-    background: variables.$primary-color-panel;
+    background:var(--panel-primary);
 }
 
 #upload-image-select{

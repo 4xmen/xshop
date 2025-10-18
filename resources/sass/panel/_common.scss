@@ -1,7 +1,7 @@
 @use "sass:color";
 @use "variables";
 body {
-    background: variables.$body-bg;
+    background: var(--panel-background);
 }
 
 a.btn, a.action-btn, a.circle-btn {
@@ -18,7 +18,7 @@ a.btn, a.action-btn, a.circle-btn {
 #setting-sections {
     section {
         display: none;
-        background: variables.$lighter-color;
+        background:  var(--panel-lighter);
         padding: 1rem;
 
         .setting-field {
@@ -44,7 +44,7 @@ a.btn, a.action-btn, a.circle-btn {
     display: flex;
     align-items: center;
     justify-content: center;
-    color:  color.adjust(variables.$primary-color-panel, $lightness: 15%);
+    color:  var(--panel-primary);
 
     .loader {
         position: relative;
@@ -65,7 +65,7 @@ a.btn, a.action-btn, a.circle-btn {
             position: absolute;
             inset: 0;
             box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.3) inset;
-            box-shadow: 0 2px 0 #FF3D00 inset;
+            box-shadow: 0 2px 0 var(--panel-secondary) inset;
             animation: rotate 2s linear infinite;
         }
     }
@@ -113,7 +113,7 @@ a.btn, a.action-btn, a.circle-btn {
     bottom: -50vh;
     left: 1rem;
     right: 1rem;
-    background: variables.$lighter-color;
+    background:  var(--panel-lighter);
     height: 40vh;
     border-radius: 7px 7px 0 0;
     border: 1px solid #aaaaaa55;
@@ -262,7 +262,7 @@ a.btn, a.action-btn, a.circle-btn {
 }
 
 .general-form {
-    background: variables.$lighter-color;
+    background:  var(--panel-lighter);
     border-radius: 7px;
     margin-bottom: 4rem;
     position: relative;
@@ -361,11 +361,11 @@ a.btn, a.action-btn, a.circle-btn {
         color: white;
 
         &.active {
-            background: variables.$primary-color-panel;
+            background: var(--panel-primary);
         }
 
         &:hover {
-            background: rgba(variables.$primary-color-panel, .7);
+            background: var(--panel-secondary);
         }
     }
 }
@@ -472,10 +472,10 @@ a.btn, a.action-btn, a.circle-btn {
     height: 125px;
     text-align: center;
     display: block;
-    color: variables.$text-muted;
+    color: var(--panel-text-muted);
 
     &:hover {
-        color:  color.adjust(variables.$primary-color-panel, $lightness: 7%);
+        color:  var(--panel-primary);
     }
 
     i {
@@ -490,12 +490,12 @@ a.btn, a.action-btn, a.circle-btn {
 }
 
 .avatar-x64 {
-    background: variables.$body-bg;
+    background: var(--panel-background);
     width: 64px;
     height: 64px;
     border-radius: 50%;
     object-fit: cover;
-    border: 3px rgba(variables.$primary-color-panel, 127) solid;
+    border: 3px var(--panel-primary) solid;
 }
 
 .skewed-container {
@@ -519,7 +519,7 @@ a.btn, a.action-btn, a.circle-btn {
 
     .card-header {
         background: #ffffff22 !important;
-        color: variables.$secondary-color-panel;
+        color: var(--panel-secondary);
     }
 
     .card-body {
@@ -541,7 +541,7 @@ a.btn, a.action-btn, a.circle-btn {
 
     .card-header {
         background: #ffffff22 !important;
-        color: variables.$secondary-color-panel;
+        color: var(--panel-secondary);
     }
 
     .card-body {
@@ -577,22 +577,22 @@ a.btn, a.action-btn, a.circle-btn {
     width: 75px;
     height: 75px;
     border-radius: 50%;
-    background: variables.$secondary-color-panel;
+    background: var(--panel-secondary);
     backdrop-filter: blur(4px);
     border: 0;
-    box-shadow: 0px 3px 5px #11111177, inset 0 0 0 0 darkred;
+    box-shadow: 0px 3px 5px #11111177, inset 0 0 0 0 var(--panel-secondary);
     user-select: none;
     cursor: pointer;
     transition: 500ms;
 
     &:hover {
-        box-shadow: 0px 3px 5px #11111177, inset 0 0 0 40px darkred;
+        box-shadow: 0px 3px 5px var(--panel-secondary), inset 0 0 0 40px var(--panel-secondary);
     }
 }
 
 .custom-tooltip {
-    --bs-tooltip-bg: var(--bs-indigo);
-    --bs-tooltip-color: var(--bs-white);
+    --bs-tooltip-bg: var(--panel-secondary);
+    --bs-tooltip-color: var(--panel-text);
 }
 
 .grid-equal {

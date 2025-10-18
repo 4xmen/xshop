@@ -1,11 +1,21 @@
 // Body
-$body-bg: #1b223a;
+//$body-bg: #1b223a;
+//
+//// Typography
+//$font-family-sans-serif: 'Vazirmatn', sans-serif;
+//$font-size-base: 0.9rem;
+//$line-height-base: 1.6;
+//$primary-color-panel: #6e0000;
+//$secondary-color-panel:  rgba(139, 0, 139, 0.86) ;
+//$lighter-color: #282d47;
+//$text-muted: silver;
 
-// Typography
-$font-family-sans-serif: 'Vazirmatn', sans-serif;
-$font-size-base: 0.9rem;
-$line-height-base: 1.6;
-$primary-color-panel: #6e0000;
-$secondary-color-panel:  rgba(139, 0, 139, 0.86) ;
-$lighter-color: #282d47;
-$text-muted: silver;
+:root{
+    --panel-background: #1b223a;
+    --panel-primary: #6e0000;
+    --panel-secondary: #8B008BDB;
+    --xshop-text: #ffffff;
+    --panel-text-muted: #c0c0c0;
+    --panel-lighter: #282d47 ;
+    --panel-darker: #21252b;
+}

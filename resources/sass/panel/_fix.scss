@@ -1,7 +1,7 @@
 @use "variables";
 .form-control:focus,.form-check-input:focus{
-    box-shadow: 0 0 0 0.25rem rgba(133, 13, 253, 0.25);
-border-color: #bc86fe;
+    box-shadow: 0 0 0 0.25rem rgba(var(--panel-secondary), 0.25);
+border-color: rgba(var(--panel-secondary), 0.25);
 }
 
 .forms{
@@ -10,13 +10,13 @@ border-color: #bc86fe;
         background-color: rgba(var(--bs-body-bg),.5);
         background-image: url("$resImage/pattern.png");
         backdrop-filter: blur(4px);
-        box-shadow: -2px -2px 7px #560000, 2px 2px 7px #5e00b5;
+        box-shadow: -2px -2px 7px var(--panel-primary), 2px 2px 7px var(--panel-secondary);
     }
 }
 
 main{
     .card{
-        background-color: variables.$lighter-color;
+        background-color:  var(--panel-lighter);
         border: 0;
         .card-header{
             background: #00000011;
@@ -38,26 +38,26 @@ main{
 
 
 .form-check-input:checked,.btn-primary{
-    background-color: #a60087;
-    border-color: #ff0067;
+    background-color: var(--panel-primary);
+    border-color: var(--panel-primary);
 }
 
 .btn-primary:hover{
-    background-color: #ff0067;
+    background-color:var(--panel-secondary);
 }
 
 a,a:visited{
     color: white;
     &:hover{
-        color: #ff0067;
+        color: var(--panel-primary);
     }
 }
 
 .pagination{
-    --bs-pagination-active-bg: #6e0000 ;
-    --bs-pagination-active-border-color: #810000;
-    --bs-pagination-color: #cb00a5;
-    --bs-pagination-hover-color: red;
+    --bs-pagination-active-bg:var(--panel-primary) ;
+    --bs-pagination-active-border-color: var(--panel-background);
+    --bs-pagination-color: var(--panel-primary,var(--panel-secondary));
+    --bs-pagination-hover-color:rgba(var(--panel-primary),.2);
 }
 
 .v-toast__item{

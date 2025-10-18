@@ -73,7 +73,7 @@
 
     .table-list {
         tr td a b, tr th a b {
-            color: variables.$secondary-color-panel;
+            color: var(--panel-secondary);
         }
 
         .btn-outline-light {
@@ -109,7 +109,7 @@
     }
 
     .steps li.active {
-        background: variables.$primary-color-panel;
+        background: var(--panel-primary);
         color: white;
     }
 

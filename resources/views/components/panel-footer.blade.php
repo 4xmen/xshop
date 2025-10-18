@@ -11,6 +11,12 @@
     var website_text_color = "{{gfx()['text']}}";
     var website_font = "{{gfx()['font']}}";
     window.routesList = @json(getAdminRoutes());
+
+    const el = document.querySelector('body');
+
+    // get color of panel
+    var primaryColor = getComputedStyle(el).getPropertyValue('--panel-primary').trim();
+    var secondaryColor = getComputedStyle(el).getPropertyValue('--panel-secondary').trim();
 </script>
 @include('components.translates')
 </body>

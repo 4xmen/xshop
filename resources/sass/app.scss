@@ -32,7 +32,7 @@
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-    background: darkred;
+    background: var(--panel-primary);
 }
 
 /* Handle on hover */
@@ -65,7 +65,7 @@ a{
 
     >aside{
         background-image: url("../images/pattern.png");
-        background-color: color.adjust(variables.$body-bg, $lightness: 7%);
+        background-color: var(--panel-lighter);
         position: relative;
     }
     &.sided{
