@@ -156,6 +156,14 @@ class SettingSeeder extends Seeder
                     'key' => 'guarantee',
                     'type' => 'TEXT',
                     'value' => '',
+                    'size' => 6,
+                ],
+                [
+                    'title' => __('Pagination page +2 (no-index, follow)'),
+                    'key' => 'page2',
+                    'type' => 'CHECKBOX',
+                    'value' => 0,
+                    'size' => 6,
                 ],
             ],
             'Media' => [

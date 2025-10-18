@@ -9,7 +9,11 @@
     @if(config('app.demo') || isset($noIndex))
         <meta name="robots" content="noindex">
     @else
-        <meta name="robots" content="follow,index">
+        @if(getSetting('page2') && request()->get('page') > 2 )
+            <meta name="robots" content="follow,noindex">
+        @else
+            <meta name="robots" content="follow,index">
+        @endif
         <link rel="alternate" type="application/rss+xml" title="{{__("Post RSS Feed")}}" href="{{route('rss.post')}}" />
         <link rel="alternate" type="application/rss+xml" title="{{__("Product RSS Feed")}}" href="{{route('rss.product')}}" />
     @endif

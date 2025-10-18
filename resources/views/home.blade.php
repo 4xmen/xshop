@@ -256,7 +256,7 @@
                     datasets: [
                         {
                             label: "{{__('Orders')}}",
-                            backgroundColor: secondaryColor + '33',
+                            backgroundColor: secondaryColor ,
                             borderColor: secondaryColor,
                             data: @json($orders),
                             fill: true,
@@ -264,7 +264,7 @@
                         {
                             label: "{{__('Invoices')}}",
                             backgroundColor: primaryColor,
-                            borderColor: primaryColor + '33',
+                            borderColor: primaryColor ,
                             data: @json($invoices),
                             fill: true,
                         },
