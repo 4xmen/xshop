@@ -667,27 +667,37 @@ function validateSettingRequest($setting, $newValue)
 }
 
 
-/***
- * get setting by key
- * @param string $key setting key
- * @return false|mixed|string|null
+/**
+ * get setting by key with cache
+ *
+ * @param string $key   setting key
+ * @param int    $ttl   cache ttl in seconds (default 3600)
+ * @return string|false|mixed|null
  */
-function getSetting($key)
+function getSetting(string $key, int $ttl = 3600)
 {
+    // skip cache when running in CLI or the settings table does not exist
     if (!isset($_SERVER['SERVER_NAME']) || !\Schema::hasTable('settings')) {
         return false;
     }
-    $x = Setting::where('key', $key)->first();
-    if ($x == null) {
-//        $a = new \stdClass();
-        return '';
-    }
 
-    $txtType = ['TEXT', 'LONGTEXT', 'EDITOR'];
-    if (config('app.xlang') && !in_array($x->type, $txtType)) {
-        return $x->raw;
-    }
-    return $x->value;
+    $cacheKey = "setting:{$key}";
+
+    // retrieve from cache or query the database and store the result
+    return Cache::remember($cacheKey, $ttl, function () use ($key) {
+        $setting = Setting::where('key', $key)->first();
+
+        if (is_null($setting)) {
+            return '';
+        }
+
+        $txtTypes = ['TEXT', 'LONGTEXT', 'EDITOR'];
+        if (config('app.xlang') && !in_array($setting->type, $txtTypes)) {
+            return $setting->raw;
+        }
+
+        return $setting->value;
+    });
 }
 
 /**

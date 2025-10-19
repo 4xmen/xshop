@@ -3,6 +3,7 @@
 namespace App\Observers;
 
 use App\Models\Setting;
+use Illuminate\Support\Facades\Cache;
 
 class SettingObsever
 {
@@ -22,6 +23,7 @@ class SettingObsever
     public function updated(Setting $setting): void
     {
         //
+        Cache::forget("setting:{$setting->key}");
     }
 
     /**
