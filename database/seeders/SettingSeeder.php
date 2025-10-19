@@ -165,6 +165,20 @@ class SettingSeeder extends Seeder
                     'value' => 0,
                     'size' => 6,
                 ],
+                [
+                    'title' => __('Lazy load'),
+                    'key' => 'lazyload',
+                    'type' => 'CHECKBOX',
+                    'value' => 0,
+                    'size' => 6,
+                ],
+                [
+                    'title' => __('Product grid class'),
+                    'key' => 'grid-class',
+                    'type' => 'TEXT',
+                    'value' => '',
+                    'size' => 6,
+                ],
             ],
             'Media' => [
                 [

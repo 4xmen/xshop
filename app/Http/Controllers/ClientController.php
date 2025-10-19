@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Contracts\Payment;
 use App\Http\Requests\ContactSubmitRequest;
 use App\Mail\AuthMail;
+use App\Models\Area;
 use App\Models\Attachment;
 use App\Models\Category;
 use App\Models\Clip;
@@ -136,6 +137,9 @@ class ClientController extends Controller
         $subtitle = '';
         $products = Product::where('status', 1)
             ->orderByDesc('id')->paginate($this->paginate);
+        if (\request()->ajax()) {
+            return view('client.raw-products',compact('products'));
+        }
         return view('client.default-list', compact('area', 'products', 'title', 'subtitle'));
     }
 
@@ -441,6 +445,9 @@ class ClientController extends Controller
 
         $products = $query->paginate($this->paginate);
 
+        if (\request()->ajax()) {
+            return view('client.raw-products',compact('products'));
+        }
         if ($category->parent_id == null) {
             $breadcrumb = [
                 __('Products') => productsUrl(),
@@ -463,8 +470,6 @@ class ClientController extends Controller
         $area = 'creator';
         $title = $creator->name;
         $subtitle = $creator->subtitle;
-
-
 
 
         $products = $creator->products()->where('status', 1)->paginate($this->paginate);

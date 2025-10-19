@@ -14,14 +14,14 @@
         </div>
 
         <div class="py-3">
-            <div class="row">
+            <div class="row" id="list-row">
                 @foreach($products as $product)
-                    <div class="col-md-4 p-2">
+                    <div class="{{getSetting('grid-class')}}">
                         @include(\App\Models\Area::where('name','product-grid')->first()->defPart(),compact('product'))
                     </div>
                 @endforeach
             </div>
-            {{$products->withQueryString()->links()}}
+            @include('website.inc.website-lazy-pagination',['items' => $products])
 
         </div>
     </div>

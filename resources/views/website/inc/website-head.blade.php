@@ -134,7 +134,7 @@
     @endif
 </head>
 <body @yield('body-attr')>
-
+<input type="hidden" id="lazy-load" value="{{getSetting('lazyload')}}">
 @php($preloader = hasPart('preloader'))
 
 <div id="website-preloader">

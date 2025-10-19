@@ -1,4 +1,5 @@
-<section class='ProductGridSidebar content live-setting' data-live="{{$data->area_name.'_'.$data->part}}" id="product-list-view">
+<section class='ProductGridSidebar content live-setting' data-live="{{$data->area_name.'_'.$data->part}}"
+         id="product-list-view">
     <div class="{{gfx()['container']}}">
         <h1>
             {{$title}}
@@ -10,14 +11,14 @@
                 </div>
             @endif
             <div class="col-lg-9">
-                <div class="row">
+                <div class="row" id="list-row">
                     @foreach($products as $product)
-                        <div class="col-md-4 p-2">
+                        <div class="{{getSetting('grid-class')}}">
                             @include(\App\Models\Area::where('name','product-grid')->first()->defPart(),compact('product'))
                         </div>
                     @endforeach
                 </div>
-                {{$products->withQueryString()->links()}}
+                @include('website.inc.website-lazy-pagination',['items' => $products])
 
             </div>
             @if(getSetting($data->area_name.'_'.$data->part.'_invert'))
