@@ -19,7 +19,15 @@
                 </h3>
                 <ul>
                     <li>
-                        {{__("Recommends")}}
+                        {{__("You can set the theme of this item exclusively")}} : <a href="{{route('admin.area.design.model',['post','Post',$item->id])}}" class="btn btn-secondary btn-sm"> <i class="ri-palette-line"></i> </a>
+                    </li>
+                    <li>
+                        {{__("You can add some attachment to this item")}}
+                    </li>
+                    <li>
+                        {{__("What the visitor sees")}} : <a href="{{$item->webUrl()}}" target="_blank" class="btn btn-primary btn-sm">
+                            {{__("Preview")}}
+                        </a>
                     </li>
                 </ul>
             </div>
@@ -103,7 +111,7 @@
 
                 <h1>
                     @if(isset($item))
-                        {{__("Edit post")}} [{{$item->title}}] <a href="{{route('admin.area.design.model',['post','Post',$item->id])}}" class="btn btn-secondary"> <i class="ri-palette-line"></i> </a>
+                        {{__("Edit post")}} [{{$item->title}}]
                     @else
                         {{__("Add new post")}}
                     @endif
