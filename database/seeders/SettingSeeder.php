@@ -159,7 +159,7 @@ class SettingSeeder extends Seeder
                     'size' => 6,
                 ],
                 [
-                    'title' => __('Pagination page +2 (no-index, follow)'),
+                    'title' => __('Pagination page +1 canonical to main page'),
                     'key' => 'page2',
                     'type' => 'CHECKBOX',
                     'value' => 0,

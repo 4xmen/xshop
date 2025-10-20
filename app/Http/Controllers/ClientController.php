@@ -196,9 +196,11 @@ class ClientController extends Controller
         $posts = Post::withAnyTags([$tag])->where('status', 1)->paginate(100);
         $products = Product::withAnyTags([$tag])->where('status', 1)->paginate(100);
         $clips = Clip::withAnyTags([$tag])->where('status', 1)->paginate(100);
+
+        $canonical = \route('client.welcome');
         $title = __('Tag') . ': ' . $tag->name;
         $subtitle = '';
-        return view('client.tag', compact('tag', 'posts', 'products', 'clips', 'title', 'subtitle'));
+        return view('client.tag', compact('tag', 'posts', 'products', 'clips', 'title', 'subtitle','canonical'));
     }
 
 

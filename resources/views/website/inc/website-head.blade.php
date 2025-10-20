@@ -14,8 +14,8 @@
         @if(request()->has('sort') || request()->has('meta') )
             <meta name="robots" content="follow,noindex">
         @else
-            @if(getSetting('page2') && request()->get('page',1) > 2 )
-                <meta name="robots" content="follow,noindex">
+            @if(getSetting('page2') && request()->get('page',1) > 1 )
+                <link rel="canonical" href="{{url()->current()}}" />
             @else
                 <meta name="robots" content="follow,index">
             @endif
@@ -131,6 +131,11 @@
     @else
         <meta name="description" content="{{getSetting('desc')}}">
         <meta name="keywords" content="{{getSetting('keyword')}}">
+    @endif
+
+    {{--  other canonical--}}
+    @if(isset($canonical) )
+        <link rel="canonical" href="{{$canonical}}"/>
     @endif
 </head>
 <body @yield('body-attr')>
