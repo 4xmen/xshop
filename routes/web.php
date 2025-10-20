@@ -446,7 +446,7 @@ Route::middleware([\App\Http\Middleware\VisitorCounter::class])
         Route::post('/customer/sign-up/now', [ClientController::class, 'signUpNow'])->name('sign-up-now');
         Route::get('/customer/send/auth-code', [ClientController::class, 'sendSms'])->name('send-sms');
         Route::get('/customer/check/auth-code', [ClientController::class, 'checkAuth'])->name('check-auth');
-        Route::get('/customer/profile', [ClientController::class, 'profile'])->name('profile');
+        Route::get('/customer/profile', [\App\Http\Controllers\CustomerController::class, 'profile'])->name('profile');
         Route::post('/customer/rate', [ClientController::class, 'rate'])->name('rate');
         Route::get('/compare', [ClientController::class, 'compare'])->name('compare');
         Route::get('/contact-us', [ClientController::class, 'contact'])->name('contact');
