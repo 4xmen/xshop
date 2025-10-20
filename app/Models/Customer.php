@@ -109,4 +109,8 @@ class Customer extends Authenticatable
         }
         return 'regular';
     }
+
+    public function unsuccessInvoices(){
+        return $this->invoices()->whereIn('status',[ 'PENDING', 'CANCELED', 'FAILED']);
+    }
 }

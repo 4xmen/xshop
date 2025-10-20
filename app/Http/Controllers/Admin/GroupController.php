@@ -32,6 +32,7 @@ class GroupController extends XController
     protected $listView = 'admin.groups.group-list';
     protected $formView = 'admin.groups.group-form';
 
+    protected $with = ['parent'];
 
     protected $buttons = [
         'edit' =>

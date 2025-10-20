@@ -30,6 +30,8 @@ class InvoiceController extends XController
     protected $listView = 'admin.invoices.invoice-list';
     protected $formView = 'admin.invoices.invoice-form';
 
+    protected $with = ['customer'];
+
 
     protected $buttons = [
         'edit' =>
@@ -95,6 +97,18 @@ class InvoiceController extends XController
     public function edit(Invoice $item)
     {
         //
+        $item->load([
+            'customer' => function ($q) {
+                $q->with([
+                    'unsuccessInvoices',
+                    'addresses',
+                    'invoices',
+                ]);
+            },
+            'orders.product.quantities',
+            'address',
+        ]);
+
         return view($this->formView, compact('item'));
     }
 

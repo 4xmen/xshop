@@ -784,7 +784,12 @@ function getParts($areaName, $custom = null)
             return $customs->get();
         }
     }
-    return Area::where('name', $areaName)->first()->parts()->orderBy('sort')->get();
+    return Area::with('parts')
+        ->where('name', $areaName)
+        ->first()
+        ->parts()
+        ->orderBy('sort')
+        ->get();
 }
 
 
@@ -837,7 +842,7 @@ function getGrayscaleTextColor($bgColor)
  */
 function getGroupBySetting($key)
 {
-    return Group::where('id', getSetting($key) ?? 1)->first();
+    return Group::with('posts')->where('id', getSetting($key) ?? 1)->first();
 }
 
 /**
@@ -850,7 +855,7 @@ function getMenuBySetting($key)
     if (Menu::count() == 0) {
         return [];
     }
-    return Menu::where('id', getSetting($key) ?? 1)->first();
+    return Menu::with('items')->where('id', getSetting($key) ?? 1)->first();
 }
 
 /**
@@ -863,7 +868,7 @@ function getMenuBySettingItems($key)
     if (Menu::count() == 0) {
         return [];
     }
-    $r = Menu::where('id', getSetting($key) ?? 1)->first();
+    $r = Menu::with('items')->where('id', getSetting($key) ?? 1)->first();
     if ($r == null) {
         $r = Menu::first();
     }
@@ -895,7 +900,7 @@ function getGroupPostsBySetting($key, $limit = 10, $order = 'id', $dir = "DESC")
  */
 function getCategoryProductBySetting($key, $limit = 10, $order = 'id', $dir = "DESC")
 {
-    return Category::where('id', getSetting($key) ?? 1)->first()
+    return Category::with('products')->where('id', getSetting($key) ?? 1)->first()
         ->products()->where('status', 1)->orderBy($order, $dir)->limit($limit)->get();
 }
 
@@ -911,7 +916,7 @@ function getProductsQueryBySetting($key, $limit = 10)
     if ($data[0] == 0) {
         $q = Product::where('status', 1);
     } else {
-        $q = Category::where('id', $data[0])->first()
+        $q = Category::with('products')->where('id', $data[0])->first()
             ->products()->where('status', 1);
     }
     return $q->orderBy($data[1], $data[2])->limit($limit)->get();
@@ -929,7 +934,7 @@ function getPostsQueryBySetting($key, $limit = 10)
     if ($data[0] == 0) {
         $q = Post::where('status', 1);
     } else {
-        $q = Group::where('id', $data[0])->first()
+        $q = Group::with('posts')->where('id', $data[0])->first()
             ->posts()->where('status', 1);
     }
     return $q->orderBy($data[1], $data[2])->limit($limit)->get();
@@ -945,7 +950,7 @@ function getPostsQueryBySetting($key, $limit = 10)
  */
 function getCategorySubCatsBySetting($key, $limit = 10, $order = 'id', $dir = "DESC")
 {
-    $c = Category::where('id', getSetting($key) ?? 1)->first();
+    $c = Category::with('children')->where('id', getSetting($key) ?? 1)->first();
     if ($c == null) {
         return [];
     }
@@ -1472,7 +1477,7 @@ function findArea($name, $model = null)
     if ($model != null && $model->theme != null) {
         return json_decode($model->theme);
     }
-    return \App\Models\Area::where('name', $name)->first();
+    return \App\Models\Area::with('parts')->where('name', $name)->first();
 }
 
 /**
@@ -1494,7 +1499,7 @@ function cacheNumber()
  */
 function getMainCategory($limit = 4, $orderBy = 'sort', $asc = 'ASC')
 {
-    return \App\Models\Category::whereNull('parent_id')->limit($limit)->orderBy($orderBy, $asc)->get();
+    return \App\Models\Category::with(['children','products'])->whereNull('parent_id')->limit($limit)->orderBy($orderBy, $asc)->get();
 }
 
 
@@ -1508,7 +1513,7 @@ function getMainCategory($limit = 4, $orderBy = 'sort', $asc = 'ASC')
  */
 function getSubGroupSetting($key, $limit = 10, $order = 'id', $dir = "DESC")
 {
-    return Group::where('id', getSetting($key) ?? 1)->first()
+    return Group::with('children')->where('id', getSetting($key) ?? 1)->first()
         ->children()->orderBy($order, $dir)->limit($limit)->get();
 }
 
@@ -1523,7 +1528,7 @@ function getSubGroupSetting($key, $limit = 10, $order = 'id', $dir = "DESC")
  */
 function getCategoriesSet($key, $limit = 4, $orderBy = 'sort', $asc = 'ASC')
 {
-    return \App\Models\Category::whereIn('id', json_decode(getSetting($key) ?? []))->where('hide', 0)->limit($limit)->orderBy($orderBy, $asc)->get();
+    return Category::with('products')->whereIn('id', json_decode(getSetting($key) ?? []))->where('hide', 0)->limit($limit)->orderBy($orderBy, $asc)->get();
 }
 
 
@@ -1537,7 +1542,7 @@ function getCategoriesSet($key, $limit = 4, $orderBy = 'sort', $asc = 'ASC')
  */
 function getGroupsSet($key, $limit = 4, $orderBy = 'sort', $asc = 'ASC')
 {
-    return \App\Models\Group::whereIn('id', json_decode(getSetting($key) ?? []))->where('hide', 0)->limit($limit)->orderBy($orderBy, $asc)->get();
+    return \App\Models\Group::with('posts')->whereIn('id', json_decode(getSetting($key) ?? []))->where('hide', 0)->limit($limit)->orderBy($orderBy, $asc)->get();
 }
 
 

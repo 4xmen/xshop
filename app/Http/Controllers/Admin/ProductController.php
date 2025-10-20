@@ -28,6 +28,8 @@ class ProductController extends XController
     protected $listView = 'admin.products.product-list';
     protected $formView = 'admin.products.product-form';
 
+    protected $with = ['category'];
+
     protected $buttons = [
         'edit' =>
             ['title' => "Edit", 'class' => 'btn-outline-primary', 'icon' => 'ri-edit-2-line'],

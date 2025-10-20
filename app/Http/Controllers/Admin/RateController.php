@@ -25,6 +25,7 @@ class RateController extends XController
     protected $listView = 'admin.rates.rate-list';
     protected $formView = 'admin.rates.rate-form';
 
+    protected $with = ['evaluation'];
 
     protected $buttons = [
 //        'edit' =>

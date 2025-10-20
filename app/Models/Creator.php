@@ -131,4 +131,9 @@ class Creator extends Model
                 ->where('evaluationable_id',$this->id);
         })->get();
     }
+
+    public function parent()
+    {
+        return $this->belongsTo(Creator::class, 'parent_id');
+    }
 }

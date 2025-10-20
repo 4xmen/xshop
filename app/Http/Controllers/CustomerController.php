@@ -60,7 +60,7 @@ class CustomerController extends Controller
         $title = __("Profile");
         $subtitle = 'You information';
         return view('client.default-list', compact('area', 'title', 'subtitle'));
-        return auth('customer')->user();
+//        return auth('customer')->user();
     }
 
     public function save(Request $request)
@@ -131,6 +131,19 @@ class CustomerController extends Controller
         if (!auth('customer')->check() || $invoice->customer_id != auth('customer')->id()) {
             return redirect()->route('client.sign-in')->withErrors([__('You need to login to access this page')]);
         }
+
+
+        // Load everything that will be accessed in the view
+        $invoice->load([
+            'customer',
+            // orders and the product for each order
+            'orders.product',
+            // quantity (and its meta array) for each order
+            'orders.quantity',
+            // address and its related state / city
+            'address.state',
+            'address.city',
+        ]);
 
         $area = 'invoice';
         $title = __("Invoice");

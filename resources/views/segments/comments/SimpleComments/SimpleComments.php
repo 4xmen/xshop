@@ -3,6 +3,7 @@
 namespace Resources\Views\Segments;
 
 use App\Models\Part;
+use App\Models\Post;
 
 class SimpleComments
 {
@@ -19,7 +20,7 @@ class SimpleComments
         if ($model == null){
             return $part;
         }
-        $part->comments = $model->approvedComments()->whereNull('parent_id')->orderBy('id','desc')->get();
+        $part->comments = $model->approvedComments()->with('children')->whereNull('parent_id')->orderBy('id','desc')->get();
         $part->commentable_type = get_class($model);
         $part->commentable_id = $model->id;
         return $part;

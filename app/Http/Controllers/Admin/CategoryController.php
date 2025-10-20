@@ -29,6 +29,7 @@ class CategoryController extends XController
 
     protected $searchable = ['name', 'subtitle', 'description'];
 
+    protected $with = ['parent'];
 
     protected $listView = 'admin.categories.category-list';
     protected $formView = 'admin.categories.category-form';

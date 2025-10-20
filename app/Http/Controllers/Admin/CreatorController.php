@@ -30,6 +30,7 @@ class CreatorController extends XController
     protected $listView = 'admin.creators.creator-list';
     protected $formView = 'admin.creators.creator-form';
 
+    protected $with = ['parent'];
 
     protected $buttons = [
         'edit' =>

@@ -23,6 +23,9 @@ abstract class XController extends Controller
     protected $listView = 'admin.users.user-list';
     protected $formView = 'admin.users.user-form';
 
+    protected $with = [];
+    protected $withSingle = [];
+
     protected $searchable = [];
 
     public function __construct($model = null, $request = null)
@@ -68,9 +71,9 @@ abstract class XController extends Controller
 
 
         if (!\request()->has('sort') || !in_array(\request('sort'), $this->cols)) {
-            $query = $this->_MODEL_::orderByDesc('id');
+            $query = $this->_MODEL_::with($this->with)->orderByDesc('id');
         } else {
-            $query = $this->_MODEL_::orderBy(\request('sort'), \request('sortType', 'asc'));
+            $query = $this->_MODEL_::with($this->with)->orderBy(\request('sort'), \request('sortType', 'asc'));
         }
 
         foreach (\request()->input('filter', []) as $col => $filter) {

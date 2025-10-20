@@ -129,6 +129,7 @@ class CustomerController extends XController
     public function edit(Customer $item)
     {
         //
+        $item->load(['addresses','credits','creditHistory']);
         return view($this->formView, compact('item'));
     }
 
