@@ -17,7 +17,7 @@ return new class extends Migration
             $table->text('description')->nullable()->default(null);
             $table->unsignedInteger('sort')->default(0);
             $table->boolean('is_default')->default(0);
-            $table->unsignedInteger('price')->default(0);
+            $table->decimal('price',20)->default(0);
             $table->string('icon')->nullable();
             $table->softDeletes();
             $table->timestamps();

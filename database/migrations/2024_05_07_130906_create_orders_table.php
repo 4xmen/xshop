@@ -17,7 +17,7 @@ return new class extends Migration
             $table->unsignedBigInteger('product_id');
             $table->unsignedBigInteger('quantity_id')->nullable();
             $table->integer('count')->nullable()->default(1);
-            $table->unsignedInteger('price_total');
+            $table->decimal('price_total',20,2)->unsigned();
             $table->json('data')->nullable()->default(null);;
             $table->timestamps();
 

@@ -16,7 +16,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('customer_id');
             $table->enum("status",\App\Models\Invoice::$invoiceStatus)->nullable()->default("PENDING");
-            $table->unsignedBigInteger('total_price')->nullable()->default(0);
+            $table->decimal('total_price',20)->nullable()->default(0);
             $table->integer('count')->nullable()->default(0);
             $table->json('meta')->nullable();
             $table->unsignedBigInteger('discount_id')->nullable()->default(null);
@@ -24,8 +24,8 @@ return new class extends Migration
             $table->string('hash',32)->nullable()->default(null)->unique()->index();
 
             $table->unsignedBigInteger('transport_id')->nullable()->default(null);
-            $table->unsignedBigInteger('transport_price')->default(0);
-            $table->unsignedBigInteger('credit_price')->default(0);
+            $table->decimal('transport_price',20)->default(0);
+            $table->decimal('credit_price',20)->default(0);
 
             $table->boolean('reserve')->default(0);
             $table->unsignedBigInteger('invoice_id')->nullable()->default(null);
