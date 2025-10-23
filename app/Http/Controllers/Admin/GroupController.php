@@ -75,7 +75,7 @@ class GroupController extends XController
         }
         $group->slug = $this->getSlug($group);
         if ($request->has('image')) {
-            $group->image = $this->storeFile('image', $group, $target);
+            $group->image =  substr($this->storeFile('image', $group, $target),strlen($target)+1);
             $key = 'image';
             $this->saveImage($group, $key, $target);
 //            $format = $request->file($key)->guessExtension();
@@ -86,7 +86,7 @@ class GroupController extends XController
 
         }
         if ($request->has('bg')) {
-            $group->bg = $this->storeFile('bg', $group, $target);
+            $group->bg =  substr($this->storeFile('bg', $group, $target),strlen($target)+1);
             $key = 'bg';
 //            $format = $request->file($key)->guessExtension();
 //            if (strtolower($format) == 'png') {

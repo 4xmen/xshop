@@ -76,7 +76,7 @@ class CategoryController extends XController
         }
         $category->slug = $this->getSlug($category);
         if ($request->has('image')) {
-            $category->image = $this->storeFile('image', $category, $target);
+            $category->image = substr($this->storeFile('image', $category, $target),strlen($target)+1);
             $key = 'image';
 //            $format = $request->file($key)->guessExtension();
 //            if (strtolower($format) == 'png') {
@@ -86,7 +86,7 @@ class CategoryController extends XController
             $this->saveImage($category, $key, $target);
         }
         if ($request->has('bg')) {
-            $category->bg = $this->storeFile('bg', $category, $target);
+            $category->bg = substr($this->storeFile('bg', $category, $target),strlen($target)+1);
             $key = 'bg';
 //            $format = $request->file($key)->guessExtension();
 //            if (strtolower($format) == 'png') {

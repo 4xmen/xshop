@@ -73,7 +73,7 @@ class CreatorController extends XController
         $creator->slug = $this->getSlug($creator);
 
         if ($request->has('image')) {
-            $creator->image = $this->storeFile('image', $creator, $target);
+            $creator->image = substr($this->storeFile('image', $creator, $target),strlen($target)+1);
             $key = 'image';
 //            $format = $request->file($key)->guessExtension();
 //            if (strtolower($format) == 'png') {
