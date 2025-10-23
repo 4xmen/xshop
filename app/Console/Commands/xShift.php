@@ -78,7 +78,7 @@ class xShift extends Command
                     $c->id = $category->id;
                     $c->name = $category->title;
                     $c->description = $category->description;
-                    $c->slug = $category->slug;
+                    $c->slug = urldecode($category->slug);
                     $c->parent_id = $category->parent_id == 0 ? null : $category->parent_id;
                     $c->save();
                     if ($category->thumbnail != null) {
@@ -111,7 +111,7 @@ class xShift extends Command
                     $g->id = $group->id;
                     $g->name = $group->title;
                     $g->description = $group->description;
-                    $g->slug = $group->slug;
+                    $g->slug = urldecode($group->slug);
                     $g->parent_id = $group->parent_id == 0 ? null : $group->parent_id;
                     $g->save();
                 }
@@ -127,7 +127,7 @@ class xShift extends Command
                     $p = new Post();
                     $p->id = $post->id;
                     $p->title = $post->title;
-                    $p->slug = $post->slug;
+                    $p->slug = urldecode($post->slug);
                     $p->body = $post->content;
                     $p->subtitle = $post->excerpt;
                     $p->group_id = $post->categories[0];
@@ -145,8 +145,9 @@ class xShift extends Command
                     }
                     $p->syncTags($post->tags);
                     $p->groups()->attach($post->categories);
+                    $p->created_at = $post->date;
                     $p->save();
-                    // WIP: created at
+
 
                 }
                 break;
@@ -161,7 +162,7 @@ class xShift extends Command
                     $p = new Product();
                     $p->id = $product->id;
                     $p->name = $product->name;
-                    $p->slug = $product->slug;
+                    $p->slug = urldecode($product->slug);
                     $p->description = $product->description;
                     $p->excerpt = $product->short_description;
                     $p->category_id = $product->product_category_ids[0];
@@ -200,8 +201,9 @@ class xShift extends Command
                         }
                     }
                     $p->categories()->attach($product->product_category_ids);
+                    $p->created_at = $product->date;
                     $p->save();
-                    // WIP: additional_informations, created at
+                    // WIP: additional_informations
 
                 }
                 break;
