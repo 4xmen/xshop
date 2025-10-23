@@ -11,7 +11,7 @@ return new class extends Migration
         // Add credit column to customers table if not exists
         if (!Schema::hasColumn('customers', 'credit')) {
             Schema::table('customers', function (Blueprint $table) {
-                $table->decimal('credit', 15, 2)->default(0)->after('password');
+                $table->decimal('credit', 20, 2)->default(0)->after('password');
                 $table->index('credit');
             });
         }
