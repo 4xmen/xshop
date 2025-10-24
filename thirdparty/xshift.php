@@ -176,6 +176,7 @@ class XShift
                 'parent_id' => $term->parent,
                 'description' => $term->description,
                 'thumbnail' => $thumbnail_url,
+                'link' => get_term_link($term),
             ];
         }
 

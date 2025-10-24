@@ -10,7 +10,9 @@ use App\Models\Invoice;
 use App\Models\Order;
 use App\Models\Post;
 use App\Models\Product;
+use App\Models\Redirect;
 use App\Models\User;
+use Carbon\Carbon;
 use GuzzleHttp\Client;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
@@ -81,15 +83,16 @@ class xShift extends Command
                     $c->slug = urldecode($category->slug);
                     $c->parent_id = $category->parent_id == 0 ? null : $category->parent_id;
                     $c->save();
+                    $this->checkRedirect($category->link, $c->webUrl());
                     if ($category->thumbnail != null) {
                         $path = parse_url($category->thumbnail, PHP_URL_PATH);
                         $info = pathinfo($path);
-                        $temp = tempnam(sys_get_temp_dir(), 'TMP_') ;
+                        $temp = tempnam(sys_get_temp_dir(), 'TMP_');
                         if ($this->downloadToTemp($category->thumbnail, $temp)) {
-                            \File::copy($temp,storage_path().'/app/public/categories/' .$info['basename']);
+                            \File::copy($temp, storage_path() . '/app/public/categories/' . $info['basename']);
                             $c->image = $info['basename'];
                             $c->save();
-                            XController::saveOptimizedImage($c,'image','categories',storage_path().'/app/public/categories/' .$info['basename']);
+                            XController::saveOptimizedImage($c, 'image', 'categories', storage_path() . '/app/public/categories/' . $info['basename']);
                         } else {
                             $this->info('Error image download:', $category->thumbnail);
                         }
@@ -114,6 +117,7 @@ class xShift extends Command
                     $g->slug = urldecode($group->slug);
                     $g->parent_id = $group->parent_id == 0 ? null : $group->parent_id;
                     $g->save();
+                    $this->checkRedirect($group->link, $g->webUrl());
                 }
                 break;
             case 'post':
@@ -133,10 +137,10 @@ class xShift extends Command
                     $p->group_id = $post->categories[0];
                     $p->user_id = User::first()->id;
                     $p->status = 1;
-                    $p->hash =  date('Ym') . str_pad(dechex(crc32($post->slug)), 8, '0', STR_PAD_LEFT);
+                    $p->hash = date('Ym') . str_pad(dechex(crc32($post->slug)), 8, '0', STR_PAD_LEFT);
 
                     if ($post->featured_image != false) {
-                        $temp = tempnam(sys_get_temp_dir(), 'TMP_') ;
+                        $temp = tempnam(sys_get_temp_dir(), 'TMP_');
                         if ($this->downloadToTemp($post->featured_image, $temp)) {
                             $p->addMedia($temp)
                                 ->preservingOriginal() //middle method
@@ -147,6 +151,7 @@ class xShift extends Command
                     $p->groups()->attach($post->categories);
                     $p->created_at = $post->date;
                     $p->save();
+                    $this->checkRedirect($post->link, $p->webUrl());
 
 
                 }
@@ -180,7 +185,7 @@ class xShift extends Command
                     }
 
 
-                    switch ($product->stock){
+                    switch ($product->stock) {
                         case 'instock':
                             $p->stock_status = 'IN_STOCK';
                             break;
@@ -193,7 +198,7 @@ class xShift extends Command
                     }
 
                     foreach ($product->images as $image) {
-                        $temp = tempnam(sys_get_temp_dir(), 'TMP_') ;
+                        $temp = tempnam(sys_get_temp_dir(), 'TMP_');
                         if ($this->downloadToTemp($image, $temp)) {
                             $p->addMedia($temp)
                                 ->preservingOriginal() //middle method
@@ -203,6 +208,7 @@ class xShift extends Command
                     $p->categories()->attach($product->product_category_ids);
                     $p->created_at = $product->date;
                     $p->save();
+                    $this->checkRedirect($product->link, $p->webUrl());
                     // WIP: additional_informations
 
                 }
@@ -292,4 +298,38 @@ class xShift extends Command
             return false;
         }
     }
+
+    /**
+     * Returns only the path component of a URL.
+     *
+     * @param string $url The full URL (e.g. "http://wp.test/category/uncategorized/")
+     * @return string     The path (e.g. "/category/uncategorized/")
+     */
+    function getUrlPath(string $url): string
+    {
+        // Parse the URL and get the path component
+        $path = parse_url($url, PHP_URL_PATH);
+
+        // Ensure the path starts with a slash
+        if ($path === null) {
+            return '/';
+        }
+        return '/' . ltrim($path, '/');
+    }
+
+    public function checkRedirect($old, $new)
+    {
+
+        $old = $this->getUrlPath($old);
+        $new = $this->getUrlPath($new);
+        if (trim($old,'/') !== trim($new,'/')) {
+            $r = new Redirect();
+            $r->source = rtrim($old,'/');
+            $r->destination = $new;
+            $r->status = 1;
+            $r->expire = date('y-m-d', strtotime('+180 days'));
+            $r->save();
+        }
+    }
+
 }
