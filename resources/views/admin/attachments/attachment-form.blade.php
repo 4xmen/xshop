@@ -49,19 +49,20 @@
                                 </li>
                                 <li>
                                     {{__("File ext")}}: <b>{{$item->ext}}</b>
+                                </li>
                                 <li>
                                     {{__("File size")}}: <b>{{formatFileSize($item->size)}}</b>
                                 </li>
                             </ul>
 
-                            <div class="input-group mb-3 copiable" >
+                            <div class="input-group mb-3 copiable">
                                 <span class="input-group-text">{{__("Short code")}}</span>
                                 <input type="text" class="form-control" value="[ATTACHED:{{$item->id}}]">
                                 <button type="button" class="input-group-text copy-btn" data-bs-toggle="tooltip"
                                         data-bs-placement="top"
                                         data-bs-custom-class="custom-tooltip"
                                         data-bs-title="{{__("Copy")}}">
-                                    <i class="ri-file-copy-line"  ></i>
+                                    <i class="ri-file-copy-line"></i>
                                 </button>
                             </div>
                             <a href="{{$item->url()}}" class="btn btn-dark w-100">
@@ -83,7 +84,7 @@
                             xlang="{{config('app.locale')}}"
                             @if(isset($item))
                                 xmorph="{{$item->attachable_type}}"
-                                :xid="{{$item->attachable_id}}"
+                            :xid="{{$item->attachable_id}}"
                             @endif
                         ></morph-selector>
                     </div>

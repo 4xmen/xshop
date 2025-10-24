@@ -401,6 +401,24 @@ Route::prefix(config('app.panel.prefix'))->name('admin.')->group(
                         Route::post('bulk', [\App\Http\Controllers\Admin\StateController::class, "bulk"])->name('bulk');
                         Route::get('trashed', [\App\Http\Controllers\Admin\StateController::class, "trashed"])->name('trashed');
                     });
+
+                Route::prefix('stories')->name('story.')->group(
+                    function () {
+                        Route::get('', [\App\Http\Controllers\Admin\StoryController::class, 'index'])->name('index');
+                        Route::get('create', [\App\Http\Controllers\Admin\StoryController::class, 'create'])->name('create');
+                        Route::post('store', [\App\Http\Controllers\Admin\StoryController::class, 'store'])->name('store');
+                        Route::get('show/{item}', [\App\Http\Controllers\Admin\StoryController::class, 'show'])->name('show');
+                        Route::get('edit/{item}', [\App\Http\Controllers\Admin\StoryController::class, 'edit'])->name('edit');
+                        Route::post('update/{item}', [\App\Http\Controllers\Admin\StoryController::class, 'update'])->name('update');
+                        Route::get('delete/{item}', [\App\Http\Controllers\Admin\StoryController::class, 'destroy'])->name('destroy');
+                        Route::get('restore/{item}', [\App\Http\Controllers\Admin\StoryController::class, 'restore'])->name('restore');
+                        Route::post('bulk', [\App\Http\Controllers\Admin\StoryController::class, "bulk"])->name('bulk');
+                        Route::get('trashed', [\App\Http\Controllers\Admin\StoryController::class, "trashed"])->name('trashed');
+
+
+                        Route::post('sort/save', [\App\Http\Controllers\Admin\StoryController::class, 'sortSave'])->name('sort-save');
+                        Route::get('sort', [\App\Http\Controllers\Admin\StoryController::class, 'sort'])->name('sort');
+                    });
                 Route::prefix('tags')->name('tag.')->group(
                     function () {
                         Route::get('', [\App\Http\Controllers\Admin\TagController::class, 'index'])->name('index');

@@ -109,7 +109,7 @@
                 </ul>
             </li>
         @endif
-        @if(  auth()->user()->hasAnyAccesses(['post','group','adv','gallery','clip','attachment']) )
+        @if(  auth()->user()->hasAnyAccesses(['post','group','adv','gallery','clip','attachment','story']) )
             <li data-bs-toggle="tooltip" data-bs-placement="auto" data-bs-custom-class="custom-tooltip"
                 data-bs-title="{{__("Contents")}}">
                 <a href="#contents">
@@ -161,6 +161,14 @@
                             <a href="{{route('admin.attachment.index')}}">
                                 <i class="ri-attachment-2"></i>
                                 {{__("Attachments")}}
+                            </a>
+                        </li>
+                    @endif
+                    @if(  auth()->user()->hasAnyAccess( 'story' ))
+                        <li>
+                            <a href="{{route('admin.story.index')}}">
+                                <i class="ri-file-history-line"></i>
+                                {{__("Stories")}}
                             </a>
                         </li>
                     @endif
