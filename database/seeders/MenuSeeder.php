@@ -19,29 +19,33 @@ class MenuSeeder extends Seeder
 
         Menu::first()->items()->createMany([
            [
-               'title' => "Home",
+               'title' => __("Home"),
                'meta' => '/',
                'user_id' => 1,
                'kind'=>'direct',
+               'icon'=>'ri-home-2-line',
            ],
            [
-               'title' => "News",
+               'title' => __("News"),
                'menuable_id' => 1,
                'menuable_type' => Group::class,
+               'kind'=>'module',
                'user_id' => 1,
+               'icon'=>'ri-news-line',
            ],
            [
-               'title' => "Contact",
+               'title' => __("Contact us"),
                'meta' => '/contact-us',
                'user_id' => 1,
                'kind'=>'direct',
+               'icon'=>'ri-phone-line',
            ],
-           [
-               'title' => "About",
-               'meta' => '/about-us',
-               'user_id' => 1,
-               'kind'=>'direct',
-           ],
+//           [
+//               'title' => "About",
+//               'meta' => '/about-us',
+//               'user_id' => 1,
+//               'kind'=>'direct',
+//           ],
         ]);
     }
 }

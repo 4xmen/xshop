@@ -69,6 +69,7 @@ class MenuController extends XController
             $i->sort = $item->sort;
             $i->parent = $item->parent;
             $i->kind = $item->kind;
+            $i->icon = $item->icon;
             $i->title = $item->title;
             $i->menuable_id = $item->menuable_id??null;
             $i->menuable_type = $item->menuable_type??null;

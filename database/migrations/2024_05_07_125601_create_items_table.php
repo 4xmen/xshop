@@ -21,6 +21,7 @@ return new class extends Migration
             $table->text('meta')->nullable();
             $table->unsignedInteger('parent')->nullable()->default(null)->index();
             $table->unsignedInteger('sort')->default(0);
+            $table->string('icon')->nullable();
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('menu_id');
             $table->timestamps();

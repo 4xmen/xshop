@@ -9,7 +9,7 @@
                 </div>
                 <div class="card-body">
                     <div class="row p-0">
-                        <div class="col-md-10">
+                        <div class="col-xxl-10">
                             <div>
                                 <!-- WIP translate-->
                                 <label :for="`kind-${i}`">
@@ -62,7 +62,10 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md d-flex justify-content-center align-items-center">
+                        <div class="col-xxl-1 d-flex justify-content-center align-items-center pb-2">
+                            <remix-icon-picker xname="icon" v-model="item.icon"></remix-icon-picker>
+                        </div>
+                        <div class="col-xxl-1 d-flex justify-content-center align-items-center">
                             <button type="button" class="btn btn-primary" @click="remItem(i)">
                                 <i class="ri-close-line"></i>
                             </button>
