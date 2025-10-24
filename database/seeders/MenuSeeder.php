@@ -34,18 +34,19 @@ class MenuSeeder extends Seeder
                'icon'=>'ri-news-line',
            ],
            [
+               'title' => __("Products"),
+               'meta' => '/products',
+               'user_id' => 1,
+               'kind'=>'direct',
+               'icon'=>'ri-barcode-line',
+           ],
+           [
                'title' => __("Contact us"),
                'meta' => '/contact-us',
                'user_id' => 1,
                'kind'=>'direct',
                'icon'=>'ri-phone-line',
            ],
-//           [
-//               'title' => "About",
-//               'meta' => '/about-us',
-//               'user_id' => 1,
-//               'kind'=>'direct',
-//           ],
         ]);
     }
 }

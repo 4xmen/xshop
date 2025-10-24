@@ -260,7 +260,7 @@
                 </ul>
             </li>
         @endif
-        @if(  auth()->user()->hasAnyAccesses(['user','state','city','report','adminlog','guestlog']) )
+        @if(  auth()->user()->hasAnyAccesses(['user','state','city','report','adminlog','guestlog','redirect']) )
             <li data-bs-toggle="tooltip" data-bs-placement="auto" data-bs-custom-class="custom-tooltip"
                 data-bs-title="{{__("Managing")}}">
                 <a href="#manage">
@@ -320,6 +320,14 @@
                             <a href="{{ route('admin.lang.index') }}">
                                 <i class="ri-global-fill"></i>
                                 {{__("Languages")}}
+                            </a>
+                        </li>
+                    @endif
+                    @if(auth()->user()->hasAnyAccess( 'redirect' ))
+                        <li>
+                            <a href="{{ route('admin.redirect.index') }}">
+                                <i class="ri-corner-up-right-double-line"></i>
+                                {{__("Redirects")}}
                             </a>
                         </li>
                     @endif

@@ -17,11 +17,12 @@ return Application::configure(basePath: dirname(__DIR__))
             \App\Http\Middleware\IgnoreFirstPage::class,
         ]);
 
-
         $middleware->web(append: [
             \Fahlisaputra\Minify\Middleware\MinifyHtml::class,
             \Fahlisaputra\Minify\Middleware\MinifyCss::class,
             \Fahlisaputra\Minify\Middleware\MinifyJavascript::class,
+        ], prepend: [
+            \App\Http\Middleware\RedirectMiddleware::class,
         ]);
 
     })

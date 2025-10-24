@@ -123,7 +123,7 @@
                             <label for="title">
                                 {{__('Title')}}
                             </label>
-                            <input name="title" type="text"
+                            <input name="title" type="text" id="title"
                                    class="form-control @error('title') is-invalid @enderror"
                                    placeholder="{{__('Title')}}" value="{{old('title',$item->title??null)}}"/>
                         </div>
