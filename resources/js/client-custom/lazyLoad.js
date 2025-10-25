@@ -12,13 +12,13 @@ document.addEventListener('DOMContentLoaded', () => {
     if (pagination) {
         pagination.style.opacity = '.02';
     } else {
-        console.log('pagination element not found');
+        // console.log('pagination element not found');
     }
 
     // get the list row container
     const listRow = document.getElementById('list-row');
     if (!listRow) {
-        console.log('list-row element not found');
+        // console.log('list-row element not found');
         return;
     }
 

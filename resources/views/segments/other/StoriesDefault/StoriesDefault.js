@@ -1,6 +1,10 @@
 // story-modal.js
 document.addEventListener('DOMContentLoaded', () => {
+
     const modal = document.getElementById('story-modal');
+    if (modal == null) {
+        return ;
+    }
     const items = document.querySelectorAll('.story-default-item');
     const slides = modal.querySelectorAll('.slides li');
     const modalContent = modal.querySelector('.modal-content');
@@ -138,7 +142,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Close button
     const closeBtn = document.createElement('div');
     closeBtn.className = 'close-btn';
-    closeBtn.innerHTML = '×';
+    closeBtn.innerHTML = '<i class="ri-close-line"></i>';
     modalContent.appendChild(closeBtn);
 
     // Keyboard

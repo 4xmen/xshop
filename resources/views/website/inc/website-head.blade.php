@@ -25,7 +25,7 @@
               href="{{route('rss.product')}}"/>
     @endif
 
-    <meta name="generator" content="xShop; version={{config('app.version')}}">
+    <meta name="generator" content="xShop @if(!getSetting('hide_version')); version={{config('app.version')}}@endif">
     {{--  Please don't modify or remove generator --}}
 
     <title>

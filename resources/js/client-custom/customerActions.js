@@ -1,3 +1,15 @@
+// custom console logging function for styled array output
+const _console = o => {
+    o.forEach(a => {
+        console.log(
+            `%c%c${a.title}%c${a.value}`,
+            "line-height:28px;",
+            "padding:2px 4px;background:#3173f6;color:#fff;font-size:12px;border-radius:4px 0 0 4px;",
+            "padding:2px 4px;background:#fff;color:#000;font-size:12px;border-radius:0 4px 4px 0;"
+        )
+    })
+};
+
 window.addEventListener('load', function () {
 
     const favUrl = document.querySelector('#api-fav-toggle').value;
@@ -61,5 +73,19 @@ window.addEventListener('load', function () {
                 // Handle error (e.g., show an error message)
             });
     });
+
+
+
+    try {
+        _console([{
+            title: 'Author',
+            value: document.querySelector('meta[name="generator"]').getAttribute('content').trim()
+        },{
+            title: 'Github',
+            value: '[github.com/4xmen/xshop]',
+        }]);
+    } catch(e) {
+        console.log(e.message);
+    }
 
 });

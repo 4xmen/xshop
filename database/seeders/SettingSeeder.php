@@ -91,6 +91,14 @@ class SettingSeeder extends Seeder
                     'title' => __('Under construction'),
                     'key' => 'under',
                     'type' => 'CHECKBOX',
+                    'size' => '6',
+                    'value' => 0,
+                ],
+                [
+                    'title' => __('Hide version'),
+                    'key' => 'hide_version',
+                    'type' => 'CHECKBOX',
+                    'size' => '6',
                     'value' => 0,
                 ],
                 [

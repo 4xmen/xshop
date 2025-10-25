@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
     <meta name="description" content="xShop control panel - {{config('app.name')}}">
-    <meta name="generator" content="xShop; version={{config('app.version')}}">
+    <meta name="generator" content="xShop @if(!getSetting('hide_version')); version={{config('app.version')}}@endif">
     {{--  open graph  --}}
     <meta property="og:site_name" content="{{config('app.name')}}" />
     <meta property="og:locale" content="{{config('app.locale')}}">
