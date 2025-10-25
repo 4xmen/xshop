@@ -1,5 +1,6 @@
 <section class="StoriesDefault live-setting" data-live="{{$data->area_name.'_'.$data->part}}">
     <div class="{{gfx()['container']}}">
+        <input type="hidden" id="def-story-timeout" value="{{getSetting($data->area_name.'_'.$data->part.'_timeout')}}">
         <ul class="story-default-list">
             @foreach(\App\Models\Story::where('status','1')->orderBy('sort')->get() as $k => $story)
                 <li class="story-default-item" data-title="{{$story->title}}"

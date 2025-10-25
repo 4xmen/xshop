@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let currentIndex = 0;
     let progressInterval = null;
     let autoNextTimeout = null;
-    const DURATION = 10000;
+    const DURATION = parseInt(document.querySelector('#def-story-timeout').value) * 1000;
 
     // Build progress bars
     const progressContainer = document.createElement('div');
@@ -106,7 +106,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const video = slides[currentIndex].querySelector('video');
         if (video) {
             video.currentTime = 0;
-            video.play().catch(() => {});
+            video.play().catch(() => {
+            });
         }
     }
 
@@ -146,5 +147,11 @@ document.addEventListener('DOMContentLoaded', () => {
         if (e.key === 'Escape') closeModal();
         if (e.key === 'ArrowRight') goNext();
         if (e.key === 'ArrowLeft') goPrev();
+    });
+
+    document.querySelector('#story-modal').addEventListener('click', function (e) {
+        if (e.target === this) {
+            closeModal();
+        }
     });
 });
