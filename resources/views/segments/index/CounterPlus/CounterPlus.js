@@ -1,0 +1,78 @@
+var intervals = [];
+var counters = [];
+var steps = [];
+var isCounterInited = false;
+
+function isElementInViewport(el) {
+    const rect = el.getBoundingClientRect();
+    return (
+        rect.bottom > 0 &&
+        rect.right > 0 &&
+        rect.top < (window.innerHeight || document.documentElement.clientHeight) &&
+        rect.left < (window.innerWidth || document.documentElement.clientWidth)
+    );
+}
+
+
+
+function uncommafy(txt) {
+    return txt.split(',').join('');
+}
+
+function commafy(num) {
+    if (typeof num !== 'string') {
+        num = num.toString();
+    }
+    let str = uncommafy(num.toString()).split('.');
+    if (str[0].length >= 4) {
+        str[0] = str[0].replace(/(\d)(?=(\d{3})+$)/g, '$1,');
+    }
+    if (str[1] && str[1].length >= 4) {
+        str[1] = str[1].replace(/(\d{3})/g, '$1 ');
+    }
+    return str.join('.');
+}
+
+
+const handleScroll = function() {
+
+    const container = document.getElementById('CounterPlus');
+    if (container == null){
+        return ;
+    }
+    if (isElementInViewport(container)) {
+        if (!isCounterInited){
+            isCounterInited = true;
+            document.querySelectorAll('.plus-counter').forEach(function (el, key) {
+
+                let max = parseInt(el.getAttribute('data-max'));
+                let min = parseInt(el.getAttribute('data-min'));
+                let diff = max - min;
+                counters[key] = 0;
+                steps[key] = parseInt(diff / 99);
+
+                let tmp = setInterval(() => {
+                    counters[key] += steps[key];
+                    document.querySelectorAll('.plus-counter')[key].innerHTML = commafy(counters[key]);
+                }, 100);
+                setTimeout(function () {
+                    for (const i in intervals) {
+                        clearInterval(intervals[i]);
+                        document.querySelectorAll('.plus-counter')[key].innerHTML = commafy(document.querySelectorAll('.plus-counter')[key].getAttribute('data-max'));
+                    }
+
+                }, 9900);
+                intervals.push(tmp);
+            });
+        }
+        // Remove event listener if you only want to alert once
+        // this.removeEventListener('scroll', arguments.callee);
+    }
+};
+document.addEventListener('DOMContentLoaded', function () {
+
+    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('touchmove', handleScroll);
+
+
+});

@@ -1,0 +1,36 @@
+.CounterPlus {
+    // scss
+    padding: 2rem 0;
+
+    .cplus-item {
+        background: var(--counter-plus-item-bg);
+        padding: 1rem;
+        border-radius: var(--xshop-border-radius);
+        color: var(--counter-plus-item-text-color);
+
+        a {
+            color: var(--counter-plus-item-text-color);
+        }
+
+        h3{
+            font-weight: 300;
+            font-size: 1.5rem;
+            margin-top: .5rem;
+        }
+    }
+
+    .plus-counter {
+        font-size: 2rem;
+        display: inline-block;
+
+        &:after {
+            content: '+';
+        }
+    }
+
+
+    i {
+        font-size: 2rem;
+        display: inline-block;
+    }
+}
