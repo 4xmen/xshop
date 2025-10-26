@@ -50,6 +50,7 @@ class MenuController extends XController
     public function save($menu, $request)
     {
 
+
         $menu->name = $request->input('name');
         if ($menu->user_id == null){
             $menu->user_id = auth()->user()->id;
@@ -57,6 +58,7 @@ class MenuController extends XController
         $menu->save();
 
         $items = json_decode($request->input('items','[]'));
+
         foreach ($items as $item) {
             if ($item->id == null){
                 $i = new Item();
@@ -69,7 +71,7 @@ class MenuController extends XController
             $i->sort = $item->sort;
             $i->parent = $item->parent;
             $i->kind = $item->kind;
-            $i->icon = $item->icon;
+            $i->icon = $item->icon??null;
             $i->title = $item->title;
             $i->menuable_id = $item->menuable_id??null;
             $i->menuable_type = $item->menuable_type??null;

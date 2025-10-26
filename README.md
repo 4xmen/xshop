@@ -20,6 +20,13 @@
 - Developer-friendly
 - Custom theme design
 
+#### Default supported payment gateways:
+<div style="background: #ffffff;padding:1rem 7px; display: flex; justify-content: space-evenly;">
+<img src="thirdparty/assets/paypal.svg" style="height: 48px"  alt="paypal">
+<img src="thirdparty/assets/zarinpal.svg" style="height: 48px"  alt="zarinpal">
+<img src="thirdparty/assets/zibal.svg" style="height: 48px" alt="zibal">
+</div>
+
 ## Documentation
 
 - [📄 **Full Documentation** 📄](https://4xmen.github.io/xshop/#/)
@@ -168,6 +175,34 @@ php artisan build
 ## Demo
 
 > Online demo available here: <a href="https://xshop.xstack.ir/login">https://xshop.xstack.ir/</a>
+
+
+## How to migrate from WordPress & WooCommerce to xShop?
+
+This is done in several steps:
+
+- First install xShop following the steps described above (preferably on localhost).
+- Then install the xshift plugin (found in the `thirdparty` folder) on your WordPress site.
+- Next, run the following commands inside the xshop folder:
+
+```
+php artisan xshift group http://wp.test/
+php artisan xshift post http://wp.test/
+php artisan xshift catgory http://wp.test/
+php artisan xshift product http://wp.test/
+```
+
+Replace `http://wp.test/` with your old website’s URL.  
+If xshop does not allow data transfer and requires an empty database, run:
+
+```
+php artisan xshift clear
+```
+
+> Important notes: the above clear command will delete (truncate) all content and product data on your current server.
+
+> Note: migration commands may take from 1 minute to several hours depending on the amount of content on the old site, especially the number of images.
+
 
 ### Screenshots
 

@@ -82,7 +82,7 @@
         </button>
 
 
-        <input type="hidden" name="items" :value="JSON.stringify(this.currentItems)">
+        <input type="hidden"  name="items" :value="JSON.stringify(this.currentItems)">
         <input type="hidden" name="removed" :value="JSON.stringify(this.removed)">
     </div>
 </template>
@@ -148,6 +148,7 @@ export default {
                 sort: this.currentItems.length,
                 parent: null,
                 menu_id: this.menuId,
+                icon:null,
             });
         },
         remItem(i) {

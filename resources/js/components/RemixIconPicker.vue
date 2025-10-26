@@ -7,16 +7,16 @@
             <div id="ri-selector">
                 <i id="selected-icon" :class="currentIcon"></i>
                 <div class="ri-search-box">
-                    <input type="text"  v-model="q" class="form-control text-center" placeholder="search..." >
+                    <input type="text" v-model="q" class="form-control text-center" placeholder="search...">
                 </div>
                 <div class="icon-list">
                     <template v-for="i in icons">
-                    <i :class="i"  v-if="i.indexOf(q) !== -1" @click="selecting(i)"></i>
+                        <i :class="i" v-if="i.indexOf(q) !== -1" @click="selecting(i)"></i>
                     </template>
                 </div>
             </div>
         </div>
-<!--        <br>-->
+        <!--        <br>-->
         <input type="hidden" :name="xname" v-model="currentIcon">
     </div>
 </template>
@@ -27,8 +27,8 @@ export default {
     components: {},
     data: () => {
         return {
-            currentIcon:'',
-            icons:[
+            currentIcon: '',
+            icons: [
                 "ri-arrow-left-up-line",
                 "ri-arrow-left-up-fill",
                 "ri-arrow-up-line",
@@ -3172,7 +3172,7 @@ export default {
              *     icons.push(el.getAttribute('class'));
              * });
              */
-            q:'',
+            q: '',
             modalShow: false,
         }
     },
@@ -3181,11 +3181,11 @@ export default {
         modelValue: {
             default: null,
         },
-        xname:{
+        xname: {
             default: '',
             type: String,
         },
-        xvalue:{
+        xvalue: {
             default: '',
             type: String,
         },
@@ -3199,33 +3199,31 @@ export default {
     mounted() {
         if (this.modelValue != null) {
             this.currentIcon = this.modelValue;
-        }else{
+        } else {
             this.currentIcon = this.xvalue;
         }
     },
     computed: {
-        modalStyle:function (){
-            if (this.modalShow){
+        modalStyle: function () {
+            if (this.modalShow) {
                 return 'display: block !important;';
-            }else{
+            } else {
                 return 'display:none;';
             }
         }
     },
     methods: {
-        selecting(i){
+        selecting(i) {
             this.currentIcon = i;
             this.modalShow = false;
-            if (this.modelValue != null) {
-                this.$emit('update:modelValue', i);
-            }
+            this.$emit('update:modelValue', i);
             this.onSelect(i);
         },
-        showModal:function () {
-          this.modalShow = true;
+        showModal: function () {
+            this.modalShow = true;
         },
-        hideModal:function () {
-          this.modalShow = false;
+        hideModal: function () {
+            this.modalShow = false;
         }
     },
 
@@ -3236,16 +3234,17 @@ export default {
 #remix-icon-picker {
 }
 
-#icon-dropdown{
+#icon-dropdown {
     min-height: 45px;
     padding-right: 2rem;
     padding-left: 2rem;
 }
-#icon-dropdown i{
+
+#icon-dropdown i {
     font-size: 20px;
 }
 
-#ri-modal{
+#ri-modal {
     position: fixed;
     display: none;
     left: 0;
@@ -3257,7 +3256,7 @@ export default {
     backdrop-filter: blur(4px);
 }
 
-#ri-selector{
+#ri-selector {
     height: 90vh;
     border-radius: 7px;
     width: 80%;
@@ -3266,31 +3265,33 @@ export default {
     padding: 5px;
 }
 
-.ri-search-box{
+.ri-search-box {
     padding: 7px 1rem;
 }
 
-.icon-list{
+.icon-list {
     height: calc(80vh - 50px);
     overflow-y: auto;
-    padding: 2px 7px ;
+    padding: 2px 7px;
     text-align: center;
     user-select: none;
 }
-.icon-list i{
+
+.icon-list i {
     display: inline-flex;
     font-size: 25px;
     padding: 7px;
     transition: 200ms;
 }
-.icon-list i:hover{
+
+.icon-list i:hover {
     background: #ffffff75;
     transform: scale(1.75);
     color: darkred;
     cursor: pointer;
 }
 
-#selected-icon{
+#selected-icon {
     font-size: 30px;
     color: darkred;
     width: 50px;
