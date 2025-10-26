@@ -5,6 +5,7 @@ return [
         'gateways' => [
             \App\Payment\Zibal::class,
             \App\Payment\Zarinpal::class,
+            \App\Payment\Paypal::class,
         ],
         'config' => [
             'zibal' => [
@@ -13,6 +14,12 @@ return [
             'zarinpal' => [
                 'merchant' => env('ZARINPAL_MERCHANT'),
                 'test' => env('ZARINPAL_TEST')
+            ],
+            'paypal' => [
+                'client_id' => env('PAYPAL_CLIENT_ID'),
+                'secret' => env('PAYPAL_SECRET'),
+                'mode' => env('PAYPAL_MODE', 'sandbox'), // 'sandbox' or 'live'
+                'currency' => env('PAYPAL_CURRENCY', 'USD'),
             ],
         ],
         'credit' => [

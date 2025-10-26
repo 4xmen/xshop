@@ -37,3 +37,5 @@
 - [Report](29-report.md)
 - [Command Middleware](30-command-middleware.md)
 - [User](31-user.md)
+- [Payment Gateway](32-payment-gateways.md)
+- [Paypal](33-paypal-payment.md)
