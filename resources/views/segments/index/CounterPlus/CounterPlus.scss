@@ -2,11 +2,13 @@
     // scss
     padding: 2rem 0;
 
+
     .cplus-item {
         background: var(--counter-plus-item-bg);
         padding: 1rem;
         border-radius: var(--xshop-border-radius);
         color: var(--counter-plus-item-text-color);
+        margin-bottom: 2rem;
 
         a {
             color: var(--counter-plus-item-text-color);
