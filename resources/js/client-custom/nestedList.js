@@ -1,4 +1,6 @@
-document.addEventListener('DOMContentLoaded', function () {
+
+
+var nestedHandle = function () {
     document.querySelectorAll('.nested-list')?.forEach(function (list) {
         list.querySelectorAll('li').forEach(function (li) {
             // Check if the <li> has a <ul> child
@@ -26,4 +28,6 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         });
     });
-});
+}
+
+document.addEventListener('DOMContentLoaded', nestedHandle);

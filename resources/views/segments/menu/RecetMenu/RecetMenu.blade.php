@@ -6,11 +6,13 @@
             </a>
         </li>
         @foreach(getMenuBySettingItems($data->area_name.'_'.$data->part.'_menu') as $item)
-            <li>
-                <a href="{{$item->webUrl()}}">
-                    {{$item->title}}
-                </a>
-            </li>
+            @if($item->dest == null || $item->dest->hide == 0 )
+                <li>
+                    <a href="{{$item->webUrl()}}">
+                        {{$item->title}}
+                    </a>
+                </li>
+            @endif
         @endforeach
         <li class="float-end">
             <a href="{{ route('client.card') }}" class="d-inline-block px-1 card-link">
@@ -22,19 +24,19 @@
                 </span>
             </a>
 
-        @if(auth('customer')->check())
-                <a href="{{route('client.profile')}}"  class="d-inline-block px-1 card-link">
+            @if(auth('customer')->check())
+                <a href="{{route('client.profile')}}" class="d-inline-block px-1 card-link">
                     <i class="ri-user-line"></i>
                 </a>
-        @else
-                <a href="{{route('client.sign-in')}}"  class="d-inline-block px-1 card-link">
+            @else
+                <a href="{{route('client.sign-in')}}" class="d-inline-block px-1 card-link">
                     <i class="ri-user-line"></i>
                 </a>
-        @endif
+            @endif
             @if(config('app.xlang.active'))
                 @foreach(\App\Models\XLang::all() as $lang)
                     @if($lang->tag != app()->getLocale())
-                        <a href="/{{$lang->tag}}" class="d-inline-block px-1"  hreflang="{{$lang->tag}}" >
+                        <a href="/{{$lang->tag}}" class="d-inline-block px-1" hreflang="{{$lang->tag}}">
                             {{$lang->emoji}}
                         </a>
                     @endif

@@ -1,0 +1,140 @@
+.BahmanMenu {
+    height: 3.75rem;
+
+    #bahman-toggle {
+        display: none;
+    }
+
+    ul#bahman-desktop {
+        list-style: none;
+        padding: 0;
+        display: flex;
+        transition: 300ms;
+        justify-content: start;
+
+        li {
+            position: relative;
+
+            a {
+                padding: .5rem 2rem;
+                position: relative;
+                display: block;
+                transition: 313ms;
+
+                i {
+                    font-size: 1.5rem;
+                    position: relative;
+                    top: 4px;
+                }
+
+                &:after {
+                    transition: 313ms;
+                    content: ' ';
+                    position: absolute;
+                    inset-inline-start: 0;
+                    width: 0;
+                    height: 2px;
+                    background: var(--xshop-secondary);
+                    bottom: 0;
+                }
+
+                &:hover{
+                    text-transform: uppercase;
+
+                    &:after {
+                        width: 100%;
+                    }
+                }
+            }
+
+            ul {
+                overflow: hidden;
+                transform: scale(0);
+                opacity: 0;
+                transition: .3s ease-in-out;
+                position: absolute;
+                padding: 0;
+            }
+
+            &:hover{
+                ul{
+                    list-style: none;
+                    overflow: hidden;
+                    transform: scale(1);
+                    max-width: 300px;
+                    width: 300px;
+                    opacity: 1;
+                    top: 100%;
+                    inset-inline-start: 0;
+                    background: var(--xshop-background);
+                    display: flex;
+                    flex-direction: column;
+                    z-index: 9;
+                }
+            }
+
+        }
+
+
+    }
+
+    /*-1000px width*/
+    @media (max-width: 1000px) {
+
+        #bahman-toggle {
+            display: block;
+        }
+
+        .bahman-item{
+            display: none;
+        }
+
+    }
+
+    #bahman-modal{
+        position: fixed;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        max-height: 0;
+        transition: 500ms;
+        overflow: hidden;
+        z-index: 999;
+        background: #ffffff11;
+        backdrop-filter: blur(7px) grayscale(1);
+
+        ul{
+            list-style: none;
+            padding: 0;
+        }
+        #bahman-mobile{
+            position: absolute;
+            inset-inline-start: 0;
+            top: 0;
+            bottom: 0;
+            overflow-y: auto;
+            background: var(--xshop-background);
+            width: 300px;
+            li{
+                position: relative;
+
+                a{
+                    display: block;
+                    padding: .5rem;
+                    border-bottom: 1px solid #75757575;
+                }
+                i.float-end{
+                    inset-inline-end: 0;
+                    margin: 0 !important;
+                    padding: 0 1rem;
+                    top: 0;
+                    position: absolute;
+                    font-size: 30px;
+                    border-left: 1px solid #75757575;
+                    border-right: 1px solid #75757575;
+                }
+            }
+        }
+    }
+}
