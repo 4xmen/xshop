@@ -4,6 +4,7 @@ namespace App\Payment;
 
 use App\Contracts\Payment;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Session;
 
 class Paypal implements Payment
@@ -170,11 +171,21 @@ class Paypal implements Payment
 
             $accessToken = $this->getAccessToken();
 
-            // Capture the payment
+            // Capture the payment - PayPal requires empty JSON object {}
             $response = Http::withToken($accessToken)
+                ->withHeaders([
+                    'Content-Type' => 'application/json',
+                    'Prefer' => 'return=representation',
+                ])
+                ->withBody('{}', 'application/json')
                 ->post("{$this->apiUrl}/v2/checkout/orders/{$orderId}/capture");
 
             if (!$response->successful()) {
+                Log::error('PayPal capture failed', [
+                    'status' => $response->status(),
+                    'body' => $response->body(),
+                    'order_id' => $orderId
+                ]);
                 throw new \Exception('PayPal payment capture failed: ' . $response->body());
             }
 
