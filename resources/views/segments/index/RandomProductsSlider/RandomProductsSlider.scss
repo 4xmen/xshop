@@ -1,0 +1,45 @@
+.RandomProductsSlider {
+    padding-top: 1rem;
+    padding-bottom: 4rem;
+    // scss
+    h2{
+        font-weight: 200;
+    }
+
+    .random-slider{
+        .item{
+            position: relative;
+            img{
+                width: 100%;
+                height: 300px;
+                object-fit: cover;
+                border-radius: var(--xshop-border-radius);
+            }
+
+            h3{
+                position: absolute;
+                left: 1rem;
+                right: 1rem;
+                top: 1rem;
+                bottom: 1rem;
+                background: #75757575;
+                color: var(--xshop-text);
+                backdrop-filter: grayscale(.6) blur(7px);
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                transform: skewY(90deg);
+                opacity: 0;
+                transition: 400ms;
+                border-radius: var(--xshop-border-radius);
+            }
+
+            &:hover{
+                h3{
+                    transform: skewY(0);
+                    opacity: 1;
+                }
+            }
+        }
+    }
+}
