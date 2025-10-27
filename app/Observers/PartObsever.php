@@ -34,7 +34,9 @@ class PartObsever
             $className = $part->part;
             $className= ucfirst($part->part);
             $handle = "\\Resources\\Views\\Segments\\$className";
-            $handle::onAdd($part);
+            if (method_exists($handle,'onAdd')) {
+                $handle::onAdd($part);
+            }
         }
 
     }
@@ -48,7 +50,9 @@ class PartObsever
         // remove part
         $className= ucfirst($part->part);
         $handle = "\\Resources\\Views\\Segments\\$className";
-        $handle::onRemove($part);
+        if (method_exists($handle,'onRemove')){
+            $handle::onRemove($part);
+        }
     }
 
     /**
