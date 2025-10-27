@@ -37,14 +37,30 @@
 
                 <div v-if="p == activeIndex">
                     <hr>
+                    <div class="p-3">
+                        <input type="text" v-model="q" class="form-control" placeholder="search...">
+                    </div>
+                    <div class="p-3">
+                        <ul class="filter">
+                            <li @click="setFilter(null)"  :class="filter == null?'active':''">
+                                All
+                            </li>
+                            <li v-for="segment in segments" :key="segment" :class="filter == segment?'active':''" @click="setFilter(segment)">
+                                {{segment}}
+                            </li>
+                        </ul>
+                    </div>
                     <div class="rw">
                         <template v-for="(valid,i) in valids">
-                            <div @click="changePart(p,valid.segment,valid.part)"
-                                 :class="``+(valid.data.name == part.part?'selected-part':'can-select')">
-                                <img class="img-fluid mt-2" :src="imageLink+'/'+valid.segment+'/'+valid.part"
-                                     alt="screeshot">
-                                {{ valid.part }} [v{{ valid.data.version }}]
-                            </div>
+                          <template v-if="valid.segment == filter || filter == null">
+                              <div v-if="valid.part.toLowerCase().indexOf(q.toLowerCase()) != -1"
+                                   @click="changePart(p,valid.segment,valid.part)"
+                                   :class="``+(valid.data.name == part.part?'selected-part':'can-select')">
+                                  <img class="img-fluid mt-2" :src="imageLink+'/'+valid.segment+'/'+valid.part"
+                                       alt="screeshot">
+                                  {{ valid.part }} [v{{ valid.data.version }}]
+                              </div>
+                          </template>
                         </template>
                     </div>
                 </div>
@@ -69,6 +85,8 @@ export default {
             partsData: [],
             removed: [],
             activeIndex: null,
+            q:'',
+            filter: null,
         }
     },
     props: {
@@ -91,8 +109,22 @@ export default {
     mounted() {
         this.partsData = this.parts;
     },
-    computed: {},
+    computed: {
+        segments(){
+            let arr = [];
+            for( const valid of this.valids) {
+                if (arr.indexOf(valid.segment) == -1) {
+                    arr.push(valid.segment);
+                }
+            }
+
+            return arr;
+        }
+    },
     methods: {
+        setFilter(filter = null){
+            this.filter = filter;
+        },
         changePart(p, segment, part) {
             this.partsData[p].segment = segment;
             this.partsData[p].part = part;
@@ -153,6 +185,21 @@ export default {
 
     div {
         margin-bottom: 1rem;
+    }
+}
+.filter{
+    list-style: none;
+    display: flex;
+    justify-content: space-evenly;
+    li{
+        background: white;
+        color: black;
+        padding: 5px 10px;
+        border-radius: 5px;
+
+        &.active{
+            background: #2ec0ff;
+        }
     }
 }
 </style>
