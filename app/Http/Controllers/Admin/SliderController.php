@@ -53,31 +53,15 @@ class SliderController extends XController
     public function save($slider, $request)
     {
 
+        $target = 'sliders';
         $slider->body = $request->input('body', '');
         $slider->status = $request->input('status');
         $slider->data = $request->input('data');
         $slider->user_id = auth()->id();
         if ($request->hasFile('cover')) {
-            $name = time() . '.' . request()->cover->getClientOriginalExtension();
-            $slider->image = $name;
-            $request->file('cover')->storeAs('public/sliders', $name);
-            $format = $request->file('cover')->guessExtension();
-            if (strtolower($format) == 'png'){
-                $format = 'webp';
-            }
-            $key = 'cover';
-            $i = Image::load($request->file($key)->getPathname())
-                ->optimize()
-//                ->nonQueued()
-                ->format($format);
-            if (getSetting('watermark2')) {
-                $i->watermark(public_path('upload/images/logo.png'),
-                    AlignPosition::BottomLeft, 5, 5, Unit::Percent,
-                    config('app.media.watermark_size'), Unit::Percent,
-                    config('app.media.watermark_size'), Unit::Percent, Fit::Contain,
-                    config('app.media.watermark_opacity'));
-            }
-            $i->save(storage_path() . '/app/public/sliders/optimized-'. $slider->image);
+            $slider->image = substr($this->storeFile('image', $slider, $target),strlen($target)+1);
+            $key = 'image';
+            $this->saveImage($slider, $key, $target);
         }
 
         if ($slider->id == null && Slider::count() > 0) {

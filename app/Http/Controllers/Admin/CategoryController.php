@@ -78,11 +78,6 @@ class CategoryController extends XController
         if ($request->has('image')) {
             $category->image = substr($this->storeFile('image', $category, $target),strlen($target)+1);
             $key = 'image';
-//            $format = $request->file($key)->guessExtension();
-//            if (strtolower($format) == 'png') {
-//                $format = 'webp';
-//            }
-
             $this->saveImage($category, $key, $target);
         }
         if ($request->has('bg')) {

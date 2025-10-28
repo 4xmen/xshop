@@ -24,7 +24,7 @@ class Slider extends Model
             return asset('/assets/upload/logo.svg');
         }
 
-        return \Storage::url('sliders/optimized-' . $this->image);
+        return \Storage::url('optimized/sliders/' . $this->image.'.webp');
     }
 
     public function imgOriginalUrl()

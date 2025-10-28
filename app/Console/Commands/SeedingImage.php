@@ -123,10 +123,7 @@ class SeedingImage extends Command
                     }
                     \File::copy($images[0]->getRealPath(),storage_path().'/app/public/sliders/' . $images[0]->getFilename());
                     $item->image = $images[0]->getFilename();
-                    $i = Image::load($images[0]->getRealPath())
-                        ->optimize()
-                        ->format('webp');
-                    $i->save(storage_path() . '/app/public/sliders/optimized-'. $item->image);
+                    XController::saveOptimizedImage($item,'image','sliders',$images[0]->getRealPath());
                     $item->status = 1;
                     $item->save();
                 }
