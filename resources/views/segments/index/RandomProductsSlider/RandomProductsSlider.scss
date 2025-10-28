@@ -2,28 +2,33 @@
     padding-top: 1rem;
     padding-bottom: 4rem;
     // scss
-    h2{
+    h2 {
         font-weight: 200;
     }
 
-    .random-slider{
-        .item{
+    .random-slider {
+        .item {
             position: relative;
-            img{
+
+            img {
                 width: 100%;
                 height: 300px;
                 object-fit: cover;
                 border-radius: var(--xshop-border-radius);
             }
 
-            h3{
+            h3 {
+                font-size: 19px;
+                font-weight: 300;
+                padding: 1rem;
+                text-align: center;
                 position: absolute;
                 left: 1rem;
                 right: 1rem;
                 top: 1rem;
                 bottom: 1rem;
-                background: #75757575;
-                color: var(--xshop-text);
+                background: #00000075;
+                color: #ffffff;
                 backdrop-filter: grayscale(.6) blur(7px);
                 display: flex;
                 justify-content: center;
@@ -34,8 +39,8 @@
                 border-radius: var(--xshop-border-radius);
             }
 
-            &:hover{
-                h3{
+            &:hover {
+                h3 {
                     transform: skewY(0);
                     opacity: 1;
                 }

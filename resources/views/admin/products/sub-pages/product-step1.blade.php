@@ -13,7 +13,7 @@
     </div>
     <div class="col-md-6 mt-3">
         <div class="form-group">
-            <label for="name">
+            <label for="slug">
                 {{__('Slug')}}
             </label>
             <input name="slug" type="text"
@@ -33,7 +33,7 @@
 
             <currency-input xname="price" xid="price" @error('price')
             :err="true" @enderror xtitle="{{__('Base price')}}"
-                            :xvalue="{{old('price',$item->price??null)}}"></currency-input>
+                            :xvalue="{{old('price',$item->price??0)}}"></currency-input>
         </div>
     </div>
 

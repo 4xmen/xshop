@@ -111,10 +111,10 @@
                                    placeholder="{{__('Category name')}}" value="{{old('name',$item->name??null)}}"/>
                         </div>
                         <div class="col-md-6 mt-3">
-                            <label for="name">
+                            <label for="slug">
                                 {{__('Category slug')}}
                             </label>
-                            <input name="slug" type="text" class="form-control @error('slug') is-invalid @enderror"
+                            <input name="slug" type="text" id="slug" class="form-control @error('slug') is-invalid @enderror"
                                    placeholder="{{__('Category slug')}}" value="{{old('slug',$item->slug??null)}}"/>
                         </div>
                         <div class="col-md-9 mt-3">

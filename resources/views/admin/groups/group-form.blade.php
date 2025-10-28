@@ -89,10 +89,10 @@
                                    placeholder="{{__('Group name')}}" value="{{old('name',$item->name??null)}}"/>
                         </div>
                         <div class="col-md-6 mt-3">
-                            <label for="name">
+                            <label for="slug">
                                 {{__('Group slug')}}
                             </label>
-                            <input name="slug" type="text" class="form-control @error('slug') is-invalid @enderror"
+                            <input name="slug" id="slug" type="text" class="form-control @error('slug') is-invalid @enderror"
                                    placeholder="{{__('Group slug')}}" value="{{old('slug',$item->slug??null)}}"/>
                         </div>
                         <div class="col-md-9 mt-3">
