@@ -81,12 +81,12 @@
                     </div>
                     <div class="col-md-6 mt-3">
                         <div class="form-group">
-                            <label for="cover">
+                            <label for="image">
                                 {{__('Image')}}
                             </label>
-                            <input name="cover" id="cover" type="file"
+                            <input name="image" id="image" type="file"
                                    accept="image/*"
-                                   class="form-control @error('cover') is-invalid @enderror"
+                                   class="form-control @error('image') is-invalid @enderror"
                                    placeholder="{{__('Image')}}"/>
                         </div>
                     </div>

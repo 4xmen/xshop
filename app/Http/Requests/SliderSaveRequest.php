@@ -25,7 +25,7 @@ class SliderSaveRequest extends FormRequest
             'body' => ['required', 'string','min:1'],
             'status' => ['required', 'boolean'],
             'data'=> ['nullable'],
-            'cover' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif,svg', 'max:4096'],
+            'image' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif,svg', 'max:'.getMaxUploadSize()],
         ];
     }
 }
