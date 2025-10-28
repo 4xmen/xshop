@@ -3,7 +3,7 @@
     <img width="250" src="resources/images/xshop-logo.svg" alt="xShop logo">
 </div>
 
-# xShop/v2
+# xShop/v3
 
 > [!NOTE]
 > xShop is an open-source shop developed in Laravel, highly customizable!
@@ -19,6 +19,10 @@
 - More specific UI/UX
 - Developer-friendly
 - Custom theme design
+- WordPress migration
+- Easy support for multilingual (rtl-ltr) websites
+- A powerful SEO foundation means users never have to worry about technical SEO issues.
+
 
 #### Default supported payment gateways:
 <div style="background: #ffffff;padding:1rem 7px; display: flex; justify-content: space-evenly;">

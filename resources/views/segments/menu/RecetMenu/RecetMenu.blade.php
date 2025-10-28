@@ -9,6 +9,7 @@
             @if($item->dest == null || $item->dest->hide == 0 )
                 <li>
                     <a href="{{$item->webUrl()}}">
+                        <i class="{{$item->icon}}"></i>
                         {{$item->title}}
                     </a>
                 </li>
