@@ -59,7 +59,7 @@ class SliderController extends XController
         $slider->data = $request->input('data');
         $slider->user_id = auth()->id();
         if ($request->hasFile('image')) {
-            $slider->image = substr($this->storeFile('cover', $slider, $target),strlen($target)+1);
+            $slider->image = substr($this->storeFile('image', $slider, $target),strlen($target)+1);
             $key = 'image';
             $this->saveImage($slider, $key, $target);
         }
