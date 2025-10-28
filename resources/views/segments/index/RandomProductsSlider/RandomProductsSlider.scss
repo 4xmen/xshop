@@ -37,6 +37,7 @@
                 opacity: 0;
                 transition: 400ms;
                 border-radius: var(--xshop-border-radius);
+                box-sizing: border-box;
             }
 
             &:hover {
