@@ -25,11 +25,12 @@ class ProductSaveRequest extends FormRequest
             'name' => ['required', 'string', 'min:5', 'max:128', "unique:products,name," . $this->id],
             'sku' => ['nullable', 'string', 'min:1', 'max:128', "unique:products,sku," . $this->id],
             'body' => ['nullable', 'string', 'min:5'],
+            'price' => ['required', 'numeric'],
             'excerpt' => ['required', 'string', 'min:5'],
             'active' => ['nullable', 'boolean'],
             'meta' => ['nullable'],
             'category_id' => ['required', 'exists:categories,id'],
-            'image.*' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'image.*' => ['nullable','image','mimes:jpeg,png,jpg,gif,svg','max:'.getMaxUploadSize()],
             'canonical' => ['nullable', 'url', 'min:5', 'max:128'],
         ];
     }

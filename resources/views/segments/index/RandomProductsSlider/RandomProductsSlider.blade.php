@@ -4,7 +4,7 @@
             {{getSetting($data->area_name.'_'.$data->part.'_title')}}
         </h2>
         <div class="random-slider">
-            @foreach(\App\Models\Product::where('status',1)->limit(getSetting($data->area_name.'_'.$data->part.'_limit'))->get() as $product)
+            @foreach(\App\Models\Product::where('status',1)->inRandomOrder()->limit(getSetting($data->area_name.'_'.$data->part.'_limit'))->get() as $product)
                 <div class="item slider-content">
                     <a href="{{$product->webUrl()}}">
                         <img src="{{$product->imgUrl()}}" alt="{{$product->name}}">

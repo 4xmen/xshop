@@ -75,7 +75,7 @@ class ProductController extends XController
         $product->average_rating = $request->input('average_rating', 0);
         $product->rating_count = $request->input('rating_count', 0);
         $product->on_sale = $request->input('on_sale', 1);
-        $product->sku = $request->input('sku', null);
+        $product->sku = trim($request->input('sku')) == '' ? null : trim($request->input('sku'));
         $product->virtual = $request->input('virtual', false);
         $product->downloadable = $request->input('downloadable', false);
         $product->category_id = $request->input('category_id');
