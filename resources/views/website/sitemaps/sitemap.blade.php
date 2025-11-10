@@ -4,7 +4,7 @@
 
               xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/siteindex.xsd"
               xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-    @if(\App\Models\Product::count() > 0)
+    @if(\App\Models\Product::count() > 0 && \App\Helpers\General::getSetting('sitemap_product'))
 
         <sitemap>
             <loc>{{route('sitemap.products')}}</loc>
@@ -13,7 +13,7 @@
 
     @endif
 
-    @if(\App\Models\Post::count() > 0)
+    @if(\App\Models\Post::count() > 0 && \App\Helpers\General::getSetting('sitemap_post'))
 
         <sitemap>
             <loc>{{route('sitemap.posts')}}</loc>
@@ -22,7 +22,7 @@
 
     @endif
 
-    @if(\App\Models\Gallery::count() > 0)
+    @if(\App\Models\Gallery::count() > 0 && \App\Helpers\General::getSetting('sitemap_gallery'))
 
         <sitemap>
             <loc>{{route('sitemap.galleries')}}</loc>
@@ -31,7 +31,7 @@
 
     @endif
 
-    @if(\App\Models\Clip::count() > 0)
+    @if(\App\Models\Clip::count() > 0 && \App\Helpers\General::getSetting('sitemap_clip'))
 
         <sitemap>
             <loc>{{route('sitemap.clips')}}</loc>
@@ -40,7 +40,7 @@
 
     @endif
 
-    @if(\App\Models\Attachment::count() > 0)
+    @if(\App\Models\Attachment::count() > 0 && \App\Helpers\General::getSetting('sitemap_attachment'))
 
         <sitemap>
             <loc>{{route('sitemap.attachments')}}</loc>
@@ -48,7 +48,9 @@
         </sitemap>
 
     @endif
-    @if(\App\Models\Group::count() > 0 || \App\Models\Category::count())
+    @if( (\App\Models\Group::count() > 0 || \App\Models\Category::count() > 0
+        || \App\Models\Creator::count() > 0) && ( \App\Helpers\General::getSetting('sitemap_category')
+        || \App\Helpers\General::getSetting('sitemap_group') || \App\Helpers\General::getSetting('sitemap_creator')) )
 
         <sitemap>
             <loc>{{route('sitemap.categories')}}</loc>
