@@ -557,8 +557,9 @@ Route::get('login/as/{mobile}', function ($mobile) {
 })->name('login.as');
 
 Route::get('test', function () {
-    $p = \App\Models\Product::first();
-    return $p->evaluations();
+
+    return null;
+
 })->name('test');
 
 
