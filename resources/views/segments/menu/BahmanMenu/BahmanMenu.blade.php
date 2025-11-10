@@ -39,6 +39,9 @@
             @endif
         @endforeach
         <li class="ms-auto">
+            <a href="{{route('client.welcome')}}">
+                    <img src="{{asset('upload/images/logo.svg')}}" class="logo-behnam" alt="">
+            </a>
             <a href="{{ route('client.card') }}" class="d-inline-block px-1 card-link">
                 <i class="ri-shopping-bag-2-line"></i>
                 <span class="badge bg-danger card-count">
