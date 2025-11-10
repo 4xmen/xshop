@@ -1533,7 +1533,7 @@ function getCategoriesSet($key, $limit = 4, $orderBy = 'sort', $asc = 'ASC')
 
 
 /**
- * get website main categories
+ * get website main groups
  * @param $key
  * @param $limit
  * @param $orderBy
@@ -1593,4 +1593,17 @@ function fixShortCode($txt) :string
     }
 
     return $txt;
+}
+
+/**
+ * get website main creators
+ * @param $key
+ * @param $limit
+ * @param $orderBy
+ * @param $asc
+ * @return Group[]|\LaravelIdea\Helper\App\Models\_IH_Group_C
+ */
+function getCreatorSet($key, $limit = 4, $orderBy = 'sort', $asc = 'ASC')
+{
+    return \App\Models\Creator::with('products')->whereIn('id', json_decode(getSetting($key) ?? '[]'))->limit($limit)->orderBy($orderBy, $asc)->get();
 }
