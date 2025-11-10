@@ -30,7 +30,7 @@
                         {{__("Preview")}}
                     </h3>
                     <div class="p2 pb-5">
-                        <img src="{{$item->imgUrl()}}" data-open-file="#cover" class="img-fluid" alt="image">
+                        <img src="{{$item->imgUrl()}}" data-open-file="#image" class="img-fluid" alt="image">
                     </div>
                 </div>
             @endif

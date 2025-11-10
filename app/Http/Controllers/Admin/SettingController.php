@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\SettingSaveRequest;
 use App\Models\Category;
+use App\Models\Creator;
 use App\Models\Group;
 use App\Models\Menu;
 use App\Models\Setting;
@@ -27,8 +28,10 @@ class SettingController extends Controller
         $groups = Group::all(['id', 'name'])->toArray();
         $catz = array_merge([['id' => 0, 'name' => __('All')]], $cats);
         $groupz = array_merge([['id' => 0, 'name' => __('All')]], $groups);
+        $creators = Creator::all(['id', 'name'])->toArray();
+        $creatorz = array_merge([['id' => 0, 'name' => __('All')]], $creators);
         return view('admin.commons.setting',
-            compact('settings', 'cats', 'groups', 'menus', 'catz', 'groupz'));
+            compact('settings', 'cats', 'groups', 'menus', 'catz', 'groupz', 'creators','creatorz'));
     }
 
     /**
@@ -116,9 +119,9 @@ class SettingController extends Controller
                 } else
                     if ($file->guessExtension() == 'mp4' || $file->guessExtension() == 'mp3') {
                         $file->move(public_path('upload/media/'), str_replace('_', '.', $index));//store('/images/'.,['disk' => 'public']);
-                    } elseif ($file->guessExtension() == 'webp' || $file->guessExtension() == 'svg')  {
+                    } elseif ($file->guessExtension() == 'webp' || $file->guessExtension() == 'svg') {
                         $file->move(public_path('upload/images/'), str_replace('_', '.', $index));//store('/images/'.,['disk' => 'public']);
-                    } else  {
+                    } else {
                         $file->move(public_path('upload/file/'), str_replace('_', '.', $index));//store('/images/'.,['disk' => 'public']);
                     }
             }
@@ -160,7 +163,9 @@ class SettingController extends Controller
         $menus = Menu::all(['id', 'name']);
         $groups = Group::all(['id', 'name'])->toArray();
         $groupz = array_merge([['id' => 0, 'name' => __('All')]], $groups);
+        $creators = Creator::all(['id', 'name'])->toArray();
+        $creatorz = array_merge([['id' => 0, 'name' => __('All')]], $creators);
         return view('admin.commons.live',
-            compact('settings', 'cats', 'groups', 'menus', 'catz', 'groupz'));
+            compact('settings', 'cats', 'groups', 'menus', 'catz', 'groupz','creators','creatorz'));
     }
 }
