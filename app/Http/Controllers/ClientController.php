@@ -798,6 +798,16 @@ class ClientController extends Controller
     {
 
         $uri = '/' . $request->path();
+        $uri = str_replace('/'.app()->getLocale(),'',$uri);
+
+        // ignore main lang of site
+        if ( '/' . $request->path() == $uri){
+            return false;
+        }
+        $uri = trim($uri, '/');
+
+
+//        echo $uri.'<hr>'; // just 4 debug
         // Iterate through all the defined routes
         $r = null;
         $n = '';
@@ -808,15 +818,19 @@ class ClientController extends Controller
                 continue;
             }
 
-            $uri2 = str_replace('/', '\\/', $route->uri());
-            $uri2 = preg_replace('/\{[a-z]*\}/m', '.*', $uri2);
+            $uri2 = $route->uri();
+            $routeSet1 = explode('/',trim($uri,'/'));
+            $routeSet2 = explode('/',trim($uri2,'/'));
+
+
             // Check if the route matches the given URI
-            if (preg_match('/' . $uri2 . '/', $uri)) {
+            if ($routeSet1[0] == $routeSet2[0] && count($routeSet1) == count( $routeSet2)) {
                 $r = $route->action['controller'];
                 $n = $route->uri();
                 break;
             }
         }
+        // check is controller method extis
         if (count(explode('@', $r)) == 1) {
             return abort(404);
         }

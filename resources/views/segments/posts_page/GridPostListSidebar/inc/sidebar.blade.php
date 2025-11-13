@@ -1,4 +1,4 @@
-@cache('post_sidebar_2'. cacheNumber(), 90)
+@cache('post_sidebar_2'.app()->getLocale(). cacheNumber(), 90)
 <aside class="p-4">
     <h4>
         {{__("Search")}}
