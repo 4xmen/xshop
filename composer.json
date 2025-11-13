@@ -2,13 +2,21 @@
     "name": "xmen/xshop",
     "type": "project",
     "description": "Very customizable and easy to use shopping system, open source project based on laravel",
-    "keywords": ["xshop", "e-shop", "laravel","laravel-shop","open-source-shop"],
+    "keywords": [
+        "xshop",
+        "e-shop",
+        "laravel",
+        "laravel-shop",
+        "open-source-shop"
+    ],
     "license": "GPL-3.0-or-later",
     "version": "3.0.1",
     "require": {
         "php": "^8.2",
         "ext-dom": "*",
         "ext-zip": "*",
+        "ext-gd": "*",
+        "ext-imagick": "*",
         "carlos-meneses/laravel-mpdf": "^2.1",
         "chillerlan/php-qrcode": "^5.0",
         "darkaonline/l5-swagger": "^8.6",
