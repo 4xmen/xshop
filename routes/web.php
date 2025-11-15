@@ -518,6 +518,7 @@ Route::middleware([\App\Http\Middleware\VisitorCounter::class])
         Route::get('/search', [ClientController::class, 'search'])->name('search');
         Route::get('attach/download/{attachment?}', [ClientController::class, 'attachDl'])->name('attach-dl');
         Route::get('pay/{invoice?}', [ClientController::class, 'pay'])->name('pay');
+        Route::post('story/like', [ClientController::class, 'likeStory'])->name('story-like');
 
         Route::get('product/fav/toggle/{product?}', [\App\Http\Controllers\CustomerController::class, 'ProductFavToggle'])->name('product-fav-toggle');
         Route::get('product/compare/toggle/{product?}', [\App\Http\Controllers\CardController::class, 'productCompareToggle'])->name('product-compare-toggle');

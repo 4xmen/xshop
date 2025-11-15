@@ -158,4 +158,31 @@ document.addEventListener('DOMContentLoaded', () => {
             closeModal();
         }
     });
+
+    document.querySelectorAll('#story-modal .like')?.forEach(function (el) {
+
+        let i = el.querySelector('i');
+        el.addEventListener('mouseenter', function (e) {
+            i.classList.add('ri-heart-fill');
+            i.classList.remove('ri-heart-line');
+            i.style.color = 'red';
+        });
+        el.addEventListener('mouseleave', function (e) {
+            i.classList.add('ri-heart-line');
+            i.classList.remove('ri-heart-fill');
+            i.style.color = '';
+        });
+        el.addEventListener('click', async function (e) {
+            const url = document.querySelector('#like-url').value;
+            let resp =  await axios.post(url,{id: this.getAttribute('data-id')});
+            if (resp.data.OK){
+                this.setAttribute('data-is-fav',resp.data.data);
+                window.$toast.success(resp.data.message);
+                el.querySelector('b').innerText =  ( parseInt(el.querySelector('b').innerText) + 1).toString();
+            }else {
+                window.$toast.error(resp.data.message);
+            }
+        });
+    });
+
 });

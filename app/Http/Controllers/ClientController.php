@@ -20,6 +20,7 @@ use App\Models\Post;
 use App\Models\Product;
 use App\Models\Quantity;
 use App\Models\Rate;
+use App\Models\Story;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
@@ -986,5 +987,22 @@ class ClientController extends Controller
     public function cardItems()
     {
 
+    }
+
+    public function likeStory(Request $request){
+
+        if (isGuestMaxAttemptTry('like_story ['.$request->id.']', 1, 60)) {
+            return [
+                'OK' => false,
+                'message' => __('You have liked this'),
+                'error' => __('You have liked this'),
+            ];
+        }
+
+        Story::where('id',$request->id)->increment('likes');
+        return [
+            'OK' => true,
+            'message' => __('Thanks, You liked the story'),
+        ];
     }
 }
