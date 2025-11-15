@@ -1065,6 +1065,10 @@ function isGuestMaxAttemptTry($action, $max = 5, $minutes = 60)
             ->where('created_at', '>', time() - ($minutes * 60))->count() >= $max) {
         return true;
     } else {
+        \App\Models\GuestLog::create([
+            'action' => $action,
+            'ip' => request()->ip(),
+        ]);
         return false;
     }
 }
