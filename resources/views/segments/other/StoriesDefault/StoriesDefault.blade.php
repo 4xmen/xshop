@@ -6,8 +6,10 @@
                 {{getSetting($data->area_name.'_'.$data->part.'_title')}}
             </h6>
         </a>
-        <input type="hidden" id="like-url" value="{{route('client.story-like')}}">
-        <input type="hidden" id="def-story-timeout" value="{{getSetting($data->area_name.'_'.$data->part.'_timeout')}}">
+        <input type="hidden" id="like-url" value="{{route('client.story.like')}}">
+        <input type="hidden" id="story-comment-url" value="{{route('client.comment.submit')}}">
+        <input type="hidden" id="def-story-timeout"
+               value="{{getSetting($data->area_name.'_'.$data->part.'_timeout')}}">
         <ul class="story-default-list">
             @foreach(\App\Models\Story::where('status','1')->orderBy('sort')->get() as $k => $story)
                 <li class="story-default-item" data-title="{{$story->title}}"
@@ -44,7 +46,15 @@
 {{--                                <span class="comment">--}}
 {{--                                    {{$story->commentCount()}}--}}
 {{--                                </span>--}}
+
+
                             </div>
+                                <div class="input-group mb-3 p-3 comment" data-bs-theme="dark" >
+                                    <input type="text" class="form-control" placeholder="{{__("leave comment...")}}"  aria-describedby="button-addon2">
+                                    <button class="btn btn-outline-secondary send-story-comment" type="button" data-id="{{$story->id}}">
+                                        <i class="ri-send-plane-line"></i>
+                                    </button>
+                                </div>
                         </li>
                     @endforeach
                 </ul>

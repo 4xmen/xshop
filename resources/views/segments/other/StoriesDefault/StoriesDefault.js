@@ -159,6 +159,64 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
+    document.querySelectorAll('#story-modal input')?.forEach(el => {
+        el.addEventListener('focus', function (e) {
+            stopAutoPlay();
+        })
+        el.addEventListener('blur', function (e) {
+            startAutoPlay();
+        })
+    });
+
+    document.querySelectorAll('#story-modal .send-story-comment')?.forEach(function (el) {
+        el.addEventListener('click', async (e) => {
+           e.preventDefault();
+           const url = document.querySelector('#story-comment-url').value;
+           const data = {
+               commentable_type: 'App\\Models\\Story',
+               commentable_id: el.getAttribute('data-id'),
+               message: el.closest('.input-group').querySelector('input').value,
+               parent_id: null,
+           };
+            let resp;
+           try {
+                resp =  await axios.post(url,data);
+                if (resp.data.OK){
+                    window.$toast.success(resp.data.message);
+                    el.closest('.input-group').querySelector('input').value = '';
+                }else {
+                    window.$toast.error(resp.data.message);
+                }
+            } catch(e) {
+               if (e.response) {
+                   // The request was made and the server responded with a status code
+                   // that falls out of the range of 2xx
+                   if (e.response.status === 422) {
+                       // Laravel validation errors
+                       const errors = e.response.data.errors;
+                       if (errors) {
+                           // Display first error message or concatenate multiple errors
+                           const errorMessage = Object.values(errors)[0][0];
+                           window.$toast.error(errorMessage);
+                       } else {
+                           // Fallback error message
+                           window.$toast.error(e.response.data.message || 'Validation failed');
+                       }
+                   } else {
+                       // Other error status codes
+                       window.$toast.error(e.response.data.message || 'An error occurred');
+                   }
+               } else if (e.request) {
+                   // The request was made but no response was received
+                   window.$toast.error('No response from server');
+               } else {
+                   // Something happened in setting up the request that triggered an Error
+                   window.$toast.error('Error in request setup');
+               }
+            }
+
+        });
+    });
     document.querySelectorAll('#story-modal .like')?.forEach(function (el) {
 
         let i = el.querySelector('i');
@@ -176,7 +234,6 @@ document.addEventListener('DOMContentLoaded', () => {
             const url = document.querySelector('#like-url').value;
             let resp =  await axios.post(url,{id: this.getAttribute('data-id')});
             if (resp.data.OK){
-                this.setAttribute('data-is-fav',resp.data.data);
                 window.$toast.success(resp.data.message);
                 el.querySelector('b').innerText =  ( parseInt(el.querySelector('b').innerText) + 1).toString();
             }else {
@@ -184,5 +241,6 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     });
+
 
 });
