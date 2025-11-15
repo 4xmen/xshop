@@ -1,0 +1,10 @@
+#LinePreloader {
+    // scss
+    position: fixed;
+    top: 0;
+    inset-inline-start: 0;
+    height: 3px;
+    width: 0;
+    background: var(--xshop-primary);
+    z-index: 999;
+}
