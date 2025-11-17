@@ -1,3 +1,6 @@
+#app{
+    padding-bottom: 75px;
+}
 .BottomPanel {
     // scss
     position: fixed;
@@ -8,7 +11,8 @@
     background: var(--xshop-background);
     ul{
         width: 100%;
-        padding: 1rem 1rem 0;
+        padding: 0 1rem;
+        margin: 0;
         display: flex;
         flex-direction: row;
         justify-content: space-evenly;
