@@ -147,7 +147,7 @@
         @include($preloader->getBlade())
     @endif
 </div>
-<div id="app">
+<div id="app" class="route-{{ str_replace('.','-',Route::currentRouteName())  }}">
 @foreach(getParts('floats') as $part)
     @php($p = $part->getBladeWithData())
     @include($p['blade'],['data' => $p['data']])
