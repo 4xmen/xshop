@@ -30,7 +30,7 @@ class CustomerSaveRequest extends FormRequest
             'height' => ['nullable', 'numeric'],
             'weight' => ['nullable', 'numeric'],
             'sex' => ['required', 'in:MALE,FEMALE'],
-            'dob' => ['nullable', 'date'],
+            'dob' => ['nullable', 'numeric'],
             'avatar' => ['nullable', 'image', 'mimes:jpeg','max:2048'],
         ];
     }

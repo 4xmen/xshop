@@ -18,6 +18,7 @@
                     {{__("Tips")}}
                 </h3>
                 <ul>
+                    @if(isset($item))
                     <li>
                         {{__("You can set the theme of this item exclusively")}} : <a href="{{route('admin.area.design.model',['post','Post',$item->id])}}" class="btn btn-secondary btn-sm"> <i class="ri-palette-line"></i> </a>
                     </li>
@@ -29,6 +30,7 @@
                             {{__("Preview")}}
                         </a>
                     </li>
+                    @endif
                 </ul>
             </div>
             @if (isset($item))

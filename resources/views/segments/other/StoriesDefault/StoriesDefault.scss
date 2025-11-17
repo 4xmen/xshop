@@ -1,6 +1,7 @@
 .StoriesDefault {
+    padding-top: 2em;
     // scss
-    .story-default-list{
+    .story-default-list {
         padding: 0;
         list-style: none;
         display: flex;
@@ -41,7 +42,10 @@
     #story-modal {
         display: none;
         position: fixed;
-        top: 0; left: 0; right: 0; bottom: 0;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
         background: #00000077;
         backdrop-filter: blur(7px);
         z-index: 9999;
@@ -68,7 +72,10 @@
             &::before {
                 content: '';
                 position: absolute;
-                top: 0; left: 0; right: 0; bottom: 0;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
                 background: #000;
                 z-index: 1;
             }
@@ -110,7 +117,8 @@
 
             .slide {
                 position: absolute;
-                top: 0; left: 0;
+                top: 0;
+                left: 0;
                 width: 100%;
                 height: 100%;
                 opacity: 0;
@@ -171,8 +179,12 @@
 
                 // Footer: Like + Comment
                 .story-footer {
-                    padding: 12px 16px;
+                    padding: 1rem;
                     display: flex;
+                    position: relative;
+                    left: 0;
+                    right: 0;
+                    bottom: 40px;
                     justify-content: space-between;
                     color: #fff;
                     font-size: 14px;
@@ -182,14 +194,18 @@
                         display: flex;
                         align-items: center;
                         gap: 6px;
+                        font-size: 25px;
+                        i{
+                            cursor: pointer;
+                        }
 
                         &::before {
                             font-size: 18px;
                         }
                     }
 
-                    .like::before   { content: '❤️'; }
-                    .comment::before { content: '💬'; }
+                    //.like::before   { content: '❤️'; }
+                    //.comment::before { content: '💬'; }
                 }
             }
         }
@@ -197,13 +213,19 @@
         // Navigation Zones (Left/Right click)
         .nav-zone {
             position: absolute;
-            top: 0; bottom: 0;
+            top: 0;
+            bottom: 6rem;
             width: 35%;
             z-index: 8;
             cursor: pointer;
 
-            &.prev { left: 0; }
-            &.next { right: 0; }
+            &.prev {
+                inset-inline-start: 0;
+            }
+
+            &.next {
+                inset-inline-end: 0;
+            }
         }
 
         // Close Button
@@ -230,5 +252,16 @@
                 background: rgba(0, 0, 0, 0.7);
             }
         }
+
+        .comment{
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: -30px;
+        }
     }
+}
+
+.v-toast--bottom{
+    z-index: 99999;
 }

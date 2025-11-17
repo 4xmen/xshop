@@ -20,6 +20,7 @@ use App\Models\Post;
 use App\Models\Product;
 use App\Models\Quantity;
 use App\Models\Rate;
+use App\Models\Story;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
@@ -138,7 +139,7 @@ class ClientController extends Controller
         $products = Product::where('status', 1)
             ->orderByDesc('id')->paginate($this->paginate);
         if (\request()->ajax()) {
-            return view('client.raw-products',compact('products'));
+            return view('client.raw-products', compact('products'));
         }
         return view('client.default-list', compact('area', 'products', 'title', 'subtitle'));
     }
@@ -200,7 +201,7 @@ class ClientController extends Controller
         $canonical = \route('client.welcome');
         $title = __('Tag') . ': ' . $tag->name;
         $subtitle = '';
-        return view('client.tag', compact('tag', 'posts', 'products', 'clips', 'title', 'subtitle','canonical'));
+        return view('client.tag', compact('tag', 'posts', 'products', 'clips', 'title', 'subtitle', 'canonical'));
     }
 
 
@@ -213,14 +214,25 @@ class ClientController extends Controller
             'parent_id' => ['nullable', 'integer'],
         ]);
 
+        if (isGuestMaxAttemptTry('comment_' . str_replace('App\\Models\\','',$request->commentable_type) . '  [' . $request->commentable_id . ']', 1, 60)) {
+            if (request()->ajax()) {
+                return [
+                    'OK' => false,
+                    'message' => __('You have send comment to this'),
+                    'error' => __('You have send comment to this'),
+                ];
+            }
+            return redirect()->back()->with(['message' => __('You have send comment to this')]);
+        }
+
         $comment = new Comment();
         if (!auth()->check() && !auth('customer')->check()) {
-            $request->validate([
-                'name' => ['required', 'string', 'min:2'],
-                'email' => ['required', 'email'],
-            ]);
-            $comment->name = $request->name;
-            $comment->email = $request->email;
+//            $request->validate([
+//                'name' => ['required', 'string', 'min:2'],
+//                'email' => ['required', 'email'],
+//            ]);
+            $comment->name = $request->input('name',__('Unknown'));
+            $comment->email = $request->input('email',__('Unknown@nothing'));
             $comment->status = 0;
         } else {
             if (auth()->check()) {
@@ -242,6 +254,12 @@ class ClientController extends Controller
         $comment->commentable_id = $request->input('commentable_id');
         $comment->ip = request()->ip();
         $comment->save();
+        if ($request->ajax()) {
+            return [
+                'OK' => true,
+                'message' => __('Your comment has been submitted'),
+            ];
+        }
 
         return redirect()->back()->with(['message' => __('Your comment has been submitted')]);
     }
@@ -448,7 +466,7 @@ class ClientController extends Controller
         $products = $query->paginate($this->paginate);
 
         if (\request()->ajax()) {
-            return view('client.raw-products',compact('products'));
+            return view('client.raw-products', compact('products'));
         }
         if ($category->parent_id == null) {
             $breadcrumb = [
@@ -798,10 +816,10 @@ class ClientController extends Controller
     {
 
         $uri = '/' . $request->path();
-        $uri = str_replace('/'.app()->getLocale(),'',$uri);
+        $uri = str_replace('/' . app()->getLocale(), '', $uri);
 
         // ignore main lang of site
-        if ( '/' . $request->path() == $uri){
+        if ('/' . $request->path() == $uri) {
             return false;
         }
         $uri = trim($uri, '/');
@@ -819,12 +837,12 @@ class ClientController extends Controller
             }
 
             $uri2 = $route->uri();
-            $routeSet1 = explode('/',trim($uri,'/'));
-            $routeSet2 = explode('/',trim($uri2,'/'));
+            $routeSet1 = explode('/', trim($uri, '/'));
+            $routeSet2 = explode('/', trim($uri2, '/'));
 
 
             // Check if the route matches the given URI
-            if ($routeSet1[0] == $routeSet2[0] && count($routeSet1) == count( $routeSet2)) {
+            if ($routeSet1[0] == $routeSet2[0] && count($routeSet1) == count($routeSet2)) {
                 $r = $route->action['controller'];
                 $n = $route->uri();
                 break;
@@ -986,5 +1004,23 @@ class ClientController extends Controller
     public function cardItems()
     {
 
+    }
+
+    public function likeStory(Request $request)
+    {
+
+        if (isGuestMaxAttemptTry('like_story [' . $request->id . ']', 1, 60)) {
+            return [
+                'OK' => false,
+                'message' => __('You have liked this'),
+                'error' => __('You have liked this'),
+            ];
+        }
+
+        Story::where('id', $request->id)->increment('likes');
+        return [
+            'OK' => true,
+            'message' => __('Thanks, You liked the story'),
+        ];
     }
 }

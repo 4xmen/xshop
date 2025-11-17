@@ -1,0 +1,73 @@
+.BabaFooter {
+    // scss
+    .logo {
+        width: 120px;
+    }
+
+    .baba-list {
+        ul {
+            display: block;
+            list-style: none;
+            padding: .5rem;
+
+            li {
+                margin-bottom: 5px;
+                a {
+                    color: var(--xshop-text);
+                }
+            }
+        }
+    }
+
+    .images ul {
+        padding: 2rem 0;
+        list-style: none;
+        display: flex;
+        justify-content: end;
+        gap: .5rem;
+
+        li {
+            border: 1px solid #7e7e7e;
+            opacity: .5;
+            border-radius: var(--xshop-border-radius);
+
+            img {
+                width: 100px;
+                height: 100px;
+                object-fit: cover;
+                padding: .5rem;
+            }
+
+            &:hover {
+                opacity: 1;
+            }
+        }
+    }
+
+    h3 {
+        font-size: 1.5rem;
+
+    }
+
+
+    .social {
+        li {
+            i {
+                font-size: 2rem;
+            }
+        }
+    }
+
+    @media (max-width: 767px) {
+        .baba-list .content {
+            display: none;
+        }
+        .baba-list .content.active {
+            display: block;
+        }
+        .baba-list h3.toggle {
+            cursor: pointer;
+            user-select: none;
+        }
+    }
+}

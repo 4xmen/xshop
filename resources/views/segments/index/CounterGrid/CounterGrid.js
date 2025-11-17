@@ -1,8 +1,10 @@
+// Global variables to manage counter animation
 var intervals = [];
 var counters = [];
 var steps = [];
 var isCounterInited = false;
 
+// check if element is in viewport
 function isElementInViewport(el) {
     const rect = el.getBoundingClientRect();
     return (
@@ -13,12 +15,12 @@ function isElementInViewport(el) {
     );
 }
 
-
-
+// remove commas from number string
 function uncommafy(txt) {
     return txt.split(',').join('');
 }
 
+// add commas to number for better readability
 function commafy(num) {
     if (typeof num !== 'string') {
         num = num.toString();
@@ -33,45 +35,48 @@ function commafy(num) {
     return str.join('.');
 }
 
-
+// improved counter scroll handler
 const handleScroll = function() {
     const container = document.getElementById('CounterGrid');
-    if (container == null){
-        return ;
-    }
-    if (isElementInViewport(container)) {
-        if (!isCounterInited){
-            isCounterInited = true;
-            document.querySelectorAll('.grid-counter').forEach(function (el, key) {
+    if (container == null) return;
 
-                let max = parseInt(el.getAttribute('data-max'));
-                let min = parseInt(el.getAttribute('data-min'));
-                let diff = max - min;
-                counters[key] = 0;
-                steps[key] = parseInt(diff / 99);
+    if (isElementInViewport(container) && !isCounterInited) {
+        isCounterInited = true;
 
-                let tmp = setInterval(() => {
-                    counters[key] += steps[key];
-                    document.querySelectorAll('.grid-counter')[key].innerHTML = commafy(counters[key]);
-                }, 100);
-                setTimeout(function () {
-                    for (const i in intervals) {
-                        clearInterval(intervals[i]);
-                        document.querySelectorAll('.grid-counter')[key].innerHTML = commafy(document.querySelectorAll('.grid-counter')[key].getAttribute('data-max'));
-                    }
+        document.querySelectorAll('.grid-counter').forEach(function (el, key) {
+            let max = parseInt(el.getAttribute('data-max'));
+            let min = parseInt(el.getAttribute('data-min')) || 0;
+            let diff = max - min;
 
-                }, 9900);
-                intervals.push(tmp);
-            });
-        }
-        // Remove event listener if you only want to alert once
-        // this.removeEventListener('scroll', arguments.callee);
+            // calculate more dynamic and smooth step
+            let duration = 7000; // total animation duration in ms
+            let fps = 60; // frames per second
+            let totalFrames = duration / (1000 / fps);
+
+            counters[key] = min;
+            steps[key] = diff / totalFrames;
+
+            let tmp = setInterval(() => {
+                // increment counter smoothly
+                counters[key] += steps[key];
+
+                // stop if reached or exceeded max
+                if (counters[key] >= max) {
+                    counters[key] = max;
+                    clearInterval(tmp);
+                }
+
+                // update display
+                el.innerHTML = commafy(Math.round(counters[key]));
+            }, 1000 / fps);
+
+            intervals.push(tmp);
+        });
     }
 };
-document.addEventListener('DOMContentLoaded', function () {
 
+// event listeners for scroll and touch
+document.addEventListener('DOMContentLoaded', function () {
     window.addEventListener('scroll', handleScroll);
     window.addEventListener('touchmove', handleScroll);
-
-
 });
