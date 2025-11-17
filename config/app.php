@@ -16,7 +16,7 @@ return [
     */
 
     'name' => env('APP_NAME', 'xShop'),
-    'version' => env('APP_VERSION', '3.0.1'),
+    'version' => env('APP_VERSION', '3.0.2'),
     'demo' => env('APP_DEMO', false),
     /*
     |--------------------------------------------------------------------------
