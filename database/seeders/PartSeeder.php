@@ -6,6 +6,7 @@ use App\Models\Area;
 use App\Models\Part;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\File;
 
 class PartSeeder extends Seeder
 {
@@ -14,8 +15,14 @@ class PartSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        // create folder if not exists
+        $path = public_path('upload/image');
 
+        if (!File::exists($path)) {
+            File::makeDirectory($path, 0755, true);
+        }
+
+        // add parts
         $part = new Part();
         $part->segment = 'preloader';
         $part->part = 'LinePreloader';
