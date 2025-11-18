@@ -128,6 +128,9 @@ class ClientController extends Controller
         $subtitle = '';
         $posts = Post::where('status', 1)
             ->orderByDesc('id')->paginate($this->paginate);
+        if (\request()->ajax()) {
+            return view('client.raw-posts',compact('posts'));
+        }
         return view('client.default-list', compact('area', 'posts', 'title', 'subtitle'));
     }
 
@@ -336,6 +339,9 @@ class ClientController extends Controller
                 $group->name => null,
             ];
 
+        }
+        if (\request()->ajax()) {
+            return view('client.raw-posts',compact('posts'));
         }
         return view('client.group', compact('area', 'posts', 'title', 'subtitle', 'group', 'breadcrumb'));
     }

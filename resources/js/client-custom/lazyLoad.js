@@ -2,13 +2,13 @@
 document.addEventListener('DOMContentLoaded', () => {
     // check if lazy load is enabled
     const lazyLoad = document.getElementById('lazy-load')?.value;
-    if (!lazyLoad) {
+    if (lazyLoad != 1) {
         console.log('lazy load is not enabled or input not found');
         return;
     }
 
     // hide pagination
-    const pagination = document.querySelector('ul.pagination');
+    const pagination = document.querySelector('#active-pagination ul.pagination');
     if (pagination) {
         pagination.style.opacity = '.02';
     } else {
