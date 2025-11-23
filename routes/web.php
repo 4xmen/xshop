@@ -588,13 +588,7 @@ Route::any('under-construction', [ClientController::class, 'underConstruction'])
 // handle fallback redirect
 Route::fallback(function (Request $request) {
     $redirectMiddleware = new \App\Http\Middleware\RedirectMiddleware();
-    $path = request()->path();
-
-    // ignore check files
-    if (!preg_match('/^[^\s]+?\.[a-zA-Z0-9]{2,4}$/', $path)) {
-        return $redirectMiddleware->handle($request, function () {
-            return response()->view('laravel-exceptions::404', [], 404);
-        });
-    }
-
+    return $redirectMiddleware->handle($request, function() {
+        return abort(404,__("Page not found"));
+    });
 });
