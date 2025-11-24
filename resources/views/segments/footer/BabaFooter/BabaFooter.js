@@ -4,7 +4,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const heads = document.querySelectorAll(`${sel} h3.toggle`);
 
     heads.forEach(h => {
-        h.innerHTML += '<i class="ri-arrow-down-s-line"></i>';
+        if (window.innerWidth < 767) {
+            h.innerHTML += '<i class="ri-arrow-down-s-line"></i>';
+        }
         h.addEventListener('click', () => {
             const ul = h.nextElementSibling;
             if (ul && window.innerWidth <= 767) ul.classList.toggle('active');
