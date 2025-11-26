@@ -165,6 +165,7 @@ export default {
 
 
 .seekbar {
+    direction: ltr;
     height: 4px;
     margin-bottom: 16px;
     background: silver;
