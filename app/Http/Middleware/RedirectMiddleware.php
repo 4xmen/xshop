@@ -26,8 +26,9 @@ class RedirectMiddleware
 
         $source = '/' . ltrim($request->path(), '/'); // current path without query string
 
-        // cache redirect per source for 5 minutes
-        $destination = Cache::remember("redirect:{$source}", 300, function () use ($source) {
+        // cache redirect per source for 5  minutes
+        $destination = Cache::remember("redirect:".crc32($source), 300, function () use ($source) {
+
             return DB::table('redirects')
                 ->where('source', $source)
                 ->where('status', true)
