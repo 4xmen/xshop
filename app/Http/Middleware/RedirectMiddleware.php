@@ -20,6 +20,9 @@ class RedirectMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
+        if (str_contains(request()->route()->getName(), 'admin')){
+            return $next($request);
+        }
 
         $source = '/' . ltrim($request->path(), '/'); // current path without query string
 
