@@ -49,6 +49,17 @@
                         @endforeach
                     </div>
                 @endif
+                @if(config('app.xlang.active'))
+                    <div class="col-md-1">
+                        @foreach(\App\Models\XLang::all() as $lang)
+                            @if($lang->tag != app()->getLocale() && ($post->getTranslation('body',$lang) != null && strlen($post->getTranslation('body',$lang)) > 10)  )
+                                <a href="{{$post->webUrlLang($lang->tag)}}">
+                                    {{$lang->emoji}}
+                                </a>
+                            @endif
+                        @endforeach
+                    </div>
+                @endif
             </div>
             <hr>
             @if($post->table_of_contents)

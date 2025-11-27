@@ -137,6 +137,12 @@ class Post extends Model implements HasMedia
         return fixUrlLang(route('client.post', $this->slug));
     }
 
+    public function webUrlLang($lang)
+    {
+        $url = route('client.post', $this->slug);
+        return str_replace(config('app.url'), config('app.url') . '/' . $lang, $url);
+    }
+
 
     public function markup()
     {
