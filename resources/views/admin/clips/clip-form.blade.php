@@ -118,8 +118,8 @@
                             <label for="cover">
                                 {{__('Cover')}}
                             </label>
-                            <input name="cover" id="cover" type="file"
-                                   class="form-control @error('cover') is-invalid @enderror"
+                            <input name="image" id="cover" type="file"
+                                   class="form-control @error('image') is-invalid @enderror"
                                    placeholder="{{__('Cover')}}" accept="image/*"/>
                         </div>
                     </div>
