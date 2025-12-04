@@ -23,3 +23,5 @@ This directory contains logo images for payment gateways.
        return asset('payment/image/your-logo.png');
    }
    ```
+
+some new features
