@@ -42,6 +42,9 @@ return new class extends Migration
 
             // Rename 'data' column to avoid conflict and ensure it's JSON
             if (Schema::hasColumn('credits', 'data') ) {
+                if (DB::connection()->getDriverName() === 'pgsql') {
+                    DB::statement('ALTER TABLE credits ALTER COLUMN data TYPE json USING data::json');
+                }
                 $table->json('data')->nullable()->change();
             }
 
