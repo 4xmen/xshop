@@ -585,10 +585,10 @@ Route::any('{lang}', [ClientController::class, 'langIndex'])
 
 Route::any('under-construction', [ClientController::class, 'underConstruction'])->name('client.under-construction');
 
-// handle fallback redirect
-Route::fallback(function (Request $request) {
-    $redirectMiddleware = new \App\Http\Middleware\RedirectMiddleware();
-    return $redirectMiddleware->handle($request, function() {
-        return abort(404,__("Page not found"));
-    });
-});
+//// handle fallback redirect
+//Route::fallback(function (Request $request) {
+//    $redirectMiddleware = new \App\Http\Middleware\RedirectMiddleware();
+//    return $redirectMiddleware->handle($request, function() {
+//        return abort(404,__("Page not found"));
+//    });
+//});
