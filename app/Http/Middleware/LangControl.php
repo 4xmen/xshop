@@ -19,11 +19,14 @@ class LangControl
 
         $segments = $request->segments();
         if (strlen($segments[0]) == 2 && preg_match('/[A-Za-z]/', $segments[0])) {
-            app()->setLocale($segments[0]);
-
-            $request->attributes->set('set_lang', true);
-            \Session::put('locate',app()->getLocale());
-            \Session::save();
+            if (\File::exists(base_path() . '/resources/lang/' . $segments[0] . '.json')) {
+                app()->setLocale($segments[0]);
+                $request->attributes->set('set_lang', true);
+                \Session::put('locate',app()->getLocale());
+                \Session::save();
+            }else{
+                return redirect()->route('client.welcome');
+            }
         } else {
             app()->setLocale(config('app.locale'));
         }
