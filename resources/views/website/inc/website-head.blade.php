@@ -38,7 +38,7 @@
         <link rel="stylesheet" fetchpriority="high" href="{{asset('assets/vendor/bootstrap/dist/css/bootstrap.min.css')}}">
     @endif
 
-    <link rel="stylesheet" href="{{ route('theme.variable.css') }}">
+    <link rel="stylesheet" href="{{ route('theme.variable.css') }}?lang={{app()->getLocale()}}">
     @vite(['resources/sass/client.scss',  'resources/js/client.js', 'resources/sass/client-fonts.scss'])
 
 

@@ -292,6 +292,12 @@ class Product extends Model implements HasMedia
     }
 
 
+    public function webUrlLang($lang)
+    {
+        $url = route('client.product', $this->slug);
+        return str_replace(config('app.url'), config('app.url') . '/' . $lang, $url);
+    }
+
     public function getPrice()
     {
         $price = 0;

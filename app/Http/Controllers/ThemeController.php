@@ -11,8 +11,13 @@ class ThemeController extends Controller
     //
     public function cssVariables()
     {
+
+        $locale = app()->getLocale();
+        if (\request()->has('lang')) {
+            $locale = request()->input('lang');
+        }
         $response = 'main{';
-        if (langIsRTL(app()->getLocale())) {
+        if (langIsRTL($locale)) {
             $response .= 'font-feature-settings: "ss01";';
         }
         foreach (Setting::where('section', 'theme')->whereNotNull('data')
@@ -28,10 +33,10 @@ class ThemeController extends Controller
         }
         $response .= '}';
 
-        if (langIsRTL(app()->getLocale())) {
+        if (langIsRTL($locale)) {
             $response .= ' .slider-content, .tns-outer .item{ direction: rtl; }';
         }
-        if (langIsRTL(app()->getLocale())) {
+        if (langIsRTL($locale)) {
             $response .= ' .main-dir{ direction: rtl; }';
         }else{
             $response .= ' .main-dir{ direction: ltr; }';

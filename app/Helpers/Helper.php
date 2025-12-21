@@ -681,7 +681,7 @@ function getSetting(string $key, int $ttl = 3600)
         return false;
     }
 
-    $cacheKey = "setting:{$key}";
+    $cacheKey = "setting:{$key}:".app()->getLocale();
 
     // retrieve from cache or query the database and store the result
     return Cache::remember($cacheKey, $ttl, function () use ($key) {

@@ -26,14 +26,14 @@
             </div>
             <hr>
         @endif
-        <div class="row">
+        <div class="row" >
             @if(!getSetting($data->area_name.'_'.$data->part.'_invert'))
                 <div class="col-lg-3 p-0">
                     @include('segments.posts_page.GridPostListSidebar.inc.sidebar')
                 </div>
             @endif
             <div class="col-lg-9">
-                <div class="row">
+                <div class="row" id="list-row">
                     @foreach($posts as $post)
                         <div class="col-md-4">
                             <div class="grid-post-item">
@@ -67,7 +67,7 @@
                         </div>
                     @endforeach
                 </div>
-                {{$posts->links()}}
+                @include('website.inc.website-lazy-pagination',['items' => $posts])
             </div>
             @if(getSetting($data->area_name.'_'.$data->part.'_invert'))
                 <div class="col-lg-3 p-0">

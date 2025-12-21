@@ -1,12 +1,12 @@
 <template>
-    <div class="mp4-player">
+    <div class="mp4-player" ref="mainPlayer">
         <video ref="p" :src="link" class="video" :poster="cover"></video>
         <div class="seek-container">
             <div ref="seekbar" class="seekbar" @click="seek">
                 <div class="progress-seek" :style="progressPercent"></div>
             </div>
         </div>
-        <div class="player-buttons">
+        <div class="player-buttons" dir="ltr">
 
             <div>
                 {{ currentTime }}
@@ -21,7 +21,7 @@
                 <i class="ri-play-line" v-if="!isPlay"></i>
                 <i class="ri-pause-line" v-if="isPlay"></i>
             </button>
-            <button type="button" class="stop p-btn" @click="stopNow" >
+            <button type="button" class="stop p-btn" @click="stopNow">
                 <i class="ri-stop-line"></i>
             </button>
             <button type="button" class="sp p-btn" @click="timeOffset(10)">
@@ -45,6 +45,7 @@ export default {
     components: {},
     data: () => {
         return {
+            isInited: false,
             link: '',
             currentTime: '00:00',
             fullTime: '00:00',
@@ -64,22 +65,26 @@ export default {
         }
     },
     props: {
+        fixSize: {
+            type: Boolean,
+            default: true,
+        },
         asset: {
             required: true
         },
-        cover:{
+        cover: {
             default: null,
         }
     },
     mounted() {
-        window.addEventListener('load',()=>{
-        setTimeout(() => {
-            this.link = this.asset;
-            document.querySelector('#video-preview-botz').style.display = 'none';
-        }, 500);
-        setInterval(() => {
-            this.updatePlayer();
-        }, 300);
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                this.link = this.asset;
+                document.querySelector('#video-preview-botz').style.display = 'none';
+            }, 500);
+            setInterval(() => {
+                this.updatePlayer();
+            }, 300);
         });
     },
     computed: {
@@ -92,16 +97,16 @@ export default {
         }
     },
     methods: {
-        fullScreen(){
-           this.$refs.p.requestFullscreen();
+        fullScreen() {
+            this.$refs.p.requestFullscreen();
         },
         speedChange() {
             this.speed++;
-            if (this.speed  === this.speeds.length){
+            if (this.speed === this.speeds.length) {
                 this.speed = 0;
             }
             this.$refs.p.playbackRate = this.speeds[this.speed];
-            window.$toast.success('Speed: '+this.speeds[this.speed])
+            window.$toast.success('Speed: ' + this.speeds[this.speed])
         },
         seek(e) {
             const req = e.offsetX * 100 / this.$refs.seekbar.clientWidth;
@@ -133,9 +138,16 @@ export default {
                     this.currentTime = this.toHHMMSS(p.currentTime);
                     this.full = p.duration;
                     this.current = p.currentTime;
+                    const ratio = p.videoHeight / p.videoWidth;
+                    if (this.fixSize && !this.isInited && (ratio > 1) && window.innerWidth > 800){
+                        this.isInited = true;
+                        this.$refs.mainPlayer.style.width = `45%`;
+                        this.$refs.mainPlayer.style.margin = `0 auto`;
+                        console.log(ratio);
+                    }
                 }
 
-                this.isPlay = ! p.paused;
+                this.isPlay = !p.paused;
 
             } catch {
             }
@@ -165,6 +177,7 @@ export default {
 
 
 .seekbar {
+    direction: ltr;
     height: 4px;
     margin-bottom: 16px;
     background: silver;
@@ -231,7 +244,7 @@ export default {
     border-radius: 50%;
 }
 
-.video{
+.video {
     width: 100%;
     border-radius: var(--xshop-border-radius);
 }
@@ -240,7 +253,7 @@ export default {
 @media ( max-width: 450px ) {
     .player-buttons {
         display: grid;
-        grid-template-columns:  repeat(4,1fr);
+        grid-template-columns:  repeat(4, 1fr);
         gap: 10px;
     }
 

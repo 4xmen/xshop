@@ -14,17 +14,21 @@ class RedirectMiddleware
      * handle incoming request and apply active redirects
      * uses cached db query (5 min ttl) for performance
      *
-     * @param  Request  $request
-     * @param  Closure  $next
+     * @param Request $request
+     * @param Closure $next
      * @return Response
      */
     public function handle(Request $request, Closure $next): Response
     {
+        if (str_contains(request()->route()->getName(), 'admin')) {
+            return $next($request);
+        }
 
         $source = '/' . ltrim($request->path(), '/'); // current path without query string
 
-        // cache redirect per source for 5 minutes
-        $destination = Cache::remember("redirect:{$source}", 300, function () use ($source) {
+        // cache redirect per source for 5  minutes
+        $destination = Cache::remember("redirect:" . crc32($source), 300, function () use ($source) {
+
             return DB::table('redirects')
                 ->where('source', $source)
                 ->where('status', true)
@@ -39,7 +43,6 @@ class RedirectMiddleware
         if ($destination) {
             return redirect($destination, 301);
         }
-
         // no redirect, continue to next middleware/route
         return $next($request);
     }

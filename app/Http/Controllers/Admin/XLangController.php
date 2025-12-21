@@ -44,6 +44,7 @@ class XLangController extends XController
         Discount::class,
         Product::class,
         Category::class,
+        Creator::class,
         Post::class,
         Group::class,
         Slider::class,

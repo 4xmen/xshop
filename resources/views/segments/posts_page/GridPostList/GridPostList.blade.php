@@ -29,17 +29,19 @@
         <div class="row">
 
             <div class="col-12">
-                <div class="row">
+                <div class="row" id="list-row">
                     @foreach($posts as $post)
                         <div class="col-md-4">
                             <div class="grid-post-item">
                                 <div class="corner">
                                     {{$post->mainGroup->name}}
                                 </div>
-                                <img src="{{$post->imgUrl()}}" alt="{{$post->title}}" loading="lazy">
-                                <h4>
-                                    {{$post->title}}
-                                </h4>
+                                <a href="{{$post->webUrl()}}">
+                                    <img src="{{$post->imgUrl()}}" alt="{{$post->title}}" loading="lazy">
+                                    <h4>
+                                        {{$post->title}}
+                                    </h4>
+                                </a>
                                 <div class="text-muted py-2">
                                     <span>
                                         <i class="ri-calendar-line"></i>
@@ -61,7 +63,7 @@
                         </div>
                     @endforeach
                 </div>
-                {{$posts->links()}}
+                @include('website.inc.website-lazy-pagination',['items' => $posts])
             </div>
         </div>
     </div>

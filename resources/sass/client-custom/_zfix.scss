@@ -1,24 +1,4 @@
-.tns-outer {
-    direction: ltr;
 
-    .tns-nav, button {
-        display: none;
-    }
-}
-
-.slider-content {
-    direction: ltr;
-    overflow: hidden;
-
-    .item {
-
-    }
-}
-
-
-.tns-inner {
-    overflow: hidden;
-}
 
 a, a:visited {
     text-decoration: none;
@@ -43,6 +23,31 @@ blockquote p,q p {
 }
 
 
+#vue-lst{
+    width: 100px;
+}
+
+.tns-outer {
+    direction: ltr;
+
+    .tns-nav, button {
+        display: none;
+    }
+}
+
+.slider-content {
+    direction: ltr;
+    overflow: hidden;
+
+    .item {
+
+    }
+}
+
+
+.tns-inner {
+    overflow: hidden;
+}
 .btn {
     border-radius: var(--xshop-border-radius);
     font-family: VazirXUI, sans-serif;

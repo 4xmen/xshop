@@ -69,30 +69,15 @@ class ClipController extends XController
 //            $clip->cover = $name;
 //            $request->file('cover')->storeAs('public/clips', $name);
 //        }
-        if ($request->has('cover')){
-            $clip->cover = $this->storeFile('cover',$clip, 'clips');
+        $target = 'clips';
+        if ($request->hasFile('image')) {
+            $clip->cover = substr($this->storeFile('image', $clip, $target),strlen($target)+1);
+//            $this->saveImage($clip, $key, $target);
 
-            $key = 'cover';
-            $format = $request->file($key)->guessExtension();
-            if (strtolower($format) == 'png'){
-                $format = 'webp';
-            }
-            $i = Image::load($request->file($key)->getPathname())
-                ->optimize()
-//                ->nonQueued()
-                ->format($format);
-            if (getSetting('watermark2')) {
-                $i->watermark(public_path('upload/images/logo.png'),
-                    AlignPosition::BottomLeft, 5, 5, Unit::Percent,
-                    config('app.media.watermark_size'), Unit::Percent,
-                    config('app.media.watermark_size'), Unit::Percent, Fit::Contain,
-                    config('app.media.watermark_opacity'));
-            }
-            if (!file_exists(storage_path() . '/app/public/cover')){
-                mkdir(storage_path() . '/app/public/cover/');
-            }
-            $i->save(storage_path() . '/app/public/cover/optimized-'. $clip->$key);
+            $file = \request()->file('image')->getPathname();
+            parent::saveOptimizedImage($clip, 'cover', $target, $file );
         }
+
 
 
 

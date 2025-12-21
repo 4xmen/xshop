@@ -25,7 +25,7 @@ class Clip extends Model
             return asset('assets/upload/logo.svg');
         }
 
-        return \Storage::url('cover/optimized-' . $this->cover);
+        return \Storage::url('optimized/clips/' . $this->cover.'.webp');
     }
 
     public function imgOriginalUrl()
@@ -43,7 +43,7 @@ class Clip extends Model
             return null;
         }
 
-        return \Storage::url('clips/' . $this->file);
+        return \Storage::url( $this->file);
     }
 
     public function author()
