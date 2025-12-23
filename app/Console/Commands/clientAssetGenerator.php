@@ -101,3 +101,4 @@ class clientAssetGenerator extends Command
         return $uniqueText;
     }
 }
+
