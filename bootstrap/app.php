@@ -22,6 +22,7 @@ return Application::configure(basePath: dirname(__DIR__))
             \Fahlisaputra\Minify\Middleware\MinifyCss::class,
             \Fahlisaputra\Minify\Middleware\MinifyJavascript::class,
         ], prepend: [
+            \App\Http\Middleware\BlockAIBots::class,
             \App\Http\Middleware\RedirectMiddleware::class,
         ]);
 
