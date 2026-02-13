@@ -822,7 +822,7 @@ class ClientController extends Controller
     {
 
         $uri = '/' . $request->path();
-        $uri = str_replace('/' . app()->getLocale(), '', $uri);
+        $uri = str_replace('/'.app()->getLocale().'/','/',$uri);
 
         // ignore main lang of site
         if ('/' . $request->path() == $uri) {

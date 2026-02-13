@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\XController;
+use App\Http\Requests\AttachingRequest;
 use App\Http\Requests\AttachmentSaveRequest;
 use App\Models\Access;
 use App\Models\Attachment;
@@ -149,7 +150,7 @@ class AttachmentController extends XController
         return $this->bringUp($request, $item);
     }
 
-    public function attaching(Request $request){
+    public function attaching(AttachingRequest $request){
         $item = new Attachment();
         $item = $this->save($item, $request);
         logAdmin(__METHOD__,__CLASS__,$item->id);

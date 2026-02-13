@@ -75,7 +75,7 @@ class clientAssetGenerator extends Command
 
         }
         // add parts scss & js
-        foreach (Part::distinct()->get() as $part) {
+        foreach (Part::select('segment','part')->distinct()->get() as $part) {
             if (filesize(__DIR__ . '/../../../resources/views/segments/' . $part->segment . '/' . $part->part . '/' . $part->part . '.scss') > 10) {
                 $variables .= '@use "../views/segments/' . $part->segment . '/'
                     . $part->part . '/' . $part->part . '";' . PHP_EOL;
@@ -101,3 +101,4 @@ class clientAssetGenerator extends Command
         return $uniqueText;
     }
 }
+

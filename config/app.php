@@ -1,4 +1,5 @@
 <?php
+
 use Illuminate\Support\Facades\Facade;
 use Illuminate\Support\ServiceProvider;
 
@@ -42,8 +43,8 @@ return [
     |
     */
 
-    'debug' => (bool) env('APP_DEBUG', false),
-    'deployed' => (bool) env('APP_DEPLOYED', false),
+    'debug' => (bool)env('APP_DEBUG', false),
+    'deployed' => (bool)env('APP_DEPLOYED', false),
 
     /*
     |--------------------------------------------------------------------------
@@ -135,8 +136,8 @@ return [
      */
 
     'panel' => [
-        'prefix' => env('PANEL_PREFIX','dashboard'),
-        'page_count' => env('PANEL_PAGE_COUNT',30),
+        'prefix' => env('PANEL_PREFIX', 'dashboard'),
+        'page_count' => env('PANEL_PAGE_COUNT', 30),
     ],
 
     /*
@@ -147,9 +148,9 @@ return [
      */
 
     'currency' => [
-        'symbol' => env('CURRENCY_SYMBOL','$'),
-        'factor' => env('CURRENCY_FACTOR',1),
-        'code'=> env('CURRENCY_CODE','USD'),
+        'symbol' => env('CURRENCY_SYMBOL', '$'),
+        'factor' => env('CURRENCY_FACTOR', 1),
+        'code' => env('CURRENCY_CODE', 'USD'),
     ],
 
     /*
@@ -160,13 +161,22 @@ return [
      */
 
     'sms' => [
-        'sign' => env('SMS_SING',false),
-        'driver' => env('SMS_DRIVER','direct'),
-        'username' => env('SMS_USERNAME',''),
-        'password' => env('SMS_PASSWORD',''),
-        'number' => env('SMS_NUMBER',''),
-        'url' => env('SMS_URL',''),
-        'token' => env('SMS_TOKEN',''),
+        'sign' => env('SMS_SING', false),
+        'driver' => env('SMS_DRIVER', 'direct'),
+        'username' => env('SMS_USERNAME', ''),
+        'password' => env('SMS_PASSWORD', ''),
+        'number' => env('SMS_NUMBER', ''),
+        'url' => env('SMS_URL', ''),
+        'token' => env('SMS_TOKEN', ''),
+    ],
+    /*
+    |--------------------------------------------------------------------------
+    | Privacy
+    |--------------------------------------------------------------------------
+    | Website privacy
+     */
+    'privacy' => [
+        'block_ai_bots' => env('BLOCK_AI_BOTS', false),
     ],
     /*
     |--------------------------------------------------------------------------
@@ -176,26 +186,25 @@ return [
      */
 
     'media' => [
-        'gallery_thumb' => env('MEDIA_GALLEY_THUMB','500x500'),
-        'post_thumb' => env('MEDIA_POST_THUMB','500x500'),
-        'product_thumb' => env('MEDIA_PRODUCT_THUMB','500x500'),
-        'product_image' => env('MEDIA_PRODUCT_IMAGE','1200x1200'),
-        'optimized_max_width' => env('MEDIA_OPTIMIZE_MAX_WIDTH',2200),
-        'watermark_size' => env('MEDIA_WATERMARK_SIZE',15),
-        'watermark_opacity' => env('MEDIA_WATERMARK_OPACITY',50),
+        'gallery_thumb' => env('MEDIA_GALLEY_THUMB', '500x500'),
+        'post_thumb' => env('MEDIA_POST_THUMB', '500x500'),
+        'product_thumb' => env('MEDIA_PRODUCT_THUMB', '500x500'),
+        'product_image' => env('MEDIA_PRODUCT_IMAGE', '1200x1200'),
+        'optimized_max_width' => env('MEDIA_OPTIMIZE_MAX_WIDTH', 2200),
+        'watermark_size' => env('MEDIA_WATERMARK_SIZE', 15),
+        'watermark_opacity' => env('MEDIA_WATERMARK_OPACITY', 50),
     ],
     'xlang' => [
-        'active' => (bool) env('XLANG_ACTIVE',false),
-        'main' => env('XLANG_MAIN','en'),
-        'api_url' => env('XLANG_API_URL',''),
+        'active' => (bool)env('XLANG_ACTIVE', false),
+        'main' => env('XLANG_MAIN', 'en'),
+        'api_url' => env('XLANG_API_URL', ''),
     ],
-    'xshop' =>[
-      'payment' => [
-          'gateway' =>  env('PAY_GATEWAY',''),
-          'merchant_id' => env('MERCHANT_ID',''),
-      ]
+    'xshop' => [
+        'payment' => [
+            'gateway' => env('PAY_GATEWAY', ''),
+            'merchant_id' => env('MERCHANT_ID', ''),
+        ]
     ],
-
 
 
     /*
