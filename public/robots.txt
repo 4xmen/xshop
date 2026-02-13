@@ -9,4 +9,7 @@ Disallow: /customer/*
 Disallow: /product/fav/*
 Disallow: /*/card
 Disallow: /*/compare
+Disallow: /attach/download/*
+Disallow: /*/attach/download/*
+# you need make this absolute url: https://example.com/sitemap.xml
 Sitemap: /sitemap.xml
