@@ -168,6 +168,11 @@ class CardController extends Controller
             'address_id' => ['required', 'exists:addresses,id'],
             'desc' => ['nullable', 'string']
         ]);
+
+        // check address belong to user
+        if ( !auth('customer')->user()->addresses()->where('id', $request->address_id)->exists())  abort(403);
+
+
         $total = 0;
 //        return $request->all();
         $invoice = new Invoice();

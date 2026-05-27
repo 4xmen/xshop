@@ -266,12 +266,15 @@ class CustomerController extends Controller
 
     public function showTicket(Ticket $ticket)
     {
+        // check auth
+        if ($ticket->customer_id != auth('customer')->user()->id) abort(403);
         return view('client.ticket', compact('ticket'));
     }
 
 
     public function ticketAnswer(Ticket $ticket, Request $request)
     {
+        if ($ticket->customer_id != auth('customer')->user()->id) abort(403);
 
         $request->validate([
             'body' => ['required', 'string'],
