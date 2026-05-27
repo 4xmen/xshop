@@ -152,6 +152,11 @@ class UserController extends XController
                 }
                 break;
             case 'role':
+
+                // check is developer to change role
+                if ($data[1] == 'DEVELOPER' && !auth()->user()->hasRole('developer')) {
+                    abort(403);
+                }
                 foreach ($ids as $id) {
                     $user = User::where('id', $id)->first();
                     $user->role = $data[1];
