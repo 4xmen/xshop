@@ -113,7 +113,6 @@ export default {
             this.pageAspectRatio = window.innerWidth / window.innerHeight;
             let finalCSS = '';
             if( this.started ){
-                console.log(this.aspectRatio);
                 if( this.aspectRatio <= 1 ){
                     // portrait
                     if( this.pageAspectRatio < 1 ){
@@ -131,8 +130,7 @@ export default {
                 finalCSS =  "height:0;";
             }
 
-            finalCSS = finalCSS + ';opacity:0.99'+this.refreshKey;
-            console.log('final',finalCSS);
+            finalCSS = finalCSS + ';opacity:0.99'+this.refreshKey; // refresh key to make sure computed run safe
             return finalCSS;
         },
         progressPercent() {
@@ -155,16 +153,23 @@ export default {
             window.$toast.success('Speed: ' + this.speeds[this.speed])
         },
         seek(e) {
+            const dir = getComputedStyle(this.$refs.seekbar).direction;
             const req = e.offsetX * 100 / this.$refs.seekbar.clientWidth;
-            this.$refs.p.currentTime = req * this.full / 100;
+            this.$refs.p.currentTime = (dir === "rtl"? 100 - req : req ) * this.full / 100;
         },
-        timeOffset(sec) { this.$refs.p.currentTime += sec; },
+        timeOffset(sec) {
+            const dir = getComputedStyle(this.$refs.seekbar).direction;
+            this.$refs.p.currentTime += dir === 'rtl' ? (-1*sec) : sec;
+        },
         stopNow() {
             let p = this.$refs.p;
             p.pause();
             p.currentTime = 0;
         },
         playPause() {
+            if (!this.started){
+                this.started = true;
+            }
             this.refreshKey++;
             let p = this.$refs.p;
             if (this.isPlay) p.pause();
@@ -238,6 +243,7 @@ export default {
     background: var(--xshop-primary);
     width: 0%;
     transition: width 0.3s linear;
+    pointer-events: none;
 }
 
 .player-buttons {
