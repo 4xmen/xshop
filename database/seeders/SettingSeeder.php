@@ -241,14 +241,21 @@ class SettingSeeder extends Seeder
                     'key' => 'sitemap_post',
                     'type' => 'CHECKBOX',
                     'value' => 1,
-                    'size' => 6,
+                    'size' => 4,
                 ],
                 [
                     'title' => __('Product site map'),
                     'key' => 'sitemap_product',
                     'type' => 'CHECKBOX',
                     'value' => 1,
-                    'size' => 6,
+                    'size' => 4,
+                ],
+                [
+                    'title' => __('Post & Product self canonical'),
+                    'key' => 'seo_self_canonical',
+                    'type' => 'CHECKBOX',
+                    'value' => 1,
+                    'size' => 4,
                 ],
             ],
             'Media' => [
