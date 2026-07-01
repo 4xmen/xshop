@@ -559,6 +559,7 @@ Route::get('login/as/{mobile}', function ($mobile) {
 
 Route::get('test', function () {
 
+    return auth('customer')->user()->purchased_products();
     return null;
 
 })->name('test');

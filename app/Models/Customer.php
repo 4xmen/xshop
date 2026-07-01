@@ -6,11 +6,12 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Support\Facades\DB;
 use Laravel\Sanctum\HasApiTokens;
 
 class Customer extends Authenticatable
 {
-    use HasFactory, SoftDeletes,HasApiTokens ;
+    use HasFactory, SoftDeletes, HasApiTokens;
 
     protected $hidden = [
         'password', 'remember_token',
@@ -21,37 +22,45 @@ class Customer extends Authenticatable
         'dob' => 'date'
     ];
 
-    public function invoices(){
+    public function invoices()
+    {
         return $this->hasMany(Invoice::class);
     }
 
-    public function tickets(){
+    public function tickets()
+    {
         return $this->hasMany(Ticket::class);
     }
 
-    public function main_tickets(){
+    public function main_tickets()
+    {
         return $this->hasMany(Ticket::class)->whereNull('parent_id');
     }
 
-    public function products(){
-        return $this->belongsToMany(Product::class,'customer_product');
+    public function products()
+    {
+        return $this->belongsToMany(Product::class, 'customer_product');
     }
 
-    public function addresses(){
+    public function addresses()
+    {
         return $this->hasMany(Address::class);
     }
 
 
-    public function favorites(){
-        return $this->belongsToMany(Product::class,'customer_product');
+    public function favorites()
+    {
+        return $this->belongsToMany(Product::class, 'customer_product');
     }
 
-    public function comments(){
+    public function comments()
+    {
         return $this->morphMany(Comment::class, 'commentator');
     }
 
 
-    public function evaluations(){
+    public function evaluations()
+    {
 
         return Evaluation::where(function ($query) {
             $query->whereNull('evaluationable_type')
@@ -59,15 +68,16 @@ class Customer extends Authenticatable
         })->orWhere(function ($query) {
             $query->where('evaluationable_type', Customer::class)
                 ->whereNull('evaluationable_id');
-        })->orWhere(function ($query ) {
+        })->orWhere(function ($query) {
             $query->where('evaluationable_type', Customer::class)
-                ->where('evaluationable_id',$this->id);
+                ->where('evaluationable_id', $this->id);
         })->get();
     }
 
 
-    public function avatar(){
-        if ($this->avatar == null || trim($this->avatar) == ''){
+    public function avatar()
+    {
+        if ($this->avatar == null || trim($this->avatar) == '') {
             return asset('assets/default/unknown.svg');
         }
 
@@ -75,8 +85,18 @@ class Customer extends Authenticatable
         return \Storage::url('customers/' . $this->avatar);
     }
 
+    public function purchased_products()
+    {
+        return DB::table('orders')
+            ->join('invoices', 'orders.invoice_id', '=', 'invoices.id')
+            ->where('invoices.customer_id', $this->id)
+            ->whereIn('invoices.status', ['PAID', 'COMPLETED',"PROCESSING"])
+            ->pluck('orders.product_id');
+    }
 
-    public function hasRole(){
+
+    public function hasRole()
+    {
         return false;
     }
 
@@ -100,17 +120,19 @@ class Customer extends Authenticatable
         return $this->credit >= $amount;
     }
 
-    public function loyalty(){
-        if ($this->total_purchases < 2){
+    public function loyalty()
+    {
+        if ($this->total_purchases < 2) {
             return 'new';
         }
-        if ($this->total_purchases > 5){
+        if ($this->total_purchases > 5) {
             return 'loyal';
         }
         return 'regular';
     }
 
-    public function unsuccessInvoices(){
-        return $this->invoices()->whereIn('status',[ 'PENDING', 'CANCELED', 'FAILED']);
+    public function unsuccessInvoices()
+    {
+        return $this->invoices()->whereIn('status', ['PENDING', 'CANCELED', 'FAILED']);
     }
 }

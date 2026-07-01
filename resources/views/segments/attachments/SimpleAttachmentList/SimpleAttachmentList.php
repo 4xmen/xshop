@@ -21,7 +21,7 @@ class SimpleAttachmentList
         if ($model == null) {
             return $part;
         }
-        $part->attachs = $model->attachs;
+        $part->attachs = $model->visible_attachs();
         return $part;
     }
 }
