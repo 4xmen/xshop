@@ -15,7 +15,7 @@
             <meta name="robots" content="follow,noindex">
         @else
             @if(getSetting('page2') && request()->get('page',1) > 1 )
-                <link rel="canonical" href="{{url()->current()}}" />
+                <link rel="canonical" href="{{url()->current()}}"/>
             @else
                 <meta name="robots" content="follow,index">
             @endif
@@ -33,9 +33,11 @@
     </title>
 
     @if(langIsRTL(app()->getLocale()))
-        <link rel="stylesheet" fetchpriority="high" href="{{asset('assets/vendor/bootstrap/dist/css/bootstrap.rtl.min.css')}}">
+        <link rel="stylesheet" fetchpriority="high"
+              href="{{asset('assets/vendor/bootstrap/dist/css/bootstrap.rtl.min.css')}}">
     @else
-        <link rel="stylesheet" fetchpriority="high" href="{{asset('assets/vendor/bootstrap/dist/css/bootstrap.min.css')}}">
+        <link rel="stylesheet" fetchpriority="high"
+              href="{{asset('assets/vendor/bootstrap/dist/css/bootstrap.min.css')}}">
     @endif
 
     <link rel="stylesheet" href="{{ route('theme.variable.css') }}?lang={{app()->getLocale()}}">
@@ -64,6 +66,10 @@
 
         @if(\Illuminate\Support\Str::isUrl($post->canonical) )
             <link rel="canonical" href="{{$post->canonical}}"/>
+        @else
+            @if(getSetting("seo_self_canonical"))
+                <link rel="canonical" href="{{$post->webUrl()}}"/>
+            @endif
         @endif
 
     @elseif(isset($product))
@@ -92,6 +98,10 @@
 
         @if(\Illuminate\Support\Str::isUrl($product->canonical) )
             <link rel="canonical" href="{{$product->canonical}}"/>
+        @else
+            @if(getSetting("seo_self_canonical"))
+                <link rel="canonical" href="{{$product->webUrl()}}"/>
+            @endif
         @endif
 
     @elseif(isset($group))

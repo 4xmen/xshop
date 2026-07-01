@@ -48,19 +48,19 @@ class Invoice extends Model
         return route('redirect.bank', ['invoice' => $this->id, 'gateway' => $gateway]);
     }
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
-     */
-    public function products()
-    {
-        return $this->belongsToMany(Product::class, 'invoice_product')
-            ->withPivot(
-                'count',
-                'price_total',
-                'data',
-                'quantity_id'
-            );
-    }
+//    /**
+//     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+//     */
+//    public function products()
+//    {
+//        return $this->belongsToMany(Product::class, 'invoice_product')
+//            ->withPivot(
+//                'count',
+//                'price_total',
+//                'data',
+//                'quantity_id'
+//            );
+//    }
 
 
     public function isCompleted()

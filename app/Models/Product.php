@@ -33,6 +33,26 @@ class Product extends Model implements HasMedia
         return $this->morphMany(Attachment::class, 'attachable');
     }
 
+    public function visible_attachs()
+    {
+        $user = auth('customer')->user();
+
+        $query = $this->attachs();
+
+        if (!$user) {
+            return $query->where('is_premium', false)->get();
+        }
+
+        $hasPurchased = $user->purchased_products()
+            ->contains($this->id);
+
+        if ($hasPurchased) {
+            return $query->get();
+        }
+
+        return $query->where('is_premium', false)->get();
+    }
+
     protected $guarded = [];
 
 

@@ -224,7 +224,38 @@ export default {
                 // Optionally, add the new attachment to the attachments array
             } catch (error) {
                 console.error(error);
-                this.$toast.error('Upload failed!');
+
+                // Default fallback message
+                let messages = ['Upload failed!'];
+
+                if (error.response) {
+                    // Laravel validation errors (422)
+                    if (error.response.data?.errors) {
+                        const errors = error.response.data.errors;
+
+                        // Flatten all error messages into a single array
+                        messages = Object.values(errors).flat();
+                    }
+
+                    // General API message
+                    else if (error.response.data?.message) {
+                        messages = [error.response.data.message];
+                    }
+
+                    // HTTP status fallback
+                    else {
+                        messages = [`Error ${error.response.status}`];
+                    }
+                } else if (error.request) {
+                    messages = ['No response from server'];
+                } else {
+                    messages = [error.message];
+                }
+
+                // Show each error separately
+                messages.forEach(msg => {
+                    this.$toast.error(msg, {duration: 5000});
+                });
             } finally {
                 this.isShowProgress = false;
             }

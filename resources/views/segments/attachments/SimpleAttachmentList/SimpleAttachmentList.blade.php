@@ -22,6 +22,9 @@
             @foreach($data['attachs'] as $attach)
                 <tr>
                     <th>
+                        @if($attach->is_premium)
+                            <i class="ri-verified-badge-line text-success"></i>
+                        @endif
                         {{$attach->title}}
                     </th>
                     <th>
