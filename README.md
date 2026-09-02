@@ -57,6 +57,16 @@ pnpm install @rollup/rollup-win32-x64-msvc # Windows only, if the below line doe
 pnpm dev
 ```
 
+
+If prompted to approve build scripts, approve the following packages: `pnpm approve-builds`
+
+- `esbuild`
+- `@parcel/watcher`
+
+
+
+
+
 > [!TIP]
 > Default admin emails are: `developer@example.com` (developer) or `admin@example.com` (admin)
 > Default password: `password`
