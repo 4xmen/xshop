@@ -19,7 +19,7 @@ class MorphController extends Controller
     public function search(Request $request)
     {
 
-        if (auth()->check() ){
+        if (!auth()->check() ){
             return abort(403);
         }
         $morph = $request->input('morph', Product::class);

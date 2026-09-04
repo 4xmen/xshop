@@ -19,14 +19,15 @@ class QunatityCollection extends JsonResource
         /**
          * @var $this Quantity
          */
+        $data = $this->product->getMedia();
         return [
             'id' => $this->id,
             'product_name' => $this->product->name,
             'count' => $this->count,
-            'data'=> json_decode($this->data),
+            'data' => json_decode($this->data),
             'meta' => $this->meta,
-            'price'=>  $this->price,
-            'image' => $this->product->getMedia()[$this->image]->getUrl('product-image'),
+            'price' => $this->price,
+            'image' => (!isset($data[$this->image])) ? asset('assets/upload/logo.svg') : $data->getUrl('product-image'),
         ];
     }
 }
