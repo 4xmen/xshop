@@ -55,10 +55,10 @@ php artisan serv
 
 # to develop front-end
 
-npm install -g yarn
-yarn install
+npm install -g pnpm
+pnpm install
 php artisan client
-yarn dev
+pnpm dev
 ```
 </div>
 
@@ -123,9 +123,9 @@ composer install
 php artisan migrate:fresh --seed
 php artisan storage:link
 php key:generate
-npm install 
+pnpm install 
 php artisan client
-npm run build
+pnpm build
 ```
 </div>
 

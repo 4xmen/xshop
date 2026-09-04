@@ -9,6 +9,7 @@ use App\Models\Access;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Helper;
+use Illuminate\Support\Facades\DB;
 use Spatie\Image\Image;
 use function App\Helpers\hasCreateRoute;
 
@@ -52,7 +53,11 @@ class UserController extends XController
         }
         $user->mobile = $request->input('mobile');
         $user->role = $request->input('role');
-        $user->syncRoles($request->input('role'));
+        if (DB::connection()->getDriverName() == 'sqlite') {
+            $user->syncRoles(strtolower($request->input('role')));
+        }else{
+            $user->syncRoles($request->input('role'));
+        }
         $user->save();
         if ($request->has('acl')) {
             $user->accesses()->delete();

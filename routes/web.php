@@ -328,8 +328,6 @@ Route::prefix(config('app.panel.prefix'))->name('admin.')->group(
                     });
 
 
-
-
                 Route::prefix('redirects')->name('redirect.')->group(
                     function () {
                         Route::get('', [\App\Http\Controllers\Admin\RedirectController::class, 'index'])->name('index');
@@ -466,6 +464,17 @@ Route::prefix(config('app.panel.prefix'))->name('admin.')->group(
     });
 
 Route::get('/theme/variable', [\App\Http\Controllers\ThemeController::class, 'cssVariables'])->name('theme.variable.css');
+
+if (config('app.xlang.active')) {
+    Route::any('/' . config('app.xlang.main') . '/{path?}', function ($path = null) {
+        $url = '/' . ltrim($path ?? '', '/');
+
+        if (request()->getQueryString()) {
+            $url .= '?' . request()->getQueryString();
+        }
+        return redirect()->to($url, 301);
+    })->where('path', '.*');
+}
 
 Route::middleware([\App\Http\Middleware\VisitorCounter::class])
     ->name('client.')->group(function () {

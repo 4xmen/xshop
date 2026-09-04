@@ -113,7 +113,7 @@ export default {
             }
 
             let resp = await axios.get(this.cardLink + '?quantity=' + this.qz[this.selected].id);
-            if (resp.data.success) {
+            if (resp.data.success || resp.data.OK) {
                 window.$toast.success(resp.data.message);
                 document.querySelectorAll('.card-count')?.forEach(function (el2) {
                     el2.innerText = resp.data.data.count;

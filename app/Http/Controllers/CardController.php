@@ -124,19 +124,20 @@ class CardController extends Controller
         $invoice->save();
 
         foreach ($request->product_id as $i => $product) {
+            $count = abs($request->count[$i]);
             $order = new Order();
             $order->product_id = $product;
             $order->invoice_id = $invoice->id;
-            $order->count = $request->count[$i];
+            $order->count = $count;
             if ($request->quantity_id[$i] != '') {
                 $order->quantity_id = $request->quantity_id[$i];
                 $q = Quantity::find($request->quantity_id[$i]);
-                $order->price_total = $q->price * $request->count[$i];
+                $order->price_total = $q->price * $count;
                 $order->data = $q->data;
 
             } else {
                 $p = Product::find($request->product_id[$i]);
-                $order->price_total = $p->price * $request->count[$i];
+                $order->price_total = $p->price * $count;
             }
             $total += $order->price_total;
             $order->save();
@@ -198,6 +199,10 @@ class CardController extends Controller
             $order->product_id = $product;
             $order->invoice_id = $invoice->id;
             $order->count = $request->count[$i];
+            $p = Product::find($request->product_id[$i]);
+            if ($p->status !== 1) {
+                abort(403);
+            }
             if ($request->quantity_id[$i] != '') {
                 $order->quantity_id = $request->quantity_id[$i];
                 $q = Quantity::find($request->quantity_id[$i]);
@@ -205,7 +210,6 @@ class CardController extends Controller
                 $order->data = $q->data;
 
             } else {
-                $p = Product::find($request->product_id[$i]);
                 $order->price_total = $p->price * $request->count[$i];
             }
             $total += $order->price_total;

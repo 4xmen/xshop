@@ -1,4 +1,3 @@
-
 <div align="center">
     <img width="250" src="resources/images/xshop-logo.svg" alt="xShop logo">
 </div>
@@ -23,8 +22,8 @@
 - Easy support for multilingual (rtl-ltr) websites
 - A powerful SEO foundation means users never have to worry about technical SEO issues.
 
-
 #### Default supported payment gateways:
+
 <div style="background: #ffffff;padding:1rem 7px; display: flex; justify-content: space-evenly;">
 <img src="thirdparty/assets/paypal.svg" style="height: 48px"  alt="paypal">
 <img src="thirdparty/assets/zarinpal.svg" style="height: 48px"  alt="zarinpal">
@@ -38,7 +37,7 @@
 
 ## Installation [Development Mode]
 
-> [!IMPORTANT]  
+> [!IMPORTANT]
 > Create a new database and rename `.env.example` to `.env`, then update your `.env` configurations. Run the following commands:
 
 ```bash
@@ -52,31 +51,36 @@ php artisan key:generate
 php artisan serve
 
 # To develop front-end
-npm i
+pnpm i
 php artisan client
-npm install @rollup/rollup-win32-x64-msvc # Windows only, if the below line does not work
-npm run dev
-
-# Or with yarn
-
-yarn install
-php artisan client
-yarn add @rollup/rollup-win32-x64-msvc # Windows only, if the below line does not work
-yarn dev
+pnpm install @rollup/rollup-win32-x64-msvc # Windows only, if the below line does not work
+pnpm dev
 ```
 
-> [!TIP]  
-> Default admin emails are: `developer@example.com` (developer) or `admin@example.com` (admin)  
+
+If prompted to approve build scripts, approve the following packages: `pnpm approve-builds`
+
+- `esbuild`
+- `@parcel/watcher`
+
+
+
+
+
+> [!TIP]
+> Default admin emails are: `developer@example.com` (developer) or `admin@example.com` (admin)
 > Default password: `password`
 
 ## Image Seeding
 
-- Download and prepare images:  
+- Download and prepare images:
+
 ```bash
 php artisan seeding:prepare
 ```
+
 - Then copy your image folder to `database/seeders/images/`
-- Seed images for models: [Group, Category, Post, Product, Slider]  
+- Seed images for models: [Group, Category, Post, Product, Slider]
 
 ```bash
 php artisan seeding:image Product digital
@@ -88,7 +92,7 @@ Or to seed all models:
 php artisan seeding:all digital
 ```
 
-> The first parameter is the model name; the second is the image seeder directory. Available directories: `[bag, clothe, digital, sport, posts, makeup]`  
+> The first parameter is the model name; the second is the image seeder directory. Available directories: `[bag, clothe, digital, sport, posts, makeup]`
 > You can create your own directory, add images to it, and use it with the image seeder.
 
 ## Requirements
@@ -111,9 +115,9 @@ composer install
 php artisan migrate:fresh --seed
 php artisan storage:link
 php artisan key:generate
-npm install 
+pnpm install 
 php artisan client
-npm run build
+pnpm build
 ```
 
 ## Optimize for Production
@@ -140,7 +144,7 @@ Add this line:
 
 ## Create xController
 
-Create a controller with logging and semi-automatic CRUD with logs.  
+Create a controller with logging and semi-automatic CRUD with logs.
 Usage: [`model`]
 
 ```bash
@@ -151,8 +155,8 @@ php artisan make:xcontroller User
 
 Create a reusable theme part in a specific area.
 
-Parameters:  
-PartName [`theme part name`]  
+Parameters:
+PartName [`theme part name`]
 segmentName [`group`, `category`, `preloader`, ...]
 
 ```bash
@@ -170,16 +174,15 @@ php artisan build
 
 ### Theme Parts Files
 
-- `PartName.php`: Contains `onCreate`, `onRemove`, `onMount` actions for the theme part  
-- `PartName.blade.php`: Blade template for the theme part  
-- `PartName.scss`: SCSS styles for the theme part  
-- `PartName.js`: JavaScript for the theme part  
+- `PartName.php`: Contains `onCreate`, `onRemove`, `onMount` actions for the theme part
+- `PartName.blade.php`: Blade template for the theme part
+- `PartName.scss`: SCSS styles for the theme part
+- `PartName.js`: JavaScript for the theme part
 - `screenshot.png`: Screenshot preview of the theme part
 
 ## Demo
 
 > Online demo available here: <a href="https://xshop.xstack.ir/login">https://xshop.xstack.ir/</a>
-
 
 ## How to migrate from WordPress & WooCommerce to xShop?
 
@@ -196,7 +199,7 @@ php artisan xshift catgory http://wp.test/
 php artisan xshift product http://wp.test/
 ```
 
-Replace `http://wp.test/` with your old website’s URL.  
+Replace `http://wp.test/` with your old website’s URL.
 If xshop does not allow data transfer and requires an empty database, run:
 
 ```
@@ -206,7 +209,6 @@ php artisan xshift clear
 > Important notes: the above clear command will delete (truncate) all content and product data on your current server.
 
 > Note: migration commands may take from 1 minute to several hours depending on the amount of content on the old site, especially the number of images.
-
 
 ### Screenshots
 
@@ -222,9 +224,10 @@ php artisan xshift clear
 
 ## Access to xShop/v1
 
-> [!WARNING]  
+> [!WARNING]
 > xShop/v1 is available here: <a href="https://github.com/4xmen/xshop.v1">https://github.com/4xmen/xshop.v1</a>
 
 <p align="center"> 
     Developed with ❤️!
 </p>
+

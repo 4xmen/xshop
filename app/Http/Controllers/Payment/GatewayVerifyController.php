@@ -20,6 +20,10 @@ class GatewayVerifyController
             $message = null;
             $result = true;
             $paymentId = self::getPayment($invoice);
+            $pay = \App\Models\Payment::whereId($paymentId)->firstOrFail();
+            if ($pay->amount != $invoice->total_price) {
+                abort(400, 'Payment amount does not match invoice');
+            }
             $response = $gateway->verify();
             $payment = $invoice->storeSuccessPayment($paymentId, $response['reference_id'], $response['card_number']);
             session(['card'=>serialize([])]);

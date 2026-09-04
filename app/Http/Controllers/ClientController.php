@@ -518,11 +518,26 @@ class ClientController extends Controller
 
     public function attachDl($slug)
     {
+
         $attachment = Attachment::where('slug', $slug)->firstOrFail();
         $attachment->increment('downloads');
-        $file = (storage_path() . '/app/public/attachments/' . $attachment->file);
+        $file = (storage_path() . '/app/public/' . $attachment->file);
         if (file_exists($file)) {
-            return response()->download($file);
+            if (!$attachment->is_premium){
+                return response()->download($file);
+            }else{
+                if (auth('customer')->check()){
+                    $user = auth('customer')->user();
+                    if ($user->purchased_products()
+                        ->contains($attachment->attachable_id)){
+                        return response()->download($file);
+                    }
+                }
+                abort(403,"You don't have permission to access this attachment.");
+            }
+
+        }else{
+            abort(404,"Attachment not found.");
         }
     }
 
