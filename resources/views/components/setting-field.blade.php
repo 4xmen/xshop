@@ -18,9 +18,15 @@
                       rows="5">{{old($setting->key, $setting->value)}}</textarea>
             @break
         @case('CODE')
-            <textarea dir="ltr" name="{{$setting->key}}" id="{{$setting->key}}"
-                      class="form-control"
-                      rows="5">{{old($setting->key, $setting->value)}}</textarea>
+{{--            <textarea dir="ltr" name="{{$setting->key}}" id="{{$setting->key}}"--}}
+{{--                      class="form-control"--}}
+{{--                      rows="5">{{old($setting->key, $setting->value)}}</textarea>--}}
+            <code-editor
+                name="custom_code"
+                value='{{base64_encode(old($setting->key, $setting->value))}}'
+                xname="{{$setting->key}}"
+                default-syntax="html"
+            ></code-editor>
             @break
         @case('TIME')
             <vue-time-picker :am-pm="false"
