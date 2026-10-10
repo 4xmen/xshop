@@ -403,6 +403,21 @@ class Product extends Model implements HasMedia
         return true;
     }
 
+
+    /**
+     * renew stock quantity count & min price
+     * @return void
+     */
+    public function renewPriceAndStock()
+    {
+        if ($this->quantities()->count() > 0) {
+            $this->stock_quantity = $this->quantities()->sum('count');
+            // just apply price has quantity
+            $this->price = $this->quantities()->where('count', '>', 0)->min('price');
+        }
+        $this->save();
+    }
+
     public function markup()
     {
 
@@ -473,7 +488,8 @@ RESULT;
     }
 
 
-    public function evaluations(){
+    public function evaluations()
+    {
 
         return Evaluation::where(function ($query) {
             $query->whereNull('evaluationable_type')
@@ -481,12 +497,12 @@ RESULT;
         })->orWhere(function ($query) {
             $query->where('evaluationable_type', Product::class)
                 ->whereNull('evaluationable_id');
-        })->orWhere(function ($query ) {
+        })->orWhere(function ($query) {
             $query->where('evaluationable_type', Product::class)
-                ->where('evaluationable_id',$this->id);
-        })->orWhere(function ($query ) {
+                ->where('evaluationable_id', $this->id);
+        })->orWhere(function ($query) {
             $query->where('evaluationable_type', Category::class)
-                ->where('evaluationable_id',$this->category_id);
+                ->where('evaluationable_id', $this->category_id);
         })->get();
     }
 }
