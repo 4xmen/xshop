@@ -18,15 +18,19 @@
                       rows="5">{{old($setting->key, $setting->value)}}</textarea>
             @break
         @case('CODE')
-{{--            <textarea dir="ltr" name="{{$setting->key}}" id="{{$setting->key}}"--}}
-{{--                      class="form-control"--}}
-{{--                      rows="5">{{old($setting->key, $setting->value)}}</textarea>--}}
-            <code-editor
-                name="custom_code"
-                value='{{base64_encode(old($setting->key, $setting->value))}}'
-                xname="{{$setting->key}}"
-                default-syntax="html"
-            ></code-editor>
+            @if(config('app.xshop.code_editor'))
+                <code-editor
+                    name="custom_code"
+                    value='{{base64_encode(old($setting->key, $setting->value))}}'
+                    xname="{{$setting->key}}"
+                    default-syntax="html"
+                ></code-editor>
+            @else
+                <textarea dir="ltr" name="{{$setting->key}}" id="{{$setting->key}}"
+                          class="form-control"
+                          rows="5">{{old($setting->key, $setting->value)}}</textarea>
+
+            @endif
             @break
         @case('TIME')
             <vue-time-picker :am-pm="false"
@@ -177,10 +181,13 @@
                         <option value="id"> {{__("ID")}} </option>
                         <option value="view" @if($vals[1] == 'view') selected @endif> {{__("View")}} </option>
                         <option value="sell" @if($vals[1] == 'sell') selected @endif> {{__("Sell")}} </option>
-                        <option value="average_rating" @if($vals[1] == 'average_rating') selected @endif> {{__("Rate")}} </option>
+                        <option value="average_rating"
+                                @if($vals[1] == 'average_rating') selected @endif> {{__("Rate")}} </option>
                         <option value="price" @if($vals[1] == 'price') selected @endif> {{__("Price")}} </option>
-                        <option value="stock_quantity" @if($vals[1] == 'stock_quantity') selected @endif> {{__("Stock quantity")}} </option>
-                        <option value="updated_at" @if($vals[1] == 'updated_at') selected @endif> {{__("Update")}} </option>
+                        <option value="stock_quantity"
+                                @if($vals[1] == 'stock_quantity') selected @endif> {{__("Stock quantity")}} </option>
+                        <option value="updated_at"
+                                @if($vals[1] == 'updated_at') selected @endif> {{__("Update")}} </option>
                     </select>
                 </div>
                 <div class="col-md">
@@ -189,7 +196,7 @@
                     </label>
                     <select name="{{$setting->key}}[sort]" id="{{$setting->key}}s" class="form-control">
                         <option value="DESC"> {{__("Descending")}} </option>
-                        <option value="ASC"  @if($vals[2] == 'ASC') selected @endif> {{__("Ascending")}} </option>
+                        <option value="ASC" @if($vals[2] == 'ASC') selected @endif> {{__("Ascending")}} </option>
                     </select>
                 </div>
             </div>
@@ -223,7 +230,8 @@
                         <option value="id"> {{__("ID")}} </option>
                         <option value="view" @if($vals[1] == 'view') selected @endif> {{__("View")}} </option>
                         <option value="like" @if($vals[1] == 'like') selected @endif> {{__("Like")}} </option>
-                        <option value="updated_at" @if($vals[1] == 'updated_at') selected @endif> {{__("Update")}} </option>
+                        <option value="updated_at"
+                                @if($vals[1] == 'updated_at') selected @endif> {{__("Update")}} </option>
                     </select>
                 </div>
                 <div class="col-md">
@@ -232,7 +240,7 @@
                     </label>
                     <select name="{{$setting->key}}[sort]" id="{{$setting->key}}s" class="form-control">
                         <option value="DESC"> {{__("Descending")}} </option>
-                        <option value="ASC"  @if($vals[2] == 'ASC') selected @endif> {{__("Ascending")}} </option>
+                        <option value="ASC" @if($vals[2] == 'ASC') selected @endif> {{__("Ascending")}} </option>
                     </select>
                 </div>
             </div>

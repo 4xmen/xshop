@@ -203,7 +203,8 @@ return [
         'payment' => [
             'gateway' => env('PAY_GATEWAY', ''),
             'merchant_id' => env('MERCHANT_ID', ''),
-        ]
+        ],
+        'code_editor' => env('CODE_EDITOR', true),
     ],
 
 
