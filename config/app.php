@@ -232,9 +232,11 @@ return [
          * Application Service Providers...
          */
         App\Providers\AppServiceProvider::class,
-        Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
         Translator\Framework\TranslatorServiceProvider::class,
-        \App\Providers\BladeServiceProvider::class,
 
+        ... (env('APP_ENV') === 'production' ? [] : [
+            Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
+            \App\Providers\BladeServiceProvider::class,
+        ]),
     ])->toArray(),
 ];
