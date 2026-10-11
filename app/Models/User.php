@@ -16,6 +16,40 @@ class User extends Authenticatable
 
     static $roles = ['DEVELOPER', 'ADMIN', 'USER', 'SUSPENDED'];
 
+    function markupKeywords()
+    {
+        return [
+            'app.name' => [
+                'title' => __("App name"),
+                'value' => config('app.name'),
+            ],
+            'name' => [
+                'title' => __("Name"),
+                'value' => $this->name,
+            ],
+            'email' => [
+                'title' => __("Email"),
+                'value' => $this->email,
+            ],
+            'mobile' => [
+                'title' => __("Mobile"),
+                'value' => $this->mobile,
+            ],
+            'register' => [
+                'title' => __("created_at"),
+                'value' => $this->created_at,
+            ],
+//            'url' => [
+//                'title' => __("URL"),
+//                'value' => $this->webUrl(),
+//            ],
+            'img' => [
+                'title' => __("Avatar"),
+                'value' => $this->avatar(),
+            ],
+        ];
+    }
+
     /**
      * The attributes that are mass assignable.
      *

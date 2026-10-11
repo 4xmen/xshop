@@ -239,6 +239,21 @@
                     </div>
                 </div>
             </div>
+            <div class="item-list my-3">
+
+                <h3 class="p-3">
+                    <i class="ri-message-3-line"></i>
+                    {{__("Markups")}}
+                </h3>
+                <div class="mt-4">
+                    <code-editor
+                        value='{{base64_encode(old('markups', $item->markups)??'')}}'
+                        xname="markups"
+                        :btns='@json($item->markupKeywords())'
+                        default-syntax="html"
+                    ></code-editor>
+                </div>
+            </div>
         </div>
     </div>
 @endsection

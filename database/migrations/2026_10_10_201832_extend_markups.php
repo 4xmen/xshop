@@ -17,8 +17,17 @@ return new class extends Migration {
         Schema::table('groups', function (Blueprint $table) {
             $table->text('default_markup')->nullable()->default(null);
         });
+        Schema::table('categories', function (Blueprint $table) {
+            $table->text('default_markup')->nullable()->default(null);
+        });
         Schema::table('users', function (Blueprint $table) {
-            $table->text('markup')->nullable()->default(null);
+            $table->text('markups')->nullable()->default(null);
+        });
+        Schema::table('products', function (Blueprint $table) {
+            $table->text('markups')->nullable()->default(null);
+        });
+        Schema::table('creators', function (Blueprint $table) {
+            $table->text('markups')->nullable()->default(null);
         });
     }
 

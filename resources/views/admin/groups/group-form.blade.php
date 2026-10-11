@@ -171,7 +171,6 @@
                            <div class="col-12 mt-4">
                                {{__("Markup schema for posts of this group")}}:
                                <code-editor
-                                   name="custom_code"
                                    value='{{base64_encode(old('default_markup', $item->default_markup)??'')}}'
                                    xname="default_markup"
                                    :btns='@json($item->posts()->inRandomOrder()->first()->markupKeywords())'

@@ -56,6 +56,7 @@ class PostController extends XController
         $post->slug = $this->getSlug($post,'slug','title');
         $post->body = $request->input('body');
         $post->subtitle = $request->input('subtitle');
+        $post->markups = $request->input('markups',null);
         $post->status = $request->input('status');
         $post->group_id = $request->input('group_id');
         $post->user_id = auth()->id();

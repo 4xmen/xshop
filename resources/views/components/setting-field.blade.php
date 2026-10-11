@@ -20,7 +20,6 @@
         @case('CODE')
             @if(config('app.xshop.code_editor'))
                 <code-editor
-                    name="custom_code"
                     value='{{base64_encode(old($setting->key, $setting->value))}}'
                     xname="{{$setting->key}}"
                     default-syntax="html"

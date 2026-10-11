@@ -232,17 +232,17 @@ class Post extends Model implements HasMedia
 }
 </script>
 RESULT;
-        $groupMarkup = $this->mainGroup->default_markup;
-        // why 45 cuz `<script type="application/ld+json"></script>` must fill
-        if (strlen( $groupMarkup ) <= 45){
-            return $markup;
-        }
+
 
         $keywords = $this->markupKeywords();
-        $keys = array_keys($keywords);
-        $values = array_column($keywords, 'value');
-        $groupMarkup = str_replace($keys, $values, $groupMarkup);
-        return $markup.PHP_EOL.$groupMarkup;
+
+
+        // add other markups
+
+        return $markup . PHP_EOL .
+            getValidMarkup($this->mainGroup->default_markup??'', $keywords) . PHP_EOL .
+            getValidMarkup($this->author->markups??'', $this->author->markupKeywords()) . PHP_EOL .
+            getValidMarkup($this->markups??'', $keywords) . PHP_EOL ;
     }
 
     public function tagsList()
