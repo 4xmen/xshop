@@ -29,6 +29,61 @@ class Product extends Model implements HasMedia
         'qidz' => 'array'
     ];
 
+
+    function markupKeywords()
+    {
+        return [
+            'app.name' => [
+                'title' => __("App name"),
+                'value' => config('app.name'),
+            ],
+            'name' => [
+                'title' => __("Name"),
+                'value' => $this->name,
+            ],
+            'excerpt' => [
+                'title' => __("Excerpt"),
+                'value' => $this->excerpt,
+            ],
+            'desc' => [
+                'title' => __("Description"),
+                'value' => $this->description,
+            ],
+            'updated' => [
+                'title' => __("updated_at"),
+                'value' => $this->updated_at,
+            ],
+            'url' => [
+                'title' => __("URL"),
+                'value' => $this->webUrl(),
+            ],
+            'img' => [
+                'title' => __("Image"),
+                'value' => $this->imgUrl(),
+            ],
+            'price' => [
+                'title' => __("Price"),
+                'value' => $this->getPrice(),
+            ],
+            'quantity' => [
+                'title' => __("Quantities"),
+                'value' => $this->stock_quantity,
+            ],
+            'sku' => [
+                'title' => __("SKU"),
+                'value' => $this->sku,
+            ],
+            'creators' => [
+                'title' => __("Creators"),
+                'value' => $this->creators()->pluck('name')->implode(', '),
+            ],
+            'discounts' => [
+                'title' => __("Discounts"),
+                'value' => json_encode($this->discounts()->get(['title','amount','type'])),
+            ],
+        ];
+    }
+
     public function attachs()
     {
         return $this->morphMany(Attachment::class, 'attachable');
@@ -425,7 +480,7 @@ class Product extends Model implements HasMedia
 
         $currency = config('app.currency.code');
         $reviews = CommentMarkupCollection::collection($this->approvedComments)->toJson();
-        return <<<RESULT
+        $markup =  <<<RESULT
 <script type="application/ld+json">
 {
   "@context": "https://schema.org/",
@@ -459,6 +514,12 @@ class Product extends Model implements HasMedia
 }
 </script>
 RESULT;
+
+        $keywords = $this->markupKeywords();
+        return $markup . PHP_EOL .
+            getValidMarkup($this->category->default_markup??'', $keywords) . PHP_EOL .
+//            getValidMarkup($this->author->markups??'', $this->author->markupKeywords()) . PHP_EOL .
+            getValidMarkup($this->markups??'', $keywords) . PHP_EOL ;
 
     }
 
