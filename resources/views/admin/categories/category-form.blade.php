@@ -190,7 +190,7 @@
                                 {{__('Description')}}
                             </label>
                             <textarea rows="5" name="description"
-                                      class="form-control @error('description') is-invalid @enderror"
+                                      class="form-control @error('description') is-invalid @enderror ckeditorx"
                                       placeholder="{{__('Description')}}">{{old('description',$item->description??null)}}</textarea>
                         </div>
                         <div class="col-md-12">

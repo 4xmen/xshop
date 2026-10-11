@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Http\Resources\CommentMarkupCollection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -34,6 +35,44 @@ class Post extends Model implements HasMedia
     public function getRouteKeyName()
     {
         return 'slug';
+    }
+
+    function markupKeywords()
+    {
+        return [
+            'app.name' => [
+                'title' => __("App name"),
+                'value' => config('app.name'),
+            ],
+            'title' => [
+                'title' => __("Title"),
+                'value' => $this->title,
+            ],
+            'subtitle' => [
+                'title' => __("Subtitle"),
+                'value' => $this->subtitle,
+            ],
+            'created' => [
+                'title' => __("created_at"),
+                'value' => $this->created_at,
+            ],
+            'updated' => [
+                'title' => __("updated_at"),
+                'value' => $this->updated_at,
+            ],
+            'url' => [
+                'title' => __("URL"),
+                'value' => $this->webUrl(),
+            ],
+            'img' => [
+                'title' => __("Image"),
+                'value' => $this->imgUrl(),
+            ],
+            'tags' => [
+                'title' => __("Tags"),
+                'value' => $this->tagsList(),
+            ],
+        ];
     }
 
 
@@ -157,7 +196,8 @@ class Post extends Model implements HasMedia
         $app = config('app.name');
         $logo = asset('upload/images/logo.png');
         $author = $this->author->name ?? $app;
-        return <<<RESULT
+        $reviews = CommentMarkupCollection::collection($this->approvedComments)->toJson();
+        $markup = <<<RESULT
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -187,11 +227,22 @@ class Post extends Model implements HasMedia
     "userInteractionCount": {$this->view}
   },
   "datePublished": "{$this->created_at}",
-  "dateModified": "{$this->updated_at}"
+  "dateModified": "{$this->updated_at}",
+  "review": $reviews
 }
 </script>
 RESULT;
+        $groupMarkup = $this->mainGroup->default_markup;
+        // why 45 cuz `<script type="application/ld+json"></script>` must fill
+        if (strlen( $groupMarkup ) <= 45){
+            return $markup;
+        }
 
+        $keywords = $this->markupKeywords();
+        $keys = array_keys($keywords);
+        $values = array_column($keywords, 'value');
+        $groupMarkup = str_replace($keys, $values, $groupMarkup);
+        return $markup.PHP_EOL.$groupMarkup;
     }
 
     public function tagsList()
@@ -203,19 +254,21 @@ RESULT;
         }
     }
 
-    public function tableOfContents(){
+    public function tableOfContents()
+    {
         list($toc, $modifiedHtml) = generateTOC($this->body);
         return $toc;
     }
 
-    public function bodyContent(){
+    public function bodyContent()
+    {
         list($toc, $modifiedHtml) = generateTOC($this->body);
         return $modifiedHtml;
     }
 
 
-
-    public function evaluations(){
+    public function evaluations()
+    {
 
         return Evaluation::where(function ($query) {
             $query->whereNull('evaluationable_type')
@@ -223,12 +276,12 @@ RESULT;
         })->orWhere(function ($query) {
             $query->where('evaluationable_type', Post::class)
                 ->whereNull('evaluationable_id');
-        })->orWhere(function ($query ) {
+        })->orWhere(function ($query) {
             $query->where('evaluationable_type', Post::class)
-                ->where('evaluationable_id',$this->id);
-        })->orWhere(function ($query ) {
+                ->where('evaluationable_id', $this->id);
+        })->orWhere(function ($query) {
             $query->where('evaluationable_type', Group::class)
-                ->where('evaluationable_id',$this->group_id);
+                ->where('evaluationable_id', $this->group_id);
         })->get();
     }
 }

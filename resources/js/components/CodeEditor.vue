@@ -1,19 +1,34 @@
-
 <template>
     <div id="code-editor">
         <div class="editor-toolbar">
-            <label for="editor-syntax">Syntax</label>
 
-            <select
-                id="editor-syntax"
-                v-model="syntax"
-                class="syntax-select"
-            >
-                <option value="html">HTML</option>
-                <option value="json">JSON</option>
-                <option value="javascript">JavaScript</option>
-                <option value="css">CSS</option>
-            </select>
+            <div class="btn reset" @click="resetText">
+                Reset
+            </div>
+
+            <div v-for="(btn, iBtn) in btns">
+                <div class="btn" :title="btn.value" @click="replaceKeyword(iBtn)">
+                    {{ btn.title }}
+                </div>
+            </div>
+
+            <div>
+                <label for="editor-syntax">Syntax</label>
+
+                &nbsp;
+                &nbsp;
+                <select
+                    id="editor-syntax"
+                    v-model="syntax"
+                    class="syntax-select"
+                >
+                    <option value="html">HTML</option>
+                    <option value="json">JSON</option>
+                    <option value="javascript">JavaScript</option>
+                    <option value="css">CSS</option>
+                </select>
+            </div>
+
         </div>
 
         <div ref="editorContainer" class="editor-container"></div>
@@ -36,7 +51,7 @@ function decodeBase64Utf8(encoded) {
     return new TextDecoder().decode(bytes);
 }
 
-import { basicEditor } from "prism-code-editor/setups";
+import {basicEditor} from "prism-code-editor/setups";
 
 import "prism-code-editor/prism/languages/markup";
 import "prism-code-editor/prism/languages/json";
@@ -44,6 +59,49 @@ import "prism-code-editor/prism/languages/javascript";
 import "prism-code-editor/prism/languages/css";
 
 export default {
+
+    methods: {
+        resetText(){
+
+            if (!confirm("Are you sure to reset the code?")){
+                return;
+            }
+            this.currentValue = this.firstData;
+
+            this.editor.setOptions({value: this.firstData});
+
+            this.$emit("input", this.firstData);
+            this.$emit("change", this.firstData);
+        },
+        replaceKeyword(keyword_input) {
+            const textarea = this.editor.textarea;
+
+            const start = textarea.selectionStart;
+            const end = textarea.selectionEnd;
+
+            const keyword = `%${keyword_input}%`
+
+            if (start === end) return;
+
+            const value = this.editor.value;
+            const newValue =
+                value.substring(0, start) +
+                keyword +
+                value.substring(end);
+
+            this.editor.setOptions({value: newValue});
+
+            this.currentValue = newValue;
+
+            this.$emit("input", newValue);
+            this.$emit("change", newValue);
+
+            textarea.focus();
+
+            const cursor = start + keyword.length;
+            textarea.setSelectionRange(cursor, cursor);
+        }
+    },
     name: "CodeEditor",
 
     props: {
@@ -55,6 +113,10 @@ export default {
         xname: {
             type: String,
             required: true
+        },
+        btns: {
+            type: Array,
+            default: [],
         },
 
         defaultSyntax: {
@@ -83,6 +145,7 @@ export default {
             editor: null,
             syntax: this.defaultSyntax,
             currentValue: decodeBase64Utf8(this.value),
+            firstData: decodeBase64Utf8(this.value),
         };
     },
 
@@ -111,6 +174,8 @@ export default {
     },
 
     watch: {
+
+
         value(newValue) {
             if (newValue === this.currentValue) return;
 
@@ -163,8 +228,9 @@ export default {
 .editor-toolbar {
     display: flex;
     align-items: center;
-    justify-content: flex-end;
-    gap: 8px;
+    justify-content: space-between;
+    gap: 5px;
+    padding-top: 5px;
 }
 
 .editor-toolbar label {
@@ -197,7 +263,16 @@ export default {
     font-size: 14px;
     line-height: 1.6;
 }
+
 .editor-container {
     white-space: pre;
+}
+
+.btn {
+    background: #00000044;
+}
+
+.reset{
+    background: #ff000022;
 }
 </style>

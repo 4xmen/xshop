@@ -22,6 +22,7 @@ class Product extends Model implements HasMedia
 
     public static $stock_status = ['IN_STOCK', 'OUT_STOCK', 'BACK_ORDER'];
 
+
     public $translatable = ['name', 'excerpt', 'description', 'table'];
     protected $casts = [
         'qz' => 'array',
@@ -440,8 +441,8 @@ class Product extends Model implements HasMedia
   "offers": {
     "@type": "Offer",
     "url": "{$this->webUrl()}",
-    "priceCurrency": "$currency",
-    "price": "{{$this->price}}"
+    "priceCurrency": "{$currency}",
+    "price": "{$this->price}"
   },
    "interactionStatistic": {
     "@type": "InteractionCounter",

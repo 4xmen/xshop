@@ -62,6 +62,7 @@ class GroupController extends XController
         $group->name = $request->input('name');
         $group->subtitle = $request->input('subtitle');
         $group->description = $request->input('description');
+        $group->default_markup = $request->input('default_markup',null);
         $group->hide = $request->has('hide');
 
         if ($request->input('parent_id') == '') {
