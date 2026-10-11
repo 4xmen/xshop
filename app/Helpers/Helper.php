@@ -1624,7 +1624,10 @@ function getValidMarkup($markup, $keywords)
     if (strlen($markup) <= 45) {
         return '';
     }
-    $keys = array_keys($keywords);
+    $keys = array_map(
+        fn ($key) => "%{$key}%",
+        array_keys($keywords)
+    );
     $values = array_column($keywords, 'value');
     return str_replace($keys, $values, $markup);
 }

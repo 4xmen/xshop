@@ -81,7 +81,6 @@ export default {
 
             const keyword = `%${keyword_input}%`
 
-            if (start === end) return;
 
             const value = this.editor.value;
             const newValue =

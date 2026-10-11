@@ -29,7 +29,7 @@ class Post extends Model implements HasMedia
 
     public function author()
     {
-        return $this->belongsTo(\App\Models\User::class);
+        return $this->belongsTo(User::class,'user_id','id');
     }
 
     public function getRouteKeyName()
