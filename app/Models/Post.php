@@ -183,8 +183,10 @@ class Post extends Model implements HasMedia
     }
 
 
+
     public function markup()
     {
+        $lang = app()->getLocale();
         $type = 'BlogPosting';
         if (strpos(strtolower(implode(',', $this->groups()->pluck('name')->toArray())), __('article')) !== false) {
             $type = 'Article';
@@ -228,6 +230,7 @@ class Post extends Model implements HasMedia
   },
   "datePublished": "{$this->created_at}",
   "dateModified": "{$this->updated_at}",
+  'inLanguage' => app()->getLocale(),
   "review": $reviews
 }
 </script>

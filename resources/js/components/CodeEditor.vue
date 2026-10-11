@@ -222,6 +222,7 @@ export default {
     gap: 8px;
     width: 100%;
     min-width: 0;
+    direction: ltr;
 }
 
 .editor-toolbar {
