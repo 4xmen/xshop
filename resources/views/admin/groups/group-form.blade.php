@@ -167,7 +167,7 @@
                                       placeholder="{{__('Description')}}">{{old('description',$item->description??null)}}</textarea>
                         </div>
 
-                        @if($item->posts()->count() > 0)
+                        @if(isset($item) && $item->posts()->count() > 0)
                            <div class="col-12 mt-4">
                                {{__("Markup schema for posts of this group")}}:
                                <code-editor

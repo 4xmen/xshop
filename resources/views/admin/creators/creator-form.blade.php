@@ -136,15 +136,17 @@
                                       class="form-control ckeditorx @error('description')  is-invalid @enderror"
                                       placeholder="{{__('Description')}}">{{old('description',$item->description??null)}}</textarea>
                         </div>
-                        <div class="col-12 mt-4">
-                            {{__("Shema markups")}}:
-                            <code-editor
-                                value='{{base64_encode(old('markups', $item->markups)??'')}}'
-                                xname="markups"
-                                :btns='@json($item->markupKeywords())'
-                                default-syntax="html"
-                            ></code-editor>
-                        </div>
+                        @if(isset($item))
+                            <div class="col-12 mt-4">
+                                {{__("Shema markups")}}:
+                                <code-editor
+                                    value='{{base64_encode(old('markups', $item->markups)??'')}}'
+                                    xname="markups"
+                                    :btns='@json($item->markupKeywords())'
+                                    default-syntax="html"
+                                ></code-editor>
+                            </div>
+                        @endif
                         <div class="col-md-12">
                             <label> &nbsp;</label>
                             <input name="" type="submit" class="btn btn-primary mt-2" value="{{__('Save')}}"/>

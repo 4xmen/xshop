@@ -25,9 +25,9 @@
                         {{__("E-mail is unique each users")}}
                     </li>
                     @if(config('app.demo'))
-                    <li>
-                        {{__("You can't change email or password in demo version")}}
-                    </li>
+                        <li>
+                            {{__("You can't change email or password in demo version")}}
+                        </li>
                     @endif
                 </ul>
             </div>
@@ -36,8 +36,9 @@
                     <i class="ri-user-3-line"></i>
                     {{__("Avatar")}}
                 </h3>
-                <img @if(isset($item)) src="{{$item->avatar()}}" @else src="{{asset('assets/default/unknown.svg')}}" @endif  class="img-fluid mb-3" alt="avatar" data-open-file="#avatar-input">
-                <input type="file" name="avatar" id="avatar-input"  accept="image/jpeg">
+                <img @if(isset($item)) src="{{$item->avatar()}}" @else src="{{asset('assets/default/unknown.svg')}}"
+                     @endif  class="img-fluid mb-3" alt="avatar" data-open-file="#avatar-input">
+                <input type="file" name="avatar" id="avatar-input" accept="image/jpeg">
             </div>
         </div>
         <div class="col-lg-9 ps-xl-1 ps-xxl-1">
@@ -121,11 +122,6 @@
                     </div>
 
 
-
-
-
-
-
                     @if(isset($item) && $item->hasRole('user'))
 
                         <div class="col-12">
@@ -190,21 +186,23 @@
                     @endif
                 </div>
             </div>
-            <div class="item-list my-3">
 
-                <h3 class="p-3">
-                    <i class="ri-message-3-line"></i>
-                    {{__("Markups")}}
-                </h3>
-                <div class="mt-4">
-                    <code-editor
-                        value='{{base64_encode(old('markups', $item->markups)??'')}}'
-                        xname="markups"
-                        :btns='@json($item->markupKeywords())'
-                        default-syntax="html"
-                    ></code-editor>
+            @if(isset($item))
+                <div class="item-list my-3">
+                    <h3 class="p-3">
+                        <i class="ri-message-3-line"></i>
+                        {{__("Markups")}}
+                    </h3>
+                    <div class="mt-4">
+                        <code-editor
+                            value='{{base64_encode(old('markups', $item->markups)??'')}}'
+                            xname="markups"
+                            :btns='@json($item->markupKeywords())'
+                            default-syntax="html"
+                        ></code-editor>
+                    </div>
                 </div>
-            </div>
+            @endif
         </div>
     </div>
 @endsection
@@ -212,7 +210,7 @@
 
 @section('js-content')
     <script>
-        document.addEventListener('DOMContentLoaded',function () {
+        document.addEventListener('DOMContentLoaded', function () {
             document.querySelectorAll('.main-switch').forEach(function (chk) {
                 chk.addEventListener('change', function () {
                     let state = this.checked;

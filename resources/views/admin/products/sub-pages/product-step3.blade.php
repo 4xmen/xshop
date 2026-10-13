@@ -228,8 +228,6 @@
         model="{{get_class($item)}}"
         id="{{$item->id}}"
     ></fast-attaching>
-    @endif
-
     <div class="item-list my-3">
 
         <h3 class="p-3">
@@ -245,4 +243,5 @@
             ></code-editor>
         </div>
     </div>
+    @endif
 </div>
