@@ -670,8 +670,8 @@ function validateSettingRequest($setting, $newValue)
 /**
  * get setting by key with cache
  *
- * @param string $key   setting key
- * @param int    $ttl   cache ttl in seconds (default 3600)
+ * @param string $key setting key
+ * @param int $ttl cache ttl in seconds (default 3600)
  * @return string|false|mixed|null
  */
 function getSetting(string $key, int $ttl = 3600)
@@ -681,7 +681,7 @@ function getSetting(string $key, int $ttl = 3600)
         return false;
     }
 
-    $cacheKey = "setting:{$key}:".app()->getLocale();
+    $cacheKey = "setting:{$key}:" . app()->getLocale();
 
     // retrieve from cache or query the database and store the result
     return Cache::remember($cacheKey, $ttl, function () use ($key) {
@@ -1503,7 +1503,7 @@ function cacheNumber()
  */
 function getMainCategory($limit = 4, $orderBy = 'sort', $asc = 'ASC')
 {
-    return \App\Models\Category::with(['children','products'])->whereNull('parent_id')->limit($limit)->orderBy($orderBy, $asc)->get();
+    return \App\Models\Category::with(['children', 'products'])->whereNull('parent_id')->limit($limit)->orderBy($orderBy, $asc)->get();
 }
 
 
@@ -1556,7 +1556,7 @@ function getGroupsSet($key, $limit = 4, $orderBy = 'sort', $asc = 'ASC')
  * @param $txt
  * @return array|string[]
  */
-function extractShortCode($key, $txt) :array
+function extractShortCode($key, $txt): array
 {
     // regex to extract all ids in the text
     $pattern = '/\[' . $key . ':(\d+)\]/';
@@ -1578,7 +1578,7 @@ function extractShortCode($key, $txt) :array
  * @param $txt
  * @return string
  */
-function fixShortCode($txt) :string
+function fixShortCode($txt): string
 {
     $ids = extractShortCode('ATTACHED', $txt);
     $attachs = Attachment::whereIn('id', $ids)->get();
@@ -1610,4 +1610,24 @@ function fixShortCode($txt) :string
 function getCreatorSet($key, $limit = 4, $orderBy = 'sort', $asc = 'ASC')
 {
     return \App\Models\Creator::with('products')->whereIn('id', json_decode(getSetting($key) ?? '[]'))->limit($limit)->orderBy($orderBy, $asc)->get();
+}
+
+/**
+ * this function check is valid markup replace or not return empty string
+ * @param $markup
+ * @param $keywords
+ * @return string
+ */
+function getValidMarkup($markup, $keywords)
+{
+    // why 45 cuz `<script type="application/ld+json"></script>` must fill
+    if (strlen($markup) <= 45) {
+        return '';
+    }
+    $keys = array_map(
+        fn ($key) => "%{$key}%",
+        array_keys($keywords)
+    );
+    $values = array_column($keywords, 'value');
+    return str_replace($keys, $values, $markup);
 }

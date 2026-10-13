@@ -52,15 +52,15 @@
             @if(isset($item))
                 <div class="item-list mb-3">
                     <div class="p-3">
-                            <div class="form-group">
-                                <label for="canonical" class="my-2">
-                                    {{__('Canonical')}}
-                                </label>
-                                <input type="text" id="canonical" name="canonical"
-                                       value="{{old('canonical',$item->canonical??null)}}"
-                                       placeholder="{{__('canonical')}}"
-                                       class="form-control">
-                            </div>
+                        <div class="form-group">
+                            <label for="canonical" class="my-2">
+                                {{__('Canonical')}}
+                            </label>
+                            <input type="text" id="canonical" name="canonical"
+                                   value="{{old('canonical',$item->canonical??null)}}"
+                                   placeholder="{{__('canonical')}}"
+                                   class="form-control">
+                        </div>
                     </div>
                 </div>
             @endif
@@ -72,7 +72,9 @@
 
                 <h1>
                     @if(isset($item))
-                        {{__("Edit group")}} [{{$item->name}}] <a href="{{route('admin.area.design.model',['group','Group',$item->id])}}" class="btn btn-secondary"> <i class="ri-palette-line"></i> </a>
+                        {{__("Edit group")}} [{{$item->name}}] <a
+                            href="{{route('admin.area.design.model',['group','Group',$item->id])}}"
+                            class="btn btn-secondary"> <i class="ri-palette-line"></i> </a>
                     @else
                         {{__("Add new group")}}
                     @endif
@@ -92,7 +94,8 @@
                             <label for="slug">
                                 {{__('Group slug')}}
                             </label>
-                            <input name="slug" id="slug" type="text" class="form-control @error('slug') is-invalid @enderror"
+                            <input name="slug" id="slug" type="text"
+                                   class="form-control @error('slug') is-invalid @enderror"
                                    placeholder="{{__('Group slug')}}" value="{{old('slug',$item->slug??null)}}"/>
                         </div>
                         <div class="col-md-9 mt-3">
@@ -109,7 +112,7 @@
                         <div class="col-md-3 mt-4">
                             <div class="form-group mt-4">
                                 <div class="form-check form-switch">
-                                    <input class="form-check-input" name="hide"  @if (old('hide',$item->hide??0) != 0)
+                                    <input class="form-check-input" name="hide" @if (old('hide',$item->hide??0) != 0)
                                         checked
                                            @endif type="checkbox" id="hide">
                                     <label class="form-check-label" for="hide">{{__('Hide in menu')}}</label>
@@ -160,9 +163,21 @@
                                 {{__('Description')}}
                             </label>
                             <textarea rows="5" name="description"
-                                      class="form-control @error('description') is-invalid @enderror"
+                                      class="form-control @error('description') is-invalid @enderror ckeditorx"
                                       placeholder="{{__('Description')}}">{{old('description',$item->description??null)}}</textarea>
                         </div>
+
+                        @if($item->posts()->count() > 0)
+                           <div class="col-12 mt-4">
+                               {{__("Markup schema for posts of this group")}}:
+                               <code-editor
+                                   value='{{base64_encode(old('default_markup', $item->default_markup)??'')}}'
+                                   xname="default_markup"
+                                   :btns='@json($item->posts()->inRandomOrder()->first()->markupKeywords())'
+                                   default-syntax="html"
+                               ></code-editor>
+                           </div>
+                        @endif
                         <div class="col-md-12">
                             <label> &nbsp;</label>
                             <input name="" type="submit" class="btn btn-primary mt-2" value="{{__('Save')}}"/>

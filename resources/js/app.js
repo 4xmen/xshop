@@ -131,6 +131,9 @@ app.component('vue-time-picker', VueTimepicker);
 import fastAttaching from "./components/FastAttaching.vue";
 app.component('fast-attaching', fastAttaching);
 
+import codeEditor from "./components/CodeEditor.vue";
+app.component('code-editor', codeEditor);
+
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue

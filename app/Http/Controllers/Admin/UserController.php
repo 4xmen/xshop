@@ -45,6 +45,8 @@ class UserController extends XController
         }
 
         $user->name = $request->input('name');
+        $user->markups = $request->input('markups',null);
+
         if (!config('app.demo')) {
             $user->email = $request->input('email');
             if (trim($request->input('password')) != '') {

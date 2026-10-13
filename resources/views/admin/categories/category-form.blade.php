@@ -190,9 +190,20 @@
                                 {{__('Description')}}
                             </label>
                             <textarea rows="5" name="description"
-                                      class="form-control @error('description') is-invalid @enderror"
+                                      class="form-control @error('description') is-invalid @enderror ckeditorx"
                                       placeholder="{{__('Description')}}">{{old('description',$item->description??null)}}</textarea>
                         </div>
+                        @if($item->products()->count() > 0)
+                            <div class="col-12 mt-4">
+                                {{__("Markup schema for posts of this group")}}:
+                                <code-editor
+                                    value='{{base64_encode(old('default_markup', $item->default_markup)??'')}}'
+                                    xname="default_markup"
+                                    :btns='@json($item->products()->inRandomOrder()->first()->markupKeywords())'
+                                    default-syntax="html"
+                                ></code-editor>
+                            </div>
+                        @endif
                         <div class="col-md-12">
                             <label> &nbsp;</label>
                             <input name="" type="submit" class="btn btn-primary mt-2" value="{{__('Save')}}"/>

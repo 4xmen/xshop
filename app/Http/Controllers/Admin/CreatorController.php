@@ -59,6 +59,7 @@ class CreatorController extends XController
 
         $creator->name = $request->input('name');
         $creator->subtitle = $request->input('subtitle');
+        $creator->markups = $request->input('markups',null);
         $creator->description = $request->input('description');
 
         if ($request->input('parent_id') == ''){

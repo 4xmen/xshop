@@ -66,6 +66,7 @@ class ProductController extends XController
         $product->stock_status = $request->input('stock_status');
         $product->price = $request->input('price', 0);
         $product->buy_price = $request->input('buy_price', 0);
+        $product->markups = $request->input('markups', null);
 
         if (!$request->has('quantity')) {
             $product->price = $request->input('price', 0);
@@ -132,10 +133,7 @@ class ProductController extends XController
             }
             $product->quantities()->whereIn('id', $toRemoveQ)->delete();
 
-            if ($product->quantities()->count() > 0) {
-                $product->stock_quantity = $product->quantities()->sum('count');
-                $product->price = $product->quantities()->min('price');
-            }
+            $product->renewPriceAndStock();
             $product->save();
         }
 
@@ -143,7 +141,6 @@ class ProductController extends XController
         return $product;
 
     }
-
 
     /**
      * Show the form for creating a new resource.

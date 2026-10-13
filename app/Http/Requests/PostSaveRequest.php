@@ -31,6 +31,11 @@ class PostSaveRequest extends FormRequest
             'icon' => ['nullable', 'string', 'min:3'],
             'group_id' => ['required', 'exists:groups,id'],
             'canonical' => ['nullable', 'url', 'min:5', 'max:128'],
+            'markups' => ['nullable', 'string', function ($attribute, $value, $fail) {
+                if (!str_contains($value, '<script type="application/ld+json">')) {
+                    $fail(__("The :A field must contain `:W`.", ['A' => $attribute, 'W' => '<script type="application/ld+json">']));
+                }
+            },]
         ];
     }
 }

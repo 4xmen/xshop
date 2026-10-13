@@ -17,6 +17,9 @@ importers:
       leaflet:
         specifier: ^1.9.4
         version: 1.9.4
+      prism-code-editor:
+        specifier: ^5.4.0
+        version: 5.4.0
       remixicon:
         specifier: ^4.9.1
         version: 4.9.1
@@ -731,6 +734,14 @@ packages:
     resolution: {integrity: sha512-KBDEIpLrvpv16pp3K0Fw+UCoZfopFjjgeB+0tA/aaThfEE74kKDLrgg603YvOWJyg3+WYtyq3xYsQWsIyZlPqQ==}
     engines: {node: ^10 || ^12 || >=14}
 
+  prism-code-editor@5.4.0:
+    resolution: {integrity: sha512-8y4SdQxwHa/lnxIbFf2w8N2D1OwxcskDRw774ov4XEEa1e5alqqrAZk08YXgaxisc1RuJdFbCTI+4tU3Plljqw==}
+    peerDependencies:
+      emmet: ^2.0.0
+    peerDependenciesMeta:
+      emmet:
+        optional: true
+
   process@0.11.10:
     resolution: {integrity: sha512-cdGef/drWFoydD1JsMzuFf8100nZl+GT+yacc2bEced5f9Rjk4z+WtFUTBu9PhOi9j/jfmBPu0mMEY4wIdAF8A==}
     engines: {node: '>= 0.6.0'}
@@ -1360,6 +1371,8 @@ snapshots:
       nanoid: 3.3.16
       picocolors: 1.1.1
       source-map-js: 1.2.1
+
+  prism-code-editor@5.4.0: {}
 
   process@0.11.10: {}
 

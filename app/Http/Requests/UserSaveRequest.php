@@ -25,8 +25,13 @@ class UserSaveRequest extends FormRequest
             'name' => ['required', 'string', 'max:255'],
             'mobile' => ['required', 'string', 'min:10'],
             'role' => ['required', 'string'],
-            'email' => ['required', 'string', 'email', 'max:255', "unique:users,email,".$this->id],
-            'password' => ['string', 'min:8', 'confirmed','nullable'],
+            'email' => ['required', 'string', 'email', 'max:255', "unique:users,email," . $this->id],
+            'password' => ['string', 'min:8', 'confirmed', 'nullable'],
+            'markups' => ['nullable', 'string', function ($attribute, $value, $fail) {
+                if (!str_contains($value, '<script type="application/ld+json">')) {
+                    $fail(__("The :A field must contain `:W`.", ['A' => $attribute, 'W' => '<script type="application/ld+json">']));
+                }
+            },],
         ];
     }
 }

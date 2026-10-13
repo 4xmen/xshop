@@ -22,11 +22,67 @@ class Product extends Model implements HasMedia
 
     public static $stock_status = ['IN_STOCK', 'OUT_STOCK', 'BACK_ORDER'];
 
+
     public $translatable = ['name', 'excerpt', 'description', 'table'];
     protected $casts = [
         'qz' => 'array',
         'qidz' => 'array'
     ];
+
+
+    function markupKeywords()
+    {
+        return [
+            'app.name' => [
+                'title' => __("App name"),
+                'value' => config('app.name'),
+            ],
+            'name' => [
+                'title' => __("Name"),
+                'value' => $this->name,
+            ],
+            'excerpt' => [
+                'title' => __("Excerpt"),
+                'value' => $this->excerpt,
+            ],
+            'desc' => [
+                'title' => __("Description"),
+                'value' => $this->description,
+            ],
+            'updated' => [
+                'title' => __("updated_at"),
+                'value' => $this->updated_at,
+            ],
+            'url' => [
+                'title' => __("URL"),
+                'value' => $this->webUrl(),
+            ],
+            'img' => [
+                'title' => __("Image"),
+                'value' => $this->imgUrl(),
+            ],
+            'price' => [
+                'title' => __("Price"),
+                'value' => $this->getPrice(),
+            ],
+            'quantity' => [
+                'title' => __("Quantities"),
+                'value' => $this->stock_quantity,
+            ],
+            'sku' => [
+                'title' => __("SKU"),
+                'value' => $this->sku,
+            ],
+            'creators' => [
+                'title' => __("Creators"),
+                'value' => $this->creators()->pluck('name')->implode(', '),
+            ],
+            'discounts' => [
+                'title' => __("Discounts"),
+                'value' => json_encode($this->discounts()->get(['title','amount','type'])),
+            ],
+        ];
+    }
 
     public function attachs()
     {
@@ -403,13 +459,28 @@ class Product extends Model implements HasMedia
         return true;
     }
 
+
+    /**
+     * renew stock quantity count & min price
+     * @return void
+     */
+    public function renewPriceAndStock()
+    {
+        if ($this->quantities()->count() > 0) {
+            $this->stock_quantity = $this->quantities()->sum('count');
+            // just apply price has quantity
+            $this->price = $this->quantities()->where('count', '>', 0)->min('price');
+        }
+        $this->save();
+    }
+
     public function markup()
     {
 
 
         $currency = config('app.currency.code');
         $reviews = CommentMarkupCollection::collection($this->approvedComments)->toJson();
-        return <<<RESULT
+        $markup =  <<<RESULT
 <script type="application/ld+json">
 {
   "@context": "https://schema.org/",
@@ -425,8 +496,8 @@ class Product extends Model implements HasMedia
   "offers": {
     "@type": "Offer",
     "url": "{$this->webUrl()}",
-    "priceCurrency": "$currency",
-    "price": "{{$this->price}}"
+    "priceCurrency": "{$currency}",
+    "price": "{$this->price}"
   },
    "interactionStatistic": {
     "@type": "InteractionCounter",
@@ -443,6 +514,12 @@ class Product extends Model implements HasMedia
 }
 </script>
 RESULT;
+
+        $keywords = $this->markupKeywords();
+        return $markup . PHP_EOL .
+            getValidMarkup($this->category->default_markup??'', $keywords) . PHP_EOL .
+//            getValidMarkup($this->author->markups??'', $this->author->markupKeywords()) . PHP_EOL .
+            getValidMarkup($this->markups??'', $keywords) . PHP_EOL ;
 
     }
 
@@ -473,7 +550,8 @@ RESULT;
     }
 
 
-    public function evaluations(){
+    public function evaluations()
+    {
 
         return Evaluation::where(function ($query) {
             $query->whereNull('evaluationable_type')
@@ -481,12 +559,12 @@ RESULT;
         })->orWhere(function ($query) {
             $query->where('evaluationable_type', Product::class)
                 ->whereNull('evaluationable_id');
-        })->orWhere(function ($query ) {
+        })->orWhere(function ($query) {
             $query->where('evaluationable_type', Product::class)
-                ->where('evaluationable_id',$this->id);
-        })->orWhere(function ($query ) {
+                ->where('evaluationable_id', $this->id);
+        })->orWhere(function ($query) {
             $query->where('evaluationable_type', Category::class)
-                ->where('evaluationable_id',$this->category_id);
+                ->where('evaluationable_id', $this->category_id);
         })->get();
     }
 }

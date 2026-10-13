@@ -29,6 +29,11 @@ class CategorySaveRequest extends FormRequest
             'description' => ['nullable', 'string',],
             'parent_id' => ['nullable', 'exists:categories,id'],
             'canonical' => ['nullable', 'url', 'min:5', 'max:128'],
+            'default_markup' => ['nullable', 'string', function ($attribute, $value, $fail) {
+                if (! str_contains($value, '<script type="application/ld+json">')) {
+                    $fail(__("The :A field must contain `:W`.",['A' => $attribute, 'W' => '<script type="application/ld+json">']));
+                }
+            },],
         ];
     }
 }

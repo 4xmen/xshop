@@ -21,6 +21,7 @@
         "bs5-lightbox": "^1.8.3",
         "chart.js": "^4.4.3",
         "leaflet": "^1.9.4",
+        "prism-code-editor": "^5.4.0",
         "remixicon": "^4.9.1",
         "sortablejs": "^1.15.7",
         "three": "0.150.0",

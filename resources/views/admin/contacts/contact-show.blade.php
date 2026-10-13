@@ -46,7 +46,7 @@
                 {{__("Question/Message")}}
             </th>
             <td>
-                {!! $item->body !!}
+                {!! htmlspecialchars($item->body, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8') !!}
             </td>
         </tr>
 
