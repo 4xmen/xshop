@@ -12,7 +12,6 @@ class Creator extends Model
 {
 
 
-
     use HasFactory, SoftDeletes, HasTranslations;
 
     public $translatable = ['name', 'subtitle', 'description'];
@@ -23,13 +22,51 @@ class Creator extends Model
         return app()->getLocale();
     }
 
+    function markupKeywords()
+    {
+        return [
+            'app.name' => [
+                'title' => __("App name"),
+                'value' => config('app.name'),
+            ],
+            'name' => [
+                'title' => __("Name"),
+                'value' => $this->name,
+            ],
+            'subtitle' => [
+                'title' => __("Subtitle"),
+                'value' => $this->subtitle,
+            ],
+            'desc' => [
+                'title' => __("desc"),
+                'value' => $this->description,
+            ],
+            'created_at' => [
+                'title' => __("created_at"),
+                'value' => $this->created_at,
+            ],
+            'updated_at' => [
+                'title' => __("updated_at"),
+                'value' => $this->updated_at,
+            ],
+            'url' => [
+                'title' => __("URL"),
+                'value' => $this->webUrl(),
+            ],
+            'img' => [
+                'title' => __("Image"),
+                'value' => $this->imgUrl(),
+            ],
+        ];
+    }
 
 
     public static function findOrCreate(
-        string | array | ArrayAccess $values,
-        string | null $type = null,
-        string | null $locale = null,
-    ) {
+        string|array|ArrayAccess $values,
+        string|null              $type = null,
+        string|null              $locale = null,
+    )
+    {
         $creators = collect($values)->map(function ($value) use ($type, $locale) {
             if ($value instanceof self) {
                 return $value;
@@ -62,7 +99,7 @@ class Creator extends Model
 
         $creator = static::findFromString($name, $type, $locale);
 
-        if (! $creator) {
+        if (!$creator) {
             $creator = static::create([
                 'name' => [$locale => $name],
                 'slug' => sluger($name),
@@ -90,7 +127,7 @@ class Creator extends Model
             return asset('/assets/upload/logo.svg');
         }
 
-        return \Storage::url('optimized/creator/'  . $this->image.'.webp');
+        return \Storage::url('optimized/creator/' . $this->image . '.webp');
     }
 
     public function imgOriginalUrl()
@@ -109,7 +146,7 @@ class Creator extends Model
 
     public function webUrl()
     {
-        return fixUrlLang(route('client.creator',$this->slug));
+        return fixUrlLang(route('client.creator', $this->slug));
     }
 
 
@@ -118,7 +155,8 @@ class Creator extends Model
         return $this->belongsToMany(Product::class);
     }
 
-    public function evaluations(){
+    public function evaluations()
+    {
 
         return Evaluation::where(function ($query) {
             $query->whereNull('evaluationable_type')
@@ -126,14 +164,21 @@ class Creator extends Model
         })->orWhere(function ($query) {
             $query->where('evaluationable_type', Creator::class)
                 ->whereNull('evaluationable_id');
-        })->orWhere(function ($query ) {
+        })->orWhere(function ($query) {
             $query->where('evaluationable_type', Creator::class)
-                ->where('evaluationable_id',$this->id);
+                ->where('evaluationable_id', $this->id);
         })->get();
     }
 
     public function parent()
     {
         return $this->belongsTo(Creator::class, 'parent_id');
+    }
+
+    public function markup()
+    {
+        $keywords = $this->markupKeywords();
+        // add markups
+        return getValidMarkup($this->markups??'', $keywords) . PHP_EOL ;
     }
 }

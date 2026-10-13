@@ -104,6 +104,8 @@
             @endif
         @endif
 
+    @elseif(isset($creator))
+        {!! $creator->markup() !!}
     @elseif(isset($group))
         @if(\Illuminate\Support\Str::isUrl($group->canonical) )
             <link rel="canonical" href="{{$group->canonical}}"/>
