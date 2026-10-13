@@ -19,17 +19,20 @@
                 </h3>
                 <ul>
                     @if(isset($item))
-                    <li>
-                        {{__("You can set the theme of this item exclusively")}} : <a href="{{route('admin.area.design.model',['post','Post',$item->id])}}" class="btn btn-secondary btn-sm"> <i class="ri-palette-line"></i> </a>
-                    </li>
-                    <li>
-                        {{__("You can add some attachment to this item")}}
-                    </li>
-                    <li>
-                        {{__("What the visitor sees")}} : <a href="{{$item->webUrl()}}" target="_blank" class="btn btn-primary btn-sm">
-                            {{__("Preview")}}
-                        </a>
-                    </li>
+                        <li>
+                            {{__("You can set the theme of this item exclusively")}} : <a
+                                href="{{route('admin.area.design.model',['post','Post',$item->id])}}"
+                                class="btn btn-secondary btn-sm"> <i class="ri-palette-line"></i> </a>
+                        </li>
+                        <li>
+                            {{__("You can add some attachment to this item")}}
+                        </li>
+                        <li>
+                            {{__("What the visitor sees")}} : <a href="{{$item->webUrl()}}" target="_blank"
+                                                                 class="btn btn-primary btn-sm">
+                                {{__("Preview")}}
+                            </a>
+                        </li>
                     @endif
                 </ul>
             </div>
@@ -61,17 +64,17 @@
                     {{__("Tags")}}
                 </h3>
                 <div>
-{{--                    {{json_encode($item->tags->pluck('name')->toArray())}}--}}
+                    {{--                    {{json_encode($item->tags->pluck('name')->toArray())}}--}}
                     <tag-input xname="tags" splitter=",,"
                                xtitle="{{__("Tags, Press enter")}}"
                                @if(isset($item))
-                               xvalue="{{old('tags',implode(',,',$item->tags->pluck('name')->toArray()??''))}}"
+                                   xvalue="{{old('tags',implode(',,',$item->tags->pluck('name')->toArray()??''))}}"
                                @endif
-                        auto-complete="{{route('v1.tag.search','')}}/"
+                               auto-complete="{{route('v1.tag.search','')}}/"
                     ></tag-input>
-{{--                    <input type="text" name="tags" class="taggble" @if(isset($item))--}}
-{{--                        value="{{implode(',',$item->tag_names)}}"--}}
-{{--                        @endif>--}}
+                    {{--                    <input type="text" name="tags" class="taggble" @if(isset($item))--}}
+                    {{--                        value="{{implode(',',$item->tag_names)}}"--}}
+                    {{--                        @endif>--}}
                 </div>
             </div>
             <div class="item-list mb-3">
@@ -84,11 +87,11 @@
                 </div>
             </div>
             @if(isset($item))
-            <div class="item-list mb-3">
-                <div class="p-3">
-                @include('components.panel-attachs',['attachs' => $item->attachs])
+                <div class="item-list mb-3">
+                    <div class="p-3">
+                        @include('components.panel-attachs',['attachs' => $item->attachs])
+                    </div>
                 </div>
-            </div>
             @endif
 
             @if(isset($item))
@@ -140,10 +143,12 @@
                     <div class="col-3 mt-4">
                         <div class="form-group mt-4">
                             <div class="form-check form-switch">
-                                <input class="form-check-input" name="table_of_contents"  @if (old('table_of_contents',$item->table_of_contents??0) != 0)
-                                    checked
+                                <input class="form-check-input" name="table_of_contents"
+                                       @if (old('table_of_contents',$item->table_of_contents??0) != 0)
+                                           checked
                                        @endif type="checkbox" id="table_of_contents">
-                                <label class="form-check-label" for="table_of_contents">{{__('Table of contents')}}</label>
+                                <label class="form-check-label"
+                                       for="table_of_contents">{{__('Table of contents')}}</label>
                             </div>
                         </div>
                     </div>
@@ -163,7 +168,8 @@
                             <label for="body">
                                 {{__('Post Text')}}
                             </label>
-                            <textarea name="body" class="ckeditorx seo-analyze form-control @error('body') is-invalid @enderror"
+                            <textarea name="body"
+                                      class="ckeditorx seo-analyze form-control @error('body') is-invalid @enderror"
                                       placeholder="{{__('Post Text')}}"
                                       rows="8">{{old('body',$item->body??null)}}</textarea>
                             {{--                                    @trix(\App\Post::class, 'body')--}}
@@ -189,7 +195,8 @@
                             <label for="group_id">
                                 {{__('Main group')}}
                             </label>
-                            <select name="group_id" class="form-control  @error('group_id') is-invalid @enderror" id="group_id">
+                            <select name="group_id" class="form-control  @error('group_id') is-invalid @enderror"
+                                    id="group_id">
                                 @foreach($cats as $cat )
                                     <option value="{{ $cat->id }}"
                                             @if (old('group_id',$item->group_id??null) == $cat->id ) selected @endif > {{$cat->name}} </option>
@@ -226,8 +233,9 @@
                     <div class="col-md-3 mt-3 pt-2">
                         <div class="form-group mt-4">
                             <div class="form-check form-switch">
-                                <input class="form-check-input" name="is_pin"  @if (old('is_pin',$item->is_pinned??0) != 0)
-                                    checked
+                                <input class="form-check-input" name="is_pin"
+                                       @if (old('is_pin',$item->is_pinned??0) != 0)
+                                           checked
                                        @endif type="checkbox" id="ispin">
                                 <label class="form-check-label" for="ispin">{{__('Pin')}}</label>
                             </div>
@@ -239,21 +247,23 @@
                     </div>
                 </div>
             </div>
-            <div class="item-list my-3">
+            @if(isset($item))
+                <div class="item-list my-3">
 
-                <h3 class="p-3">
-                    <i class="ri-message-3-line"></i>
-                    {{__("Markups")}}
-                </h3>
-                <div class="mt-4">
-                    <code-editor
-                        value='{{base64_encode(old('markups', $item->markups)??'')}}'
-                        xname="markups"
-                        :btns='@json($item->markupKeywords())'
-                        default-syntax="html"
-                    ></code-editor>
+                    <h3 class="p-3">
+                        <i class="ri-message-3-line"></i>
+                        {{__("Markups")}}
+                    </h3>
+                    <div class="mt-4">
+                        <code-editor
+                            value='{{base64_encode(old('markups', $item->markups)??'')}}'
+                            xname="markups"
+                            :btns='@json($item->markupKeywords())'
+                            default-syntax="html"
+                        ></code-editor>
+                    </div>
                 </div>
-            </div>
+            @endif
         </div>
     </div>
 @endsection
