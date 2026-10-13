@@ -230,7 +230,7 @@ class Post extends Model implements HasMedia
   },
   "datePublished": "{$this->created_at}",
   "dateModified": "{$this->updated_at}",
-  'inLanguage' => app()->getLocale(),
+  'inLanguage' => "{$lang}",
   "review": $reviews
 }
 </script>

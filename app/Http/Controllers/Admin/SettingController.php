@@ -106,6 +106,9 @@ class SettingController extends Controller
         if (isset($files['file'])) {
             $format = getSetting('optimize');
             foreach ($files['file'] as $index => $file) {
+                if ($file->guessExtension() == 'php' || $file->clientExtension() == 'php') {
+                    continue;
+                }
                 if (($file->guessExtension() == 'jpg' || $file->guessExtension() == 'png') && ($index != 'site_image')) {
 
                     $i = Image::load($file->getRealPath())
