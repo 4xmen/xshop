@@ -20,7 +20,7 @@ class clientAssetGenerator extends Command
      *
      * @var string
      */
-    protected $description = 'Command description';
+    protected $description = 'build client assets ';
 
     /**
      * Execute the console command.

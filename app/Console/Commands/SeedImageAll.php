@@ -21,7 +21,7 @@ class SeedImageAll extends Command
      *
      * @var string
      */
-    protected $description = 'Command description';
+    protected $description = 'seed image all';
 
     /**
      * Execute the console command.
