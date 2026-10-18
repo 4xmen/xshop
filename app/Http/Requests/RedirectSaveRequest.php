@@ -23,8 +23,21 @@ class RedirectSaveRequest extends FormRequest
     {
         return [
             //
-            'source' => ['required', 'string','min:2'],
-            'destination' => ['required', 'string','min:2'],
+            'source' => [
+                'required',
+                'string',
+                'min:2',
+                function ($attribute, $value, $fail) {
+                    if (
+                        ! str_starts_with($value, '/') ||
+                        str_starts_with($value, '//') ||
+                        preg_match('/[\r\n\\\\]/', $value)
+                    ) {
+                        $fail(__('The :attribute must be a relative path starting with /.'));
+                    }
+                },
+            ],
+            'destination' => ['required', 'string','min:1'],
             'expire' => ['nullable'],
         ];
     }
