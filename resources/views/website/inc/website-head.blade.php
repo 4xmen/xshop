@@ -140,6 +140,7 @@
         <meta property="og:type" content="website">
         <meta name="description" content="{{getSetting('desc')}}">
         <meta name="keywords" content="{{getSetting('keyword')}}">
+        {!! $gallery->markup() !!}
     @else
         <meta name="description" content="{{getSetting('desc')}}">
         <meta name="keywords" content="{{getSetting('keyword')}}">
