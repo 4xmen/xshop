@@ -54,11 +54,11 @@ class Post extends Model implements HasMedia
             ],
             'created' => [
                 'title' => __("created_at"),
-                'value' => $this->created_at,
+                'value' => $this->created_at->tz('UTC')->toAtomString(),
             ],
             'updated' => [
                 'title' => __("updated_at"),
-                'value' => $this->updated_at,
+                'value' => $this->updated_at->tz('UTC')->toAtomString(),
             ],
             'url' => [
                 'title' => __("URL"),
@@ -211,6 +211,7 @@ class Post extends Model implements HasMedia
   "headline": "{$this->title}",
   "description": "{$this->subtitle}",
   "image": "{$this->imgUrl()}",
+  "url": "{$this->webUrl()}",
   "author": {
     "@type": "Person",
     "name": "$author"

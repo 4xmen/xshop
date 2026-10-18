@@ -32,11 +32,18 @@ class ProductSaveRequest extends FormRequest
             'category_id' => ['required', 'exists:categories,id'],
             'image.*' => ['nullable','image','mimes:jpeg,png,jpg,gif,svg','max:'.getMaxUploadSize()],
             'canonical' => ['nullable', 'url', 'min:5', 'max:128'],
-            'markups' => ['nullable', 'string', function ($attribute, $value, $fail) {
-                if (!str_contains($value, '<script type="application/ld+json">')) {
-                    $fail(__("The :A field must contain `:W`.", ['A' => $attribute, 'W' => '<script type="application/ld+json">']));
-                }
-            },],
+            'markups' => [
+                'nullable',
+                'string',
+                function ($attribute, $value, $fail) {
+                    if (! isValidJsonLd($value)) {
+                        $fail(__(
+                            'The :A field must contain a valid JSON-LD script. `<script type="application/ld+json"> VALID JSON </script>`',
+                            ['A' => $attribute]
+                        ));
+                    }
+                },
+            ]
         ];
     }
 }

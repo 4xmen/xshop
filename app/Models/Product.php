@@ -49,9 +49,13 @@ class Product extends Model implements HasMedia
                 'title' => __("Description"),
                 'value' => $this->description,
             ],
+            'created_at' => [
+                'title' => __("created_at"),
+                'value' => $this->created_at->tz('UTC')->toAtomString(),
+            ],
             'updated' => [
                 'title' => __("updated_at"),
-                'value' => $this->updated_at,
+                'value' => $this->updated_at->tz('UTC')->toAtomString(),
             ],
             'url' => [
                 'title' => __("URL"),
@@ -487,6 +491,7 @@ class Product extends Model implements HasMedia
   "@type": "Product",
   "name": "name",
   "image": "{$this->name}",
+  "url": "{$this->webUrl()}",
   "description": "{$this->excerpt}",
   "brand": {
     "@type": "Brand",

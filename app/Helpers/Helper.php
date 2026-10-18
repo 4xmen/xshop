@@ -1428,7 +1428,7 @@ function generateHeadingID($text, $counter)
 // The buildTOC function remains unchanged
 function buildTOC($items)
 {
-    $html = '<ul>';
+    $html = '<nav aria-label="'.__('Table of contents').'">'. PHP_EOL . '<ul>';
     foreach ($items as $item) {
         $html .= '<li>';
         $html .= '<a href="#' . $item['id'] . '">' . $item['title'] . '</a>';
@@ -1440,6 +1440,7 @@ function buildTOC($items)
         $html .= '</li>';
     }
     $html .= '</ul>';
+    $html .= '</nav>';
     return $html;
 }
 
@@ -1630,4 +1631,41 @@ function getValidMarkup($markup, $keywords)
     );
     $values = array_column($keywords, 'value');
     return str_replace($keys, $values, $markup);
+}
+
+
+/**
+ * check is markup input requst valid
+ * use in request validator
+ * @param string|null $value
+ * @return bool
+ */
+function isValidJsonLd(?string $value): bool
+{
+    // first check tag
+    if (! $value || ! str_contains(
+            $value,
+            '<script type="application/ld+json">'
+        )) {
+        return false;
+    }
+
+    // extract regex
+    preg_match_all(
+        '/<script type="application\/ld\+json">(.*?)<\/script>/s',
+        $value,
+        $matches
+    );
+
+    if (empty($matches[1])) {
+        return false;
+    }
+    // check is json valid
+    foreach ($matches[1] as $json) {
+        json_decode(trim($json));
+        if (json_last_error() !== JSON_ERROR_NONE) {
+            return false;
+        }
+    }
+    return true;
 }
