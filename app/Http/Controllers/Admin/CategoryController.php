@@ -66,6 +66,7 @@ class CategoryController extends XController
         $category->description = $request->input('description');
         $category->hide = $request->has('hide');
         $category->default_markup = $request->input('default_markup',null);
+        $category->markups = $request->input('markups',null);
 
         if ($request->input('parent_id') == '') {
             $category->parent_id = null;

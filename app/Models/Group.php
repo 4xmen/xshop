@@ -14,6 +14,45 @@ class Group extends Model
 
     public $translatable = ['name', 'subtitle', 'description'];
 
+
+
+    function markupKeywords()
+    {
+        return [
+            'app.name' => [
+                'title' => __("App name"),
+                'value' => config('app.name'),
+            ],
+            'name' => [
+                'title' => __("Name"),
+                'value' => $this->name,
+            ],
+            'subtitle' => [
+                'title' => __("Subtitle"),
+                'value' => $this->subtitle,
+            ],
+            'desc' => [
+                'title' => __("Description"),
+                'value' => $this->description,
+            ],
+            'created_at' => [
+                'title' => __("created_at"),
+                'value' => $this->created_at->tz('UTC')->toAtomString(),
+            ],
+            'updated_at' => [
+                'title' => __("updated_at"),
+                'value' => $this->updated_at->tz('UTC')->toAtomString(),
+            ],
+            'url' => [
+                'title' => __("URL"),
+                'value' => $this->webUrl(),
+            ],
+            'img' => [
+                'title' => __("Image"),
+                'value' => $this->imgUrl(),
+            ],
+        ];
+    }
     public function posts()
     {
         return $this->belongsToMany(Post::class);
@@ -105,5 +144,12 @@ class Group extends Model
             $query->where('evaluationable_type', Group::class)
                 ->where('evaluationable_id',$this->id);
         })->get();
+    }
+
+    public function markup()
+    {
+        $keywords = $this->markupKeywords();
+        // add markups
+        return getValidMarkup($this->markups??'', $keywords) . PHP_EOL ;
     }
 }
