@@ -184,7 +184,7 @@ class SettingSeeder extends Seeder
                     'title' => __('Product grid class'),
                     'key' => 'grid-class',
                     'type' => 'TEXT',
-                    'value' => '',
+                    'value' => 'col-md-6 col-lg-4 mb-3',
                     'size' => 6,
                 ],
                 [
