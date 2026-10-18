@@ -1,14 +1,17 @@
 
 
-import Lightbox from 'bs5-lightbox' ;
+import GLightbox from 'glightbox';
 import {tns} from "tiny-slider/src/tiny-slider";
 
 var karenImgSlider, karenRelativeSlider;
 document.addEventListener('DOMContentLoaded',function () {
 
-    for (const el of document.querySelectorAll('.light-box')) {
-        el.addEventListener('click', Lightbox.initialize);
-    }
+        GLightbox({
+            selector: '.glightbox',
+            loop: false,
+            zoomable: true,
+        });
+
     if (document.querySelector('#karen-img-slider') != null){
     try {
 

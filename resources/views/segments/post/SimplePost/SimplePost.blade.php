@@ -62,13 +62,15 @@
                 @endif
             </div>
             <hr>
-            @if($post->table_of_contents)
-                {!! $post->tableOfContents() !!}
-                {!! fixShortCode($post->bodyContent()) !!}
-            @else
+            <div class="post-content">
+                @if($post->table_of_contents)
+                    {!! $post->tableOfContents() !!}
+                    {!! fixShortCode($post->bodyContent()) !!}
+                @else
 
-                {!! fixShortCode($post->body) !!}
-            @endif
+                    {!! fixShortCode($post->body) !!}
+                @endif
+            </div>
 
         </div>
     </div>

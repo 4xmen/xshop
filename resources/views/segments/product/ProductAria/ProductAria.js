@@ -1,4 +1,4 @@
-import Lightbox from 'bs5-lightbox' ;
+import GLightbox from 'glightbox';
 import {tns} from "tiny-slider/src/tiny-slider";
 
 var ariaImgSlider, ariaRelativeSlider;
@@ -6,9 +6,11 @@ document.addEventListener('DOMContentLoaded',function () {
 
 
 
-    for (const el of document.querySelectorAll('.light-box')) {
-        el.addEventListener('click', Lightbox.initialize);
-    }
+    GLightbox({
+        selector: '.glightbox',
+        loop: false,
+        zoomable: true,
+    });
     ariaImgSlider = tns({
         container: '#aria-img-slider',
         items: 3,

@@ -8,12 +8,12 @@ importers:
 
   .:
     dependencies:
-      bs5-lightbox:
-        specifier: ^1.8.3
-        version: 1.8.5(bootstrap@5.3.8(@popperjs/core@2.11.8))
       chart.js:
         specifier: ^4.4.3
         version: 4.5.1
+      glightbox:
+        specifier: ^3.3.1
+        version: 3.3.1
       leaflet:
         specifier: ^1.9.4
         version: 1.9.4
@@ -535,11 +535,6 @@ packages:
     peerDependencies:
       '@popperjs/core': ^2.11.8
 
-  bs5-lightbox@1.8.5:
-    resolution: {integrity: sha512-GBVQgpzjVdLnkD8956bXHhX76IDtIYO9qUJH4Pl0JSyI3nuJvLbe3vmgBEmXloCgXzbfEqKqBM+OpVC7/DGA9Q==}
-    peerDependencies:
-      bootstrap: ^5.0.0
-
   call-bind-apply-helpers@1.0.2:
     resolution: {integrity: sha512-Sp1ablJ0ivDkSzjcaJdxEunN5/XvksFJ2sMBFfq6x0ryhQV/2b/KwFe21cMpmHtPOSij8K99/wSfoEuTObmuMQ==}
     engines: {node: '>= 0.4'}
@@ -645,6 +640,9 @@ packages:
   get-proto@1.0.1:
     resolution: {integrity: sha512-sTSfBjoXBp89JvIKIefqw7U2CCebsc74kiY6awiGogKtoSGbgjYE/G/+l9sF3MWFPNc9IcoOC4ODfKHfxFmp0g==}
     engines: {node: '>= 0.4'}
+
+  glightbox@3.3.1:
+    resolution: {integrity: sha512-nXoKfJRnQTDaAFAw5799hjpfAAHx5aLvOLG0SIGudeMCwtHgO3P2/avNYapJ+SL4UEZxO2YNBPtq6pzMhSx42g==}
 
   gopd@1.2.0:
     resolution: {integrity: sha512-ZUKRh6/kUFoAiTAtTYPZJ3hw9wNxx+BIBOijnlG9PnrJsCcSjs1wyyD6vJpaYtgnzDrKYRSqf3OO6Rfa93xsRg==}
@@ -1174,10 +1172,6 @@ snapshots:
     dependencies:
       '@popperjs/core': 2.11.8
 
-  bs5-lightbox@1.8.5(bootstrap@5.3.8(@popperjs/core@2.11.8)):
-    dependencies:
-      bootstrap: 5.3.8(@popperjs/core@2.11.8)
-
   call-bind-apply-helpers@1.0.2:
     dependencies:
       es-errors: 1.3.0
@@ -1296,6 +1290,8 @@ snapshots:
     dependencies:
       dunder-proto: 1.0.1
       es-object-atoms: 1.1.2
+
+  glightbox@3.3.1: {}
 
   gopd@1.2.0: {}
 

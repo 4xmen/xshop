@@ -163,7 +163,7 @@
             <div id="yac-images">
                 @foreach($product->getMedia() as $media)
                     <div class="item">
-                        <a href="{{$media->getUrl('product-image')}}" class="light-box"
+                        <a href="{{$media->getUrl('product-image')}}" class="glightbox"
                            data-gallery="yac-products">
                             <img src="{{$media->getUrl('product-image')}}" alt="{{$product->name}}">
                         </a>
@@ -182,6 +182,15 @@
                     </div>
                 @endforeach
             </div>
+        </div>
+        <div id="hidden-images">
+            @foreach($product->getMedia() as $k => $media)
+                <a href="{{$media->getUrl()}}" class="glightbox"
+                   data-gallery="aria-products">
+                    <img src="{{$media->getUrl('product-image')}}" id="hidden-img-{{$k}}"
+                         alt="{{$product->name}}">
+                </a>
+            @endforeach
         </div>
     </div>
 </section>

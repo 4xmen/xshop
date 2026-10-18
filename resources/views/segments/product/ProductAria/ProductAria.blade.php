@@ -21,7 +21,7 @@
         <div class="row">
             <div class="col-lg-5">
                 <div id="preview">
-                    <a href="{{$product->originalImageUrl()}}" id="aria-main-img" class="light-box"
+                    <a href="{{$product->originalImageUrl()}}" id="aria-main-img" class="glightbox"
                        data-gallery="aria-products">
                         <img src="{{$product->originalImageUrl()}}" alt="{{$product->name}}">
                     </a>
@@ -223,7 +223,7 @@
     </div>
     <div id="hidden-images">
         @foreach($product->getMedia() as $k => $media)
-            <a href="{{$media->getUrl()}}" class="light-box"
+            <a href="{{$media->getUrl()}}" class="glightbox"
                data-gallery="aria-products">
                 <img src="{{$media->getUrl('product-image')}}" id="hidden-img-{{$k}}"
                      alt="{{$product->name}}">

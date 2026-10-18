@@ -1,11 +1,15 @@
-import Lightbox from "bs5-lightbox";
+import GLightbox from 'glightbox';
 import {tns} from "tiny-slider";
 
 var  YacRelativeSlider;
 document.addEventListener('DOMContentLoaded',function () {
-    for (const el of document.querySelectorAll('.light-box')) {
-        el.addEventListener('click', Lightbox.initialize);
-    }
+
+
+    GLightbox({
+        selector: '.glightbox',
+        loop: false,
+        zoomable: true,
+    });
 
     try {
         YacRelativeSlider = tns({
