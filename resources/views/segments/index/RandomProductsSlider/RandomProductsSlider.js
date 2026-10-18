@@ -32,12 +32,20 @@ document.addEventListener('DOMContentLoaded', () => {
                     autoplayButton: false,
                     // nextButton: false,
                     controls: false,
-                    autoplayHoverPause: true,
+                    autoplayHoverPause: false,
                     mouseDrag: true,
                     slideBy: 1,
                     autoplayTimeout: 5000,
                     gutter: 7,
                     // speed:10000,
+                });
+
+                el.addEventListener('mouseenter', () => {
+                    randomSlider.pause();
+                });
+
+                el.addEventListener('mouseleave', () => {
+                    randomSlider.play();
                 });
             });
         }

@@ -12,6 +12,7 @@ document.addEventListener('DOMContentLoaded',function () {
     });
 
     try {
+        const el = document.querySelector('#rel-products');
         YacRelativeSlider = tns({
             container: '#rel-products',
             items: 3,
@@ -19,7 +20,7 @@ document.addEventListener('DOMContentLoaded',function () {
             autoplayButton: false,
             // nextButton: false,
             controls: false,
-            autoplayHoverPause: true,
+            autoplayHoverPause: false,
             mouseDrag: true,
             gutter: 5,
             slideBy: 1,
@@ -40,6 +41,13 @@ document.addEventListener('DOMContentLoaded',function () {
 
             }
             // speed:10000,
+        });
+        el.addEventListener('mouseenter', () => {
+            YacRelativeSlider.pause();
+        });
+
+        el.addEventListener('mouseleave', () => {
+            YacRelativeSlider.play();
         });
     } catch {
     }

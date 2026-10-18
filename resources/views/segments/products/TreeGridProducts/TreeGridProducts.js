@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
             autoplayButton: false,
             // nextButton: false,
             controls: false,
-            autoplayHoverPause: true,
+            autoplayHoverPause: false,
             mouseDrag: true,
             gutter: 7,
             slideBy: 1,
@@ -38,6 +38,13 @@ document.addEventListener('DOMContentLoaded', () => {
             }
             // speed:10000,
         });
+        el.addEventListener('mouseenter', () => {
+            treeSlider.pause();
+        });
+
+        el.addEventListener('mouseleave', () => {
+            treeSlider.play();
+        });
     });
     document.querySelectorAll('.tree-grid .section-second')?.forEach(function (el) {
         if (el.classList.contains('.tns-slider')){
@@ -51,13 +58,20 @@ document.addEventListener('DOMContentLoaded', () => {
             autoplayButton: false,
             // nextButton: false,
             controls: false,
-            autoplayHoverPause: true,
+            autoplayHoverPause: false,
             autoplayTimeout: 8000,
             mouseDrag: true,
             gutter: 7,
             edgePadding: 60,
             slideBy: 1,
             // speed:10000,
+        });
+        el.addEventListener('mouseenter', () => {
+            treeSliderX.pause();
+        });
+
+        el.addEventListener('mouseleave', () => {
+            treeSliderX.play();
         });
     });
     document.querySelectorAll('.tree-grid .section-third')?.forEach(function (el) {
@@ -73,12 +87,19 @@ document.addEventListener('DOMContentLoaded', () => {
             autoplayButton: false,
             // nextButton: false,
             controls: false,
-            autoplayHoverPause: true,
+            autoplayHoverPause: false,
             mouseDrag: true,
             gutter: 7,
             edgePadding: 60,
             slideBy: 1,
             // speed:10000,
+        });
+        el.addEventListener('mouseenter', () => {
+            treeSliderY.pause();
+        });
+
+        el.addEventListener('mouseleave', () => {
+            treeSliderY.play();
         });
     });
 });

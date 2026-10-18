@@ -11,6 +11,10 @@ document.addEventListener('DOMContentLoaded',function () {
         loop: false,
         zoomable: true,
     });
+
+
+    const el = document.querySelector('#rel-products');
+
     ariaImgSlider = tns({
         container: '#aria-img-slider',
         items: 3,
@@ -18,7 +22,7 @@ document.addEventListener('DOMContentLoaded',function () {
         autoplayButton: false,
         // nextButton: false,
         controls: false,
-        autoplayHoverPause: true,
+        autoplayHoverPause: false,
         mouseDrag: true,
         gutter: 5,
         slideBy: 1,
@@ -32,7 +36,7 @@ document.addEventListener('DOMContentLoaded',function () {
         autoplayButton: false,
         // nextButton: false,
         controls: false,
-        autoplayHoverPause: true,
+        autoplayHoverPause: false,
         mouseDrag: true,
         gutter: 5,
         slideBy: 1,
@@ -53,6 +57,14 @@ document.addEventListener('DOMContentLoaded',function () {
 
         }
         // speed:10000,
+    });
+
+    el.addEventListener('mouseenter', () => {
+        ariaRelativeSlider.pause();
+    });
+
+    el.addEventListener('mouseleave', () => {
+        ariaRelativeSlider.play();
     });
 
     document.querySelectorAll('#aria-img-slider a')?.forEach(function (el) {
