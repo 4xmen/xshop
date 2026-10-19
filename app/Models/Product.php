@@ -6,6 +6,7 @@ use App\Http\Resources\CommentMarkupCollection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Plank\Metable\Metable;
 use Spatie\Image\Enums\AlignPosition;
@@ -84,7 +85,7 @@ class Product extends Model implements HasMedia
             ],
             'discounts' => [
                 'title' => __("Discounts"),
-                'value' => json_encode($this->discounts()->get(['title','amount','type'])),
+                'value' => json_encode($this->discounts()->get(['title', 'amount', 'type'])),
             ],
         ];
     }
@@ -485,7 +486,7 @@ class Product extends Model implements HasMedia
 
         $currency = config('app.currency.code');
         $reviews = CommentMarkupCollection::collection($this->approvedComments)->toJson();
-        $markup =  <<<RESULT
+        $markup = <<<RESULT
 <script type="application/ld+json">
 {
   "@context": "https://schema.org/",
@@ -523,9 +524,9 @@ RESULT;
 
         $keywords = $this->markupKeywords();
         return $markup . PHP_EOL .
-            getValidMarkup($this->category->default_markup??'', $keywords) . PHP_EOL .
+            getValidMarkup($this->category->default_markup ?? '', $keywords) . PHP_EOL .
 //            getValidMarkup($this->author->markups??'', $this->author->markupKeywords()) . PHP_EOL .
-            getValidMarkup($this->markups??'', $keywords) . PHP_EOL ;
+            getValidMarkup($this->markups ?? '', $keywords) . PHP_EOL;
 
     }
 
@@ -577,123 +578,127 @@ RESULT;
 
     public function relatedProduct(int $limit = 10): array
     {
-        if (! $this->exists || ! $this->getKey()) {
+        if (!$this->exists || !$this->getKey()) {
             return [];
         }
 
         $limit = max(1, min($limit, 50));
 
-        // All categories, including the main category.
-        $categoryIds = $this->categories()
-            ->pluck('categories.id')
-            ->push($this->category_id)
-            ->unique()
-            ->values();
+        // unique id each product + limit
+        $cacheKey = "product:{$this->getKey()}:related:{$limit}";
 
-        $creatorIds = $this->creators()
-            ->pluck('creators.id')
-            ->unique()
-            ->values();
+        return Cache::remember($cacheKey, now()->addHour(), function () use ($limit) {
+            // All categories, including the main category.
+            $categoryIds = $this->categories()
+                ->pluck('categories.id')
+                ->push($this->category_id)
+                ->unique()
+                ->values();
 
-        // Spatie Laravel Tags (HasTags trait).
-        $tagIds = $this->tags()
-            ->pluck('tags.id')
-            ->unique()
-            ->values();
+            $creatorIds = $this->creators()
+                ->pluck('creators.id')
+                ->unique()
+                ->values();
 
-        // No useful signals.
-        if (
-            $categoryIds->isEmpty()
-            && $creatorIds->isEmpty()
-            && $tagIds->isEmpty()
-        ) {
-            return [];
-        }
+            // Spatie Laravel Tags (HasTags trait).
+            $tagIds = $this->tags()
+                ->pluck('tags.id')
+                ->unique()
+                ->values();
 
-        $candidates = static::query()
-            ->select([
-                'products.id',
-                'products.category_id',
-                'products.stock_quantity',
-            ])
-            ->where('products.status', 1)
-            ->whereNull('products.deleted_at')
-            ->where('products.id', '<>', $this->getKey())
-            ->where(function ($query) use (
-                $categoryIds,
-                $creatorIds,
-                $tagIds
+            // No useful signals.
+            if (
+                $categoryIds->isEmpty()
+                && $creatorIds->isEmpty()
+                && $tagIds->isEmpty()
             ) {
-                // Same main category.
-                $query->where(
+                return [];
+            }
+
+            $candidates = static::query()
+                ->select([
+                    'products.id',
                     'products.category_id',
-                    $this->category_id
-                );
-
-                // Any shared category.
-                if ($categoryIds->isNotEmpty()) {
-                    $query->orWhereHas(
-                        'categories',
-                        fn ($q) => $q->whereIn(
-                            'categories.id',
-                            $categoryIds
-                        )
+                    'products.stock_quantity',
+                ])
+                ->where('products.status', 1)
+                ->whereNull('products.deleted_at')
+                ->where('products.id', '<>', $this->getKey())
+                ->where(function ($query) use (
+                    $categoryIds,
+                    $creatorIds,
+                    $tagIds
+                ) {
+                    // Same main category.
+                    $query->where(
+                        'products.category_id',
+                        $this->category_id
                     );
-                }
 
-                // Shared creators.
-                if ($creatorIds->isNotEmpty()) {
-                    $query->orWhereHas(
-                        'creators',
-                        fn ($q) => $q->whereIn(
+                    // Any shared category.
+                    if ($categoryIds->isNotEmpty()) {
+                        $query->orWhereHas(
+                            'categories',
+                            fn($q) => $q->whereIn(
+                                'categories.id',
+                                $categoryIds
+                            )
+                        );
+                    }
+
+                    // Shared creators.
+                    if ($creatorIds->isNotEmpty()) {
+                        $query->orWhereHas(
+                            'creators',
+                            fn($q) => $q->whereIn(
+                                'creators.id',
+                                $creatorIds
+                            )
+                        );
+                    }
+
+                    // Shared Spatie tags.
+                    if ($tagIds->isNotEmpty()) {
+                        $query->orWhereHas(
+                            'tags',
+                            fn($q) => $q->whereIn(
+                                'tags.id',
+                                $tagIds
+                            )
+                        );
+                    }
+                })
+                ->withCount([
+                    // Count shared categories, excluding each candidate's
+                    // own main category to avoid double-counting it.
+                    'categories as shared_categories_count' =>
+                        fn($q) => $q
+                            ->whereIn('categories.id', $categoryIds)
+                            ->whereColumn(
+                                'categories.id',
+                                '<>',
+                                'products.category_id'
+                            ),
+
+                    'creators as shared_creators_count' =>
+                        fn($q) => $q->whereIn(
                             'creators.id',
                             $creatorIds
-                        )
-                    );
-                }
-
-                // Shared Spatie tags.
-                if ($tagIds->isNotEmpty()) {
-                    $query->orWhereHas(
-                        'tags',
-                        fn ($q) => $q->whereIn(
-                            'tags.id',
-                            $tagIds
-                        )
-                    );
-                }
-            })
-            ->withCount([
-                // Count shared categories, excluding each candidate's
-                // own main category to avoid double-counting it.
-                'categories as shared_categories_count' =>
-                    fn ($q) => $q
-                        ->whereIn('categories.id', $categoryIds)
-                        ->whereColumn(
-                            'categories.id',
-                            '<>',
-                            'products.category_id'
                         ),
 
-                'creators as shared_creators_count' =>
-                    fn ($q) => $q->whereIn(
-                        'creators.id',
-                        $creatorIds
-                    ),
+                    'tags as shared_tags_count' =>
+                        fn($q) => $q->whereIn(
+                            'tags.id',
+                            $tagIds
+                        ),
+                ]);
 
-                'tags as shared_tags_count' =>
-                    fn ($q) => $q->whereIn(
-                        'tags.id',
-                        $tagIds
-                    ),
-            ]);
-
-        // Rank the candidates in SQL.
-        return DB::query()
-            ->fromSub($candidates, 'ranked')
-            ->select('ranked.id')
-            ->selectRaw(
-                '(CASE WHEN ranked.category_id = ? THEN 10 ELSE 0 END)
+            // Rank the candidates in SQL.
+            return DB::query()
+                ->fromSub($candidates, 'ranked')
+                ->select('ranked.id')
+                ->selectRaw(
+                    '(CASE WHEN ranked.category_id = ? THEN 10 ELSE 0 END)
      + (ranked.shared_categories_count * 3)
      + (ranked.shared_tags_count * 2)
      + (ranked.shared_creators_count * 4)
@@ -705,13 +710,15 @@ RESULT;
           ELSE 4
         END)
      AS similarity_score',
-                [$this->category_id]
-            )
-            ->orderByDesc('similarity_score')
-            ->orderBy('ranked.id')
-            ->limit($limit)
-            ->pluck('ranked.id')
-            ->map(fn ($id) => (int) $id)
-            ->all();
+                    [$this->category_id]
+                )
+                ->orderByDesc('similarity_score')
+                ->orderBy('ranked.id')
+                ->limit($limit)
+                ->pluck('ranked.id')
+                ->map(fn($id) => (int)$id)
+                ->all();
+        });
     }
+
 }

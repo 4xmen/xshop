@@ -12,6 +12,7 @@ use App\Models\Product;
 use App\Models\Quantity;
 use Illuminate\Http\Request;
 use App\Helper;
+use Illuminate\Support\Facades\Cache;
 use function App\Helpers\hasCreateRoute;
 
 class ProductController extends XController
@@ -137,6 +138,7 @@ class ProductController extends XController
             $product->save();
         }
 
+        Cache::tags(["product:{$product->id}"])->flush();
 
         return $product;
 
