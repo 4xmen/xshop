@@ -2,9 +2,9 @@
     <div class="{{gfx()['container']}}">
         <dov class="row">
             @if(!getSetting($data->area_name.'_'.$data->part.'_invert'))
-            <div class="col-lg-3 p-0">
-                @include('segments.post.PostSidebar.inc.sidebar')
-            </div>
+                <div class="col-lg-3 p-0">
+                    @include('segments.post.PostSidebar.inc.sidebar')
+                </div>
             @endif
             <div class="col-lg-9 p-0">
                 <div class="py-2 px-4">
@@ -63,13 +63,15 @@
                         @endif
                     </div>
                     <hr>
-                    @if($post->table_of_contents)
-                    {!! $post->tableOfContents() !!}
-                    {!! fixShortCode($post->bodyContent()) !!}
-                    @else
+                    <div class="post-content">
+                        @if($post->table_of_contents)
+                            {!! $post->tableOfContents() !!}
+                            {!! fixShortCode($post->bodyContent()) !!}
+                        @else
 
-                        {!! fixShortCode($post->body) !!}
-                    @endif
+                            {!! fixShortCode($post->body) !!}
+                        @endif
+                    </div>
 
                 </div>
 

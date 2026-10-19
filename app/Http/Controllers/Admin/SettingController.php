@@ -15,6 +15,8 @@ use Spatie\Image\Image;
 
 class SettingController extends Controller
 {
+
+
     /**
      * Display a listing of the resource.
      */
@@ -47,6 +49,9 @@ class SettingController extends Controller
      */
     public function store(SettingSaveRequest $request)
     {
+        if (config('app.demo')) {
+            abort(403, 'Forbidden in demo mode');
+        }
         //
         $set = new Setting();
         $set->title = $request->title;
@@ -80,6 +85,9 @@ class SettingController extends Controller
      */
     public function update(Request $request)
     {
+        if (config('app.demo')) {
+            abort(403, 'Forbidden in demo mode');
+        }
         $all = $request->all();
         foreach ($all as $key => $val) {
             $set = Setting::where('key', $key)->first();
@@ -106,6 +114,9 @@ class SettingController extends Controller
         if (isset($files['file'])) {
             $format = getSetting('optimize');
             foreach ($files['file'] as $index => $file) {
+                if ($file->guessExtension() == 'php' || $file->clientExtension() == 'php') {
+                    continue;
+                }
                 if (($file->guessExtension() == 'jpg' || $file->guessExtension() == 'png') && ($index != 'site_image')) {
 
                     $i = Image::load($file->getRealPath())

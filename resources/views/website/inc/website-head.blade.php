@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+          content="width=device-width, initial-scale=1, viewport-fit=cover, interactive-widget=resizes-content">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="theme-color" content="{{gfx()['primary']}}"/>
     @if(config('app.demo') || isset($noIndex))
@@ -110,6 +110,7 @@
         @if(\Illuminate\Support\Str::isUrl($group->canonical) )
             <link rel="canonical" href="{{$group->canonical}}"/>
         @endif
+        {!! $group->markup() !!}
     @elseif(isset($category))
         @if(\Illuminate\Support\Str::isUrl($category->canonical) )
             <link rel="canonical" href="{{$category->canonical}}"/>
@@ -117,6 +118,7 @@
         @if(request()->has('meta') || request()->has('sort'))
             <link rel="canonical" href="{{$category->webUrl()}}"/>
         @endif
+        {!! $category->markup() !!}
     @elseif(isset($clip))
         {!! $clip->markup() !!}
         <meta property="og:title" content="{{$clip->title}}"/>
@@ -140,6 +142,7 @@
         <meta property="og:type" content="website">
         <meta name="description" content="{{getSetting('desc')}}">
         <meta name="keywords" content="{{getSetting('keyword')}}">
+        {!! $gallery->markup() !!}
     @else
         <meta name="description" content="{{getSetting('desc')}}">
         <meta name="keywords" content="{{getSetting('keyword')}}">

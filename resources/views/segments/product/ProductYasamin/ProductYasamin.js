@@ -1,13 +1,18 @@
-import Lightbox from "bs5-lightbox";
+import GLightbox from 'glightbox';
 import {tns} from "tiny-slider";
 
 var  YacRelativeSlider;
 document.addEventListener('DOMContentLoaded',function () {
-    for (const el of document.querySelectorAll('.light-box')) {
-        el.addEventListener('click', Lightbox.initialize);
-    }
+
+
+    GLightbox({
+        selector: '.glightbox',
+        loop: false,
+        zoomable: true,
+    });
 
     try {
+        const el = document.querySelector('#rel-products');
         YacRelativeSlider = tns({
             container: '#rel-products',
             items: 3,
@@ -15,7 +20,7 @@ document.addEventListener('DOMContentLoaded',function () {
             autoplayButton: false,
             // nextButton: false,
             controls: false,
-            autoplayHoverPause: true,
+            autoplayHoverPause: false,
             mouseDrag: true,
             gutter: 5,
             slideBy: 1,
@@ -36,6 +41,13 @@ document.addEventListener('DOMContentLoaded',function () {
 
             }
             // speed:10000,
+        });
+        el.addEventListener('mouseenter', () => {
+            YacRelativeSlider.pause();
+        });
+
+        el.addEventListener('mouseleave', () => {
+            YacRelativeSlider.play();
         });
     } catch {
     }

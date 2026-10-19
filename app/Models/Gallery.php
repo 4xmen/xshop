@@ -84,4 +84,70 @@ class Gallery extends Model implements HasMedia
     {
         return $this->morphMany(Comment::class, 'commentable')->where('status', 1);
     }
+
+
+
+    public function markup()
+    {
+        $images = '';
+        $items = $this->images()->get();
+        $count = $items->count();
+
+        foreach ($items as $k => $image) {
+            $i = $k + 1;
+
+            $title = json_encode(
+                $image->title,
+                JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES
+            );
+
+            $url = json_encode(
+                $image->imgUrl(),
+                JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES
+            );
+
+            $images .= <<<IMG
+        {
+          "@type": "ListItem",
+          "position": {$i},
+          "item": {
+            "@type": "ImageObject",
+            "name": {$title},
+            "contentUrl": {$url},
+            "caption": {$title}
+          }
+        },
+IMG;
+        }
+
+        $images = rtrim(trim($images), ',');
+
+        $name = json_encode(
+            $this->title,
+            JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES
+        );
+
+        $url = json_encode(
+            $this->webUrl(),
+            JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES
+        );
+
+        echo <<<DOC
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  "name": {$name},
+  "url": {$url},
+  "mainEntity": {
+    "@type": "ItemList",
+    "numberOfItems": {$count},
+    "itemListElement": [
+      {$images}
+    ]
+  }
+}
+</script>
+DOC;
+    }
 }

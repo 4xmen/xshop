@@ -18,13 +18,22 @@ document.addEventListener('DOMContentLoaded', () => {
                     autoplayButton: false,
                     // nextButton: false,
                     controls: false,
-                    autoplayHoverPause: true,
+                    autoplayHoverPause: false,
                     mouseDrag: true,
                     slideBy: 1,
                     autoplayTimeout: 5000,
                     // speed:10000,
                 });
+
+                el.addEventListener('mouseenter', () => {
+                    sliderSimple.pause();
+                });
+
+                el.addEventListener('mouseleave', () => {
+                    sliderSimple.play();
+                });
             });
+
         }
 
     } catch {

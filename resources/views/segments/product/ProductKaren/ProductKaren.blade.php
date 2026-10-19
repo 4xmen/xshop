@@ -5,7 +5,7 @@
         <div class="row">
             <div class="col-lg-5">
                 <div id="preview">
-                    <a href="{{$product->originalImageUrl()}}" id="karen-main-img" class="light-box"
+                    <a href="{{$product->originalImageUrl()}}" id="karen-main-img" class="glightbox"
                        data-gallery="karen-products">
                         <img src="{{$product->originalImageUrl()}}" alt="{{$product->name}}" >
                     </a>
@@ -208,16 +208,16 @@
             {{__("Related products")}}
         </h3>
         <div id="rel-products" class="mb-2">
-            @foreach($product->category->products()->where('status',1)->limit(10)->get() as $p)
+            @foreach(\App\Models\Product::whereIn('id', $product->relatedProduct())->get() as $p)
                 <div class="item">
-                @include(\App\Models\Area::where('name','product-grid')->first()->defPart(),['$product' => $p])
+                @include(\App\Models\Area::where('name','product-grid')->first()->defPart(),['product' => $p])
                 </div>
             @endforeach
         </div>
     </div>
     <div id="hidden-images">
         @foreach($product->getMedia() as $k => $media)
-            <a href="{{$media->getUrl()}}" class="light-box"
+            <a href="{{$media->getUrl()}}" class="glightbox"
                data-gallery="karen-products">
                 <img src="{{$media->getUrl('product-image')}}" id="hidden-img-{{$k}}"
                      alt="{{$product->name}}">

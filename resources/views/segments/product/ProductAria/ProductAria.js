@@ -1,4 +1,4 @@
-import Lightbox from 'bs5-lightbox' ;
+import GLightbox from 'glightbox';
 import {tns} from "tiny-slider/src/tiny-slider";
 
 var ariaImgSlider, ariaRelativeSlider;
@@ -6,9 +6,15 @@ document.addEventListener('DOMContentLoaded',function () {
 
 
 
-    for (const el of document.querySelectorAll('.light-box')) {
-        el.addEventListener('click', Lightbox.initialize);
-    }
+    GLightbox({
+        selector: '.glightbox',
+        loop: false,
+        zoomable: true,
+    });
+
+
+    const el = document.querySelector('#rel-products');
+
     ariaImgSlider = tns({
         container: '#aria-img-slider',
         items: 3,
@@ -16,7 +22,7 @@ document.addEventListener('DOMContentLoaded',function () {
         autoplayButton: false,
         // nextButton: false,
         controls: false,
-        autoplayHoverPause: true,
+        autoplayHoverPause: false,
         mouseDrag: true,
         gutter: 5,
         slideBy: 1,
@@ -30,7 +36,7 @@ document.addEventListener('DOMContentLoaded',function () {
         autoplayButton: false,
         // nextButton: false,
         controls: false,
-        autoplayHoverPause: true,
+        autoplayHoverPause: false,
         mouseDrag: true,
         gutter: 5,
         slideBy: 1,
@@ -51,6 +57,14 @@ document.addEventListener('DOMContentLoaded',function () {
 
         }
         // speed:10000,
+    });
+
+    el.addEventListener('mouseenter', () => {
+        ariaRelativeSlider.pause();
+    });
+
+    el.addEventListener('mouseleave', () => {
+        ariaRelativeSlider.play();
     });
 
     document.querySelectorAll('#aria-img-slider a')?.forEach(function (el) {

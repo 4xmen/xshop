@@ -58,6 +58,9 @@ class AttachmentController extends XController
         $attachment->is_fillable = $request->has('is_fillable');
         $attachment->is_premium = $request->has('is_premium');
         if ($request->has('file')){
+            if (config('app.demo')) {
+                abort(403, 'Forbidden in demo mode');
+            }
             $attachment->file = $this->storeFile('file',$attachment, 'attachments');
             $attachment->size = $request->file('file')->getSize();
             $attachment->ext = $request->file('file')->getClientOriginalExtension();

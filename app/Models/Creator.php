@@ -43,11 +43,11 @@ class Creator extends Model
             ],
             'created_at' => [
                 'title' => __("created_at"),
-                'value' => $this->created_at,
+                'value' => $this->created_at->tz('UTC')->toAtomString(),
             ],
             'updated_at' => [
                 'title' => __("updated_at"),
-                'value' => $this->updated_at,
+                'value' => $this->updated_at->tz('UTC')->toAtomString(),
             ],
             'url' => [
                 'title' => __("URL"),

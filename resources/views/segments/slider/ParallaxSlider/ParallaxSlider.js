@@ -16,13 +16,20 @@ document.addEventListener('DOMContentLoaded', () => {
             autoplayButton: false,
             // nextButton: false,
             controls: false,
-            autoplayHoverPause: true,
+            autoplayHoverPause: false,
             mouseDrag: true,
             autoplayTimeout: 5000,
             autoplayButtonOutput: false,
 
             // speed:10000,
 
+        });
+        el.addEventListener('mouseenter', () => {
+            parallaxSlider.pause();
+        });
+
+        el.addEventListener('mouseleave', () => {
+            parallaxSlider.play();
         });
     });
 

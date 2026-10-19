@@ -15,8 +15,11 @@ class CkeditorController extends Controller
 {
     public function upload(Request $request)
     {
-        if ($request->hasFile('upload')) {
 
+        $request->validate([
+            'upload' => 'mimes:jpeg,jpg,png,gif,webp,svg|max:4096',
+        ]);
+        if ($request->hasFile('upload')) {
 
             $key = 'upload';
             $format = getSetting('optimize');

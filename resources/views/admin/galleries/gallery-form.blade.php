@@ -85,7 +85,7 @@
                                 {{__('Description')}}
                             </label>
                             <textarea id="description" name="description"
-                                      class="form-control @error('description') is-invalid @enderror"
+                                      class="ckeditorx form-control @error('description') is-invalid @enderror"
                                       placeholder="{{__('Description')}}"
                                       rows="3">{{old('description',$item->description??null)}}</textarea>
                         </div>

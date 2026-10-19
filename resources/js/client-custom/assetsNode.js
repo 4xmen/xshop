@@ -49,3 +49,10 @@ app.mount('#app');
 window.app = app;
 window.$toast = $toast;
 window.store = store;
+// lightbox
+import GLightbox from 'glightbox';
+GLightbox({
+    selector: '.post-content img',
+    loop: false,
+    zoomable: true,
+});

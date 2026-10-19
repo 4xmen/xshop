@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
             autoplayButton: false,
             // nextButton: false,
             controls: false,
-            autoplayHoverPause: true,
+            autoplayHoverPause: false,
             mouseDrag: true,
             gutter: 7,
             slideBy: 1,
@@ -39,6 +39,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
             }
             // speed:10000,
+        });
+        el.addEventListener('mouseenter', () => {
+            maincatz.pause();
+        });
+
+        el.addEventListener('mouseleave', () => {
+            maincatz.play();
         });
     });
 });

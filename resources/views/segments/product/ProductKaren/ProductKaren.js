@@ -1,17 +1,21 @@
 
 
-import Lightbox from 'bs5-lightbox' ;
+import GLightbox from 'glightbox';
 import {tns} from "tiny-slider/src/tiny-slider";
 
 var karenImgSlider, karenRelativeSlider;
 document.addEventListener('DOMContentLoaded',function () {
 
-    for (const el of document.querySelectorAll('.light-box')) {
-        el.addEventListener('click', Lightbox.initialize);
-    }
+        GLightbox({
+            selector: '.glightbox',
+            loop: false,
+            zoomable: true,
+        });
+
     if (document.querySelector('#karen-img-slider') != null){
     try {
 
+        const el = document.querySelector('#rel-products');
         karenImgSlider = tns({
             container: '#karen-img-slider',
             items: 3,
@@ -19,7 +23,7 @@ document.addEventListener('DOMContentLoaded',function () {
             autoplayButton: false,
             // nextButton: false,
             controls: false,
-            autoplayHoverPause: true,
+            autoplayHoverPause: false,
             mouseDrag: true,
             gutter: 5,
             slideBy: 1,
@@ -33,7 +37,7 @@ document.addEventListener('DOMContentLoaded',function () {
             autoplayButton: false,
             // nextButton: false,
             controls: false,
-            autoplayHoverPause: true,
+            autoplayHoverPause: false,
             mouseDrag: true,
             gutter: 5,
             slideBy: 1,
@@ -54,6 +58,13 @@ document.addEventListener('DOMContentLoaded',function () {
 
             }
             // speed:10000,
+        });
+        el.addEventListener('mouseenter', () => {
+            karenRelativeSlider.pause();
+        });
+
+        el.addEventListener('mouseleave', () => {
+            karenRelativeSlider.play();
         });
     } catch {
     }

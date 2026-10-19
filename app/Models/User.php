@@ -37,7 +37,7 @@ class User extends Authenticatable
             ],
             'register' => [
                 'title' => __("created_at"),
-                'value' => $this->created_at,
+                'value' => $this->created_at->tz('UTC')->toAtomString(),
             ],
 //            'url' => [
 //                'title' => __("URL"),

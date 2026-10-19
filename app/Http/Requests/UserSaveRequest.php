@@ -27,11 +27,18 @@ class UserSaveRequest extends FormRequest
             'role' => ['required', 'string'],
             'email' => ['required', 'string', 'email', 'max:255', "unique:users,email," . $this->id],
             'password' => ['string', 'min:8', 'confirmed', 'nullable'],
-            'markups' => ['nullable', 'string', function ($attribute, $value, $fail) {
-                if (!str_contains($value, '<script type="application/ld+json">')) {
-                    $fail(__("The :A field must contain `:W`.", ['A' => $attribute, 'W' => '<script type="application/ld+json">']));
-                }
-            },],
+            'markups' => [
+                'nullable',
+                'string',
+                function ($attribute, $value, $fail) {
+                    if (! isValidJsonLd($value)) {
+                        $fail(__(
+                            'The :A field must contain a valid JSON-LD script. `<script type="application/ld+json"> VALID JSON </script>`',
+                            ['A' => $attribute]
+                        ));
+                    }
+                },
+            ]
         ];
     }
 }
