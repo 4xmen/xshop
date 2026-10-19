@@ -152,7 +152,7 @@
                 </h2>
                 <div id="desc" class="accordion-collapse collapse show" data-bs-parent="#product-detail">
                     <div class="accordion-body">
-                         {!! fixShortCode($product->description) !!}
+                        {!! fixShortCode($product->description) !!}
                     </div>
                 </div>
             </div>
@@ -212,12 +212,10 @@
             {{__("Related products")}}
         </h3>
         <div id="rel-products" class="mb-2">
-            @foreach($product->category->products()->where('status',1)->limit(10)->get() as $p)
-                @foreach($product->category->products()->where('status',1)->limit(10)->get() as $p)
-                    <div class="item">
-                        @include(\App\Models\Area::where('name','product-grid')->first()->defPart(),['$product' => $p])
-                    </div>
-                @endforeach
+            @foreach(\App\Models\Product::whereIn('id', $product->relatedProduct())->get() as $p)
+                <div class="item">
+                    @include(\App\Models\Area::where('name','product-grid')->first()->defPart(),['product' => $p])
+                </div>
             @endforeach
         </div>
     </div>

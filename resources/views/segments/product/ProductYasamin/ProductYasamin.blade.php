@@ -176,9 +176,9 @@
                 {{__("Related products")}}
             </h3>
             <div id="rel-products" class="mb-2">
-                @foreach($product->category->products()->where('status',1)->limit(10)->get() as $p)
+                @foreach(\App\Models\Product::whereIn('id', $product->relatedProduct())->get() as $p)
                     <div class="item">
-                        @include(\App\Models\Area::where('name','product-grid')->first()->defPart(),['$product' => $p])
+                        @include(\App\Models\Area::where('name','product-grid')->first()->defPart(),['product' => $p])
                     </div>
                 @endforeach
             </div>
