@@ -236,7 +236,7 @@ class Product extends Model implements HasMedia
             });
     }
 
-    public function quesions()
+    public function questions()
     {
         return $this->hasMany(Question::class);
     }

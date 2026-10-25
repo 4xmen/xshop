@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('product_id');
             $table->unsignedInteger('count')->default(0);
-            $table->unsignedBigInteger('price')->default(0);
+            $table->decimal('price',20,2)->default(0);
             $table->unsignedBigInteger('image')->default(null)->nullable();
             $table->longText('data')->nullable()->default(null);
             $table->softDeletes();

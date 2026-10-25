@@ -17,7 +17,7 @@ class Image extends Model implements HasMedia
     use HasFactory,InteractsWithMedia, HasTranslations;
     public $translatable = ['title'];
 
-    protected $guarded = [''];
+    protected $guarded = [];
 
     public function gallery()
     {

@@ -65,7 +65,7 @@ class Category extends Model
             return asset('/assets/upload/logo.svg');
         }
 
-        return \Storage::url('categories/' . $this->svg);
+        return \Storage::url('/' . $this->svg);
     }
 
     public function imgOriginalUrl()

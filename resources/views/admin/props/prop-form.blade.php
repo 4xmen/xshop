@@ -19,7 +19,7 @@
                 </h3>
                 <ul>
                     <li>
-                        {{__("Recommends")}}
+                        {{__("Please read document of this entity.")}}
                     </li>
                 </ul>
             </div>

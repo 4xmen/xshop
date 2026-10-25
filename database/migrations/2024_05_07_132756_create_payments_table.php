@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('payments', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('invoice_id');
-            $table->unsignedBigInteger('amount')->nullable();
+            $table->decimal('amount',20,2)->nullable();
             $table->enum("type", \App\Models\Payment::$types)->nullable()->default(\App\Models\Payment::$types[0]);
             $table->enum("status", \App\Models\Payment::$status)->nullable()->default(\App\Models\Payment::$status[0]);
             $table->string('order_id')->unique();

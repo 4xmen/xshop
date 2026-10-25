@@ -138,7 +138,7 @@ class ProductController extends XController
             $product->save();
         }
 
-        Cache::tags(["product:{$product->id}"])->flush();
+        Cache::forget("product:{$product->id}");
 
         return $product;
 
