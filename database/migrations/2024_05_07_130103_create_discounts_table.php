@@ -18,7 +18,7 @@ return new class extends Migration
             $table->unsignedBigInteger('product_id')->nullable()->default(null);
             $table->enum('type',\App\Models\Discount::$doscount_type);
             $table->string('code',100)->nullable()->default(null);
-            $table->decimal('amount',20)->unsigned();
+            $table->decimal('amount',20,2)->unsigned();
             $table->dateTime('expire')->default(null)->nullable();
             $table->timestamps();
 

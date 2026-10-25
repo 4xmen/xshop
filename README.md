@@ -174,7 +174,7 @@ php artisan build
 
 ### Theme Parts Files
 
-- `PartName.php`: Contains `onCreate`, `onRemove`, `onMount` actions for the theme part
+- `PartName.php`: Contains `onAdd`, `onRemove`, `onMount` actions for the theme part
 - `PartName.blade.php`: Blade template for the theme part
 - `PartName.scss`: SCSS styles for the theme part
 - `PartName.js`: JavaScript for the theme part

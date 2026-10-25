@@ -56,6 +56,7 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
+        'id',
         'name',
         'email',
         'password',
@@ -206,7 +207,6 @@ class User extends Authenticatable
         if ($this->avatar == null || trim($this->avatar) == ''){
             return asset('assets/default/unknown.svg');
         }
-
 
         return \Storage::url('users/' . $this->avatar);
     }

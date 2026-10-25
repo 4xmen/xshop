@@ -16,4 +16,8 @@ class Address extends Model
     public function city(){
         return $this->belongsTo(City::class);
     }
+
+    public function customer(){
+        return $this->belongsTo(Customer::class);
+    }
 }

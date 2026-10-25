@@ -195,11 +195,22 @@
                         </div>
                         @if(isset($item) && $item->products()->count() > 0)
                             <div class="col-12 mt-4">
-                                {{__("Markup schema for posts of this group")}}:
+                                {{__("Markup schema for products of this category")}}:
                                 <code-editor
                                     value='{{base64_encode(old('default_markup', $item->default_markup)??'')}}'
                                     xname="default_markup"
                                     :btns='@json($item->products()->inRandomOrder()->first()->markupKeywords())'
+                                    default-syntax="html"
+                                ></code-editor>
+                            </div>
+                        @endif
+                        @if(isset($item))
+                            <div class="col-12 mt-4">
+                                {{__("Markup schema")}}:
+                                <code-editor
+                                    value='{{base64_encode(old('markups', $item->markups)??'')}}'
+                                    xname="markups"
+                                    :btns='@json($item->markupKeywords())'
                                     default-syntax="html"
                                 ></code-editor>
                             </div>

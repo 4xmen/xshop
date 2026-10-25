@@ -203,7 +203,7 @@ php artisan build
 
 ### توضیحات پرونده‌های قسمت قالب 
 
-- PartName.php: `onCreate`, `onRemove`, `onMount` برای انجام اعمال قسمت
+- PartName.php: `onAdd`, `onRemove`, `onMount` برای انجام اعمال قسمت
 - PartName.blade.php: برای قرارگرفتن کد‌های blade code
 - PartName.scss:برای افزودن ویژگی‌های scss
 - PartName.js: برای افزودن javascript

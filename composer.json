@@ -10,7 +10,7 @@
         "open-source-shop"
     ],
     "license": "GPL-3.0-or-later",
-    "version": "3.0.2",
+    "version": "3.5.0",
     "require": {
         "php": "^8.3",
         "ext-dom": "*",
