@@ -167,13 +167,20 @@ export default {
 
 <style scoped>
 .menu-item {
-    padding-right: 1rem;
-    padding-left: 1rem;
+    padding-inline: var(--spacing-md);
 }
-.menu-item .card{
-    margin-bottom: 1rem;
+
+.menu-item .card {
+    margin-block-end: var(--spacing-md);
 }
-.menu-item .card-body{
-    background: #ffffff11;
+
+.menu-item .card-body label {
+    display: inline-block;
+    margin-block: var(--spacing-xs) var(--spacing-2xs);
+}
+
+.menu-item .alert.bg-danger {
+    background-color: var(--color-danger-subtle) !important;
+    color: var(--color-danger-text);
 }
 </style>

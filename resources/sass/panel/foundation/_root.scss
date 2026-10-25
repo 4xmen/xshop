@@ -1,0 +1,273 @@
+@use 'sass:map';
+@use 'sass:color';
+@use '../tokens/palette' as p;
+@use '../tokens/scales' as s;
+
+@function rgb-list($c) {
+  @return #{color.channel($c, 'red', $space: rgb)}, #{color.channel($c, 'green', $space: rgb)}, #{color.channel($c, 'blue', $space: rgb)};
+}
+
+@mixin bootstrap-bridge($bg, $surface, $raised, $text, $muted, $border, $primary, $link, $link-hover, $danger, $success) {
+  --bs-body-bg: #{$bg};
+  --bs-body-bg-rgb: #{rgb-list($bg)};
+  --bs-body-color: #{$text};
+  --bs-body-color-rgb: #{rgb-list($text)};
+  --bs-emphasis-color: #{$text};
+  --bs-emphasis-color-rgb: #{rgb-list($text)};
+  --bs-heading-color: #{$text};
+  --bs-secondary-color: #{$muted};
+  --bs-secondary-color-rgb: #{rgb-list($muted)};
+  --bs-secondary-bg: #{$raised};
+  --bs-secondary-bg-rgb: #{rgb-list($raised)};
+  --bs-tertiary-color: #{$muted};
+  --bs-tertiary-bg: #{$surface};
+  --bs-tertiary-bg-rgb: #{rgb-list($surface)};
+  --bs-border-color: #{$border};
+  --bs-border-color-translucent: #{$border};
+  --bs-link-color: #{$link};
+  --bs-link-color-rgb: #{rgb-list($link)};
+  --bs-link-hover-color: #{$link-hover};
+  --bs-link-hover-color-rgb: #{rgb-list($link-hover)};
+  --bs-primary: #{$primary};
+  --bs-primary-rgb: #{rgb-list($primary)};
+  --bs-danger-rgb: #{rgb-list($danger)};
+  --bs-success-rgb: #{rgb-list($success)};
+  --bs-warning-rgb: #{rgb-list(map.get(p.$amber, 500))};
+  --bs-info-rgb: #{rgb-list(map.get(p.$cyan, 600))};
+  --bs-form-invalid-color: var(--color-danger-text);
+  --bs-form-invalid-border-color: var(--color-danger-text);
+  --bs-form-valid-color: var(--color-success-text);
+  --bs-form-valid-border-color: var(--color-success-text);
+  --bs-focus-ring-color: var(--color-focus-ring);
+  --bs-border-radius: var(--radius-md);
+  --bs-border-radius-sm: var(--radius-sm);
+  --bs-border-radius-lg: var(--radius-lg);
+  --bs-border-radius-xl: var(--radius-xl);
+  --bs-box-shadow: var(--shadow-md);
+  --bs-box-shadow-sm: var(--shadow-sm);
+  --bs-box-shadow-lg: var(--shadow-lg);
+}
+
+@mixin theme-dark {
+  color-scheme: dark;
+
+  --color-background: #{map.get(p.$ink, 900)};
+  --color-rail: #{map.get(p.$ink, 950)};
+  --color-surface: #{map.get(p.$ink, 800)};
+  --color-surface-raised: #{map.get(p.$ink, 700)};
+  --color-field: #{map.get(p.$ink, 850)};
+  --color-hover: #{map.get(p.$ink, 750)};
+  --color-overlay: rgb(5 7 14 / 70%);
+
+  --color-text: #{map.get(p.$ink, 100)};
+  --color-text-muted: #{map.get(p.$ink, 300)};
+  --color-text-disabled: #{map.get(p.$ink, 400)};
+
+  --color-border: #{map.get(p.$ink, 600)};
+  --color-border-strong: #{map.get(p.$ink, 400)};
+
+  --color-primary: #{map.get(p.$crimson, 500)};
+  --color-primary-hover: #{map.get(p.$crimson, 400)};
+  --color-primary-active: #{map.get(p.$crimson, 600)};
+  --color-primary-edge: #{map.get(p.$crimson, 500)};
+  --color-primary-text: #{map.get(p.$crimson, 300)};
+  --color-primary-subtle: #{map.get(p.$dark-tint, 'crimson')};
+  --color-text-on-primary: #ffffff;
+
+  --color-accent: #{map.get(p.$orchid, 600)};
+  --color-accent-hover: #{map.get(p.$orchid, 700)};
+  --color-accent-text: #{map.get(p.$orchid, 300)};
+  --color-accent-subtle: #{map.get(p.$dark-tint, 'orchid')};
+  --color-text-on-accent: #ffffff;
+
+  --color-success-text: #{map.get(p.$green, 300)};
+  --color-success-subtle: #{map.get(p.$dark-tint, 'green')};
+  --color-success-dot: #{map.get(p.$green, 500)};
+  --color-warning-text: #{map.get(p.$amber, 300)};
+  --color-warning-subtle: #{map.get(p.$dark-tint, 'amber')};
+  --color-warning-dot: #{map.get(p.$amber, 500)};
+  --color-caution-text: #{map.get(p.$orange, 300)};
+  --color-caution-subtle: #{map.get(p.$dark-tint, 'orange')};
+  --color-caution-dot: #{map.get(p.$orange, 500)};
+  --color-danger-text: #{map.get(p.$red, 300)};
+  --color-danger-subtle: #{map.get(p.$dark-tint, 'red')};
+  --color-danger-dot: #{map.get(p.$red, 500)};
+  --color-info-text: #{map.get(p.$cyan, 300)};
+  --color-info-subtle: #{map.get(p.$dark-tint, 'cyan')};
+  --color-neutral-dot: #{map.get(p.$ink, 100)};
+  --color-danger: #{map.get(p.$red, 600)};
+  --color-text-on-danger: #ffffff;
+
+  --color-focus-ring: #{map.get(p.$crimson, 300)};
+
+  --color-chart-1: #{map.get(p.$crimson, 300)};
+  --color-chart-2: #{map.get(p.$orchid, 400)};
+  --color-chart-3: #{map.get(p.$amber, 300)};
+  --color-chart-4: #{map.get(p.$cyan, 300)};
+
+  --shadow-sm: 0 1px 2px rgb(0 0 0 / 30%), 0 0 0 1px rgb(255 255 255 / 2%);
+  --shadow-md: 0 6px 16px rgb(0 0 0 / 35%);
+  --shadow-lg: 0 18px 44px rgb(0 0 0 / 50%);
+
+  --panel-background: var(--color-background);
+  --panel-lighter: var(--color-surface);
+  --panel-darker: var(--color-field);
+  --panel-primary: var(--color-chart-1);
+  --panel-secondary: var(--color-chart-2);
+  --panel-text-muted: var(--color-text-muted);
+  --xshop-text: var(--color-text);
+
+  @include bootstrap-bridge(
+    map.get(p.$ink, 900), map.get(p.$ink, 800), map.get(p.$ink, 700),
+    map.get(p.$ink, 100), map.get(p.$ink, 300), map.get(p.$ink, 600),
+    map.get(p.$crimson, 500), map.get(p.$crimson, 300), map.get(p.$crimson, 400),
+    map.get(p.$red, 600), map.get(p.$green, 500)
+  );
+}
+
+@mixin theme-light {
+  color-scheme: light;
+
+  --color-background: #{map.get(p.$mist, 100)};
+  --color-rail: #{map.get(p.$mist, 0)};
+  --color-surface: #{map.get(p.$mist, 0)};
+  --color-surface-raised: #{map.get(p.$mist, 0)};
+  --color-field: #{map.get(p.$mist, 50)};
+  --color-hover: #{map.get(p.$mist, 150)};
+  --color-overlay: rgb(20 24 39 / 40%);
+
+  --color-text: #{map.get(p.$mist, 900)};
+  --color-text-muted: #{map.get(p.$mist, 600)};
+  --color-text-disabled: #{map.get(p.$mist, 400)};
+
+  --color-border: #{map.get(p.$mist, 200)};
+  --color-border-strong: #{map.get(p.$mist, 400)};
+
+  --color-primary: #{map.get(p.$crimson, 600)};
+  --color-primary-hover: #{map.get(p.$crimson, 700)};
+  --color-primary-active: #{map.get(p.$crimson, 800)};
+  --color-primary-edge: #{map.get(p.$crimson, 600)};
+  --color-primary-text: #{map.get(p.$crimson, 600)};
+  --color-primary-subtle: #{map.get(p.$crimson, 50)};
+  --color-text-on-primary: #ffffff;
+
+  --color-accent: #{map.get(p.$orchid, 700)};
+  --color-accent-hover: #{map.get(p.$orchid, 600)};
+  --color-accent-text: #{map.get(p.$orchid, 700)};
+  --color-accent-subtle: #{map.get(p.$orchid, 50)};
+  --color-text-on-accent: #ffffff;
+
+  --color-success-text: #{map.get(p.$green, 700)};
+  --color-success-subtle: #{map.get(p.$green, 50)};
+  --color-success-dot: #{map.get(p.$green, 500)};
+  --color-warning-text: #{map.get(p.$amber, 700)};
+  --color-warning-subtle: #{map.get(p.$amber, 50)};
+  --color-warning-dot: #{map.get(p.$amber, 500)};
+  --color-caution-text: #{map.get(p.$orange, 700)};
+  --color-caution-subtle: #{map.get(p.$orange, 50)};
+  --color-caution-dot: #{map.get(p.$orange, 500)};
+  --color-danger-text: #{map.get(p.$red, 700)};
+  --color-danger-subtle: #{map.get(p.$red, 50)};
+  --color-danger-dot: #{map.get(p.$red, 500)};
+  --color-info-text: #{map.get(p.$cyan, 700)};
+  --color-info-subtle: #{map.get(p.$cyan, 50)};
+  --color-neutral-dot: #{map.get(p.$mist, 400)};
+  --color-danger: #{map.get(p.$red, 600)};
+  --color-text-on-danger: #ffffff;
+
+  --color-focus-ring: #{map.get(p.$crimson, 600)};
+
+  --color-chart-1: #{map.get(p.$crimson, 500)};
+  --color-chart-2: #{map.get(p.$orchid, 700)};
+  --color-chart-3: #{map.get(p.$amber, 500)};
+  --color-chart-4: #{map.get(p.$cyan, 600)};
+
+  --shadow-sm: 0 1px 2px rgb(20 24 39 / 6%), 0 1px 3px rgb(20 24 39 / 4%);
+  --shadow-md: 0 6px 16px rgb(20 24 39 / 10%);
+  --shadow-lg: 0 18px 44px rgb(20 24 39 / 14%);
+
+  --panel-background: var(--color-background);
+  --panel-lighter: var(--color-surface);
+  --panel-darker: var(--color-field);
+  --panel-primary: var(--color-chart-1);
+  --panel-secondary: var(--color-chart-2);
+  --panel-text-muted: var(--color-text-muted);
+  --xshop-text: var(--color-text);
+
+  @include bootstrap-bridge(
+    map.get(p.$mist, 100), map.get(p.$mist, 0), map.get(p.$mist, 50),
+    map.get(p.$mist, 900), map.get(p.$mist, 600), map.get(p.$mist, 200),
+    map.get(p.$crimson, 600), map.get(p.$crimson, 600), map.get(p.$crimson, 700),
+    map.get(p.$red, 600), map.get(p.$green, 700)
+  );
+}
+
+@mixin scale-tokens {
+  @each $step, $value in s.$spacing {
+    --spacing-#{$step}: #{$value};
+  }
+
+  @each $step, $value in s.$font-size {
+    --font-size-#{$step}: #{$value};
+  }
+
+  @each $step, $value in s.$font-weight {
+    --font-weight-#{$step}: #{$value};
+  }
+
+  @each $step, $value in s.$line-height {
+    --line-height-#{$step}: #{$value};
+  }
+
+  @each $step, $value in s.$radius {
+    --radius-#{$step}: #{$value};
+  }
+
+  @each $step, $value in s.$control-height {
+    --control-height-#{$step}: #{$value};
+  }
+
+  @each $step, $value in s.$duration {
+    --duration-#{$step}: #{$value};
+  }
+
+  @each $step, $value in s.$easing {
+    --easing-#{$step}: #{$value};
+  }
+
+  @each $step, $value in s.$z-index {
+    --z-index-#{$step}: #{$value};
+  }
+}
+
+:root {
+  @include scale-tokens;
+  @include theme-dark;
+
+  --font-family-base: 'Vazirmatn UI', 'Vazirmatn', system-ui, -apple-system, 'Segoe UI', tahoma, roboto, arial, sans-serif;
+  --font-family-mono: ui-monospace, 'SF Mono', 'Cascadia Mono', menlo, consolas, monospace;
+  --bs-body-font-family: var(--font-family-base);
+  --bs-font-sans-serif: var(--font-family-base);
+  --bs-body-font-size: var(--font-size-sm);
+  --bs-body-line-height: var(--line-height-normal);
+
+  --topbar-height: 3.75rem;
+  --rail-width: 5rem;
+  --drawer-width: 16rem;
+  --content-max: 100rem;
+}
+
+:root,
+[data-bs-theme='dark'] {
+  @include theme-dark;
+}
+
+[data-bs-theme='light'] {
+  @include theme-light;
+}
+
+[dir='rtl'] {
+  --font-family-base: 'Vazirmatn', system-ui, -apple-system, 'Segoe UI', tahoma, roboto, arial, sans-serif;
+  --bs-body-font-family: var(--font-family-base);
+  --bs-font-sans-serif: var(--font-family-base);
+}

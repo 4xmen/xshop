@@ -1,0 +1,219 @@
+@use '../tokens' as ds;
+
+.dash {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-lg);
+}
+
+.dash__top {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--spacing-lg);
+
+  @include ds.media-up('md') {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+
+    .dash-welcome {
+      grid-column: 1 / -1;
+    }
+  }
+
+  @include ds.media-up('xl') {
+    grid-template-columns: minmax(0, 2fr) repeat(2, minmax(0, 1fr));
+
+    .dash-welcome {
+      grid-column: auto;
+    }
+  }
+}
+
+.dash__charts {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--spacing-lg);
+
+  @include ds.media-up('lg') {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
+  }
+}
+
+.dash-card {
+  @include ds.surface;
+
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-lg);
+  min-inline-size: 0;
+}
+
+.dash-welcome__head {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+}
+
+.dash-welcome__eyebrow {
+  color: var(--color-text-muted);
+  font-size: var(--font-size-sm);
+}
+
+.dash-welcome__name {
+  margin-block-start: var(--spacing-3xs);
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-bold);
+}
+
+.dash-welcome__stats {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--spacing-sm);
+  padding: 0;
+  margin: 0;
+  list-style: none;
+
+  @include ds.media-up('sm') {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+.dash-metric {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-2xs);
+  padding: var(--spacing-sm) var(--spacing-md);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-field);
+
+  .progress {
+    margin-block-start: var(--spacing-xs);
+  }
+}
+
+.dash-metric__label {
+  margin: 0;
+  color: var(--color-text-muted);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-medium);
+}
+
+.dash-metric__value {
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-tight);
+}
+
+.dash-action {
+  --tone: var(--color-warning-text);
+  --tone-subtle: var(--color-warning-subtle);
+
+  position: relative;
+  justify-content: space-between;
+
+  @include ds.transition(border-color, transform);
+
+  &:hover {
+    border-color: color-mix(in srgb, var(--tone) 50%, transparent);
+  }
+
+  > a,
+  > a:visited {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+    color: var(--color-text);
+
+    &::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+    }
+
+    &:hover {
+      color: var(--color-text);
+    }
+  }
+
+  i {
+    @include ds.icon-chip(var(--tone-subtle), var(--tone));
+
+    inline-size: 3rem;
+    block-size: 3rem;
+    font-size: 1.5rem;
+  }
+
+  h2 {
+    margin: 0;
+    font-size: var(--font-size-3xl);
+    font-weight: var(--font-weight-bold);
+    line-height: var(--line-height-tight);
+  }
+}
+
+.dash-action__label {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-xs);
+  color: var(--color-text-muted);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+
+  &::after {
+    content: '\ea6e';
+    color: var(--tone);
+    font-family: 'remixicon';
+    font-size: 1.25rem;
+  }
+
+  [dir='rtl'] &::after {
+    content: '\ea64';
+  }
+}
+
+.dash-action--tickets {
+  --tone: var(--color-info-text);
+  --tone-subtle: var(--color-info-subtle);
+}
+
+.dash-chart {
+  margin: 0;
+
+  .card-header i {
+    font-size: 1.125rem;
+  }
+
+  .card-body {
+    position: relative;
+    block-size: 20rem;
+    padding: var(--spacing-md);
+  }
+}
+
+.dash-chart--wide .card-body {
+  block-size: auto;
+  min-block-size: 20rem;
+}
+
+.skewed-container {
+  position: relative;
+  min-block-size: 8rem;
+  overflow: hidden;
+}
+
+.skewed-icon {
+  position: absolute;
+  inset-block-start: var(--spacing-md);
+  inset-inline-end: var(--spacing-md);
+  color: var(--color-primary-text);
+  font-size: 1.5rem;
+  opacity: 0.6;
+  transform: none;
+}
+
+.order-card,
+.ticket-card {
+  background: var(--color-surface) !important;
+}

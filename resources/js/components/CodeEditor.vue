@@ -219,60 +219,96 @@ export default {
 #code-editor {
     display: flex;
     flex-direction: column;
-    gap: 8px;
-    width: 100%;
-    min-width: 0;
+    gap: var(--spacing-xs);
+    inline-size: 100%;
+    min-inline-size: 0;
     direction: ltr;
 }
 
 .editor-toolbar {
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
     justify-content: space-between;
-    gap: 5px;
-    padding-top: 5px;
+    gap: var(--spacing-2xs);
+    padding-block-start: var(--spacing-2xs);
 }
 
 .editor-toolbar label {
-    color: #a1a1aa;
-    font-size: 13px;
+    color: var(--color-text-muted);
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-medium);
+}
+
+.editor-toolbar .btn {
+    --bs-btn-bg: transparent;
+    --bs-btn-color: var(--color-text);
+    --bs-btn-border-color: var(--color-border-strong);
+    --bs-btn-hover-bg: var(--color-hover);
+    --bs-btn-hover-color: var(--color-text);
+    --bs-btn-hover-border-color: var(--color-text-muted);
+    --bs-btn-active-bg: var(--color-hover);
+    --bs-btn-active-color: var(--color-text);
+    --bs-btn-active-border-color: var(--color-text-muted);
+    --bs-btn-padding-x: var(--spacing-sm);
+    --bs-btn-font-size: var(--font-size-xs);
+
+    min-block-size: var(--control-height-xs);
+}
+
+.editor-toolbar .reset {
+    --bs-btn-bg: var(--color-danger-subtle);
+    --bs-btn-color: var(--color-danger-text);
+    --bs-btn-border-color: transparent;
+    --bs-btn-hover-bg: var(--color-danger-subtle);
+    --bs-btn-hover-color: var(--color-danger-text);
+    --bs-btn-hover-border-color: var(--color-danger-text);
+    --bs-btn-active-bg: var(--color-danger-subtle);
+    --bs-btn-active-color: var(--color-danger-text);
+    --bs-btn-active-border-color: var(--color-danger-text);
 }
 
 .syntax-select {
-    padding: 6px 10px;
-    color: #e4e4e7;
-    background: #18181b;
-    border: 1px solid #3f3f46;
-    border-radius: 6px;
-    font-size: 13px;
+    min-block-size: var(--control-height-xs);
+    padding-block: 0;
+    padding-inline: var(--spacing-sm);
+    border: 1px solid var(--color-border-strong);
+    border-radius: var(--radius-md);
+    background-color: var(--color-field);
+    color: var(--color-text);
+    font-size: var(--font-size-xs);
+}
+
+.syntax-select:hover {
+    border-color: var(--color-text-muted);
+}
+
+.syntax-select:focus {
+    border-color: var(--color-focus-ring);
+    box-shadow: 0 0 0 1px var(--color-focus-ring);
+    outline: none;
 }
 
 .editor-container {
     display: grid;
-    width: 100%;
-    min-width: 0;
-    min-height: 240px;
+    inline-size: 100%;
+    min-inline-size: 0;
+    min-block-size: 240px;
     overflow: hidden;
-    border: 1px solid #3f3f46;
-    border-radius: 8px;
-    background: #0d1117;
-}
-
-.editor-container :deep(.prism-code-editor) {
-    min-height: 240px;
-    font-size: 14px;
-    line-height: 1.6;
-}
-
-.editor-container {
+    border: 1px solid var(--color-border-strong);
+    border-radius: var(--radius-md);
+    background-color: var(--color-field);
     white-space: pre;
 }
 
-.btn {
-    background: #00000044;
+.editor-container:focus-within {
+    border-color: var(--color-focus-ring);
+    box-shadow: 0 0 0 1px var(--color-focus-ring);
 }
 
-.reset{
-    background: #ff000022;
+.editor-container :deep(.prism-code-editor) {
+    min-block-size: 240px;
+    font-size: var(--font-size-sm);
+    line-height: 1.6;
 }
 </style>

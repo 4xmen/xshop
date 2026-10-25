@@ -13,6 +13,9 @@
                     <i class="ri-shopping-cart-line"></i>
                 </a>
                 <ul id="card">
+                    <li class="drawer-title">
+                        {{__("Shopping card")}}
+                    </li>
                     @if(  auth()->user()->hasAnyAccess( 'invoice' ))
                         <li>
                             <a href="{{ route('admin.invoice.index') }}">
@@ -57,6 +60,9 @@
                     <i class="ri-store-line"></i>
                 </a>
                 <ul id="catalog">
+                    <li class="drawer-title">
+                        {{__("Catalog")}}
+                    </li>
                     @if(  auth()->user()->hasAnyAccess( 'product' ))
                         <li>
                             <a href="{{route('admin.product.index')}}">
@@ -116,6 +122,9 @@
                     <i class="ri-pages-line"></i>
                 </a>
                 <ul id="contents">
+                    <li class="drawer-title">
+                        {{__("Contents")}}
+                    </li>
                     @if(  auth()->user()->hasAnyAccess( 'post' ))
                         <li>
                             <a href="{{route('admin.post.index')}}">
@@ -190,6 +199,9 @@
                     <i class="ri-palette-line"></i>
                 </a>
                 <ul id="themes">
+                    <li class="drawer-title">
+                        {{__("Theme")}}
+                    </li>
                     @if(  auth()->user()->hasAnyAccess( 'menu' ))
                         <li>
                             <a href="{{route('admin.menu.index')}}">
@@ -233,6 +245,9 @@
                     <i class="ri-chat-1-line"></i>
                 </a>
                 <ul id="interaction">
+                    <li class="drawer-title">
+                        {{__("Interaction")}}
+                    </li>
                     @if(  auth()->user()->hasAnyAccess( 'question' ))
                         <li>
                             <a href="{{route('admin.question.index')}}">
@@ -275,6 +290,9 @@
                     <i class="ri-pie-chart-line"></i>
                 </a>
                 <ul id="manage">
+                    <li class="drawer-title">
+                        {{__("Managing")}}
+                    </li>
                     @if(  auth()->user()->hasAnyAccess( 'user' ))
                         <li>
                             <a href="{{route('admin.user.index')}}">

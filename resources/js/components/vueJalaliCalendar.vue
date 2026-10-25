@@ -264,118 +264,160 @@ export default {
 
 <style scoped>
 #vue-a1-calendar {
-    border: 1px solid #44444444;
-    background: #fff;
     direction: rtl;
+    overflow: hidden;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    background-color: var(--color-surface);
+    color: var(--color-text);
+    font-family: var(--font-family-base);
     user-select: none;
-    font-family: 'Vazir', 'Vazirmatn', sans-serif;
 }
 
-
-#vue-cal-table {
-    width: calc(100% - 2rem);
-    border-spacing: 0;
-    text-align: center;
-    margin: 0 auto 1rem;
-}
-
-
-#vue-cal-table th {
-    cursor: pointer;
-    background: dodgerblue;
-    border: 1px solid navy;
-    border-right: 0;
-    color: white;
-    width: calc(100% / 7);
-}
-
-
-#vue-cal-table td, #vue-cal-table th {
-    font-size: 22px;
-    padding: 1rem;
-}
-
-#vue-cal-table th:first-child, #vue-cal-table td:first-child {
-    border-right: 1px solid navy;
-}
-
-#vue-cal-table td {
-    border: 1px solid navy;
-    border-right: 0;
-    border-top: 0;
-    position: relative;
-    height: 4rem;
-    transition: 200ms;
-}
-
-
-#vue-cal-table td.selected-td {
-    background: rgba(144, 238, 144, 0.82);
-}
-
-#vue-cal-table td.selectable-td {
-    cursor: pointer;
+#vue-a1-calendar > .text-center {
+    color: var(--color-text-muted);
+    font-size: var(--font-size-sm);
 }
 
 .cal-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    margin: 1rem;
-    background: #00a2a2;
-    color: white;
-    border-radius: 5px;
+    margin: var(--spacing-md);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    background-color: var(--color-field);
+    color: var(--color-text);
 }
 
 .cal-grid div {
-    text-align: center;
-    padding: 1rem;
-    font-size: 25px;
     display: flex;
     align-items: center;
     justify-content: center;
+    padding: var(--spacing-sm);
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-semibold);
+    text-align: center;
 }
 
 .cal-grid svg {
-    width: 40px;
-    fill: white;
+    inline-size: 1.75rem;
+    fill: currentcolor;
 }
 
-.cal-grid div:first-child, .cal-grid div:last-child {
+.cal-grid div:first-child,
+.cal-grid div:last-child {
+    border-radius: var(--radius-md);
+    color: var(--color-text-muted);
     cursor: pointer;
 }
 
+.cal-grid div:first-child:hover,
+.cal-grid div:last-child:hover {
+    background-color: var(--color-hover);
+    color: var(--color-text);
+}
+
 .cal-grid input {
-    font-size: 25px;
-    text-align: center;
-    width: 100px;
-    background: transparent;
+    inline-size: 6rem;
+    padding-inline: var(--spacing-2xs);
     border: none;
+    border-radius: var(--radius-sm);
     outline: none;
-    color: white;
+    background: transparent;
+    color: var(--color-text);
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-semibold);
+    text-align: center;
+}
+
+.cal-grid div:first-child:focus-visible,
+.cal-grid div:last-child:focus-visible,
+.cal-grid input:focus-visible,
+#vue-cal-table th:focus-visible,
+#vue-cal-table td:focus-visible {
+    outline: 2px solid var(--color-focus-ring);
+    outline-offset: 2px;
+}
+
+#vue-cal-table {
+    inline-size: calc(100% - 2rem);
+    margin: 0 auto var(--spacing-md);
+    border-collapse: separate;
+    border-spacing: var(--spacing-2xs);
+    text-align: center;
+}
+
+#vue-cal-table th {
+    inline-size: calc(100% / 7);
+    padding: var(--spacing-xs);
+    border-radius: var(--radius-md);
+    color: var(--color-text-muted);
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-semibold);
+    cursor: pointer;
+}
+
+#vue-cal-table th:hover {
+    background-color: var(--color-hover);
+    color: var(--color-text);
+}
+
+#vue-cal-table td {
+    position: relative;
+    block-size: 4rem;
+    padding: var(--spacing-xs);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    font-size: var(--font-size-lg);
+    font-variant-numeric: tabular-nums;
+    transition: background-color var(--duration-base) var(--easing-standard), color var(--duration-base) var(--easing-standard), border-color var(--duration-base) var(--easing-standard);
+}
+
+#vue-cal-table td:not(.selectable-td) {
+    border-color: transparent;
+}
+
+#vue-cal-table td.selectable-td {
+    background-color: var(--color-field);
+    cursor: pointer;
+}
+
+#vue-cal-table td.selectable-td:hover {
+    background-color: var(--color-hover);
+}
+
+#vue-cal-table td.selected-td {
+    border-color: var(--color-primary-edge);
+    background-color: var(--color-primary);
+    color: var(--color-text-on-primary);
+}
+
+#vue-cal-table td.selectable-td.selected-td:hover {
+    background-color: var(--color-primary-hover);
 }
 
 .a1-badge {
-    background: dodgerblue;
-    color: white;
-    border-radius: 3px;
     position: absolute;
-    left: 2px;
-    top: 2px;
-    font-size: 14px;
-    padding: 7px;
+    inset-block-start: var(--spacing-3xs);
+    inset-inline-end: var(--spacing-3xs);
+    padding: var(--spacing-3xs) var(--spacing-2xs);
+    border-radius: var(--radius-sm);
+    background-color: var(--color-accent-subtle);
+    color: var(--color-accent-text);
+    font-size: var(--font-size-xs);
+    line-height: var(--line-height-snug);
     opacity: .85;
-    transition: 400ms;
-}
-
-td.selectable-td:hover {
-    background: #11111111;
-}
-
-td.selectable-td.selected-td:hover {
-    background: rgba(25, 107, 73, .5) !important;
+    transition: opacity var(--duration-slow) var(--easing-standard);
 }
 
 td:hover .a1-badge {
     opacity: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    #vue-cal-table td,
+    .a1-badge {
+        transition: none;
+    }
 }
 </style>

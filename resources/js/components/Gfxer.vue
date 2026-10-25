@@ -242,93 +242,80 @@ export default {
 </script>
 
 <style scoped>
-#gfxer {
-
-}
-
-#mobile {
-    width: 400px;
-    height: 800px;
-    border-radius: 20px;
-    border: 4px solid gray;
-    background: #fff;
-    overflow-y: auto;
-}
-
-#m-content {
-    border-radius: 20px;
-    overflow: hidden;
-}
-
-#browser {
-    border-radius: 7px;
-    border: 4px solid silver;
-    min-height: 80vh;
-    background: #fff;
-    overflow-y: auto;
-    overflow-x: hidden;
-
-    #bar {
-        display: block;
-        background: silver;
-        position: relative;
-        text-align: center;
-        padding-top: 3px;
-
-        height: 30px;
-
-        &:before {
-            content: ' ';
-            width: 15px;
-            height: 15px;
-            border-radius: 50%;
-            background: red;
-            position: absolute;
-            top: 5px;
-            right: 5px;
-
-        }
-
-        &:after {
-            content: ' ';
-            width: 15px;
-            height: 15px;
-            border-radius: 50%;
-            background: #00d75c;
-            position: absolute;
-            top: 5px;
-            right: 35px;
-
-        }
-    }
+.item-gfx {
+    border-radius: var(--radius-md);
 }
 
 .item-gfx:hover {
-    background: #ffffff22;
+    background-color: var(--color-hover);
 }
 
-#items-icon {
-    text-align: center;
-
-    i {
-        font-size: 75px;
-    }
-
-    p {
-        text-align: justify;
-    }
-
-    .btn-read-more {
-        border: 1px solid gray;
-        display: block;
-        padding: 5px;
-        box-shadow: var(--shadow);
-    }
+.item-gfx .form-control-color {
+    inline-size: var(--control-height-md);
+    block-size: var(--control-height-xs);
+    padding: var(--spacing-3xs);
+    border: 1px solid var(--color-border-strong);
+    border-radius: var(--radius-md);
+    background-color: var(--color-field);
+    cursor: pointer;
 }
 
-#big-box {
-    margin-top: 1rem;
-    padding: 3rem;
+.item-gfx .form-control-color:focus-visible {
+    outline: 2px solid var(--color-focus-ring);
+    outline-offset: 2px;
+}
+
+#mobile {
+    inline-size: 400px;
+    block-size: 800px;
+    overflow-y: auto;
+    border: 4px solid var(--color-border-strong);
+    border-radius: var(--radius-xl);
+    background-color: var(--color-surface);
+    box-shadow: var(--shadow-md);
+}
+
+#browser {
+    min-block-size: 80vh;
+    overflow-x: hidden;
+    overflow-y: auto;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    background-color: var(--color-surface);
+    box-shadow: var(--shadow-sm);
+}
+
+#browser #bar {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    block-size: var(--control-height-xs);
+    border-block-end: 1px solid var(--color-border);
+    background-color: var(--color-field);
+    color: var(--color-text-muted);
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-medium);
+}
+
+#browser #bar::before,
+#browser #bar::after {
+    content: '';
+    position: absolute;
+    inset-block-start: calc(50% - 0.375rem);
+    inline-size: 0.75rem;
+    block-size: 0.75rem;
+    border-radius: var(--radius-full);
+}
+
+#browser #bar::before {
+    inset-inline-start: var(--spacing-sm);
+    background-color: var(--color-danger-dot);
+}
+
+#browser #bar::after {
+    inset-inline-start: calc(var(--spacing-sm) + 1.25rem);
+    background-color: var(--color-success-dot);
 }
 
 .diff {
@@ -337,7 +324,9 @@ export default {
 }
 
 .preview-frame {
-    height: 80vh;
-    width: 100%;
+    display: block;
+    inline-size: 100%;
+    block-size: 80vh;
+    border: 0;
 }
 </style>

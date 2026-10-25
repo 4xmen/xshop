@@ -67,6 +67,12 @@ export default {
 
 <style scoped>
 #slider-data {
-    padding: 1rem;
+    padding: var(--spacing-md);
+}
+
+#slider-data > .row:first-child {
+    color: var(--color-text-muted);
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-medium);
 }
 </style>

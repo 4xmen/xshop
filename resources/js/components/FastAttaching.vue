@@ -264,50 +264,71 @@ export default {
 }
 </script>
 <style scoped>
-#fast-attaching {
-
-}
-
 #new-attach {
     position: absolute;
-    inset-inline-end: 80px;
-    top: 0;
-    padding: 5px;
-    background: rgba(8, 255, 0, 0.2);
-    font-size: 30px;
-    border-radius: 0 0 7px 7px;
+    inset-block-start: 0;
+    inset-inline-end: calc(var(--spacing-xl) + var(--control-height-sm) + var(--spacing-xs));
+    display: grid;
+    place-items: center;
+    inline-size: var(--control-height-sm);
+    block-size: var(--control-height-sm);
+    border: 1px solid var(--color-border);
+    border-block-start: 0;
+    border-radius: 0 0 var(--radius-md) var(--radius-md);
+    background-color: var(--color-success-subtle);
+    color: var(--color-success-text);
+    font-size: 1.25rem;
     cursor: pointer;
+}
 
-    &:hover {
-        background: rgba(8, 255, 0, 0.4);
-    }
+#new-attach:hover {
+    border-color: var(--color-success-text);
+}
+
+#new-attach:focus-visible {
+    outline: 2px solid var(--color-focus-ring);
+    outline-offset: 2px;
 }
 
 #progress {
-    margin: 2rem 0;
-    border: 1px solid #ffffff22;
-    border-radius: 7px;
-    overflow: hidden;
-    text-align: center;
     position: relative;
+    isolation: isolate;
+    margin-block: var(--spacing-xl);
+    padding-block: var(--spacing-xs);
+    padding-inline: var(--spacing-md);
+    overflow: hidden;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    background-color: var(--color-field);
+    color: var(--color-text);
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-medium);
+    text-align: center;
 }
 
 #percent {
-    background: rgba(8, 255, 0, 0.4);
     position: absolute;
+    inset-block: 0;
     inset-inline-start: 0;
-    top: 0;
-    bottom: 0;
+    z-index: -1;
+    border-inline-end: 2px solid var(--color-success-dot);
+    background-color: var(--color-success-subtle);
+}
+
+#fast-attaching .badge.bg-success {
+    background-color: var(--color-success-subtle) !important;
+    color: var(--color-success-text);
 }
 
 .ri-shield-keyhole-line {
-    font-size: 24px;
     position: absolute;
-    top: -3px;
+    inset-block-start: -3px;
     display: inline-block;
+    color: var(--color-text-muted);
+    font-size: 1.5rem;
 }
 
 .lime {
-    color: lime;
+    color: var(--color-success-text);
 }
 </style>

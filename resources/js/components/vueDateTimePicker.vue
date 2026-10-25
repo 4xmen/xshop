@@ -909,92 +909,127 @@ export default {
 </script>
 
 <style scoped>
-
-
 #vue-datepicker {
-    font-size: 12pt;
     direction: ltr;
+    font-size: var(--font-size-md);
 }
 
 #dp-modal {
     position: fixed;
+    inset: 0;
+    z-index: var(--z-index-overlay);
+    background-color: var(--color-overlay);
 }
 
 #picker {
-    max-width: 400px;
-    min-height: 450px;
+    max-inline-size: 400px;
+    min-block-size: 450px;
     margin: calc(50vh - 225px) auto;
-    background: #ffffffdd;
-    backdrop-filter: blur(4px);
+    padding: var(--spacing-2xs);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    background-color: var(--color-surface-raised);
+    color: var(--color-text);
+    font-family: var(--font-family-base);
+    box-shadow: var(--shadow-lg);
     user-select: none;
-    color: black;
-    padding: 5px;
-    font-family: 'Vazir', 'Vazirmatn', sans-serif;
 }
 
 #picker table {
-    border: 1px solid black;
-    width: 100%;
-    margin-top: 5px;
+    inline-size: 100%;
+    margin-block-start: var(--spacing-2xs);
+    border-collapse: separate;
+    border-spacing: var(--spacing-3xs);
 }
 
-#picker table td, #picker table th {
-    border: 1px solid silver;
-    width: calc(100% / 7);
+#picker table td,
+#picker table th {
+    inline-size: calc(100% / 7);
     text-align: center;
-    padding: 7px;
-    transition: 500ms;
+}
+
+#picker table th {
+    padding: var(--spacing-2xs) var(--spacing-3xs);
+    color: var(--color-text-muted);
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-semibold);
+}
+
+#picker table td {
+    padding: var(--spacing-xs) var(--spacing-3xs);
+    border: 1px solid transparent;
+    border-radius: var(--radius-md);
+    font-variant-numeric: tabular-nums;
+    cursor: pointer;
+    transition: background-color var(--duration-fast) var(--easing-standard), color var(--duration-fast) var(--easing-standard);
 }
 
 #picker table td:hover {
-    background: deepskyblue;
-    cursor: pointer;
+    background-color: var(--color-hover);
 }
 
-#picker .next, #picker .previous {
-    color: gray;
+#picker table td.next,
+#picker table td.previous {
+    color: var(--color-text-disabled);
+}
+
+#picker table td.disabled-date {
+    background-color: var(--color-field);
+    color: var(--color-text-disabled);
+    text-decoration: line-through;
+}
+
+#picker table td.active-selected {
+    border-color: var(--color-primary-edge);
+    background-color: var(--color-primary);
+    color: var(--color-text-on-primary);
 }
 
 .equal-width {
     display: grid;
     grid-auto-columns: minmax(0, 1fr);
     grid-auto-flow: column;
+    gap: var(--spacing-3xs);
     text-align: center;
     cursor: pointer;
 }
 
 .equal-width div {
-    padding: .5rem 5px;
-    font-weight: 800;
+    padding: var(--spacing-xs) var(--spacing-2xs);
+    border-radius: var(--radius-md);
+    font-weight: var(--font-weight-semibold);
 }
 
 .equal-width div i {
-    font-size: 25px;
-}
-
-#bottom-bar {
-    display: grid;
-    grid-template-columns: 1fr 2fr 1fr;
-    text-align: center;
-}
-
-#bottom-bar > div {
-    padding: 7px 4px;
-}
-
-#vuejs-tabs {
-    border: 1px solid gray;
-    margin-bottom: .5rem;
+    font-size: 1.5rem;
 }
 
 .equal-width div:hover {
-    background: teal;
-    color: white;;
+    background-color: var(--color-hover);
+    color: var(--color-text);
 }
 
-.active-tab {
-    background: deepskyblue;
-    color: white;
+#vuejs-tabs {
+    margin-block-end: var(--spacing-xs);
+    padding: var(--spacing-3xs);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    background-color: var(--color-field);
+}
+
+#vuejs-tabs div {
+    border-radius: var(--radius-sm);
+    color: var(--color-text-muted);
+}
+
+#vuejs-tabs div:hover {
+    color: var(--color-text);
+}
+
+#vuejs-tabs .active-tab,
+#vuejs-tabs .active-tab:hover {
+    background-color: var(--color-primary-subtle);
+    color: var(--color-primary-text);
 }
 
 .vuejsbtn {
@@ -1003,16 +1038,13 @@ export default {
 
 #calendar-container {
     position: relative;
-    min-height: 285px;
+    min-block-size: 285px;
 }
 
 .sub-picker {
     position: absolute;
-    left: 0;
-    top: 0;
-    bottom: 0;
-    right: 0;
-    background: white;
+    inset: 0;
+    background-color: var(--color-surface-raised);
 }
 
 .month {
@@ -1023,20 +1055,49 @@ export default {
     padding: .97rem 0 !important;
 }
 
+#bottom-bar {
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+    margin-block-start: var(--spacing-2xs);
+    border-block-start: 1px solid var(--color-border);
+    text-align: center;
+}
+
+#bottom-bar > div {
+    padding: var(--spacing-xs) var(--spacing-2xs);
+}
+
 .vuejs-btn {
-    padding: 3px;
-    background: silver;
     display: block;
+    padding: var(--spacing-2xs);
+    border: 1px solid var(--color-border-strong);
+    border-radius: var(--radius-md);
+    background-color: transparent;
+    color: var(--color-text-muted);
     cursor: pointer;
 }
 
 .vuejs-btn:hover {
-    background: deepskyblue;
-    color: white;
+    background-color: var(--color-hover);
+    color: var(--color-text);
 }
 
 .vuejs-btn i {
-    font-size: 20px;
+    font-size: 1.25rem;
+}
+
+.vuejs-btn.active-selected {
+    border-color: var(--color-primary-edge);
+    background-color: var(--color-primary);
+    color: var(--color-text-on-primary);
+}
+
+.vuejs-btn:focus-visible,
+.equal-width div:focus-visible,
+#picker table td:focus-visible,
+.number-hours span i b:focus-visible {
+    outline: 2px solid var(--color-focus-ring);
+    outline-offset: 2px;
 }
 
 .centered {
@@ -1046,13 +1107,10 @@ export default {
 }
 
 .centered span {
-    margin-top: 6px;
     display: inline-block;
-}
-
-.active-selected {
-    background: teal;
-    color: yellow !important;
+    color: var(--color-text-muted);
+    font-size: var(--font-size-xs);
+    font-variant-numeric: tabular-nums;
 }
 
 #clock {
@@ -1061,158 +1119,170 @@ export default {
 
 #circle {
     position: absolute;
-    background: deepskyblue;
-    width: 6px;
-    height: 6px;
-    left: calc(50% - 3px);
-    top: calc(50% - 3px);
-    border-radius: 50%;
+    inset-inline-start: calc(50% - 3px);
+    inset-block-start: calc(50% - 3px);
     z-index: 5;
+    inline-size: 6px;
+    block-size: 6px;
+    border-radius: var(--radius-full);
+    background-color: var(--color-primary-text);
 }
 
 .wrapper {
     position: relative;
-    width: 255px;
-    height: 255px;
-    border-radius: 50%;
     display: flex;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
+    inline-size: 255px;
+    block-size: 255px;
+    border-radius: 50%;
 }
 
 .bar-seconds,
 .number-hours {
     position: absolute;
-    width: 100%;
-    height: 100%;
+    inline-size: 100%;
+    block-size: 100%;
     border-radius: 50%;
 }
 
 .bar-seconds span {
     position: absolute;
-    transform: rotate(calc(var(--index) * 6deg));
     inset: -20px;
     text-align: center;
+    transform: rotate(calc(var(--index) * 6deg));
     pointer-events: none;
 }
 
 .bar-seconds span i {
     display: inline-block;
-    width: 2px;
-    height: 12px;
-    background: deepskyblue;
+    inline-size: 2px;
+    block-size: 12px;
     border-radius: 2px;
-    box-shadow: 0 0 10px deepskyblue;
-    pointer-events: none;
+    background-color: var(--color-border-strong);
     font-style: normal;
+    pointer-events: none;
 }
 
 .bar-seconds span:nth-child(5n) i { /* 5n pour dire tout les mutliples de 5 */
-    width: 6px;
-    height: 18px;
+    inline-size: 6px;
+    block-size: 18px;
+    background-color: var(--color-text-muted);
     transform: translateY(1px);
 }
 
 .number-hours span {
     position: absolute;
-    transform: rotate(calc(var(--index) * 30deg));
     inset: 6px;
     text-align: center;
+    transform: rotate(calc(var(--index) * 30deg));
     pointer-events: none;
 }
 
 .number-hours span i {
-    font-size: 25px;
-    color: deepskyblue;
+    color: var(--color-text);
+    font-size: 1.125rem;
+    font-style: normal;
     transform: rotate(calc(var(--index) * -30deg));
     pointer-events: none;
-    font-style: normal;
 }
 
 .number-hours span i b {
-    text-decoration: none;
-    color: deepskyblue;
-    pointer-events: all;
-    display: inline-block;
-    width: 40px;
-    border-radius: 50%;
-    height: 40px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     box-sizing: border-box;
+    inline-size: 40px;
+    block-size: 40px;
     padding: 2px;
-    font-weight: 400;
+    border-radius: var(--radius-full);
+    color: var(--color-text);
+    font-weight: var(--font-weight-medium);
+    text-decoration: none;
+    pointer-events: all;
 }
 
 .number-hours span i b:hover {
-    background: teal;
-    color: white;
+    background-color: var(--color-hover);
+    color: var(--color-text);
+}
+
+.number-hours span i b.active-selected {
+    background-color: var(--color-primary);
+    color: var(--color-text-on-primary);
 }
 
 .hands-box {
     position: relative;
     display: flex;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
     pointer-events: none;
 }
 
 .hands-box .hand {
     position: absolute;
-    border-radius: 50%;
     display: flex;
     justify-content: center;
+    border-radius: 50%;
 }
 
 .hands-box .hand i {
     display: inline-block;
-    transform-origin: bottom;
     border-radius: 50%;
-    box-shadow: 0 0 10px deepskyblue;
+    transform-origin: bottom;
 }
 
 .hands-box .hours {
-    width: 180px;
-    height: 180px;
+    inline-size: 180px;
+    block-size: 180px;
 }
 
 .hands-box .hours i {
-    width: 8px;
-    height: 90px;
-    background: deepskyblue;
+    inline-size: 8px;
+    block-size: 90px;
+    background-color: var(--color-text);
 }
 
 .hands-box .minutes {
-    width: 275px;
-    height: 275px;
+    inline-size: 275px;
+    block-size: 275px;
 }
 
 .hands-box .minutes i {
-    width: 6px;
-    height: 140px;
-    background: dodgerblue;
+    inline-size: 6px;
+    block-size: 140px;
     border-radius: 2px;
+    background-color: var(--color-primary-text);
 }
 
 #modes {
     position: absolute;
-    left: 5px;
-    top: 5px;
+    inset-inline-start: 5px;
+    inset-block-start: 5px;
 }
 
 #modes .vuejs-btn {
-    padding: 5px;
-    width: 40px;
+    inline-size: 40px;
+    margin-block-end: var(--spacing-2xs);
+    padding: var(--spacing-xs) var(--spacing-2xs);
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-semibold);
     text-align: center;
-    padding-top: 10px;
 }
 
 #time {
     position: absolute;
-    right: 5px;
-    top: 5px;
-    font-size: 25px;
+    inset-inline-end: 5px;
+    inset-block-start: 5px;
+    font-size: var(--font-size-xl);
+    font-weight: var(--font-weight-semibold);
+    font-variant-numeric: tabular-nums;
 }
 
-.disabled-date {
-    background: silver;
+@media (prefers-reduced-motion: reduce) {
+    #picker table td {
+        transition: none;
+    }
 }
 </style>

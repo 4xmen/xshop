@@ -168,38 +168,90 @@ export default {
 </script>
 
 <style scoped>
-#area-designer {
-
+#area-designer .card-header > .btn:first-of-type {
+    margin-inline-start: auto !important;
 }
 
-.selected-part {
-    background: #32CD3233;
-}
-
-.can-select {
-    cursor: pointer;
+.part-body {
+    padding: var(--spacing-md);
 }
 
 .rw {
     column-count: 3;
-
-    div {
-        margin-bottom: 1rem;
-    }
+    column-gap: var(--spacing-md);
 }
-.filter{
-    list-style: none;
-    display: flex;
-    justify-content: space-evenly;
-    li{
-        background: white;
-        color: black;
-        padding: 5px 10px;
-        border-radius: 5px;
 
-        &.active{
-            background: #2ec0ff;
-        }
-    }
+.rw div {
+    margin-block-end: var(--spacing-md);
+}
+
+.rw img {
+    border-radius: var(--radius-sm);
+}
+
+.selected-part,
+.can-select {
+    padding: var(--spacing-xs);
+    border: 1px solid transparent;
+    border-radius: var(--radius-md);
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-medium);
+    break-inside: avoid;
+}
+
+.selected-part {
+    border-color: var(--color-success-text);
+    background-color: var(--color-success-subtle);
+    color: var(--color-success-text);
+}
+
+.can-select {
+    color: var(--color-text-muted);
+    cursor: pointer;
+}
+
+.can-select:hover {
+    background-color: var(--color-hover);
+    color: var(--color-text);
+}
+
+.can-select:focus-visible,
+.filter li:focus-visible {
+    outline: 2px solid var(--color-focus-ring);
+    outline-offset: 2px;
+}
+
+.filter {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--spacing-xs);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.filter li {
+    display: inline-flex;
+    align-items: center;
+    min-block-size: var(--control-height-xs);
+    padding-inline: var(--spacing-sm);
+    border: 1px solid var(--color-border-strong);
+    border-radius: var(--radius-full);
+    color: var(--color-text-muted);
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-medium);
+    cursor: pointer;
+}
+
+.filter li:hover {
+    background-color: var(--color-hover);
+    color: var(--color-text);
+}
+
+.filter li.active {
+    border-color: transparent;
+    background-color: var(--color-primary-subtle);
+    color: var(--color-primary-text);
 }
 </style>

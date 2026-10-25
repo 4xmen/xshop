@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="row">
+    <div class="row report-page">
         <div class="col-md">
             <a href="?period=daily" class="col-md btn btn-secondary w-100">
                 {{__("Daily")}}

@@ -289,80 +289,117 @@ export default {
     position: relative;
     user-select: none;
     touch-action: none;
+}
 
-    #highlight {
-        position: absolute;
-        left: 0;
-        right: 0;
-        z-index: 3;
-        background: rgba(173, 255, 47, 0.44);
-        height: 45px;
-        top: 75px;
-    }
+.time-picker #vue-search-btn {
+    display: flex;
+    cursor: pointer;
+}
 
-    #tp {
-        position: absolute;
-        top: 100%;
-        width: 275px;
-        background: #282d46;
-        inset-inline-start: 0;
-        padding: 1rem;
+.time-picker #vue-search-btn .input-group-text {
+    min-block-size: var(--control-height-sm);
+    border-color: var(--color-border-strong);
+    border-start-end-radius: 0;
+    border-end-end-radius: 0;
+    background-color: var(--color-surface-raised);
+    color: var(--color-text-muted);
+    font-size: var(--font-size-md);
+}
 
-        border: 1px solid rgba(192, 192, 192, 0.46);
-        border-radius: 7px;
-        z-index: 3;
-        height: 200px;
-        overflow: hidden;
+.time-picker #vue-search-btn:hover .input-group-text {
+    background-color: var(--color-hover);
+    color: var(--color-text);
+}
 
-        .row {
-            position: relative;
-        }
+.time-picker .form-control[readonly] {
+    border-style: solid;
+    border-color: var(--color-border-strong);
+    color: var(--color-text);
+    font-variant-numeric: tabular-nums;
+    cursor: pointer;
+}
 
-        .col {
-            padding: 0;
-            position: relative;
-            z-index: 7;
+.time-picker .form-control[readonly]:focus {
+    border-color: var(--color-focus-ring);
+}
 
-            div {
-                height: 200px;
-                position: relative;
-                z-index: 4;
+.time-picker #highlight {
+    position: absolute;
+    inset-inline: var(--spacing-xs);
+    inset-block-start: 75px;
+    z-index: 3;
+    block-size: 45px;
+    border-radius: var(--radius-md);
+    background-color: var(--color-primary-subtle);
+}
 
-                ul {
-                    list-style: none;
-                    position: absolute;
+.time-picker #tp {
+    position: absolute;
+    inset-block-start: 100%;
+    inset-inline-start: 0;
+    z-index: var(--z-index-dropdown);
+    inline-size: 275px;
+    block-size: 200px;
+    padding: var(--spacing-md);
+    overflow: hidden;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    background-color: var(--color-surface-raised);
+    color: var(--color-text);
+    box-shadow: var(--shadow-md);
+}
 
-                    li {
-                        height: 25px;
-                    }
-                }
-            }
-        }
-    }
+.time-picker #tp .row {
+    position: relative;
+}
 
-    .active {
-        font-size: 30px;
-        height: 45px !important;
-    }
+.time-picker #tp .col {
+    position: relative;
+    z-index: 7;
+    padding: 0;
+}
 
-    .before {
-        opacity: .75;
-        transform: rotateX(-35deg);
-    }
+.time-picker #tp .col div {
+    position: relative;
+    z-index: 4;
+    block-size: 200px;
+}
 
-    .after {
-        opacity: .75;
-        transform: rotateX(+35deg);
-    }
+.time-picker #tp .col div ul {
+    position: absolute;
+    color: var(--color-text-muted);
+    list-style: none;
+}
 
-    .before2 {
-        opacity: .35;
-        transform: rotateX(-55deg);
-    }
+.time-picker #tp .col div ul li {
+    block-size: 25px;
+    font-variant-numeric: tabular-nums;
+}
 
-    .after2 {
-        opacity: .35;
-        transform: rotateX(+55deg);
-    }
+.time-picker .active {
+    block-size: 45px !important;
+    color: var(--color-primary-text);
+    font-size: 30px;
+    font-weight: var(--font-weight-semibold);
+}
+
+.time-picker .before {
+    opacity: .75;
+    transform: rotateX(-35deg);
+}
+
+.time-picker .after {
+    opacity: .75;
+    transform: rotateX(+35deg);
+}
+
+.time-picker .before2 {
+    opacity: .35;
+    transform: rotateX(-55deg);
+}
+
+.time-picker .after2 {
+    opacity: .35;
+    transform: rotateX(+55deg);
 }
 </style>

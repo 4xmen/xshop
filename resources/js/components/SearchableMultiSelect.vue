@@ -229,86 +229,146 @@ export default {
 </script>
 
 <style scoped>
-#searchable-select {
-
-}
-
 #vue-search-btn {
-    cursor: pointer;
+    display: flex;
     user-select: none;
 }
 
-#vue-search-btn:hover .input-group-text {
-    background: deepskyblue;
+#vue-search-btn .input-group-text {
+    min-block-size: var(--control-height-sm);
+    border-color: var(--color-border-strong);
+    border-start-end-radius: 0;
+    border-end-end-radius: 0;
+    background-color: var(--color-surface-raised);
+    color: var(--color-text-muted);
+    font-size: var(--font-size-md);
+    cursor: pointer;
 }
 
+#vue-search-btn .input-group-text:hover {
+    background-color: var(--color-hover);
+    color: var(--color-text);
+}
+
+#vue-search-btn .input-group-text:focus-visible {
+    position: relative;
+    z-index: 5;
+    outline: 2px solid var(--color-focus-ring);
+    outline-offset: 2px;
+}
 
 #ss-modal {
     position: fixed;
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    z-index: 999;
-    background: #00000033;
+    inset: 0;
+    z-index: var(--z-index-overlay);
+    background-color: var(--color-overlay);
     backdrop-filter: blur(4px);
     user-select: none;
 }
 
 #ss-selector {
-    height: 60vh;
-    border-radius: 7px;
-    min-width: 350px;
-    width: 400px;
-    max-width: 90%;
+    block-size: 60vh;
+    min-inline-size: 350px;
+    inline-size: 400px;
+    max-inline-size: 90%;
     margin: 20vh auto;
-    background: #282D47;
-    box-shadow: 0 0 4px gray;
-    padding: 5px;
+    padding: var(--spacing-2xs);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    background-color: var(--color-surface-raised);
+    color: var(--color-text);
+    box-shadow: var(--shadow-md);
 }
 
 #vue-search-list {
-    height: calc(60vh - 90px);
-    overflow-x: auto;
+    gap: var(--spacing-3xs);
+    block-size: calc(60vh - 90px);
+    overflow-y: auto;
 }
 
-#vue-search-list .list-group-item:hover, #vue-search-list .list-group-item.focused {
-    background: #6610F2;
+#vue-search-list .list-group-item {
+    display: flex;
+    align-items: center;
+    min-block-size: var(--control-height-xs);
+    padding-block: var(--spacing-2xs);
+    padding-inline: var(--spacing-sm);
+    border: 0;
+    border-radius: var(--radius-sm);
+    background-color: transparent;
+    color: var(--color-text);
+    font-size: var(--font-size-sm);
+    cursor: pointer;
+}
+
+#vue-search-list .list-group-item:hover,
+#vue-search-list .list-group-item.focused {
+    background-color: var(--color-hover);
+}
+
+#vue-search-list .list-group-item.focused {
+    box-shadow: inset 0 0 0 1px var(--color-border-strong);
 }
 
 #vue-search-list .list-group-item.selected {
-    background: darkred;
-    color: white;;
+    background-color: var(--color-primary-subtle);
+    color: var(--color-primary-text);
+    font-weight: var(--font-weight-medium);
 }
 
-#vue-search-list .list-group-item.selected:hover, #vue-search-list .list-group-item.selected.focused {
-    background: #6610F2 !important;
+#vue-search-list .list-group-item.selected.focused {
+    box-shadow: inset 0 0 0 1px var(--color-primary-text);
+}
+
+#vue-search-list .list-group-item:focus-visible {
+    outline: 2px solid var(--color-focus-ring);
+    outline-offset: 2px;
 }
 
 #vue-lst {
-    user-select: none;
-    white-space: nowrap;
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-2xs);
+    min-block-size: var(--control-height-sm);
+    padding-block: var(--spacing-2xs);
     overflow: hidden;
+    white-space: nowrap;
+    cursor: pointer;
+    user-select: none;
 }
 
 .tag-select {
-    display: inline-block;
-    padding: 0 4px 0 20px;
-    margin-right: 5px;
-    background: #282c34dd;
-    color: white;
-    position: relative;
-    border-radius: 3px;
+    display: inline-flex;
+    flex: none;
+    align-items: center;
+    gap: var(--spacing-3xs);
+    block-size: 1.5rem;
+    padding-inline: var(--spacing-xs) var(--spacing-3xs);
+    border-radius: var(--radius-full);
+    background-color: var(--color-primary-subtle);
+    color: var(--color-primary-text);
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-medium);
+    line-height: 1;
 }
 
 .tag-select i {
-    font-size: 20px;
-    position: absolute;
-    left: 0;
-    top: -5px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    inline-size: 1.125rem;
+    block-size: 1.125rem;
+    border-radius: var(--radius-full);
+    font-size: var(--font-size-sm);
+    cursor: pointer;
 }
 
 .tag-select i:hover {
-    color: red;
+    background-color: var(--color-primary);
+    color: var(--color-text-on-primary);
+}
+
+.tag-select i:focus-visible {
+    outline: 2px solid var(--color-focus-ring);
+    outline-offset: 2px;
 }
 </style>

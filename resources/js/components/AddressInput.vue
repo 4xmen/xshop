@@ -411,27 +411,48 @@ export default {
 
 <style scoped>
 #address-input {
-    padding: 0 .75rem 1rem;
+    padding-block: 0 var(--spacing-md);
+    padding-inline: var(--spacing-sm);
+}
+
+#address-input table td {
+    padding-block: var(--spacing-xs);
+    color: var(--color-text);
+    vertical-align: middle;
+}
+
+#address-input table tr + tr td {
+    border-block-start: 1px solid var(--color-border);
+}
+
+#address-input table + .btn {
+    margin-block-start: var(--spacing-xs);
 }
 
 #address-modal {
     position: fixed;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    top: 0;
-    backdrop-filter: blur(4px);
-    background: #ffffff33;
-    z-index: 9;
+    inset: 0;
+    z-index: var(--z-index-overlay);
     display: flex;
     align-items: center;
     justify-content: center;
+    padding: var(--spacing-md);
+    background-color: var(--color-overlay);
+    backdrop-filter: blur(4px);
 }
 
 #address-modal .card {
-    max-width: 900px;
-    width: 100%;
+    inline-size: 100%;
+    max-inline-size: 900px;
+    max-block-size: 100%;
+    overflow-y: auto;
+    border-color: var(--color-border);
+    background-color: var(--color-surface-raised);
+    box-shadow: var(--shadow-lg);
 }
 
-
+#address-modal label {
+    display: inline-block;
+    margin-block: var(--spacing-xs) var(--spacing-2xs);
+}
 </style>
