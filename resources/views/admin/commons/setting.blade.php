@@ -16,7 +16,7 @@
                         </h3>
                         <ul>
                             <li>
-                                {{__("Recommends")}}
+                                {{__("You can add some setting yourself from side panel")}}
                             </li>
                         </ul>
 

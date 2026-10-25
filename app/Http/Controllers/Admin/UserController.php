@@ -19,6 +19,8 @@ class UserController extends XController
 
     protected $searchable = ['name', 'mobile', 'email'];
 
+    protected $extra_cols = ['id'];
+
 
     protected const request = UserSaveRequest::class;
 
@@ -192,7 +194,7 @@ class UserController extends XController
 
     public function restore($item)
     {
-        return parent::restoreing(User::withTrashed()->where('email', $item)->first());
+        return parent::restoreing(User::withTrashed()->where('id', $item)->first());
     }
 
     public function switchTheme(){

@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class XLang extends Model
 {
-    use HasFactory,SoftDeletes;
+    use HasFactory, SoftDeletes;
 
     protected $table = 'xlangs';
 
@@ -20,6 +20,7 @@ class XLang extends Model
             return \Storage::url('langz/optimized-' . $this->img);
         }
     }
+
     public function imgOriginalUrl()
     {
         if ($this->img == null || $this->img == '') {
@@ -29,7 +30,8 @@ class XLang extends Model
         }
     }
 
-    public function getRouteKeyName(){
+    public function getRouteKeyName()
+    {
         return 'tag';
     }
 }
