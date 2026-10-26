@@ -27,8 +27,16 @@ jobs:
 #        run: rm composer.lock
       - name: Install Dependencies
         run: composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist --ignore-platform-reqs
+      - name: Debug PHP and Laravel
+        run: |
+          php -v
+          php --ini
+          php -m
+          composer --version
+          php artisan --version
+          ls -la .env
       - name: Generate key
-        run: php artisan key:generate
+        run: php artisan key:generate -vvv
       - name: Directory Permissions
         run: chmod -R 777 storage bootstrap/cache
       - name: Create Database
