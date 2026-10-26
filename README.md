@@ -97,7 +97,7 @@ php artisan seeding:all digital
 
 ## Requirements
 
-- PHP 8.2.x or above with extensions: `php-gd`, `sqlite3`, `php-soap`
+- PHP 8.4.x or above with extensions: `php-gd`, `sqlite3`, `php-soap`
 - MySQL, MariaDB, or SQLite
 - Composer
 - Recommended: Install ImageMagick on the server for better image performance

@@ -103,7 +103,7 @@ php artisan seeding:all digital
 
 ## ملزومات
 
-- php 8.2.x یا بالاتر با همراه افزونه‌ها [ `php-gd`, `sqlite3`, `php-soap`]
+- php 8.4.x یا بالاتر با همراه افزونه‌ها [ `php-gd`, `sqlite3`, `php-soap`]
 - mysql یا mariadb یا sqlite
 - composer
 - پیشنهاد می‌شود imagemagick برای افزایش راندمان تصاویر نصب کنید

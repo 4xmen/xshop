@@ -12,7 +12,7 @@
     "license": "GPL-3.0-or-later",
     "version": "3.5.0",
     "require": {
-        "php": "^8.3",
+        "php": "^8.4",
         "ext-dom": "*",
         "ext-zip": "*",
         "ext-gd": "*",
