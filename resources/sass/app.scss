@@ -1,79 +1,21 @@
-@use "sass:color";
-// Fonts
 @use 'vazirmatn/Vazirmatn-font-face.css';
-@use "remixicon/fonts/remixicon.css";
-@use "vue-toast-notification/dist/theme-bootstrap.css";
-// Variables
-@use 'panel/variables';
+@use 'remixicon/fonts/remixicon.css';
+@use 'vue-toast-notification/dist/theme-bootstrap.css';
 
-@use "panel/common";
-@use "panel/raw";
-@use "panel/fix";
-@use "panel/navbar";
-@use "panel/breadcrumbs";
-@use "panel/item-list";
-@use "panel/steps";
-@use "panel/light-theme";
-@use "panel/reports";
+@use 'panel/foundation/fonts';
+@use 'panel/foundation/root';
+@use 'panel/foundation/base';
 
+@use 'panel/components/button';
+@use 'panel/components/field';
+@use 'panel/components/card';
+@use 'panel/components/table';
+@use 'panel/components/overlays';
 
-// Bootstrap
-//@import 'bootstrap/scss/bootstrap';
+@use 'panel/layout/shell';
+@use 'panel/layout/breadcrumb';
+@use 'panel/layout/page';
 
-/* width */
-::-webkit-scrollbar {
-    width: 5px;
-}
-
-/* Track */
-::-webkit-scrollbar-track {
-    background: #282c34;
-}
-
-/* Handle */
-::-webkit-scrollbar-thumb {
-    background: var(--panel-primary);
-}
-
-/* Handle on hover */
-::-webkit-scrollbar-thumb:hover {
-    background: var(--bs-indigo);
-}
-
-*{
-    padding: 0;
-    margin: 0;
-    font-family: 'Vazirmatn', sans-serif;
-}
-html {
-    scroll-behavior: smooth;
-}
-body{
-    min-height: 100vh;
-    overflow-x: hidden;
-    cursor: default;
-}
-a{
-    text-decoration: none !important;
-}
-
-#panel{
-    display: grid;
-    grid-template-columns:50px 0 1fr;
-    transition: 400ms;
-    min-height: calc(100vh - 60px);
-
-    >aside{
-        background-image: url("../images/pattern.png");
-        background-color: var(--panel-lighter);
-        position: relative;
-    }
-    &.sided{
-        grid-template-columns:50px 250px 1fr;
-        #sidebar-panel{
-            display: block;
-        }
-    }
-}
-
-
+@use 'panel/pages/auth';
+@use 'panel/pages/dashboard';
+@use 'panel/pages/workflow';

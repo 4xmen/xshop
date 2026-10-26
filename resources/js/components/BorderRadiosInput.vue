@@ -101,24 +101,86 @@ export default {
 </script>
 
 <style scoped>
-#border-radios-input {
+#shadow-input .row {
+    align-items: center;
+}
 
+#shadow-input .text-end {
+    color: var(--color-text-muted);
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-medium);
+    font-variant-numeric: tabular-nums;
 }
 
 .cir-btn {
-    background: transparent;
-    font-size: 17px;
-    border: 1px solid gray;
-    width: 35px;
-    height: 35px;
     display: inline-flex;
-    justify-content: center;
     align-items: center;
-    border-radius: 50%;
-    padding-top: 3px;
+    justify-content: center;
+    inline-size: var(--control-height-xs);
+    block-size: var(--control-height-xs);
+    padding: 0;
+    border: 1px solid var(--color-border-strong);
+    border-radius: var(--radius-full);
+    background-color: transparent;
+    color: var(--color-text-muted);
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-medium);
+    cursor: pointer;
+}
 
-    &.active {
-        background: darkred;
-    }
+.cir-btn:hover {
+    background-color: var(--color-hover);
+    color: var(--color-text);
+}
+
+.cir-btn.active {
+    border-color: var(--color-primary-edge);
+    background-color: var(--color-primary);
+    color: var(--color-text-on-primary);
+}
+
+.cir-btn:focus-visible {
+    outline: 2px solid var(--color-focus-ring);
+    outline-offset: 2px;
+}
+
+.form-range::-webkit-slider-runnable-track {
+    background-color: var(--color-field);
+    box-shadow: inset 0 0 0 1px var(--color-border);
+}
+
+.form-range::-moz-range-track {
+    background-color: var(--color-field);
+    box-shadow: inset 0 0 0 1px var(--color-border);
+}
+
+.form-range::-webkit-slider-thumb {
+    background-color: var(--color-primary-text);
+}
+
+.form-range::-webkit-slider-thumb:active {
+    background-color: var(--color-primary-hover);
+}
+
+.form-range::-moz-range-thumb {
+    background-color: var(--color-primary-text);
+}
+
+.form-range::-moz-range-thumb:active {
+    background-color: var(--color-primary-hover);
+}
+
+.form-range:focus::-webkit-slider-thumb {
+    box-shadow: none;
+}
+
+.form-range:focus::-moz-range-thumb {
+    box-shadow: none;
+}
+
+.form-range:focus-visible {
+    border-radius: var(--radius-sm);
+    outline: 2px solid var(--color-focus-ring);
+    outline-offset: 2px;
 }
 </style>

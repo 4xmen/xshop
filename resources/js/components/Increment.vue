@@ -93,18 +93,26 @@ export default {
 
 #inc .form-control {
     border-radius: 0;
+    font-variant-numeric: tabular-nums;
     text-align: center;
 }
 
-#inc div:first-child {
-    border-top-right-radius: 0;
-    border-bottom-right-radius: 0;
+#inc .form-control:focus {
+    position: relative;
+    z-index: 1;
+}
+
+#inc .btn {
     user-select: none;
 }
 
-#inc div:last-child {
-    border-top-left-radius: 0;
-    border-bottom-left-radius: 0;
-    user-select: none;
+#inc .btn:first-child {
+    border-start-end-radius: 0;
+    border-end-end-radius: 0;
+}
+
+#inc .btn:last-child {
+    border-start-start-radius: 0;
+    border-end-start-radius: 0;
 }
 </style>

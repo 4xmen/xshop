@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="row">
+    <div class="row report-page">
 
         <form action="" method="get">
 {{--            @foreach (request()->query() as $key => $value)--}}

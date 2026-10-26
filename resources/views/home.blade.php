@@ -1,136 +1,124 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container-fluid">
-        <div class="row equal-height">
-            <div class="col-lg-6 p-0 pe-lg-2 mb-3">
-                <div class="card skewed-container">
-                    <i class="ri-user-follow-line skewed-icon"></i>
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-3 text-center">
-                                <img src="{{auth()->user()->avatar()}}" class="avatar-x64" alt="avatar">
-                            </div>
-                            <div class="col-9 pt-1">
-                                {{__("Welcome back")}}
-                                <h4 class="mt-2">
-                                    {{auth()->user()->name}}
-                                </h4>
-                            </div>
-                            <div class="p-4">
-                                <div class="row text-center">
-                                    <div class="col-6 mt-3">
-                                        <h5>
-                                            {{__("Posts")}}
-                                        </h5>
-                                        {{number_format(auth()->user()->posts()->count())}}
-                                        <div class="progress" role="progressbar" style="height: 3px">
-                                            <div class="progress-bar"
-                                                 style="width: {{auth()->user()->postsPercent()}}%"></div>
-                                        </div>
-                                    </div>
-                                    <div class="col-6 mt-3">
-                                        <h5>
-                                            {{__("Products")}}
-                                        </h5>
-                                        {{number_format(auth()->user()->products()->count())}}
-                                        <div class="progress" role="progressbar" style="height: 3px">
-                                            <div class="progress-bar bg-warning"
-                                                 style="width: {{auth()->user()->productsPercent()}}%"></div>
-                                        </div>
-                                    </div>
-                                    <div class="col-6 mt-3">
-                                        <h5>
-                                            {{__("Comments")}}
-                                        </h5>
-                                        {{number_format(auth()->user()->comments()->count())}}
-                                        <div class="progress" role="progressbar" style="height: 3px">
-                                            <div class="progress-bar bg-danger"
-                                                 style="width: {{auth()->user()->commentsPercent()}}%"></div>
-                                        </div>
-                                    </div>
-                                    <div class="col-6 mt-3">
-                                        <h5>
-                                            {{__("Tickets")}}
-                                        </h5>
-                                        {{number_format(auth()->user()->tickets()->count())}}
-                                        <div class="progress" role="progressbar" style="height: 3px">
-                                            <div class="progress-bar bg-success"
-                                                 style="width: {{auth()->user()->ticketsPercent()}}%"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+    <div class="dash">
+        <div class="dash__top">
+            <section class="dash-card dash-welcome">
+                <div class="dash-welcome__head">
+                    <img src="{{auth()->user()->avatar()}}" class="avatar-x64" alt="avatar">
+                    <div>
+                        <span class="dash-welcome__eyebrow">
+                            {{__("Welcome back")}}
+                        </span>
+                        <h4 class="dash-welcome__name">
+                            {{auth()->user()->name}}
+                        </h4>
+                    </div>
+                </div>
+                <ul class="dash-welcome__stats">
+                    <li class="dash-metric">
+                        <h5 class="dash-metric__label">
+                            {{__("Posts")}}
+                        </h5>
+                        <span class="dash-metric__value">
+                            {{number_format(auth()->user()->posts()->count())}}
+                        </span>
+                        <div class="progress" role="progressbar" style="height: 3px">
+                            <div class="progress-bar"
+                                 style="width: {{auth()->user()->postsPercent()}}%"></div>
                         </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 p-0 px-lg-2 mb-3">
-                <div class="card order-card h-100">
-                    <div class="card-header">
+                    </li>
+                    <li class="dash-metric">
+                        <h5 class="dash-metric__label">
+                            {{__("Products")}}
+                        </h5>
+                        <span class="dash-metric__value">
+                            {{number_format(auth()->user()->products()->count())}}
+                        </span>
+                        <div class="progress" role="progressbar" style="height: 3px">
+                            <div class="progress-bar bg-warning"
+                                 style="width: {{auth()->user()->productsPercent()}}%"></div>
+                        </div>
+                    </li>
+                    <li class="dash-metric">
+                        <h5 class="dash-metric__label">
+                            {{__("Comments")}}
+                        </h5>
+                        <span class="dash-metric__value">
+                            {{number_format(auth()->user()->comments()->count())}}
+                        </span>
+                        <div class="progress" role="progressbar" style="height: 3px">
+                            <div class="progress-bar bg-danger"
+                                 style="width: {{auth()->user()->commentsPercent()}}%"></div>
+                        </div>
+                    </li>
+                    <li class="dash-metric">
+                        <h5 class="dash-metric__label">
+                            {{__("Tickets")}}
+                        </h5>
+                        <span class="dash-metric__value">
+                            {{number_format(auth()->user()->tickets()->count())}}
+                        </span>
+                        <div class="progress" role="progressbar" style="height: 3px">
+                            <div class="progress-bar bg-success"
+                                 style="width: {{auth()->user()->ticketsPercent()}}%"></div>
+                        </div>
+                    </li>
+                </ul>
+            </section>
+            <section class="dash-card dash-action dash-action--orders">
+                <a href='{{route('admin.invoice.index')}}?filter%5Bstatus%5D=%5B"PAID"%5D'>
+                    <span class="dash-action__label">
                         {{__("Need process orders")}}
-                    </div>
-                    <div class="card-body">
-                        <a href='{{route('admin.invoice.index')}}?filter%5Bstatus%5D=%5B"PAID"%5D'>
-                            <i class="ri-shopping-bag-4-line"></i>
-                            <h2>
-                                {{number_format(\App\Models\Invoice::where('status','PAID')->count())}}
-                            </h2>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 p-0 ps-lg-2 mb-3">
-                <div class="card ticket-card h-100">
-                    <div class="card-header">
+                    </span>
+                    <i class="ri-shopping-bag-4-line"></i>
+                    <h2>
+                        {{number_format(\App\Models\Invoice::where('status','PAID')->count())}}
+                    </h2>
+                </a>
+            </section>
+            <section class="dash-card dash-action dash-action--tickets">
+                <a href='{{route('admin.ticket.index')}}?filter%5Bstatus%5D=%5B"PENDING"%5D'>
+                    <span class="dash-action__label">
                         {{__("Pending tickets")}}
-                    </div>
-                    <div class="card-body">
-                        <a href='{{route('admin.ticket.index')}}?filter%5Bstatus%5D=%5B"PENDING"%5D'>
-                            <i class="ri-customer-service-2-line"></i>
-                            <h2>
-                                {{number_format(\App\Models\Ticket::where('status','PENDING')->count())}}
-                            </h2>
-                        </a>
-                    </div>
-                </div>
-            </div>
+                    </span>
+                    <i class="ri-customer-service-2-line"></i>
+                    <h2>
+                        {{number_format(\App\Models\Ticket::where('status','PENDING')->count())}}
+                    </h2>
+                </a>
+            </section>
         </div>
-        <div class="row">
 
-            <div class="col-lg-12 mb-3 p-0" id="visitor-container">
-                <div class="card skewed-container">
-                    <i class="ri-bar-chart-box-line skewed-icon"></i>
-                    <div class="card-header">
-                        {{__("Last month visits")}}
-                    </div>
-                    <div class="card-body">
-                        <canvas id="visitor-chart"></canvas>
-                    </div>
+        <div id="visitor-container">
+            <div class="card dash-chart dash-chart--wide">
+                <div class="card-header">
+                    <i class="ri-bar-chart-box-line"></i>
+                    {{__("Last month visits")}}
+                </div>
+                <div class="card-body">
+                    <canvas id="visitor-chart"></canvas>
                 </div>
             </div>
         </div>
-        <div class="row">
-            <div class="col-lg-4 p-0 pe-lg-2 mb-3">
-                <div class="card skewed-container h-100">
-                    <i class="ri-computer-line skewed-icon"></i>
-                    <div class="card-header">
-                        {{__("Last month visitors devices")}}
-                    </div>
-                    <div class="card-body">
-                        <canvas id="visitor-device"></canvas>
-                    </div>
+
+        <div class="dash__charts">
+            <div class="card dash-chart">
+                <div class="card-header">
+                    <i class="ri-computer-line"></i>
+                    {{__("Last month visitors devices")}}
+                </div>
+                <div class="card-body">
+                    <canvas id="visitor-device"></canvas>
                 </div>
             </div>
-            <div class="col-lg-8 p-0 ps-lg-2 mb-3">
-                <div class="card skewed-container h-100">
-                    <i class="ri-shopping-bag-3-line skewed-icon"></i>
-                    <div class="card-header">
-                        {{__("Last week orders")}}
-                    </div>
-                    <div class="card-body">
-                        <canvas id="orders-chart"></canvas>
-                    </div>
+            <div class="card dash-chart">
+                <div class="card-header">
+                    <i class="ri-shopping-bag-3-line"></i>
+                    {{__("Last week orders")}}
+                </div>
+                <div class="card-body">
+                    <canvas id="orders-chart"></canvas>
                 </div>
             </div>
         </div>

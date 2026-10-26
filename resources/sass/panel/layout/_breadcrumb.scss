@@ -1,0 +1,73 @@
+@use '../tokens' as ds;
+
+#panel-breadcrumb {
+  margin-block-end: var(--spacing-lg);
+
+  ul {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--spacing-3xs);
+    padding: 0;
+    margin: 0;
+    list-style: none;
+  }
+
+  li {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--spacing-3xs);
+    color: var(--color-text-muted);
+    font-size: var(--font-size-sm);
+
+    + li::before {
+      content: '\ea6e';
+      color: var(--color-text-disabled);
+      font-family: 'remixicon';
+      font-size: 1rem;
+      line-height: 1;
+    }
+
+    a,
+    span {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--spacing-2xs);
+      color: var(--color-text-muted);
+    }
+
+    a {
+      min-block-size: var(--control-height-xs);
+      padding-inline: var(--spacing-xs);
+      border-radius: var(--radius-md);
+
+      &[href]:hover {
+        background-color: var(--color-hover);
+        color: var(--color-text);
+      }
+    }
+
+    i {
+      margin: 0;
+      font-size: 1rem;
+      line-height: 1;
+    }
+
+    &:last-child,
+    &:last-child a,
+    &:last-child span {
+      color: var(--color-text);
+      font-weight: var(--font-weight-medium);
+    }
+  }
+}
+
+[dir='rtl'] #panel-breadcrumb li + li::before {
+  content: '\ea64';
+}
+
+@media (max-width: 600px) {
+  #panel-breadcrumb li:not(:last-child) span {
+    display: none !important;
+  }
+}

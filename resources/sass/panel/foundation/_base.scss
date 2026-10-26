@@ -1,0 +1,195 @@
+@use '../tokens' as ds;
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
+  scroll-padding-block-start: calc(var(--topbar-height) + var(--spacing-md));
+}
+
+body {
+  min-block-size: 100vh;
+  overflow-x: hidden;
+  background-color: var(--color-background);
+  color: var(--color-text);
+  font-family: var(--font-family-base);
+  font-size: var(--font-size-sm);
+  line-height: var(--line-height-normal);
+  cursor: default;
+  -webkit-font-smoothing: antialiased;
+}
+
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: var(--color-text);
+  font-family: var(--font-family-base);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-snug);
+  letter-spacing: 0;
+}
+
+h1 {
+  font-size: var(--font-size-2xl);
+}
+
+h2 {
+  font-size: var(--font-size-xl);
+}
+
+h3 {
+  font-size: var(--font-size-lg);
+}
+
+h4 {
+  font-size: var(--font-size-md);
+}
+
+h5,
+h6 {
+  font-size: var(--font-size-sm);
+}
+
+a,
+a:visited {
+  color: var(--color-text);
+  text-decoration: none !important;
+
+  @include ds.transition(color, background-color, border-color);
+  @include ds.focus-ring;
+}
+
+a:hover {
+  color: var(--color-primary-text);
+}
+
+:where(button, [role='button'], input, select, textarea, summary, [tabindex]:not([tabindex='-1'])) {
+  @include ds.focus-ring;
+}
+
+code,
+kbd,
+samp,
+pre {
+  font-family: var(--font-family-mono);
+  font-size: 0.9em;
+}
+
+hr {
+  border: 0;
+  border-block-start: 1px solid var(--color-border);
+  opacity: 1;
+  margin-block: var(--spacing-md);
+}
+
+::selection {
+  background-color: var(--color-primary);
+  color: var(--color-text-on-primary);
+}
+
+::placeholder {
+  color: var(--color-text-disabled) !important;
+  opacity: 1;
+}
+
+:disabled,
+[aria-disabled='true'] {
+  cursor: not-allowed;
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-border-strong) transparent;
+}
+
+::-webkit-scrollbar {
+  inline-size: 8px;
+  block-size: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  border: 2px solid transparent;
+  border-radius: var(--radius-full);
+  background: var(--color-border-strong);
+  background-clip: padding-box;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: var(--color-text-muted);
+}
+
+.text-muted {
+  color: var(--color-text-muted) !important;
+}
+
+.text-primary {
+  color: var(--color-primary-text) !important;
+}
+
+.text-danger {
+  color: var(--color-danger-text) !important;
+}
+
+.text-info {
+  color: var(--color-info-text) !important;
+}
+
+.text-success {
+  color: var(--color-success-text) !important;
+}
+
+.text-warning {
+  color: var(--color-warning-text) !important;
+}
+
+.bg-primary {
+  background-color: var(--color-primary) !important;
+}
+
+.bg-success {
+  background-color: var(--color-success-dot) !important;
+}
+
+.bg-warning {
+  background-color: var(--color-warning-dot) !important;
+}
+
+.bg-danger {
+  background-color: var(--color-danger-dot) !important;
+}
+
+.border-warning {
+  border-color: var(--color-warning-dot) !important;
+}
+
+.border {
+  border-color: var(--color-border) !important;
+}
+
+.shadow-sm {
+  box-shadow: var(--shadow-sm) !important;
+}

@@ -144,11 +144,41 @@ export default {
 </script>
 
 <style scoped>
-.morph-selector {
-
+.morph-selector .list-group {
+    gap: var(--spacing-3xs);
+    padding: var(--spacing-2xs);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    background-color: var(--color-surface-raised);
+    box-shadow: var(--shadow-md);
 }
 
-.list-group-item.selected {
-    background: darkred;
+.morph-selector .list-group-item {
+    display: flex;
+    align-items: center;
+    min-block-size: var(--control-height-xs);
+    padding-block: var(--spacing-2xs);
+    padding-inline: var(--spacing-sm);
+    border: 0;
+    border-radius: var(--radius-sm);
+    background-color: transparent;
+    color: var(--color-text);
+    font-size: var(--font-size-sm);
+    cursor: pointer;
+}
+
+.morph-selector .list-group-item:hover {
+    background-color: var(--color-hover);
+}
+
+.morph-selector .list-group-item.selected {
+    background-color: var(--color-primary-subtle);
+    color: var(--color-primary-text);
+    font-weight: var(--font-weight-medium);
+}
+
+.morph-selector .list-group-item:focus-visible {
+    outline: 2px solid var(--color-focus-ring);
+    outline-offset: 2px;
 }
 </style>

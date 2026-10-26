@@ -1,0 +1,83 @@
+@use 'breakpoints' as bp;
+
+@mixin media-up($name) {
+  @media (min-width: bp.breakpoint($name)) {
+    @content;
+  }
+}
+
+@mixin media-down($name) {
+  @media (width < bp.breakpoint($name)) {
+    @content;
+  }
+}
+
+@mixin focus-ring($offset: 2px) {
+  &:focus-visible {
+    outline: 2px solid var(--color-focus-ring);
+    outline-offset: $offset;
+  }
+}
+
+@mixin visually-hidden {
+  position: absolute;
+  inline-size: 1px;
+  block-size: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+@mixin transition($properties...) {
+  transition-property: $properties;
+  transition-duration: var(--duration-base);
+  transition-timing-function: var(--easing-standard);
+
+  @media (prefers-reduced-motion: reduce) {
+    transition-duration: 1ms;
+  }
+}
+
+@mixin surface($padding: var(--spacing-lg)) {
+  padding: $padding;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  background-color: var(--color-surface);
+  box-shadow: var(--shadow-sm);
+}
+
+@mixin heading-bar {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  margin: 0;
+  padding-block: var(--spacing-md);
+  padding-inline: var(--spacing-lg);
+  border-block-end: 1px solid var(--color-border);
+  color: var(--color-text);
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-snug);
+  text-align: start;
+  background: none;
+
+  i {
+    color: var(--color-primary-text);
+    font-size: 1.25em;
+  }
+}
+
+@mixin icon-chip($fill: var(--color-primary-subtle), $text: var(--color-primary-text)) {
+  display: inline-grid;
+  flex: none;
+  place-items: center;
+  inline-size: 2.5rem;
+  block-size: 2.5rem;
+  border-radius: var(--radius-md);
+  background-color: $fill;
+  color: $text;
+  font-size: 1.25rem;
+}

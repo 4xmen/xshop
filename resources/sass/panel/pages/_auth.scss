@@ -1,0 +1,155 @@
+@use '../tokens' as ds;
+
+#webgl {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  inline-size: 100%;
+  block-size: 100vh;
+  outline: none;
+  background: transparent;
+  opacity: 0.35;
+}
+
+#raw {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  inline-size: 100%;
+  min-block-size: 100vh;
+  padding: var(--spacing-xl) var(--spacing-md);
+  background: radial-gradient(60rem 40rem at 50% -10%, color-mix(in srgb, var(--color-primary) 35%, transparent), transparent 70%);
+
+  > .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .forms {
+    inline-size: 100%;
+    max-inline-size: 26rem;
+    margin-inline: auto;
+  }
+
+  .forms.row {
+    max-inline-size: 30rem;
+
+    > [class*='col'] {
+      flex: 0 0 100%;
+      max-inline-size: 100%;
+    }
+  }
+
+  .card {
+    border-radius: var(--radius-xl);
+  }
+
+  .card-header {
+    justify-content: center;
+    padding-block: var(--spacing-lg) var(--spacing-md);
+    border-block-end: 0;
+    font-size: var(--font-size-xl);
+    font-weight: var(--font-weight-bold);
+  }
+
+  .card-body {
+    padding: var(--spacing-md) var(--spacing-xl) var(--spacing-xl);
+
+    > form > .row,
+    .row.mb-3,
+    .row.mb-0 {
+      --bs-gutter-x: 0;
+
+      margin-inline: 0;
+
+      > [class*='col-md'] {
+        flex: 0 0 100%;
+        max-inline-size: 100%;
+        margin-inline-start: 0;
+        text-align: start !important;
+      }
+    }
+
+    .col-form-label {
+      padding-block: 0 var(--spacing-2xs);
+    }
+
+    .btn-primary {
+      inline-size: 100%;
+      min-block-size: var(--control-height-md);
+      margin-block-start: var(--spacing-xs);
+    }
+  }
+
+  .form-control,
+  .input-group > .input-group-text {
+    min-block-size: var(--control-height-md);
+  }
+
+  .alert {
+    margin-block-end: var(--spacing-md) !important;
+  }
+
+  .alert code {
+    color: inherit;
+  }
+}
+
+#raw-form {
+  position: relative;
+  inline-size: 100%;
+  max-inline-size: 26rem;
+  margin: auto;
+  overflow: visible;
+}
+
+.auth-card__brand {
+  display: flex;
+  justify-content: center;
+  padding-block-start: var(--spacing-xl);
+}
+
+.xshop-raw-logo {
+  position: static;
+  display: block;
+  block-size: 4.5rem;
+  margin: 0 auto;
+  transform: none;
+}
+
+.auth-card__subtitle {
+  margin-block: calc(var(--spacing-xs) * -1) var(--spacing-md);
+  color: var(--color-text-muted);
+  text-align: center;
+}
+
+.auth-card__field + .auth-card__field {
+  margin-block-start: var(--spacing-md);
+}
+
+.auth-card__field .invalid-feedback {
+  display: flex;
+}
+
+.auth-card__options {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-xs);
+  margin-block: var(--spacing-md) var(--spacing-lg);
+
+  .btn-link {
+    min-block-size: var(--control-height-xs);
+    padding-inline: var(--spacing-xs);
+    font-size: var(--font-size-sm);
+  }
+}
+
+.auth-card__submit {
+  inline-size: 100%;
+  min-block-size: var(--control-height-md);
+  font-size: var(--font-size-md);
+}

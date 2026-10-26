@@ -325,43 +325,68 @@ export default {
 </script>
 
 <style scoped>
-#meta-input {
-
-}
-
-.color option {
-
+#meta-input select.color:has(+ .sq) {
+    padding-inline-end: calc(var(--spacing-xl) + 2rem);
 }
 
 .sq {
-    width: 37px;
-    height: 37px;
-    background: transparent;
-    border: 1px solid black;
     position: absolute;
-    inset-inline-end: 0;
-    top: 0;
-    border-radius: 4px;
+    inset-block-start: var(--spacing-xs);
+    inset-inline-end: var(--spacing-xl);
+    inline-size: 1.5rem;
+    block-size: 1.5rem;
+    border: 1px solid var(--color-border-strong);
+    border-radius: var(--radius-sm);
+    background: transparent;
+    pointer-events: none;
 }
 
-#img-modal{
+#img-modal {
     position: fixed;
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    background: #00000033;
-    backdrop-filter: blur(5px);
-    z-index: 10;
+    inset: 0;
+    z-index: var(--z-index-overlay);
+    background-color: var(--color-overlay);
+    backdrop-filter: blur(4px);
 }
 
-.img-index{
-    width: 100%;
-    height: 25vh;
-    min-height: 200px;
-    object-fit: cover;
+#img-modal .container {
+    max-block-size: 90vh;
+    overflow-y: auto;
+    padding: var(--spacing-md);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    background-color: var(--color-surface-raised);
+    box-shadow: var(--shadow-lg);
 }
-.selected-img{
-    background: darkred;
+
+#img-modal .row > div {
+    padding-block: var(--spacing-xs);
+    border-radius: var(--radius-lg);
+}
+
+.img-index {
+    inline-size: 100%;
+    block-size: 25vh;
+    min-block-size: 200px;
+    border-radius: var(--radius-md);
+    object-fit: cover;
+    cursor: pointer;
+}
+
+.img-index:hover {
+    opacity: 0.85;
+}
+
+.img-index:focus-visible {
+    outline: 2px solid var(--color-focus-ring);
+    outline-offset: 2px;
+}
+
+.selected-img {
+    background-color: var(--color-primary-subtle);
+}
+
+.selected-img .img-index {
+    box-shadow: 0 0 0 2px var(--color-primary-text);
 }
 </style>

@@ -7,25 +7,39 @@
             {{--  list side bar start--}}
             <div class="col-xl-3">
                 @include('components.err')
-                <div class="item-list mb-3">
-                    <div class="row">
-                        <div class="col-8">
-                            <h1>
-                                @yield('list-title')
-                            </h1>
+                <div class="item-list list-head mb-3">
+                    <div class="list-head__top">
+                        <h1>
+                            @yield('list-title')
+                        </h1>
+                        @if(hasRoute('trashed'))
+                            <a class="btn btn-outline-danger"
+                               data-bs-toggle="tooltip"
+                               data-bs-placement="top"
+                               data-bs-custom-class="custom-tooltip"
+                               data-bs-title="{{__("Trashed items")}}"
+                               href="{{getRoute('trashed')}}"
+                            >
+                                <i class="ri-delete-bin-6-line"></i>
+                            </a>
+                        @endif
+                    </div>
+                    <div class="list-head__stats">
+                        <div class="list-head__stat">
+                            <span>
+                                 {{__("Total")}}
+                            </span>
+                            <span>
+                                ({{$items->total()}})
+                            </span>
                         </div>
-                        <div class="col-4 pt-3 text-end">
-                            @if(hasRoute('trashed'))
-                                <a class="btn btn-outline-danger me-3"
-                                   data-bs-toggle="tooltip"
-                                   data-bs-placement="top"
-                                   data-bs-custom-class="custom-tooltip"
-                                   data-bs-title="{{__("Trashed items")}}"
-                                   href="{{getRoute('trashed')}}"
-                                >
-                                    <i class="ri-delete-bin-6-line"></i>
-                                </a>
-                            @endif
+                        <div class="list-head__stat">
+                            <span>
+                                 {{__("From - To")}}
+                            </span>
+                            <span>
+                                 @paginated($items)
+                            </span>
                         </div>
                     </div>
                     <form action="" class="p-3">
@@ -45,26 +59,6 @@
                 </div>
 
                 @yield('side-raw')
-
-                <div class="item-list mb-3 py-3">
-                    <div class="grid-equal text-center p-1">
-                        <span>
-                             {{__("Total")}}
-                        </span>
-                        <span>
-                            ({{$items->total()}})
-                        </span>
-                    </div>
-                    <hr>
-                    <div class="grid-equal text-center p-1">
-                        <span>
-                             {{__("From - To")}}
-                        </span>
-                        <span>
-                             @paginated($items)
-                        </span>
-                    </div>
-                </div>
 
                 @if(hasRoute('bulk'))
 

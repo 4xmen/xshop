@@ -189,54 +189,82 @@ export default {
 </script>
 
 <style scoped>
-#searchable-select {
-
-}
-
 #vue-search-btn {
+    display: flex;
     cursor: pointer;
     user-select: none;
 }
 
-#vue-search-btn:hover .input-group-text {
-    background: darkred;
+#vue-search-btn .input-group-text {
+    min-block-size: var(--control-height-sm);
+    border-color: var(--color-border-strong);
+    border-start-end-radius: 0;
+    border-end-end-radius: 0;
+    background-color: var(--color-surface-raised);
+    color: var(--color-text-muted);
+    font-size: var(--font-size-md);
 }
 
+#vue-search-btn:hover .input-group-text {
+    background-color: var(--color-hover);
+    color: var(--color-text);
+}
 
 #ss-modal {
     position: fixed;
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    z-index: 999;
-    background: #00000033;
+    inset: 0;
+    z-index: var(--z-index-overlay);
+    background-color: var(--color-overlay);
     backdrop-filter: blur(4px);
     user-select: none;
 }
 
 #ss-selector {
-    height: 60vh;
-    border-radius: 7px;
-    min-width: 350px;
-    width: 400px;
-    max-width: 90%;
+    block-size: 60vh;
+    min-inline-size: 350px;
+    inline-size: 400px;
+    max-inline-size: 90%;
     margin: 20vh auto;
-    background: #ffffff99;
-    padding: 5px;
+    padding: var(--spacing-2xs);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    background-color: var(--color-surface-raised);
+    color: var(--color-text);
+    box-shadow: var(--shadow-md);
 }
 
 #vue-search-list {
-    height: calc(60vh - 90px);
-    overflow-x: auto;
+    gap: var(--spacing-3xs);
+    block-size: calc(60vh - 90px);
+    overflow-y: auto;
+}
+
+#vue-search-list .list-group-item {
+    display: flex;
+    align-items: center;
+    min-block-size: var(--control-height-xs);
+    padding-block: var(--spacing-2xs);
+    padding-inline: var(--spacing-sm);
+    border: 0;
+    border-radius: var(--radius-sm);
+    background-color: transparent;
+    color: var(--color-text);
+    font-size: var(--font-size-sm);
+    cursor: pointer;
 }
 
 #vue-search-list .list-group-item:hover {
-    background: deepskyblue;
+    background-color: var(--color-hover);
 }
 
 #vue-search-list .list-group-item.selected {
-    background: dodgerblue;
-    color: white;;
+    background-color: var(--color-primary-subtle);
+    color: var(--color-primary-text);
+    font-weight: var(--font-weight-medium);
+}
+
+#vue-search-list .list-group-item:focus-visible {
+    outline: 2px solid var(--color-focus-ring);
+    outline-offset: 2px;
 }
 </style>

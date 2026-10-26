@@ -1,0 +1,17 @@
+@use 'sass:map';
+
+$breakpoints: (
+  'sm': 36rem,
+  'md': 48rem,
+  'lg': 62rem,
+  'xl': 75rem,
+  '2xl': 87.5rem,
+);
+
+@function breakpoint($name) {
+  @if not map.has-key($breakpoints, $name) {
+    @error 'Unknown breakpoint "#{$name}". Available: #{map.keys($breakpoints)}.';
+  }
+
+  @return map.get($breakpoints, $name);
+}

@@ -1,0 +1,196 @@
+@use '../tokens' as ds;
+
+@mixin variant($bg, $text, $edge, $hover-bg, $hover-text: $text, $hover-edge: $edge) {
+  --bs-btn-bg: #{$bg};
+  --bs-btn-color: #{$text};
+  --bs-btn-border-color: #{$edge};
+  --bs-btn-hover-bg: #{$hover-bg};
+  --bs-btn-hover-color: #{$hover-text};
+  --bs-btn-hover-border-color: #{$hover-edge};
+  --bs-btn-active-bg: #{$hover-bg};
+  --bs-btn-active-color: #{$hover-text};
+  --bs-btn-active-border-color: #{$hover-edge};
+  --bs-btn-disabled-bg: var(--color-field);
+  --bs-btn-disabled-color: var(--color-text-disabled);
+  --bs-btn-disabled-border-color: transparent;
+  --bs-btn-focus-shadow-rgb: 0, 0, 0;
+
+  i {
+    color: inherit !important;
+  }
+}
+
+.btn {
+  --bs-btn-padding-x: var(--spacing-md);
+  --bs-btn-padding-y: var(--spacing-2xs);
+  --bs-btn-font-size: var(--font-size-sm);
+  --bs-btn-font-weight: var(--font-weight-medium);
+  --bs-btn-line-height: var(--line-height-snug);
+  --bs-btn-border-radius: var(--radius-md);
+  --bs-btn-box-shadow: none;
+  --bs-btn-focus-box-shadow: none;
+  --bs-btn-disabled-opacity: 1;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-xs);
+  min-block-size: var(--control-height-sm);
+  letter-spacing: 0;
+  white-space: nowrap;
+
+  @include ds.transition(background-color, border-color, color, box-shadow);
+  @include ds.focus-ring;
+
+  &:focus-visible {
+    box-shadow: none;
+  }
+
+  i {
+    font-size: 1.15em;
+    line-height: 1;
+  }
+
+  &.w-100 {
+    display: flex;
+  }
+}
+
+.btn-sm {
+  --bs-btn-padding-x: var(--spacing-sm);
+  --bs-btn-font-size: var(--font-size-xs);
+  --bs-btn-border-radius: var(--radius-md);
+
+  min-block-size: var(--control-height-xs);
+}
+
+.btn-lg {
+  --bs-btn-padding-x: var(--spacing-xl);
+  --bs-btn-font-size: var(--font-size-md);
+
+  min-block-size: var(--control-height-md);
+}
+
+.btn-primary {
+  @include variant(var(--color-primary), var(--color-text-on-primary), var(--color-primary-edge), var(--color-primary-hover));
+}
+
+.btn-secondary,
+.btn-outline-secondary,
+.btn-outline-light,
+.btn-outline-dark,
+.btn-dark {
+  @include variant(transparent, var(--color-text), var(--color-border-strong), var(--color-hover), var(--color-text), var(--color-text-muted));
+}
+
+.btn-light {
+  @include variant(var(--color-field), var(--color-text), var(--color-border), var(--color-hover));
+
+  color: var(--color-text) !important;
+}
+
+.btn-outline-primary,
+.btn-info {
+  @include variant(var(--color-primary-subtle), var(--color-primary-text), transparent, var(--color-primary-subtle), var(--color-primary-text), var(--color-primary-text));
+}
+
+.btn-success,
+.btn-outline-success {
+  @include variant(var(--color-success-subtle), var(--color-success-text), transparent, var(--color-success-subtle), var(--color-success-text), var(--color-success-text));
+}
+
+.btn-warning {
+  @include variant(var(--color-warning-subtle), var(--color-warning-text), transparent, var(--color-warning-subtle), var(--color-warning-text), var(--color-warning-text));
+}
+
+.btn-danger {
+  @include variant(var(--color-danger), var(--color-text-on-danger), var(--color-danger), var(--color-danger));
+
+  &:hover {
+    filter: brightness(1.1);
+  }
+}
+
+.btn-outline-danger {
+  @include variant(var(--color-danger-subtle), var(--color-danger-text), transparent, var(--color-danger-subtle), var(--color-danger-text), var(--color-danger-text));
+}
+
+.btn-link {
+  @include variant(transparent, var(--color-primary-text), transparent, var(--color-primary-subtle));
+
+  --bs-btn-padding-x: var(--spacing-sm);
+
+  text-decoration: none;
+}
+
+.btn-close {
+  @include ds.focus-ring;
+}
+
+[data-bs-theme='dark'] .btn-close {
+  filter: invert(1) grayscale(100%) brightness(200%);
+}
+
+.circle-btn {
+  display: inline-grid;
+  place-items: center;
+  inline-size: var(--control-height-lg);
+  block-size: var(--control-height-lg);
+  padding: 0;
+  border: 1px solid var(--color-primary-edge);
+  border-radius: var(--radius-full);
+  background-color: var(--color-primary);
+  color: var(--color-text-on-primary);
+  box-shadow: var(--shadow-lg);
+  font-size: 1.5rem;
+  line-height: 1;
+  cursor: pointer;
+  user-select: none;
+
+  @include ds.transition(background-color, transform, box-shadow);
+  @include ds.focus-ring(3px);
+
+  i {
+    color: inherit;
+  }
+
+  &:hover,
+  &:focus-visible {
+    background-color: var(--color-primary-hover);
+    color: var(--color-text-on-primary);
+  }
+
+  &:active {
+    transform: scale(0.96);
+  }
+}
+
+a.circle-btn,
+a.circle-btn:visited,
+a.circle-btn:hover {
+  color: var(--color-text-on-primary);
+}
+
+.action-btn {
+  position: fixed;
+  inset-block-end: var(--spacing-lg);
+  inset-inline-start: calc(var(--rail-width) + var(--spacing-lg));
+  z-index: var(--z-index-sticky);
+
+  @include ds.media-up('lg') {
+    display: inline-flex;
+    gap: var(--spacing-xs);
+    inline-size: auto;
+    block-size: var(--control-height-md);
+    padding-inline: var(--spacing-md) var(--spacing-lg);
+    font-size: 1.25rem;
+
+    &[data-bs-title]::after {
+      content: attr(data-bs-title);
+      font-family: var(--font-family-base);
+      font-size: var(--font-size-sm);
+      font-weight: var(--font-weight-semibold);
+      white-space: nowrap;
+    }
+  }
+}

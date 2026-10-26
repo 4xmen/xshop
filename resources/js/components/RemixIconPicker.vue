@@ -3325,76 +3325,96 @@ export default {
 </script>
 
 <style scoped>
-#remix-icon-picker {
-}
-
 #icon-dropdown {
-    min-height: 45px;
-    padding-right: 2rem;
-    padding-left: 2rem;
+    min-block-size: var(--control-height-sm);
+    padding-inline: var(--spacing-xl);
 }
 
 #icon-dropdown i {
-    font-size: 20px;
+    font-size: 1.25rem;
 }
 
 #ri-modal {
     position: fixed;
+    inset: 0;
+    z-index: var(--z-index-overlay);
     display: none;
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    z-index: 999;
-    background: #00000033;
+    background-color: var(--color-overlay);
     backdrop-filter: blur(4px);
 }
 
 #ri-selector {
-    height: 90vh;
-    border-radius: 7px;
-    width: 80%;
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-xs);
+    block-size: 90vh;
+    inline-size: 80%;
     margin: 5vh auto;
-    background: #00000099;
-    padding: 5px;
+    padding: var(--spacing-md);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    background-color: var(--color-surface-raised);
+    color: var(--color-text);
+    box-shadow: var(--shadow-lg);
+}
+
+#selected-icon {
+    display: flex;
+    flex: none;
+    align-self: center;
+    align-items: center;
+    justify-content: center;
+    inline-size: var(--control-height-md);
+    block-size: var(--control-height-md);
+    border-radius: var(--radius-md);
+    background-color: var(--color-primary-subtle);
+    color: var(--color-primary-text);
+    font-size: 1.75rem;
 }
 
 .ri-search-box {
-    padding: 7px 1rem;
+    flex: none;
 }
 
 .icon-list {
-    height: calc(80vh - 50px);
+    display: flex;
+    flex: 1 1 auto;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    justify-content: center;
+    gap: var(--spacing-2xs);
+    min-block-size: 0;
+    padding: var(--spacing-2xs);
     overflow-y: auto;
-    padding: 2px 7px;
-    text-align: center;
     user-select: none;
 }
 
 .icon-list i {
     display: inline-flex;
-    font-size: 25px;
-    padding: 7px;
-    transition: 200ms;
+    align-items: center;
+    justify-content: center;
+    inline-size: var(--control-height-sm);
+    block-size: var(--control-height-sm);
+    border-radius: var(--radius-md);
+    color: var(--color-text-muted);
+    font-size: 1.25rem;
+    cursor: pointer;
+    transition: background-color var(--duration-fast) var(--easing-standard), color var(--duration-fast) var(--easing-standard);
 }
 
 .icon-list i:hover {
-    background: #ffffff75;
-    transform: scale(1.75);
-    color: darkred;
-    cursor: pointer;
+    background-color: var(--color-hover);
+    color: var(--color-text);
 }
 
-#selected-icon {
-    font-size: 30px;
-    color: darkred;
-    width: 50px;
-    padding: 5px;
-    background: #000;
-    margin: auto;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 35px;
+.icon-list i:focus-visible {
+    outline: 2px solid var(--color-focus-ring);
+    outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .icon-list i {
+        transition: none;
+    }
 }
 </style>

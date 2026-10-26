@@ -1,0 +1,45 @@
+@use '../tokens' as ds;
+
+.card {
+  --bs-card-bg: var(--color-surface);
+  --bs-card-color: var(--color-text);
+  --bs-card-border-color: var(--color-border);
+  --bs-card-border-radius: var(--radius-lg);
+  --bs-card-inner-border-radius: calc(var(--radius-lg) - 1px);
+  --bs-card-cap-bg: transparent;
+  --bs-card-spacer-x: var(--spacing-lg);
+  --bs-card-spacer-y: var(--spacing-lg);
+  --bs-card-cap-padding-x: var(--spacing-lg);
+  --bs-card-cap-padding-y: var(--spacing-md);
+
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+  background-color: var(--color-surface);
+  background-image: none;
+  box-shadow: var(--shadow-sm);
+}
+
+.card-header {
+  @include ds.heading-bar;
+
+  font-size: var(--font-size-md);
+}
+
+.card-body {
+  color: var(--color-text);
+}
+
+.card-footer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--spacing-xs);
+  padding: var(--spacing-md) var(--spacing-lg);
+  border-block-start: 1px solid var(--color-border);
+  background: transparent;
+
+  .btn {
+    min-inline-size: 10rem;
+  }
+}
