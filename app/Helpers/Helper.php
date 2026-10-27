@@ -1634,6 +1634,55 @@ function getValidMarkup($markup, $keywords)
 }
 
 
+function humanValue($prop, $value): string
+{
+    switch ($prop->type) {
+        case 'color':
+            $color = is_string($value) && preg_match('/^#[0-9a-fA-F]{3,8}$/', $value)
+                ? $value
+                : 'transparent';
+            $html = "<div style='background: {$color}' class='color-bullet'> &nbsp; </div>";
+            break;
+
+        case 'checkbox':
+            $html = $value
+                ? '<i class="ri-checkbox-circle-line"></i>'
+                : '<i class="ri-close-circle-line"></i>';
+            break;
+
+        case 'select':
+        case 'singlemulti':
+            $options = $prop->datas ?? [];
+
+            if (is_array($value)) {
+                $labels = [];
+                foreach ($value as $v) {
+                    if (isset($options[$v])) {
+                        $labels[] = e($options[$v]);
+                    }
+                }
+                $html = $labels ? implode(', ', $labels) : '-';
+            } else {
+                $html = isset($options[$value]) ? e($options[$value]) : '-';
+            }
+            break;
+
+        default:
+            if (is_array($value)) {
+                $tags = array_map(fn ($v) => '<span class="meta-tag">' . e($v) . '</span>', $value);
+                $html = implode(' ', $tags);
+            } elseif ($value === null || $value === '') {
+                $html = '-';
+            } else {
+                $html = e($value);
+            }
+    }
+
+    $unit = trim((string) $prop->unit);
+
+    return $unit !== '' ? $html . ' ' . e($unit) : $html;
+}
+
 /**
  * check is markup input requst valid
  * use in request validator

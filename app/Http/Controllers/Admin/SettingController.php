@@ -33,7 +33,7 @@ class SettingController extends Controller
         $creators = Creator::all(['id', 'name'])->toArray();
         $creatorz = array_merge([['id' => 0, 'name' => __('All')]], $creators);
         return view('admin.commons.setting',
-            compact('settings', 'cats', 'groups', 'menus', 'catz', 'groupz', 'creators','creatorz'));
+            compact('settings', 'cats', 'groups', 'menus', 'catz', 'groupz', 'creators', 'creatorz'));
     }
 
     /**
@@ -53,9 +53,10 @@ class SettingController extends Controller
             abort(403, 'Forbidden in demo mode');
         }
         //
+
         $set = new Setting();
         $set->title = $request->title;
-        $set->key = $request->key;
+        $set->key = str_replace('_php', '', $request->key);
         $set->section = $request->section;
         $set->type = $request->type;
         $set->size = $request->size;
@@ -114,7 +115,8 @@ class SettingController extends Controller
         if (isset($files['file'])) {
             $format = getSetting('optimize');
             foreach ($files['file'] as $index => $file) {
-                if ($file->guessExtension() == 'php' || $file->clientExtension() == 'php') {
+                if ($file->guessExtension() == 'php' || $file->clientExtension() == 'php' ||
+                    str_ends_with($index, '_php') || str_ends_with($index, '.php')) {
                     continue;
                 }
                 if (($file->guessExtension() == 'jpg' || $file->guessExtension() == 'png') && ($index != 'site_image')) {
@@ -177,6 +179,6 @@ class SettingController extends Controller
         $creators = Creator::all(['id', 'name'])->toArray();
         $creatorz = array_merge([['id' => 0, 'name' => __('All')]], $creators);
         return view('admin.commons.live',
-            compact('settings', 'cats', 'groups', 'menus', 'catz', 'groupz','creators','creatorz'));
+            compact('settings', 'cats', 'groups', 'menus', 'catz', 'groupz', 'creators', 'creatorz'));
     }
 }

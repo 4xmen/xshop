@@ -32,8 +32,8 @@
 
 ## Documentation
 
-- [📄 **Full Documentation** 📄](https://4xmen.github.io/xshop/#/)
-- [🇮🇷 Persian README](README-fa.md)
+- [📄 **Full Documentation** 📄](https://4xmen.github.io/xshop-docs/)
+- [🇮🇷 Persian Documentation](https://4xmen.github.io/xshop-docs/fa)
 
 ## Installation [Development Mode]
 
@@ -180,9 +180,10 @@ php artisan build
 - `PartName.js`: JavaScript for the theme part
 - `screenshot.png`: Screenshot preview of the theme part
 
-## Demo
+[//]: # (## Demo)
 
-> Online demo available here: <a href="https://xshop.xstack.ir/login">https://xshop.xstack.ir/</a>
+[//]: # ()
+[//]: # (> Online demo available here: <a href="https://xshop.xstack.ir/login">https://xshop.xstack.ir/</a>)
 
 ## How to migrate from WordPress & WooCommerce to xShop?
 

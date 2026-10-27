@@ -32,8 +32,8 @@
 
 ## مستندات 
 
-- [📄 مستندات کامل 📄](https://4xmen.github.io/xshop/#/)
-- [🇺🇸 English read me](README.md)
+- [📄 مستندات کامل 📄](https://4xmen.github.io/xshop-docs/fa)
+- [🇺🇸 English read me](Documentation)
 
 ## نحوه نصب [ حالت توسعه دهنده ]
 
@@ -209,9 +209,10 @@ php artisan build
 - PartName.js: برای افزودن javascript
 - screenshot.png: و یک پیش‌نمایش از قسمت قالب
 
-## Demo / دمو
+[//]: # (## Demo / دمو)
 
-> برای دیدن یک دموی آنلاین : <a href="https://xshop.xstack.ir/login">https://xshop.xstack.ir/</a>
+[//]: # ()
+[//]: # (> برای دیدن یک دموی آنلاین : <a href="https://xshop.xstack.ir/login">https://xshop.xstack.ir/</a>)
 
 
 ## چطور از وردپرس و ووکامرس به xshop مهاجرت کنیم؟

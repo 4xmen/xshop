@@ -312,60 +312,30 @@ class Product extends Model implements HasMedia
     public function fullMeta($limit = 99)
     {
         $metas = $this->getAllMeta()->toArray();
-        $result = [];
-        $i = 0;
-        foreach ($metas as $key => $value) {
-            $result[$key] = [
-                'value' => $value,
-                'data' => Prop::where('name', $key)->first(),
-            ];
-            switch ($result[$key]['data']['type']) {
-                case 'color':
-                    $result[$key]['human_value'] = "<div style='background:  $value' class='color-bullet'> &nbsp; </div>";
-                    break;
-                case 'checkbox':
-                    $result[$key]['human_value'] = $value ? '<i class="ri-checkbox-circle-line"></i>' : '<i class="ri-close-circle-line"></i>';
-                    break;
-                case 'select':
-                case 'singlemulti':
-                    if (!is_array($value)) {
-                        if (isset($result[$key]['data']->datas[$value])) {
-
-                            $result[$key]['human_value'] =
-                                $result[$key]['data']->datas[$value];
-                        } else {
-                            $result[$key]['human_value'] = '-';
-                        }
-                    } else {
-                        $result[$key]['human_value'] = '';
-                        foreach ($value as $k => $v) {
-                            $result[$key]['human_value'] = $result[$key]['data']->datas[$v] . ', ';
-                        }
-                        $result[$key]['human_value'] = trim($result[$key]['human_value'], ' ,');
-                    }
-                    break;
-                default:
-                    if (is_array($value)) {
-                        $result[$key]['human_value'] = '<span class="meta-tag">' . implode('</span> <span class="meta-tag">', $value) . '</span>';
-                    } else {
-                        if ($value == '' || $value == null) {
-                            $result[$key]['human_value'] = '-';
-                        } else {
-                            $result[$key]['human_value'] = $value;
-                        }
-                    }
-            }
-
-            $result[$key]['human_value'] .= ' ' . $result[$key]['data']['unit'];
+        if (empty($metas)) {
+            return [];
         }
 
-        usort($result, function ($a, $b) {
-            return $a['data']['sort'] - $b['data']['sort'];
-        });
+        // get all props in one query
+        $props = Prop::whereIn('name', array_keys($metas))->get()->keyBy('name');
 
-        $result = array_slice($result, 0, $limit);
+        $result = [];
+        foreach ($metas as $key => $value) {
+            $prop = $props->get($key);
+            if (!$prop) {
+                continue; // skip without error
+            }
 
-        return $result;
+            $result[$key] = [
+                'value'       => $value,
+                'data'        => $prop,
+                'human_value' => humanValue($prop, $value),
+            ];
+        }
+
+        usort($result, fn ($a, $b) => $a['data']->sort <=> $b['data']->sort);
+
+        return array_slice($result, 0, $limit);
     }
 
     public function webUrl()
