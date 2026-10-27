@@ -37,6 +37,8 @@
 
 ## Installation [Development Mode]
 
+> It is strongly recommended that you refer to the documentation for installation and setup. This is only a brief installation summary.
+
 > [!IMPORTANT]
 > Create a new database and rename `.env.example` to `.env`, then update your `.env` configurations. Run the following commands:
 
@@ -104,6 +106,8 @@ php artisan seeding:all digital
 
 ## Deployment Guide
 
+> It is strongly recommended that you refer to the documentation for installation and setup. This is only a brief installation summary.
+
 We recommend deploying xShop on a VPS. Create a database and run the following commands:
 
 ```bash
@@ -112,7 +116,7 @@ git clone https://github.com/4xmen/xshop.git .  # If this command doesn’t work
 cp .env.example .env
 nano .env # Edit your DB config, URL, etc.
 composer install
-php artisan migrate:fresh --seed
+php artisan migrate --seed
 php artisan storage:link
 php artisan key:generate
 pnpm install 

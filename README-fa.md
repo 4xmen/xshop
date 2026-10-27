@@ -35,6 +35,9 @@
 - [📄 مستندات کامل 📄](https://4xmen.github.io/xshop-docs/fa)
 - [🇺🇸 English read me](Documentation)
 
+
+> برای نصب و راه‌اندازی اکیداً توصیه می‌شود به مستندات مراجعه کنید، این فقط یک خلاصه از نصب است.
+
 ## نحوه نصب [ حالت توسعه دهنده ]
 
 > [!مهم]  
@@ -120,7 +123,7 @@ git clone  https://github.com/4xmen/xshop.git . # if this command not work make 
 cp .env.example .env
 nano .env # edit your config db, url, etc.
 composer install
-php artisan migrate:fresh --seed
+php artisan migrate --seed
 php artisan storage:link
 php key:generate
 pnpm install 

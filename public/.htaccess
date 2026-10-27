@@ -1,9 +1,16 @@
+
 <IfModule mod_rewrite.c>
     <IfModule mod_negotiation.c>
         Options -MultiViews -Indexes
     </IfModule>
 
     RewriteEngine On
+
+    # Block PHP execution in public/storage
+    RewriteRule ^storage/.*\.(php[0-9]*|phtml|phar)$ - [F,NC,L]
+
+    # Block PHP execution in public/upload
+    RewriteRule ^upload/.*\.(php[0-9]*|phtml|phar)$ - [F,NC,L]
 
     # Handle Authorization Header
     RewriteCond %{HTTP:Authorization} .
