@@ -11,6 +11,7 @@ use App\Models\Post;
 use App\Models\Menu;
 use App\Models\Product;
 use App\Models\Rate;
+use App\Models\Creator;
 use Illuminate\Support\Facades\Route;
 use GuzzleHttp\Client;
 
@@ -916,8 +917,13 @@ function getProductsQueryBySetting($key, $limit = 10)
     if ($data[0] == 0) {
         $q = Product::where('status', 1);
     } else {
-        $q = Category::with('products')->where('id', $data[0])->first()
-            ->products()->where('status', 1);
+        $q = Category::with('products')->where('id', $data[0])->first();
+        if ($q != null) {
+            $q = $q->products()->where('status', 1);
+        }
+    }
+    if ($q == null) {
+        return [];
     }
     return $q->orderBy($data[1], $data[2])->limit($limit)->get();
 }
@@ -934,8 +940,13 @@ function getPostsQueryBySetting($key, $limit = 10)
     if ($data[0] == 0) {
         $q = Post::where('status', 1);
     } else {
-        $q = Group::with('posts')->where('id', $data[0])->first()
-            ->posts()->where('status', 1);
+        $q = Group::with('posts')->where('id', $data[0])->first();
+        if ($q != null) {
+            $q = $q->posts()->where('status', 1);
+        }
+    }
+    if ($q == null) {
+        return [];
     }
     return $q->orderBy($data[1], $data[2])->limit($limit)->get();
 }
@@ -1610,7 +1621,31 @@ function fixShortCode($txt): string
  */
 function getCreatorSet($key, $limit = 4, $orderBy = 'sort', $asc = 'ASC')
 {
-    return \App\Models\Creator::with('products')->whereIn('id', json_decode(getSetting($key) ?? '[]'))->limit($limit)->orderBy($orderBy, $asc)->get();
+    $setting = getSetting($key);
+    $ids = json_decode($setting ?: '[]', true);
+
+    // Return an empty collection if the setting is invalid or contains no IDs.
+    if (!is_array($ids) || $ids === []) {
+        return collect();
+    }
+
+    // Keep only numeric IDs.
+    $ids = array_filter($ids, 'is_numeric');
+
+    if ($ids === []) {
+        return collect();
+    }
+
+    // Restrict dynamic SQL values to known-safe options.
+    $allowedOrderColumns = ['sort', 'id', 'name'];
+    $orderBy = in_array($orderBy, $allowedOrderColumns, true) ? $orderBy : 'sort';
+    $direction = strtoupper($asc) === 'DESC' ? 'DESC' : 'ASC';
+
+    return Creator::with('products')
+        ->whereIn('id', $ids)
+        ->orderBy($orderBy, $direction)
+        ->limit(max(0, (int) $limit))
+        ->get();
 }
 
 /**
