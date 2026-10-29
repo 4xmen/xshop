@@ -13,39 +13,50 @@ class CategorySeeder extends Seeder
      */
     public function run(): void
     {
-        //
-        $mainCategories = [
-            __("Mobile"),
-            __("Tablet"),
-            __("Desktop"),
-        ];
 
-        $subCats = [
-            1 => [
-                __("Smart phone"),
-                __("Basic phones"),
-            ],
-            3 => [
-                __("PC"),
-                __("Laptop"),
-            ],
-        ];
-
-        // insert main categories
-        foreach ($mainCategories as $category){
+        if (app()->environment('production')) {
             $c = new Category();
-            $c->name = $category;
-            $c->slug = sluger($category);
+            $c->name = __("First Category");
+            $c->slug = sluger('first-category');
             $c->save();
-        }
-        foreach ($subCats as $k => $categories){
-            foreach ($categories as $category){
+
+        } else {
+
+            //
+            $mainCategories = [
+                __("Mobile"),
+                __("Tablet"),
+                __("Desktop"),
+            ];
+
+            $subCats = [
+                1 => [
+                    __("Smart phone"),
+                    __("Basic phones"),
+                ],
+                3 => [
+                    __("PC"),
+                    __("Laptop"),
+                ],
+            ];
+
+            // insert main categories
+            foreach ($mainCategories as $category) {
                 $c = new Category();
                 $c->name = $category;
                 $c->slug = sluger($category);
-                $c->parent_id = $k ;
                 $c->save();
+            }
+            foreach ($subCats as $k => $categories) {
+                foreach ($categories as $category) {
+                    $c = new Category();
+                    $c->name = $category;
+                    $c->slug = sluger($category);
+                    $c->parent_id = $k;
+                    $c->save();
+                }
             }
         }
     }
+
 }

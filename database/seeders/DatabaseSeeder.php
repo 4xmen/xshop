@@ -28,6 +28,8 @@ class DatabaseSeeder extends Seeder
                     UserSeeder::class,
                     SettingSeeder::class,
                     GfxSeeder::class,
+                    GroupSeeder::class,
+                    CategorySeeder::class,
                     AreaSeeder::class,
                     MenuSeeder::class,
                     PartSeeder::class,
