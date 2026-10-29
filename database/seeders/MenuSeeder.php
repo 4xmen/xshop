@@ -17,36 +17,65 @@ class MenuSeeder extends Seeder
         //
         Menu::factory(['name' => 'main-menu'])->create();
 
-        Menu::first()->items()->createMany([
-           [
-               'title' => __("Home"),
-               'meta' => '/',
-               'user_id' => 1,
-               'kind'=>'direct',
-               'icon'=>'ri-home-2-line',
-           ],
-           [
-               'title' => __("News"),
-               'menuable_id' => 1,
-               'menuable_type' => Group::class,
-               'kind'=>'module',
-               'user_id' => 1,
-               'icon'=>'ri-news-line',
-           ],
-           [
-               'title' => __("Products"),
-               'meta' => '/products',
-               'user_id' => 1,
-               'kind'=>'direct',
-               'icon'=>'ri-barcode-line',
-           ],
-           [
-               'title' => __("Contact us"),
-               'meta' => '/contact-us',
-               'user_id' => 1,
-               'kind'=>'direct',
-               'icon'=>'ri-phone-line',
-           ],
-        ]);
+        if (app()->environment('production')) {
+            Menu::first()->items()->createMany([
+                [
+                    'title' => __("Home"),
+                    'meta' => '/',
+                    'user_id' => 1,
+                    'kind' => 'direct',
+                    'icon' => 'ri-home-2-line',
+                ],
+                [
+                    'title' => __("Products"),
+                    'meta' => '/products',
+                    'user_id' => 1,
+                    'kind' => 'direct',
+                    'icon' => 'ri-barcode-line',
+                ],
+                [
+                    'title' => __("Contact us"),
+                    'meta' => '/contact-us',
+                    'user_id' => 1,
+                    'kind' => 'direct',
+                    'icon' => 'ri-phone-line',
+                ],
+            ]);
+
+        } else {
+
+            Menu::first()->items()->createMany([
+                [
+                    'title' => __("Home"),
+                    'meta' => '/',
+                    'user_id' => 1,
+                    'kind' => 'direct',
+                    'icon' => 'ri-home-2-line',
+                ],
+                [
+                    'title' => __("News"),
+                    'menuable_id' => 1,
+                    'menuable_type' => Group::class,
+                    'kind' => 'module',
+                    'user_id' => 1,
+                    'icon' => 'ri-news-line',
+                ],
+                [
+                    'title' => __("Products"),
+                    'meta' => '/products',
+                    'user_id' => 1,
+                    'kind' => 'direct',
+                    'icon' => 'ri-barcode-line',
+                ],
+                [
+                    'title' => __("Contact us"),
+                    'meta' => '/contact-us',
+                    'user_id' => 1,
+                    'kind' => 'direct',
+                    'icon' => 'ri-phone-line',
+                ],
+            ]);
+        }
+
     }
 }

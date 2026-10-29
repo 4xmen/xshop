@@ -29,6 +29,7 @@ class DatabaseSeeder extends Seeder
                     SettingSeeder::class,
                     GfxSeeder::class,
                     AreaSeeder::class,
+                    MenuSeeder::class,
                     PartSeeder::class,
                 ]
             );
