@@ -198,7 +198,7 @@ class Post extends Model implements HasMedia
         $app = config('app.name');
         $logo = asset('upload/images/logo.png');
         $author = $this->author->name ?? $app;
-        $reviews = CommentMarkupCollection::collection($this->approvedComments)->toJson();
+        $comments = CommentMarkupCollection::collection($this->approvedComments)->toJson();
         $markup = <<<RESULT
 <script type="application/ld+json">
 {
@@ -232,7 +232,7 @@ class Post extends Model implements HasMedia
   "datePublished": "{$this->created_at}",
   "dateModified": "{$this->updated_at}",
   'inLanguage' => "{$lang}",
-  "review": $reviews
+  "comment": $comments
 }
 </script>
 RESULT;

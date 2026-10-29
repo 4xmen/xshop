@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\Http\Resources\CommentMarkupCollection;
+use App\Http\Resources\ReviewMarkupCollection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -455,7 +455,7 @@ class Product extends Model implements HasMedia
 
 
         $currency = config('app.currency.code');
-        $reviews = CommentMarkupCollection::collection($this->approvedComments)->toJson();
+        $reviews = ReviewMarkupCollection::collection($this->approvedComments)->toJson();
         $markup = <<<RESULT
 <script type="application/ld+json">
 {
