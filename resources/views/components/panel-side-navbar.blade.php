@@ -115,7 +115,7 @@
                 </ul>
             </li>
         @endif
-        @if(  auth()->user()->hasAnyAccesses(['post','group','adv','gallery','clip','attachment','story']) )
+        @if(  auth()->user()->hasAnyAccesses(['page','post','group','adv','gallery','clip','attachment','story']) )
             <li data-bs-toggle="tooltip" data-bs-placement="auto" data-bs-custom-class="custom-tooltip"
                 data-bs-title="{{__("Contents")}}">
                 <a href="#contents">
@@ -130,6 +130,14 @@
                             <a href="{{route('admin.post.index')}}">
                                 <i class="ri-megaphone-fill"></i>
                                 {{__('Post')}}
+                            </a>
+                        </li>
+                    @endif
+                    @if(  auth()->user()->hasAnyAccess( 'page' ))
+                        <li>
+                            <a href="{{route('admin.page.index')}}">
+                                <i class="ri-file-settings-line"></i>
+                                {{__('Pages')}}
                             </a>
                         </li>
                     @endif

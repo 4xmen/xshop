@@ -291,6 +291,19 @@ Route::prefix(config('app.panel.prefix'))->name('admin.')->group(
                         Route::get('group/edit/{id?}', [\App\Http\Controllers\Admin\PostController::class, 'groupEdit'])->name('group-edit');
                         Route::post('group/save/{item?}', [\App\Http\Controllers\Admin\PostController::class, 'groupSave'])->name('group-save');
                     });
+                Route::prefix('pages')->name('page.')->group(
+                    function () {
+                        Route::get('', [\App\Http\Controllers\Admin\PageController::class, 'index'])->name('index');
+                        Route::get('create', [\App\Http\Controllers\Admin\PageController::class, 'create'])->name('create');
+                        Route::post('store', [\App\Http\Controllers\Admin\PageController::class, 'store'])->name('store');
+                        Route::get('show/{item}', [\App\Http\Controllers\Admin\PageController::class, 'show'])->name('show');
+                        Route::get('edit/{item}', [\App\Http\Controllers\Admin\PageController::class, 'edit'])->name('edit');
+                        Route::post('update/{item}', [\App\Http\Controllers\Admin\PageController::class, 'update'])->name('update');
+                        Route::get('delete/{item}', [\App\Http\Controllers\Admin\PageController::class, 'destroy'])->name('destroy');
+                        Route::get('restore/{item}', [\App\Http\Controllers\Admin\PageController::class, 'restore'])->name('restore');
+                        Route::post('bulk', [\App\Http\Controllers\Admin\PageController::class, "bulk"])->name('bulk');
+                        Route::get('trashed', [\App\Http\Controllers\Admin\PageController::class, "trashed"])->name('trashed');
+                    });
                 Route::prefix('products')->name('product.')->group(
                     function () {
                         Route::get('', [\App\Http\Controllers\Admin\ProductController::class, 'index'])->name('index');
@@ -537,6 +550,7 @@ Route::middleware([\App\Http\Middleware\VisitorCounter::class])
         Route::prefix('credit')->name('credit.')->group(function () {
             Route::post('/charge', [\App\Http\Controllers\CreditController::class, 'chargeCredit'])->name('charge.process');
         });
+        Route::get('/{page?}', [ClientController::class, 'page'])->name('page');
     });
 
 

@@ -212,6 +212,16 @@ class PartSeeder extends Seeder
 
 
         $part = new Part();
+        $part->segment = 'page';
+        $part->part = 'SimplePage';
+        $part->area_id = Area::where('name', 'page')->first()->id;
+        $part->sort = 1;
+        $part->save();
+
+        // -------------------------------------------------------------
+
+
+        $part = new Part();
         $part->segment = 'clips_page';
         $part->part = 'ClipListGrid';
         $part->area_id = Area::where('name', 'clips-list')->first()->id;
