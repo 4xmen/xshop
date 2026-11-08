@@ -1,0 +1,27 @@
+.SimplePost {
+    // scss
+    h1{
+        font-size: 27px;
+        padding: 1rem;
+        color: var(--xshop-primary);
+
+        span{
+            font-size: 16px;
+            margin-top: 5px;
+            display: inline-block;
+        }
+    }
+
+    img{
+        max-height: 40vh;
+        width: 100%;
+        object-fit: cover;
+    }
+
+    .tag{
+        background: var(--xshop-primary);
+        padding: 3px .7rem;
+        color: var(--xshop-diff);
+        border-radius: var(--xshop-border-radius);
+    }
+}
