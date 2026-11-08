@@ -22,6 +22,7 @@ class Post extends Model implements HasMedia
     public $translatable = ['title', 'subtitle', 'body'];
 
 
+
     public function groups()
     {
         return $this->belongsToMany(Group::class);
@@ -142,7 +143,7 @@ class Post extends Model implements HasMedia
 
     public function approvedComments()
     {
-        return $this->morphMany(Comment::class, 'commentable');
+        return $this->morphMany(Comment::class, 'commentable')->where('status',1);
     }
 
     public function mainGroup()
