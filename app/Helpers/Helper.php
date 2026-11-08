@@ -8,6 +8,7 @@ use App\Models\Category;
 use App\Models\Area;
 use App\Models\Part;
 use App\Models\Post;
+use App\Models\Page;
 use App\Models\Menu;
 use App\Models\Product;
 use App\Models\Rate;
@@ -1535,7 +1536,7 @@ function getSubGroupSetting($key, $limit = 10, $order = 'id', $dir = "DESC")
 
 
 /**
- * get website main categories
+ * get website categories set
  * @param $key
  * @param $limit
  * @param $orderBy
@@ -1544,12 +1545,25 @@ function getSubGroupSetting($key, $limit = 10, $order = 'id', $dir = "DESC")
  */
 function getCategoriesSet($key, $limit = 4, $orderBy = 'sort', $asc = 'ASC')
 {
-    return Category::with('products')->whereIn('id', json_decode(getSetting($key) ?? []))->where('hide', 0)->limit($limit)->orderBy($orderBy, $asc)->get();
+    return Category::with('products')->whereIn('id', json_decode(getSetting($key) ?? '[]'))->where('hide', 0)->limit($limit)->orderBy($orderBy, $asc)->get();
+}
+
+/**
+ * get website main categories
+ * @param $key
+ * @param $limit
+ * @param $orderBy
+ * @param $asc
+ * @return Page[]|\LaravelIdea\Helper\App\Models\_IH_Category_C
+ */
+function getPagesSet($key, $limit = 4, $orderBy = 'sort', $asc = 'ASC')
+{
+    return Page::with('parent')->whereIn('id', json_decode(getSetting($key) ?? '[]'))->where('hide', 0)->limit($limit)->orderBy($orderBy, $asc)->get();
 }
 
 
 /**
- * get website main groups
+ * get website groups set
  * @param $key
  * @param $limit
  * @param $orderBy
@@ -1558,7 +1572,7 @@ function getCategoriesSet($key, $limit = 4, $orderBy = 'sort', $asc = 'ASC')
  */
 function getGroupsSet($key, $limit = 4, $orderBy = 'sort', $asc = 'ASC')
 {
-    return \App\Models\Group::with('posts')->whereIn('id', json_decode(getSetting($key) ?? []))->where('hide', 0)->limit($limit)->orderBy($orderBy, $asc)->get();
+    return \App\Models\Group::with('posts')->whereIn('id', json_decode(getSetting($key) ?? '[]'))->where('hide', 0)->limit($limit)->orderBy($orderBy, $asc)->get();
 }
 
 
@@ -1612,12 +1626,12 @@ function fixShortCode($txt): string
 }
 
 /**
- * get website main creators
+ * get website  creators set
  * @param $key
  * @param $limit
  * @param $orderBy
  * @param $asc
- * @return Group[]|\LaravelIdea\Helper\App\Models\_IH_Group_C
+ * @return Creator[]|\LaravelIdea\Helper\App\Models\_IH_Group_C
  */
 function getCreatorSet($key, $limit = 4, $orderBy = 'sort', $asc = 'ASC')
 {
