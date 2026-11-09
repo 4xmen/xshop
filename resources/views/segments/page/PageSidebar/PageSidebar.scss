@@ -1,0 +1,73 @@
+.PostSidebar {
+
+    h1 {
+        font-size: 27px;
+        padding: 1rem;
+        color: var(--xshop-primary);
+
+        span {
+            font-size: 16px;
+            margin-top: 5px;
+            display: inline-block;
+        }
+    }
+
+    img {
+        max-height: 40vh;
+        width: 100%;
+        object-fit: cover;
+    }
+
+    .tag {
+        background: var(--xshop-primary);
+        padding: 3px .7rem;
+        color: var(--xshop-diff);
+        border-radius: var(--xshop-border-radius);
+    }
+
+
+    aside{
+        h4{
+            padding: .5rem;
+            position: relative;
+            text-align: center;
+            font-weight: 300;
+            font-size: 20px;
+            &:after{
+                position: absolute;
+                content: ' ';
+                height: 1px;
+                width: 70%;
+                bottom: 0;
+                left: 15%;
+                right: 15%;
+                background: linear-gradient(90deg,#ffffff00 0%, var(--xshop-primary) 50%, #ffffff00 100%);
+            }
+        }
+    }
+
+    .recent{
+        padding: 0;
+        list-style: none;
+        margin-top: 1rem;
+        li{
+            min-height: 60px;
+            margin-bottom: 1rem;
+        }
+        img{
+            width: 48px;
+            height: 48px;
+            object-fit: cover;
+        }
+
+        p{
+            height: 1.2em;
+            overflow: hidden;
+        }
+
+        h6{
+            max-height: 2.2em;
+            overflow: hidden;
+        }
+    }
+}

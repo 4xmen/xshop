@@ -138,7 +138,7 @@
                         </div>
                         @if(isset($item))
                             <div class="col-12 mt-4">
-                                {{__("Shema markups")}}:
+                                {{__("Markup schema")}}:
                                 <code-editor
                                     value='{{base64_encode(old('markups', $item->markups)??'')}}'
                                     xname="markups"

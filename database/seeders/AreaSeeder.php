@@ -76,6 +76,16 @@ class AreaSeeder extends Seeder
                 'icon' => 'ri-file-text-line',
             ],
             [
+                'name' => 'page',
+                'valid_segments' => json_encode(
+                    ["top", "header", "footer", "menu",
+                        "parallax", "other", "post", "comments", "ads", "attachments"]
+                ),
+                'max' => 6,
+                'preview' => null,
+                'icon' => 'ri-file-settings-line',
+            ],
+            [
                 'name' => 'posts-list',
                 'valid_segments' => json_encode(
                     ["top", "header", "footer", "menu",

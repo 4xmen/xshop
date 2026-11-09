@@ -114,6 +114,18 @@
                 :xvalue='{{old($setting->key,$setting->value??[])}}'
                 :close-on-Select="true"></searchable-multi-select>
             @break
+        @case('PAGE_SET')
+            <searchable-multi-select
+                @error($setting->key) :err="true" @enderror
+            :items='@json($pages)'
+                title-field="title"
+                value-field="id"
+                xlang="{{config('app.locale')}}"
+                xid="{{$setting->key}}"
+                xname="{{$setting->key}}"
+                :xvalue='{{old($setting->key,$setting->value??[])}}'
+                :close-on-Select="true"></searchable-multi-select>
+            @break
         @case('CATEGORY_SET')
             <searchable-multi-select
                 @error($setting->key) :err="true" @enderror
