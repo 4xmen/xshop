@@ -12,7 +12,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::disableForeignKeyConstraints();
+        //Schema::disableForeignKeyConstraints();
         Schema::create('pages', function (Blueprint $table) {
             $table->id();
             $table->text('title');
@@ -29,7 +29,7 @@ return new class extends Migration
             $table->timestamps();
             $table->softDeletes();
 
-            $table->foreign('parent_id')->references('id')->on('pages')->onDelete('cascade');
+            //$table->foreign('parent_id')->references('id')->on('pages');
         });
 
 
