@@ -118,7 +118,7 @@
             <searchable-multi-select
                 @error($setting->key) :err="true" @enderror
             :items='@json($pages)'
-                title-field="name"
+                title-field="title"
                 value-field="id"
                 xlang="{{config('app.locale')}}"
                 xid="{{$setting->key}}"

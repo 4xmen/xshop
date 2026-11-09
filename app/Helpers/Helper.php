@@ -1556,9 +1556,9 @@ function getCategoriesSet($key, $limit = 4, $orderBy = 'sort', $asc = 'ASC')
  * @param $asc
  * @return Page[]|\LaravelIdea\Helper\App\Models\_IH_Category_C
  */
-function getPagesSet($key, $limit = 4, $orderBy = 'sort', $asc = 'ASC')
+function getPagesSet($key, $limit = 4, $orderBy = 'id', $asc = 'ASC')
 {
-    return Page::with('parent')->whereIn('id', json_decode(getSetting($key) ?? '[]'))->where('hide', 0)->limit($limit)->orderBy($orderBy, $asc)->get();
+    return Page::with('parent')->whereIn('id', json_decode(getSetting($key) ?? '[]'))->where('status', 1)->limit($limit)->orderBy($orderBy, $asc)->get();
 }
 
 
