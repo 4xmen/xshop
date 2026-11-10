@@ -35,8 +35,22 @@ return new class extends Migration
 
         if (version_compare(config('app.version'), '3.6.0', '<=')) {
             Schema::table('settings', function (Blueprint $table) {
-                $table->enum('type', \App\Models\Setting::$settingTypes)->change();
+                if (DB::connection()->getDriverName() !== 'pgsql') {
+                    $table->enum('type', \App\Models\Setting::$settingTypes)->change();
+                }
             });
+
+            if (DB::connection()->getDriverName() === 'pgsql') {
+                DB::statement('ALTER TABLE settings DROP CONSTRAINT IF EXISTS settings_type_check');
+
+                $values = collect(\App\Models\Setting::$settingTypes)
+                    ->map(fn ($value) => DB::getPdo()->quote($value))
+                    ->implode(', ');
+
+                DB::statement(
+                    "ALTER TABLE settings ADD CONSTRAINT settings_type_check CHECK (type IN ($values))"
+                );
+            }
         }
 
 
