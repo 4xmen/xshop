@@ -157,15 +157,16 @@ function hasRoute($name): bool
 }
 
 /**
- * get named route url
- * @param $name string
- * @param $args array
- * @return string|null
+ * Checks whether a route exists after replacing the final segment
+ * of the current route name with the given name.
+ *
+ * @param string $name The replacement route-name segment
+ * @return bool
  */
 function getRoute($name, $args = []): string|null
 {
     // create route
-    $routes = explode('.', request()->route()->getName());
+    $routes = explode('.', request()->route()->getName()??'');
     $routes[count($routes) - 1] = $name;
     $cRuote = implode('.', $routes);
 
@@ -219,7 +220,12 @@ function arrayNormalizeVueCompatible($array, $translate = false): false|string
  */
 function isJson($string): bool
 {
+    if (!is_string($string)) {
+        return false;
+    }
+
     json_decode($string);
+
     return json_last_error() === JSON_ERROR_NONE;
 }
 
@@ -259,7 +265,10 @@ function logAdmin($method, $cls, $id): void
         'loggable_id' => $id,
     ]);
 }
-
+/*
+ * Get theme engine template values (Graphic)
+ * like: primary-color, bg color, border-radius  & etc.
+ */
 function gfx()
 {
     return \App\Models\Gfx::pluck('value', 'key');
@@ -398,7 +407,7 @@ function lastCrump()
 
 
 /**
- * @param $cats array categories or groups as nested ul li wih checkbox
+ * @param $cats array categories or groups as nested ul li wih checkbox for admin panel
  * @param $checked array witch one checked default
  * @param $parent null|integer parent id
  * @return string
@@ -433,7 +442,7 @@ function showCatNested($cats, $parent = null)
 {
     $ret = "";
     foreach ($cats as $cat) {
-        if ($cat->parent_id == $parent & !$cat->hide) {
+        if ($cat->parent_id == $parent && !$cat->hide) {
             $ret .= "<li class='category-nested-{$cat->id}'>";
             $ret .= "<a href='" . $cat->webUrl() . "'>";
             $ret .= $cat->name . '</a>';
@@ -498,9 +507,11 @@ function getAdminRoutes()
 {
     $routes = [];
     foreach (Illuminate\Support\Facades\Route::getRoutes() as $r) {
-        if (strpos($r->getName(), 'admin') !== false) {
+        $name = $r->getName();
+
+        if ($name && strpos($name, 'admin') !== false) {
             $routes[] = [
-                'name' => $r->getName(),
+                'name' => $name,
                 'url' => $r->uri(),
             ];
         }
@@ -517,22 +528,23 @@ function getClientRoutes()
 {
     $routes = [];
     foreach (Illuminate\Support\Facades\Route::getRoutes() as $r) {
-        if (strpos($r->getName(), 'admin') === false) {
+        $name = $r->getName();
+
+        if ($name && strpos($name, 'admin') === false) {
             $routes[] = [
-                'name' => $r->getName(),
+                'name' => $name,
                 'url' => $r->uri(),
             ];
         }
     }
-
     return $routes;
 }
 
 
 /**
- * get model with all custom attributes
- * @param $model \Illuminate\Database\Eloquent\Model
- * @return void
+ * Get model with all custom attributes.
+ * @param \Illuminate\Database\Eloquent\Model $model
+ * @return array
  */
 function modelWithCustomAttrs($model)
 {
@@ -555,7 +567,9 @@ function getMaxUploadSize()
     $uploadMaxSize = returnBytes(ini_get('upload_max_filesize'));
     $postMaxSize = returnBytes(ini_get('post_max_size'));
 
-    return min($uploadMaxSize, $postMaxSize);
+    return $postMaxSize > 0
+        ? min($uploadMaxSize, $postMaxSize)
+        : $uploadMaxSize;
 }
 
 
@@ -566,18 +580,25 @@ function getMaxUploadSize()
  */
 function returnBytes($val)
 {
+    $val = trim((string) $val);
+
+    if ($val === '') {
+        return 0;
+    }
+
     $last = strtolower($val[strlen($val) - 1]);
     $val = trim(strtolower($val), 'kgm');
     switch ($last) {
-        // The 'G' modifier is available since PHP 5.1.0
         case 'g':
             $val *= 1024 * 1024 * 1024;
+            break;
         case 'm':
             $val *= 1024 * 1024;
+            break;
         case 'k':
             $val *= 1024;
+            break;
     }
-
     return $val;
 }
 
@@ -710,19 +731,16 @@ function getSetting(string $key, int $ttl = 3600)
 function imageSizeConvertValidate($size)
 {
     $s = getSetting($size);
+
     if ($s == null) {
+        $configSize = config('app.media' . $size);
 
-        $t = explode('x', $size);
-        if (config('app.media' . $size) == null || config('app.media' . $size) == '') {
-            $t[0] = 500;
-            $t[1] = 500;
-        }
-
+        $t = explode('x', $configSize ?: '500x500');
     } else {
         $t = explode('x', $s);
     }
-    return $t;
 
+    return $t;
 }
 
 
@@ -780,18 +798,20 @@ function hasPart($areaName)
 function getParts($areaName, $custom = null)
 {
     if ($custom != null) {
-
         $customs = Part::where('custom', $custom)->orderBy('sort');
-        if ($customs->count() > 0) {
+
+        if ($customs->exists()) {
             return $customs->get();
         }
     }
-    return Area::with('parts')
-        ->where('name', $areaName)
-        ->first()
-        ->parts()
-        ->orderBy('sort')
-        ->get();
+
+    $area = Area::where('name', $areaName)->first();
+
+    if ($area == null) {
+        return collect();
+    }
+
+    return $area->parts()->orderBy('sort')->get();
 }
 
 
@@ -806,7 +826,7 @@ function getSettingsGroup($group)
     foreach (Setting::where('key', 'LIKE', $group . '%')
                  ->whereNotNull('value')->get(['key', 'value']) as $r) {
         if ($r->value != null && $r->value != '') {
-            $result[substr($r->key, mb_strlen($group))] = $r->value;
+            $result[mb_substr($r->key, mb_strlen($group))] = $r->value;
         }
     }
 
@@ -902,8 +922,17 @@ function getGroupPostsBySetting($key, $limit = 10, $order = 'id', $dir = "DESC")
  */
 function getCategoryProductBySetting($key, $limit = 10, $order = 'id', $dir = "DESC")
 {
-    return Category::with('products')->where('id', getSetting($key) ?? 1)->first()
-        ->products()->where('status', 1)->orderBy($order, $dir)->limit($limit)->get();
+    $category = Category::find(getSetting($key) ?? 1);
+
+    if ($category == null) {
+        return collect();
+    }
+
+    return $category->products()
+        ->where('status', 1)
+        ->orderBy($order, $dir)
+        ->limit($limit)
+        ->get();
 }
 
 /**
@@ -914,7 +943,12 @@ function getCategoryProductBySetting($key, $limit = 10, $order = 'id', $dir = "D
  */
 function getProductsQueryBySetting($key, $limit = 10)
 {
-    $data = explode(',', getSetting($key) ?? '1,id,DESC');
+    $data = explode(',', getSetting($key) ?: '1,id,DESC');
+
+    $data = array_pad($data, 3, null);
+
+    $data[1] = $data[1] ?: 'id';
+    $data[2] = strtoupper($data[2] ?: 'DESC');
     if ($data[0] == 0) {
         $q = Product::where('status', 1);
     } else {
@@ -953,12 +987,12 @@ function getPostsQueryBySetting($key, $limit = 10)
 }
 
 /**
- * get group's posts by setting key
+ * get category's children by setting key
  * @param $key
  * @param integer $limit
  * @param string $order
  * @param string $dir
- * @return \App\Models\Post[]|\Illuminate\Database\Eloquent\Collection|\LaravelIdea\Helper\App\Models\_IH_Post_C | array
+ * @return \App\Models\Category[]
  */
 function getCategorySubCatsBySetting($key, $limit = 10, $order = 'id', $dir = "DESC")
 {
@@ -1074,7 +1108,8 @@ function isGuestMaxAttemptTry($action, $max = 5, $minutes = 60)
 {
     if (\App\Models\GuestLog::where('ip', request()->ip())
             ->where('action', $action)
-            ->where('created_at', '>', time() - ($minutes * 60))->count() >= $max) {
+            ->where('created_at', '>', now()->subMinutes($minutes))
+            ->count() >= $max) {
         return true;
     } else {
         \App\Models\GuestLog::create([
@@ -1148,6 +1183,26 @@ function tagUrl($slug)
     return fixUrlLang(route('client.tag', $slug));
 }
 
+/**
+ * fix url for multilang shops
+ * @param $url
+ * @return array|mixed|string|string[]
+ */
+function fixUrlLang($url)
+{
+    if (config('app.xlang.active') && app()->getLocale() != config('app.xlang.main')) {
+        $welcome = \route('client.welcome');
+        $localizedWelcome = $welcome . (str_ends_with($welcome, '/') ? '' : '/') . app()->getLocale();
+
+        if (str_contains($url, $localizedWelcome)) {
+            return $url;
+        }
+
+        return str_replace($welcome, $localizedWelcome, $url);
+    }
+
+    return $url;
+}
 
 /**
  * @param $props
@@ -1159,7 +1214,8 @@ function usableProp($props): array
 
     foreach ($props as $prop) {
         $tmp = [];
-        foreach (json_decode($prop->options) as $item) {
+        foreach (json_decode($prop->options) ?? [] as $item)
+        {
             $tmp[$item->value] = $item->title;
         }
         $result[$prop->name]['data'] = $tmp;
@@ -1197,10 +1253,9 @@ function cardItems()
  */
 function cardCount()
 {
-    if (!\Cookie::has('card')) {
-        return 0;
-    }
-    return count(json_decode(\Cookie::get('card'), true));
+    $card = json_decode(\Cookie::get('card', '[]'), true);
+
+    return is_array($card) ? count($card) : 0;
 }
 
 /**
@@ -1218,11 +1273,9 @@ function transports()
  */
 function defTrannsport()
 {
-    if (\App\Models\Transport::where('is_default', 1)->count() == 0) {
-        return null;
-    }
+    $transport = \App\Models\Transport::where('is_default', 1)->first();
 
-    return \App\Models\Transport::where('is_default', 1)->first()->id;
+    return $transport ? $transport->id : null;
 }
 
 
@@ -1254,7 +1307,7 @@ function markUpBreadcrumbList($items)
             "position" => $i,
             "name" => $index,
         ];
-        if ($item != '' || $item != null) {
+        if ($item !== '' && $item !== null) {
             $json[$i - 1]['item'] = $item;
         }
     }
@@ -1277,19 +1330,6 @@ RESULT;
 }
 
 
-/**
- * fix url for multilang shops
- * @param $url
- * @return array|mixed|string|string[]
- */
-function fixUrlLang($url)
-{
-    if (config('app.xlang.active') && app()->getLocale() != config('app.xlang.main')) {
-        $welcome = \route('client.welcome');
-        return str_replace($welcome, $welcome . '/' . app()->getLocale(), $url);
-    }
-    return $url;
-}
 
 
 /**
@@ -1309,9 +1349,9 @@ function sendingSMS($text, $number, $args)
     if (config('app.sms.driver') == 'Kavenegar') {
         $url = str_replace('TOKEN', config('app.sms.token'), config('app.sms.url')) . '?' . http_build_query($args);
         $response = Http::get($url);
-        $r = json_decode($response->body(), true);
-        if ($r['return']['status'] != 200) {
-            \Illuminate\Support\Facades\Log::error($r);
+        $r = $response->json();
+        if (($r['return']['status'] ?? null) != 200) {
+            \Illuminate\Support\Facades\Log::error($r ?? []);
             return false;
         }
         return true;
@@ -1323,7 +1363,7 @@ function sendingSMS($text, $number, $args)
         $text = str_replace('%' . $k, $arg, $text);
     }
     $fields = [
-        'user' => config('app.sms.url'),
+        'user' => config('app.sms.username'),
         'password' => config('app.sms.password'),
         'to' => $number,
         'from' => config('app.sms.number'),
@@ -1342,6 +1382,7 @@ function sendingSMS($text, $number, $args)
                 'Content-Type' => 'application/x-www-form-urlencoded',
                 'Cache-Control' => 'no-cache',
             ],
+            'timeout' => 15,
         ]);
 
         // Get the response body as a string
@@ -1443,7 +1484,9 @@ function buildTOC($items)
     $html = '<nav aria-label="'.__('Table of contents').'">'. PHP_EOL . '<ul>';
     foreach ($items as $item) {
         $html .= '<li>';
-        $html .= '<a href="#' . $item['id'] . '">' . $item['title'] . '</a>';
+        $html .= '<a href="#' . htmlspecialchars($item['id'], ENT_QUOTES, 'UTF-8') . '">'
+            . htmlspecialchars($item['title'], ENT_QUOTES, 'UTF-8')
+            . '</a>';
 
         if (!empty($item['children'])) {
             $html .= buildTOC($item['children']);
@@ -1475,11 +1518,9 @@ function detectRateCustomer($type, $id, $evaluation)
         ->where('rateable_id', $id)
         ->where('evaluation_id', $evaluation);
 
-    if ($rate->count() == 0) {
-        return 0;
-    } else {
-        return $rate->first()->rate;
-    }
+    $rate = $rate->first();
+
+    return $rate ? $rate->rate : 0;
 
 }
 
@@ -1530,8 +1571,13 @@ function getMainCategory($limit = 4, $orderBy = 'sort', $asc = 'ASC')
  */
 function getSubGroupSetting($key, $limit = 10, $order = 'id', $dir = "DESC")
 {
-    return Group::with('children')->where('id', getSetting($key) ?? 1)->first()
-        ->children()->orderBy($order, $dir)->limit($limit)->get();
+    $group = Group::where('id', getSetting($key) ?? 1)->first();
+
+    if ($group == null) {
+        return collect();
+    }
+
+    return $group->children()->orderBy($order, $dir)->limit($limit)->get();
 }
 
 
@@ -1554,7 +1600,7 @@ function getCategoriesSet($key, $limit = 4, $orderBy = 'sort', $asc = 'ASC')
  * @param $limit
  * @param $orderBy
  * @param $asc
- * @return Page[]|\LaravelIdea\Helper\App\Models\_IH_Category_C
+ * @return Page[]
  */
 function getPagesSet($key, $limit = 4, $orderBy = 'id', $asc = 'ASC')
 {
@@ -1585,7 +1631,7 @@ function getGroupsSet($key, $limit = 4, $orderBy = 'sort', $asc = 'ASC')
 function extractShortCode($key, $txt): array
 {
     // regex to extract all ids in the text
-    $pattern = '/\[' . $key . ':(\d+)\]/';
+    $pattern = '/\[' . preg_quote($key, '/') . ':(\d+)\]/';
 
     // match all shortcodes
     preg_match_all($pattern, $txt, $matches);
@@ -1617,8 +1663,10 @@ function fixShortCode($txt): string
         $data['size'] = formatFileSize($attach->size);
         $data['subtitle'] = $attach->subtitle;
 
-        $vueCode = "<live-attach  xlang='" . config('app.locale') .
-            "' :attachment='" . json_encode($data) . "'></live-attach>";
+        $jsonData = json_encode($data, JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_TAG | JSON_HEX_AMP);
+
+        $vueCode = "<live-attach xlang='" . e(config('app.locale')) .
+            "' :attachment='" . e($jsonData) . "'></live-attach>";
         $txt = str_replace('[ATTACHED:' . $attach->id . ']', $vueCode, $txt);
     }
 
@@ -1631,7 +1679,7 @@ function fixShortCode($txt): string
  * @param $limit
  * @param $orderBy
  * @param $asc
- * @return Creator[]|\LaravelIdea\Helper\App\Models\_IH_Group_C
+ * @return Creator[]
  */
 function getCreatorSet($key, $limit = 4, $orderBy = 'sort', $asc = 'ASC')
 {
@@ -1687,7 +1735,7 @@ function humanValue($prop, $value): string
 {
     switch ($prop->type) {
         case 'color':
-            $color = is_string($value) && preg_match('/^#[0-9a-fA-F]{3,8}$/', $value)
+            $color = is_string($value) && preg_match('/^#(?:[0-9a-fA-F]{3}|[0-9a-fA-F]{4}|[0-9a-fA-F]{6}|[0-9a-fA-F]{8})$/', $value)
                 ? $value
                 : 'transparent';
             $html = "<div style='background: {$color}' class='color-bullet'> &nbsp; </div>";

@@ -33,8 +33,7 @@ return new class extends Migration
         });
 
 
-        if (version_compare(config('app.version'), '3.6.0', '<')) {
-
+        if (version_compare(config('app.version'), '3.6.0', '<=')) {
             Schema::table('settings', function (Blueprint $table) {
                 $table->enum('type', \App\Models\Setting::$settingTypes)->change();
             });
