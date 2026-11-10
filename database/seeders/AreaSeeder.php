@@ -79,7 +79,7 @@ class AreaSeeder extends Seeder
                 'name' => 'page',
                 'valid_segments' => json_encode(
                     ["top", "header", "footer", "menu",
-                        "parallax", "other", "post", "comments", "ads", "attachments"]
+                        "parallax", "other", "page", "comments", "ads", "attachments"]
                 ),
                 'max' => 6,
                 'preview' => null,

@@ -106,7 +106,7 @@ class ClientController extends Controller
             ];
         }
 
-        return view('client.default-list', compact('area', 'page', 'title', 'subtitle', 'breadcrumb'));
+        return view('client.page', compact('area', 'page', 'title', 'subtitle', 'breadcrumb'));
     }
 
     public function clip($slug)

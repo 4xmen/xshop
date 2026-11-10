@@ -21,7 +21,7 @@
                     @if(isset($item))
                         <li>
                             {{__("You can set the theme of this item exclusively")}} : <a
-                                href="{{route('admin.area.design.model',['post','Post',$item->id])}}"
+                                href="{{route('admin.area.design.model',['page','Page',$item->id])}}"
                                 class="btn btn-secondary btn-sm"> <i class="ri-palette-line"></i> </a>
                         </li>
                         <li>

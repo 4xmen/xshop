@@ -1,7 +1,7 @@
 <section class="UnrealFooter live-setting" data-live="{{$data->area_name.'_'.$data->part}}" >
 
     <footer class="site-footer" dir="rtl">
-        <div class="container">
+        <div class="{{gfx()['container']}}">
 
             <!-- Main Footer -->
             <div class="footer-main">
