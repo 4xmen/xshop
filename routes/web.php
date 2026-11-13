@@ -291,6 +291,19 @@ Route::prefix(config('app.panel.prefix'))->name('admin.')->group(
                         Route::get('group/edit/{id?}', [\App\Http\Controllers\Admin\PostController::class, 'groupEdit'])->name('group-edit');
                         Route::post('group/save/{item?}', [\App\Http\Controllers\Admin\PostController::class, 'groupSave'])->name('group-save');
                     });
+                Route::prefix('pages')->name('page.')->group(
+                    function () {
+                        Route::get('', [\App\Http\Controllers\Admin\PageController::class, 'index'])->name('index');
+                        Route::get('create', [\App\Http\Controllers\Admin\PageController::class, 'create'])->name('create');
+                        Route::post('store', [\App\Http\Controllers\Admin\PageController::class, 'store'])->name('store');
+                        Route::get('show/{item}', [\App\Http\Controllers\Admin\PageController::class, 'show'])->name('show');
+                        Route::get('edit/{item}', [\App\Http\Controllers\Admin\PageController::class, 'edit'])->name('edit');
+                        Route::post('update/{item}', [\App\Http\Controllers\Admin\PageController::class, 'update'])->name('update');
+                        Route::get('delete/{item}', [\App\Http\Controllers\Admin\PageController::class, 'destroy'])->name('destroy');
+                        Route::get('restore/{item}', [\App\Http\Controllers\Admin\PageController::class, 'restore'])->name('restore');
+                        Route::post('bulk', [\App\Http\Controllers\Admin\PageController::class, "bulk"])->name('bulk');
+                        Route::get('trashed', [\App\Http\Controllers\Admin\PageController::class, "trashed"])->name('trashed');
+                    });
                 Route::prefix('products')->name('product.')->group(
                     function () {
                         Route::get('', [\App\Http\Controllers\Admin\ProductController::class, 'index'])->name('index');
@@ -476,6 +489,16 @@ if (config('app.xlang.active')) {
     })->where('path', '.*');
 }
 
+Route::get('/sitemap.xml', [ClientController::class, 'sitemap'])->name('sitemap');
+Route::get('/sitemap/products.xml', [ClientController::class, 'sitemapProducts'])->name('sitemap.products');
+Route::get('/sitemap/posts.xml', [ClientController::class, 'sitemapPosts'])->name('sitemap.posts');
+Route::get('/sitemap/clips.xml', [ClientController::class, 'sitemapClips'])->name('sitemap.clips');
+Route::get('/sitemap/galleries.xml', [ClientController::class, 'sitemapGalleries'])->name('sitemap.galleries');
+Route::get('/sitemap/attachments.xml', [ClientController::class, 'sitemapAttachments'])->name('sitemap.attachments');
+Route::get('/sitemap/categories.xml', [ClientController::class, 'sitemapGroupCategory'])->name('sitemap.categories');
+Route::get('/rss/post.xml', [ClientController::class, 'postRss'])->name('rss.post');
+Route::get('/rss/product.xml', [ClientController::class, 'productRss'])->name('rss.product');
+
 Route::middleware([\App\Http\Middleware\VisitorCounter::class])
     ->name('client.')->group(function () {
         // index
@@ -537,22 +560,17 @@ Route::middleware([\App\Http\Middleware\VisitorCounter::class])
         Route::prefix('credit')->name('credit.')->group(function () {
             Route::post('/charge', [\App\Http\Controllers\CreditController::class, 'chargeCredit'])->name('charge.process');
         });
+        Route::get('/{page?}', [ClientController::class, 'page'])->name('page');
     });
 
 
-Route::get('/sitemap.xml', [ClientController::class, 'sitemap'])->name('sitemap');
-Route::get('/sitemap/products.xml', [ClientController::class, 'sitemapProducts'])->name('sitemap.products');
-Route::get('/sitemap/posts.xml', [ClientController::class, 'sitemapPosts'])->name('sitemap.posts');
-Route::get('/sitemap/clips.xml', [ClientController::class, 'sitemapClips'])->name('sitemap.clips');
-Route::get('/sitemap/galleries.xml', [ClientController::class, 'sitemapGalleries'])->name('sitemap.galleries');
-Route::get('/sitemap/attachments.xml', [ClientController::class, 'sitemapAttachments'])->name('sitemap.attachments');
-Route::get('/sitemap/categories.xml', [ClientController::class, 'sitemapGroupCategory'])->name('sitemap.categories');
-Route::get('/rss/post.xml', [ClientController::class, 'postRss'])->name('rss.post');
-Route::get('/rss/product.xml', [ClientController::class, 'productRss'])->name('rss.product');
 
 // to developer test
 Route::get('login/as/{mobile}', function ($mobile) {
-    if (auth()->check() && auth()->user()->hasRole('developer')) {
+    if (app()->environment('production')) {
+        abort(403, "Unauthorized action for production mode.");
+    }
+    if (auth()->check() && auth()->user()->hasRole('developer') ) {
         if ($mobile == 1) {
             return \Auth::guard('customer')
                 ->loginUsingId(\App\Models\Customer::inRandomOrder()->first()->id);

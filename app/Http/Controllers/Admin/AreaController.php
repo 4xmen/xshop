@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Area;
 use App\Models\Category;
 use App\Models\Group;
+use App\Models\Page;
 use App\Models\Part;
 use App\Models\Post;
 use App\Models\Product;
@@ -56,6 +57,9 @@ class AreaController extends Controller
                 break;
             case 'Post':
                 $m = Post::whereId($id)->first();
+                break;
+            case 'Page':
+                $m = Page::whereId($id)->first();
                 break;
             case 'Product':
                 $m = Product::whereId($id)->first();
@@ -160,6 +164,9 @@ class AreaController extends Controller
                 break;
             case 'Post':
                 $m = Post::whereId($id)->first();
+                break;
+            case 'Page':
+                $m = Page::whereId($id)->first();
                 break;
             case 'Product':
                 $m = Product::whereId($id)->first();

@@ -8,6 +8,7 @@ use App\Models\Category;
 use App\Models\Creator;
 use App\Models\Group;
 use App\Models\Menu;
+use App\Models\Page;
 use App\Models\Setting;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Artisan;
@@ -32,8 +33,10 @@ class SettingController extends Controller
         $groupz = array_merge([['id' => 0, 'name' => __('All')]], $groups);
         $creators = Creator::all(['id', 'name'])->toArray();
         $creatorz = array_merge([['id' => 0, 'name' => __('All')]], $creators);
+        $pages = Page::all(['id', 'title'])->toArray();
+        $pagez = array_merge([['id' => 0, 'title' => __('All')]], $pages);
         return view('admin.commons.setting',
-            compact('settings', 'cats', 'groups', 'menus', 'catz', 'groupz', 'creators', 'creatorz'));
+            compact('settings', 'cats', 'groups', 'menus', 'catz', 'groupz', 'creators', 'creatorz','pages','pagez'));
     }
 
     /**
@@ -178,7 +181,9 @@ class SettingController extends Controller
         $groupz = array_merge([['id' => 0, 'name' => __('All')]], $groups);
         $creators = Creator::all(['id', 'name'])->toArray();
         $creatorz = array_merge([['id' => 0, 'name' => __('All')]], $creators);
+        $pages = Page::all(['id', 'title'])->toArray();
+        $pagez = array_merge([['id' => 0, 'title' => __('All')]], $pages);
         return view('admin.commons.live',
-            compact('settings', 'cats', 'groups', 'menus', 'catz', 'groupz', 'creators', 'creatorz'));
+            compact('settings', 'cats', 'groups', 'menus', 'catz', 'groupz', 'creators', 'creatorz','pages','pagez'));
     }
 }

@@ -16,6 +16,7 @@ use App\Models\Customer;
 use App\Models\Gallery;
 use App\Models\Group;
 use App\Models\Invoice;
+use App\Models\Page;
 use App\Models\Post;
 use App\Models\Product;
 use App\Models\Quantity;
@@ -63,7 +64,7 @@ class ClientController extends Controller
     public function post($slug)
     {
 
-        $post = Post::where('slug', $slug)->firstOrFail();
+        $post = Post::where('slug', $slug)->with('mainGroup')->firstOrFail();
 
         if ($post->status = 0 && !auth()->check()) {
             return abort(403);
@@ -80,6 +81,32 @@ class ClientController extends Controller
             $post->title => null,
         ];
         return view('client.post', compact('area', 'post', 'title', 'subtitle', 'breadcrumb'));
+    }
+    public function page($slug)
+    {
+
+        $page = Page::where('slug', $slug)->with('parent')->firstOrFail();
+
+        if ($page->status = 0 && !auth()->check()) {
+            return abort(403);
+        }
+        $area = 'page';
+        $title = $page->title;
+        $subtitle = $page->subtitle;
+        $page->withoutTimestamps(function () use ($page) {
+            $page->increment('view');
+        });
+        $breadcrumb = [
+            $page->title => null,
+        ];
+        if ($page->parent_id != null) {
+            $breadcrumb = [
+                $page->parent->title => $page->parent->webUrl(),
+                $page->title => null,
+            ];
+        }
+
+        return view('client.page', compact('area', 'page', 'title', 'subtitle', 'breadcrumb'));
     }
 
     public function clip($slug)

@@ -5,11 +5,14 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Clip;
+use App\Models\Creator;
 use App\Models\Gallery;
 use App\Models\Group;
+use App\Models\Page;
 use App\Models\Post;
 use App\Models\Product;
 use Illuminate\Http\Request;
+
 
 class MorphController extends Controller
 {
@@ -18,6 +21,7 @@ class MorphController extends Controller
     //
     public function search(Request $request)
     {
+
 
         if (!auth()->check() ){
             return abort(403);
@@ -35,6 +39,11 @@ class MorphController extends Controller
                     ->orWhere('subtitle', 'LIKE', $q)
                     ->orWhere('body', 'LIKE', $q);
                 break;
+            case Page::class:
+                $q = Page::where('title', 'LIKE', $q)
+                    ->orWhere('subtitle', 'LIKE', $q)
+                    ->orWhere('body', 'LIKE', $q);
+                break;
             case Group::class:
                 $q = Group::where('name', 'LIKE', $q)
                     ->orWhere('subtitle', 'LIKE', $q)
@@ -42,6 +51,11 @@ class MorphController extends Controller
                 break;
             case Category::class:
                 $q = Category::where('name', 'LIKE', $q)
+                    ->orWhere('subtitle', 'LIKE', $q)
+                    ->orWhere('description', 'LIKE', $q);
+                break;
+            case Creator::class:
+                $q = Creator::where('name', 'LIKE', $q)
                     ->orWhere('subtitle', 'LIKE', $q)
                     ->orWhere('description', 'LIKE', $q);
                 break;
