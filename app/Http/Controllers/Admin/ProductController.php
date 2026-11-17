@@ -87,12 +87,13 @@ class ProductController extends XController
         $tags = array_filter(explode(',,', $request->input('tags')));
         $creators = array_filter(explode(',,', $request->input('creators')));
         $creators = collect(Creator::findOrCreate($creators));
-        $product->creators()->sync($creators);
         if ($request->has('canonical') && trim($request->input('canonical')) != '') {
             $product->canonical = $request->input('canonical');
         }
 
         $product->save();
+        // sync after save so a new product has an id for the pivot table
+        $product->creators()->sync($creators);
         $product->categories()->sync($request->input('cat'));
         if (count($tags) > 0) {
             $product->syncTags($tags);

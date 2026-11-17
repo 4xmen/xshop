@@ -1,0 +1,87 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: avandora:latest
+    restart: unless-stopped
+    ports:
+      - "${APP_PORT:-8080}:80"
+    env_file:
+      # Laravel .env passed through; values below win over it
+      - path: .env
+        required: false
+    environment:
+      # literals, not ${..}: Compose reads those from Laravel's own .env
+      APP_ENV: production          # image has no dev deps
+      APP_DEBUG: "false"
+      APP_URL: http://localhost:8080   # must match the published port below
+      DB_CONNECTION: mysql
+      DB_HOST: mariadb
+      DB_PORT: 3306
+      DB_DATABASE: "${DB_DATABASE:-avandora}"
+      DB_USERNAME: "${DB_USERNAME:-avandora}"
+      DB_PASSWORD: "${DB_PASSWORD:-secret}"
+      REDIS_CLIENT: phpredis
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+      CACHE_STORE: "${CACHE_STORE:-database}"
+      SESSION_DRIVER: "${SESSION_DRIVER:-database}"
+      QUEUE_CONNECTION: "${QUEUE_CONNECTION:-database}"
+      # startup behaviour (see entrypoint)
+      AUTO_MIGRATE: "${AUTO_MIGRATE:-true}"
+      AUTO_SEED: "${AUTO_SEED:-false}"
+      RUN_QUEUE_WORKER: "${RUN_QUEUE_WORKER:-true}"
+      RUN_SCHEDULER: "${RUN_SCHEDULER:-true}"
+      QUEUE_WORKERS: "${QUEUE_WORKERS:-1}"
+    volumes:
+      - storage_data:/var/www/html/storage          # uploads, media, logs
+      - upload_data:/var/www/html/public/upload
+    depends_on:
+      mariadb:
+        condition: service_healthy
+      redis:
+        condition: service_started
+    networks:
+      - avandora
+
+  mariadb:
+    image: mariadb:11
+    restart: unless-stopped
+    environment:
+      MARIADB_DATABASE: "${DB_DATABASE:-avandora}"
+      MARIADB_USER: "${DB_USERNAME:-avandora}"
+      MARIADB_PASSWORD: "${DB_PASSWORD:-secret}"
+      MARIADB_ROOT_PASSWORD: "${DB_ROOT_PASSWORD:-rootsecret}"
+    volumes:
+      - db_data:/var/lib/mysql
+    # uncomment to reach the DB from the host
+    # ports:
+    #   - "3306:3306"
+    healthcheck:
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 30s
+    networks:
+      - avandora
+
+  redis:
+    image: redis:7-alpine
+    restart: unless-stopped
+    command: ["redis-server", "--appendonly", "yes"]
+    volumes:
+      - redis_data:/data
+    networks:
+      - avandora
+
+volumes:
+  storage_data:
+  upload_data:
+  db_data:
+  redis_data:
+
+networks:
+  avandora:
+    driver: bridge
