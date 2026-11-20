@@ -39,43 +39,44 @@ class PartSeeder extends Seeder
         $part->save();
 
         $part = new Part();
-        $part->segment = 'slider';
-        $part->part = 'SliderSimple';
+        $part->segment = 'index';
+        $part->part = 'TechHero';
         $part->area_id = Area::where('name', 'index')->first()->id;
         $part->sort = 1;
         $part->save();
 
         $part = new Part();
-        $part->segment = 'products';
-        $part->part = 'LatestProducts';
+        $part->segment = 'other';
+        $part->part = 'LifeCategory';
         $part->area_id = Area::where('name', 'index')->first()->id;
         $part->sort = 2;
         $part->save();
 
         $part = new Part();
         $part->segment = 'posts';
-        $part->part = 'PostsIconSimple';
+        $part->part = 'ShahedPosts';
         $part->area_id = Area::where('name', 'index')->first()->id;
         $part->sort = 3;
         $part->save();
 
-        $part = new Part();
-        $part->segment = 'index';
-        $part->part = 'CounterGrid';
-        $part->area_id = Area::where('name', 'index')->first()->id;
-        $part->sort = 4;
-        $part->save();
 
         $part = new Part();
-        $part->segment = 'categories';
-        $part->part = 'CategoriesFavImageLinks';
+        $part->segment = 'parallax';
+        $part->part = 'ParallaxShort';
         $part->area_id = Area::where('name', 'index')->first()->id;
         $part->sort = 5;
         $part->save();
 
         $part = new Part();
-        $part->segment = 'posts';
-        $part->part = 'PostIndexImage';
+        $part->segment = 'index';
+        $part->part = 'CounterPlus';
+        $part->area_id = Area::where('name', 'index')->first()->id;
+        $part->sort = 4;
+        $part->save();
+
+        $part = new Part();
+        $part->segment = 'other';
+        $part->part = 'SupporterBox';
         $part->area_id = Area::where('name', 'index')->first()->id;
         $part->sort = 6;
         $part->save();
@@ -83,7 +84,7 @@ class PartSeeder extends Seeder
 
         $part = new Part();
         $part->segment = 'footer';
-        $part->part = 'WaveFooter';
+        $part->part = 'UnrealFooter';
         $part->area_id = Area::where('name', 'index')->first()->id;
         $part->sort = 7;
         $part->save();

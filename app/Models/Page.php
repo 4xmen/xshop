@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Spatie\Image\Enums\AlignPosition;
@@ -14,7 +15,7 @@ use Spatie\Translatable\HasTranslations;
 
 class Page extends Model implements HasMedia
 {
-    use SoftDeletes, HasTranslations, InteractsWithMedia;
+    use SoftDeletes, HasTranslations, InteractsWithMedia, HasFactory;
     public $translatable = ['title', 'subtitle', 'body'];
     //
     public function children(){

@@ -8,9 +8,15 @@
     .tree-product-box{
         padding: .4rem;
         overflow: hidden;
-        background: var(--xshop-background);
         border-radius: var(--xshop-border-radius);
         color: var(--xshop-text);
+        .xshop-product-item{
+            background: var(--xshop-background);
+            img{
+                height: 250px;
+                object-fit: cover;
+            }
+        }
         .price{
             padding: 4px;
             text-align: center;

@@ -10,28 +10,10 @@
                     <div class="w100 overflow-hidden">
 
                         <div class="section-main">
-                            @foreach(getCategoryProductBySetting($part->area_name . '_' . $part->part.'_category') as $product)
+                            @foreach(getCategoryProductBySetting($part->area_name . '_' . $part->part.'_category') as $p)
                                 <div class="item slider-content">
                                     <div class="tree-product-box">
-                                        <a href="{{$product->webUrl()}}">
-                                            <img src="{{$product->imgUrl()}}" alt="{{$product->name}}" loading="lazy">
-                                        </a>
-                                        <h4>
-                                            <a href="{{$product->webUrl()}}">
-                                                {{$product->name}}
-                                            </a>
-                                        </h4>
-
-                                        <div class="price">
-                                            {{$product->getPrice()}}
-                                        </div>
-
-                                        <a href="{{ route('client.product-card-toggle',$product->slug) }}" class="btn btn-primary btn-sm w-100 add-to-card">
-                                            <i class="ri-shopping-cart-2-line"></i>
-                                            <span>
-                                                {{__("Add to card")}}
-                                            </span>
-                                        </a>
+                                        @include(\App\Models\Area::where('name','product-grid')->first()->defPart(),['product' => $p])
                                     </div>
                                 </div>
                             @endforeach

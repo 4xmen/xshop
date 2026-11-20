@@ -1591,8 +1591,31 @@ function getSubGroupSetting($key, $limit = 10, $order = 'id', $dir = "DESC")
  */
 function getCategoriesSet($key, $limit = 4, $orderBy = 'sort', $asc = 'ASC')
 {
-    return Category::with('products')->whereIn('id', json_decode(getSetting($key) ?? '[]'))->where('hide', 0)->limit($limit)->orderBy($orderBy, $asc)->get();
+    $raw = getSetting($key);
+    $ids = is_string($raw) ? json_decode($raw, true) : [];
+
+    if (!is_array($ids)) {
+        $ids = [];
+    }
+
+    $ids = array_values(array_filter($ids, 'is_numeric'));
+
+    $allowedOrderBy = ['sort', 'id', 'name', 'created_at', 'updated_at','sort'];
+    $orderBy = in_array($orderBy, $allowedOrderBy, true) ? $orderBy : 'sort';
+
+    $direction = strtoupper((string) $asc);
+    $direction = in_array($direction, ['ASC', 'DESC'], true) ? $direction : 'ASC';
+
+    $limit = max(1, min((int) $limit, 100));
+
+    return Category::with('products')
+        ->whereIn('id', $ids)
+        ->where('hide', 0)
+        ->orderBy($orderBy, $direction)
+        ->limit($limit)
+        ->get();
 }
+
 
 /**
  * get website main categories
@@ -1604,7 +1627,30 @@ function getCategoriesSet($key, $limit = 4, $orderBy = 'sort', $asc = 'ASC')
  */
 function getPagesSet($key, $limit = 4, $orderBy = 'id', $asc = 'ASC')
 {
-    return Page::with('parent')->whereIn('id', json_decode(getSetting($key) ?? '[]'))->where('status', 1)->limit($limit)->orderBy($orderBy, $asc)->get();
+    $raw = getSetting($key);
+    $ids = is_string($raw) ? json_decode($raw, true) : [];
+
+    if (!is_array($ids)) {
+        $ids = [];
+    }
+
+    // فقط شناسه‌های عددی معتبر
+    $ids = array_values(array_filter($ids, 'is_numeric'));
+
+    $allowedOrderBy = ['id', 'title', 'created_at', 'updated_at'];
+    $orderBy = in_array($orderBy, $allowedOrderBy, true) ? $orderBy : 'id';
+
+    $direction = strtoupper((string) $asc);
+    $direction = in_array($direction, ['ASC', 'DESC'], true) ? $direction : 'ASC';
+
+    $limit = max(1, min((int) $limit, 100));
+
+    return Page::with('parent')
+        ->whereIn('id', $ids)
+        ->where('status', 1)
+        ->orderBy($orderBy, $direction)
+        ->limit($limit)
+        ->get();
 }
 
 

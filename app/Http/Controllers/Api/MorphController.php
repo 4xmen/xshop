@@ -21,56 +21,43 @@ class MorphController extends Controller
     //
     public function search(Request $request)
     {
+        abort_unless(auth()->check(), 403);
 
-
-        if (!auth()->check() ){
-            return abort(403);
-        }
         $morph = $request->input('morph', Product::class);
+        $term  = mb_strtolower((string) $request->input('q', ''));
+        $term  = addcslashes($term, '\%_');
+        $like  = "%{$term}%";
 
-        $q = '%' . $request->input('q') . '%';
-        switch ($morph) {
-            case Product::class:
-                $q = Product::where('name', 'LIKE', $q)
-                    ->orWhere('description', 'LIKE', $q);
-                break;
-            case Post::class:
-                $q = Post::where('title', 'LIKE', $q)
-                    ->orWhere('subtitle', 'LIKE', $q)
-                    ->orWhere('body', 'LIKE', $q);
-                break;
-            case Page::class:
-                $q = Page::where('title', 'LIKE', $q)
-                    ->orWhere('subtitle', 'LIKE', $q)
-                    ->orWhere('body', 'LIKE', $q);
-                break;
-            case Group::class:
-                $q = Group::where('name', 'LIKE', $q)
-                    ->orWhere('subtitle', 'LIKE', $q)
-                    ->orWhere('description', 'LIKE', $q);
-                break;
-            case Category::class:
-                $q = Category::where('name', 'LIKE', $q)
-                    ->orWhere('subtitle', 'LIKE', $q)
-                    ->orWhere('description', 'LIKE', $q);
-                break;
-            case Creator::class:
-                $q = Creator::where('name', 'LIKE', $q)
-                    ->orWhere('subtitle', 'LIKE', $q)
-                    ->orWhere('description', 'LIKE', $q);
-                break;
-            case Clip::class:
-                $q = Clip::where('title', 'LIKE', $q)
-                    ->orWhere('body', 'LIKE', $q);
-                break;
-            case Gallery::class:
-                $q = Gallery::where('title', 'LIKE', $q)
-                    ->orWhere('description', 'LIKE', $q);
-                break;
-            default:
-                return ['OK' => false, 'error' => __("Invalid morph")];
+        $locale = app()->getLocale();
+
+        $searchableColumns = [
+            Product::class  => ['name', 'description'],
+            Post::class     => ['title', 'subtitle', 'body'],
+            Page::class     => ['title', 'subtitle', 'body'],
+            Group::class    => ['name', 'subtitle', 'description'],
+            Category::class => ['name', 'subtitle', 'description'],
+            Creator::class  => ["name->{$locale}", 'subtitle', 'description'],
+            Clip::class     => ['title', 'body'],
+            Gallery::class  => ['title', 'description'],
+        ];
+
+        if (! isset($searchableColumns[$morph])) {
+            return ['OK' => false, 'error' => __('Invalid morph')];
         }
 
-        return ['OK' => true, 'data' => $q->orderByDesc('updated_at')->limit($this->limit)->get()];
+        $query = $morph::query()->where(function ($builder) use ($searchableColumns, $morph, $like) {
+            $grammar = $builder->getGrammar();
+
+            foreach ($searchableColumns[$morph] as $column) {
+                // wrap() بر اساس driver، ستون یا مسیر JSON رو درست می‌سازه
+                $wrapped = $grammar->wrap($column);
+                $builder->orWhereRaw("LOWER({$wrapped}) LIKE ?", [$like]);
+            }
+        });
+
+        return [
+            'OK'   => true,
+            'data' => $query->orderByDesc('updated_at')->limit($this->limit)->get(),
+        ];
     }
 }

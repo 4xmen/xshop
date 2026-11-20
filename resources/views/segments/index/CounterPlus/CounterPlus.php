@@ -4,6 +4,7 @@ namespace Resources\Views\Segments;
 
 use App\Models\Part;
 use App\Models\Setting;
+use Database\Factories\PostFactory;
 
 class CounterPlus
 {
@@ -31,7 +32,11 @@ class CounterPlus
         $setting->title =  $part->area_name . ' ' . $part->part .' counter plus item bg';
         $setting->save();
 
+        $icon = PostFactory::$icons;
+
+
         for ($i = 1; $i <= self::$count; $i++) {
+            shuffle($icon);
 
             $setting = new Setting();
             $setting->section = 'theme';
@@ -45,7 +50,7 @@ class CounterPlus
             $setting = new Setting();
             $setting->section = 'theme';
             $setting->key = $part->area_name . '_' . $part->part.'_icon'.$i;
-            $setting->value = 'ri-user-line';
+            $setting->value = $icon[0];
             $setting->size = 6;
             $setting->type = 'ICON';
 //        $setting->data = json_encode(['xmin' => 2, 'xmax' => 6]);
