@@ -1,7 +1,7 @@
 <section class="tech-hero py-4 TechHero live-setting" data-live="{{$data->area_name.'_'.$data->part}}">
     <div class="{{gfx()['container']}} px-3 px-xl-4">
 
-        @php($products = \App\Models\Product::with('category')->whereIn('category_id',json_decode(getSetting($data->area_name.'_'.$data->part.'_categories')))->where('status',1)->orderByDesc('stock_quantity')->limit(5)->get())
+        @php($products = \App\Models\Product::with('category')->whereIn('category_id',json_decode(getSetting($data->area_name.'_'.$data->part.'_categories'))??[])->where('status',1)->orderByDesc('stock_quantity')->limit(5)->get())
         <div class="row g-3">
 
             <div class="col-12 col-lg-8">
@@ -41,47 +41,51 @@
                 </div>
                 <div class="box-v">
                     @foreach($products as $k => $product)
-                    <a href="#" class="prevw-item" onclick="window.nextHeroSlider({{$k}})">
-                        <img src="{{$product->imgUrl()}}" alt="">
-                        <span>
+                        <a href="#" class="prevw-item" onclick="window.nextHeroSlider({{$k}})">
+                            <img src="{{$product->imgUrl()}}" alt="">
+                            <span>
                             <strong>{{$product->name}}</strong>
                             <small>From $249</small>
                         </span>
-                    </a>
-                    @if($k == 2)
-                        @break
-                    @endif
+                        </a>
+                        @if($k == 2)
+                            @break
+                        @endif
                     @endforeach
                 </div>
             </div>
 
             <div class="col-12 col-lg-4">
                 <div>
-                    <article>
-                        <span>{{$products[3]->category->name}}</span>
-                        <h2>{{$products[3]->name}}</h2>
-                        <p>{{$products[3]->excerpt}}</p>
-                        <strong>
-                            {{$products[3]->getPrice()}}
-                        </strong>
-                        <img src="{{$products[3]->imgUrl()}}" alt="{{$products[3]->name}}">
-                        <a href="{{$products[3]->webUrl()}}" aria-label="{{$products[3]->name}}">
-                            <i class="ri-arrow-up-right-line"></i>
-                        </a>
-                    </article>
+                    @if(isset($products[3]))
 
-                    <article>
-                        <span>{{$products[4]->category->name}}</span>
-                        <h2>{{$products[4]->name}}</h2>
-                        <p>{{$products[4]->excerpt}}</p>
-                        <strong>
-                            {{$products[4]->getPrice()}}
-                        </strong>
-                        <img src="{{$products[4]->imgUrl()}}" alt="{{$products[4]->name}}">
-                        <a href="{{$products[4]->webUrl()}}" aria-label="{{$products[4]->name}}">
-                            <i class="ri-arrow-up-right-line"></i>
-                        </a>
-                    </article>
+                        <article>
+                            <span>{{$products[3]->category->name}}</span>
+                            <h2>{{$products[3]->name}}</h2>
+                            <p>{{$products[3]->excerpt}}</p>
+                            <strong>
+                                {{$products[3]->getPrice()}}
+                            </strong>
+                            <img src="{{$products[3]->imgUrl()}}" alt="{{$products[3]->name}}">
+                            <a href="{{$products[3]->webUrl()}}" aria-label="{{$products[3]->name}}">
+                                <i class="ri-arrow-up-right-line"></i>
+                            </a>
+                        </article>
+                    @endif
+                    @if(isset($products[4]))
+                        <article>
+                            <span>{{$products[4]->category->name}}</span>
+                            <h2>{{$products[4]->name}}</h2>
+                            <p>{{$products[4]->excerpt}}</p>
+                            <strong>
+                                {{$products[4]->getPrice()}}
+                            </strong>
+                            <img src="{{$products[4]->imgUrl()}}" alt="{{$products[4]->name}}">
+                            <a href="{{$products[4]->webUrl()}}" aria-label="{{$products[4]->name}}">
+                                <i class="ri-arrow-up-right-line"></i>
+                            </a>
+                        </article>
+                    @endif
                 </div>
             </div>
 

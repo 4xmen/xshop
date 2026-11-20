@@ -40,7 +40,7 @@ class PartSeeder extends Seeder
 
         $part = new Part();
         $part->segment = 'index';
-        $part->part = 'HeroTech';
+        $part->part = 'TechHero';
         $part->area_id = Area::where('name', 'index')->first()->id;
         $part->sort = 1;
         $part->save();

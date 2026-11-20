@@ -56,6 +56,7 @@ class DatabaseSeeder extends Seeder
                     TransportSeeder::class,
                     MenuSeeder::class,
                     SliderSeeder::class,
+                    PageSeeder::class,
                     PartSeeder::class,
                     EvaluationSeeder::class,
                 ]

@@ -8,7 +8,7 @@
                             <img src="{{$category->imgUrl()}}" alt="{{$category->name}}">
                             <div class="life-content">
                                 <span class="badge bg-danger d-inline-block m-2">
-                                    {{__("Products")}}: {{number_format($category->products->count())}}
+                                    {{__("Products")}}: {{number_format($category->products->count()??0)}}
                                 </span>
                                 <h2>
                                     {{$category->name}}
