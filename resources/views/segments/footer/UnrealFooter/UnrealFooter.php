@@ -5,6 +5,7 @@ namespace Resources\Views\Segments;
 use App\Models\Page;
 use App\Models\Part;
 use App\Models\Setting;
+use Illuminate\Support\Facades\File;
 
 class UnrealFooter
 {
@@ -26,6 +27,16 @@ class UnrealFooter
         $setting->size = 12;
         $setting->title =  $part->area_name . ' ' . $part->part .' contact text';
         $setting->save();
+        $setting = new Setting();
+        $setting->section = 'theme';
+        $setting->key = $part->area_name . '_' . $part->part.'_jpg';
+        $setting->value = null;
+        $setting->type = 'FILE';
+        $setting->size = 12;
+        $setting->title =  $part->area_name . ' ' . $part->part.' Image';
+        $setting->save();
+
+        File::copy(__DIR__.'/../../default-assets/city.jpg',public_path('upload/images/').$part->area_name . '.' . $part->part.'.jpg');
         $setting = new Setting();
         $setting->section = 'theme';
         $setting->key = $part->area_name . '_' . $part->part.'_main_title';
@@ -67,6 +78,7 @@ class UnrealFooter
         Setting::where('key',$part->area_name . '_' . $part->part.'_sub_title')->first()?->delete();
         Setting::where('key',$part->area_name . '_' . $part->part.'_main_link')->first()?->delete();
         Setting::where('key',$part->area_name . '_' . $part->part.'_pages')->first()?->delete();
+        Setting::where('key',$part->area_name . '_' . $part->part.'_jpg')->first()?->delete();
     }
     public static function onMount(Part $part = null)
     {

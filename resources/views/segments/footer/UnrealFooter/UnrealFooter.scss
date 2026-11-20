@@ -28,14 +28,10 @@
             min-height: 375px;
             border-radius: 110px 0 110px 0;
             overflow: hidden;
-            background:
-                linear-gradient(
-                        135deg,
-                        rgba(35, 43, 78, .82),
-                        rgba(49, 54, 83, .83)
-                ),
-                url('https://images.unsplash.com/photo-1519501025264-65ba15a82390?w=1000') center/cover no-repeat;
 
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: cover;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -193,6 +189,7 @@
                     display: flex;
                     align-items: flex-start;
                     gap: 9px;
+                    color: var(--xshop-text);
 
                     a,
                     span {
