@@ -45,6 +45,7 @@ class DatabaseSeeder extends Seeder
                     CustomerSeeder::class,
                     CategorySeeder::class,
                     PropSeeder::class,
+                    CreatorSeeder::class,
                     ProductSeeder::class,
                     CommentSeeder::class,
                     SettingSeeder::class,
@@ -57,7 +58,6 @@ class DatabaseSeeder extends Seeder
                     SliderSeeder::class,
                     PartSeeder::class,
                     EvaluationSeeder::class,
-                    CreatorSeeder::class,
                 ]
             );
         }

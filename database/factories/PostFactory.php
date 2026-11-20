@@ -12,7 +12,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 class PostFactory extends Factory
 {
 
-    public $icons = [
+    public static $icons = [
         'ri-home-4-line',
         'ri-building-line',
         'ri-mail-open-line',
@@ -65,7 +65,7 @@ class PostFactory extends Factory
             'status' => rand(0,1),
             'view' => rand(0,999),
             'user_id' => User::where('id','<',6)->inRandomOrder()->first()->id,
-            'icon' => $this->icons[rand(0,count($this->icons)-1)],
+            'icon' => self::$icons[rand(0,count(self::$icons)-1)],
         ];
     }
 }
