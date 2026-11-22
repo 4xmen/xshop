@@ -5,7 +5,7 @@
                 <h1>
                     {{$group->name}}
                 </h1>
-                {{$group->description}}
+                {!! $group->description !!}
             </div>
             <div class="col-md-6">
                 <img src="{{$group->imgUrl()}}" alt="{{$group->name}}" class="img-fluid">
