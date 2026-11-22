@@ -7,6 +7,9 @@
           content="width=device-width, initial-scale=1, viewport-fit=cover, interactive-widget=resizes-content">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="theme-color" content="{{gfx()['primary']}}"/>
+    @if(mb_strlen(getSetting("google-webmaster-code")) > 10)
+        {!! getSetting("google-webmaster-code") !!}
+    @endif
     @if(mb_strlen(getSetting("custom_css")) > 10)
         <style>
             {!! getSetting("custom_css") !!}
