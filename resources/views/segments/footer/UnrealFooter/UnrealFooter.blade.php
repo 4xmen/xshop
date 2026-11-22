@@ -10,7 +10,7 @@
 
                     <!-- About Section -->
                     <div class="col-lg-4 col-md-12">
-                        <div class="footer-about">
+                        <div class="footer-about" style="background-image: linear-gradient(135deg, rgba(35, 43, 78, .34), rgba(49, 54, 83, .33)), url('{{asset('upload/images/'.$data->area_name.'.'.$data->part.'.jpg')}}')">
                             <div class="footer-about-content">
                                 <div class="footer-logo">
                                     <i class="bi bi-geo-alt-fill"></i>

@@ -1,0 +1,49 @@
+.LifeCategory {
+    // scss
+    .life-grid-item{
+        background: var(--xshop-diff);
+        height: 200px;
+        position: relative;
+        border-radius: var(--xshop-border-radius);
+        overflow: hidden;
+        margin-bottom: 1.5rem;
+        img{
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            transition: 300ms;
+            opacity: .7;
+
+        }
+        .life-content{
+            position: relative;
+            z-index: 1;
+            height: 100%;
+            color: var(--xshop-diff2);
+            h2{
+                padding: .5rem 1rem;
+                opacity: .85;
+                background: linear-gradient(45deg, var(--xshop-primary) 0%, var(--xshop-secondary) 100%);
+                background-clip: text;
+                color: transparent;
+            }
+        }
+
+        &:hover{
+            img{
+                transform: scale(1.5) rotateZ(7deg)  translate(-5%,-5%);
+            }
+        }
+    }
+
+    .more{
+        position: absolute;
+        inset-inline-end: 1rem;
+        bottom: 1rem;
+    }
+}

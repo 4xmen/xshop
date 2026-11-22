@@ -4,6 +4,7 @@ namespace Resources\Views\Segments;
 
 use App\Models\Part;
 use App\Models\Setting;
+use Database\Factories\PostFactory;
 
 class CounterGrid
 {
@@ -12,9 +13,11 @@ class CounterGrid
     public static  $count = 4;
     public static function onAdd(Part $part = null)
     {
+        $icon = PostFactory::$icons;
 
 
         for ($i = 1; $i <= self::$count; $i++) {
+            shuffle($icon);
 
             $setting = new Setting();
             $setting->section = 'theme';
@@ -29,7 +32,7 @@ class CounterGrid
             $setting = new Setting();
             $setting->section = 'theme';
             $setting->key = $part->area_name . '_' . $part->part.'_icon'.$i;
-            $setting->value = 'ri-user-line';
+            $setting->value = $icon[0];
             $setting->size = 4;
             $setting->type = 'ICON';
 //        $setting->data = json_encode(['xmin' => 2, 'xmax' => 6]);
@@ -50,6 +53,7 @@ class CounterGrid
     public static function onRemove(Part $part = null)
     {
         for ($i = 1; $i <= self::$count; $i++) {
+
             Setting::where('key',$part->area_name . '_' . $part->part.'_title'.$i)->first()?->delete();
             Setting::where('key',$part->area_name . '_' . $part->part.'_icon'.$i)->first()?->delete();
             Setting::where('key',$part->area_name . '_' . $part->part.'_number'.$i)->first()?->delete();

@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Category;
+use App\Models\Creator;
 use App\Models\Product;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -19,6 +20,7 @@ class ProductSeeder extends Seeder
 
         foreach (Product::all() as $product) {
             $product->categories()->sync(Category::inRandomOrder()->limit(3)->pluck('id')->toArray());
+            $product->creators()->sync(Creator::inRandomOrder()->limit(2)->pluck('id')->toArray());
             $product->save();
         }
     }
